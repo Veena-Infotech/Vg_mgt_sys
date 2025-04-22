@@ -8,3 +8,16 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    window.addEventListener('load', () => {
+      gsap.from(".footer", {
+        duration: 1,
+        opacity: 0,
+        y: 50,
+        ease: "power2.out"
+      });
+    });
+  </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
