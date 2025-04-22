@@ -114,28 +114,29 @@
                         <hr class="bg-body-secondary mt-5 mb-4" />
                         <div class="divider-content-center bg-body-emphasis">or use email</div>
                       </div> -->
-                      <div class="mb-3 text-start"><label class="form-label" for="email">Email address</label>
-                        <div class="form-icon-container"><input class="form-control form-icon-input" id="email"
-                            type="email" placeholder="name@example.com" /><span
-                            class="fas fa-user text-body fs-9 form-icon"></span></div>
-                      </div>
-                      <div class="mb-3 text-start"><label class="form-label" for="password">Password</label>
-                        <div class="form-icon-container" data-password="data-password"><input
-                            class="form-control form-icon-input pe-6" id="password" type="password"
-                            placeholder="Password" data-password-input="data-password-input" /><span
-                            class="fas fa-key text-body fs-9 form-icon"></span><button
-                            class="btn px-3 py-0 h-100 position-absolute top-0 end-0 fs-7 text-body-tertiary"
-                            data-password-toggle="data-password-toggle"><span class="uil uil-eye show"></span><span
-                              class="uil uil-eye-slash hide"></span></button></div>
-                      </div>
-                      <div class="row flex-between-center mb-7">
-                        <div class="col-auto">
-                          <!-- <div class="form-check mb-0"><input class="form-check-input" id="basic-checkbox" type="checkbox" checked="checked" /><label class="form-check-label mb-0" for="basic-checkbox">Remember me</label></div> -->
+                      <form action="" method="post">
+                        <div class="mb-3 text-start"><label class="form-label" for="email">Email address</label>
+                          <div class="form-icon-container"><input class="form-control form-icon-input" id="email"
+                              type="email" placeholder="name@example.com" /><span
+                              class="fas fa-user text-body fs-9 form-icon"></span></div>
                         </div>
-                        <div class="col-auto"><a class="fs-9 fw-semibold" href="forgot_password.php">Forgot
-                            Password?</a></div>
-                      </div><button class="btn btn-primary w-100 mb-3">Sign In</button>
-                      <div class="text-center"><a class="fs-9 fw-bold" href="sign-up.html">Create an account</a></div>
+                        <div class="mb-3 text-start"><label class="form-label" for="password">Password</label>
+                          <div class="form-icon-container" data-password="data-password"><input
+                              class="form-control form-icon-input pe-6" id="password" type="password"
+                              placeholder="Password" data-password-input="data-password-input" /><span
+                              class="fas fa-key text-body fs-9 form-icon"></span><button
+                              class="btn px-3 py-0 h-100 position-absolute top-0 end-0 fs-7 text-body-tertiary"
+                              data-password-toggle="data-password-toggle"><span class="uil uil-eye show"></span><span
+                                class="uil uil-eye-slash hide"></span></button></div>
+                        </div>
+                        <div class="row flex-between-center mb-7">
+                          <div class="col-auto">
+                            <!-- <div class="form-check mb-0"><input class="form-check-input" id="basic-checkbox" type="checkbox" checked="checked" /><label class="form-check-label mb-0" for="basic-checkbox">Remember me</label></div> -->
+                          </div>
+                        </div><button class="btn btn-primary w-100 mb-3">Sign In</button>
+                      </form>
+                      <div class="col-auto"><a class="fs-9 fw-semibold" href="forgot_password.php">Forgot
+                          Password?</a></div>
                     </div>
                   </div>
                 </div>
@@ -236,6 +237,99 @@
   <script src="vendors/feather-icons/feather.min.js"></script>
   <script src="vendors/dayjs/dayjs.min.js"></script>
   <script src="assets/js/phoenix.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      // Main Card Zoom-in
+      gsap.from(".auth-card", {
+        scale: 0.7,
+        opacity: 0,
+        duration: 0.7,
+        ease: "power2.out"
+      });
+
+      // Logo Animation
+      gsap.from(".auth-form-box img", {
+        scale: 0,
+        opacity: 0,
+        delay: 0,
+        duration: 0.4,
+        ease: "back.out(1.7)"
+      });
+
+      // Headings and Paragraphs
+      gsap.from(".auth-form-box h3, .auth-form-box p", {
+        opacity: 0,
+        y: 20,
+        duration: 0.6,
+        stagger: 0.1,
+        delay: 0.6,
+        ease: "power2.out"
+      });
+
+      // Animate labels and spans
+      gsap.from("label, span", {
+        opacity: 0,
+        y: 10,
+        delay: 1.2,
+        duration: 0.4,
+        stagger: 0.1,
+        ease: "power2.out"
+      });
+
+      // Labels and Icons
+      gsap.from(".auth-form-box label", {
+        opacity: 0,
+        x: -50,
+        duration: 1,
+        stagger: 0.1,
+        delay: 0.8,
+        ease: "power1.out"
+      });
+
+      // Inputs
+      gsap.from(".auth-form-box .form-control", {
+        opacity: 0,
+        y: 20,
+        duration: 0.5,
+        stagger: 0.1,
+        delay: 1,
+        ease: "power1.out"
+      });
+
+      // Buttons and Links
+      gsap.from(".auth-form-box button, .auth-form-box a", {
+        opacity: 0,
+        y: 20,
+        duration: 0.5,
+        stagger: 0.1,
+        delay: 1.2,
+        ease: "power1.out"
+      });
+
+      // Left side title box animation (title, para, list items)
+      gsap.from(".auth-title-box h3, .auth-title-box p, .auth-title-box li", {
+        opacity: 0,
+        x: -30,
+        duration: 0.6,
+        stagger: 0.15,
+        delay: 0.6,
+        ease: "power2.out"
+      });
+
+      // Illustration Image at the bottom of left box
+      gsap.from(".auth-title-box-img", {
+        opacity: 0,
+        y: 30,
+        duration: 0.6,
+        delay: 1,
+        ease: "power2.out"
+      });
+
+
+    });
+  </script>
+
 </body>
 
 

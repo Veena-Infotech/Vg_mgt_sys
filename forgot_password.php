@@ -318,8 +318,105 @@
             });
         }
     </script>
+    <script>
+  // Existing goToStep function stays unchanged...
+
+  window.addEventListener('DOMContentLoaded', () => {
+    // Main card zoom-in
+    gsap.from(".auth-card", {
+      scale: 0.8,
+      opacity: 0,
+      duration: 1,
+      ease: "power3.out"
+    });
+
+    // Logo zoom-in
+    gsap.from(".auth-form-box img", {
+      scale: 0,
+      opacity: 0,
+      delay: 0.2,
+      duration: 0.8,
+      ease: "back.out(1.7)"
+    });
+
+    // Auth heading and paragraph
+    gsap.from(".auth-title-box h3, .auth-title-box p", {
+      x: -50,
+      opacity: 0,
+      delay: 0.4,
+      duration: 0.8,
+      stagger: 0.2,
+      ease: "power3.out"
+    });
+
+    // List items with checkmarks
+    gsap.from(".auth-title-box li", {
+      x: -30,
+      opacity: 0,
+      delay: 0.6,
+      duration: 0.6,
+      stagger: 0.15,
+      ease: "power2.out"
+    });
+
+    // Step-wise container fade-in
+    gsap.from(".step", {
+      opacity: 0,
+      y: 20,
+      duration: 0.6,
+      delay: 0.8,
+      ease: "power2.out"
+    });
+
+    // Animate all form inputs
+    gsap.from("input.form-control", {
+      opacity: 0,
+      y: 20,
+      delay: 0.9,
+      duration: 0.4,
+      stagger: 0.1,
+      ease: "power2.out"
+    });
+
+    // Animate all form icons
+    gsap.from(".form-icon", {
+      opacity: 0,
+      scale: 0.3,
+      delay: 1.1,
+      duration: 0.4,
+      stagger: 0.1,
+      ease: "back.out(1.7)"
+    });
+
+    // Animate labels and spans
+    gsap.from("label, span", {
+      opacity: 0,
+      y: 10,
+      delay: 1.2,
+      duration: 0.4,
+      stagger: 0.1,
+      ease: "power2.out"
+    });
+
+    // Animate all buttons
+    gsap.from("button", {
+      opacity: 0,
+      scale: 0.95,
+      delay: 1.3,
+      duration: 0.4,
+      stagger: 0.2,
+      ease: "back.out(1.4)"
+    });
+
+    // Animate the background image containers
+    gsap.from(".bg-holder", {
+      opacity: 0,
+      scale: 1.05,
+      duration: 1.2,
+      ease: "power1.out"
+    });
+  });
+</script>
+
 </body>
-
-
-
 </html>
