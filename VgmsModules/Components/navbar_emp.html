@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
 
 <body>
@@ -19,58 +21,63 @@
         <ul class="navbar-nav flex-column" id="navbarVerticalNav">
           <li class="nav-item">
             <!-- parent pages-->
-            <div class="nav-item-wrapper"><a class="nav-link dropdown-indicator label-1" href="#nv-home" role="button"
-                data-bs-toggle="collapse" aria-expanded="true" aria-controls="nv-home">
+            <div class="nav-item-wrapper">
+              <a class="nav-link dropdown-indicator label-1" href="#nv-home" role="button"
+                 data-bs-toggle="collapse" aria-expanded="true" aria-controls="nv-home">
                 <div class="d-flex align-items-center">
-                  <div class="dropdown-indicator-icon-wrapper"><span
-                      class="fas fa-caret-right dropdown-indicator-icon"></span></div><span class="nav-link-icon"><span
-                      data-feather="pie-chart"></span></span><span class="nav-link-text">Employee</span><span
-                    class="fa-solid  text-info ms-1 " style="font-size: 6px"></span>
+                  <div class="dropdown-indicator-icon-wrapper">
+                    <span class="fas fa-caret-right dropdown-indicator-icon"></span>
+                  </div>
+                  <span class="nav-link-icon"><span class="fas fa-user-tie"></span></span>
+                  <span class="nav-link-text">Employee</span>
+                  <span class="fa-solid text-info ms-1" style="font-size: 6px"></span>
                 </div>
               </a>
+          
               <div class="parent-wrapper label-1">
                 <ul class="nav collapse parent show" data-bs-parent="#navbarVerticalCollapse" id="nv-home">
                   <li class="collapsed-nav-item-title d-none">Employee</li>
-                  <li class="nav-item"><a class="nav-link "
-                      href="/VGMS/employee-pages/dashboard.php?tag=dashboard"
-                      id="dashboard">
-                      <div class="d-flex align-items-center"><span class="nav-link-text">Dashboard</span></div>
-                    </a><!-- more inner pages-->
+          
+                  <li class="nav-item">
+                    <a class="nav-link" href="/VGMS/employee-pages/dashboard.php?tag=dashboard" id="dashboard">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fas fa-tachometer-alt"></i></span>
+                        <span class="nav-link-text">Dashboard</span>
+                      </div>
+                    </a>
                   </li>
-                  <li class="nav-item"><a class="nav-link"
-                      href="/VGMS/employee-pages/emp-attendance.php?tag=attendance"
-                      id="attendance">
-                      <div class="d-flex align-items-center"><span class="nav-link-text">Attendance</span></div>
-                    </a><!-- more inner pages -->
+          
+                  <li class="nav-item">
+                    <a class="nav-link" href="/VGMS/employee-pages/emp-attendance.php?tag=attendance" id="attendance">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fas fa-calendar-check"></i></span>
+                        <span class="nav-link-text">Attendance</span>
+                      </div>
+                    </a>
                   </li>
-                  <li class="nav-item"><a class="nav-link"
-                      href="/VGMS/EMS/Pages/Meeting.php?tag=meetings" id="meetings">
-                      <div class="d-flex align-items-center"><span class="nav-link-text">Client Meetings</span></div>
-                    </a><!-- more inner pages -->
+          
+                  <li class="nav-item">
+                    <a class="nav-link" href="/VGMS/EMS/Pages/Meeting.php?tag=meetings" id="meetings">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fas fa-handshake"></i></span>
+                        <span class="nav-link-text">Client Meetings</span>
+                      </div>
+                    </a>
                   </li>
-                  <!-- <li class="nav-item"><a class="nav-link" href="/VGMS/admin-pages/add-customers.php?tag=customer" id="customer">
-                          <div class="d-flex align-items-center"><span class="nav-link-text">Add Customer</span></div>
-                        </a> more inner pages-->
-                  <!-- </li> -->
-                  <!-- <li class="nav-item"><a class="nav-link" href="/VGMS/admin-pages/add-employee.php?tag=employee" id="employee">
-                        <div class="d-flex align-items-center"><span class="nav-link-text">Add Employee</span></div> -->
-                  <!-- </a>more inner pages -->
-                  <!-- </li>  -->
-                  <!-- <li class="nav-item"><a class="nav-link" href="/VGMS/employee-pages/project-timeline.php?tag=timeline" id="timeline">
-                          <div class="d-flex align-items-center"><span class="nav-link-text">Manage Project Timeline </span></div>
-                        </a>more inner pages -->
-          </li>
-          <li class="nav-item"><a class="nav-link"
-              href="/VGMS/employee-pages/task-page.php?tag=task" id="task">
-              <div class="d-flex align-items-center"><span class="nav-link-text">Project Tasks</span></div>
-            </a><!-- more inner pages-->
-            <!-- <li class="nav-item"><a class="nav-link" href="/VGMS/admin-pages/assign-tasks.php?tag=permissions" id="permissions">
-                          <div class="d-flex align-items-center"><span class="nav-link-text">Permissions</span></div>
-                        </a>more inner pages -->
-            <!-- <li class="nav-item"><a class="nav-link" href="/VGMS/admin-pages/review-page.php?tag=review" id="review">
-                          <div class="d-flex align-items-center"><span class="nav-link-text">Review Tasks</span></div>
-                        </a>more inner pages -->
-          </li>
+          
+                  <li class="nav-item">
+                    <a class="nav-link" href="/VGMS/employee-pages/task-page.php?tag=task" id="task">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fas fa-tasks"></i></span>
+                        <span class="nav-link-text">Project Tasks</span>
+                      </div>
+                    </a>
+                  </li>
+          
+                </ul>
+              </div>
+            </div>
+          </li>          
         </ul>
       </div>
     </div>
@@ -93,8 +100,8 @@
               class="toggle-line"></span></span></button>
         <a class="navbar-brand me-1 me-sm-3" href="index.html">
           <div class="d-flex align-items-center">
-            <div class="d-flex align-items-center"><img
-                src="\VGMS\assets\img\icons\Veenagrp.png" alt="phoenix" width="180" />
+            <div class="d-flex align-items-center"><img src="\VGMS\assets\img\icons\Veenagrp.png" alt="phoenix"
+                width="180" />
               <h5 class="logo-text ms-2 d-none d-sm-block"></h5>
             </div>
           </div>
@@ -507,8 +514,7 @@
         <li class="nav-item dropdown"><a class="nav-link lh-1 pe-0" id="navbarDropdownUser" href="#!" role="button"
             data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
             <div class="avatar avatar-l ">
-              <img class="rounded-circle " src="\VGMS\assets\img\team\72x72\57.webp"
-                alt="" />
+              <img class="rounded-circle " src="\VGMS\assets\img\team\72x72\57.webp" alt="" />
             </div>
           </a>
           <div class="dropdown-menu dropdown-menu-end navbar-dropdown-caret py-0 dropdown-profile shadow border"
@@ -517,8 +523,7 @@
               <div class="card-body p-0">
                 <div class="text-center pt-4 pb-3">
                   <div class="avatar avatar-xl ">
-                    <img class="rounded-circle "
-                      src="\VGMS\assets\img\team\72x72\57.webp" alt="" />
+                    <img class="rounded-circle " src="\VGMS\assets\img\team\72x72\57.webp" alt="" />
                   </div>
                   <h6 class="mt-2 text-body-emphasis">Jerry Seinfield</h6>
                 </div>
@@ -527,37 +532,36 @@
               <div class="overflow-auto scrollbar" style="height: 4.5rem;">
                 <ul class="nav d-flex flex-column mb-2 pb-1">
                   <li class="nav-item">
-                      <a href="/VGMS/employee-pages/employee-profile.php?id=empId" class="nav-link px-3 d-block">
-                          <span class="me-2 text-body align-bottom" data-feather="user"></span>Profile
-                      </a>
+                    <a href="/VGMS/employee-pages/employee-profile.php?id=empId" class="nav-link px-3 d-block">
+                      <span class="me-2 text-body align-bottom" data-feather="user"></span>Profile
+                    </a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link px-3 d-block" href="#!">
-                          <span class="me-2 text-body align-bottom" data-feather="settings"></span>Settings &amp; Privacy 
-                      </a>
+                    <a class="nav-link px-3 d-block" href="#!">
+                      <span class="me-2 text-body align-bottom" data-feather="settings"></span>Settings &amp; Privacy
+                    </a>
                   </li>
-              </ul>
-              
+                </ul>
+
               </div>
               <!-- <div class="card-footer p-0 border-top border-translucent"> -->
               <!-- <ul class="nav d-flex flex-column my-3"> -->
-                <!-- <li class="nav-item"><a class="nav-link px-3 d-block" href="#!"> <span class="me-2 text-body align-bottom" data-feather="user-plus"></span>Add another account</a></li> -->
+              <!-- <li class="nav-item"><a class="nav-link px-3 d-block" href="#!"> <span class="me-2 text-body align-bottom" data-feather="user-plus"></span>Add another account</a></li> -->
               <!-- </ul> -->
               <hr />
 
               <div class="px-3">
-                <a class="btn btn-phoenix-secondary d-flex flex-center w-100 mb-2"
-                  href="/VGMS/index.php?action=logout">
+                <a class="btn btn-phoenix-secondary d-flex flex-center w-100 mb-2" href="/VGMS/index.php?action=logout">
                   <span class="me-2" data-feather="log-out"></span>Sign out
                 </a>
               </div>
 
               <!-- <div class="my-2 text-center fw-bold fs-10 text-body-quaternary"><a class="text-body-quaternary me-1" href="#!">Privacy policy</a>&bull;<a class="text-body-quaternary mx-1" href="#!">Terms</a>&bull;<a class="text-body-quaternary ms-1" href="#!">Cookies</a></div> -->
-            <!-- </div> -->
+              <!-- </div> -->
+            </div>
           </div>
-    </div>
-    </li>
-    </ul>
+        </li>
+      </ul>
     </div>
   </nav>
   <nav class="navbar navbar-top navbar-slim fixed-top navbar-expand" id="topNavSlim" style="display:none;">
@@ -850,8 +854,7 @@
               <div class="card-body p-0">
                 <div class="text-center pt-4 pb-3">
                   <div class="avatar avatar-xl ">
-                    <img class="rounded-circle "
-                      src="\VGMS\assets\img\team\72x72\57.webp" alt="" />
+                    <img class="rounded-circle " src="\VGMS\assets\img\team\72x72\57.webp" alt="" />
                   </div>
                   <h6 class="mt-2 text-body-emphasis">Jerry Seinfield</h6>
                 </div>
@@ -901,8 +904,8 @@
             class="toggle-line"></span></span></button>
       <a class="navbar-brand me-1 me-sm-3" href="index.html">
         <div class="d-flex align-items-center">
-          <div class="d-flex align-items-center"><img
-              src="\VGMS\assets\img\icons\Veenagrp.png" alt="phoenix" width="180" />
+          <div class="d-flex align-items-center"><img src="\VGMS\assets\img\icons\Veenagrp.png" alt="phoenix"
+              width="180" />
             <h5 class="logo-text ms-2 d-none d-sm-block"></h5>
           </div>
         </div>
@@ -911,43 +914,37 @@
     <div class="collapse navbar-collapse navbar-top-collapse order-1 order-lg-0 justify-content-center"
       id="navbarTopCollapse">
       <ul class="navbar-nav navbar-nav-top" data-dropdown-on-hover="data-dropdown-on-hover">
-        <li class="nav-item dropdown"><a class="nav-link dropdown-toggle lh-1" href="#!" role="button"
-            data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false"><span
-              class="uil fs-8 me-2 uil-chart-pie"></span>Employee</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle lh-1" href="#!" role="button" data-bs-toggle="dropdown"
+            data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
+            <span class="fas fa-users me-2"></span>Employee
+          </a>
           <ul class="dropdown-menu navbar-dropdown-caret">
-            <li><a class="dropdown-item "
-                href="/VGMS/employee-pages/dashboard.php?tag=dashboard" id="dashboard">
-                <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="shopping-cart"></span>Dashboard
+            <li>
+              <a class="dropdown-item" href="/VGMS/employee-pages/dashboard.php?tag=dashboard" id="dashboard">
+                <div class="dropdown-item-wrapper">
+                  <span class="fas fa-tachometer-alt me-2"></span>Dashboard
                 </div>
-              </a></li>
-            <li><a class="dropdown-item"
-                href="/VGMS/employee-pages/emp-attendance.php?tag=attendance"
-                id="attendance">
-                <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="clipboard"></span>Attendance
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="/VGMS/employee-pages/emp-attendance.php?tag=attendance" id="attendance">
+                <div class="dropdown-item-wrapper">
+                  <span class="fas fa-calendar-check me-2"></span>Attendance
                 </div>
-              </a></li>
-            <!-- <li><a class="dropdown-item" href="/VGMS/admin-pages/add-customers.php?tag=customer" id="customer">
-                    <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="phone"></span>Add Customer</div>
-                  </a></li> -->
-            <!-- <li><a class="dropdown-item" href="/VGMS/admin-pages/add-employee.php?tag=employee" id="employee">
-                    <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="briefcase"></span>Add Employee</div>
-                  </a></li> -->
-            <!-- <li><a class="dropdown-item" href="/VGMS/admin-pages/project-timeline.php?tag=timeline" id="timeline">
-                    <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="share-2"></span>Manage Project Timeline</div>
-                  </a></li> -->
-            <li><a class="dropdown-item"
-                href="/VGMS/employee-pages/task-page.php?tag=task" id="task">
-                <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="share-2"></span>Project Tasks
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="/VGMS/employee-pages/task-page.php?tag=task" id="task">
+                <div class="dropdown-item-wrapper">
+                  <span class="fas fa-tasks me-2"></span>Project Tasks
                 </div>
-              </a></li>
-            <!-- <li><a class="dropdown-item" href="/VGMS/admin-pages/assign-tasks.php?tag=permissions" id="permissions">
-                  <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="share-2"></span>Permissions</div>
-                </a></li> -->
-            <!-- <li><a class="dropdown-item" href="/VGMS/admin-pages/review-page.php?tag=review" id="review">
-                  <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="share-2"></span>Review Tasks</div>
-                </a></li> -->
+              </a>
+            </li>
           </ul>
         </li>
+      </ul>
+      </li>
       </ul>
     </div>
     <ul class="navbar-nav navbar-nav-icons flex-row">
@@ -1227,8 +1224,7 @@
             <div class="card-body p-0">
               <div class="text-center pt-4 pb-3">
                 <div class="avatar avatar-xl ">
-                  <img class="rounded-circle " src="\VGMS\assets\img\team\72x72\57.webp"
-                    alt="" />
+                  <img class="rounded-circle " src="\VGMS\assets\img\team\72x72\57.webp" alt="" />
                 </div>
                 <h6 class="mt-2 text-body-emphasis">Jerry Seinfield</h6>
               </div>
@@ -1282,41 +1278,35 @@
     <div class="collapse navbar-collapse navbar-top-collapse order-1 order-lg-0 justify-content-center"
       id="navbarTopCollapse">
       <ul class="navbar-nav navbar-nav-top" data-dropdown-on-hover="data-dropdown-on-hover">
-        <li class="nav-item dropdown"><a class="nav-link dropdown-toggle lh-1" href="#!" role="button"
-            data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false"><span
-              class="uil fs-8 me-2 uil-chart-pie"></span>Employee</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle lh-1" href="#!" role="button"
+             data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
+            <span class="fas fa-users me-2"></span>Employee
+          </a>
           <ul class="dropdown-menu navbar-dropdown-caret">
-            <li><a class="dropdown-item "
-                href="/VGMS/employee-pages/dashboard.php?tag=dashboard" id="dashboard">
-                <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="shopping-cart"></span>Dashboard
+            <li>
+              <a class="dropdown-item" href="/VGMS/employee-pages/dashboard.php?tag=dashboard" id="dashboard">
+                <div class="dropdown-item-wrapper">
+                  <span class="fas fa-tachometer-alt me-2"></span>Dashboard
                 </div>
-              </a></li>
-            <li><a class="dropdown-item"
-                href="/VGMS/employee-pages/emp-atttendance.php?tag=attendance"
-                id="attendance">
-                <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="clipboard"></span>Add Project
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="/VGMS/employee-pages/emp-attendance.php?tag=attendance" id="attendance">
+                <div class="dropdown-item-wrapper">
+                  <span class="fas fa-calendar-check me-2"></span>Attendance
                 </div>
-              </a></li>
-            <!-- <li><a class="dropdown-item" href="/VGMS/admin-pages/add-customers.php?tag=customer" id="customer">
-                    <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="phone"></span>Add Customer</div>
-                  </a></li> -->
-            <!-- <li><a class="dropdown-item" href="/VGMS/admin-pages/add-employee.php?tag=employee" id="employee">
-                    <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="briefcase"></span>Add Employee</div>
-                  </a></li> -->
-            <!-- <li><a class="dropdown-item" href="/VGMS/admin-pages/project-timeline.php?tag=timeline" id="timeline">
-                    <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="share-2"></span>Manage Project Timeline</div> -->
-            </a>
-        </li>
-        <li><a class="dropdown-item" href="/VGMS/employee-pages/task-page.php?tag=task"
-            id="task">
-            <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="share-2"></span>Project Tasks</div>
-          </a></li>
-        <!-- <li><a class="dropdown-item" href="/VGMS/admin-pages/assign-tasks.php?tag=permissions" id="permissions">
-                  <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="share-2"></span>Permissions</div>
-                </a></li> -->
-        <!-- <li><a class="dropdown-item" href="/VGMS/admin-pages/review-page.php?tag=review" id="review">
-                  <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="share-2"></span>Review Tasks</div>
-                </a></li> -->
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="/VGMS/employee-pages/task-page.php?tag=task" id="task">
+                <div class="dropdown-item-wrapper">
+                  <span class="fas fa-tasks me-2"></span>Project Tasks
+                </div>
+              </a>
+            </li>
+          </ul>
+        </li>        
       </ul>
       </ul>
     </div>
@@ -1598,8 +1588,7 @@
             <div class="card-body p-0">
               <div class="text-center pt-4 pb-3">
                 <div class="avatar avatar-xl ">
-                  <img class="rounded-circle " src="\VGMS\assets\img\team\72x72\57.webp"
-                    alt="" />
+                  <img class="rounded-circle " src="\VGMS\assets\img\team\72x72\57.webp" alt="" />
                 </div>
                 <h6 class="mt-2 text-body-emphasis">Jerry Seinfield</h6>
               </div>
@@ -1649,8 +1638,8 @@
             class="toggle-line"></span></span></button>
       <a class="navbar-brand me-1 me-sm-3" href="index.html">
         <div class="d-flex align-items-center">
-          <div class="d-flex align-items-center"><img
-              src="\VGMS\assets\img\icons\Veenagrp.png" alt="phoenix" width="180" />
+          <div class="d-flex align-items-center"><img src="\VGMS\assets\img\icons\Veenagrp.png" alt="phoenix"
+              width="180" />
             <h5 class="logo-text ms-2 d-none d-sm-block"></h5>
           </div>
         </div>
@@ -1663,8 +1652,7 @@
             data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false"><span
               class="uil fs-8 me-2 uil-chart-pie"></span>Employee</a>
           <ul class="dropdown-menu navbar-dropdown-caret">
-            <li><a class="dropdown-item "
-                href="/VGMS/employee-pages/dashboard.php?tag=dashboard" id="dashboard">
+            <li><a class="dropdown-item " href="/VGMS/employee-pages/dashboard.php?tag=dashboard" id="dashboard">
                 <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="shopping-cart"></span>Dashboard
                 </div>
               </a></li>
@@ -1963,8 +1951,7 @@
             <div class="card-body p-0">
               <div class="text-center pt-4 pb-3">
                 <div class="avatar avatar-xl ">
-                  <img class="rounded-circle " src="\VGMS\assets\img\team\72x72\57.webp"
-                    alt="" />
+                  <img class="rounded-circle " src="\VGMS\assets\img\team\72x72\57.webp" alt="" />
                 </div>
                 <h6 class="mt-2 text-body-emphasis">Jerry Seinfield</h6>
               </div>
@@ -2018,43 +2005,38 @@
     <div class="collapse navbar-collapse navbar-top-collapse order-1 order-lg-0 justify-content-center"
       id="navbarTopCollapse">
       <ul class="navbar-nav navbar-nav-top" data-dropdown-on-hover="data-dropdown-on-hover">
-        <li class="nav-item dropdown"><a class="nav-link dropdown-toggle lh-1" href="#!" role="button"
-            data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false"><span
-              class="uil fs-8 me-2 uil-chart-pie"></span>Employee</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle lh-1" href="#!" role="button" data-bs-toggle="dropdown"
+            data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
+            <span class="fas fa-users me-2"></span>Employee
+          </a>
           <ul class="dropdown-menu navbar-dropdown-caret">
-            <li><a class="dropdown-item"
-                href="/VGMS/employee-pages/dashboard.php?tag=dashboard" id="dashboard">
-                <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="shopping-cart"></span>Dashboard
+            <li>
+              <a class="dropdown-item" href="/VGMS/employee-pages/dashboard.php?tag=dashboard" id="dashboard">
+                <div class="dropdown-item-wrapper">
+                  <span class="fas fa-tachometer-alt me-2"></span>Dashboard
                 </div>
-              </a></li>
-            <li><a class="dropdown-item"
-                href="/VGMS/employee-pages/emp-attendance.php?tag=attendance"
-                id="attendance">
-                <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="clipboard"></span>Attendance
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="/VGMS/employee-pages/emp-attendance.php?tag=attendance" id="attendance">
+                <div class="dropdown-item-wrapper">
+                  <span class="fas fa-calendar-check me-2"></span>Attendance
                 </div>
-              </a></li>
-            <!-- <li><a class="dropdown-item" href="/VGMS/admin-pages/add-customers.php?tag=customer" id="customer">
-                    <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="phone"></span>Add Customer</div>
-                  </a></li> -->
-            <!-- <li><a class="dropdown-item" href="/VGMS/admin-pages/project-timeline.php?tag=timeline" id="timeline">
-                    <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="briefcase"></span>Add Employee</div>
-                  </a></li> -->
-            <!-- <li><a class="dropdown-item" href="/VGMS/admin-pages/add-employee.php?tag=employee" id="employee">
-                    <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="share-2"></span>Manage Project Timeline</div>
-                  </a></li> -->
-            <li><a class="dropdown-item"
-                href="/VGMS/employee-pages/task-page.php?tag=task" id="task">
-                <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="briefcase"></span>Project Tasks
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="/VGMS/employee-pages/task-page.php?tag=task" id="task">
+                <div class="dropdown-item-wrapper">
+                  <span class="fas fa-tasks me-2"></span>Project Tasks
                 </div>
-              </a></li>
-            <!-- <li><a class="dropdown-item" href="/VGMS/admin-pages/assign-tasks.php?tag=permissions" id="permissions">
-                    <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="share-2"></span>Permissions</div>
-                  </a></li> -->
-            <!-- <li><a class="dropdown-item" href="/VGMS/admin-pages/review-page.php?tag=review" id="review">
-                    <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="share-2"></span>Review Tasks</div>
-                  </a></li> -->
+              </a>
+            </li>
           </ul>
         </li>
+
+      </ul>
+      </li>
 
       </ul>
       </li>
@@ -2340,8 +2322,7 @@
             <div class="card-body p-0">
               <div class="text-center pt-4 pb-3">
                 <div class="avatar avatar-xl ">
-                  <img class="rounded-circle " src="\VGMS\assets\img\team\72x72\57.webp"
-                    alt="" />
+                  <img class="rounded-circle " src="\VGMS\assets\img\team\72x72\57.webp" alt="" />
                 </div>
                 <h6 class="mt-2 text-body-emphasis">Jerry Seinfield</h6>
               </div>
@@ -2392,8 +2373,8 @@
                 class="toggle-line"></span></span></button>
           <a class="navbar-brand me-1 me-sm-3" href="index.html">
             <div class="d-flex align-items-center">
-              <div class="d-flex align-items-center"><img
-                  src="\VGMS\assets\img\icons\Veenagrp.png" alt="phoenix" width="180" />
+              <div class="d-flex align-items-center"><img src="\VGMS\assets\img\icons\Veenagrp.png" alt="phoenix"
+                  width="180" />
                 <h5 class="logo-text ms-2 d-none d-sm-block"></h5>
               </div>
             </div>
@@ -2815,8 +2796,7 @@
                 <div class="card-body p-0">
                   <div class="text-center pt-4 pb-3">
                     <div class="avatar avatar-xl ">
-                      <img class="rounded-circle "
-                        src="\VGMS\assets\img\team\72x72\57.webp" alt="" />
+                      <img class="rounded-circle " src="\VGMS\assets\img\team\72x72\57.webp" alt="" />
                     </div>
                     <h6 class="mt-2 text-body-emphasis">Jerry Seinfield</h6>
                   </div>
@@ -2860,42 +2840,37 @@
       </div>
       <div class="collapse navbar-collapse navbar-top-collapse justify-content-center" id="navbarTopCollapse">
         <ul class="navbar-nav navbar-nav-top" data-dropdown-on-hover="data-dropdown-on-hover">
-          <li class="nav-item dropdown"><a class="nav-link dropdown-toggle lh-1" href="#!" role="button"
-              data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false"><span
-                class="uil fs-8 me-2 uil-chart-pie"></span>Employee</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle lh-1" href="#!" role="button" data-bs-toggle="dropdown"
+              data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
+              <span class="fas fa-users me-2"></span>Employee
+            </a>
             <ul class="dropdown-menu navbar-dropdown-caret">
-              <li><a class="dropdown-item "
-                  href="/VGMS/employee-pages/dashboard.php?tag=dashboard" id="dashboard">
-                  <div class="dropdown-item-wrapper"><span class="me-2 uil"
-                      data-feather="shopping-cart"></span>Dashboard</div>
-                </a></li>
-              <li><a class="dropdown-item"
-                  href="/VGMS/employee-pages/emp-attendance.php?tag=attendance"
-                  id="attendance">
-                  <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="clipboard"></span>Attendance
+              <li>
+                <a class="dropdown-item" href="/VGMS/employee-pages/dashboard.php?tag=dashboard" id="dashboard">
+                  <div class="dropdown-item-wrapper">
+                    <span class="fas fa-tachometer-alt me-2"></span>Dashboard
                   </div>
-                </a></li>
-              <!-- <li><a class="dropdown-item index" href="/VGMS/admin-pages/add-customers.php?tag=customer" id="customer">
-                      <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="phone"></span>Add Customer</div>
-                    </a></li> -->
-              <!-- <li><a class="dropdown-item" href="/VGMS/admin-pages/add-employee.php?tag=employee" id="employee">
-                      <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="briefcase"></span>Add Employee</div>
-                    </a></li> -->
-              <!-- <li><a class="dropdown-item" href="/VGMS/admin-pages/project-timeline.php?tag=timeline" id="timeline">
-                      <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="share-2"></span>Manage Project Timeline</div>
-                    </a></li> -->
-              <li><a class="dropdown-item"
-                  href="/VGMS/employee-pages/task-page.php?tag=task" id="task">
-                  <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="share-2"></span>Project Tasks
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/VGMS/employee-pages/emp-attendance.php?tag=attendance" id="attendance">
+                  <div class="dropdown-item-wrapper">
+                    <span class="fas fa-calendar-check me-2"></span>Attendance
                   </div>
-                </a></li>
-              <!-- <li><a class="dropdown-item" href="/VGMS/admin-pages/assign-tasks.php?tag=permissions" id="permissions">
-                    <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="share-2"></span>Permissions</div>
-                  </a></li> -->
-              <!-- <li><a class="dropdown-item" href="/VGMS/admin-pages/review-page.php?tag=review" id="review">
-                    <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="share-2"></span>Review Tasks</div>
-                  </a></li> -->
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/VGMS/employee-pages/task-page.php?tag=task" id="task">
+                  <div class="dropdown-item-wrapper">
+                    <span class="fas fa-tasks me-2"></span>Project Tasks
+                  </div>
+                </a>
+              </li>
             </ul>
+          </li>
+
+        </ul>
 
         </ul>
       </div>
