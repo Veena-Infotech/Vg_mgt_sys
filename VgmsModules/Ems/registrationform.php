@@ -63,7 +63,7 @@
     <!--    Main Content-->
     <!-- ===============================================-->
     <main class="main" id="top">
-        <?php include '../Components/navbar_emp.html'; ?>
+        <?php include_once('../../Components/navbar.php'); ?>
         <script>
             var navbarTopShape = window.config.config.phoenixNavbarTopShape;
             var navbarPosition = window.config.config.phoenixNavbarPosition;
