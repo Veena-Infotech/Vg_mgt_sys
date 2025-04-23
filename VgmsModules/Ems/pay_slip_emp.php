@@ -47,6 +47,104 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
+  <style>
+    body {
+      padding: 20px;
+      background: #fff;
+    }
+
+    @media print {
+      @page {
+        size: A4;
+        margin: 20mm;
+      }
+
+      body {
+        margin-top: 100px;
+        /* Space for letterhead */
+      }
+    }
+
+    table.custom-table th,
+    table.custom-table td {
+      border: 1px solid #000 !important;
+      vertical-align: middle;
+    }
+
+    .table-title {
+      font-weight: bold;
+      text-align: center;
+      font-size: 1.25rem;
+      padding: 12px;
+      border: 2px solid #000;
+    }
+
+    .spacer-row td {
+      height: 20px;
+      border: none !important;
+      margin-left: 1px;
+    }
+  </style>
+  <style>
+    .custom-table td,
+    .custom-table th {
+      vertical-align: middle;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    .col-1 {
+      width: 35%;
+    }
+
+    .col-2 {
+      width: 15%;
+    }
+
+    .col-3 {
+      width: 15%;
+      border-left: none;
+    }
+
+    /* Wider */
+    .col-4 {
+      width: 20%;
+    }
+
+    /* Slightly narrower */
+    .col-5 {
+      width: 15%;
+    }
+
+    .table-title {
+      text-align: center;
+      font-weight: bold;
+      background-color: #f0f0f0;
+    }
+
+    @media (max-width: 768px) {
+
+      .custom-table td,
+      .custom-table th {
+        font-size: 12px;
+      }
+    }
+
+    @font-face {
+      font-family: 'BriceSemiBold';
+      src: url('../../assets/fonts/brice-semi-expanded-semi-bold.otf') format('opentype');
+    }
+
+    .mid-head {
+      font-family: 'BriceSemiBold', sans-serif;
+    }
+  </style>
+  <style>
+  .p-16-8 {
+    padding: 16px 8px !important;
+  }
+</style>
+
 </head>
 
 <body>
@@ -348,98 +446,148 @@
       </div>
 
       <!-- Payslip Container -->
-      <div id="payslipContent" class="rounded bg-white px-5 pt-5 pb-4 mb-4 min-vh-75">
-
-        <!-- Replace with actual payslip HTML -->
-        <!-- Watermark -->
-        <div
-          class="position-absolute top-50 start-50 translate-middle w-100 h-100 d-flex justify-content-center align-items-center opacity-25 watermark-pdf-img"
-          style="z-index: 0; pointer-events: none; ">
-          <img src="../../assets/img/logos/logo3.png" alt="Watermark" class="img-fluid" style="max-width: 40%;">
-        </div>
-
-        <div class="container-small position-relative" style="z-index: 1;">
-          <div class="d-flex justify-content-between align-items-end mb-2 flex-row">
-            <h2 class="mb-0 text-dark">Pay Slip</h2>
-          </div>
-          <hr class="hr-black bg-black opacity-100" style="height: 2px; border: none;">
-
-
-          <div class="row g-4 mb-3">
-            <!-- Left column with background -->
-            <div class="col-12 col-lg-6">
-              <div class="bg-body-secondary p-4 rounded-2 h-100">
-                <h6>Employee Name:</h6>
-                <p class="fw-semibold text-body-secondary">John Doe</p>
-                <h6>Employee ID:</h6>
-                <p class="fw-semibold text-body-secondary">EMP12345</p>
-                <h6>Designation:</h6>
-                <p class="fw-semibold text-body-secondary">Software Developer</p>
-              </div>
-            </div>
-
-            <!-- Right column without background -->
-            <div class="col-12 col-lg-6">
-              <div class="p-4 h-100 d-flex flex-column justify-content-between">
-                <h6 class="text-body-secondary">Pay Period:</h6>
-                <p class="fw-semibold text-body-secondary">March 2025</p>
-                <h6 class="text-body-secondary">Working Days:</h6>
-                <p class="fw-semibold text-body-secondary">22</p>
-                <h6 class="text-body-secondary">Days Present:</h6>
-                <p class="fw-semibold text-body-secondary">20</p>
-                <!-- You can add Salary here -->
-                <h6 class="text-body-secondary">Net Salary:</h6>
-                <p class="fw-semibold text-body-secondary">₹60,000</p>
-              </div>
-            </div>
+      <div id="payslipContent" style="width: 794px; max-width: 794px; margin: auto;"
+        class="rounded bg-white px-5 pt-5 pb-4 mb-4 min-vh-75">
+        <div class="container-fluid px-3">
+          <div class="text-center mb-3">
+            <img src="/VG_MGT_SYS/assets/img/logos/logo.png" alt="Logo" class="img-fluid">
           </div>
 
+          <table class="table table-bordered custom-table w-100">
+            <tbody>
+              <!-- Company Addresses -->
+              <tr>
+                <td colspan="3" class="p-16-8">Regd. Office: 604 Veena Velocity, Veena Nagar, LBS Marg, Mulund West, Mumbai - 400080
+                </td>
+                <td colspan="2" class="p-16-8">Branch Office: Veena Velocity, 8th Floor, Veena Nagar Phase II, LBS Marg, Mulund West,
+                  Mumbai - 400080</td>
+              </tr>
+              <!-- Contact Info -->
+              <tr>
+                <td colspan="3" class="p-16-8">Contact: +91 9820535000 | Email: veenagroup@gmail.com</td>
+                <td colspan="2" class="p-16-8">GST No: 27AAFCV5197A1Z0</td>
+              </tr>
 
-          <div class="table-responsive">
-            <table class="table fs-9 text-body mb-0">
-              <thead class="bg-body-secondary">
-                <tr>
-                  <th>Earnings</th>
-                  <th class="text-end">Amount (₹)</th>
-                  <th>Deductions</th>
-                  <th class="text-end">Amount (₹)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="text-dark">
-                  <td>Basic Salary</td>
-                  <td class="text-end">₹25,000</td>
-                  <td>Professional Tax</td>
-                  <td class="text-end">₹200</td>
-                </tr>
-                <tr>
-                  <td>Travel Allowance</td>
-                  <td class="text-end">₹3,000</td>
-                  <td>Income Tax</td>
-                  <td class="text-end">₹1,000</td>
-                </tr>
-                <tr class="bg-body-secondary fw-semibold">
-                  <td>Total Earnings</td>
-                  <td class="text-end">₹28,000</td>
-                  <td>Total Deductions</td>
-                  <td class="text-end">₹1,200</td>
-                </tr>
-                <tr class="fw-bold text-body-highlight">
-                  <td colspan="2">Net Pay (in words): <br><em>Twenty-Six Thousand Eight Hundred Rupees
-                      Only</em></td>
-                  <td colspan="2" class="text-end">₹26,800</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+              <!-- Employee Details -->
+              <tr>
+                <td class="col-1 p-16-8">Employee ID</td>
+                <td class="col-2" colspan="2"></td>
+                <td class="col-4">Base Salary</td>
+                <td class="col-5"></td>
+              </tr>
+              <tr>
+                <td class="p-16-8">Employee Name</td>
+                <td colspan="2"></td>
+                <td>Per Day</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td class="p-16-8">Venture</td>
+                <td colspan="2"></td>
+                <td>No. of Days in Month / Present</td>
+                <td colspan="2"  class="p-16-8">31 / 25</td>
+              </tr>
+              <tr>
+                <td class="p-16-8">Designation</td>
+                <td colspan="2"></td>
+                <td>Leaves</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td class="p-16-8">Contact</td>
+                <td colspan="2"></td>
+                <td>Late Remark</td>
+                <td></td>
+              </tr>
 
-          <div class="text-end py-5 border-bottom">
-            <img src="logo.png" alt="Company Logo" style="height: 40px;" class="mb-3" />
-            <h4>Authorized Signatory</h4>
-          </div>
-          <div class="text-center py-4">
-            <p class="mb-0">Thank you for your service | © 2025 <a href="#">YourCompany</a></p>
-          </div>
+              <!-- Title -->
+              <tr>
+                <td colspan="5" class="table-title text-center fw-bold fs-7 mid-head">Salary Slip for the Month of March
+                  2025
+                </td>
+              </tr>
+
+              <!-- Earnings & Deductions -->
+              <tr>
+                <th colspan="3">Earnings</th>
+                <th colspan="2">Deductions</th>
+              </tr>
+              <tr>
+                <td class="p-16-8">Base Salary</td>
+                <td>20,000</td>
+                <td class="col-2"></td>
+                <td>Profession Tax</td>
+                <td class="p-16-8">200</td>
+              </tr>
+              <tr>
+                <td class="p-16-8">HRA</td>
+                <td>10,000</td>
+                <td></td>
+                <td>Income Tax</td>
+                <td class="p-16-8">-</td>
+              </tr>
+              <tr>
+                <td class="p-16-8">Travel Allowance</td>
+                <td>1,000</td>
+                <td></td>
+                <td>Loan EMI</td>
+                <td class="p-16-8">5,000</td>
+              </tr>
+              <tr>
+                <td class="p-16-8">Extra Working Days</td>
+                <td>-</td>
+                <td></td>
+                <td>Advance Salary</td>
+                <td class="p-16-8">2,500</td>
+              </tr>
+              <tr>
+                <td class="p-16-8">Special Allowances</td>
+                <td>19,000</td>
+                <td></td>
+                <td>Other Deduction</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td class="p-16-8">Overtime</td>
+                <td>-</td>
+                <td></td>
+                <td colspan="2"></td>
+              </tr>
+              <tr>
+                <th class="p-16-8">Total</th>
+                <th>50,000</th>
+                <td></td>
+                <th>Total</th>
+                <th>7,700</th>
+              </tr>
+              <tr>
+                <th colspan="4">Net Payable</th>
+                <th>36,123</th>
+              </tr>
+
+              <!-- Spacer -->
+              <tr class="spacer-row">
+                <td colspan="3"></td>
+                <td colspan="2" rowspan="2" class="text-end"></td>
+              </tr>
+
+              <!-- Payment Date -->
+              <tr>
+                <td></td>
+                <td class="text-end"></td>
+                <td class="text-end"></td>
+
+              </tr>
+
+              <tr>
+                <td class="p-16-8">Date of Payment:</td>
+                <td class="text-end"></td>
+                <td class="text-end"></td>
+                <td colspan="2" class="text-end p-16-8">Authorised Signatory</td>
+              </tr>
+              <!-- Signature -->
+            </tbody>
+          </table>
         </div>
       </div>
 
@@ -622,90 +770,101 @@
 
   <!-- Download Functionality -->
   <script>
-  document.getElementById("downloadBtn").addEventListener("click", async () => {
-    const payslip = document.getElementById("payslipContent");
-    const watermark = payslip.querySelector(".watermark-pdf-img");
+    document.getElementById("downloadBtn").addEventListener("click", async () => {
+      const payslip = document.getElementById("payslipContent");
+      const watermark = payslip.querySelector(".watermark-pdf-img");
 
-    // Scroll to top to prevent clipping
-    window.scrollTo({ top: 0, behavior: "instant" });
+      // Scroll to top to prevent clipping
+      window.scrollTo({ top: 0, behavior: "instant" });
 
-    // Ensure watermark is hidden from the canvas render
-    if (watermark) watermark.style.display = "none";
-
-    // Allow DOM to update before capturing
-    await new Promise(resolve => setTimeout(resolve, 200));
-
-    html2canvas(payslip, {
-      scale: 2,
-      backgroundColor: null,
-      useCORS: true
-    }).then(async canvas => {
-      // Show watermark now that canvas is captured
-      if (watermark) watermark.style.display = "block";
-
-      const imgData = canvas.toDataURL("image/png");
-      const watermarkImgPath = watermark ? watermark.getAttribute("src") : "";
-
-      const { jsPDF } = window.jspdf;
-      const pdf = new jsPDF({
-        orientation: "portrait",
-        unit: "pt",
-        format: "a4"
-      });
-
-      const pdfWidth = pdf.internal.pageSize.getWidth();   // ~595.28 pt
-      const pdfHeight = pdf.internal.pageSize.getHeight(); // ~841.89 pt
-
-      // Add watermark in center
-      if (watermarkImgPath) {
-        const watermarkSize = 300;
-        pdf.addImage(
-          watermarkImgPath,
-          "PNG",
-          (pdfWidth - watermarkSize) / 2,
-          (pdfHeight - watermarkSize) / 2,
-          watermarkSize,
-          watermarkSize,
-          undefined,
-          "NONE",
-          0.1
-        );
-      }
-
-      const monthSelect = document.querySelectorAll("select")[1];
-      const selectedMonth = monthSelect ? monthSelect.value : "defaultMonth";
-
-
-      // Set margins
-      const padding = 40;
-      const topSpace = 80;
-      const targetWidth = pdfWidth + 58 * 2 ;
-
-      // Maintain aspect ratio
-      const aspectRatio = canvas.height / canvas.width;
-      const targetHeight = targetWidth * aspectRatio;
-      const imgX = (pdfWidth - targetWidth) / 2; // center horizontally
-
-      // Add canvas to PDF
-      pdf.addImage(
-        imgData,
-        "PNG",
-        imgX,
-        topSpace,
-        targetWidth,
-        targetHeight
-      );
-
-      pdf.save(`pay-slip-${selectedMonth}.pdf`);
-
-      // Re-hide watermark in DOM
+      // Temporarily hide watermark
       if (watermark) watermark.style.display = "none";
-    }).catch(err => {
-      console.error("Error generating PDF:", err);
-      alert("An error occurred while generating the PDF. Please try again.");
+
+      // Wait for DOM to reflect changes
+      await new Promise(resolve => setTimeout(resolve, 100));
+
+      // Capture the payslip as canvas
+      html2canvas(payslip, {
+        scale: 2, // High quality
+        backgroundColor: "#ffffff",
+        useCORS: true
+      }).then(async canvas => {
+        if (watermark) watermark.style.display = "block"; // Re-show watermark
+
+        const imgData = canvas.toDataURL("image/png");
+
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF({
+          orientation: "portrait",
+          unit: "pt",
+          format: "a4"
+        });
+
+        const pdfWidth = pdf.internal.pageSize.getWidth();   // ~595.28
+        const pdfHeight = pdf.internal.pageSize.getHeight(); // ~841.89
+
+        // Resize canvas content to fit A4 exactly (inside margins)
+        // Resize canvas content to fit A4 exactly (inside margins)
+        const margin = 20; // 20pt margin
+        const contentMaxWidth = pdfWidth + 10 * 2;
+        const contentMaxHeight = pdfHeight - margin * 2;
+
+        let imgWidth = contentMaxWidth;
+        let imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+        // If height overflows, adjust both width and height again
+        if (imgHeight > contentMaxHeight) {
+          imgHeight = contentMaxHeight;
+          imgWidth = (canvas.width * imgHeight) / canvas.height;
+        }
+
+        // Center the image
+        const positionX = (pdfWidth - imgWidth) / 2;
+        const positionY = (pdfHeight - imgHeight) / 2;
+
+
+        // Optional watermark in center
+        if (watermark) {
+          const watermarkSrc = watermark.getAttribute("src");
+          const watermarkSize = 250;
+          pdf.addImage(
+            watermarkSrc,
+            "PNG",
+            (pdfWidth - watermarkSize) / 2,
+            (pdfHeight - watermarkSize) / 2,
+            watermarkSize,
+            watermarkSize,
+            undefined,
+            "NONE",
+            0.05
+          );
+        }
+
+        // Draw the canvas image into PDF
+        pdf.addImage(
+          imgData,
+          "PNG",
+          positionX,
+          positionY,
+          imgWidth,
+          imgHeight
+        );
+
+
+        // Use selected month as file name
+        const monthSelect = document.querySelectorAll("select")[1];
+        const selectedMonth = monthSelect ? monthSelect.value : "default-month";
+        pdf.save(`pay-slip-${selectedMonth}.pdf`);
+
+        // Re-hide watermark (if needed)
+        if (watermark) watermark.style.display = "none";
+      }).catch(err => {
+        console.error("Error generating PDF:", err);
+        alert("An error occurred while generating the PDF. Please try again.");
+      });
     });
-  });
-</script>
+  </script>
+
 
   <!-- html2canvas -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
