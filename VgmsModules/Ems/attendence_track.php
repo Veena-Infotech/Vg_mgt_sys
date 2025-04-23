@@ -171,8 +171,8 @@
             <!-- your main contents goes here  with footer . -->
             <!-- Title and Subtitle -->
             <div id="headerSection" class="text-start mb-4">
-            <h1 class="fw-bold">Employee Attendance Management</h1>
-<p class="lead text-muted">Easily track and manage workforce attendance.</p>
+                <h1 class="fw-bold">Employee Attendance Management</h1>
+                <p class="lead text-muted">Easily track and manage workforce attendance.</p>
 
             </div>
             <hr class="hr" />
@@ -699,34 +699,34 @@
         });
     </script>
     <script>
-    function filterByDate() {
-        const range = document.getElementById('timepicker2').value.split(' to ');
-        if (range.length < 2) return;
+        function filterByDate() {
+            const range = document.getElementById('timepicker2').value.split(' to ');
+            if (range.length < 2) return;
 
-        const start = new Date(range[0]);
-        const end = new Date(range[1]);
+            const start = new Date(range[0]);
+            const end = new Date(range[1]);
 
-        // Set time to 0 for consistent comparison
-        start.setHours(0, 0, 0, 0);
-        end.setHours(0, 0, 0, 0);
+            // Set time to 0 for consistent comparison
+            start.setHours(0, 0, 0, 0);
+            end.setHours(0, 0, 0, 0);
 
-        document.querySelectorAll('.list tr').forEach(row => {
-            const dateCell = row.querySelector('.date');
-            if (!dateCell) return;
+            document.querySelectorAll('.list tr').forEach(row => {
+                const dateCell = row.querySelector('.date');
+                if (!dateCell) return;
 
-            const [dd, mm, yyyy] = dateCell.textContent.trim().split('-');
-            const rowDate = new Date(`${yyyy}-${mm}-${dd}`); // format as yyyy-mm-dd
-            rowDate.setHours(0, 0, 0, 0); // normalize
+                const [dd, mm, yyyy] = dateCell.textContent.trim().split('-');
+                const rowDate = new Date(`${yyyy}-${mm}-${dd}`); // format as yyyy-mm-dd
+                rowDate.setHours(0, 0, 0, 0); // normalize
 
-            // Compare
-            if (rowDate >= start && rowDate <= end) {
-                row.style.display = '';
-            } else {
-                row.style.display = 'none';
-            }
-        });
-    }
-</script>
+                // Compare
+                if (rowDate >= start && rowDate <= end) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+    </script>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
