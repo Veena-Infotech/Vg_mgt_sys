@@ -75,17 +75,17 @@
               <div class="parent-wrapper label-1">
                 <ul class="nav collapse parent" data-bs-parent="#navbarVerticalCollapse" id="nv-leads">
 
-                  <!-- add lead -->
+             
                  
                     <li class="nav-item">
-                      <a class="nav-link" href="/pms/PMS-files/pages/leads/add-leads.php?tag=add-leads" id="add-leads">
+                      <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/Vms/NewRegistration.php?tag=emp-meet-queue" id="tag=emp-meet-queue">
                         <!-- add the link for Add New Lead page here -->
                         <div class="d-flex align-items-center"><span class="nav-link-text">New Registration</span></div>
                       </a>
                     </li>
                 
 
-                  <!-- view/manage lead -->
+    
 
 
                  
@@ -96,6 +96,26 @@
                       </a>
                     </li>
 
+                    <li class="nav-item">
+                      <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/Vms/Payment-management.php?tag=payment-management" id="payment-management">
+                        <!-- add the link for View/Manage Leads page here -->
+                        <div class="d-flex align-items-center"><span class="nav-link-text">Payment Management</span></div>
+                      </a>
+                    </li>
+
+                    <li class="nav-item">
+                      <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/Vms/Receptionist-side-meeting.php?tag=recp-meeting" id="recp-meeting">
+                        <!-- add the link for View/Manage Leads page here -->
+                        <div class="d-flex align-items-center"><span class="nav-link-text">Receptionist Side Meeting Queue</span></div>
+                      </a>
+                    </li>
+
+                    <li class="nav-item">
+                      <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/Vms/LobbyManagement.php?tag=lobby" id="lobby">
+                        <!-- add the link for View/Manage Leads page here -->
+                        <div class="d-flex align-items-center"><span class="nav-link-text">Lobby Management</span></div>
+                      </a>
+                    </li>
                 </ul>
               </div>
             </div>
@@ -114,34 +134,21 @@
               <div class="parent-wrapper label-1">
                 <ul class="nav collapse parent" data-bs-parent="#navbarVerticalCollapse" id="nv-property">
                     <li class="nav-item">
-                      <a class="nav-link" href="/pms/PMS-files/pages/Property/Add-property.php?tag=add-property" id="add-property">
+                      <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/Ems/attendance_track.php?tag=attendance" id="attendance">
                         <!-- add the link for Add Society page here -->
-                        <div class="d-flex align-items-center"><span class="nav-link-text">Add Property</span></div>
+                        <div class="d-flex align-items-center"><span class="nav-link-text">Attendance Track</span></div>
                       </a>
                     </li>
                 
                     <li class="nav-item">
-                      <a class="nav-link" href="/pms/PMS-files/pages/Society/view-society.php?tag=view-society" id="view-society">
+                      <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/Ems/listemployee.php?tag=list-emp" id="list-emp">
                         <!-- add the link for View/Manage Societies page here -->
-                        <div class="d-flex align-items-center"><span class="nav-link-text">View/Manage Societies</span></div>
+                        <div class="d-flex align-items-center"><span class="nav-link-text">List Employees</span></div>
                       </a>
                     </li>
                   
-                  <li class="nav-item">
-                    <a class="nav-link" href="/pms/PMS-files/pages/Property/view-manage-landlord.php?tag=view-manage-landlord" id="view-manage-landlord">
-                      <div class="d-flex align-items-center"><span class="nav-link-text">View/Manage LandLord</span></div>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="/pms/PMS-files/pages/Property/view-landlord.php?tag=view-landlord" id="view-landlord">
-                      <div class="d-flex align-items-center"><span class="nav-link-text">View Landlord</span></div>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="/pms/PMS-files/pages/Property/edit-landlord.php?tag=edit-landlord" id="edit-landlord">
-                      <div class="d-flex align-items-center"><span class="nav-link-text">Edit Landlord</span></div>
-                    </a>
-                  </li>
+                
+                 
                 </ul>
               </div>
             </div>
