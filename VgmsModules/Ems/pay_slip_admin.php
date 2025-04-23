@@ -429,7 +429,11 @@
       <!-- Dropdowns and Download Button -->
       <div id="filterSection" class="d-flex justify-content-between align-items-center flex-wrap my-4">
         <div class="d-flex flex-row gap-3">
-            
+          <select class="form-select" aria-label="Select Employee">
+            <option selected>Select Employee</option>
+            <option value="1">John Doe</option>
+            <option value="2">Jane Smith</option>
+          </select>
           <select class="form-select" aria-label="Select Month">
             <option selected>Select Month</option>
             <option value="Jan">January</option>
