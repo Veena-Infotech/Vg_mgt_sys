@@ -41,7 +41,7 @@
   <link href="../../assets/css/theme.min.css" type="text/css" rel="stylesheet" id="style-default">
   <link href="../../assets/css/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
   <link href="../../assets/css/user.min.css" type="text/css" rel="stylesheet" id="user-style-default">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="../../vendors/flatpickr/flatpickr.min.css" rel="stylesheet" />
   <script>
     var phoenixIsRTL = window.config.config.phoenixIsRTL;
     if (phoenixIsRTL) {
@@ -472,6 +472,7 @@
           </div>
         </div>
       </div>
+
       <?php include_once('../Components/footer.html'); ?>
     </div>
     <div>
@@ -652,9 +653,9 @@
   <script src="../../vendors/list.js/list.min.js"></script>
   <script src="../../vendors/feather-icons/feather.min.js"></script>
   <script src="../../vendors/dayjs/dayjs.min.js"></script>
+  <script src="../../vendors/flatpickr/flatpickr.min.js"></script>
   <script src="../../assets/js/phoenix.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
