@@ -13,7 +13,7 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>Starter code</title>
+    <title>Registration Form</title>
 
     <!-- ===============================================-->
     <!--    Favicons-->
@@ -63,7 +63,7 @@
     <!--    Main Content-->
     <!-- ===============================================-->
     <main class="main" id="top">
-        <?php include '../../Components/navbar.php'; ?>
+        <?php include '../Components/navbar_emp.html'; ?>
         <script>
             var navbarTopShape = window.config.config.phoenixNavbarTopShape;
             var navbarPosition = window.config.config.phoenixNavbarPosition;

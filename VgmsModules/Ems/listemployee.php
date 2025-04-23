@@ -42,6 +42,7 @@
   <link href="../../assets/css/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
   <link href="../../assets/css/user.min.css" type="text/css" rel="stylesheet" id="user-style-default">
   <link href="../../vendors/flatpickr/flatpickr.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <script>
     var phoenixIsRTL = window.config.config.phoenixIsRTL;
     if (phoenixIsRTL) {
@@ -64,7 +65,7 @@
   <!--    Main Content-->
   <!-- ===============================================-->
   <main class="main" id="top">
-    <?php include_once('../Components/navbar_emp.html'); ?>
+    <?php include '../Components/navbar_emp.html'; ?>
     <script>
       var navbarTopShape = window.config.config.phoenixNavbarTopShape;
       var navbarPosition = window.config.config.phoenixNavbarPosition;
@@ -193,14 +194,29 @@
           <table class="table table-striped table-sm fs-9 mb-0 text-center justify-content-center align-items-center">
             <thead>
               <tr>
-                <th class="sort border-top border-translucent ps-3" data-sort="profile">Profile</th>
-                <th class="sort border-top border-translucent ps-3" data-sort="name">Name</th>
-                <th class="sort border-top border-translucent ps-3" data-sort="email">Email</th>
-                <th class="sort border-top border-translucent ps-3" data-sort="phone">Phone</th>
-                <th class="sort border-top border-translucent ps-3" data-sort="designation">Designation</th>
-                <th class="sort border-top border-translucent ps-3" data-sort="address">Address</th>
-                <th class="sort border-top border-translucent ps-3" data-sort="action">Action</th>
+                <th class="sort border-top border-translucent ps-3" data-sort="profile">
+                  <i class="bi bi-person-circle me-1"></i> Profile
+                </th>
+                <th class="sort border-top border-translucent ps-3" data-sort="name">
+                  <i class="bi bi-person-badge me-1"></i> Name
+                </th>
+                <th class="sort border-top border-translucent ps-3" data-sort="email">
+                  <i class="bi bi-envelope-at me-1"></i> Email
+                </th>
+                <th class="sort border-top border-translucent ps-3" data-sort="phone">
+                  <i class="bi bi-telephone me-1"></i> Phone
+                </th>
+                <th class="sort border-top border-translucent ps-3" data-sort="designation">
+                  <i class="bi bi-briefcase me-1"></i> Designation
+                </th>
+                <th class="sort border-top border-translucent ps-3" data-sort="address">
+                  <i class="bi bi-geo-alt me-1"></i> Address
+                </th>
+                <th class="sort border-top border-translucent ps-3" data-sort="action">
+                  <i class="bi bi-gear me-1"></i> Action
+                </th>
               </tr>
+
             </thead>
             <tbody class="list">
               <tr>
@@ -216,9 +232,17 @@
                       type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true"
                       aria-expanded="false" data-bs-reference="parent"><span
                         class="fas fa-ellipsis-h fs-10"></span></button>
-                    <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a
-                        class="dropdown-item" href="#!">Export</a>
-                      <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                    <div class="dropdown-menu dropdown-menu-end py-2">
+                      <a class="dropdown-item" href="#!">
+                        <i class="bi bi-eye me-2"></i> View
+                      </a>
+                      <a class="dropdown-item" href="#!">
+                        <i class="bi bi-box-arrow-up-right me-2"></i> Export
+                      </a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item text-danger" href="#!">
+                        <i class="bi bi-trash3 me-2"></i> Remove
+                      </a>
                     </div>
                   </div>
                 </td>
@@ -658,7 +682,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function() {
       gsap.registerPlugin(ScrollTrigger);
 
       // Animate heading and add button
