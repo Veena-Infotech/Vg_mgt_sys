@@ -176,17 +176,18 @@
 <main class="main" id="top">
     <div class="container py-5">
       <div class="row justify-content-center">
-        <div class="col-md-10 col-lg-8">
-          <!-- Title Section -->
-          <div class="text-center mb-5">
-            <i class="bi bi-clipboard-check" style="font-size: 2.5rem; color: #0d6efd;"></i>
-            <h2 class="fw-bold mt-2">Leave Requests Management</h2>
-            <p class="text-muted">Approve or reject employee leave requests with ease.</p>
-          </div>
+
+      <div class="mb-4 text-start">
+          <h2 class="fw-bold d-flex align-items-center gap-2">
+            <i class="bi bi-clipboard-check" style="color: #0d6efd;"></i>
+            Leave Requests Management
+          </h2>
+          <p class="text-muted ms-1">Approve or reject employee leave requests with ease.</p>
+        </div>
 
           <!-- Leave Requests Table -->
           <table class="table table-bordered table-hover">
-            <thead class="table-light">
+            <thead class="table">
               <tr>
                 <th scope="col">Employee Name</th>
                 <th scope="col">Leave Type</th>

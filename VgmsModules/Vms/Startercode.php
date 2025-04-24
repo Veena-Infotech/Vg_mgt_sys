@@ -169,10 +169,10 @@
             <!-- Footer -->
             <?php include("../../Components/footer.php"); ?>
         </div>
+        
 
 
 
-        </div>
 
 
     </main>

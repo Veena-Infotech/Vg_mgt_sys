@@ -183,21 +183,24 @@
 
                 <!-- Leave Requests Card -->
                 <div class="card border-0 shadow-lg" id="cardBox">
-                    <div class="card-header bg-white d-flex flex-wrap justify-content-between align-items-center">
+                    <div class="card-header d-flex flex-wrap justify-content-between align-items-center">
                         <div class="d-flex align-items-center">
                             <i class="bi bi-person-lines-fill text-success fs-4 me-2"></i>
                             <h5 class="mb-0">Leave Status Summary</h5>
                         </div>
+                        <!-- Filter and Search (smaller width) -->
                         <div class="d-flex flex-wrap gap-2 mt-2 mt-sm-0">
                             <!-- Filter -->
-                            <select class="form-select form-select-sm" id="leaveFilter">
+                            <select class="form-select form-select-sm w-auto" id="leaveFilter">
                                 <option value="All">All</option>
                                 <option value="Pending">Pending</option>
                                 <option value="Approved">Approved</option>
                                 <option value="Rejected">Rejected</option>
                             </select>
+
                             <!-- Search -->
-                            <input type="text" id="searchBox" class="form-control form-control-sm" placeholder="Search by reason..." />
+                            <input type="text" id="searchBox" class="form-control form-control-sm w-auto" placeholder="Search..." style="min-width: 160px;" />
+
                             <!-- Apply Button -->
                             <button class="btn btn-outline-primary btn-sm">
                                 <i class="bi bi-plus-circle me-1"></i> Apply for Leave
@@ -207,7 +210,7 @@
 
                     <div class="card-body p-0">
                         <table class="table table-hover align-middle mb-0" id="leaveTable">
-                            <thead class="table-light text-center">
+                            <thead class="table text-center">
                                 <tr>
                                     <th><i class="bi bi-file-earmark-text me-1"></i>Type</th>
                                     <th><i class="bi bi-calendar me-1"></i>From</th>
@@ -323,3 +326,6 @@
 
 
 </html>
+
+
+

@@ -13,7 +13,7 @@
   <!-- ===============================================-->
   <!--    Document Title-->
   <!-- ===============================================-->
-  <title>Leave Request</title>
+  <title>Leave Request Form</title>
 
   <!-- ===============================================-->
   <!--    Favicons-->
@@ -41,6 +41,7 @@
   <link href="../../assets/css/theme.min.css" type="text/css" rel="stylesheet" id="style-default">
   <link href="../../assets/css/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
   <link href="../../assets/css/user.min.css" type="text/css" rel="stylesheet" id="user-style-default">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
   <script>
     var phoenixIsRTL = window.config.config.phoenixIsRTL;
     if (phoenixIsRTL) {
@@ -63,7 +64,7 @@
   <!--    Main Content-->
   <!-- ===============================================-->
   <main class="main" id="top">
-    <!-- change this to your navbar code link should be replaced properly -->
+     <!-- change this to your navbar code link should be replaced properly -->
     <?php include_once('../../Components/navbar.php'); ?>
     <script>
       var navbarTopShape = window.config.config.phoenixNavbarTopShape;
@@ -167,18 +168,22 @@
 
 
     <div class="content">
-      <!-- your main contents goes here  with footer . -->
+        <!-- your main contents goes here  with footer . -->
+
+        <div class="container py-5">
+        <!-- Left-Aligned Title Section with Icon -->
+        <div class="mb-4 text-start">
+          <h2 class="fw-bold d-flex align-items-center gap-2">
+            <i class="bi bi-clipboard-check" style="color: #0d6efd;"></i>
+            Leave Request Form
+          </h2>
+          <p class="text-muted ms-1">Submit your time-off request with the form below.</p>
+        </div>
 
 
-      <div class="container py-5">
+        <!-- Centered Form Section -->
         <div class="row justify-content-center">
           <div class="col-md-10 col-lg-8">
-            <div class="text-center mb-4">
-              <i class="bi bi-clipboard-check" style="font-size: 2.5rem; color: #0d6efd;"></i>
-              <h2 class="fw-bold mt-2">Leave Request Form</h2>
-              <p class="text-muted">Submit your time-off request with the form below.</p>
-            </div>
-
             <div class="border rounded shadow-sm p-4" id="formCard">
               <form id="leaveForm">
                 <div class="row g-3">
@@ -191,9 +196,9 @@
                     <label class="form-label"><i class="bi bi-card-list me-1"></i>Leave Type</label>
                     <select class="form-select" required>
                       <option selected disabled value="">Select type</option>
-                      <option>Casual Leave</option>
-                      <option>Sick Leave</option>
-                      <option>Earned Leave</option>
+                      <option><i class="bi bi-airplane"></i> Casual Leave</option>
+                      <option><i class="bi bi-thermometer-half"></i> Sick Leave</option>
+                      <option><i class="bi bi-wallet2"></i> Earned Leave</option>
                     </select>
                   </div>
 
@@ -220,29 +225,33 @@
                 </div>
               </form>
             </div>
-
           </div>
         </div>
       </div>
 
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
-      <script>
-        gsap.from("#formCard", {
-          opacity: 0,
-          y: 60,
-          duration: 1,
-          ease: "power2.out"
-        });
-      </script>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+    <script>
+      gsap.from("#formCard", {
+        opacity: 0,
+        y: 60,
+        duration: 1,
+        ease: "power2.out"
+      });
+    </script>
 
 
-      <!-- Footer -->
-      <?php include("../../Components/footer.php"); ?>
+
+
+             <!-- Footer -->
+             <?php include("../../Components/footer.php"); ?>
     </div>
 
   </main>
-
+  
   <!-- ===============================================-->
   <!--    End of Main Content-->
   <!-- ===============================================-->
@@ -266,3 +275,6 @@
 
 
 </html>
+
+
+
