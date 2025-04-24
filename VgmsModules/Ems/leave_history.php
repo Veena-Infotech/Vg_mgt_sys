@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr" data-navigation-type="default" data-navbar-horizontal-shape="default">
 
@@ -41,6 +42,8 @@
   <link href="../../assets/css/theme.min.css" type="text/css" rel="stylesheet" id="style-default">
   <link href="../../assets/css/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
   <link href="../../assets/css/user.min.css" type="text/css" rel="stylesheet" id="user-style-default">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
   <script>
     var phoenixIsRTL = window.config.config.phoenixIsRTL;
     if (phoenixIsRTL) {
@@ -63,7 +66,7 @@
   <!--    Main Content-->
   <!-- ===============================================-->
   <main class="main" id="top">
-    <!-- change this to your navbar code link should be replaced properly -->
+     <!-- change this to your navbar code link should be replaced properly -->
     <?php include_once('../../Components/navbar.php'); ?>
     <script>
       var navbarTopShape = window.config.config.phoenixNavbarTopShape;
@@ -167,128 +170,103 @@
 
 
     <div class="content">
-      <!-- your main contents goes here  with footer . -->
+        <!-- your main contents goes here  with footer . -->
+
+        
 
 
-      <div class="content py-5">
-        <div class="container">
-          <div class="text-center mb-4">
-            <h1 class="display-6 fw-bold">Salary Slip Generator</h1>
-            <p class="text-muted">Easily view and generate employee payslips</p>
+<div class="container py-5">
+        <div class="text-center mb-4">
+            <h1 class="display-6 fw-bold">Leave History</h1>
+            <p class="text-muted">View leave records for employees (Admin Access Only)</p>
             <hr class="w-25 mx-auto">
-          </div>
+        </div>
 
-          <div class="row justify-content-center">
-            <div class="col-lg-10 col-xl-8">
-              <form id="salaryForm" class="bg-white p-4 rounded shadow-sm">
-                <div class="row mb-3">
-                  <div class="col-md-4">
-                    <label class="form-label">Select Employee</label>
-                    <select class="form-select">
-                      <option selected disabled>Choose...</option>
-                      <option>John Doe</option>
-                      <option>Jane Smith</option>
-                      <option>Rahul Kumar</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label class="form-label">Select Month</label>
-                    <select class="form-select">
-                      <option selected disabled>Choose...</option>
-                      <option>January</option>
-                      <option>February</option>
-                      <option>March</option>
-                      <!-- Add all months -->
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label class="form-label">Select Year</label>
-                    <select class="form-select" id="yearSelect"></select>
-                  </div>
-                </div>
-
-                <div class="d-flex justify-content-end mb-4">
-                  <button type="button" class="btn btn-outline-primary" id="fetchBtn">Fetch</button>
-                </div>
-
-                <div id="slipPreview" class="border-top pt-4" style="display: none;">
-                  <h5 class="mb-3">Salary Slip Details</h5>
-                  <div class="row g-3">
-                    <div class="col-md-6">
-                      <label class="form-label">Basic Salary</label>
-                      <input type="text" class="form-control" placeholder="e.g. 40,000">
-                    </div>
-                    <div class="col-md-6">
-                      <label class="form-label">HRA</label>
-                      <input type="text" class="form-control" placeholder="e.g. 12,000">
-                    </div>
-                    <div class="col-md-6">
-                      <label class="form-label">Allowances</label>
-                      <input type="text" class="form-control" placeholder="e.g. 5,000">
-                    </div>
-                    <div class="col-md-6">
-                      <label class="form-label">Deductions</label>
-                      <input type="text" class="form-control" placeholder="e.g. 2,000">
-                    </div>
-                  </div>
-                </div>
-
-                <div class="text-end mt-4">
-                  <button type="submit" class="btn btn-outline-success">Submit</button>
-                </div>
-              </form>
+        <div class="row justify-content-center mb-4">
+            <div class="col-md-6">
+                <label for="employeeSelect" class="form-label">Select Employee</label>
+                <select id="employeeSelect" class="form-select">
+                    <option selected disabled>Choose an employee</option>
+                    <option>John Doe</option>
+                    <option>Jane Smith</option>
+                    <option>Rahul Kumar</option>
+                </select>
             </div>
+        </div>
 
-            <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
-            <script>
-              // Populate year dropdown with current year as default
-              const yearSelect = document.getElementById("yearSelect");
-              const currentYear = new Date().getFullYear();
-              for (let i = currentYear; i >= currentYear - 10; i--) {
-                const option = document.createElement("option");
-                option.value = i;
-                option.textContent = i;
-                if (i === currentYear) option.selected = true;
-                yearSelect.appendChild(option);
-              }
+        <div class="d-flex justify-content-end mb-4">
+            <button class="btn btn-outline-primary" id="loadHistory">Load History</button>
+        </div>
 
-              // Animate form on load
-              gsap.from("form", {
-                duration: 1,
+        <div id="historyTable" class="table-responsive" style="display: none;">
+            <table class="table table-bordered align-middle text-center">
+                <thead class="table-light">
+                    <tr>
+                        <th><i class="bi bi-calendar3 me-1"></i>Date</th>
+                        <th><i class="bi bi-box-arrow-in-right me-1"></i>Leave Type</th>
+                        <th><i class="bi bi-hourglass-split me-1"></i>Status</th>
+                        <th><i class="bi bi-person-check me-1"></i>Approved By</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- This data can later be dynamically loaded -->
+                    <tr>
+                        <td>2025-04-05</td>
+                        <td>Casual Leave</td>
+                        <td><span class="badge bg-success">Approved</span></td>
+                        <td>Manager A</td>
+                    </tr>
+                    <tr>
+                        <td>2025-03-12</td>
+                        <td>Sick Leave</td>
+                        <td><span class="badge bg-danger">Rejected</span></td>
+                        <td>Manager B</td>
+                    </tr>
+                    <tr>
+                        <td>2025-02-20</td>
+                        <td>Work From Home</td>
+                        <td><span class="badge bg-warning text-dark">Pending</span></td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- GSAP Animation Script -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+    <script>
+        // Page entrance animation
+        gsap.from(".container", {
+            opacity: 0,
+            y: 30,
+            duration: 1,
+            ease: "power2.out"
+        });
+
+        // Load table with animation
+        document.getElementById("loadHistory").addEventListener("click", () => {
+            const table = document.getElementById("historyTable");
+            table.style.display = "block";
+            gsap.fromTo(table, {
                 opacity: 0,
-                y: 30,
+                y: 20
+            }, {
+                opacity: 1,
+                y: 0,
+                duration: 0.6,
                 ease: "power2.out"
-              });
-
-              // Animate fetch button click
-              document.getElementById("fetchBtn").addEventListener("click", () => {
-                const slip = document.getElementById("slipPreview");
-                slip.style.display = "block";
-                gsap.fromTo(slip, {
-                  opacity: 0,
-                  y: 20
-                }, {
-                  opacity: 1,
-                  y: 0,
-                  duration: 0.6,
-                  ease: "power2.out"
-                });
-              });
-
-              // Prevent form submission
-              document.getElementById("salaryForm").addEventListener("submit", (e) => {
-                e.preventDefault();
-                alert("Salary slip submitted successfully!");
-              });
-            </script>
+            });
+        });
+    </script>
 
 
-            <!-- Footer -->
-            <?php include("../../Components/footer.php"); ?>
-          </div>
+         <!-- Footer -->
+         <?php include("../../Components/footer.php"); ?>
+    </div>
 
   </main>
-
+  
   <!-- ===============================================-->
   <!--    End of Main Content-->
   <!-- ===============================================-->
@@ -308,7 +286,4 @@
   <script src="../../assets/js/phoenix.js"></script>
   <!-- you js code goes here -->
 </body>
-
-
-
 </html>
