@@ -13,7 +13,7 @@
   <!-- ===============================================-->
   <!--    Document Title-->
   <!-- ===============================================-->
-  <title>Phoenix</title>
+  <title>leave history</title>
 
   <!-- ===============================================-->
   <!--    Favicons-->
@@ -41,6 +41,7 @@
   <link href="../../assets/css/theme.min.css" type="text/css" rel="stylesheet" id="style-default">
   <link href="../../assets/css/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
   <link href="../../assets/css/user.min.css" type="text/css" rel="stylesheet" id="user-style-default">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
   <script>
     var phoenixIsRTL = window.config.config.phoenixIsRTL;
     if (phoenixIsRTL) {
@@ -168,6 +169,98 @@
 
     <div class="content">
         <!-- your main contents goes here  with footer . -->
+
+
+        <div class="container py-5">
+        <div class="text-start mb-4">
+          <h1 class="display-6 fw-bold">Leave History</h1>
+          <p class="text-muted">View leave records for employees (Admin Access Only)</p>
+          <hr class="w-25">
+        </div>
+
+        <div class="mb-4">
+          <label for="employeeSelect" class="form-label">Select Employee</label>
+          <div class="d-flex align-items-end gap-3 flex-wrap">
+            <select id="employeeSelect" class="form-select w-auto">
+              <option selected disabled>Choose an employee</option>
+              <option>John Doe</option>
+              <option>Jane Smith</option>
+              <option>Rahul Kumar</option>
+            </select>
+            <button class="btn btn-outline-primary" id="loadHistory">Load History</button>
+          </div>
+        </div>
+
+
+      </div>
+
+
+
+      <div id="historyTable" class="table-responsive" style="display: none;">
+        <table class="table table-bordered align-middle text-center">
+          <thead class="table-light">
+            <tr>
+              <th><i class="bi bi-calendar3 me-1"></i>Date</th>
+              <th><i class="bi bi-box-arrow-in-right me-1"></i>Leave Type</th>
+              <th><i class="bi bi-hourglass-split me-1"></i>Status</th>
+              <th><i class="bi bi-person-check me-1"></i>Approved By</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- This data can later be dynamically loaded -->
+            <tr>
+              <td>2025-04-05</td>
+              <td>Casual Leave</td>
+              <td><span class="badge bg-success">Approved</span></td>
+              <td>Manager A</td>
+            </tr>
+            <tr>
+              <td>2025-03-12</td>
+              <td>Sick Leave</td>
+              <td><span class="badge bg-danger">Rejected</span></td>
+              <td>Manager B</td>
+            </tr>
+            <tr>
+              <td>2025-02-20</td>
+              <td>Work From Home</td>
+              <td><span class="badge bg-warning text-dark">Pending</span></td>
+              <td>-</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- GSAP Animation Script -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+    <script>
+      // Page entrance animation
+      gsap.from(".container", {
+        opacity: 0,
+        y: 30,
+        duration: 1,
+        ease: "power2.out"
+      });
+
+      // Load table with animation
+      document.getElementById("loadHistory").addEventListener("click", () => {
+        const table = document.getElementById("historyTable");
+        table.style.display = "block";
+        gsap.fromTo(table, {
+          opacity: 0,
+          y: 20
+        }, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out"
+        });
+      });
+    </script>
+
+
+            <!-- Footer -->
+            <?php include("../../Components/footer.php"); ?>
     </div>
 
   </main>
@@ -192,6 +285,7 @@
   <!-- you js code goes here -->
 </body>
 
-
-
 </html>
+
+
+

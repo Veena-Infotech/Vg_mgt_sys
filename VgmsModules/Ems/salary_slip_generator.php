@@ -13,7 +13,7 @@
   <!-- ===============================================-->
   <!--    Document Title-->
   <!-- ===============================================-->
-  <title>Phoenix</title>
+  <title>Salary Slip Generator</title>
 
   <!-- ===============================================-->
   <!--    Favicons-->
@@ -41,6 +41,7 @@
   <link href="../../assets/css/theme.min.css" type="text/css" rel="stylesheet" id="style-default">
   <link href="../../assets/css/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
   <link href="../../assets/css/user.min.css" type="text/css" rel="stylesheet" id="user-style-default">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
   <script>
     var phoenixIsRTL = window.config.config.phoenixIsRTL;
     if (phoenixIsRTL) {
@@ -168,6 +169,146 @@
 
     <div class="content">
         <!-- your main contents goes here  with footer . -->
+
+
+        <div class="container py-5">
+        <div class="mb-4 text-start">
+          <h1 class="display-6 fw-bold d-flex align-items-center gap-2">
+            <i class="bi bi-receipt" style="color: #0d6efd;"></i>
+            Salary Slip Generator
+          </h1>
+          <p class="text-muted ms-1">Easily view and generate employee payslips</p>
+          <hr class="w-25">
+        </div>
+      </div>
+
+
+      <form id="salaryForm" class="p-4 rounded shadow-sm">
+        <div class="row mb-3">
+          <div class="col-md-4">
+            <label class="form-label">
+              <i class="bi bi-person-fill me-1"></i>Select Employee
+            </label>
+            <select class="form-select">
+              <option selected disabled>Choose...</option>
+              <option>John Doe</option>
+              <option>Jane Smith</option>
+              <option>Rahul Kumar</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">
+              <i class="bi bi-calendar-month me-1"></i>Select Month
+            </label>
+            <select class="form-select">
+              <option selected disabled>Choose...</option>
+              <option>January</option>
+              <option>February</option>
+              <option>March</option>
+              <!-- Add all months -->
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">
+              <i class="bi bi-calendar3 me-1"></i>Select Year
+            </label>
+            <select class="form-select" id="yearSelect"></select>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end mb-4">
+          <button type="button" class="btn btn-outline-primary" id="fetchBtn">
+            <i class="bi bi-search me-1"></i>Fetch
+          </button>
+        </div>
+
+        <div id="slipPreview" class="border-top pt-4" style="display: none;">
+          <h5 class="mb-3">
+            <i class="bi bi-file-earmark-text me-1"></i>Salary Slip Details
+          </h5>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">
+                <i class="bi bi-cash-stack me-1"></i>Basic Salary
+              </label>
+              <input type="text" class="form-control" placeholder="e.g. 40,000">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">
+                <i class="bi bi-house-door me-1"></i>HRA
+              </label>
+              <input type="text" class="form-control" placeholder="e.g. 12,000">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">
+                <i class="bi bi-briefcase me-1"></i>Allowances
+              </label>
+              <input type="text" class="form-control" placeholder="e.g. 5,000">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">
+                <i class="bi bi-dash-circle me-1"></i>Deductions
+              </label>
+              <input type="text" class="form-control" placeholder="e.g. 2,000">
+            </div>
+          </div>
+        </div>
+
+        <div class="text-end mt-4">
+          <button type="submit" class="btn btn-outline-success">
+            <i class="bi bi-send-check me-1"></i>Submit
+          </button>
+        </div>
+      </form>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+    <script>
+      // Populate year dropdown with current year as default
+      const yearSelect = document.getElementById("yearSelect");
+      const currentYear = new Date().getFullYear();
+      for (let i = currentYear; i >= currentYear - 10; i--) {
+        const option = document.createElement("option");
+        option.value = i;
+        option.textContent = i;
+        if (i === currentYear) option.selected = true;
+        yearSelect.appendChild(option);
+      }
+
+      // Animate form on load
+      gsap.from("form", {
+        duration: 1,
+        opacity: 0,
+        y: 30,
+        ease: "power2.out"
+      });
+
+      // Animate fetch button click
+      document.getElementById("fetchBtn").addEventListener("click", () => {
+        const slip = document.getElementById("slipPreview");
+        slip.style.display = "block";
+        gsap.fromTo(slip, {
+          opacity: 0,
+          y: 20
+        }, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out"
+        });
+      });
+
+      // Prevent form submission
+      document.getElementById("salaryForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        alert("Salary slip submitted successfully!");
+      });
+    </script>
+
+
+          <!-- Footer -->
+          <?php include("../../Components/footer.php"); ?>
     </div>
 
   </main>

@@ -13,7 +13,7 @@
   <!-- ===============================================-->
   <!--    Document Title-->
   <!-- ===============================================-->
-  <title>Phoenix</title>
+  <title>Leave Request Form</title>
 
   <!-- ===============================================-->
   <!--    Favicons-->
@@ -41,6 +41,7 @@
   <link href="../../assets/css/theme.min.css" type="text/css" rel="stylesheet" id="style-default">
   <link href="../../assets/css/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
   <link href="../../assets/css/user.min.css" type="text/css" rel="stylesheet" id="user-style-default">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
   <script>
     var phoenixIsRTL = window.config.config.phoenixIsRTL;
     if (phoenixIsRTL) {
@@ -168,6 +169,85 @@
 
     <div class="content">
         <!-- your main contents goes here  with footer . -->
+
+        <div class="container py-5">
+        <!-- Left-Aligned Title Section with Icon -->
+        <div class="mb-4 text-start">
+          <h2 class="fw-bold d-flex align-items-center gap-2">
+            <i class="bi bi-clipboard-check" style="color: #0d6efd;"></i>
+            Leave Request Form
+          </h2>
+          <p class="text-muted ms-1">Submit your time-off request with the form below.</p>
+        </div>
+
+
+        <!-- Centered Form Section -->
+        <div class="row justify-content-center">
+          <div class="col-md-10 col-lg-8">
+            <div class="border rounded shadow-sm p-4" id="formCard">
+              <form id="leaveForm">
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label class="form-label"><i class="bi bi-person-fill me-1"></i>Employee Name</label>
+                    <input type="text" class="form-control" placeholder="Please enter your name" required>
+                  </div>
+
+                  <div class="col-md-6">
+                    <label class="form-label"><i class="bi bi-card-list me-1"></i>Leave Type</label>
+                    <select class="form-select" required>
+                      <option selected disabled value="">Select type</option>
+                      <option><i class="bi bi-airplane"></i> Casual Leave</option>
+                      <option><i class="bi bi-thermometer-half"></i> Sick Leave</option>
+                      <option><i class="bi bi-wallet2"></i> Earned Leave</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-6">
+                    <label class="form-label"><i class="bi bi-calendar-event me-1"></i>From Date</label>
+                    <input type="date" class="form-control" required>
+                  </div>
+
+                  <div class="col-md-6">
+                    <label class="form-label"><i class="bi bi-calendar-check me-1"></i>To Date</label>
+                    <input type="date" class="form-control" required>
+                  </div>
+
+                  <div class="col-12">
+                    <label class="form-label"><i class="bi bi-pencil-square me-1"></i>Reason</label>
+                    <textarea class="form-control" rows="3" placeholder="Write your reason here..." required></textarea>
+                  </div>
+
+                  <div class="col-12 mt-3">
+                    <button type="submit" class="btn btn-outline-primary w-100">
+                      <i class="bi bi-send-check me-1"></i>Submit Request
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+    <script>
+      gsap.from("#formCard", {
+        opacity: 0,
+        y: 60,
+        duration: 1,
+        ease: "power2.out"
+      });
+    </script>
+
+
+
+
+             <!-- Footer -->
+             <?php include("../../Components/footer.php"); ?>
     </div>
 
   </main>
@@ -195,3 +275,6 @@
 
 
 </html>
+
+
+

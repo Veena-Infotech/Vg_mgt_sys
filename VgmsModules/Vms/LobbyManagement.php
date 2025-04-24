@@ -21,6 +21,11 @@
     <link rel="shortcut icon" type="image/x-icon" href="../../assets/img/favicons/favicon.ico">
     <link rel="manifest" href="../../assets/img/favicons/manifest.json">
     <meta name="msapplication-TileImage" content="../../assets/img/favicons/mstile-150x150.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+
+
+
     <meta name="theme-color" content="#ffffff">
 
     <script src="../../vendors/simplebar/simplebar.min.js"></script>
@@ -164,15 +169,94 @@
             }
         </script>
         <div class="content">
-            heyy
 
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card visitor">
+                            <div class="card-body">
+                                <h1 class="mb-4 fw-bold">Lobby Management</h1>
+
+                                <div class="row g-4">
+                                    <!-- Waiting Queue -->
+                                    <div class="col-md-4">
+                                        <h4>Waiting Queue</h4>
+                                        <div class="d-flex flex-column gap-1" id="waiting-queue">
+                                            <?php
+                                            $waitingVisitors = [
+                                                "Visitor 1 : Meeting with HR",
+                                                "Visitor 2 : Meeting with IT",
+                                                
+
+                                            ];
+                                            foreach ($waitingVisitors as $visitor) {
+                                                echo '
+                                            <div class="card visitor">
+                                                <div class="card-body animate-entry">
+                                                    ' . $visitor . '<br>
+                                                    <button class="btn btn-sm btn-primary mt-2 btn-action" onclick="moveToNext(this)">Move to Next</button>
+                                                </div>
+                                            </div>';
+                                            }
+                                            ?>
+                                        </div>
+                                    </div>
+
+                                    <!-- Next in Line -->
+                                    <div class="col-md-4">
+                                        <h4>In Meeting</h4>
+                                        <div class="d-flex flex-column gap-1" id="next-in-line">
+                                            <?php
+                                            $nextVisitors = [
+                                                "Visitor 12 : Meeting with HR",
+                                                "Visitor 13 : Meeting with IT",
+                                                "Visitor 14 : Meeting with CEO",
+                                               
+                                            ];
+                                            foreach ($nextVisitors as $visitor) {
+                                                echo '
+                                            <div class="card visitor">
+                                                <div class="card-body animate-entry">
+                                                    ' . $visitor . '<br>
+                                                    <button class="btn btn-sm btn-success mt-2 btn-action" onclick="moveToCompleted(this)">Complete</button>
+                                                </div>
+                                            </div>';
+                                            }
+                                            ?>
+                                        </div>
+                                    </div>
+
+                                    <!-- Completed Meetings -->
+                                    <div class="col-md-4">
+                                        <h4>Completed Meetings</h4>
+                                        <div class="d-flex flex-column gap-1" id="completed">
+                                            <?php
+                                            $completedVisitors = [];
+                                            foreach ($completedVisitors as $visitor) {
+                                                echo '
+                                            <div class="card visitor">
+                                                <div class="card-body animate-entry">
+                                                    ' . $visitor . '<br>
+                                                    <button class="btn btn-sm btn-danger mt-2 btn-action" >Remove</button>
+                                                </div>
+                                            </div>';
+                                            }
+                                            ?>
+                                        </div>
+                                    </div>
+                                </div> <!-- row g-4 -->
+                            </div> <!-- card-body -->
+                        </div> <!-- card -->
+                    </div> <!-- col-12 -->
+                </div> <!-- row -->
+            </div>
             <!-- Footer -->
             <?php include("../../Components/footer.php"); ?>
         </div>
-        
 
 
 
+        </div>
 
 
     </main>
@@ -185,6 +269,70 @@
 
     <!-- ===============================================-->
     <!--    JavaScripts-->
+    <script>
+    // GSAP animation trigger function
+    function animateNewVisitorCard(node) {
+        if (node.classList && node.classList.contains('visitor')) {
+            gsap.from(node, {
+                opacity: 0,
+                y: 30,
+                duration: 0.5,
+                ease: "power2.out"
+            });
+        }
+    }
+
+    // Function to observe a container and animate new children
+    function observeContainer(containerId) {
+        const container = document.getElementById(containerId);
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                mutation.addedNodes.forEach((node) => {
+                    animateNewVisitorCard(node);
+                });
+            });
+        });
+
+        observer.observe(container, {
+            childList: true,
+            subtree: false
+        });
+    }
+
+    // Start observing all three containers
+    observeContainer('waiting-queue');
+    observeContainer('next-in-line');
+    observeContainer('completed');
+
+    // Move visitor from Waiting to In Meeting
+    function moveToNext(button) {
+        const card = button.closest('.card.visitor');
+        const targetContainer = document.getElementById('next-in-line');
+        card.querySelector('button').textContent = "Complete";
+        card.querySelector('button').classList.remove('btn-primary');
+        card.querySelector('button').classList.add('btn-success');
+        card.querySelector('button').setAttribute('onclick', 'moveToCompleted(this)');
+        targetContainer.appendChild(card);
+    }
+
+    // Move visitor from In Meeting to Completed
+    function moveToCompleted(button) {
+        const card = button.closest('.card.visitor');
+        const targetContainer = document.getElementById('completed');
+        card.querySelector('button').textContent = "Remove";
+        card.querySelector('button').classList.remove('btn-success');
+        card.querySelector('button').classList.add('btn-danger');
+        card.querySelector('button').setAttribute('onclick', 'removeCard(this)');
+        targetContainer.appendChild(card);
+    }
+
+    // Remove card from DOM
+    function removeCard(button) {
+        const card = button.closest('.card.visitor');
+        card.remove();
+    }
+</script>
+
 
     <!-- ===============================================-->
     <!--Dropdown for contacted-to--->
@@ -204,14 +352,7 @@
     <script src="../../assets/js/phoenix.js"></script>
     <script src="../../vendors/echarts/echarts.min.js"></script>
     <script src="../../assets/js/ecommerce-dashboard.js"></script>
-
-
-
-
-
     </script>
-
-
 
 </body>
 
