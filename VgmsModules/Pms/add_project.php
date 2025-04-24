@@ -165,72 +165,77 @@
             }
         </script>
         <div class="content">
-            <h3 class="mb-4">Add New Project</h3>
-            <form action="add_project.php" method="post" >
-                <div class="row g-3">
-                    <!-- Project Title -->
-                    <div class="col-md-6">
-                        <label class="form-label">Project Title</label>
-                        <input type="text" class="form-control" placeholder="Enter project title" name="project_title">
+            <div id="heading-gsap">
+                <h3 class="mb-4">Add New Project</h3>
+                <form action="add_project.php" method="post">
+                    <div class="row g-3">
+                        <!-- Project Title -->
+                        <div class="col-md-6">
+                            <label class="form-label">Project Title</label>
+                            <input type="text" class="form-control" placeholder="Enter project title"
+                                name="project_title">
+                        </div>
+
+                        <!-- Project Type Dropdown -->
+                        <div class="col-md-6">
+                            <label class="form-label">Project Type</label>
+                            <select class="form-select" name="project_type">
+                                <option selected disabled>Select type</option>
+                                <option>Pipeline</option>
+                                <option>Residential</option>
+                                <option>Commercial</option>
+                            </select>
+                        </div>
+
+                        <!-- Status Dropdown -->
+                        <div class="col-md-6">
+                            <label class="form-label">Project Status</label>
+                            <select class="form-select" name="project_status">
+                                <option selected disabled>Select status</option>
+                                <option>Pipeline</option>
+                                <option>Ongoing</option>
+                                <option>Completed</option>
+                                <option>On Hold</option>
+                            </select>
+                        </div>
+
+                        <!-- Assigned Teams Dropdown -->
+                        <div class="col-md-6">
+                            <label class="form-label">Assigned Team</label>
+                            <select class="form-select" name="project_team">
+                                <option selected disabled>Select team</option>
+                                <option>Team A</option>
+                                <option>Team B</option>
+                                <option>Team C</option>
+                            </select>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="col-12">
+                            <label class="form-label">Project Description</label>
+                            <textarea class="form-control" rows="4" placeholder="Enter description..."
+                                name="project_desc"></textarea>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="col-12 text-end">
+                            <button class="btn btn-primary" type="submit">Submit</button>
+                            <button class="btn btn-secondary" type="reset">Clear</button>
+
+                        </div>
                     </div>
+                </form>
 
-                    <!-- Project Type Dropdown -->
-                    <div class="col-md-6">
-                        <label class="form-label">Project Type</label>
-                        <select class="form-select" name="project_type">
-                            <option selected disabled>Select type</option>
-                            <option>Pipeline</option>
-                            <option>Residential</option>
-                            <option>Commercial</option>
-                        </select>
-                    </div>
 
-                    <!-- Status Dropdown -->
-                    <div class="col-md-6">
-                        <label class="form-label">Project Status</label>
-                        <select class="form-select" name="project_status">
-                            <option selected disabled>Select status</option>
-                            <option>Pipeline</option>
-                            <option>Ongoing</option>
-                            <option>Completed</option>
-                            <option>On Hold</option>
-                        </select>
-                    </div>
 
-                    <!-- Assigned Teams Dropdown -->
-                    <div class="col-md-6">
-                        <label class="form-label">Assigned Team</label>
-                        <select class="form-select" name="project_team" >
-                            <option selected disabled>Select team</option>
-                            <option>Team A</option>
-                            <option>Team B</option>
-                            <option>Team C</option>
-                        </select>
-                    </div>
-
-                    <!-- Description -->
-                    <div class="col-12">
-                        <label class="form-label">Project Description</label>
-                        <textarea class="form-control" rows="4" placeholder="Enter description..." name="project_desc"></textarea>
-                    </div>
-
-                    <!-- Submit Button -->
-                    <div class="col-12 text-end">
-                        <button class="btn btn-primary" type="submit">Submit</button>
-                        <button class="btn btn-secondary" type="reset">Clear</button>
-
-                    </div>
-                </div>
-            </form>
-
+            </div>
 
             <!-- Footer -->
             <?php include("../../Components/footer.php"); ?>
-        </div>
-
-
 
         </div>
+        </div>
+
 
 
     </main>
@@ -267,6 +272,24 @@
 
 
 
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+    <script>
+        gsap.from("#heading-gsap", {
+            opacity: 0,
+            y: 50,
+            duration: 0.7,
+            ease: "power2.out",
+            delay: 0.7
+        });
+        gsap.from("#filterType", {
+            opacity: 0,
+            y: 50,
+            duration: 0.8,
+            ease: "power2.out",
+            delay: 0.5
+        });
     </script>
 
 
