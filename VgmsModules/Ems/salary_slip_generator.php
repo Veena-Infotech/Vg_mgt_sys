@@ -13,7 +13,7 @@
   <!-- ===============================================-->
   <!--    Document Title-->
   <!-- ===============================================-->
-  <title>Phoenix</title>
+  <title>Salary Slip Generator</title>
 
   <!-- ===============================================-->
   <!--    Favicons-->
@@ -169,123 +169,119 @@
     <div class="content">
       <!-- your main contents goes here  with footer . -->
 
+      <div class="container py-5">
+        <div class="text-center mb-4">
+          <h1 class="display-6 fw-bold">Salary Slip Generator</h1>
+          <p class="text-muted">Easily view and generate employee payslips</p>
+          <hr class="w-25 mx-auto">
+        </div>
 
-      <div class="content py-5">
-        <div class="container">
-          <div class="text-center mb-4">
-            <h1 class="display-6 fw-bold">Salary Slip Generator</h1>
-            <p class="text-muted">Easily view and generate employee payslips</p>
-            <hr class="w-25 mx-auto">
-          </div>
-
-          <div class="row justify-content-center">
-            <div class="col-lg-10 col-xl-8">
-              <form id="salaryForm" class="bg-white p-4 rounded shadow-sm">
-                <div class="row mb-3">
-                  <div class="col-md-4">
-                    <label class="form-label">Select Employee</label>
-                    <select class="form-select">
-                      <option selected disabled>Choose...</option>
-                      <option>John Doe</option>
-                      <option>Jane Smith</option>
-                      <option>Rahul Kumar</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label class="form-label">Select Month</label>
-                    <select class="form-select">
-                      <option selected disabled>Choose...</option>
-                      <option>January</option>
-                      <option>February</option>
-                      <option>March</option>
-                      <!-- Add all months -->
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label class="form-label">Select Year</label>
-                    <select class="form-select" id="yearSelect"></select>
-                  </div>
-                </div>
-
-                <div class="d-flex justify-content-end mb-4">
-                  <button type="button" class="btn btn-outline-primary" id="fetchBtn">Fetch</button>
-                </div>
-
-                <div id="slipPreview" class="border-top pt-4" style="display: none;">
-                  <h5 class="mb-3">Salary Slip Details</h5>
-                  <div class="row g-3">
-                    <div class="col-md-6">
-                      <label class="form-label">Basic Salary</label>
-                      <input type="text" class="form-control" placeholder="e.g. 40,000">
-                    </div>
-                    <div class="col-md-6">
-                      <label class="form-label">HRA</label>
-                      <input type="text" class="form-control" placeholder="e.g. 12,000">
-                    </div>
-                    <div class="col-md-6">
-                      <label class="form-label">Allowances</label>
-                      <input type="text" class="form-control" placeholder="e.g. 5,000">
-                    </div>
-                    <div class="col-md-6">
-                      <label class="form-label">Deductions</label>
-                      <input type="text" class="form-control" placeholder="e.g. 2,000">
-                    </div>
-                  </div>
-                </div>
-
-                <div class="text-end mt-4">
-                  <button type="submit" class="btn btn-outline-success">Submit</button>
-                </div>
-              </form>
+        <form id="salaryForm" class=" p-4 rounded shadow-sm">
+          <div class="row mb-3">
+            <div class="col-md-4">
+              <label class="form-label">Select Employee</label>
+              <select class="form-select">
+                <option selected disabled>Choose...</option>
+                <option>John Doe</option>
+                <option>Jane Smith</option>
+                <option>Rahul Kumar</option>
+              </select>
             </div>
-
-            <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
-            <script>
-              // Populate year dropdown with current year as default
-              const yearSelect = document.getElementById("yearSelect");
-              const currentYear = new Date().getFullYear();
-              for (let i = currentYear; i >= currentYear - 10; i--) {
-                const option = document.createElement("option");
-                option.value = i;
-                option.textContent = i;
-                if (i === currentYear) option.selected = true;
-                yearSelect.appendChild(option);
-              }
-
-              // Animate form on load
-              gsap.from("form", {
-                duration: 1,
-                opacity: 0,
-                y: 30,
-                ease: "power2.out"
-              });
-
-              // Animate fetch button click
-              document.getElementById("fetchBtn").addEventListener("click", () => {
-                const slip = document.getElementById("slipPreview");
-                slip.style.display = "block";
-                gsap.fromTo(slip, {
-                  opacity: 0,
-                  y: 20
-                }, {
-                  opacity: 1,
-                  y: 0,
-                  duration: 0.6,
-                  ease: "power2.out"
-                });
-              });
-
-              // Prevent form submission
-              document.getElementById("salaryForm").addEventListener("submit", (e) => {
-                e.preventDefault();
-                alert("Salary slip submitted successfully!");
-              });
-            </script>
-
-
-            <!-- Footer -->
-            <?php include("../../Components/footer.php"); ?>
+            <div class="col-md-4">
+              <label class="form-label">Select Month</label>
+              <select class="form-select">
+                <option selected disabled>Choose...</option>
+                <option>January</option>
+                <option>February</option>
+                <option>March</option>
+                <!-- Add all months -->
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Select Year</label>
+              <select class="form-select" id="yearSelect"></select>
+            </div>
           </div>
+
+          <div class="d-flex justify-content-end mb-4">
+            <button type="button" class="btn btn-outline-primary" id="fetchBtn">Fetch</button>
+          </div>
+
+          <div id="slipPreview" class="border-top pt-4" style="display: none;">
+            <h5 class="mb-3">Salary Slip Details</h5>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Basic Salary</label>
+                <input type="text" class="form-control" placeholder="e.g. 40,000">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">HRA</label>
+                <input type="text" class="form-control" placeholder="e.g. 12,000">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Allowances</label>
+                <input type="text" class="form-control" placeholder="e.g. 5,000">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Deductions</label>
+                <input type="text" class="form-control" placeholder="e.g. 2,000">
+              </div>
+            </div>
+          </div>
+
+          <div class="text-end mt-4">
+            <button type="submit" class="btn btn-outline-success">Submit</button>
+          </div>
+        </form>
+      </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+      <script>
+        // Populate year dropdown with current year as default
+        const yearSelect = document.getElementById("yearSelect");
+        const currentYear = new Date().getFullYear();
+        for (let i = currentYear; i >= currentYear - 10; i--) {
+          const option = document.createElement("option");
+          option.value = i;
+          option.textContent = i;
+          if (i === currentYear) option.selected = true;
+          yearSelect.appendChild(option);
+        }
+
+        // Animate form on load
+        gsap.from("form", {
+          duration: 1,
+          opacity: 0,
+          y: 30,
+          ease: "power2.out"
+        });
+
+        // Animate fetch button click
+        document.getElementById("fetchBtn").addEventListener("click", () => {
+          const slip = document.getElementById("slipPreview");
+          slip.style.display = "block";
+          gsap.fromTo(slip, {
+            opacity: 0,
+            y: 20
+          }, {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "power2.out"
+          });
+        });
+
+        // Prevent form submission
+        document.getElementById("salaryForm").addEventListener("submit", (e) => {
+          e.preventDefault();
+          alert("Salary slip submitted successfully!");
+        });
+      </script>
+
+
+      <!-- Footer -->
+      <?php include("../../Components/footer.php"); ?>
+    </div>
 
   </main>
 
@@ -309,7 +305,6 @@
   <!-- you js code goes here -->
 </body>
 
+
+
 </html>
-
-
-
