@@ -165,7 +165,7 @@
             }
         </script>
         <div class="content">
-            <div class="container-xl">
+            <div class="container-xl" id="heading-gsap">
                 <!-- Manage Project Header -->
                 <div class="d-flex justify-content-between align-items-center mt-4">
                     <h3 class="mb-0">Manage Projects</h3>
@@ -395,9 +395,12 @@
                         </div>
                     </form>
                 </div>
+                
             </div>
+            
+            
         </div>
-
+        
 
 
 
@@ -441,6 +444,8 @@
 
     </script>
     <script>
+
+
         const rowsPerPage = 5;
         let rows = document.querySelectorAll('#projectTableBody tr');
         let filteredRows = Array.from(rows); // Initialize with all rows
@@ -557,7 +562,71 @@
         // Listen to changes in filter dropdowns
         document.getElementById('projectStatusFilter').addEventListener('change', filterProjects);
         document.getElementById('filterType').addEventListener('change', filterProjects);
+        function searchProjects() {
+            const searchQuery = document.getElementById('searchInput').value.toLowerCase(); // Get the search query
+
+            // Filter rows based on the project name
+            filteredRows = Array.from(rows).filter(row => {
+                const projectName = row.querySelector('td:nth-child(1)').textContent.toLowerCase(); // First column (Project Name)
+                return projectName.includes(searchQuery); // Check if project name matches the search query
+            });
+
+            // Reset pagination to first page after filter
+            currentPage = 1;
+            showPage(currentPage);
+        }
+
+        // Listen for changes in the search bar
+        document.getElementById('searchInput').addEventListener('input', searchProjects);
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+    <script>
+        gsap.from("#formCard", {
+            opacity: 0,
+            y: 60,
+            duration: 1,
+            ease: "power2.out"
+        });
+        function animateTableRows() {
+            filteredRows.forEach((row, index) => {
+                gsap.from(row, {
+                    opacity: 0,
+                    y: 20,
+                    duration: 0.6,
+                    delay: 0.2 * index, // stagger the animation slightly
+                    ease: "power2.out"
+                });
+            });
+        }
+        animateTableRows();
+        gsap.from("#filterType", {
+            opacity: 0,
+            y: 50,
+            duration: 0.8,
+            ease: "power2.out",
+            delay: 0.5
+        });
+
+        gsap.from("#projectStatusFilter", {
+            opacity: 0,
+            y: 50,
+            duration: 0.8,
+            ease: "power2.out",
+            delay: 0.7
+        });
+
+        gsap.from("#heading-gsap", {
+            opacity: 0,
+            y: 50,
+            duration: 0.7,
+            ease: "power2.out",
+            delay: 0.1
+        });
+
+
+    </script>
+
 
 
 
