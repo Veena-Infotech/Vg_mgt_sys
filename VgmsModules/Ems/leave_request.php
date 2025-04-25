@@ -13,7 +13,7 @@
   <!-- ===============================================-->
   <!--    Document Title-->
   <!-- ===============================================-->
-  <title>Loan Request</title>
+  <title>Loan request</title>
 
   <!-- ===============================================-->
   <!--    Favicons-->
@@ -166,9 +166,6 @@
       }
     </script>
     <div class="content">
-
-
-
       <div class="container py-5">
         <!-- Left-Aligned Title Section with Icon -->
         <div class="mb-4 text-start">
@@ -241,6 +238,8 @@
         ease: "power2.out"
       });
     </script>
+
+
 
     <!-- Footer -->
     <?php include("../../Components/footer.php"); ?>
