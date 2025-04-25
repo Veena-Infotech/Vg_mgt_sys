@@ -13,7 +13,7 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>Loan & Advance Salary - Employee Panel</title>
+    <title>Loan Management</title>
 
     <!-- ===============================================-->
     <!--    Favicons-->
@@ -38,7 +38,9 @@
     <link href="../../assets/css/theme.min.css" type="text/css" rel="stylesheet" id="style-default">
     <link href="../../assets/css/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
     <link href="../../assets/css/user.min.css" type="text/css" rel="stylesheet" id="user-style-default">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
     <script>
         var phoenixIsRTL = window.config.config.phoenixIsRTL;
         if (phoenixIsRTL) {
@@ -165,131 +167,119 @@
             }
         </script>
         <div class="content">
-
-            <div class="container py-4">
-                <!-- Title & Subtitle -->
-                <div class="mb-4">
-                    <h3 class="fw-bold mb-0"><i class="bi bi-cash-coin me-2"></i>Loan & Advance Salary</h3>
-                    <p class="text-muted">Request and track your financial assistance</p>
+            <div class="container mt-5">
+                <!-- Title and Subtitle -->
+                <div class="text-left">
+                    <h1 id="page-title">Employee Loan Management</h1>
+                    <p id="page-subtitle">Manage employee loan requests and repayments</p>
                 </div>
 
-                <!-- Header Actions -->
-                <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
-                    <div></div> <!-- Left spacer -->
-                    <button class="btn btn-outline-primary" id="newRequestBtn">
-                        <i class="bi bi-plus-circle me-1"></i> New Request
-                    </button>
+                <div id="tableExample4" data-list="{&quot;valueNames&quot;:[&quot;name&quot;,&quot;email&quot;,&quot;payment&quot;],&quot;page&quot;:5,&quot;pagination&quot;:true,&quot;filter&quot;:{&quot;key&quot;:&quot;payment&quot;}}">
+                    <div class="row justify-content-end g-0">
+                        <div class="col-auto px-3"><select class="form-select form-select-sm mb-3" data-list-filter="data-list-filter">
+                                <option selected="" value="">Select payment status</option>
+                                <option value="Pending">Pending</option>
+                                <option value="Success">Success</option>
+                                <option value="Blocked">Blocked</option>
+                            </select></div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-sm fs-9 mb-0">
+                            <thead>
+                                <tr class="bg-body-highlight">
+                                    <th class="sort border-top border-translucent ps-3" data-sort="name">Customer</th>
+                                    <th class="sort border-top border-translucent" data-sort="email">Email</th>
+                                    <th class="sort border-top border-translucent text-end pe-3" data-sort="payment">Payment</th>
+                                </tr>
+                            </thead>
+                            <tbody class="list">
+                                <tr>
+                                    <td class="align-middle ps-3 name">Sylvia Plath</td>
+                                    <td class="align-middle email">john@gmail.com</td>
+                                    <td class="align-middle payment text-end py-3 pe-3">
+                                        <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="fw-bold">Success</span><svg class="svg-inline--fa fa-check ms-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+                                                <path fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path>
+                                            </svg><!-- <span class="ms-1 fas fa-check"></span> Font Awesome fontawesome.com --></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Homer</td>
+                                    <td class="align-middle email">sylvia@mail.ru</td>
+                                    <td class="align-middle payment text-end py-3 pe-3">
+                                        <div class="badge badge-phoenix fs-10 badge-phoenix-warning"><span class="fw-bold">Pending</span><svg class="svg-inline--fa fa-bars-staggered ms-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars-staggered" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+                                                <path fill="currentColor" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM64 256c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H96c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"></path>
+                                            </svg><!-- <span class="ms-1 fas fa-stream"></span> Font Awesome fontawesome.com --></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Edgar Allan Poe</td>
+                                    <td class="align-middle email">edgar@yahoo.com</td>
+                                    <td class="align-middle payment text-end py-3 pe-3">
+                                        <div class="badge badge-phoenix fs-10 badge-phoenix-secondary"><span class="fw-bold">Blocked</span><svg class="svg-inline--fa fa-ban ms-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ban" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+                                                <path fill="currentColor" d="M367.2 412.5L99.5 144.8C77.1 176.1 64 214.5 64 256c0 106 86 192 192 192c41.5 0 79.9-13.1 111.2-35.5zm45.3-45.3C434.9 335.9 448 297.5 448 256c0-106-86-192-192-192c-41.5 0-79.9 13.1-111.2 35.5L412.5 367.2zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"></path>
+                                            </svg><!-- <span class="ms-1 fas fa-ban"></span> Font Awesome fontawesome.com --></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">William Butler Yeats</td>
+                                    <td class="align-middle email">william@gmail.com</td>
+                                    <td class="align-middle payment text-end py-3 pe-3">
+                                        <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="fw-bold">Success</span><svg class="svg-inline--fa fa-check ms-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+                                                <path fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path>
+                                            </svg><!-- <span class="ms-1 fas fa-check"></span> Font Awesome fontawesome.com --></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Rabindranath Tagore</td>
+                                    <td class="align-middle email">tagore@twitter.com</td>
+                                    <td class="align-middle payment text-end py-3 pe-3">
+                                        <div class="badge badge-phoenix fs-10 badge-phoenix-warning"><span class="fw-bold">Pending</span><svg class="svg-inline--fa fa-bars-staggered ms-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars-staggered" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+                                                <path fill="currentColor" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM64 256c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H96c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"></path>
+                                            </svg><!-- <span class="ms-1 fas fa-stream"></span> Font Awesome fontawesome.com --></div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="d-flex justify-content-between mt-3"><span class="d-none d-sm-inline-block" data-list-info="data-list-info">1 to 5 <span class="text-body-tertiary"> Items of </span>10</span>
+                        <div class="d-flex"><button class="page-link disabled" data-list-pagination="prev" disabled=""><svg class="svg-inline--fa fa-chevron-left" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
+                                    <path fill="currentColor" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"></path>
+                                </svg><!-- <span class="fas fa-chevron-left"></span> Font Awesome fontawesome.com --></button>
+                            <ul class="mb-0 pagination">
+                                <li class="active"><button class="page" type="button" data-i="1" data-page="5">1</button></li>
+                                <li><button class="page" type="button" data-i="2" data-page="5">2</button></li>
+                            </ul><button class="page-link pe-0" data-list-pagination="next"><svg class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
+                                    <path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path>
+                                </svg><!-- <span class="fas fa-chevron-right"></span> Font Awesome fontawesome.com --></button>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Table -->
-                <div class="table-responsive">
-                    <table class="table table-bordered table-hover align-middle bg-white shadow-sm">
-                        <thead class="table-light">
-                            <tr>
-                                <th>#</th>
-                                <th>Amount</th>
-                                <th>Type</th>
-                                <th>Status</th>
-                                <th>Requested On</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="loanTableBody">
-                            <tr>
-                                <td>1</td>
-                                <td>₹10,000</td>
-                                <td>Loan</td>
-                                <td><span class="badge bg-warning text-dark">Pending</span></td>
-                                <td>2025-04-24</td>
-                                <td>
-                                    <button class="btn btn-outline-danger btn-sm"><i class="bi bi-x-circle"></i> Cancel</button>
-                                </td>
-                            </tr>
-                            <!-- More rows could be added here -->
-                        </tbody>
-                    </table>
-                </div>
+
+                <!-- Bootstrap JS and Popper.js -->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.1/gsap.min.js"></script>
+                <script>
+                    // GSAP Animation for Title and Subtitle
+                    gsap.from("#page-title", {
+                        duration: 1.5,
+                        opacity: 0,
+                        y: -50,
+                        ease: "power4.out"
+                    });
+
+                    gsap.from("#page-subtitle", {
+                        duration: 1.5,
+                        opacity: 0,
+                        y: 30,
+                        delay: 0.5,
+                        ease: "power4.out"
+                    });
+                </script>
+
+
+                <!-- Footer -->
+                <?php include("../../Components/footer.php"); ?>
             </div>
-
-            <!-- Scripts -->
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-
-            <script>
-                // Animate on load
-                gsap.from("h3", {
-                    x: -30,
-                    opacity: 0,
-                    duration: 1,
-                    ease: "power2.out"
-                });
-                gsap.from("p", {
-                    x: -30,
-                    opacity: 0,
-                    duration: 1,
-                    delay: 0.2,
-                    ease: "power2.out"
-                });
-                gsap.from("#newRequestBtn", {
-                    scale: 0.8,
-                    opacity: 0,
-                    duration: 0.6,
-                    delay: 0.4,
-                    ease: "back.out(1.7)"
-                });
-                gsap.from("table", {
-                    y: 30,
-                    opacity: 0,
-                    duration: 1,
-                    delay: 0.6,
-                    ease: "power2.out"
-                });
-
-                gsap.from("th, td", {
-                    y: 20,
-                    opacity: 0,
-                    duration: 0.5,
-                    stagger: 0.1,
-                    ease: "power2.out"
-                });
-
-                // Click animation for Cancel button
-                document.querySelectorAll(".btn-outline-danger").forEach(function(button) {
-                    button.addEventListener("click", function() {
-                        gsap.to(this, {
-                            scale: 0.9,
-                            duration: 0.1,
-                            yoyo: true,
-                            repeat: 1,
-                            ease: "power1.inOut",
-                            onComplete: () => {
-                                alert("Cancel request flow triggered.");
-                            }
-                        });
-                    });
-                });
-
-
-                // Click animation for New Request
-                document.getElementById("newRequestBtn").addEventListener("click", function() {
-                    gsap.to(this, {
-                        scale: 0.9,
-                        duration: 0.1,
-                        yoyo: true,
-                        repeat: 1,
-                        ease: "power1.inOut",
-                        onComplete: () => {
-                            alert("New loan or advance request flow triggered.");
-                        }
-                    });
-                });
-            </script>
-
-
-
-            <!-- Footer -->
-            <?php include("../../Components/footer.php"); ?>
-        </div>
 
 
 
