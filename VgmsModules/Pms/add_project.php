@@ -35,6 +35,9 @@
         rel="stylesheet">
     <link href="../../vendors/simplebar/simplebar.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <link href="../../vendors/choices/choices.min.css" rel="stylesheet" />
+    <link href="../../vendors/dropzone/dropzone.css" rel="stylesheet" />
+    <link href="../../vendors/flatpickr/flatpickr.min.css" rel="stylesheet" />
     <link href="../../assets/css/theme-rtl.css" type="text/css" rel="stylesheet" id="style-rtl">
     <link href="../../assets/css/theme.min.css" type="text/css" rel="stylesheet" id="style-default">
     <link href="../../assets/css/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
@@ -166,19 +169,19 @@
         </script>
         <div class="content">
             <div id="heading-gsap">
-                <h3 class="mb-4">Add New Project</h3>
-                <form action="add_project.php" method="post">
+                <h3 class="mb-4">Add Project </h3>
+                <form action="edit_project.php" method="post" class="dropzone dropzone-multiple p-0" id="dropzone-multiple" data-dropzone="data-dropzone">
                     <div class="row g-3">
                         <!-- Project Title -->
                         <div class="col-md-6">
-                            <label class="form-label">Project Title</label>
+                            <label class="form-label">Project Title <span style="color: red;">*</span></label>
                             <input type="text" class="form-control" placeholder="Enter project title"
                                 name="project_title">
                         </div>
 
                         <!-- Project Type Dropdown -->
                         <div class="col-md-6">
-                            <label class="form-label">Project Type</label>
+                            <label class="form-label">Project Type <span style="color: red;">*</span></label>
                             <select class="form-select" name="project_type">
                                 <option selected disabled>Select type</option>
                                 <option>Pipeline</option>
@@ -187,9 +190,50 @@
                             </select>
                         </div>
 
+                        <!-- project manager  -->
+
+                        <div class="col-md-6">
+                            <label class="form-label">Project Manager<span style="color: red;">*</span></label>
+                            <select class="form-select" name="project_status">
+                                <option selected disabled>Select status</option>
+                                <option>Aryan Sir</option>
+                                <option>Op sir</option>
+                                <option>Aakash sir</option>
+                                <option>Static</option>
+                            </select>
+                        </div>
+
+                         <!-- project client  -->
+
+                         <div class="col-md-6">
+                            <label class="form-label">Project Client<span style="color: red;">*</span></label>
+                            <select class="form-select" name="project_status">
+                                <option selected disabled>Select status</option>
+                                <option>Janesh</option>
+                                <option>Ishika</option>
+                                <option>Rahul</option>
+                                <option>Static</option>
+                            </select>
+                        </div>
+
+                        <!-- Assigned Teams Dropdown -->
+                        <div class="col-md-6">
+                            <div class="mb-3"><label class="form-label">Assigned Employee<span style="color: red;">*</span></label><select class="form-select" id="organizerMultiple2" data-choices="data-choices" multiple="multiple" size="1" name="organizerMultiple" required="required" data-options='{"removeItemButton":true,"placeholder":true}'>
+                                    <option value="">Select organizer...</option>
+                                    <option>Neav Panjwani</option>
+                                    <option>Om Pandey</option>
+                                    <option>Janesh Chichriya</option>
+                                    <option>Ishika sharma</option>
+                                    <option>Static</option>
+                                </select>
+                                <div class="invalid-feedback">Please select one or multiple</div>
+                            </div>
+                        </div>
+
+
                         <!-- Status Dropdown -->
                         <div class="col-md-6">
-                            <label class="form-label">Project Status</label>
+                            <label class="form-label">Project Status<span style="color: red;">*</span></label>
                             <select class="form-select" name="project_status">
                                 <option selected disabled>Select status</option>
                                 <option>Pipeline</option>
@@ -199,16 +243,29 @@
                             </select>
                         </div>
 
-                        <!-- Assigned Teams Dropdown -->
-                        <div class="col-md-6">
-                            <label class="form-label">Assigned Team</label>
-                            <select class="form-select" name="project_team">
-                                <option selected disabled>Select team</option>
-                                <option>Team A</option>
-                                <option>Team B</option>
-                                <option>Team C</option>
-                            </select>
+
+                        <!-- file Upload  -->
+                        <label class="form-label">Upload File <span style="color: red;">*</span></label>
+                        <div class="fallback"><input name="file" type="file" multiple="multiple" /></div>
+                        <div class="dz-message" data-dz-message="data-dz-message"><img class="me-2" src="../../../assets/img/icons/cloud-upload.svg" width="25" alt="" />Drop your files here</div>
+                        <div class="dz-preview dz-preview-multiple m-0 d-flex flex-column">
+                            <div class="d-flex mb-3 pb-3 border-bottom border-translucent media">
+                                <div class="border p-2 rounded-2 me-2"><img class="rounded-2 dz-image" src="../../../assets/img/icons/file.png" alt="..." data-dz-thumbnail="data-dz-thumbnail" /></div>
+                                <div class="flex-1 d-flex flex-between-center">
+                                    <div>
+                                        <h6 data-dz-name="data-dz-name"></h6>
+                                        <div class="d-flex align-items-center">
+                                            <p class="mb-0 fs-9 text-body-quaternary lh-1" data-dz-size="data-dz-size"></p>
+                                            <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress=""></span></div>
+                                        </div><span class="fs-10 text-danger" data-dz-errormessage="data-dz-errormessage"></span>
+                                    </div>
+                                    <div class="dropdown"><button class="btn btn-link text-body-tertiary btn-sm dropdown-toggle btn-reveal dropdown-caret-none" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><a class="dropdown-item" href="#!" data-dz-remove="data-dz-remove"><span style="color: red;">X</a></button>
+                                        <div class="dropdown-menu dropdown-menu-end border border-translucent py-2"><a class="dropdown-item" href="#!" data-dz-remove="data-dz-remove">Remove File</a></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
 
                         <!-- Description -->
                         <div class="col-12">
@@ -217,6 +274,12 @@
                                 name="project_desc"></textarea>
                         </div>
 
+                        <!-- start and end date of project  -->
+
+                        <label class="form-label" for="timepicker2">Select Time Range</label>
+                        <input class="form-control datetimepicker" id="timepicker2" type="text" placeholder="d/m/y to d/m/y" data-options='{"mode":"range","dateFormat":"d/m/y","disableMobile":true}' />
+                        
+                        
                         <!-- Submit Button -->
                         <div class="col-12 text-end">
                             <button class="btn btn-primary" type="submit">Submit</button>
@@ -224,7 +287,7 @@
 
                         </div>
                     </div>
-                </form>
+                </form><br><br>
 
 
 
@@ -261,10 +324,12 @@
     <script src="../../vendors/list.js/list.min.js"></script>
     <script src="../../vendors/feather-icons/feather.min.js"></script>
     <script src="../../vendors/dayjs/dayjs.min.js"></script>
+    <script src="../../vendors/dropzone/dropzone-min.js"></script>
     <script src="../../vendors/leaflet/leaflet.js"></script>
     <script src="../../vendors/leaflet.markercluster/leaflet.markercluster.js"></script>
     <script src="../../vendors/leaflet.tilelayer.colorfilter/leaflet-tilelayer-colorfilter.min.js"></script>
     <script src="../../assets/js/phoenix.js"></script>
+    <script src="../../vendors/flatpickr/flatpickr.min.js"></script>
     <script src="../../vendors/echarts/echarts.min.js"></script>
     <script src="../../assets/js/ecommerce-dashboard.js"></script>
 
@@ -275,6 +340,7 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+    <script src="../../vendors/choices/choices.min.js"></script>
     <script>
         gsap.from("#heading-gsap", {
             opacity: 0,
