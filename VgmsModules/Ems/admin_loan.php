@@ -38,8 +38,8 @@
     <link href="../../assets/css/theme.min.css" type="text/css" rel="stylesheet" id="style-default">
     <link href="../../assets/css/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
     <link href="../../assets/css/user.min.css" type="text/css" rel="stylesheet" id="user-style-default">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-  
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
     <script>
         var phoenixIsRTL = window.config.config.phoenixIsRTL;
         if (phoenixIsRTL) {
@@ -166,91 +166,971 @@
             }
         </script>
         <div class="content">
-            
-  <div class="container py-5">
-    <!-- Title & Subtitle -->
-    <div class="mb-4">
-      <h3 class="fw-bold" id="pageTitle"><i class="bi bi-cash-coin me-2"></i>Loan & Advance Salary</h3>
-      <p class="text-muted" id="pageSubtitle">Request and track your financial assistance easily</p>
-    </div>
 
-    <!-- Filters (optional demo layout) -->
-    <div class="d-flex flex-wrap gap-2 mb-4">
-      <button class="btn btn-outline-primary">Loan</button>
-      <button class="btn btn-outline-success">Advance</button>
-      <input type="text" class="form-control w-auto" placeholder="Search" />
-      <button class="btn btn-outline-secondary ms-auto">Export</button>
-    </div>
+            <div class="container py-5">
+                <!-- Title & Subtitle -->
+                <div class="mb-4">
+                    <h3 class="fw-bold" id="pageTitle"><i class="bi bi-cash-coin me-2"></i>Loan & Advance Salary</h3>
+                    <p class="text-muted" id="pageSubtitle">Request and track your financial assistance easily</p>
+                </div>
 
-    <!-- Table -->
-    <div class="table-responsive">
-      <table class="table table-bordered table-hover bg-white shadow-sm">
-        <thead class="table-light">
-          <tr>
-            <th>#</th>
-            <th><i class="bi bi-person-circle me-1"></i>Employee Name</th>
-            <th><i class="bi bi-currency-rupee me-1"></i>Amount Requested</th>
-            <th><i class="bi bi-tags me-1"></i>Type of Request</th>
-            <th><i class="bi bi-calendar-event me-1"></i>EMI Option</th>
-            <th class="text-end"><i class="bi bi-gear me-1"></i>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>John Doe</td>
-            <td>₹50,000</td>
-            <td>Loan</td>
-            <td>12 Months</td>
-            <td class="text-end">
-              <div class="dropdown">
-                <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                  <i class="bi bi-three-dots"></i>
-                </button>
-                <ul class="dropdown-menu dropdown-menu-end">
-                  <li><button class="dropdown-item text-success accept-btn"><i class="bi bi-check-circle"></i> Accept</button></li>
-                  <li><button class="dropdown-item text-danger reject-btn"><i class="bi bi-x-circle"></i> Reject</button></li>
-                  <li><button class="dropdown-item text-warning pending-btn"><i class="bi bi-hourglass-split"></i> Pending</button></li>
-                </ul>
-              </div>
-            </td>
-          </tr>
-          <!-- More rows here -->
-        </tbody>
-      </table>
-    </div>
-  </div>
+                <!-- Filters (optional demo layout) -->
+                <div class="d-flex flex-wrap gap-2 mb-4">
+                    <button class="btn btn-outline-primary">Loan</button>
+                    <button class="btn btn-outline-success">Advance</button>
+                    <input type="text" class="form-control w-auto" placeholder="Search" />
+                    <button class="btn btn-outline-secondary ms-auto">Export</button>
+                </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script>
-    // Animate title and subtitle on load
-    gsap.from("#pageTitle", { x: -100, opacity: 0, duration: 1, ease: "power3.out" });
-    gsap.from("#pageSubtitle", { x: -100, opacity: 0, duration: 1, delay: 0.3, ease: "power3.out" });
+                <!-- Table -->
 
-    // Optional: action button functionality
-    document.querySelectorAll(".accept-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
-        alert("Request accepted.");
-      });
-    });
+                <div id="tableExample3" data-list='{"valueNames":["name","email","age"],"page":5,"pagination":true}'>
+                    <div class="search-box mb-3 mx-auto">
+                        <form class="position-relative"><input class="form-control search-input search form-control-sm" type="search" placeholder="Search" aria-label="Search" />
+                            <span class="fas fa-search search-box-icon"></span>
+                        </form>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-sm fs-9 mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="sort border-top border-translucent ps-3" data-sort="name">
+                                        <span class="bi bi-person me-2"></span> Name <!-- Bootstrap icon for 'Name' -->
+                                    </th>
+                                    <th class="sort border-top" data-sort="email">
+                                        <span class="bi bi-envelope me-2"></span> Email <!-- Bootstrap icon for 'Email' -->
+                                    </th>
+                                    <th class="sort border-top" data-sort="age">
+                                        <span class="bi bi-cash me-2"></span> Amount <!-- Bootstrap icon for 'Amount' -->
+                                    </th>
+                                    <th class="sort border-top" data-sort="age">
+                                        <span class="bi bi-card-checklist me-2"></span> Type Request <!-- Bootstrap icon for 'Type Request' -->
+                                    </th>
+                                    <th class="sort border-top" data-sort="age">
+                                        <span class="bi bi-credit-card me-2"></span> EMI <!-- Bootstrap icon for 'EMI' -->
+                                    </th>
+                                    <th class="sort text-end align-middle pe-0 border-top" scope="col">
+                                        <span class="bi bi-gear me-2"></span> ACTION <!-- Bootstrap icon for 'Action' -->
+                                    </th>
+                                </tr>
 
-    document.querySelectorAll(".reject-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
-        alert("Request rejected.");
-      });
-    });
+                            </thead>
+                            <tbody class="list">
+                                <tr>
+                                    <td class="align-middle ps-3 name">Anna</td>
+                                    <td class="align-middle email">anna@example.com</td>
+                                    <td class="align-middle amount">35</td>
+                                    <td class="align-middle type-request">loan</td>
+                                    <td class="align-middle emi">2</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                        <div class="btn-reveal-trigger position-static">
+                                            <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
+                                                <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2">
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-check-circle me-2"></span> Accept <!-- Bootstrap icon for 'Accept' -->
 
-    document.querySelectorAll(".pending-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
-        alert("Marked as pending.");
-      });
-    });
-  </script>
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-hourglass me-2"></span> Pending <!-- Bootstrap icon for 'Pending' -->
+
+                                                </a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item text-danger" href="#!">
+                                                    <span class="bi bi-x-circle me-2"></span> Reject <!-- Bootstrap icon for 'Reject' -->
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Homer</td>
+                                    <td class="align-middle email">homer@example.com</td>
+                                    <td class="align-middle amount">35</td>
+                                    <td class="align-middle type-request">loan</td>
+                                    <td class="align-middle emi">2</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                    <div class="btn-reveal-trigger position-static">
+                                            <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
+                                                <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2">
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-check-circle me-2"></span> Accept <!-- Bootstrap icon for 'Accept' -->
+
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-hourglass me-2"></span> Pending <!-- Bootstrap icon for 'Pending' -->
+
+                                                </a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item text-danger" href="#!">
+                                                    <span class="bi bi-x-circle me-2"></span> Reject <!-- Bootstrap icon for 'Reject' -->
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Oscar</td>
+                                    <td class="align-middle email">oscar@example.com</td>
+                                    <td class="align-middle amount">35</td>
+                                    <td class="align-middle type-request">loan</td>
+                                    <td class="align-middle emi">2</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                    <div class="btn-reveal-trigger position-static">
+                                            <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
+                                                <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2">
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-check-circle me-2"></span> Accept <!-- Bootstrap icon for 'Accept' -->
+
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-hourglass me-2"></span> Pending <!-- Bootstrap icon for 'Pending' -->
+
+                                                </a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item text-danger" href="#!">
+                                                    <span class="bi bi-x-circle me-2"></span> Reject <!-- Bootstrap icon for 'Reject' -->
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Emily</td>
+                                    <td class="align-middle email">emily@example.com</td>
+                                    <td class="align-middle amount">35</td>
+                                    <td class="align-middle type-request">loan</td>
+                                    <td class="align-middle emi">2</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                    <div class="btn-reveal-trigger position-static">
+                                            <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
+                                                <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2">
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-check-circle me-2"></span> Accept <!-- Bootstrap icon for 'Accept' -->
+
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-hourglass me-2"></span> Pending <!-- Bootstrap icon for 'Pending' -->
+
+                                                </a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item text-danger" href="#!">
+                                                    <span class="bi bi-x-circle me-2"></span> Reject <!-- Bootstrap icon for 'Reject' -->
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Jara</td>
+                                    <td class="align-middle email">jara@example.com</td>
+                                    <td class="align-middle amount">35</td>
+                                    <td class="align-middle type-request">loan</td>
+                                    <td class="align-middle emi">2</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                    <div class="btn-reveal-trigger position-static">
+                                            <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
+                                                <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2">
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-check-circle me-2"></span> Accept <!-- Bootstrap icon for 'Accept' -->
+
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-hourglass me-2"></span> Pending <!-- Bootstrap icon for 'Pending' -->
+
+                                                </a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item text-danger" href="#!">
+                                                    <span class="bi bi-x-circle me-2"></span> Reject <!-- Bootstrap icon for 'Reject' -->
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Clark</td>
+                                    <td class="align-middle email">clark@example.com</td>
+                                    <td class="align-middle amount">35</td>
+                                    <td class="align-middle type-request">loan</td>
+                                    <td class="align-middle emi">2</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                    <div class="btn-reveal-trigger position-static">
+                                            <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
+                                                <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2">
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-check-circle me-2"></span> Accept <!-- Bootstrap icon for 'Accept' -->
+
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-hourglass me-2"></span> Pending <!-- Bootstrap icon for 'Pending' -->
+
+                                                </a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item text-danger" href="#!">
+                                                    <span class="bi bi-x-circle me-2"></span> Reject <!-- Bootstrap icon for 'Reject' -->
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Jennifer</td>
+                                    <td class="align-middle email">jennifer@example.com</td>
+                                    <td class="align-middle amount">35</td>
+                                    <td class="align-middle type-request">loan</td>
+                                    <td class="align-middle emi">2</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                    <div class="btn-reveal-trigger position-static">
+                                            <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
+                                                <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2">
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-check-circle me-2"></span> Accept <!-- Bootstrap icon for 'Accept' -->
+
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-hourglass me-2"></span> Pending <!-- Bootstrap icon for 'Pending' -->
+
+                                                </a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item text-danger" href="#!">
+                                                    <span class="bi bi-x-circle me-2"></span> Reject <!-- Bootstrap icon for 'Reject' -->
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Tony</td>
+                                    <td class="align-middle email">tony@example.com</td>
+                                    <td class="align-middle amount">35</td>
+                                    <td class="align-middle type-request">loan</td>
+                                    <td class="align-middle emi">2</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                    <div class="btn-reveal-trigger position-static">
+                                            <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
+                                                <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2">
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-check-circle me-2"></span> Accept <!-- Bootstrap icon for 'Accept' -->
+
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-hourglass me-2"></span> Pending <!-- Bootstrap icon for 'Pending' -->
+
+                                                </a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item text-danger" href="#!">
+                                                    <span class="bi bi-x-circle me-2"></span> Reject <!-- Bootstrap icon for 'Reject' -->
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Tom</td>
+                                    <td class="align-middle email">tom@example.com</td>
+                                    <td class="align-middle amount">35</td>
+                                    <td class="align-middle type-request">loan</td>
+                                    <td class="align-middle emi">2</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                    <div class="btn-reveal-trigger position-static">
+                                            <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
+                                                <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2">
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-check-circle me-2"></span> Accept <!-- Bootstrap icon for 'Accept' -->
+
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-hourglass me-2"></span> Pending <!-- Bootstrap icon for 'Pending' -->
+
+                                                </a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item text-danger" href="#!">
+                                                    <span class="bi bi-x-circle me-2"></span> Reject <!-- Bootstrap icon for 'Reject' -->
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Michael</td>
+                                    <td class="align-middle email">michael@example.com</td>
+                                    <td class="align-middle amount">35</td>
+                                    <td class="align-middle type-request">loan</td>
+                                    <td class="align-middle emi">2</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                    <div class="btn-reveal-trigger position-static">
+                                            <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
+                                                <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2">
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-check-circle me-2"></span> Accept <!-- Bootstrap icon for 'Accept' -->
+
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-hourglass me-2"></span> Pending <!-- Bootstrap icon for 'Pending' -->
+
+                                                </a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item text-danger" href="#!">
+                                                    <span class="bi bi-x-circle me-2"></span> Reject <!-- Bootstrap icon for 'Reject' -->
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Antony</td>
+                                    <td class="align-middle email">antony@example.com</td>
+                                    <td class="align-middle amount">35</td>
+                                    <td class="align-middle type-request">loan</td>
+                                    <td class="align-middle emi">2</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                    <div class="btn-reveal-trigger position-static">
+                                            <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
+                                                <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2">
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-check-circle me-2"></span> Accept <!-- Bootstrap icon for 'Accept' -->
+
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-hourglass me-2"></span> Pending <!-- Bootstrap icon for 'Pending' -->
+
+                                                </a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item text-danger" href="#!">
+                                                    <span class="bi bi-x-circle me-2"></span> Reject <!-- Bootstrap icon for 'Reject' -->
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Raymond</td>
+                                    <td class="align-middle email">raymond@example.com</td>
+                                    <td class="align-middle amount">35</td>
+                                    <td class="align-middle type-request">loan</td>
+                                    <td class="align-middle emi">2</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                    <div class="btn-reveal-trigger position-static">
+                                            <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
+                                                <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2">
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-check-circle me-2"></span> Accept <!-- Bootstrap icon for 'Accept' -->
+
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-hourglass me-2"></span> Pending <!-- Bootstrap icon for 'Pending' -->
+
+                                                </a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item text-danger" href="#!">
+                                                    <span class="bi bi-x-circle me-2"></span> Reject <!-- Bootstrap icon for 'Reject' -->
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Marie</td>
+                                    <td class="align-middle email">marie@example.com</td>
+                                    \ <td class="align-middle amount">35</td>
+                                    <td class="align-middle type-request">loan</td>
+                                    <td class="align-middle emi">2</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                    <div class="btn-reveal-trigger position-static">
+                                            <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
+                                                <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2">
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-check-circle me-2"></span> Accept <!-- Bootstrap icon for 'Accept' -->
+
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-hourglass me-2"></span> Pending <!-- Bootstrap icon for 'Pending' -->
+
+                                                </a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item text-danger" href="#!">
+                                                    <span class="bi bi-x-circle me-2"></span> Reject <!-- Bootstrap icon for 'Reject' -->
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Cohen</td>
+                                    <td class="align-middle email">cohen@example.com</td>
+                                    <td class="align-middle amount">35</td>
+                                    <td class="align-middle type-request">loan</td>
+                                    <td class="align-middle emi">2</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                    <div class="btn-reveal-trigger position-static">
+                                            <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
+                                                <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2">
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-check-circle me-2"></span> Accept <!-- Bootstrap icon for 'Accept' -->
+
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-hourglass me-2"></span> Pending <!-- Bootstrap icon for 'Pending' -->
+
+                                                </a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item text-danger" href="#!">
+                                                    <span class="bi bi-x-circle me-2"></span> Reject <!-- Bootstrap icon for 'Reject' -->
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Rowen</td>
+                                    <td class="align-middle email">rowen@example.com</td>
+                                    <td class="align-middle age">39</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                    <div class="btn-reveal-trigger position-static">
+                                            <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
+                                                <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2">
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-check-circle me-2"></span> Accept <!-- Bootstrap icon for 'Accept' -->
+
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-hourglass me-2"></span> Pending <!-- Bootstrap icon for 'Pending' -->
+
+                                                </a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item text-danger" href="#!">
+                                                    <span class="bi bi-x-circle me-2"></span> Reject <!-- Bootstrap icon for 'Reject' -->
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">John</td>
+                                    <td class="align-middle email">john@example.com</td>
+                                    <td class="align-middle amount">35</td>
+                                    <td class="align-middle type-request">loan</td>
+                                    <td class="align-middle emi">2</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                    <div class="btn-reveal-trigger position-static">
+                                            <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
+                                                <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2">
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-check-circle me-2"></span> Accept <!-- Bootstrap icon for 'Accept' -->
+
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-hourglass me-2"></span> Pending <!-- Bootstrap icon for 'Pending' -->
+
+                                                </a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item text-danger" href="#!">
+                                                    <span class="bi bi-x-circle me-2"></span> Reject <!-- Bootstrap icon for 'Reject' -->
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Emily</td>
+                                    <td class="align-middle email">emily@example.com</td>
+                                    <td class="align-middle amount">35</td>
+                                    <td class="align-middle type-request">loan</td>
+                                    <td class="align-middle emi">2</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                    <div class="btn-reveal-trigger position-static">
+                                            <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
+                                                <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2">
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-check-circle me-2"></span> Accept <!-- Bootstrap icon for 'Accept' -->
+
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-hourglass me-2"></span> Pending <!-- Bootstrap icon for 'Pending' -->
+
+                                                </a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item text-danger" href="#!">
+                                                    <span class="bi bi-x-circle me-2"></span> Reject <!-- Bootstrap icon for 'Reject' -->
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Alice</td>
+                                    <td class="align-middle email">alice@example.com</td>
+                                    <td class="align-middle amount">35</td>
+                                    <td class="align-middle type-request">loan</td>
+                                    <td class="align-middle emi">2</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                    <div class="btn-reveal-trigger position-static">
+                                            <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
+                                                <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2">
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-check-circle me-2"></span> Accept <!-- Bootstrap icon for 'Accept' -->
+
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-hourglass me-2"></span> Pending <!-- Bootstrap icon for 'Pending' -->
+
+                                                </a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item text-danger" href="#!">
+                                                    <span class="bi bi-x-circle me-2"></span> Reject <!-- Bootstrap icon for 'Reject' -->
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">David</td>
+                                    <td class="align-middle email">david@example.com</td>
+                                    <td class="align-middle amount">35</td>
+                                    <td class="align-middle type-request">loan</td>
+                                    <td class="align-middle emi">2</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                    <div class="btn-reveal-trigger position-static">
+                                            <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
+                                                <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2">
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-check-circle me-2"></span> Accept <!-- Bootstrap icon for 'Accept' -->
+
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-hourglass me-2"></span> Pending <!-- Bootstrap icon for 'Pending' -->
+
+                                                </a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item text-danger" href="#!">
+                                                    <span class="bi bi-x-circle me-2"></span> Reject <!-- Bootstrap icon for 'Reject' -->
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Sullivan Benton</td>
+                                    <td class="align-middle email">sullivan@example.com</td>
+                                    <td class="align-middle amount">35</td>
+                                    <td class="align-middle type-request">loan</td>
+                                    <td class="align-middle emi">2</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                    <div class="btn-reveal-trigger position-static">
+                                            <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
+                                                <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2">
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-check-circle me-2"></span> Accept <!-- Bootstrap icon for 'Accept' -->
+
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-hourglass me-2"></span> Pending <!-- Bootstrap icon for 'Pending' -->
+
+                                                </a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item text-danger" href="#!">
+                                                    <span class="bi bi-x-circle me-2"></span> Reject <!-- Bootstrap icon for 'Reject' -->
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Uriah Nunez</td>
+                                    <td class="align-middle email">uriah@example.com</td>
+                                    <td class="align-middle age">32</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                    <div class="btn-reveal-trigger position-static">
+                                            <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
+                                                <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2">
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-check-circle me-2"></span> Accept <!-- Bootstrap icon for 'Accept' -->
+
+                                                </a>
+                                                <a class="dropdown-item" href="#!">
+                                                    <span class="bi bi-hourglass me-2"></span> Pending <!-- Bootstrap icon for 'Pending' -->
+
+                                                </a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item text-danger" href="#!">
+                                                    <span class="bi bi-x-circle me-2"></span> Reject <!-- Bootstrap icon for 'Reject' -->
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Terry Lynch</td>
+                                    <td class="align-middle email">terry@example.com</td>
+                                    <td class="align-middle age">45</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                        <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
+                                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Lailah Green</td>
+                                    <td class="align-middle email">lailah@example.com</td>
+                                    <td class="align-middle age">25</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                        <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
+                                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Phillip Mack</td>
+                                    <td class="align-middle email">phillip@example.com</td>
+                                    <td class="align-middle age">21</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                        <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
+                                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Whitney Sawyer</td>
+                                    <td class="align-middle email">whitney@example.com</td>
+                                    <td class="align-middle age">12</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                        <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
+                                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Jaliyah Ritter</td>
+                                    <td class="align-middle email">jaliyah@example.com</td>
+                                    <td class="align-middle age">12</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                        <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
+                                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Clayton Arnold</td>
+                                    <td class="align-middle email">clayton@example.com</td>
+                                    <td class="align-middle age">52</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                        <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
+                                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Jett Donovan</td>
+                                    <td class="align-middle email">jett@example.com</td>
+                                    <td class="align-middle age">31</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                        <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
+                                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Javion Christensen</td>
+                                    <td class="align-middle email">javion@example.com</td>
+                                    <td class="align-middle age">25</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                        <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
+                                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Brittany Griffin</td>
+                                    <td class="align-middle email">brittany@example.com</td>
+                                    <td class="align-middle age">41</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                        <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
+                                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Dustin Middleton</td>
+                                    <td class="align-middle email">dustin@example.com</td>
+                                    <td class="align-middle age">45</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                        <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
+                                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Janessa Mann</td>
+                                    <td class="align-middle email">janessa@example.com</td>
+                                    <td class="align-middle age">65</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                        <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
+                                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Evangeline Santos</td>
+                                    <td class="align-middle email">evangeline@example.com</td>
+                                    <td class="align-middle age">32</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                        <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
+                                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Parker Todd</td>
+                                    <td class="align-middle email">parker@example.com</td>
+                                    <td class="align-middle age">41</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                        <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
+                                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Jaxson Gill</td>
+                                    <td class="align-middle email">jaxson@example.com</td>
+                                    <td class="align-middle age">33</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                        <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
+                                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Lucille</td>
+                                    <td class="align-middle email">lucille@example.com</td>
+                                    <td class="align-middle age">34</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                        <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
+                                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Terrell</td>
+                                    <td class="align-middle email">terrell@example.com</td>
+                                    <td class="align-middle age">35</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                        <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
+                                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Shayna</td>
+                                    <td class="align-middle email">shayna@example.com</td>
+                                    <td class="align-middle age">36</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                        <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
+                                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Alvaro</td>
+                                    <td class="align-middle email">alvaro@example.com</td>
+                                    <td class="align-middle age">37</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                        <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
+                                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Clay</td>
+                                    <td class="align-middle email">clay@example.com</td>
+                                    <td class="align-middle age">37</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                        <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
+                                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Oscar</td>
+                                    <td class="align-middle email">oscar@example.com</td>
+                                    <td class="align-middle age">37</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                        <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
+                                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Tabitha</td>
+                                    <td class="align-middle email">tabitha@example.com</td>
+                                    <td class="align-middle age">37</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                        <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
+                                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">Jordon</td>
+                                    <td class="align-middle email">jordon@example.com</td>
+                                    <td class="align-middle age">37</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                        <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
+                                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="d-flex justify-content-between mt-3"><span class="d-none d-sm-inline-block" data-list-info="data-list-info"></span>
+                        <div class="d-flex"><button class="page-link" data-list-pagination="prev"><span class="fas fa-chevron-left"></span></button>
+                            <ul class="mb-0 pagination"></ul><button class="page-link pe-0" data-list-pagination="next"><span class="fas fa-chevron-right"></span></button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+            <script>
+                // Initialize the GSAP animation
+                gsap.from(".card", {
+                    duration: 1,
+                    opacity: 0,
+                    y: -50,
+                    stagger: 0.2
+                });
+
+                // Initialize the Bootstrap dropdowns
+                var dropdowns = document.querySelectorAll('.dropdown-toggle');
+                dropdowns.forEach(function(dropdown) {
+                    dropdown.addEventListener('click', function() {
+                        var dropdownMenu = this.nextElementSibling;
+                        if (dropdownMenu.classList.contains('show')) {
+                            dropdownMenu.classList.remove('show');
+                        } else {
+                            dropdownMenu.classList.add('show');
+                        }
+                    });
+                });
+
+                // Close dropdowns when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (!event.target.matches('.dropdown-toggle')) {
+                        dropdowns.forEach(function(dropdown) {
+                            var dropdownMenu = dropdown.nextElementSibling;
+                            if (dropdownMenu.classList.contains('show')) {
+                                dropdownMenu.classList.remove('show');
+                            }
+                        });
+                    }
+                });
+
+                // Initialize the list.js for search and pagination
+                var options = {
+                    valueNames: ['name', 'email', 'age'],
+                    page: 10,
+                    pagination: true
+                };
+                var userList = new List('user-list', options);
+
+                // Initialize the tooltip
+                var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+                var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+                    return new bootstrap.Tooltip(tooltipTriggerEl);
+                });
+            </script>
             <!-- Footer -->
             <?php include("../../Components/footer.php"); ?>
         </div>
-        
+
 
 
 
