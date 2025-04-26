@@ -13,7 +13,7 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>Tasks</title>
+    <title>Pinboard</title>
 
     <!-- ===============================================-->
     <!--    Favicons-->
@@ -57,6 +57,10 @@
     <link href="../../vendors/leaflet/leaflet.css" rel="stylesheet">
     <link href="../../vendors/leaflet.markercluster/MarkerCluster.css" rel="stylesheet">
     <link href="../../vendors/leaflet.markercluster/MarkerCluster.Default.css" rel="stylesheet">
+    
+
+
+
 </head>
 
 <body>
@@ -164,90 +168,83 @@
                 navbarVertical.setAttribute('data-navbar-appearance', 'darker');
             }
         </script>
-        <div class="content" id="heading-gsap">
+        <div class="content my-5" id="heading-gsap">
+            <h2 id="heading-gsap" class="mb-4" id="heading-gsap">📌 Team Pinboard</h2>
 
-            <div class="card shadow" id="taskFormCard">
+            <div class="row" id="pinboard">
 
-                <div class="card-header text-white">
-                    <h4 class="mb-0">Create / Assign Task</h4>
+                <!-- Card 1 -->
+                <div class="col-md-4 mb-4" draggable="true">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">🚀 Project Deadline</h5>
+                            <p class="card-text">Final submission date for PRMS module is April 28th. Make sure to push
+                                your latest changes.</p>
+                            <p class="text-muted small">Posted on: 24-Apr-2025</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Card 2 -->
+                <div class="col-md-4 mb-4" draggable="true">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">🧠 Tech Tip</h5>
+                            <p class="card-text">Remember to use `isset()` in PHP when handling form POST data to avoid
+                                warnings!</p>
+                            <p class="text-muted small">Posted on: 23-Apr-2025</p>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="card-body">
-                    <form id="taskForm">
-                        <div class="row mb-3">
-                            <!-- Task Name -->
-                            <div class="col-md-6">
-                                <label for="taskName" class="form-label">Task Name <span
-                                        class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="taskName" placeholder="Enter task name"
-                                    required>
-                            </div>
-
-                            <!-- Assigned To -->
-                            <div class="col-md-6">
-                                <label for="assignedTo" class="form-label">Assigned To <span
-                                        class="text-danger">*</span></label>
-                                <select class="form-control" id="assignedTo" name="assignedTo[]" required>
-                                    <option value="aakash">Mr. Aakash</option>
-                                    <option value="priya">Ms. Priya</option>
-                                    <option value="om">Mr. Om</option>
-                                    <option value="neha">Ms. Neha</option>
-                                    <option value="rahul">Mr. Rahul</option>
-                                </select>
-                                <small class="form-text text-muted">Hold Ctrl (Windows) or Command (Mac) to select
-                                    multiple users.</small>
-                            </div>
+                <!-- Card 3 -->
+                <div class="col-md-4 mb-4" draggable="true">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">🎯 Motivation</h5>
+                            <p class="card-text">“Don’t watch the clock; do what it does. Keep going.” — Sam Levenson
+                            </p>
+                            <p class="text-muted small">Posted on: 22-Apr-2025</p>
                         </div>
-
-                        <div class="row mb-3">
-                            <!-- Start Date -->
-                            <div class="col-md-6">
-                                <label for="startDate" class="form-label">Start Date <span
-                                        class="text-danger">*</span></label>
-                                <input type="date" class="form-control" id="startDate" name="startDate" required>
-                            </div>
-
-                            <!-- Deadline -->
-                            <div class="col-md-6">
-                                <label for="deadline" class="form-label">Deadline <span
-                                        class="text-danger">*</span></label>
-                                <input type="date" class="form-control" id="deadline" required>
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <!-- Task Status -->
-                            <div class="col-md-6">
-                                <label for="taskStatus" class="form-label">Task Status <span
-                                        class="text-danger">*</span></label>
-                                <select class="form-select" id="taskStatus" required>
-                                    <option value="">Select Status</option>
-                                    <option value="To Do">To Do</option>
-                                    <option value="In Progress">In Progress</option>
-                                    <option value="Completed">Completed</option>
-                                    <option value="Blocked">Blocked</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <!-- Description -->
-                        <div class="mb-3">
-                            <label for="taskDescription" class="form-label">Task Description</label>
-                            <textarea class="form-control" id="taskDescription" rows="4"
-                                placeholder="Enter task description (optional)"></textarea>
-                        </div>
-
-                        <!-- Submit Button -->
-                        <div class="text-end">
-                            <button type="submit" class="btn btn-success px-4">Create Task</button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
+
+                <!-- Card 4 -->
+                <div class="col-md-4 mb-4" draggable="true">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">📅 Daily Reminder</h5>
+                            <p class="card-text">Team stand-up meeting at 10 AM sharp. Don’t be late!</p>
+                            <p class="text-muted small">Posted on: 25-Apr-2025</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="col-md-4 mb-4" draggable="true">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">💡 Suggestion Box</h5>
+                            <p class="card-text">Have feedback or an idea? Drop a note in the shared Google Form link.
+                            </p>
+                            <p class="text-muted small">Posted on: 21-Apr-2025</p>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+
             </div>
-
-            <?php include("../../Components/footer.php"); ?>
-
+            
         </div>
+        
+
+
+
+
+
+
+
 
 
 
@@ -287,130 +284,43 @@
 
     </script>
     <script>
+        let dragSrcEl = null;
 
+        function handleDragStart(e) {
+            dragSrcEl = this;
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/html', this.innerHTML);
 
-        const rowsPerPage = 5;
-        let rows = document.querySelectorAll('#projectTableBody tr');
-        let filteredRows = Array.from(rows); // Initialize with all rows
-        let currentPage = 1;
-
-        // Pagination and buttons
-        const pageButtons = document.querySelectorAll('.page');
-        const prevBtn = document.querySelector('.prev');
-        const nextBtn = document.querySelector('.next');
-
-        // Function to update pagination UI (active button and enabling/disabling prev/next)
-        function updatePaginationUI() {
-            // Update active state of page buttons
-            pageButtons.forEach(btn => {
-                btn.parentElement.classList.toggle('active', parseInt(btn.getAttribute('data-i')) === currentPage);
-            });
-
-            // Disable prev button if on the first page
-            prevBtn.disabled = currentPage === 1;
-
-            // Disable next button if on the last page
-            nextBtn.disabled = currentPage === Math.ceil(filteredRows.length / rowsPerPage);
+            // Adding animation for dragging effect
+            this.classList.add('dragging');
+            setTimeout(() => this.classList.add('invisible'), 0);  // Makes the card disappear during drag
         }
 
-        // Function to show the table rows based on the current page
-        function showPage(page) {
-            currentPage = page;
-
-            const start = (page - 1) * rowsPerPage;
-            const end = start + rowsPerPage;
-
-            // Hide all rows
-            rows.forEach(row => row.style.display = 'none');
-
-            // Show filtered rows based on pagination
-            filteredRows.slice(start, end).forEach(row => row.style.display = '');
-
-            updatePaginationUI();
+        function handleDragOver(e) {
+            if (e.preventDefault) e.preventDefault();
+            return false;
         }
 
-        // Function to filter rows based on the selected type and status
-        function filterProjects() {
-            const statusFilter = document.getElementById('filterType').value.toLowerCase();
-            const typeFilter = document.getElementById('filterType').value.toLowerCase();
-
-            filteredRows = Array.from(rows).filter(row => {
-                const status = row.querySelector('td:nth-child(2)').textContent.toLowerCase(); // Status column
-                const type = row.querySelector('td:nth-child(5)').textContent.toLowerCase(); // Project Type column
-
-                const matchesStatus = statusFilter ? status.includes(statusFilter) : true;
-                const matchesType = typeFilter ? type.includes(typeFilter) : true;
-
-                return matchesStatus && matchesType;
-            });
-
-            // Reset to the first page after filter
-            currentPage = 1;
-            showPage(currentPage);
-        }
-
-        // Listen to changes in filter dropdowns
-        document.getElementById('filterType').addEventListener('change', filterProjects);
-        document.getElementById('filterType').addEventListener('change', filterProjects);
-
-        // Numbered buttons (1, 2, 3, etc.)
-        pageButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const pageNum = parseInt(btn.getAttribute('data-i'));
-                if (pageNum !== currentPage) { // To prevent redundant reload of the same page
-                    showPage(pageNum);
-                }
-            });
-        });
-
-        // Prev button functionality
-        prevBtn.addEventListener('click', () => {
-            if (currentPage > 1) {
-                showPage(currentPage - 1);
+        function handleDrop(e) {
+            if (e.stopPropagation) e.stopPropagation();
+            if (dragSrcEl !== this) {
+                dragSrcEl.innerHTML = this.innerHTML;
+                this.innerHTML = e.dataTransfer.getData('text/html');
             }
-        });
-
-        // Next button functionality
-        nextBtn.addEventListener('click', () => {
-            if (currentPage < Math.ceil(filteredRows.length / rowsPerPage)) {
-                showPage(currentPage + 1);
-            }
-        });
-
-        // Initial load (show the first page)
-        showPage(1);
-    </script>
-    <script>
-        // Update rows when filters are applied (combined)
-        function filterProjects() {
-            const statusFilter = document.getElementById('projectStatusFilter').value.toLowerCase();
-            const typeFilter = document.getElementById('filterType').value.toLowerCase();
-            const searchQuery = document.getElementById('searchInput').value.toLowerCase(); // Get the search query
-
-            // Filter rows based on search query, status, and project type
-            filteredRows = Array.from(rows).filter(row => {
-                const projectName = row.querySelector('td:nth-child(2)').textContent.toLowerCase(); // Task Name column
-                const status = row.querySelector('td:nth-child(6)').textContent.toLowerCase(); // Status column
-                const type = row.querySelector('td:nth-child(5)').textContent.toLowerCase(); // Project Type column
-
-                const matchesSearch = projectName.includes(searchQuery); // Check if project name matches the search query
-                const matchesStatus = statusFilter ? status.includes(statusFilter) : true;
-                const matchesType = typeFilter ? type.includes(typeFilter) : true;
-
-                return matchesSearch && matchesStatus && matchesType;
-            });
-
-            // Reset pagination to the first page after filter
-            currentPage = 1;
-            showPage(currentPage);
+            return false;
         }
 
-        // Listen for changes in the search bar and filters
-        document.getElementById('searchInput').addEventListener('input', filterProjects);
-        document.getElementById('projectStatusFilter').addEventListener('change', filterProjects);
-        document.getElementById('filterType').addEventListener('change', filterProjects);
-    </script>
+        function handleDragEnd() {
+            document.querySelectorAll('#pinboard .col-md-4').forEach(col => col.classList.remove('opacity-50', 'dragging', 'invisible'));
+        }
 
+        document.querySelectorAll('#pinboard .col-md-4').forEach(col => {
+            col.addEventListener('dragstart', handleDragStart);
+            col.addEventListener('dragover', handleDragOver);
+            col.addEventListener('drop', handleDrop);
+            col.addEventListener('dragend', handleDragEnd);
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
     <script>
@@ -420,51 +330,17 @@
             duration: 1,
             ease: "power2.out"
         });
-        function animateTableRows() {
-            filteredRows.forEach((row, index) => {
-                gsap.from(row, {
-                    opacity: 0,
-                    y: 20,
-                    duration: 0.6,
-                    delay: 0.2 * index, // stagger the animation slightly
-                    ease: "power2.out"
-                });
-            });
-        }
-        animateTableRows();
-        gsap.from("#filterType", {
-            opacity: 0,
-            y: 50,
-            duration: 0.8,
-            ease: "power2.out",
-            delay: 0.5
-        });
-
-        gsap.from("#projectStatusFilter", {
-            opacity: 0,
-            y: 50,
-            duration: 0.8,
-            ease: "power2.out",
-            delay: 0.7
-        });
 
         gsap.from("#heading-gsap", {
             opacity: 0,
             y: 50,
-            duration: 0.7,
+            duration: 1.0,
             ease: "power2.out",
             delay: 0.1
         });
 
 
     </script>
-
-
-
-
-
-
-
 
 
 

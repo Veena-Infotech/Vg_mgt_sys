@@ -13,7 +13,7 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>Tasks</title>
+    <title>Generate Reports</title>
 
     <!-- ===============================================-->
     <!--    Favicons-->
@@ -57,6 +57,8 @@
     <link href="../../vendors/leaflet/leaflet.css" rel="stylesheet">
     <link href="../../vendors/leaflet.markercluster/MarkerCluster.css" rel="stylesheet">
     <link href="../../vendors/leaflet.markercluster/MarkerCluster.Default.css" rel="stylesheet">
+
+
 </head>
 
 <body>
@@ -164,90 +166,176 @@
                 navbarVertical.setAttribute('data-navbar-appearance', 'darker');
             }
         </script>
-        <div class="content" id="heading-gsap">
+        <div class="content my-5" id="heading-gsap">
+            <h2 class="mb-4">Generate Reports</h2>
 
-            <div class="card shadow" id="taskFormCard">
-
-                <div class="card-header text-white">
-                    <h4 class="mb-0">Create / Assign Task</h4>
+            <!-- Filter Section -->
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <label for="projectFilter">Project</label>
+                    <select id="projectFilter" class="form-select text-center">
+                        <option value="">All Projects</option>
+                        <option value="Project A">Project A</option>
+                        <option value="Project B">Project B</option>
+                        <option value="Project C">Project C</option>
+                    </select>
                 </div>
 
-                <div class="card-body">
-                    <form id="taskForm">
-                        <div class="row mb-3">
-                            <!-- Task Name -->
-                            <div class="col-md-6">
-                                <label for="taskName" class="form-label">Task Name <span
-                                        class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="taskName" placeholder="Enter task name"
-                                    required>
-                            </div>
+                <div class="col-md-3">
+                    <label for="taskFilter">Task</label>
+                    <select id="taskFilter" class="form-select text-center">
+                        <option value="">All Tasks</option>
+                        <!-- Tasks will be dynamically filled -->
+                    </select>
+                </div>
 
-                            <!-- Assigned To -->
-                            <div class="col-md-6">
-                                <label for="assignedTo" class="form-label">Assigned To <span
-                                        class="text-danger">*</span></label>
-                                <select class="form-control" id="assignedTo" name="assignedTo[]" required>
-                                    <option value="aakash">Mr. Aakash</option>
-                                    <option value="priya">Ms. Priya</option>
-                                    <option value="om">Mr. Om</option>
-                                    <option value="neha">Ms. Neha</option>
-                                    <option value="rahul">Mr. Rahul</option>
-                                </select>
-                                <small class="form-text text-muted">Hold Ctrl (Windows) or Command (Mac) to select
-                                    multiple users.</small>
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <!-- Start Date -->
-                            <div class="col-md-6">
-                                <label for="startDate" class="form-label">Start Date <span
-                                        class="text-danger">*</span></label>
-                                <input type="date" class="form-control" id="startDate" name="startDate" required>
-                            </div>
-
-                            <!-- Deadline -->
-                            <div class="col-md-6">
-                                <label for="deadline" class="form-label">Deadline <span
-                                        class="text-danger">*</span></label>
-                                <input type="date" class="form-control" id="deadline" required>
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <!-- Task Status -->
-                            <div class="col-md-6">
-                                <label for="taskStatus" class="form-label">Task Status <span
-                                        class="text-danger">*</span></label>
-                                <select class="form-select" id="taskStatus" required>
-                                    <option value="">Select Status</option>
-                                    <option value="To Do">To Do</option>
-                                    <option value="In Progress">In Progress</option>
-                                    <option value="Completed">Completed</option>
-                                    <option value="Blocked">Blocked</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <!-- Description -->
-                        <div class="mb-3">
-                            <label for="taskDescription" class="form-label">Task Description</label>
-                            <textarea class="form-control" id="taskDescription" rows="4"
-                                placeholder="Enter task description (optional)"></textarea>
-                        </div>
-
-                        <!-- Submit Button -->
-                        <div class="text-end">
-                            <button type="submit" class="btn btn-success px-4">Create Task</button>
-                        </div>
-                    </form>
+                <div class="col-md-3 d-flex align-items-end">
+                    <button class="btn btn-primary w-100" id="generateReportBtn">Search</button>
                 </div>
             </div>
 
-            <?php include("../../Components/footer.php"); ?>
+            <!-- Export Buttons (Hidden initially) -->
+            <div id="exportButtons" class="mb-4" style="display:none;">
+                <button class="btn btn-success" id="exportPdfBtn">Export PDF</button>
+                <button class="btn btn-warning" id="exportExcelBtn">Export Excel</button>
+            </div>
 
+            <!-- Report Table -->
+            <div id="reportSection" class="table-responsive" style="display:none;">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+
+                            <th>Project Name</th>
+                            <th>Task Name</th>
+                            <th>Status</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="reportTableBody" class="text-center">
+                        <!-- Static Rows -->
+                        <tr>
+
+                            <td>Project A</td>
+                            <td>Project1-task1</td>
+                            <td>In Progress</td>
+                            <td>2025-04-01</td>
+                            <td>2025-04-10</td>
+                            <td>
+                                <button class="btn btn-sm btn-info">View</button>
+                                <button class="btn btn-sm btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>Project A</td>
+                            <td>Project1-task2</td>
+                            <td>Completed</td>
+                            <td>2025-03-15</td>
+                            <td>2025-03-30</td>
+                            <td>
+                                <button class="btn btn-sm btn-info">View</button>
+                                <button class="btn btn-sm btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>Project A</td>
+                            <td>Project1-task3</td>
+                            <td>Completed</td>
+                            <td>2025-03-15</td>
+                            <td>2025-03-30</td>
+                            <td>
+                                <button class="btn btn-sm btn-info">View</button>
+                                <button class="btn btn-sm btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>Project B</td>
+                            <td>Project2-task1</td>
+                            <td>Completed</td>
+                            <td>2025-03-15</td>
+                            <td>2025-03-30</td>
+                            <td>
+                                <button class="btn btn-sm btn-info">View</button>
+                                <button class="btn btn-sm btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>Project B</td>
+                            <td>Project2-task2</td>
+                            <td>Completed</td>
+                            <td>2025-03-15</td>
+                            <td>2025-03-30</td>
+                            <td>
+                                <button class="btn btn-sm btn-info">View</button>
+                                <button class="btn btn-sm btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>Project B</td>
+                            <td>Project2-task3</td>
+                            <td>Completed</td>
+                            <td>2025-03-15</td>
+                            <td>2025-03-30</td>
+                            <td>
+                                <button class="btn btn-sm btn-info">View</button>
+                                <button class="btn btn-sm btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>Project C</td>
+                            <td>Project3-task1</td>
+                            <td>Completed</td>
+                            <td>2025-03-15</td>
+                            <td>2025-03-30</td>
+                            <td>
+                                <button class="btn btn-sm btn-info">View</button>
+                                <button class="btn btn-sm btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>Project C</td>
+                            <td>Project3-task2</td>
+                            <td>Completed</td>
+                            <td>2025-03-15</td>
+                            <td>2025-03-30</td>
+                            <td>
+                                <button class="btn btn-sm btn-info">View</button>
+                                <button class="btn btn-sm btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>Project C</td>
+                            <td>Project3-task3</td>
+                            <td>Completed</td>
+                            <td>2025-03-15</td>
+                            <td>2025-03-30</td>
+                            <td>
+                                <button class="btn btn-sm btn-info">View</button>
+                                <button class="btn btn-sm btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
         </div>
+
+
+
+
+
+
+
 
 
 
@@ -286,131 +374,78 @@
 
 
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Mapping Tasks
+            const tasksByProject = {
+                "Project A": ["Project1-task1", "Project1-task2", "Project1-task3"],
+                "Project B": ["Project2-task1", "Project2-task2", "Project2-task3"],
+                "Project C": ["Project3-task1", "Project3-task2", "Project3-task3"]
+            };
 
+            const projectFilter = document.getElementById('projectFilter');
+            const taskFilter = document.getElementById('taskFilter');
+            const reportSection = document.getElementById('reportSection');
+            const reportTableBody = document.getElementById('reportTableBody');
 
-        const rowsPerPage = 5;
-        let rows = document.querySelectorAll('#projectTableBody tr');
-        let filteredRows = Array.from(rows); // Initialize with all rows
-        let currentPage = 1;
+            // When Project is selected -> Load related Tasks
+            projectFilter.addEventListener('change', function () {
+                const selectedProject = this.value;
+                taskFilter.innerHTML = '<option value="">All Tasks</option>';
 
-        // Pagination and buttons
-        const pageButtons = document.querySelectorAll('.page');
-        const prevBtn = document.querySelector('.prev');
-        const nextBtn = document.querySelector('.next');
-
-        // Function to update pagination UI (active button and enabling/disabling prev/next)
-        function updatePaginationUI() {
-            // Update active state of page buttons
-            pageButtons.forEach(btn => {
-                btn.parentElement.classList.toggle('active', parseInt(btn.getAttribute('data-i')) === currentPage);
+                if (tasksByProject[selectedProject]) {
+                    tasksByProject[selectedProject].forEach(task => {
+                        const option = document.createElement('option');
+                        option.value = task;
+                        option.textContent = task;
+                        taskFilter.appendChild(option);
+                    });
+                }
             });
 
-            // Disable prev button if on the first page
-            prevBtn.disabled = currentPage === 1;
+            // When Generate Report button is clicked
+            document.getElementById('generateReportBtn').addEventListener('click', function () {
+                const selectedProject = projectFilter.value.trim();
+                const selectedTask = taskFilter.value.trim();
 
-            // Disable next button if on the last page
-            nextBtn.disabled = currentPage === Math.ceil(filteredRows.length / rowsPerPage);
-        }
+                const rows = reportTableBody.querySelectorAll('tr');
+                let anyRowVisible = false;
 
-        // Function to show the table rows based on the current page
-        function showPage(page) {
-            currentPage = page;
+                rows.forEach(row => {
+                    const projectName = row.cells[0].textContent.trim();
+                    const taskName = row.cells[1].textContent.trim();
 
-            const start = (page - 1) * rowsPerPage;
-            const end = start + rowsPerPage;
+                    // Matching logic
+                    const projectMatches = !selectedProject || projectName === selectedProject;
+                    const taskMatches = !selectedTask || taskName === selectedTask;
 
-            // Hide all rows
-            rows.forEach(row => row.style.display = 'none');
+                    if (projectMatches && taskMatches) {
+                        row.style.display = '';
+                        anyRowVisible = true;
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
 
-            // Show filtered rows based on pagination
-            filteredRows.slice(start, end).forEach(row => row.style.display = '');
-
-            updatePaginationUI();
-        }
-
-        // Function to filter rows based on the selected type and status
-        function filterProjects() {
-            const statusFilter = document.getElementById('filterType').value.toLowerCase();
-            const typeFilter = document.getElementById('filterType').value.toLowerCase();
-
-            filteredRows = Array.from(rows).filter(row => {
-                const status = row.querySelector('td:nth-child(2)').textContent.toLowerCase(); // Status column
-                const type = row.querySelector('td:nth-child(5)').textContent.toLowerCase(); // Project Type column
-
-                const matchesStatus = statusFilter ? status.includes(statusFilter) : true;
-                const matchesType = typeFilter ? type.includes(typeFilter) : true;
-
-                return matchesStatus && matchesType;
-            });
-
-            // Reset to the first page after filter
-            currentPage = 1;
-            showPage(currentPage);
-        }
-
-        // Listen to changes in filter dropdowns
-        document.getElementById('filterType').addEventListener('change', filterProjects);
-        document.getElementById('filterType').addEventListener('change', filterProjects);
-
-        // Numbered buttons (1, 2, 3, etc.)
-        pageButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const pageNum = parseInt(btn.getAttribute('data-i'));
-                if (pageNum !== currentPage) { // To prevent redundant reload of the same page
-                    showPage(pageNum);
+                // Show table only if any row is visible
+                if (anyRowVisible) {
+                    reportSection.style.display = 'block';
+                    gsap.from("#reportSection", {
+                        duration: 0.8,
+                        opacity: 0,
+                        y: 50,
+                        ease: "power2.out"
+                    });
+                } else {
+                    reportSection.style.display = 'none';
+                    alert("No matching records found!");
                 }
             });
         });
-
-        // Prev button functionality
-        prevBtn.addEventListener('click', () => {
-            if (currentPage > 1) {
-                showPage(currentPage - 1);
-            }
-        });
-
-        // Next button functionality
-        nextBtn.addEventListener('click', () => {
-            if (currentPage < Math.ceil(filteredRows.length / rowsPerPage)) {
-                showPage(currentPage + 1);
-            }
-        });
-
-        // Initial load (show the first page)
-        showPage(1);
     </script>
-    <script>
-        // Update rows when filters are applied (combined)
-        function filterProjects() {
-            const statusFilter = document.getElementById('projectStatusFilter').value.toLowerCase();
-            const typeFilter = document.getElementById('filterType').value.toLowerCase();
-            const searchQuery = document.getElementById('searchInput').value.toLowerCase(); // Get the search query
-
-            // Filter rows based on search query, status, and project type
-            filteredRows = Array.from(rows).filter(row => {
-                const projectName = row.querySelector('td:nth-child(2)').textContent.toLowerCase(); // Task Name column
-                const status = row.querySelector('td:nth-child(6)').textContent.toLowerCase(); // Status column
-                const type = row.querySelector('td:nth-child(5)').textContent.toLowerCase(); // Project Type column
-
-                const matchesSearch = projectName.includes(searchQuery); // Check if project name matches the search query
-                const matchesStatus = statusFilter ? status.includes(statusFilter) : true;
-                const matchesType = typeFilter ? type.includes(typeFilter) : true;
-
-                return matchesSearch && matchesStatus && matchesType;
-            });
-
-            // Reset pagination to the first page after filter
-            currentPage = 1;
-            showPage(currentPage);
-        }
-
-        // Listen for changes in the search bar and filters
-        document.getElementById('searchInput').addEventListener('input', filterProjects);
-        document.getElementById('projectStatusFilter').addEventListener('change', filterProjects);
-        document.getElementById('filterType').addEventListener('change', filterProjects);
-    </script>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
     <script>
@@ -419,33 +454,6 @@
             y: 60,
             duration: 1,
             ease: "power2.out"
-        });
-        function animateTableRows() {
-            filteredRows.forEach((row, index) => {
-                gsap.from(row, {
-                    opacity: 0,
-                    y: 20,
-                    duration: 0.6,
-                    delay: 0.2 * index, // stagger the animation slightly
-                    ease: "power2.out"
-                });
-            });
-        }
-        animateTableRows();
-        gsap.from("#filterType", {
-            opacity: 0,
-            y: 50,
-            duration: 0.8,
-            ease: "power2.out",
-            delay: 0.5
-        });
-
-        gsap.from("#projectStatusFilter", {
-            opacity: 0,
-            y: 50,
-            duration: 0.8,
-            ease: "power2.out",
-            delay: 0.7
         });
 
         gsap.from("#heading-gsap", {
@@ -458,10 +466,6 @@
 
 
     </script>
-
-
-
-
 
 
 
