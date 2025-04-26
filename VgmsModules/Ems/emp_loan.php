@@ -178,8 +178,8 @@
                         <div class="col-auto px-3"><select class="form-select form-select-sm mb-3" data-list-filter="data-list-filter">
                                 <option selected="" value="">Select payment status</option>
                                 <option value="Pending">Pending</option>
-                                <option value="Success">Success</option>
-                                <option value="Blocked">Blocked</option>
+                                <option value="Success">Accepted</option>
+                                <option value="Blocked">Rejected</option>
                             </select></div>
                     </div>
                     <div class="table-responsive">
@@ -196,7 +196,7 @@
                                     <td class="align-middle ps-3 name">Sylvia Plath</td>
                                     <td class="align-middle email">john@gmail.com</td>
                                     <td class="align-middle payment text-end py-3 pe-3">
-                                        <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="fw-bold">Success</span><svg class="svg-inline--fa fa-check ms-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+                                        <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="fw-bold">Accepted</span><svg class="svg-inline--fa fa-check ms-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
                                                 <path fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path>
                                             </svg><!-- <span class="ms-1 fas fa-check"></span> Font Awesome fontawesome.com --></div>
                                     </td>
@@ -214,7 +214,7 @@
                                     <td class="align-middle ps-3 name">Edgar Allan Poe</td>
                                     <td class="align-middle email">edgar@yahoo.com</td>
                                     <td class="align-middle payment text-end py-3 pe-3">
-                                        <div class="badge badge-phoenix fs-10 badge-phoenix-secondary"><span class="fw-bold">Blocked</span><svg class="svg-inline--fa fa-ban ms-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ban" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+                                        <div class="badge badge-phoenix fs-10 badge-phoenix-secondary"><span class="fw-bold">Rejected</span><svg class="svg-inline--fa fa-ban ms-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ban" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
                                                 <path fill="currentColor" d="M367.2 412.5L99.5 144.8C77.1 176.1 64 214.5 64 256c0 106 86 192 192 192c41.5 0 79.9-13.1 111.2-35.5zm45.3-45.3C434.9 335.9 448 297.5 448 256c0-106-86-192-192-192c-41.5 0-79.9 13.1-111.2 35.5L412.5 367.2zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"></path>
                                             </svg><!-- <span class="ms-1 fas fa-ban"></span> Font Awesome fontawesome.com --></div>
                                     </td>
@@ -292,35 +292,17 @@
                     </div>
                 </div>
 
-                <!-- Bootstrap JS and Popper.js -->
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.1/gsap.min.js"></script>
-                <script>
-                    // GSAP Animation for Title and Subtitle
-                    gsap.from("#page-title", {
-                        duration: 1.5,
-                        opacity: 0,
-                        y: -50,
-                        ease: "power4.out"
-                    });
-
-                    gsap.from("#page-subtitle", {
-                        duration: 1.5,
-                        opacity: 0,
-                        y: 30,
-                        delay: 0.5,
-                        ease: "power4.out"
-                    });
-                </script>
-                <!-- Footer -->
-                <?php include("../../Components/footer.php"); ?>
+               
             </div>
         </div>
+        
     </main>
 
     <!-- ===============================================-->
     <!--    End of Main Content-->
     <!-- ===============================================-->
-
+             <!-- Footer -->
+         <?php include("../../Components/footer.php"); ?>
 
 
     <!-- ===============================================-->
@@ -328,6 +310,27 @@
 
     <!-- ===============================================-->
     <!--Dropdown for contacted-to--->
+
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.1/gsap.min.js"></script>
+    <script>
+        // GSAP Animation for Title and Subtitle
+        gsap.from("#page-title", {
+            duration: 1.5,
+            opacity: 0,
+            y: -50,
+            ease: "power4.out"
+        });
+
+        gsap.from("#page-subtitle", {
+            duration: 1.5,
+            opacity: 0,
+            y: 30,
+            delay: 0.5,
+            ease: "power4.out"
+        });
+    </script>
 
     <script src="../../vendors/popper/popper.min.js"></script>
     <script src="../../vendors/bootstrap/bootstrap.min.js"></script>
@@ -344,13 +347,7 @@
     <script src="../../assets/js/phoenix.js"></script>
     <script src="../../vendors/echarts/echarts.min.js"></script>
     <script src="../../assets/js/ecommerce-dashboard.js"></script>
-
-
-
-
-
-    </script>
-
+    <!-- </script> -->
 
 
 </body>

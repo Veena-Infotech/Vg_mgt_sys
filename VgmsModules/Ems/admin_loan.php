@@ -252,7 +252,7 @@
                                     <td class="align-middle type-request">loan</td>
                                     <td class="align-middle emi">2</td>
                                     <td class="align-middle white-space-nowrap text-end pe-0">
-                                    <div class="btn-reveal-trigger position-static">
+                                        <div class="btn-reveal-trigger position-static">
                                             <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
                                                 <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
                                             </button>
@@ -280,7 +280,7 @@
                                     <td class="align-middle type-request">loan</td>
                                     <td class="align-middle emi">2</td>
                                     <td class="align-middle white-space-nowrap text-end pe-0">
-                                    <div class="btn-reveal-trigger position-static">
+                                        <div class="btn-reveal-trigger position-static">
                                             <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
                                                 <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
                                             </button>
@@ -308,7 +308,7 @@
                                     <td class="align-middle type-request">loan</td>
                                     <td class="align-middle emi">2</td>
                                     <td class="align-middle white-space-nowrap text-end pe-0">
-                                    <div class="btn-reveal-trigger position-static">
+                                        <div class="btn-reveal-trigger position-static">
                                             <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
                                                 <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
                                             </button>
@@ -336,7 +336,7 @@
                                     <td class="align-middle type-request">loan</td>
                                     <td class="align-middle emi">2</td>
                                     <td class="align-middle white-space-nowrap text-end pe-0">
-                                    <div class="btn-reveal-trigger position-static">
+                                        <div class="btn-reveal-trigger position-static">
                                             <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
                                                 <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
                                             </button>
@@ -364,7 +364,7 @@
                                     <td class="align-middle type-request">loan</td>
                                     <td class="align-middle emi">2</td>
                                     <td class="align-middle white-space-nowrap text-end pe-0">
-                                    <div class="btn-reveal-trigger position-static">
+                                        <div class="btn-reveal-trigger position-static">
                                             <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
                                                 <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
                                             </button>
@@ -392,7 +392,7 @@
                                     <td class="align-middle type-request">loan</td>
                                     <td class="align-middle emi">2</td>
                                     <td class="align-middle white-space-nowrap text-end pe-0">
-                                    <div class="btn-reveal-trigger position-static">
+                                        <div class="btn-reveal-trigger position-static">
                                             <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
                                                 <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
                                             </button>
@@ -420,7 +420,7 @@
                                     <td class="align-middle type-request">loan</td>
                                     <td class="align-middle emi">2</td>
                                     <td class="align-middle white-space-nowrap text-end pe-0">
-                                    <div class="btn-reveal-trigger position-static">
+                                        <div class="btn-reveal-trigger position-static">
                                             <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
                                                 <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
                                             </button>
@@ -448,7 +448,7 @@
                                     <td class="align-middle type-request">loan</td>
                                     <td class="align-middle emi">2</td>
                                     <td class="align-middle white-space-nowrap text-end pe-0">
-                                    <div class="btn-reveal-trigger position-static">
+                                        <div class="btn-reveal-trigger position-static">
                                             <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
                                                 <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
                                             </button>
@@ -476,7 +476,7 @@
                                     <td class="align-middle type-request">loan</td>
                                     <td class="align-middle emi">2</td>
                                     <td class="align-middle white-space-nowrap text-end pe-0">
-                                    <div class="btn-reveal-trigger position-static">
+                                        <div class="btn-reveal-trigger position-static">
                                             <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
                                                 <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
                                             </button>
@@ -504,7 +504,7 @@
                                     <td class="align-middle type-request">loan</td>
                                     <td class="align-middle emi">2</td>
                                     <td class="align-middle white-space-nowrap text-end pe-0">
-                                    <div class="btn-reveal-trigger position-static">
+                                        <div class="btn-reveal-trigger position-static">
                                             <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
                                                 <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
                                             </button>
@@ -532,7 +532,7 @@
                                     <td class="align-middle type-request">loan</td>
                                     <td class="align-middle emi">2</td>
                                     <td class="align-middle white-space-nowrap text-end pe-0">
-                                    <div class="btn-reveal-trigger position-static">
+                                        <div class="btn-reveal-trigger position-static">
                                             <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
                                                 <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
                                             </button>
@@ -556,11 +556,11 @@
                                 <tr>
                                     <td class="align-middle ps-3 name">Marie</td>
                                     <td class="align-middle email">marie@example.com</td>
-                                    \ <td class="align-middle amount">35</td>
+                                    <td class="align-middle amount">35</td>
                                     <td class="align-middle type-request">loan</td>
                                     <td class="align-middle emi">2</td>
                                     <td class="align-middle white-space-nowrap text-end pe-0">
-                                    <div class="btn-reveal-trigger position-static">
+                                        <div class="btn-reveal-trigger position-static">
                                             <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
                                                 <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
                                             </button>
@@ -588,7 +588,7 @@
                                     <td class="align-middle type-request">loan</td>
                                     <td class="align-middle emi">2</td>
                                     <td class="align-middle white-space-nowrap text-end pe-0">
-                                    <div class="btn-reveal-trigger position-static">
+                                        <div class="btn-reveal-trigger position-static">
                                             <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
                                                 <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
                                             </button>
@@ -614,7 +614,7 @@
                                     <td class="align-middle email">rowen@example.com</td>
                                     <td class="align-middle age">39</td>
                                     <td class="align-middle white-space-nowrap text-end pe-0">
-                                    <div class="btn-reveal-trigger position-static">
+                                        <div class="btn-reveal-trigger position-static">
                                             <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
                                                 <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
                                             </button>
@@ -642,7 +642,7 @@
                                     <td class="align-middle type-request">loan</td>
                                     <td class="align-middle emi">2</td>
                                     <td class="align-middle white-space-nowrap text-end pe-0">
-                                    <div class="btn-reveal-trigger position-static">
+                                        <div class="btn-reveal-trigger position-static">
                                             <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
                                                 <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
                                             </button>
@@ -670,7 +670,7 @@
                                     <td class="align-middle type-request">loan</td>
                                     <td class="align-middle emi">2</td>
                                     <td class="align-middle white-space-nowrap text-end pe-0">
-                                    <div class="btn-reveal-trigger position-static">
+                                        <div class="btn-reveal-trigger position-static">
                                             <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
                                                 <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
                                             </button>
@@ -698,7 +698,7 @@
                                     <td class="align-middle type-request">loan</td>
                                     <td class="align-middle emi">2</td>
                                     <td class="align-middle white-space-nowrap text-end pe-0">
-                                    <div class="btn-reveal-trigger position-static">
+                                        <div class="btn-reveal-trigger position-static">
                                             <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
                                                 <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
                                             </button>
@@ -726,7 +726,7 @@
                                     <td class="align-middle type-request">loan</td>
                                     <td class="align-middle emi">2</td>
                                     <td class="align-middle white-space-nowrap text-end pe-0">
-                                    <div class="btn-reveal-trigger position-static">
+                                        <div class="btn-reveal-trigger position-static">
                                             <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
                                                 <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
                                             </button>
@@ -754,7 +754,7 @@
                                     <td class="align-middle type-request">loan</td>
                                     <td class="align-middle emi">2</td>
                                     <td class="align-middle white-space-nowrap text-end pe-0">
-                                    <div class="btn-reveal-trigger position-static">
+                                        <div class="btn-reveal-trigger position-static">
                                             <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
                                                 <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
                                             </button>
@@ -780,7 +780,7 @@
                                     <td class="align-middle email">uriah@example.com</td>
                                     <td class="align-middle age">32</td>
                                     <td class="align-middle white-space-nowrap text-end pe-0">
-                                    <div class="btn-reveal-trigger position-static">
+                                        <div class="btn-reveal-trigger position-static">
                                             <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
                                                 <span class="bi bi-three-dots fs-10"></span> <!-- Bootstrap icon for the button -->
                                             </button>
@@ -1075,67 +1075,62 @@
                     </div>
                 </div>
 
-            </div>
 
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-            <script>
-                // Initialize the GSAP animation
-                gsap.from(".card", {
-                    duration: 1,
-                    opacity: 0,
-                    y: -50,
-                    stagger: 0.2
-                });
 
-                // Initialize the Bootstrap dropdowns
-                var dropdowns = document.querySelectorAll('.dropdown-toggle');
-                dropdowns.forEach(function(dropdown) {
-                    dropdown.addEventListener('click', function() {
-                        var dropdownMenu = this.nextElementSibling;
-                        if (dropdownMenu.classList.contains('show')) {
-                            dropdownMenu.classList.remove('show');
-                        } else {
-                            dropdownMenu.classList.add('show');
-                        }
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+                <script>
+                    // Initialize the GSAP animation
+                    gsap.from(".card", {
+                        duration: 1,
+                        opacity: 0,
+                        y: -50,
+                        stagger: 0.2
                     });
-                });
 
-                // Close dropdowns when clicking outside
-                document.addEventListener('click', function(event) {
-                    if (!event.target.matches('.dropdown-toggle')) {
-                        dropdowns.forEach(function(dropdown) {
-                            var dropdownMenu = dropdown.nextElementSibling;
+                    // Initialize the Bootstrap dropdowns
+                    var dropdowns = document.querySelectorAll('.dropdown-toggle');
+                    dropdowns.forEach(function(dropdown) {
+                        dropdown.addEventListener('click', function() {
+                            var dropdownMenu = this.nextElementSibling;
                             if (dropdownMenu.classList.contains('show')) {
                                 dropdownMenu.classList.remove('show');
+                            } else {
+                                dropdownMenu.classList.add('show');
                             }
                         });
-                    }
-                });
+                    });
 
-                // Initialize the list.js for search and pagination
-                var options = {
-                    valueNames: ['name', 'email', 'age'],
-                    page: 10,
-                    pagination: true
-                };
-                var userList = new List('user-list', options);
+                    // Close dropdowns when clicking outside
+                    document.addEventListener('click', function(event) {
+                        if (!event.target.matches('.dropdown-toggle')) {
+                            dropdowns.forEach(function(dropdown) {
+                                var dropdownMenu = dropdown.nextElementSibling;
+                                if (dropdownMenu.classList.contains('show')) {
+                                    dropdownMenu.classList.remove('show');
+                                }
+                            });
+                        }
+                    });
 
-                // Initialize the tooltip
-                var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-                var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
-                    return new bootstrap.Tooltip(tooltipTriggerEl);
-                });
-            </script>
-            <!-- Footer -->
-            <?php include("../../Components/footer.php"); ?>
+                    // Initialize the list.js for search and pagination
+                    var options = {
+                        valueNames: ['name', 'email', 'age'],
+                        page: 10,
+                        pagination: true
+                    };
+                    var userList = new List('user-list', options);
+
+                    // Initialize the tooltip
+                    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+                    var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+                        return new bootstrap.Tooltip(tooltipTriggerEl);
+                    });
+                </script>
+                <!-- Footer -->
+                <?php include("../../Components/footer.php"); ?>
+            </div>
         </div>
-
-
-
-
-
-
     </main>
 
     <!-- ===============================================-->
