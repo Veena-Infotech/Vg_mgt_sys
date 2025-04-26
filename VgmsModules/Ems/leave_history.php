@@ -64,7 +64,7 @@
   <!--    Main Content-->
   <!-- ===============================================-->
   <main class="main" id="top">
-     <!-- change this to your navbar code link should be replaced properly -->
+    <!-- change this to your navbar code link should be replaced properly -->
     <?php include_once('../../Components/navbar.php'); ?>
     <script>
       var navbarTopShape = window.config.config.phoenixNavbarTopShape;
@@ -168,10 +168,10 @@
 
 
     <div class="content">
-        <!-- your main contents goes here  with footer . -->
+      <!-- your main contents goes here  with footer . -->
 
 
-        <div class="container py-5">
+      <div class="container py-5">
         <div class="text-start mb-4">
           <h1 class="display-6 fw-bold">Leave History</h1>
           <p class="text-muted">View leave records for employees (Admin Access Only)</p>
@@ -194,41 +194,86 @@
 
       </div>
 
-
-
-      <div id="historyTable" class="table-responsive" style="display: none;">
-        <table class="table table-bordered align-middle text-center">
-          <thead class="table-light">
-            <tr>
-              <th><i class="bi bi-calendar3 me-1"></i>Date</th>
-              <th><i class="bi bi-box-arrow-in-right me-1"></i>Leave Type</th>
-              <th><i class="bi bi-hourglass-split me-1"></i>Status</th>
-              <th><i class="bi bi-person-check me-1"></i>Approved By</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- This data can later be dynamically loaded -->
-            <tr>
-              <td>2025-04-05</td>
-              <td>Casual Leave</td>
-              <td><span class="badge bg-success">Approved</span></td>
-              <td>Manager A</td>
-            </tr>
-            <tr>
-              <td>2025-03-12</td>
-              <td>Sick Leave</td>
-              <td><span class="badge bg-danger">Rejected</span></td>
-              <td>Manager B</td>
-            </tr>
-            <tr>
-              <td>2025-02-20</td>
-              <td>Work From Home</td>
-              <td><span class="badge bg-warning text-dark">Pending</span></td>
-              <td>-</td>
-            </tr>
-          </tbody>
-        </table>
+      <div id="tableExample4" data-list="{&quot;valueNames&quot;:[&quot;name&quot;,&quot;email&quot;,&quot;payment&quot;],&quot;page&quot;:5,&quot;pagination&quot;:true,&quot;filter&quot;:{&quot;key&quot;:&quot;payment&quot;}}">
+        <div class="row justify-content-end g-0">
+        <div class="table-responsive">
+          <table class="table table-sm fs-9 mb-0">
+            <thead>
+              <tr class="bg-body-highlight">
+                <th class="sort border-top border-translucent ps-3" data-sort="date">Date</th>
+                <th class="sort border-top border-translucent" data-sort="leave-type">leave Type</th>
+                <th class="sort border-top border-translucent" data-sort="approved-by">Approved By</th>
+                <th class="sort border-top border-translucent text-end pe-3" data-sort="status">Status</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td class="align-middle ps-3 date">2025-19-06</td>
+                <td class="align-middle leave-type">casual</td>
+                <td class="align-middle approved-by">Manager A</td>
+                <td class="align-middle payment text-end py-3 pe-3">
+                  <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="fw-bold">Accepted</span><svg class="svg-inline--fa fa-check ms-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+                      <path fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path>
+                    </svg><!-- <span class="ms-1 fas fa-check"></span> Font Awesome fontawesome.com --></div>
+                </td>
+              </tr>
+              <tr>
+                <td class="align-middle ps-3 date">2025-19-06</td>
+                <td class="align-middle leave-type">casual</td>
+                <td class="align-middle approved-by">Manager A</td>
+                <td class="align-middle payment text-end py-3 pe-3">
+                  <div class="badge badge-phoenix fs-10 badge-phoenix-warning"><span class="fw-bold">Pending</span><svg class="svg-inline--fa fa-bars-staggered ms-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars-staggered" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+                      <path fill="currentColor" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM64 256c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H96c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"></path>
+                    </svg><!-- <span class="ms-1 fas fa-stream"></span> Font Awesome fontawesome.com --></div>
+                </td>
+              </tr>
+              <tr>
+                <td class="align-middle ps-3 date">2025-19-06</td>
+                <td class="align-middle leave-type">casual</td>
+                <td class="align-middle approved-by">Manager A</td>
+                <td class="align-middle payment text-end py-3 pe-3">
+                  <div class="badge badge-phoenix fs-10 badge-phoenix-secondary"><span class="fw-bold">Rejected</span><svg class="svg-inline--fa fa-ban ms-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ban" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+                      <path fill="currentColor" d="M367.2 412.5L99.5 144.8C77.1 176.1 64 214.5 64 256c0 106 86 192 192 192c41.5 0 79.9-13.1 111.2-35.5zm45.3-45.3C434.9 335.9 448 297.5 448 256c0-106-86-192-192-192c-41.5 0-79.9 13.1-111.2 35.5L412.5 367.2zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"></path>
+                    </svg><!-- <span class="ms-1 fas fa-ban"></span> Font Awesome fontawesome.com --></div>
+                </td>
+              </tr>
+              <tr>
+                <td class="align-middle ps-3 date">2025-19-06</td>
+                <td class="align-middle leave-type">casual</td>
+                <td class="align-middle approved-by">Manager A</td>
+                <td class="align-middle payment text-end py-3 pe-3">
+                  <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="fw-bold">Accepted</span><svg class="svg-inline--fa fa-check ms-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+                      <path fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path>
+                    </svg><!-- <span class="ms-1 fas fa-check"></span> Font Awesome fontawesome.com --></div>
+                </td>
+              </tr>
+              <tr>
+                <td class="align-middle ps-3 date">2025-19-06</td>
+                <td class="align-middle leave-type">casual</td>
+                <td class="align-middle approved-by">Manager A</td>
+                <td class="align-middle payment text-end py-3 pe-3">
+                  <div class="badge badge-phoenix fs-10 badge-phoenix-warning"><span class="fw-bold">Pending</span><svg class="svg-inline--fa fa-bars-staggered ms-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars-staggered" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+                      <path fill="currentColor" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM64 256c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H96c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"></path>
+                    </svg><!-- <span class="ms-1 fas fa-stream"></span> Font Awesome fontawesome.com --></div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="d-flex justify-content-between mt-3"><span class="d-none d-sm-inline-block" data-list-info="data-list-info">1 to 5 <span class="text-body-tertiary"> Items of </span>10</span>
+          <div class="d-flex"><button class="page-link disabled" data-list-pagination="prev" disabled=""><svg class="svg-inline--fa fa-chevron-left" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
+                <path fill="currentColor" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"></path>
+              </svg><!-- <span class="fas fa-chevron-left"></span> Font Awesome fontawesome.com --></button>
+            <ul class="mb-0 pagination">
+              <li class="active"><button class="page" type="button" data-i="1" data-page="5">1</button></li>
+              <li><button class="page" type="button" data-i="2" data-page="5">2</button></li>
+            </ul><button class="page-link pe-0" data-list-pagination="next"><svg class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
+                <path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path>
+              </svg><!-- <span class="fas fa-chevron-right"></span> Font Awesome fontawesome.com --></button>
+          </div>
+        </div>
       </div>
+
     </div>
 
     <!-- GSAP Animation Script -->
@@ -256,15 +301,147 @@
           ease: "power2.out"
         });
       });
+
+
+      // Sample data for employees
+      const employeeData = {
+        'John Doe': [{
+            date: '2025-19-06',
+            leaveType: 'Casual',
+            approvedBy: 'Manager A',
+            status: 'Accepted'
+          },
+          {
+            date: '2025-20-06',
+            leaveType: 'Sick',
+            approvedBy: 'Manager B',
+            status: 'Pending'
+          },
+        ],
+        'Jane Smith': [{
+            date: '2025-21-06',
+            leaveType: 'Casual',
+            approvedBy: 'Manager C',
+            status: 'Rejected'
+          },
+          {
+            date: '2025-22-06',
+            leaveType: 'Vacation',
+            approvedBy: 'Manager A',
+            status: 'Accepted'
+          },
+        ],
+        'Rahul Kumar': [{
+            date: '2025-23-06',
+            leaveType: 'Maternity',
+            approvedBy: 'Manager B',
+            status: 'Pending'
+          },
+          {
+            date: '2025-24-06',
+            leaveType: 'Casual',
+            approvedBy: 'Manager A',
+            status: 'Rejected'
+          },
+        ]
+      };
+
+      // Function to update the table based on the selected employee
+      function updateTableData(employeeName) {
+        // Get the table body element
+        const tableBody = document.querySelector('#tableExample4 tbody');
+        // Clear existing rows
+        tableBody.innerHTML = '';
+
+        // Check if the employee data exists
+        if (employeeData[employeeName]) {
+          // Loop through the employee data and add rows to the table
+          employeeData[employeeName].forEach(data => {
+            const statusClass = data.status === 'Accepted' ? 'badge-phoenix-success' :
+              data.status === 'Pending' ? 'badge-phoenix-warning' : 'badge-phoenix-secondary';
+
+            const statusIcon = data.status === 'Accepted' ? 'check' :
+              data.status === 'Pending' ? 'bars-staggered' : 'ban';
+
+            const row = `
+          <tr>
+            <td class="align-middle ps-3 date">${data.date}</td>
+            <td class="align-middle leave-type">${data.leaveType}</td>
+            <td class="align-middle approved-by">${data.approvedBy}</td>
+            <td class="align-middle payment text-end py-3 pe-3">
+              <div class="badge ${statusClass} fs-10"><span class="fw-bold">${data.status}</span>
+                <svg class="svg-inline--fa fa-${statusIcon} ms-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="${statusIcon}" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+                  <path fill="currentColor" d="..."></path>
+                </svg>
+              </div>
+            </td>
+          </tr>
+        `;
+            // Append new row to the table
+            tableBody.insertAdjacentHTML('beforeend', row);
+          });
+        }
+      }
+
+      // Add event listener to employee select dropdown
+      document.getElementById('employeeSelect').addEventListener('change', function() {
+        const selectedEmployee = this.value;
+        updateTableData(selectedEmployee);
+      });
+
+      // Initial load (e.g., default employee)
+      document.addEventListener('DOMContentLoaded', function() {
+        const defaultEmployee = document.getElementById('employeeSelect').value;
+        if (defaultEmployee) {
+          updateTableData(defaultEmployee);
+        }
+      });
+
+      // Function to get badge class based on status
+      function getStatusClass(status) {
+        if (status === 'Accepted') return 'badge-phoenix-success';
+        if (status === 'Pending') return 'badge-phoenix-warning';
+        return 'badge-phoenix-secondary';
+      }
+
+      // Function to get status icon based on status
+      function getStatusIcon(status) {
+        if (status === 'Accepted') return '<svg class="svg-inline--fa fa-check ms-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>';
+        if (status === 'Pending') return '<svg class="svg-inline--fa fa-bars-staggered ms-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars-staggered" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM64 256c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H96c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"></path></svg>';
+        return '<svg class="svg-inline--fa fa-ban ms-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ban" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M367.2 412.5L99.5 144.8C77.1 176.1 64 214.5 64 256c0 106 86 192 192 192c41.5 0 79.9-13.1 111.2-35.5zm45.3-45.3C434.9 335.9 448 297.5 448 256c0-106-86-192-192-192c-41.5 0-79.9 13.1-111.2 35.5L412.5 367.2zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"></path></svg>';
+      }
+
+      // Event listener for filtering by status
+      document.querySelector('[data-list-filter="data-list-filter"]').addEventListener('change', function() {
+        const selectedStatus = this.value;
+        const rows = document.querySelectorAll('#tableExample4 tbody .leave-row');
+
+        rows.forEach(row => {
+          const rowStatus = row.getAttribute('data-status');
+          if (selectedStatus === "" || rowStatus === selectedStatus) {
+            row.style.display = ''; // Show row
+          } else {
+            row.style.display = 'none'; // Hide row
+          }
+        });
+      });
+
+      // Initial load (e.g., default employee)
+      document.addEventListener('DOMContentLoaded', function() {
+        const defaultEmployee = document.getElementById('employeeSelect').value;
+        if (defaultEmployee) {
+          updateTableData(defaultEmployee);
+        }
+      });
     </script>
 
 
-            <!-- Footer -->
-            <?php include("../../Components/footer.php"); ?>
+    <!-- Footer -->
+    <?php include("../../Components/footer.php"); ?>
     </div>
 
   </main>
-  
+
   <!-- ===============================================-->
   <!--    End of Main Content-->
   <!-- ===============================================-->
@@ -286,6 +463,3 @@
 </body>
 
 </html>
-
-
-

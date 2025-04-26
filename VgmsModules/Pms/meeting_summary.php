@@ -13,7 +13,7 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>Add Project</title>
+    <title>Meeting</title>
 
     <!-- ===============================================-->
     <!--    Favicons-->
@@ -35,9 +35,6 @@
         rel="stylesheet">
     <link href="../../vendors/simplebar/simplebar.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../unicons.iconscout.com/release/v4.0.8/css/line.css">
-    <link href="../../vendors/choices/choices.min.css" rel="stylesheet" />
-    <link href="../../vendors/dropzone/dropzone.css" rel="stylesheet" />
-    <link href="../../vendors/flatpickr/flatpickr.min.css" rel="stylesheet" />
     <link href="../../assets/css/theme-rtl.css" type="text/css" rel="stylesheet" id="style-rtl">
     <link href="../../assets/css/theme.min.css" type="text/css" rel="stylesheet" id="style-default">
     <link href="../../assets/css/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
@@ -167,137 +164,189 @@
                 navbarVertical.setAttribute('data-navbar-appearance', 'darker');
             }
         </script>
-        <div class="content">
-            <div id="heading-gsap">
-                <h3 class="mb-4">Add Project </h3>
-                <form action="edit_project.php" method="post" class="dropzone dropzone-multiple p-0" id="dropzone-multiple" data-dropzone="data-dropzone">
-                    <div class="row g-3">
-                        <!-- Project Title -->
-                        <div class="col-md-6">
-                            <label class="form-label">Project Title <span style="color: red;">*</span></label>
-                            <input type="text" class="form-control" placeholder="Enter project title"
-                                name="project_title">
+        <!-- meeting_summary.php -->
+
+        <div class="content mt-4"  >
+            <h2 class="mb-4" id="heading-gsap">Meeting Summary</h2>
+
+            <!-- Add Meeting Note Form -->
+            <div class="card p-4 mb-5 shadow" id="heading-gsap">
+                <h5 class="mb-3">Add New Meeting</h5>
+                <form>
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label for="meetingDate" class="form-label">Meeting Date</label>
+                            <input type="date" class="form-control" id="meetingDate" required>
                         </div>
-
-                        <!-- Project Type Dropdown -->
-                        <div class="col-md-6">
-                            <label class="form-label">Project Type <span style="color: red;">*</span></label>
-                            <select class="form-select" name="project_type">
-                                <option selected disabled>Select type</option>
-                                <option>Pipeline</option>
-                                <option>Residential</option>
-                                <option>Commercial</option>
-                            </select>
+                        <div class="col-md-8">
+                            <label for="participants" class="form-label">Participants</label>
+                            <input type="text" class="form-control" id="participants"
+                                placeholder="e.g. Mr. Aakash, Ms. Priya" required>
                         </div>
+                    </div>
 
-                        <!-- project manager  -->
+                    <div class="mb-3">
+                        <label for="agenda" class="form-label">Agenda</label>
+                        <input type="text" class="form-control" id="agenda"
+                            placeholder="e.g. Discuss Q2 project roadmap" required>
+                    </div>
 
-                        <div class="col-md-6">
-                            <label class="form-label">Project Manager<span style="color: red;">*</span></label>
-                            <select class="form-select" name="project_status">
-                                <option selected disabled>Select status</option>
-                                <option>Aryan Sir</option>
-                                <option>Op sir</option>
-                                <option>Aakash sir</option>
-                                <option>Static</option>
-                            </select>
-                        </div>
+                    <div class="mb-3">
+                        <label for="summary" class="form-label">Meeting Summary</label>
+                        <textarea class="form-control" id="summary" rows="4"
+                            placeholder="Brief discussion points and outcomes..." required></textarea>
+                    </div>
 
-                         <!-- project client  -->
+                    <button type="submit" class="btn btn-primary">Add Meeting</button>
+                </form>
+            </div>
 
-                         <div class="col-md-6">
-                            <label class="form-label">Project Client<span style="color: red;">*</span></label>
-                            <select class="form-select" name="project_status">
-                                <option selected disabled>Select status</option>
-                                <option>Janesh</option>
-                                <option>Ishika</option>
-                                <option>Rahul</option>
-                                <option>Static</option>
-                            </select>
-                        </div>
+            <!-- View Meeting Notes Table -->
+            <div class="card shadow" id="heading-gsap">
+                <div class="card-header text-white">
+                    <h5 class="mb-0">View Meetings</h5>
+                </div>
+                <div class="card-body table-responsive">
+                    <table class="table table-bordered table-hover align-middle text-center">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Meeting Date</th>
+                                <th>Participants</th>
+                                <th>Agenda</th>
+                                <th>Summary</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="meetingTableBody">
+                            <!-- Example static row -->
+                            <tr>
+                                <td>1</td>
+                                <td>2025-04-25</td>
+                                <td>John, Priya</td>
+                                <td>Project Kickoff</td>
+                                <td>Discussed project roadmap and responsibilities</td>
+                                <td>
+                                    <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
+                                        data-bs-target="#editMeetingModal">
+                                        Edit
+                                    </button>
+                                </td>
+                            </tr>
+                            <!-- Example static row -->
+                            <tr>
+                                <td>1</td>
+                                <td>2025-04-25</td>
+                                <td>John, Priya</td>
+                                <td>Project Kickoff</td>
+                                <td>Discussed project roadmap and responsibilities</td>
+                                <td>
+                                    <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
+                                        data-bs-target="#editMeetingModal">
+                                        Edit
+                                    </button>
+                                </td>
+                            </tr>
 
-                        <!-- Assigned Teams Dropdown -->
-                        <div class="col-md-6">
-                            <div class="mb-3"><label class="form-label">Assigned Employee<span style="color: red;">*</span></label><select class="form-select" id="organizerMultiple2" data-choices="data-choices" multiple="multiple" size="1" name="organizerMultiple" required="required" data-options='{"removeItemButton":true,"placeholder":true}'>
-                                    <option value="">Select organizer...</option>
-                                    <option>Neav Panjwani</option>
-                                    <option>Om Pandey</option>
-                                    <option>Janesh Chichriya</option>
-                                    <option>Ishika sharma</option>
-                                    <option>Static</option>
-                                </select>
-                                <div class="invalid-feedback">Please select one or multiple</div>
+                            <tr>
+                                <td>2</td>
+                                <td>2025-04-26</td>
+                                <td>Aakash, Neha</td>
+                                <td>Design Review</td>
+                                <td>Reviewed wireframes and finalized homepage layout</td>
+                                <td>
+                                    <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
+                                        data-bs-target="#editMeetingModal">
+                                        Edit
+                                    </button>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>3</td>
+                                <td>2025-04-27</td>
+                                <td>Vikas, Riya</td>
+                                <td>Sprint Planning</td>
+                                <td>Planned tasks for next sprint and assigned roles</td>
+                                <td>
+                                    <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
+                                        data-bs-target="#editMeetingModal">
+                                        Edit
+                                    </button>
+                                </td>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Reusable Modal for Editing Meeting -->
+            <div class="modal fade" id="editMeetingModal" tabindex="-1" aria-labelledby="editMeetingModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <form>
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editMeetingModalLabel">Edit Meeting</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                             </div>
-                        </div>
 
-
-                        <!-- Status Dropdown -->
-                        <div class="col-md-6">
-                            <label class="form-label">Project Status<span style="color: red;">*</span></label>
-                            <select class="form-select" name="project_status">
-                                <option selected disabled>Select status</option>
-                                <option>Pipeline</option>
-                                <option>Ongoing</option>
-                                <option>Completed</option>
-                                <option>On Hold</option>
-                            </select>
-                        </div>
-
-
-                        <!-- file Upload  -->
-                        <label class="form-label">Upload File <span style="color: red;">*</span></label>
-                        <div class="fallback"><input name="file" type="file" multiple="multiple" /></div>
-                        <div class="dz-message" data-dz-message="data-dz-message"><img class="me-2" src="../../../assets/img/icons/cloud-upload.svg" width="25" alt="" />Drop your files here</div>
-                        <div class="dz-preview dz-preview-multiple m-0 d-flex flex-column">
-                            <div class="d-flex mb-3 pb-3 border-bottom border-translucent media">
-                                <div class="border p-2 rounded-2 me-2"><img class="rounded-2 dz-image" src="../../../assets/img/icons/file.png" alt="..." data-dz-thumbnail="data-dz-thumbnail" /></div>
-                                <div class="flex-1 d-flex flex-between-center">
-                                    <div>
-                                        <h6 data-dz-name="data-dz-name"></h6>
-                                        <div class="d-flex align-items-center">
-                                            <p class="mb-0 fs-9 text-body-quaternary lh-1" data-dz-size="data-dz-size"></p>
-                                            <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress=""></span></div>
-                                        </div><span class="fs-10 text-danger" data-dz-errormessage="data-dz-errormessage"></span>
+                            <div class="modal-body row g-3">
+                                <div class="col-md-4">
+                                    <div class="form-floating">
+                                        <input type="date" class="form-control" id="editMeetingDate"
+                                            placeholder="Meeting Date" required>
+                                        <label for="editMeetingDate">Meeting Date</label>
                                     </div>
-                                    <div class="dropdown"><button class="btn btn-link text-body-tertiary btn-sm dropdown-toggle btn-reveal dropdown-caret-none" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><a class="dropdown-item" href="#!" data-dz-remove="data-dz-remove"><span style="color: red;">X</a></button>
-                                        <div class="dropdown-menu dropdown-menu-end border border-translucent py-2"><a class="dropdown-item" href="#!" data-dz-remove="data-dz-remove">Remove File</a></div>
+                                </div>
+
+                                <div class="col-md-8">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="editParticipants"
+                                            placeholder="Participants" required>
+                                        <label for="editParticipants">Participants</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="editAgenda" placeholder="Agenda"
+                                            required>
+                                        <label for="editAgenda">Agenda</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-floating">
+                                        <textarea class="form-control" id="editSummary" placeholder="Summary"
+                                            style="height: 100px" required></textarea>
+                                        <label for="editSummary">Summary</label>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="submit">Save Changes</button>
+                            </div>
+                        </form>
 
-                        <!-- Description -->
-                        <div class="col-12">
-                            <label class="form-label">Project Description</label>
-                            <textarea class="form-control" rows="4" placeholder="Enter description..."
-                                name="project_desc"></textarea>
-                        </div>
-
-                        <!-- start and end date of project  -->
-
-                        <label class="form-label" for="timepicker2">Select Time Range</label>
-                        <input class="form-control datetimepicker" id="timepicker2" type="text" placeholder="d/m/y to d/m/y" data-options='{"mode":"range","dateFormat":"d/m/y","disableMobile":true}' />
-                        
-                        
-                        <!-- Submit Button -->
-                        <div class="col-12 text-end">
-                            <button class="btn btn-primary" type="submit">Submit</button>
-                            <button class="btn btn-secondary" type="reset">Clear</button>
-
-                        </div>
                     </div>
-                </form><br><br>
 
-
+                </div>
 
             </div>
-
-            <!-- Footer -->
             <?php include("../../Components/footer.php"); ?>
 
+
         </div>
-        </div>
+
+
+
+
+
+
 
 
 
@@ -324,12 +373,10 @@
     <script src="../../vendors/list.js/list.min.js"></script>
     <script src="../../vendors/feather-icons/feather.min.js"></script>
     <script src="../../vendors/dayjs/dayjs.min.js"></script>
-    <script src="../../vendors/dropzone/dropzone-min.js"></script>
     <script src="../../vendors/leaflet/leaflet.js"></script>
     <script src="../../vendors/leaflet.markercluster/leaflet.markercluster.js"></script>
     <script src="../../vendors/leaflet.tilelayer.colorfilter/leaflet-tilelayer-colorfilter.min.js"></script>
     <script src="../../assets/js/phoenix.js"></script>
-    <script src="../../vendors/flatpickr/flatpickr.min.js"></script>
     <script src="../../vendors/echarts/echarts.min.js"></script>
     <script src="../../assets/js/ecommerce-dashboard.js"></script>
 
@@ -340,22 +387,25 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
-    <script src="../../vendors/choices/choices.min.js"></script>
     <script>
+        gsap.from("#formCard", {
+            opacity: 0,
+            y: 60,
+            duration: 1,
+            ease: "power2.out"
+        });
+        
+        
+
         gsap.from("#heading-gsap", {
             opacity: 0,
             y: 50,
             duration: 0.7,
             ease: "power2.out",
-            delay: 0.7
+            delay: 0.1
         });
-        gsap.from("#filterType", {
-            opacity: 0,
-            y: 50,
-            duration: 0.8,
-            ease: "power2.out",
-            delay: 0.5
-        });
+
+
     </script>
 
 

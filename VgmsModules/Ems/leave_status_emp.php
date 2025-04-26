@@ -3,7 +3,7 @@
 
 
 
-<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 
 <head>
     <meta charset="utf-8">
@@ -13,18 +13,16 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>Leave Approval Status For Employee</title>
+    <title>Loan Management</title>
 
     <!-- ===============================================-->
     <!--    Favicons-->
     <!-- ===============================================-->
-    <link rel="apple-touch-icon" sizes="180x180" href="../../assets/img/favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/img/favicons/favicon-16x16.png">
     <link rel="shortcut icon" type="image/x-icon" href="../../assets/img/favicons/favicon.ico">
     <link rel="manifest" href="../../assets/img/favicons/manifest.json">
     <meta name="msapplication-TileImage" content="../../assets/img/favicons/mstile-150x150.png">
     <meta name="theme-color" content="#ffffff">
+
     <script src="../../vendors/simplebar/simplebar.min.js"></script>
     <script src="../../assets/js/config.js"></script>
 
@@ -33,15 +31,15 @@
     <!-- ===============================================-->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet">
     <link href="../../vendors/simplebar/simplebar.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../../../unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <link rel="stylesheet" href="../../unicons.iconscout.com/release/v4.0.8/css/line.css">
     <link href="../../assets/css/theme-rtl.css" type="text/css" rel="stylesheet" id="style-rtl">
     <link href="../../assets/css/theme.min.css" type="text/css" rel="stylesheet" id="style-default">
     <link href="../../assets/css/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
     <link href="../../assets/css/user.min.css" type="text/css" rel="stylesheet" id="user-style-default">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
     <script>
         var phoenixIsRTL = window.config.config.phoenixIsRTL;
         if (phoenixIsRTL) {
@@ -57,6 +55,9 @@
             userLinkRTL.setAttribute('disabled', true);
         }
     </script>
+    <link href="../../vendors/leaflet/leaflet.css" rel="stylesheet">
+    <link href="../../vendors/leaflet.markercluster/MarkerCluster.css" rel="stylesheet">
+    <link href="../../vendors/leaflet.markercluster/MarkerCluster.Default.css" rel="stylesheet">
 </head>
 
 <body>
@@ -64,8 +65,7 @@
     <!--    Main Content-->
     <!-- ===============================================-->
     <main class="main" id="top">
-        <!-- change this to your navbar code link should be replaced properly -->
-        <?php include_once('../../Components/navbar.php'); ?>
+        <?php include '../../Components/navbar.php'; ?>
         <script>
             var navbarTopShape = window.config.config.phoenixNavbarTopShape;
             var navbarPosition = window.config.config.phoenixNavbarPosition;
@@ -165,10 +165,7 @@
                 navbarVertical.setAttribute('data-navbar-appearance', 'darker');
             }
         </script>
-
-
         <div class="content">
-            <!-- your main contents goes here  with footer . -->
 
             <div class="container py-5">
                 <!-- Header -->
@@ -190,13 +187,6 @@
                         </div>
                         <!-- Filter and Search (smaller width) -->
                         <div class="d-flex flex-wrap gap-2 mt-2 mt-sm-0">
-                            <!-- Filter -->
-                            <select class="form-select form-select-sm w-auto" id="leaveFilter">
-                                <option value="All">All</option>
-                                <option value="Pending">Pending</option>
-                                <option value="Approved">Approved</option>
-                                <option value="Rejected">Rejected</option>
-                            </select>
 
                             <!-- Search -->
                             <input type="text" id="searchBox" class="form-control form-control-sm w-auto" placeholder="Search..." style="min-width: 160px;" />
@@ -207,47 +197,123 @@
                             </button>
                         </div>
                     </div>
-
-                    <div class="card-body p-0">
-                        <table class="table table-hover align-middle mb-0" id="leaveTable">
-                            <thead class="table text-center">
-                                <tr>
-                                    <th><i class="bi bi-file-earmark-text me-1"></i>Type</th>
-                                    <th><i class="bi bi-calendar me-1"></i>From</th>
-                                    <th><i class="bi bi-calendar-check me-1"></i>To</th>
-                                    <th><i class="bi bi-chat-left-dots me-1"></i>Reason</th>
-                                    <th><i class="bi bi-info-circle me-1"></i>Status</th>
-                                    <th><i class="bi bi-person-check me-1"></i>Approved By</th>
-                                </tr>
-                            </thead>
-                            <tbody class="text-center" id="leaveTableBody">
-                                <tr>
-                                    <td>Casual Leave</td>
-                                    <td>2025-05-01</td>
-                                    <td>2025-05-02</td>
-                                    <td>Family Function</td>
-                                    <td><span class="badge bg-warning text-dark"><i class="bi bi-hourglass-split me-1"></i>Pending</span></td>
-                                    <td>-</td>
-                                </tr>
-                                <tr>
-                                    <td>Sick Leave</td>
-                                    <td>2025-04-10</td>
-                                    <td>2025-04-12</td>
-                                    <td>Fever</td>
-                                    <td><span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>Approved</span></td>
-                                    <td>HR Manager</td>
-                                </tr>
-                                <tr>
-                                    <td>Earned Leave</td>
-                                    <td>2025-03-15</td>
-                                    <td>2025-03-18</td>
-                                    <td>Travel</td>
-                                    <td><span class="badge bg-danger"><i class="bi bi-x-circle me-1"></i>Rejected</span></td>
-                                    <td>Admin</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div id="tableExample4" data-list='{"valueNames":["name","email","payment"],"page":5,"pagination":true,"filter":{"key":"payment"}}'>
+                        <div class="row justify-content-end g-0">
+                            
+                        <div class="table-responsive">
+                            <table class="table table-sm fs-9 mb-0">
+                                <thead>
+                                    <tr class="bg-body-highlight">
+                                       
+                                        <th class="sort border-top border-translucent" data-sort="date-from">From</th>
+                                        <th class="sort border-top border-translucent" data-sort="date-to">To</th>
+                                        <th class="sort border-top border-translucent" data-sort="reason">Reason</th>
+                                        <th class="sort border-top border-translucent" data-sort="approval-by">Approval By</th>
+                                        <th class="sort border-top border-translucent text-end pe-3" data-sort="status">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="list">
+                                    <tr>
+                                        <td class="align-middle date-from">2025-05-01</td>
+                                        <td class="align-middle date-to">2025-07-01</td>
+                                        <td class="align-middle reason">Family Function</td>
+                                        <td class="align-middle approval-by">HR Manager</td>
+                                        <td class="align-middle payment text-end py-3 pe-3">
+                                            <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="fw-bold">Success</span><span class="ms-1 fas fa-check"></span></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                    <td class="align-middle date-from">2025-05-01</td>
+                                        <td class="align-middle date-to">2025-07-01</td>
+                                        <td class="align-middle reason">Family Function</td>
+                                        <td class="align-middle approval-by">HR Manager</td>
+                                        <td class="align-middle payment text-end py-3 pe-3">
+                                            <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="fw-bold">Success</span><span class="ms-1 fas fa-check"></span></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                    <td class="align-middle date-from">2025-05-01</td>
+                                        <td class="align-middle date-to">2025-07-01</td>
+                                        <td class="align-middle reason">Family Function</td>
+                                        <td class="align-middle approval-by">HR Manager</td>
+                                        <td class="align-middle payment text-end py-3 pe-3">
+                                            <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="fw-bold">Success</span><span class="ms-1 fas fa-check"></span></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                    <td class="align-middle date-from">2025-05-01</td>
+                                        <td class="align-middle date-to">2025-07-01</td>
+                                        <td class="align-middle reason">Family Function</td>
+                                        <td class="align-middle approval-by">HR Manager</td>
+                                        <td class="align-middle payment text-end py-3 pe-3">
+                                            <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="fw-bold">Success</span><span class="ms-1 fas fa-check"></span></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                    <td class="align-middle date-from">2025-05-01</td>
+                                        <td class="align-middle date-to">2025-07-01</td>
+                                        <td class="align-middle reason">Family Function</td>
+                                        <td class="align-middle approval-by">HR Manager</td>
+                                        <td class="align-middle payment text-end py-3 pe-3">
+                                            <div class="badge badge-phoenix fs-10 badge-phoenix-warning"><span class="fw-bold">Pending</span><span class="ms-1 fas fa-stream"></span></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                    <td class="align-middle date-from">2025-05-01</td>
+                                        <td class="align-middle date-to">2025-07-01</td>
+                                        <td class="align-middle reason">Family Function</td>
+                                        <td class="align-middle approval-by">HR Manager</td>
+                                        <td class="align-middle payment text-end py-3 pe-3">
+                                            <div class="badge badge-phoenix fs-10 badge-phoenix-secondary"><span class="fw-bold">Blocked</span><span class="ms-1 fas fa-ban"></span></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                    <td class="align-middle date-from">2025-05-01</td>
+                                        <td class="align-middle date-to">2025-07-01</td>
+                                        <td class="align-middle reason">Family Function</td>
+                                        <td class="align-middle approval-by">HR Manager</td>
+                                        <td class="align-middle payment text-end py-3 pe-3">
+                                            <div class="badge badge-phoenix fs-10 badge-phoenix-warning"><span class="fw-bold">Pending</span><span class="ms-1 fas fa-stream"></span></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                    <td class="align-middle date-from">2025-05-01</td>
+                                        <td class="align-middle date-to">2025-07-01</td>
+                                        <td class="align-middle reason">Family Function</td>
+                                        <td class="align-middle approval-by">HR Manager</td>
+                                        <td class="align-middle payment text-end py-3 pe-3">
+                                            <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="fw-bold">Success</span><span class="ms-1 fas fa-check"></span></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                    <td class="align-middle date-from">2025-05-01</td>
+                                        <td class="align-middle date-to">2025-07-01</td>
+                                        <td class="align-middle reason">Family Function</td>
+                                        <td class="align-middle approval-by">HR Manager</td>
+                                        <td class="align-middle payment text-end py-3 pe-3">
+                                            <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="fw-bold">Success</span><span class="ms-1 fas fa-check"></span></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                    <td class="align-middle date-from">2025-05-01</td>
+                                        <td class="align-middle date-to">2025-07-01</td>
+                                        <td class="align-middle reason">Family Function</td>
+                                        <td class="align-middle approval-by">HR Manager</td>
+                                        <td class="align-middle payment text-end py-3 pe-3">
+                                            <div class="badge badge-phoenix fs-10 badge-phoenix-warning"><span class="fw-bold">Pending</span><span class="ms-1 fas fa-stream"></span></div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="d-flex justify-content-between mt-3"><span class="d-none d-sm-inline-block" data-list-info="data-list-info"></span>
+                            <div class="d-flex"><button class="page-link" data-list-pagination="prev"><span class="fas fa-chevron-left"></span></button>
+                                <ul class="mb-0 pagination"></ul><button class="page-link pe-0" data-list-pagination="next"><span class="fas fa-chevron-right"></span></button>
+                            </div>
+                        </div>
                     </div>
+
+
                 </div>
             </div>
 
@@ -295,11 +361,14 @@
                 searchBox.addEventListener("input", filterAndSearch);
             </script>
 
-
-
             <!-- Footer -->
             <?php include("../../Components/footer.php"); ?>
         </div>
+
+
+
+
+
 
     </main>
 
@@ -307,9 +376,14 @@
     <!--    End of Main Content-->
     <!-- ===============================================-->
 
+
+
     <!-- ===============================================-->
     <!--    JavaScripts-->
+
     <!-- ===============================================-->
+    <!--Dropdown for contacted-to--->
+
     <script src="../../vendors/popper/popper.min.js"></script>
     <script src="../../vendors/bootstrap/bootstrap.min.js"></script>
     <script src="../../vendors/anchorjs/anchor.min.js"></script>
@@ -319,13 +393,24 @@
     <script src="../../vendors/list.js/list.min.js"></script>
     <script src="../../vendors/feather-icons/feather.min.js"></script>
     <script src="../../vendors/dayjs/dayjs.min.js"></script>
+    <script src="../../vendors/leaflet/leaflet.js"></script>
+    <script src="../../vendors/leaflet.markercluster/leaflet.markercluster.js"></script>
+    <script src="../../vendors/leaflet.tilelayer.colorfilter/leaflet-tilelayer-colorfilter.min.js"></script>
     <script src="../../assets/js/phoenix.js"></script>
-    <!-- you js code goes here -->
+    <script src="../../vendors/echarts/echarts.min.js"></script>
+    <script src="../../assets/js/ecommerce-dashboard.js"></script>
+
+
+
+
+
+    </script>
+
+
+
 </body>
 
 
+<!-- Mirrored from prium.github.io/phoenix/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Sep 2024 13:37:21 GMT -->
 
 </html>
-
-
-

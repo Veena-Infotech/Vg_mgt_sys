@@ -171,6 +171,7 @@
                 <div class="card-header text-white">
                     <h4 class="mb-0">Create / Assign Task</h4>
                 </div>
+
                 <div class="card-body">
                     <form id="taskForm">
                         <div class="row mb-3">
@@ -186,19 +187,35 @@
                             <div class="col-md-6">
                                 <label for="assignedTo" class="form-label">Assigned To <span
                                         class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="assignedTo"
-                                    placeholder="Enter assignee name" required>
+                                <select class="form-control" id="assignedTo" name="assignedTo[]" multiple required>
+                                    <option value="aakash">Mr. Aakash</option>
+                                    <option value="priya">Ms. Priya</option>
+                                    <option value="om">Mr. Om</option>
+                                    <option value="neha">Ms. Neha</option>
+                                    <option value="rahul">Mr. Rahul</option>
+                                </select>
+                                <small class="form-text text-muted">Hold Ctrl (Windows) or Command (Mac) to select
+                                    multiple users.</small>
                             </div>
                         </div>
 
                         <div class="row mb-3">
+                            <!-- Start Date -->
+                            <div class="col-md-6">
+                                <label for="startDate" class="form-label">Start Date <span
+                                        class="text-danger">*</span></label>
+                                <input type="date" class="form-control" id="startDate" name="startDate" required>
+                            </div>
+
                             <!-- Deadline -->
                             <div class="col-md-6">
                                 <label for="deadline" class="form-label">Deadline <span
                                         class="text-danger">*</span></label>
                                 <input type="date" class="form-control" id="deadline" required>
                             </div>
+                        </div>
 
+                        <div class="row mb-3">
                             <!-- Task Status -->
                             <div class="col-md-6">
                                 <label for="taskStatus" class="form-label">Task Status <span
@@ -227,253 +244,11 @@
                     </form>
                 </div>
             </div>
-            <br>
-            <hr>
-            <br>
-            <div class="container-xl" id="heading-gsap">
-                <!-- Manage Project Header -->
-                <h4 class="mb-4">View Tasks</h4>
 
-                <!-- Filter and Search Section -->
-                <div class="d-flex justify-content-between align-items-center mt-3 mb-3">
-                    <!-- Search Bar -->
-                    <div class="col-md-6">
-                        <input type="text" class="form-control" id="searchInput" placeholder="Search by project name" />
-                    </div>
-
-
-                    <!-- Filter Options -->
-                    <div class="col-md-3 d-flex justify-content-end">
-                        <!-- Project Type Filter -->
-                        <select class="form-select me-2" id="filterType">
-                            <option value="">Select Task Type</option>
-                            <option value="To do">To do</option>
-                            <option value="In Progress">In Progress</option>
-                            <option value="Completed">Completed</option>
-                            <option value="Blocked">Blocked</option>
-                            <!-- Add more project types as needed -->
-                        </select>
-
-                        <!-- Status Filter -->
-                        <select class="form-select" id="projectStatusFilter" style="opacity: 0;pointer-events: none;">
-                            <option value="">Select Status</option>
-                            <option value="Active">Active</option>
-                            <option value="Completed">Completed</option>
-                            <option value="On Hold">On Hold</option>
-                            <!-- Add more statuses as needed -->
-                        </select>
-                    </div>
-                </div>
-                <br>
-                <hr class="hr">
-                <br>
-                <!-- Project List Table -->
-                <div class="card mt-3">
-                    <div class="table-responsive">
-                        <table class="table table-striped table-bordered">
-                            <thead class="text-center">
-                                <tr>
-                                    <th>Sr.No</th>
-                                    <th>Task name</th>
-                                    <th>Assigned to</th>
-                                    <th>Deadline</th>
-                                    <th>Type</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody class="text-center" id="projectTableBody">
-                                <!-- Project Row 1 -->
-                                <tr>
-                                    <td>1</td>
-                                    <td>Task 1</td>
-                                    <td>Mr. Aakash</td>
-                                    <td>31-12-2025</td>
-                                    <td>In Progress</td>
-                                    <td class="text-center">
-                                        <button class="btn btn-sm btn-info" data-bs-toggle="modal"
-                                            data-bs-target="#editModal">Edit</button>
-                                        <button class="btn btn-sm btn-danger">Delete</button>
-                                    </td>
-                                </tr>
-                                <!-- Project Row 2 -->
-                                <tr>
-                                    <td>2</td>
-                                    <td>Task 2</td>
-                                    <td>Mr. Aakash</td>
-                                    <td>30-09-2025</td>
-                                    <td>Completed</td>
-                                    <td class="text-center">
-                                        <button class="btn btn-sm btn-info" data-bs-toggle="modal"
-                                            data-bs-target="#editModal">Edit</button>
-                                        <button class="btn btn-sm btn-danger">Delete</button>
-                                    </td>
-                                </tr>
-                                <!-- Project Row 3 -->
-                                <tr>
-                                    <td>3</td>
-                                    <td>Task 3</td>
-                                    <td>Mr. Aakash</td>
-                                    <td>30-09-2025</td>
-                                    <td>Blocked</td>
-                                    <td class="text-center">
-                                        <button class="btn btn-sm btn-info" data-bs-toggle="modal"
-                                            data-bs-target="#editModal">Edit</button>
-                                        <button class="btn btn-sm btn-danger">Delete</button>
-                                    </td>
-                                </tr>
-                                <!-- Project Row 4 -->
-                                <tr>
-                                    <td>4</td>
-                                    <td>Task 4</td>
-                                    <td>Mr. Aakash</td>
-                                    <td>30-09-2025</td>
-                                    <td>To do</td>
-                                    <td class="text-center">
-                                        <button class="btn btn-sm btn-info" data-bs-toggle="modal"
-                                            data-bs-target="#editModal">Edit</button>
-                                        <button class="btn btn-sm btn-danger">Delete</button>
-                                    </td>
-                                </tr>
-                                <!-- Project Row 5 -->
-                                <tr>
-                                    <td>5</td>
-                                    <td>Task 5</td>
-                                    <td>Mr. Aakash</td>
-                                    <td>30-09-2025</td>
-                                    <td>To do</td>
-                                    <td class="text-center">
-                                        <button class="btn btn-sm btn-info" data-bs-toggle="modal"
-                                            data-bs-target="#editModal">Edit</button>
-                                        <button class="btn btn-sm btn-danger">Delete</button>
-                                    </td>
-                                </tr>
-                                <!-- Project Row 6 -->
-                                <tr>
-                                    <td>6</td>
-                                    <td>Task 6</td>
-                                    <td>Mr. Aakash</td>
-                                    <td>30-09-2025</td>
-                                    <td>To do</td>
-                                    <td class="text-center">
-                                        <button class="btn btn-sm btn-info" data-bs-toggle="modal"
-                                            data-bs-target="#editModal">Edit</button>
-                                        <button class="btn btn-sm btn-danger">Delete</button>
-                                    </td>
-                                </tr>
-                                <!-- Project Row 7 -->
-                                <tr>
-                                    <td>7</td>
-                                    <td>Task 7</td>
-                                    <td>Mr. Aakash</td>
-                                    <td>30-09-2025</td>
-                                    <td>Completed</td>
-                                    <td class="text-center">
-                                        <button class="btn btn-sm btn-info" data-bs-toggle="modal"
-                                            data-bs-target="#editModal">Edit</button>
-                                        <button class="btn btn-sm btn-danger">Delete</button>
-                                    </td>
-                                </tr>
-                                <!-- More project rows can be added here -->
-                            </tbody>
-                        </table>
-                    </div>
-
-
-                    <!-- Pagination -->
-                    <div class="d-flex justify-content-between align-items-center mt-3 mb-4">
-                        <span class="d-none d-sm-inline-block ms-3">1 to 5 Items of 6</span>
-
-                        <div class="d-flex align-items-center">
-
-                            <!-- Prev Button -->
-                            <button class="page-link me-2 prev" data-list-pagination="prev" style="border-radius: 5px;">
-                                <i class="fas fa-chevron-left"></i>
-                            </button>
-
-
-                            <!-- Pagination Numbers -->
-                            <ul class="pagination mb-0">
-                                <li class="page-item active mx-1">
-                                    <button class="page page-link" type="button" data-i="1" data-page="5">1</button>
-                                </li>
-                                <li class="page-item mx-1">
-                                    <button class="page page-link" type="button" data-i="2" data-page="5">2</button>
-                                </li>
-
-
-                            </ul>
-
-                            <!-- Next Button -->
-                            <button class="page-link ms-2 next" data-list-pagination="next" style="border-radius: 5px;">
-                                <i class="fas fa-chevron-right"></i>
-                            </button>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal for Editing Project -->
-        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                    <form>
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="editModalLabel">Edit Project</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                        </div>
-                        <div class="modal-body row g-3">
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input class="form-control" id="editProjectName" placeholder="Project Name" required
-                                        type="text">
-                                    <label for="editProjectName">Task name</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <select class="form-select" id="editProjectStatus" aria-label="Status">
-                                        <option selected disabled>Choose status</option>
-                                        <option>To do</option>
-                                        <option>In Progress</option>
-                                        <option>Completed</option>
-                                        <option>Blocked</option>
-                                    </select>
-                                    <label for="editProjectStatus">Status</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input class="form-control" id="editTaskAssignee" placeholder="Assignee"
-                                        type="text">
-                                    <label for="editStartDate">Assignee</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input class="form-control" id="editDueDate" type="date">
-                                    <label for="editDueDate">Due Date</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-primary" type="submit">Save</button>
-                        </div>
-                    </form>
-                </div>
-
-            </div>
-
+            <?php include("../../Components/footer.php"); ?>
 
         </div>
 
-
-
-
-
-        </div>
 
 
     </main>

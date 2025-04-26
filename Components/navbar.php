@@ -20,64 +20,215 @@
       <div class="navbar-vertical-content">
         <ul class="navbar-nav flex-column" id="navbarVerticalNav">
           <li class="nav-item">
-            <!-- parent pages-->
+            <!----Dashboard---> 
             <div class="nav-item-wrapper">
-              <a class="nav-link dropdown-indicator label-1" href="#nv-home" role="button"
-                 data-bs-toggle="collapse" aria-expanded="true" aria-controls="nv-home">
+              <a class="nav-link dropdown-indicator label-1" href="#nv-dashboard" role="button"
+                data-bs-toggle="collapse" aria-expanded="true" aria-controls="nv-dashboard">
                 <div class="d-flex align-items-center">
                   <div class="dropdown-indicator-icon-wrapper">
                     <span class="fas fa-caret-right dropdown-indicator-icon"></span>
                   </div>
                   <span class="nav-link-icon"><span class="fas fa-user-tie"></span></span>
-                  <span class="nav-link-text">Employee</span>
+                  <span class="nav-link-text">Dashboard</span>
                   <span class="fa-solid text-info ms-1" style="font-size: 6px"></span>
                 </div>
               </a>
-          
+
               <div class="parent-wrapper label-1">
-                <ul class="nav collapse parent show" data-bs-parent="#navbarVerticalCollapse" id="nv-home">
-                  <li class="collapsed-nav-item-title d-none">Employee</li>
-          
+                <ul class="nav collapse parent " data-bs-parent="#navbarVerticalCollapse" id="nv-dashboard">
+                  <li class="collapsed-nav-item-title d-none">Dashboard</li>
+
                   <li class="nav-item">
-                    <a class="nav-link" href="/VGMS/employee-pages/dashboard.php?tag=dashboard" id="dashboard">
+                    <a class="nav-link" href="/VGMS/employee-pages/dashboard.php?tag=dashboard" id="nv-dashboard">
                       <div class="d-flex align-items-center">
                         <span class="me-2"><i class="fas fa-tachometer-alt"></i></span>
-                        <span class="nav-link-text">Dashboard</span>
+                        <span class="nav-link-text">Admin Dashboard</span>
                       </div>
                     </a>
                   </li>
-          
                   <li class="nav-item">
-                    <a class="nav-link" href="/VGMS/employee-pages/emp-attendance.php?tag=attendance" id="attendance">
+                    <a class="nav-link" href="/VGMS/employee-pages/dashboard.php?tag=dashboard" id="nv-dashboard">
                       <div class="d-flex align-items-center">
-                        <span class="me-2"><i class="fas fa-calendar-check"></i></span>
-                        <span class="nav-link-text">Attendance</span>
+                        <span class="me-2"><i class="fas fa-tachometer-alt"></i></span>
+                        <span class="nav-link-text">Employee Dashboard</span>
                       </div>
                     </a>
                   </li>
-          
-                  <li class="nav-item">
-                    <a class="nav-link" href="/VGMS/EMS/Pages/Meeting.php?tag=meetings" id="meetings">
-                      <div class="d-flex align-items-center">
-                        <span class="me-2"><i class="fas fa-handshake"></i></span>
-                        <span class="nav-link-text">Client Meetings</span>
-                      </div>
-                    </a>
-                  </li>
-          
-                  <li class="nav-item">
-                    <a class="nav-link" href="/VGMS/employee-pages/task-page.php?tag=task" id="task">
-                      <div class="d-flex align-items-center">
-                        <span class="me-2"><i class="fas fa-tasks"></i></span>
-                        <span class="nav-link-text">Project Tasks</span>
-                      </div>
-                    </a>
-                  </li>
-          
                 </ul>
               </div>
             </div>
-          </li>          
+            <!---VMS--> 
+            <div class="nav-item-wrapper">
+              <a class="nav-link dropdown-indicator label-1" href="#nv-vms" role="button"
+                data-bs-toggle="collapse" aria-expanded="true" aria-controls="nv-vms">
+                <div class="d-flex align-items-center">
+                  <div class="dropdown-indicator-icon-wrapper">
+                    <span class="fas fa-caret-right dropdown-indicator-icon"></span>
+                  </div>
+                  <span class="nav-link-icon"><i class="fa-solid fa-user"></i></span>
+                  <span class="nav-link-text">VMS</span>
+                  <span class="fa-solid text-info ms-1" style="font-size: 6px"></span>
+                </div>
+              </a>
+
+              <div class="parent-wrapper label-1">
+                <ul class="nav collapse parent " data-bs-parent="#navbarVerticalCollapse" id="nv-vms">
+                  <li class="collapsed-nav-item-title d-none">VMS</li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/vms/NewRegistration.php?tag=new-reg" id="new-reg">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fa-solid fa-user-plus"></i></span>
+                        <span class="nav-link-text">New Registration</span>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/vms/LobbyManagement.php?tag=lobby" id="lobby">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fa-solid fa-users-line"></i></span>
+                        <span class="nav-link-text">Lobby Management</span>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/vms/EmployeeSideMeeting.php?tag=emp-meet" id="emp-meet">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fa-solid fa-handshake"></i></span>
+                        <span class="nav-link-text">Employee Side Meeting</span>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/vms/Receptionist-side-meeting.php?tag=recp-meet" id="recp-meet">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fa-regular fa-handshake"></i></span>
+                        <span class="nav-link-text">Receptionist Side Meeting</span>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/vms/Payment-management.php?tag=payment" id="payment">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fa-solid fa-money-bill"></i></span>
+                        <span class="nav-link-text">Payment Management</span>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- parent pages-->
+            <div class="nav-item-wrapper">
+              <a class="nav-link dropdown-indicator label-1" href="#nv-ems" role="button"
+                data-bs-toggle="collapse" aria-expanded="true" aria-controls="nv-ems">
+                <div class="d-flex align-items-center">
+                  <div class="dropdown-indicator-icon-wrapper">
+                    <span class="fas fa-caret-right dropdown-indicator-icon"></span>
+                  </div>
+                  <span class="nav-link-icon"><span class="fas fa-user-tie"></span></span>
+                  <span class="nav-link-text">EMS</span>
+                  <span class="fa-solid text-info ms-1" style="font-size: 6px"></span>
+                </div>
+              </a>
+
+              <div class="parent-wrapper label-1">
+                <ul class="nav collapse parent " data-bs-parent="#navbarVerticalCollapse" id="nv-ems">
+                  <li class="collapsed-nav-item-title d-none">EMS</li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/ems/attendence_track.php?tag=attendance" id="attendance">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fas fa-tachometer-alt"></i></span>
+                        <span class="nav-link-text">Attendance Track</span>
+                      </div>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/ems/listemployee.php?tag=list-emp" id="list-emp">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fas fa-calendar-check"></i></span>
+                        <span class="nav-link-text">List Employee</span>
+                      </div>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/ems/salary_slip_generator.php?tag=slip" id="slip">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fas fa-handshake"></i></span>
+                        <span class="nav-link-text">Salary Slip Generator</span>
+                      </div>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/ems/leave_request.php?tag=leave" id="leave">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fas fa-tasks"></i></span>
+                        <span class="nav-link-text">Leave Request</span>
+                      </div>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/ems/leave_history.php?tag=leave-history" id="leave-history">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fas fa-tasks"></i></span>
+                        <span class="nav-link-text">Leave History</span>
+                      </div>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/ems/pay_slip_admin.php?tag=psa" id="psa">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fas fa-tasks"></i></span>
+                        <span class="nav-link-text">Payslip Admin</span>
+                      </div>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/ems/pay_slip_emp.php?tag=psp" id="psp">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fas fa-tasks"></i></span>
+                        <span class="nav-link-text">Payslip Employee</span>
+                      </div>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/ems/registrationform.php?tag=reg-form" id="reg-form">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fas fa-tasks"></i></span>
+                        <span class="nav-link-text">Registration Form</span>
+                      </div>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/ems/self_attendence_track.php?tag=att-track" id="att-track">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fas fa-tasks"></i></span>
+                        <span class="nav-link-text">Self Attendance Track</span>
+                      </div>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/ems/leave_a-r_admin.php?tag=task" id="task">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fas fa-tasks"></i></span>
+                        <span class="nav-link-text">Leave A-R Admin</span>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
@@ -1280,7 +1431,7 @@
       <ul class="navbar-nav navbar-nav-top" data-dropdown-on-hover="data-dropdown-on-hover">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle lh-1" href="#!" role="button"
-             data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
+            data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
             <span class="fas fa-users me-2"></span>Employee
           </a>
           <ul class="dropdown-menu navbar-dropdown-caret">
@@ -1306,7 +1457,7 @@
               </a>
             </li>
           </ul>
-        </li>        
+        </li>
       </ul>
       </ul>
     </div>
