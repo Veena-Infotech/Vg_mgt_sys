@@ -13,7 +13,7 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>Add Project</title>
+    <title>Pinboard</title>
 
     <!-- ===============================================-->
     <!--    Favicons-->
@@ -35,9 +35,6 @@
         rel="stylesheet">
     <link href="../../vendors/simplebar/simplebar.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../unicons.iconscout.com/release/v4.0.8/css/line.css">
-    <link href="../../vendors/choices/choices.min.css" rel="stylesheet" />
-    <link href="../../vendors/dropzone/dropzone.css" rel="stylesheet" />
-    <link href="../../vendors/flatpickr/flatpickr.min.css" rel="stylesheet" />
     <link href="../../assets/css/theme-rtl.css" type="text/css" rel="stylesheet" id="style-rtl">
     <link href="../../assets/css/theme.min.css" type="text/css" rel="stylesheet" id="style-default">
     <link href="../../assets/css/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
@@ -60,6 +57,10 @@
     <link href="../../vendors/leaflet/leaflet.css" rel="stylesheet">
     <link href="../../vendors/leaflet.markercluster/MarkerCluster.css" rel="stylesheet">
     <link href="../../vendors/leaflet.markercluster/MarkerCluster.Default.css" rel="stylesheet">
+    
+
+
+
 </head>
 
 <body>
@@ -167,137 +168,83 @@
                 navbarVertical.setAttribute('data-navbar-appearance', 'darker');
             }
         </script>
-        <div class="content">
-            <div id="heading-gsap">
-                <h3 class="mb-4">Add Project </h3>
-                <form action="edit_project.php" method="post" class="dropzone dropzone-multiple p-0" id="dropzone-multiple" data-dropzone="data-dropzone">
-                    <div class="row g-3">
-                        <!-- Project Title -->
-                        <div class="col-md-6">
-                            <label class="form-label">Project Title <span style="color: red;">*</span></label>
-                            <input type="text" class="form-control" placeholder="Enter project title"
-                                name="project_title">
-                        </div>
+        <div class="content my-5" id="heading-gsap">
+            <h2 id="heading-gsap" class="mb-4" id="heading-gsap">📌 Team Pinboard</h2>
 
-                        <!-- Project Type Dropdown -->
-                        <div class="col-md-6">
-                            <label class="form-label">Project Type <span style="color: red;">*</span></label>
-                            <select class="form-select" name="project_type">
-                                <option selected disabled>Select type</option>
-                                <option>Pipeline</option>
-                                <option>Residential</option>
-                                <option>Commercial</option>
-                            </select>
-                        </div>
+            <div class="row" id="pinboard">
 
-                        <!-- project manager  -->
-
-                        <div class="col-md-6">
-                            <label class="form-label">Project Manager<span style="color: red;">*</span></label>
-                            <select class="form-select" name="project_status">
-                                <option selected disabled>Select Manager</option>
-                                <option>Aryan Sir</option>
-                                <option>Op sir</option>
-                                <option>Aakash sir</option>
-                                <option>Static</option>
-                            </select>
-                        </div>
-
-                        <!-- project client  -->
-
-                        <div class="col-md-6">
-                            <label class="form-label">Project Client<span style="color: red;">*</span></label>
-                            <select class="form-select" name="project_status">
-                                <option selected disabled>Select client</option>
-                                <option>Janesh</option>
-                                <option>Ishika</option>
-                                <option>Rahul</option>
-                                <option>Static</option>
-                            </select>
-                        </div>
-
-                        <!-- Assigned Teams Dropdown -->
-                        <div class="col-md-6">
-                            <div class="mb-3"><label class="form-label">Assigned Employee<span style="color: red;">*</span></label><select class="form-select" id="organizerMultiple2" data-choices="data-choices" multiple="multiple" size="1" name="organizerMultiple" required="required" data-options='{"removeItemButton":true,"placeholder":true}'>
-                                    <option value="">Select organizer...</option>
-                                    <option>Neav Panjwani</option>
-                                    <option>Om Pandey</option>
-                                    <option>Janesh Chichriya</option>
-                                    <option>Ishika sharma</option>
-                                    <option>Static</option>
-                                </select>
-                                <div class="invalid-feedback">Please select one or multiple</div>
-                            </div>
-                        </div>
-
-
-                        <!-- Status Dropdown -->
-                        <div class="col-md-6">
-                            <label class="form-label">Project Status<span style="color: red;">*</span></label>
-                            <select class="form-select" name="project_status">
-                                <option selected disabled>Select status</option>
-                                <option>Pipeline</option>
-                                <option>Ongoing</option>
-                                <option>Completed</option>
-                                <option>On Hold</option>
-                            </select>
-                        </div>
-
-
-                        <!-- file Upload  -->
-                        <label class="form-label">Upload File <span style="color: red;">*</span></label>
-                        <div class="fallback"><input name="file" type="file" multiple="multiple" /></div>
-                        <div class="dz-message" data-dz-message="data-dz-message"><img class="me-2" src="../../../assets/img/icons/cloud-upload.svg" width="25" alt="" />Drop your files here</div>
-                        <div class="dz-preview dz-preview-multiple m-0 d-flex flex-column">
-                            <div class="d-flex mb-3 pb-3 border-bottom border-translucent media">
-                                <div class="border p-2 rounded-2 me-2"><img class="rounded-2 dz-image" src="../../../assets/img/icons/file.png" alt="..." data-dz-thumbnail="data-dz-thumbnail" /></div>
-                                <div class="flex-1 d-flex flex-between-center">
-                                    <div>
-                                        <h6 data-dz-name="data-dz-name"></h6>
-                                        <div class="d-flex align-items-center">
-                                            <p class="mb-0 fs-9 text-body-quaternary lh-1" data-dz-size="data-dz-size"></p>
-                                            <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress=""></span></div>
-                                        </div><span class="fs-10 text-danger" data-dz-errormessage="data-dz-errormessage"></span>
-                                    </div>
-                                    <div class="dropdown"><button class="btn btn-link text-body-tertiary btn-sm dropdown-toggle btn-reveal dropdown-caret-none" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><a class="dropdown-item" href="#!" data-dz-remove="data-dz-remove"><span style="color: red;">X</a></button>
-                                        <div class="dropdown-menu dropdown-menu-end border border-translucent py-2"><a class="dropdown-item" href="#!" data-dz-remove="data-dz-remove">Remove File</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <!-- Description -->
-                        <div class="col-12">
-                            <label class="form-label">Project Description</label>
-                            <textarea class="form-control" rows="4" placeholder="Enter description..."
-                                name="project_desc"></textarea>
-                        </div>
-
-                        <!-- start and end date of project  -->
-
-                        <label class="form-label" for="timepicker2">Select Time Range</label>
-                        <input class="form-control datetimepicker" id="timepicker2" type="text" placeholder="d/m/y to d/m/y" data-options='{"mode":"range","dateFormat":"d/m/y","disableMobile":true}' />
-
-
-                        <!-- Submit Button -->
-                        <div class="col-12 text-end">
-                            <button class="btn btn-primary" type="submit" id="submitBtn">Submit</button>
-                            <button class="btn btn-secondary" type="reset">Clear</button>
-
+                <!-- Card 1 -->
+                <div class="col-md-4 mb-4" draggable="true">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">🚀 Project Deadline</h5>
+                            <p class="card-text">Final submission date for PRMS module is April 28th. Make sure to push
+                                your latest changes.</p>
+                            <p class="text-muted small">Posted on: 24-Apr-2025</p>
                         </div>
                     </div>
-                </form><br><br>
+                </div>
+                
+                <!-- Card 2 -->
+                <div class="col-md-4 mb-4" draggable="true">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">🧠 Tech Tip</h5>
+                            <p class="card-text">Remember to use `isset()` in PHP when handling form POST data to avoid
+                                warnings!</p>
+                            <p class="text-muted small">Posted on: 23-Apr-2025</p>
+                        </div>
+                    </div>
+                </div>
 
+                <!-- Card 3 -->
+                <div class="col-md-4 mb-4" draggable="true">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">🎯 Motivation</h5>
+                            <p class="card-text">“Don’t watch the clock; do what it does. Keep going.” — Sam Levenson
+                            </p>
+                            <p class="text-muted small">Posted on: 22-Apr-2025</p>
+                        </div>
+                    </div>
+                </div>
 
+                <!-- Card 4 -->
+                <div class="col-md-4 mb-4" draggable="true">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">📅 Daily Reminder</h5>
+                            <p class="card-text">Team stand-up meeting at 10 AM sharp. Don’t be late!</p>
+                            <p class="text-muted small">Posted on: 25-Apr-2025</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="col-md-4 mb-4" draggable="true">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">💡 Suggestion Box</h5>
+                            <p class="card-text">Have feedback or an idea? Drop a note in the shared Google Form link.
+                            </p>
+                            <p class="text-muted small">Posted on: 21-Apr-2025</p>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
 
             </div>
-
-            <!-- Footer -->
-            <?php include("../../Components/footer.php"); ?>
-
+            
         </div>
-        </div>
+        
+
+
+
+
+
+
+
 
 
 
@@ -324,12 +271,10 @@
     <script src="../../vendors/list.js/list.min.js"></script>
     <script src="../../vendors/feather-icons/feather.min.js"></script>
     <script src="../../vendors/dayjs/dayjs.min.js"></script>
-    <script src="../../vendors/dropzone/dropzone-min.js"></script>
     <script src="../../vendors/leaflet/leaflet.js"></script>
     <script src="../../vendors/leaflet.markercluster/leaflet.markercluster.js"></script>
     <script src="../../vendors/leaflet.tilelayer.colorfilter/leaflet-tilelayer-colorfilter.min.js"></script>
     <script src="../../assets/js/phoenix.js"></script>
-    <script src="../../vendors/flatpickr/flatpickr.min.js"></script>
     <script src="../../vendors/echarts/echarts.min.js"></script>
     <script src="../../assets/js/ecommerce-dashboard.js"></script>
 
@@ -338,42 +283,65 @@
 
 
     </script>
+    <script>
+        let dragSrcEl = null;
+
+        function handleDragStart(e) {
+            dragSrcEl = this;
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/html', this.innerHTML);
+
+            // Adding animation for dragging effect
+            this.classList.add('dragging');
+            setTimeout(() => this.classList.add('invisible'), 0);  // Makes the card disappear during drag
+        }
+
+        function handleDragOver(e) {
+            if (e.preventDefault) e.preventDefault();
+            return false;
+        }
+
+        function handleDrop(e) {
+            if (e.stopPropagation) e.stopPropagation();
+            if (dragSrcEl !== this) {
+                dragSrcEl.innerHTML = this.innerHTML;
+                this.innerHTML = e.dataTransfer.getData('text/html');
+            }
+            return false;
+        }
+
+        function handleDragEnd() {
+            document.querySelectorAll('#pinboard .col-md-4').forEach(col => col.classList.remove('opacity-50', 'dragging', 'invisible'));
+        }
+
+        document.querySelectorAll('#pinboard .col-md-4').forEach(col => {
+            col.addEventListener('dragstart', handleDragStart);
+            col.addEventListener('dragover', handleDragOver);
+            col.addEventListener('drop', handleDrop);
+            col.addEventListener('dragend', handleDragEnd);
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
-    <script src="../../vendors/choices/choices.min.js"></script>
     <script>
+        gsap.from("#formCard", {
+            opacity: 0,
+            y: 60,
+            duration: 1,
+            ease: "power2.out"
+        });
+
         gsap.from("#heading-gsap", {
             opacity: 0,
             y: 50,
-            duration: 0.7,
+            duration: 1.0,
             ease: "power2.out",
-            delay: 0.7
+            delay: 0.1
         });
-        gsap.from("#filterType", {
-            opacity: 0,
-            y: 50,
-            duration: 0.8,
-            ease: "power2.out",
-            delay: 0.5
-        });
-    </script>
-    <!-- alert added extra testing  -->
-    <script>
-        document.getElementById('submitBtn').addEventListener('click', function(event) {
-            event.preventDefault(); // Stop form from submitting immediately
 
-            // Get the selected time range
-            var timeRange = document.getElementById('timepicker2').value;
 
-            if (timeRange) {
-                alert("Project Deadline Selected: " + timeRange);
-                // After alert, you can submit the form manually if needed
-                // this.closest('form').submit();
-            } else {
-                alert("Please select a time range (deadline) before submitting!");
-            }
-        });
     </script>
+
 
 
 </body>
