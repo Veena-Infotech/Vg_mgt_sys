@@ -195,7 +195,7 @@
                         <div class="col-md-6">
                             <label class="form-label">Project Manager<span style="color: red;">*</span></label>
                             <select class="form-select" name="project_status">
-                                <option selected disabled>Select status</option>
+                                <option selected disabled>Select Manager</option>
                                 <option>Aryan Sir</option>
                                 <option>Op sir</option>
                                 <option>Aakash sir</option>
@@ -203,12 +203,12 @@
                             </select>
                         </div>
 
-                         <!-- project client  -->
+                        <!-- project client  -->
 
-                         <div class="col-md-6">
+                        <div class="col-md-6">
                             <label class="form-label">Project Client<span style="color: red;">*</span></label>
                             <select class="form-select" name="project_status">
-                                <option selected disabled>Select status</option>
+                                <option selected disabled>Select client</option>
                                 <option>Janesh</option>
                                 <option>Ishika</option>
                                 <option>Rahul</option>
@@ -278,11 +278,11 @@
 
                         <label class="form-label" for="timepicker2">Select Time Range</label>
                         <input class="form-control datetimepicker" id="timepicker2" type="text" placeholder="d/m/y to d/m/y" data-options='{"mode":"range","dateFormat":"d/m/y","disableMobile":true}' />
-                        
-                        
+
+
                         <!-- Submit Button -->
                         <div class="col-12 text-end">
-                            <button class="btn btn-primary" type="submit">Submit</button>
+                            <button class="btn btn-primary" type="submit" id="submitBtn">Submit</button>
                             <button class="btn btn-secondary" type="reset">Clear</button>
 
                         </div>
@@ -357,7 +357,23 @@
             delay: 0.5
         });
     </script>
+    <!-- alert added extra testing  -->
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function(event) {
+            event.preventDefault(); // Stop form from submitting immediately
 
+            // Get the selected time range
+            var timeRange = document.getElementById('timepicker2').value;
+
+            if (timeRange) {
+                alert("Project Deadline Selected: " + timeRange);
+                // After alert, you can submit the form manually if needed
+                // this.closest('form').submit();
+            } else {
+                alert("Please select a time range (deadline) before submitting!");
+            }
+        });
+    </script>
 
 
 </body>

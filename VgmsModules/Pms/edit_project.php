@@ -195,7 +195,7 @@
                         <div class="col-md-6">
                             <label class="form-label">Project Manager<span style="color: red;">*</span></label>
                             <select class="form-select" name="project_status">
-                                <option selected disabled>Select status</option>
+                                <option selected disabled>Select manager</option>
                                 <option>Aryan Sir</option>
                                 <option>Op sir</option>
                                 <option>Aakash sir</option>
@@ -208,7 +208,7 @@
                          <div class="col-md-6">
                             <label class="form-label">Project Client<span style="color: red;">*</span></label>
                             <select class="form-select" name="project_status">
-                                <option selected disabled>Select status</option>
+                                <option selected disabled>Select client</option>
                                 <option>Janesh</option>
                                 <option>Ishika</option>
                                 <option>Rahul</option>
