@@ -176,7 +176,7 @@
           </h2>
           <p class="text-muted ms-1">Submit your time-off request with the form below.</p>
         </div>
-<hr class="hr">
+        <hr class="hr">
 
         <!-- Centered Form Section -->
         <div class="row justify-content-center mt-4">
