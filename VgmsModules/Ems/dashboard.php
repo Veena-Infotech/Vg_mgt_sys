@@ -13,7 +13,7 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>Starter code</title>
+    <title>Admin Dashboard</title>
 
     <!-- ===============================================-->
     <!--    Favicons-->
@@ -166,15 +166,14 @@
         </script>
         <div class="content">
             <div class="container">
-                <div class="mb-5">
-                    <h1 class="fw-bold d-flex align-items-center gap-2 ms-1" id="pageTitle">
-                        <i class="bi bi-person-workspace"></i> Receptionist Dashboard
-                    </h1>
-                    <p class="text-muted d-flex align-items-center gap-2 ms-1" id="pageSubtitle">
-                        <i class="bi bi-briefcase"></i> Manage daily activities with ease
-                    </p>
+                <div class="d-flex align-items-center gap-2">
+                    <i class="bi bi-person-workspace fs-1"></i>
+                    <h1 class="fw-bold mb-0" id="pageTitle">Receptionist Dashboard</h1>
                 </div>
-
+                <div class="d-flex align-items-center gap-2 mt-2">
+                    <i class="bi bi-briefcase fs-5 text-muted"></i>
+                    <p class="text-muted mb-0" id="pageSubtitle">Manage daily activities with ease</p>
+                </div>
                 <!-- Dashboard Content -->
                 <div class="row g-4" id="dashboardContent">
 
@@ -283,18 +282,79 @@
                     </div>
 
                 </div>
-                <!-- Header -->
 
+                <div class="row g-4 py-5">
 
+                    <!-- To Do Section -->
+                    <div class="col-md-6">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body d-flex flex-column">
+                                <h2 class="card-title mb-4"><i class="bi bi-list-task"></i> Pending approval</h2>
 
+                                <div class="overflow-auto flex-grow-1" style="max-height: 300px;">
+                                    <ul class="list-group fs-6" id="todoList">
+                                        <li class="list-group-item">
+                                            <i class="bi bi-pencil-square me-2"></i> Finalize the geometric shapes
+                                            <div class="small text-muted mt-1 ms-4">Waiting for design team feedback</div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <i class="bi bi-people-fill me-2"></i> Daily meeting with team members
+                                            <div class="small text-muted mt-1 ms-4">Scheduling conflicts to resolve</div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <i class="bi bi-calendar-check me-2"></i> Daily Standup Meetings
+                                            <div class="small text-muted mt-1 ms-4">Pending team confirmation</div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <i class="bi bi-hourglass-split me-2"></i> Procrastinate for a month
+                                            <div class="small text-muted mt-1 ms-4">Needs management approval</div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <i class="bi bi-fire me-2"></i> Warming up
+                                            <div class="small text-muted mt-1 ms-4">Pending on-boarding session</div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <i class="bi bi-box-arrow-up-right me-2"></i> Make ready for release
+                                            <div class="small text-muted mt-1 ms-4">QA sign-off pending</div>
+                                        </li>
+                                    </ul>
+                                </div>
 
+                                <div class="mt-3">
+                                    <button class="btn btn-outline-primary w-100"><i class="bi bi-plus-circle me-2"></i> Add new task</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
+                    <!-- Payroll Summary Section -->
+                    <div class="col-md-6">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body d-flex flex-column">
+                                <h2 class="card-title mb-4"><i class="bi bi-cash-coin"></i> Payroll Summary</h2>
+                                <p class="text-muted">Recent payroll activities</p>
 
+                                <div class="overflow-auto flex-grow-1">
+                                    <ul class="list-group mt-3" id="payrollSummary">
+                                        <li class="list-group-item">
+                                            <h5><i class="bi bi-currency-dollar me-2"></i> December 2023 Salary Disbursed</h5>
+                                            <p class="mb-0">All employees received December salaries on 1st Jan 2024.</p>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <h5><i class="bi bi-gift me-2"></i> Year-End Bonuses</h5>
+                                            <p class="mb-0">Bonuses credited on 20th Dec 2023.</p>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <h5><i class="bi bi-gear-fill me-2"></i> Payroll Adjustments</h5>
+                                            <p class="mb-0">Adjustments completed for reimbursements.</p>
+                                        </li>
+                                    </ul>
+                                </div>
 
-
-
-
-
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- Footer -->
                 <?php include("../../Components/footer.php"); ?>
             </div>
@@ -476,6 +536,29 @@
             stagger: 0.1,
             delay: 0.7,
             ease: "back.out(1.7)"
+        });
+
+        // Animate the To-do list and Payroll Summary with a fade-in
+        gsap.from("#todoList li", {
+            opacity: 0,
+            x: -50,
+            duration: 0.8,
+            stagger: 0.2
+        });
+
+        gsap.from("#payrollSummary li", {
+            opacity: 0,
+            x: 50,
+            duration: 0.8,
+            stagger: 0.2
+        });
+
+        // Animate the Add new task button
+        gsap.from("#todoList button", {
+            opacity: 0,
+            scale: 0.8,
+            duration: 0.8,
+            delay: 0.5
         });
     </script>
 
