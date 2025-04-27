@@ -333,12 +333,9 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="d-flex justify-content-between mt-3"><span class="d-none d-sm-inline-block"
-                                    data-list-info="data-list-info"></span>
-                                <div class="d-flex"><button class="page-link" data-list-pagination="prev"><span
-                                            class="fas fa-chevron-left"></span></button>
-                                    <ul class="mb-0 pagination"></ul><button class="page-link pe-0"
-                                        data-list-pagination="next"><span class="fas fa-chevron-right"></span></button>
+                            <div class="d-flex justify-content-between mt-3"><span class="d-none d-sm-inline-block" data-list-info="data-list-info"></span>
+                                <div class="d-flex"><button class="page-link" data-list-pagination="prev"><span class="fas fa-chevron-left"></span></button>
+                                    <ul class="mb-0 pagination"></ul><button class="page-link pe-0" data-list-pagination="next"><span class="fas fa-chevron-right"></span></button>
                                 </div>
                             </div>
                         </div>
@@ -398,6 +395,7 @@
                 ease: "power2.out"
             });
         });
+
 
         const filterSelect = document.getElementById("leaveFilter");
         const searchBox = document.getElementById("searchBox");

@@ -164,8 +164,8 @@
       }
     </script>
     <div class="content">
-      <div class="container shadow-lg rounded-4 p-4 mt-4">
-        <h2 class="text-center mb-4 fw-bold text-primary">Veena Group Employee Onboarding</h2>
+      <div class="container shadow-lg rounded-4 p-4 mt-4 mb-2">
+      <h2 class="mb-1 fw-bold text-primary">Veena Group Employee Onboarding</h2>
 
         <div class="progress mb-4 rounded-pill">
           <div id="progress-bar" class="progress-bar bg-primary rounded-pill" role="progressbar" style="width: 0%"></div>
