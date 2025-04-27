@@ -175,7 +175,7 @@
         <div class="text-start mb-4">
           <h1 class="display-6 fw-bold">Leave History</h1>
           <p class="text-muted">View leave records for employees (Admin Access Only)</p>
-          <hr class="w-25">
+          <hr class="hr">
         </div>
 
         <div class="mb-4">

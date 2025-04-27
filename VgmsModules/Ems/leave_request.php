@@ -31,7 +31,8 @@
   <!-- ===============================================-->
   <link rel="preconnect" href="https://fonts.googleapis.com/">
   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
-  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap"
+    rel="stylesheet">
   <link href="../../vendors/simplebar/simplebar.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../../unicons.iconscout.com/release/v4.0.8/css/line.css">
   <link href="../../assets/css/theme-rtl.css" type="text/css" rel="stylesheet" id="style-rtl">
@@ -170,15 +171,15 @@
         <!-- Left-Aligned Title Section with Icon -->
         <div class="mb-4 text-start">
           <h2 class="fw-bold d-flex align-items-center gap-2">
-            <i class="bi bi-clipboard-check" style="color: #0d6efd;"></i>
+            <!-- <i class="bi bi-clipboard-check" style="color: #0d6efd;"></i> -->
             Leave Request Form
           </h2>
           <p class="text-muted ms-1">Submit your time-off request with the form below.</p>
         </div>
-
+<hr class="hr">
 
         <!-- Centered Form Section -->
-        <div class="row justify-content-center">
+        <div class="row justify-content-center mt-4">
           <div class="col-md-10 col-lg-8">
             <div class="border rounded shadow-sm p-4" id="formCard">
               <form id="leaveForm">
@@ -225,7 +226,8 @@
         </div>
       </div>
 
-
+      <!-- Footer -->
+      <?php include("../../Components/footer.php"); ?>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -241,8 +243,7 @@
 
 
 
-    <!-- Footer -->
-    <?php include("../../Components/footer.php"); ?>
+
     </div>
 
 

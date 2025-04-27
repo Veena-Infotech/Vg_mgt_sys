@@ -378,7 +378,8 @@
                     </div>
                 </div>
             </div>
-
+        <!-- Footer -->
+        <?php include("../../Components/footer.php"); ?>
         </div>
 
         <div id="mapPopup"

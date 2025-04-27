@@ -172,6 +172,7 @@
                     <h1 id="page-title">Employee Loan Management</h1>
                     <p id="page-subtitle">Manage employee loan requests and repayments</p>
                 </div>
+                <hr class="hr">
 
                 <div id="tableExample4" data-list="{&quot;valueNames&quot;:[&quot;name&quot;,&quot;email&quot;,&quot;payment&quot;],&quot;page&quot;:5,&quot;pagination&quot;:true,&quot;filter&quot;:{&quot;key&quot;:&quot;payment&quot;}}">
                     <div class="row justify-content-end g-0">
@@ -294,6 +295,8 @@
 
                
             </div>
+                         <!-- Footer -->
+         <?php include("../../Components/footer.php"); ?>
         </div>
         
     </main>
@@ -301,8 +304,7 @@
     <!-- ===============================================-->
     <!--    End of Main Content-->
     <!-- ===============================================-->
-             <!-- Footer -->
-         <?php include("../../Components/footer.php"); ?>
+
 
 
     <!-- ===============================================-->

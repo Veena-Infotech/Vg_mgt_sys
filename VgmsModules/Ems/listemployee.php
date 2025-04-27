@@ -497,7 +497,7 @@
         </div>
       </div>
 
-      <?php include_once('../Components/footer.html'); ?>
+      <?php include_once('../../Components/footer.php'); ?>
     </div>
     <div>
   </main><!-- ===============================================-->

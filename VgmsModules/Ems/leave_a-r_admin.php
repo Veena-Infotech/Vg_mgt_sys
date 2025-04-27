@@ -64,7 +64,7 @@
   <!--    Main Content-->
   <!-- ===============================================-->
   <main class="main" id="top">
-     <!-- change this to your navbar code link should be replaced properly -->
+    <!-- change this to your navbar code link should be replaced properly -->
     <?php include_once('../../Components/navbar.php'); ?>
     <script>
       var navbarTopShape = window.config.config.phoenixNavbarTopShape;
@@ -168,25 +168,20 @@
 
 
     <div class="content">
-        <!-- your main contents goes here  with footer . -->
+      <!-- your main contents goes here  with footer . -->
+      <div class="container py-5">
+        <div class="row justify-content-center">
 
-        
-
-
-<main class="main" id="top">
-    <div class="container py-5">
-      <div class="row justify-content-center">
-
-      <div class="mb-4 text-start">
-          <h2 class="fw-bold d-flex align-items-center gap-2">
-            <i class="bi bi-clipboard-check" style="color: #0d6efd;"></i>
-            Leave Requests Management
-          </h2>
-          <p class="text-muted ms-1">Approve or reject employee leave requests with ease.</p>
-        </div>
-
+          <div class="mb-4 text-start">
+            <h2 class="fw-bold d-flex align-items-center gap-2">
+              <!-- <i class="bi bi-clipboard-check" style="color: #0d6efd;"></i> -->
+              Leave Requests Management
+            </h2>
+            <p class="text-muted ms-1">Approve or reject employee leave requests with ease.</p>
+          </div>
+          <hr class="hr">
           <!-- Leave Requests Table -->
-          <table class="table table-bordered table-hover">
+          <table class="table table-bordered table-hover mt-4">
             <thead class="table">
               <tr>
                 <th scope="col">Employee Name</th>
@@ -239,6 +234,8 @@
           </table>
         </div>
       </div>
+      <!-- Footer -->
+      <?php include("../../Components/footer.php"); ?>
     </div>
 
   </main>
@@ -280,80 +277,10 @@
       </div>
     </div>
   </div>
-
-  <!-- JavaScript for Bootstrap, GSAP, and Modal functionality -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
-  <script>
-    // GSAP Animations
-    gsap.from("table tbody tr", {
-      opacity: 0,
-      y: 30,
-      duration: 1,
-      stagger: 0.2,
-      ease: "power2.out"
-    });
-
-    // Button Click Handlers for Approve and Reject actions
-    document.getElementById('approveBtn1').addEventListener('click', function() {
-      const modal = new bootstrap.Modal(document.getElementById('approveModal'));
-      modal.show();
-      document.getElementById('confirmApprove').onclick = function() {
-        gsap.to('#leaveRequest1', {
-          backgroundColor: '#d4edda',
-          duration: 0.5,
-          onComplete: () => alert('Leave Approved for Jane Doe')
-        });
-        modal.hide();
-      };
-    });
-
-    document.getElementById('rejectBtn1').addEventListener('click', function() {
-      const modal = new bootstrap.Modal(document.getElementById('rejectModal'));
-      modal.show();
-      document.getElementById('confirmReject').onclick = function() {
-        gsap.to('#leaveRequest1', {
-          backgroundColor: '#f8d7da',
-          duration: 0.5,
-          onComplete: () => alert('Leave Rejected for Jane Doe')
-        });
-        modal.hide();
-      };
-    });
-
-    document.getElementById('approveBtn2').addEventListener('click', function() {
-      const modal = new bootstrap.Modal(document.getElementById('approveModal'));
-      modal.show();
-      document.getElementById('confirmApprove').onclick = function() {
-        gsap.to('#leaveRequest2', {
-          backgroundColor: '#d4edda',
-          duration: 0.5,
-          onComplete: () => alert('Leave Approved for John Smith')
-        });
-        modal.hide();
-      };
-    });
-
-    document.getElementById('rejectBtn2').addEventListener('click', function() {
-      const modal = new bootstrap.Modal(document.getElementById('rejectModal'));
-      modal.show();
-      document.getElementById('confirmReject').onclick = function() {
-        gsap.to('#leaveRequest2', {
-          backgroundColor: '#f8d7da',
-          duration: 0.5,
-          onComplete: () => alert('Leave Rejected for John Smith')
-        });
-        modal.hide();
-      };
-    });
-  </script>
-
-         <!-- Footer -->
-         <?php include("../../Components/footer.php"); ?>
-    </div>
+  </div>
 
   </main>
-  
+
   <!-- ===============================================-->
   <!--    End of Main Content-->
   <!-- ===============================================-->
@@ -372,6 +299,74 @@
   <script src="../../vendors/dayjs/dayjs.min.js"></script>
   <script src="../../assets/js/phoenix.js"></script>
   <!-- you js code goes here -->
+  <!-- JavaScript for Bootstrap, GSAP, and Modal functionality -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+  <script>
+    // GSAP Animations
+    gsap.from("table tbody tr", {
+      opacity: 0,
+      y: 30,
+      duration: 1,
+      stagger: 0.2,
+      ease: "power2.out"
+    });
+
+    // Button Click Handlers for Approve and Reject actions
+    document.getElementById('approveBtn1').addEventListener('click', function () {
+      const modal = new bootstrap.Modal(document.getElementById('approveModal'));
+      modal.show();
+      document.getElementById('confirmApprove').onclick = function () {
+        gsap.to('#leaveRequest1', {
+          backgroundColor: '#d4edda',
+          duration: 0.5,
+          onComplete: () => alert('Leave Approved for Jane Doe')
+        });
+        modal.hide();
+      };
+    });
+
+    document.getElementById('rejectBtn1').addEventListener('click', function () {
+      const modal = new bootstrap.Modal(document.getElementById('rejectModal'));
+      modal.show();
+      document.getElementById('confirmReject').onclick = function () {
+        gsap.to('#leaveRequest1', {
+          backgroundColor: '#f8d7da',
+          duration: 0.5,
+          onComplete: () => alert('Leave Rejected for Jane Doe')
+        });
+        modal.hide();
+      };
+    });
+
+    document.getElementById('approveBtn2').addEventListener('click', function () {
+      const modal = new bootstrap.Modal(document.getElementById('approveModal'));
+      modal.show();
+      document.getElementById('confirmApprove').onclick = function () {
+        gsap.to('#leaveRequest2', {
+          backgroundColor: '#d4edda',
+          duration: 0.5,
+          onComplete: () => alert('Leave Approved for John Smith')
+        });
+        modal.hide();
+      };
+    });
+
+    document.getElementById('rejectBtn2').addEventListener('click', function () {
+      const modal = new bootstrap.Modal(document.getElementById('rejectModal'));
+      modal.show();
+      document.getElementById('confirmReject').onclick = function () {
+        gsap.to('#leaveRequest2', {
+          backgroundColor: '#f8d7da',
+          duration: 0.5,
+          onComplete: () => alert('Leave Rejected for John Smith')
+        });
+        modal.hide();
+      };
+    });
+  </script>
+
+
 </body>
 
 
