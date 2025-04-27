@@ -13,7 +13,7 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>Starter code</title>
+    <title>Task Page</title>
 
     <!-- ===============================================-->
     <!--    Favicons-->
@@ -186,14 +186,14 @@
               </div>
             </div>
           </div>
-          <div class="d-flex flex-wrap gap-3 border-bottom border-translucent mx-n4 mx-lg-n6 px-4 px-lg-6 py-5"><a class="btn btn-primary px-3 px-sm-5 px-md-10" href="create-kanban-board.html"><span class="fas fa-plus me-2"></span>Create New Board</a><button class="btn btn-phoenix-primary px-3 px-sm-4 d-flex text-body"><span class="fa-solid fa-angles-down me-sm-2"></span><span class="d-none d-sm-block">Import Bulk Tasks</span></button><a class="btn btn-phoenix-primary px-3 px-sm-4 d-flex text-body" href="../calendar.html"><span class="fa-solid fa-calendar-xmark me-sm-2"></span><span class="d-none d-sm-block white-space-nowrap">Upcoming Deadlines</span></a></div>
+          <div class="d-flex flex-wrap gap-3 border-bottom border-translucent mx-n4 mx-lg-n6 px-4 px-lg-6 py-5"><a class="btn btn-primary px-3 px-sm-5 px-md-10" href="../../VgmsModules/pms/add_project.php"><span class="fas fa-plus me-2"></span>Create New Project</a></div>
           <div class="mx-n4 mx-lg-n6 px-4 px-lg-6 py-5 border-bottom border-translucent">
             <h4>Active Boards</h4>
-            <p class="mb-4">Boards which are Active . Can be private or public boards. <a href="#!"> Change preference</a></p>
+            <p class="mb-4">Boards which are Active . Can be private or public boards.</p>
             <div class="swiper-theme-container kanban-boards-slider">
               <div class="swiper theme-slider" data-swiper='{"slidesPerView":1,"spaceBetween":24,"speed":800,"breakpoints":{"576":{"slidesPerView":2},"1200":{"slidesPerView":3},"1540":{"slidesPerView":4}}}'>
                 <div class="swiper-wrapper">
-                  <div class="swiper-slide"><a class="text-decoration-none" href="kanban.html">
+                  <!-- <div class="swiper-slide"><a class="text-decoration-none" href="kanban.html">
                       <div class="card overflow-hidden bg-transparent h-100">
                         <div class="position-relative">
                           <div class="bg-info-darker" style="height: 128px"></div>
@@ -226,8 +226,8 @@
                             <h5 class="text-body"><span class="fa-solid fa-calendar-xmark text-body-tertiary me-1"></span>3</h5>
                           </div>
                         </div>
-                      </div>
-                    </a></div>
+                      </div> 
+                    </a></div> -->
                   <div class="swiper-slide"><a class="text-decoration-none" href="kanban.html">
                       <div class="card overflow-hidden bg-transparent h-100">
                         <div class="position-relative"><img class="w-100" src="../../assets/img/kanban/board-2.png" style="height: 128px;" alt="" />
@@ -334,7 +334,7 @@
             </div>
           </div>
           <div class="mx-n4 mx-lg-n6 px-4 px-lg-6 py-5 border-bottom border-translucent">
-            <h4>Your Boards</h4>
+            <h4>Inactive Boards</h4>
             <p class="mb-4">Boards where you are either an Admin or a Member.</p>
             <div class="swiper-theme-container kanban-boards-slider">
               <div class="swiper theme-slider" data-swiper='{"slidesPerView":1,"spaceBetween":24,"speed":800,"breakpoints":{"576":{"slidesPerView":2},"1200":{"slidesPerView":3},"1540":{"slidesPerView":4}}}'>
@@ -482,7 +482,7 @@
               </div>
             </div>
           </div>
-          <div class="mx-n4 mx-lg-n6 px-4 px-lg-6 py-5 border-bottom border-translucent">
+          <!-- <div class="mx-n4 mx-lg-n6 px-4 px-lg-6 py-5 border-bottom border-translucent">
             <h4>Private Boards</h4>
             <p class="mb-4">Your eyes only</p>
             <div class="swiper-theme-container kanban-boards-slider">
@@ -530,7 +530,7 @@
                 <div class="swiper-button-prev"><span class="fas fa-chevron-left fs-11"></span></div>
               </div>
             </div>
-          </div>
+          </div> -->
           <div class="text-center"><button class="btn btn-phoenix-primary mt-4"><span class="fa-solid fa-box-archive me-2"></span>Open Archive</button></div>
         </div>
         

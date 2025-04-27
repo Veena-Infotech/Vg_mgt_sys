@@ -178,8 +178,8 @@
                         <div class="col-auto px-3"><select class="form-select form-select-sm mb-3" data-list-filter="data-list-filter">
                                 <option selected="" value="">Select payment status</option>
                                 <option value="Pending">Pending</option>
-                                <option value="Success">Success</option>
-                                <option value="Blocked">Blocked</option>
+                                <option value="Success">Accepted</option>
+                                <option value="Blocked">Rejected</option>
                             </select></div>
                     </div>
                     <div class="table-responsive">
@@ -196,7 +196,7 @@
                                     <td class="align-middle ps-3 name">Sylvia Plath</td>
                                     <td class="align-middle email">john@gmail.com</td>
                                     <td class="align-middle payment text-end py-3 pe-3">
-                                        <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="fw-bold">Success</span><svg class="svg-inline--fa fa-check ms-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+                                        <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="fw-bold">Accepted</span><svg class="svg-inline--fa fa-check ms-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
                                                 <path fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path>
                                             </svg><!-- <span class="ms-1 fas fa-check"></span> Font Awesome fontawesome.com --></div>
                                     </td>
@@ -214,7 +214,7 @@
                                     <td class="align-middle ps-3 name">Edgar Allan Poe</td>
                                     <td class="align-middle email">edgar@yahoo.com</td>
                                     <td class="align-middle payment text-end py-3 pe-3">
-                                        <div class="badge badge-phoenix fs-10 badge-phoenix-secondary"><span class="fw-bold">Blocked</span><svg class="svg-inline--fa fa-ban ms-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ban" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+                                        <div class="badge badge-phoenix fs-10 badge-phoenix-secondary"><span class="fw-bold">Rejected</span><svg class="svg-inline--fa fa-ban ms-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ban" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
                                                 <path fill="currentColor" d="M367.2 412.5L99.5 144.8C77.1 176.1 64 214.5 64 256c0 106 86 192 192 192c41.5 0 79.9-13.1 111.2-35.5zm45.3-45.3C434.9 335.9 448 297.5 448 256c0-106-86-192-192-192c-41.5 0-79.9 13.1-111.2 35.5L412.5 367.2zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"></path>
                                             </svg><!-- <span class="ms-1 fas fa-ban"></span> Font Awesome fontawesome.com --></div>
                                     </td>
@@ -240,57 +240,69 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="d-flex justify-content-between mt-3"><span class="d-none d-sm-inline-block" data-list-info="data-list-info">1 to 5 <span class="text-body-tertiary"> Items of </span>10</span>
-                        <div class="d-flex"><button class="page-link disabled" data-list-pagination="prev" disabled=""><svg class="svg-inline--fa fa-chevron-left" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
-                                    <path fill="currentColor" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"></path>
+
+                    <div class="d-flex justify-content-between mt-3"><span class="d-none d-sm-inline-block"
+                            data-list-info="data-list-info">1 to 5 <span class="text-body-tertiary"> Items of
+                            </span>10</span>
+                        <div class="d-flex"><button class="page-link disabled" data-list-pagination="prev" disabled=""><svg
+                                    class="svg-inline--fa fa-chevron-left" aria-hidden="true" focusable="false"
+                                    data-prefix="fas" data-icon="chevron-left" role="img" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 320 512" data-fa-i2svg="">
+                                    <path fill="currentColor"
+                                        d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z">
+                                    </path>
                                 </svg><!-- <span class="fas fa-chevron-left"></span> Font Awesome fontawesome.com --></button>
                             <ul class="mb-0 pagination">
-                                <li class="active"><button class="page" type="button" data-i="1" data-page="5">1</button></li>
+                                <li class="active"><button class="page" type="button" data-i="1" data-page="5">1</button>
+                                </li>
                                 <li><button class="page" type="button" data-i="2" data-page="5">2</button></li>
-                            </ul><button class="page-link pe-0" data-list-pagination="next"><svg class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
-                                    <path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path>
+                            </ul><button class="page-link pe-0" data-list-pagination="next"><svg
+                                    class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false"
+                                    data-prefix="fas" data-icon="chevron-right" role="img"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
+                                    <path fill="currentColor"
+                                        d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z">
+                                    </path>
                                 </svg><!-- <span class="fas fa-chevron-right"></span> Font Awesome fontawesome.com --></button>
+                        </div>
+                    </div>
+
+
+                    <button class="btn btn-primary" type="button" data-bs-toggle="modal"
+                        data-bs-target="#verticallyCentered">Vertically centered modal</button>
+                    <div class="modal fade" id="verticallyCentered" tabindex="-1"
+                        aria-labelledby="verticallyCenteredModalLabel" aria-hidden="true" style="display: none;">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="verticallyCenteredModalLabel">Modal title</h5><button
+                                        class="btn btn-close p-1" type="button" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p class="text-body-tertiary lh-lg mb-0">This is a static modal example (meaning its
+                                        position and display have been overridden). Included are the modal header, modal
+                                        body (required for padding), and modal footer (optional). </p>
+                                </div>
+                                <div class="modal-footer"><button class="btn btn-primary" type="button">Okay</button><button
+                                        class="btn btn-outline-primary" type="button"
+                                        data-bs-dismiss="modal">Cancel</button></div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-
-                <!-- Bootstrap JS and Popper.js -->
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.1/gsap.min.js"></script>
-                <script>
-                    // GSAP Animation for Title and Subtitle
-                    gsap.from("#page-title", {
-                        duration: 1.5,
-                        opacity: 0,
-                        y: -50,
-                        ease: "power4.out"
-                    });
-
-                    gsap.from("#page-subtitle", {
-                        duration: 1.5,
-                        opacity: 0,
-                        y: 30,
-                        delay: 0.5,
-                        ease: "power4.out"
-                    });
-                </script>
-
-
-                <!-- Footer -->
-                <?php include("../../Components/footer.php"); ?>
+               
             </div>
-
-
-
-
-
-
+        </div>
+        
     </main>
 
     <!-- ===============================================-->
     <!--    End of Main Content-->
     <!-- ===============================================-->
-
+             <!-- Footer -->
+         <?php include("../../Components/footer.php"); ?>
 
 
     <!-- ===============================================-->
@@ -298,6 +310,27 @@
 
     <!-- ===============================================-->
     <!--Dropdown for contacted-to--->
+
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.1/gsap.min.js"></script>
+    <script>
+        // GSAP Animation for Title and Subtitle
+        gsap.from("#page-title", {
+            duration: 1.5,
+            opacity: 0,
+            y: -50,
+            ease: "power4.out"
+        });
+
+        gsap.from("#page-subtitle", {
+            duration: 1.5,
+            opacity: 0,
+            y: 30,
+            delay: 0.5,
+            ease: "power4.out"
+        });
+    </script>
 
     <script src="../../vendors/popper/popper.min.js"></script>
     <script src="../../vendors/bootstrap/bootstrap.min.js"></script>
@@ -314,13 +347,7 @@
     <script src="../../assets/js/phoenix.js"></script>
     <script src="../../vendors/echarts/echarts.min.js"></script>
     <script src="../../assets/js/ecommerce-dashboard.js"></script>
-
-
-
-
-
-    </script>
-
+    <!-- </script> -->
 
 
 </body>

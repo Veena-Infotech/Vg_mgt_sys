@@ -64,7 +64,7 @@
   <!--    Main Content-->
   <!-- ===============================================-->
   <main class="main" id="top">
-     <!-- change this to your navbar code link should be replaced properly -->
+    <!-- change this to your navbar code link should be replaced properly -->
     <?php include_once('../../Components/navbar.php'); ?>
     <script>
       var navbarTopShape = window.config.config.phoenixNavbarTopShape;
@@ -168,10 +168,8 @@
 
 
     <div class="content">
-        <!-- your main contents goes here  with footer . -->
-
-
-        <div class="container py-5">
+      <!-- your main contents goes here  with footer . -->
+      <div class="container py-5">
         <div class="mb-4 text-start">
           <h1 class="display-6 fw-bold d-flex align-items-center gap-2">
             <i class="bi bi-receipt" style="color: #0d6efd;"></i>
@@ -261,58 +259,58 @@
         </div>
       </form>
 
-    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
-    <script>
-      // Populate year dropdown with current year as default
-      const yearSelect = document.getElementById("yearSelect");
-      const currentYear = new Date().getFullYear();
-      for (let i = currentYear; i >= currentYear - 10; i--) {
-        const option = document.createElement("option");
-        option.value = i;
-        option.textContent = i;
-        if (i === currentYear) option.selected = true;
-        yearSelect.appendChild(option);
-      }
+      <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+      <script>
+        // Populate year dropdown with current year as default
+        const yearSelect = document.getElementById("yearSelect");
+        const currentYear = new Date().getFullYear();
+        for (let i = currentYear; i >= currentYear - 10; i--) {
+          const option = document.createElement("option");
+          option.value = i;
+          option.textContent = i;
+          if (i === currentYear) option.selected = true;
+          yearSelect.appendChild(option);
+        }
 
-      // Animate form on load
-      gsap.from("form", {
-        duration: 1,
-        opacity: 0,
-        y: 30,
-        ease: "power2.out"
-      });
-
-      // Animate fetch button click
-      document.getElementById("fetchBtn").addEventListener("click", () => {
-        const slip = document.getElementById("slipPreview");
-        slip.style.display = "block";
-        gsap.fromTo(slip, {
+        // Animate form on load
+        gsap.from("form", {
+          duration: 1,
           opacity: 0,
-          y: 20
-        }, {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
+          y: 30,
           ease: "power2.out"
         });
-      });
 
-      // Prevent form submission
-      document.getElementById("salaryForm").addEventListener("submit", (e) => {
-        e.preventDefault();
-        alert("Salary slip submitted successfully!");
-      });
-    </script>
+        // Animate fetch button click
+        document.getElementById("fetchBtn").addEventListener("click", () => {
+          const slip = document.getElementById("slipPreview");
+          slip.style.display = "block";
+          gsap.fromTo(slip, {
+            opacity: 0,
+            y: 20
+          }, {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "power2.out"
+          });
+        });
+
+        // Prevent form submission
+        document.getElementById("salaryForm").addEventListener("submit", (e) => {
+          e.preventDefault();
+          alert("Salary slip submitted successfully!");
+        });
+      </script>
 
 
-          <!-- Footer -->
-          <?php include("../../Components/footer.php"); ?>
+      <!-- Footer -->
+      <?php include("../../Components/footer.php"); ?>
+    </div>
     </div>
 
   </main>
-  
+
   <!-- ===============================================-->
   <!--    End of Main Content-->
   <!-- ===============================================-->
