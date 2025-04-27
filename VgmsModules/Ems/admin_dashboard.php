@@ -166,12 +166,10 @@
         </script>
         <div class="content">
             <div class="container">
-                <div class="d-flex align-items-center gap-2">
-                    <i class="bi bi-person-workspace fs-1"></i>
+                <div class="d-flex align-items-center gap-2">     
                     <h1 class="fw-bold mb-0" id="pageTitle">Receptionist Dashboard</h1>
                 </div>
-                <div class="d-flex align-items-center gap-2 mt-2">
-                    <i class="bi bi-briefcase fs-5 text-muted"></i>
+                <div class="d-flex align-items-center gap-2 mt-2 mb-4">
                     <p class="text-muted mb-0" id="pageSubtitle">Manage daily activities with ease</p>
                 </div>
                 <!-- Dashboard Content -->
@@ -289,31 +287,31 @@
                     <div class="col-md-6">
                         <div class="card h-100 shadow-sm">
                             <div class="card-body d-flex flex-column">
-                                <h2 class="card-title mb-4"><i class="bi bi-list-task"></i> Pending approval</h2>
+                                <h2 class="card-title mb-4"><i class="bi bi-list-task"></i> Pending Approval</h2>
 
                                 <div class="overflow-auto flex-grow-1" style="max-height: 300px;">
                                     <ul class="list-group fs-6" id="todoList">
-                                        <li class="list-group-item">
+                                        <li class=" small list-group-item">
                                             <i class="bi bi-pencil-square me-2"></i> Finalize the geometric shapes
                                             <div class="small text-muted mt-1 ms-4">Waiting for design team feedback</div>
                                         </li>
-                                        <li class="list-group-item">
+                                        <li class=" small list-group-item">
                                             <i class="bi bi-people-fill me-2"></i> Daily meeting with team members
                                             <div class="small text-muted mt-1 ms-4">Scheduling conflicts to resolve</div>
                                         </li>
-                                        <li class="list-group-item">
+                                        <li class="small list-group-item">
                                             <i class="bi bi-calendar-check me-2"></i> Daily Standup Meetings
                                             <div class="small text-muted mt-1 ms-4">Pending team confirmation</div>
                                         </li>
-                                        <li class="list-group-item">
+                                        <li class="small list-group-item">
                                             <i class="bi bi-hourglass-split me-2"></i> Procrastinate for a month
                                             <div class="small text-muted mt-1 ms-4">Needs management approval</div>
                                         </li>
-                                        <li class="list-group-item">
+                                        <li class="small list-group-item">
                                             <i class="bi bi-fire me-2"></i> Warming up
                                             <div class="small text-muted mt-1 ms-4">Pending on-boarding session</div>
                                         </li>
-                                        <li class="list-group-item">
+                                        <li class="small list-group-item">
                                             <i class="bi bi-box-arrow-up-right me-2"></i> Make ready for release
                                             <div class="small text-muted mt-1 ms-4">QA sign-off pending</div>
                                         </li>
@@ -350,14 +348,13 @@
                                         </li>
                                     </ul>
                                 </div>
-
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- Footer -->
-                <?php include("../../Components/footer.php"); ?>
             </div>
+            <!-- Footer -->
+            <?php include("../../Components/footer.php"); ?>
         </div>
     </main>
 
@@ -401,22 +398,20 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <!-- GSAP Animations -->
     <script>
-        // Animate Title and Subtitle
+        // Animate the dashboard title and subtitle 
         gsap.from("#pageTitle", {
             duration: 1,
-            x: -100,
-            opacity: 0,
+            opacity: 1,
             ease: "power4.out"
         });
 
         gsap.from("#pageSubtitle", {
             duration: 1,
-            x: -100,
-            opacity: 0,
+            opacity: 1,
             delay: 0.2,
             ease: "power4.out"
         });
-
+       
         // Animate all dashboard cards
         gsap.from("#dashboardContent .col-lg-4, #dashboardContent .col-12", {
             duration: 1,
@@ -546,12 +541,14 @@
             stagger: 0.2
         });
 
+
         gsap.from("#payrollSummary li", {
             opacity: 0,
             x: 50,
             duration: 0.8,
             stagger: 0.2
         });
+
 
         // Animate the Add new task button
         gsap.from("#todoList button", {
@@ -560,10 +557,35 @@
             duration: 0.8,
             delay: 0.5
         });
+
+        // Animate the charts
+        gsap.from("#contactsChart", {
+            opacity: 0,
+            scale: 0.8,
+            duration: 0.8,
+            delay: 0.5
+        });
+        gsap.from("#sourcesChart", {
+            opacity: 0,
+            scale: 0.8,
+            duration: 0.8,
+            delay: 0.5
+        });
+
+        // Animate the charts with a bounce effect
+        gsap.from("#contactsChart", {
+            scale: 0.5,
+            duration: 0.8,
+            ease: "bounce.out",
+            delay: 0.5
+        });
+        gsap.from("#sourcesChart", {
+            scale: 0.5,
+            duration: 0.8,
+            ease: "bounce.out",
+            delay: 0.5
+        });
     </script>
-
-
-
 
 </body>
 
