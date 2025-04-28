@@ -180,22 +180,19 @@
         </div>
 
         <div class="d-flex align-items-center gap-3 mb-4 flex-wrap">
-  <div class="form-floating form-floating-advance-select" style="width: 250px;">
-    <select class="form-select" id="employeeSelect" data-choices="data-choices" data-options='{"removeItemButton":true,"placeholder":true}'>
-      <option selected disabled>Choose an employee</option>
-      <option>John Doe</option>
-      <option>Jane Smith</option>
-      <option>Rahul Kumar</option>
-    </select>
-    <label for="employeeSelect">Select Employee</label>
-  </div>
-  <div>
-    <button class="btn btn-outline-primary mb-4" id="loadHistory">Load History</button>
-  </div>
-</div>
-
-
-
+          <div class="form-floating" style="width: 250px;">
+            <select class="form-select" id="employeeSelect">
+              <option selected disabled>Choose an employee</option>
+              <option>John Doe</option>
+              <option>Jane Smith</option>
+              <option>Rahul Kumar</option>
+            </select>
+            <label for="employeeSelect">Select Employee</label>
+          </div>
+          <div>
+            <button class="btn btn-outline-primary mb-4 mt-4" id="loadHistory">Load History</button>
+          </div>
+        </div>
       </div>
 
       <div id="tableExample4"
@@ -317,166 +314,6 @@
 
       </div>
 
-      <!-- GSAP Animation Script -->
-      <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
-      <script>
-        // Page entrance animation
-        gsap.from(".container", {
-          opacity: 0,
-          y: 30,
-          duration: 1,
-          ease: "power2.out"
-        });
-
-        // Load table with animation
-        document.getElementById("loadHistory").addEventListener("click", () => {
-          const table = document.getElementById("historyTable");
-          table.style.display = "block";
-          gsap.fromTo(table, {
-            opacity: 0,
-            y: 20
-          }, {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            ease: "power2.out"
-          });
-        });
-
-
-        // Sample data for employees
-        const employeeData = {
-          'John Doe': [{
-            date: '2025-19-06',
-            leaveType: 'Casual',
-            approvedBy: 'Manager A',
-            status: 'Accepted'
-          },
-          {
-            date: '2025-20-06',
-            leaveType: 'Sick',
-            approvedBy: 'Manager B',
-            status: 'Pending'
-          },
-          ],
-          'Jane Smith': [{
-            date: '2025-21-06',
-            leaveType: 'Casual',
-            approvedBy: 'Manager C',
-            status: 'Rejected'
-          },
-          {
-            date: '2025-22-06',
-            leaveType: 'Vacation',
-            approvedBy: 'Manager A',
-            status: 'Accepted'
-          },
-          ],
-          'Rahul Kumar': [{
-            date: '2025-23-06',
-            leaveType: 'Maternity',
-            approvedBy: 'Manager B',
-            status: 'Pending'
-          },
-          {
-            date: '2025-24-06',
-            leaveType: 'Casual',
-            approvedBy: 'Manager A',
-            status: 'Rejected'
-          },
-          ]
-        };
-
-        // Function to update the table based on the selected employee
-        function updateTableData(employeeName) {
-          // Get the table body element
-          const tableBody = document.querySelector('#tableExample4 tbody');
-          // Clear existing rows
-          tableBody.innerHTML = '';
-
-          // Check if the employee data exists
-          if (employeeData[employeeName]) {
-            // Loop through the employee data and add rows to the table
-            employeeData[employeeName].forEach(data => {
-              const statusClass = data.status === 'Accepted' ? 'badge-phoenix-success' :
-                data.status === 'Pending' ? 'badge-phoenix-warning' : 'badge-phoenix-secondary';
-
-              const statusIcon = data.status === 'Accepted' ? 'check' :
-                data.status === 'Pending' ? 'bars-staggered' : 'ban';
-
-              const row = `
-          <tr>
-            <td class="align-middle ps-3 date">${data.date}</td>
-            <td class="align-middle leave-type">${data.leaveType}</td>
-            <td class="align-middle approved-by">${data.approvedBy}</td>
-            <td class="align-middle payment text-end py-3 pe-3">
-              <div class="badge ${statusClass} fs-10"><span class="fw-bold">${data.status}</span>
-                <svg class="svg-inline--fa fa-${statusIcon} ms-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="${statusIcon}" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
-                  <path fill="currentColor" d="..."></path>
-                </svg>
-              </div>
-            </td>
-          </tr>
-        `;
-              // Append new row to the table
-              tableBody.insertAdjacentHTML('beforeend', row);
-            });
-          }
-        }
-
-        // Add event listener to employee select dropdown
-        document.getElementById('employeeSelect').addEventListener('change', function () {
-          const selectedEmployee = this.value;
-          updateTableData(selectedEmployee);
-        });
-
-        // Initial load (e.g., default employee)
-        document.addEventListener('DOMContentLoaded', function () {
-          const defaultEmployee = document.getElementById('employeeSelect').value;
-          if (defaultEmployee) {
-            updateTableData(defaultEmployee);
-          }
-        });
-
-        // Function to get badge class based on status
-        function getStatusClass(status) {
-          if (status === 'Accepted') return 'badge-phoenix-success';
-          if (status === 'Pending') return 'badge-phoenix-warning';
-          return 'badge-phoenix-secondary';
-        }
-
-        // Function to get status icon based on status
-        function getStatusIcon(status) {
-          if (status === 'Accepted') return '<svg class="svg-inline--fa fa-check ms-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>';
-          if (status === 'Pending') return '<svg class="svg-inline--fa fa-bars-staggered ms-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars-staggered" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM64 256c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H96c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"></path></svg>';
-          return '<svg class="svg-inline--fa fa-ban ms-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ban" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M367.2 412.5L99.5 144.8C77.1 176.1 64 214.5 64 256c0 106 86 192 192 192c41.5 0 79.9-13.1 111.2-35.5zm45.3-45.3C434.9 335.9 448 297.5 448 256c0-106-86-192-192-192c-41.5 0-79.9 13.1-111.2 35.5L412.5 367.2zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"></path></svg>';
-        }
-
-        // Event listener for filtering by status
-        document.querySelector('[data-list-filter="data-list-filter"]').addEventListener('change', function () {
-          const selectedStatus = this.value;
-          const rows = document.querySelectorAll('#tableExample4 tbody .leave-row');
-
-          rows.forEach(row => {
-            const rowStatus = row.getAttribute('data-status');
-            if (selectedStatus === "" || rowStatus === selectedStatus) {
-              row.style.display = ''; // Show row
-            } else {
-              row.style.display = 'none'; // Hide row
-            }
-          });
-        });
-
-        // Initial load (e.g., default employee)
-        document.addEventListener('DOMContentLoaded', function () {
-          const defaultEmployee = document.getElementById('employeeSelect').value;
-          if (defaultEmployee) {
-            updateTableData(defaultEmployee);
-          }
-        });
-      </script>
-
-
       <!-- Footer -->
       <?php include("../../Components/footer.php"); ?>
     </div>
@@ -502,6 +339,185 @@
   <script src="../../assets/js/phoenix.js"></script>
   <script src="../../vendors/choices/choices.min.js"></script>
   <!-- you js code goes here -->
+
+
+  <!-- GSAP Animation Script -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+  <script>
+    // Page entrance animation
+    gsap.from(".container", {
+      opacity: 0,
+      y: 30,
+      duration: 1,
+      ease: "power2.out"
+    });
+
+    // Load history button animation
+    document.getElementById("loadHistory").addEventListener("mouseover", () => {
+      gsap.to("#loadHistory", {
+        scale: 1.05,
+        duration: 0.3,
+        ease: "power2.out"
+      });
+    });
+
+    document.getElementById("loadHistory").addEventListener("mouseout", () => {
+      gsap.to("#loadHistory", {
+        scale: 1,
+        duration: 0.3,
+        ease: "power2.out"
+      });
+    });
+
+
+
+    // Load table with animation
+    document.getElementById("loadHistory").addEventListener("click", () => {
+      const table = document.getElementById("historyTable");
+      table.style.display = "block";
+      gsap.fromTo(table, {
+        opacity: 0,
+        y: 20
+      }, {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: "power2.out"
+      });
+    });
+
+
+    // Sample data for employees
+    const employeeData = {
+      'John Doe': [{
+          date: '2025-19-06',
+          leaveType: 'Casual',
+          approvedBy: 'Manager A',
+          status: 'Accepted'
+        },
+        {
+          date: '2025-20-06',
+          leaveType: 'Sick',
+          approvedBy: 'Manager B',
+          status: 'Pending'
+        },
+      ],
+      'Jane Smith': [{
+          date: '2025-21-06',
+          leaveType: 'Casual',
+          approvedBy: 'Manager C',
+          status: 'Rejected'
+        },
+        {
+          date: '2025-22-06',
+          leaveType: 'Vacation',
+          approvedBy: 'Manager A',
+          status: 'Accepted'
+        },
+      ],
+      'Rahul Kumar': [{
+          date: '2025-23-06',
+          leaveType: 'Maternity',
+          approvedBy: 'Manager B',
+          status: 'Pending'
+        },
+        {
+          date: '2025-24-06',
+          leaveType: 'Casual',
+          approvedBy: 'Manager A',
+          status: 'Rejected'
+        },
+      ]
+    };
+
+    // Function to update the table based on the selected employee
+    function updateTableData(employeeName) {
+      // Get the table body element
+      const tableBody = document.querySelector('#tableExample4 tbody');
+      // Clear existing rows
+      tableBody.innerHTML = '';
+
+      // Check if the employee data exists
+      if (employeeData[employeeName]) {
+        // Loop through the employee data and add rows to the table
+        employeeData[employeeName].forEach(data => {
+          const statusClass = data.status === 'Accepted' ? 'badge-phoenix-success' :
+            data.status === 'Pending' ? 'badge-phoenix-warning' : 'badge-phoenix-secondary';
+
+          const statusIcon = data.status === 'Accepted' ? 'check' :
+            data.status === 'Pending' ? 'bars-staggered' : 'ban';
+
+          const row = `
+          <tr>
+            <td class="align-middle ps-3 date">${data.date}</td>
+            <td class="align-middle leave-type">${data.leaveType}</td>
+            <td class="align-middle approved-by">${data.approvedBy}</td>
+            <td class="align-middle payment text-end py-3 pe-3">
+              <div class="badge ${statusClass} fs-10"><span class="fw-bold">${data.status}</span>
+                <svg class="svg-inline--fa fa-${statusIcon} ms-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="${statusIcon}" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+                  <path fill="currentColor" d="..."></path>
+                </svg>
+              </div>
+            </td>
+          </tr>
+        `;
+          // Append new row to the table
+          tableBody.insertAdjacentHTML('beforeend', row);
+        });
+      }
+    }
+
+    // Add event listener to employee select dropdown
+    document.getElementById('employeeSelect').addEventListener('change', function() {
+      const selectedEmployee = this.value;
+      updateTableData(selectedEmployee);
+    });
+
+    // Initial load (e.g., default employee)
+    document.addEventListener('DOMContentLoaded', function() {
+      const defaultEmployee = document.getElementById('employeeSelect').value;
+      if (defaultEmployee) {
+        updateTableData(defaultEmployee);
+      }
+    });
+
+    // Function to get badge class based on status
+    function getStatusClass(status) {
+      if (status === 'Accepted') return 'badge-phoenix-success';
+      if (status === 'Pending') return 'badge-phoenix-warning';
+      return 'badge-phoenix-secondary';
+    }
+
+    // Function to get status icon based on status
+    function getStatusIcon(status) {
+      if (status === 'Accepted') return '<svg class="svg-inline--fa fa-check ms-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>';
+      if (status === 'Pending') return '<svg class="svg-inline--fa fa-bars-staggered ms-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars-staggered" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM64 256c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H96c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"></path></svg>';
+      return '<svg class="svg-inline--fa fa-ban ms-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ban" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M367.2 412.5L99.5 144.8C77.1 176.1 64 214.5 64 256c0 106 86 192 192 192c41.5 0 79.9-13.1 111.2-35.5zm45.3-45.3C434.9 335.9 448 297.5 448 256c0-106-86-192-192-192c-41.5 0-79.9 13.1-111.2 35.5L412.5 367.2zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"></path></svg>';
+    }
+
+    // Event listener for filtering by status
+    document.querySelector('[data-list-filter="data-list-filter"]').addEventListener('change', function() {
+      const selectedStatus = this.value;
+      const rows = document.querySelectorAll('#tableExample4 tbody .leave-row');
+
+      rows.forEach(row => {
+        const rowStatus = row.getAttribute('data-status');
+        if (selectedStatus === "" || rowStatus === selectedStatus) {
+          row.style.display = ''; // Show row
+        } else {
+          row.style.display = 'none'; // Hide row
+        }
+      });
+    });
+
+    // Initial load (e.g., default employee)
+    document.addEventListener('DOMContentLoaded', function() {
+      const defaultEmployee = document.getElementById('employeeSelect').value;
+      if (defaultEmployee) {
+        updateTableData(defaultEmployee);
+      }
+    });
+  </script>
 </body>
 
 </html>

@@ -175,16 +175,29 @@
                 <hr class="hr">
 
                 <div id="tableExample4" data-list="{&quot;valueNames&quot;:[&quot;name&quot;,&quot;email&quot;,&quot;payment&quot;],&quot;page&quot;:5,&quot;pagination&quot;:true,&quot;filter&quot;:{&quot;key&quot;:&quot;payment&quot;}}">
-                    <div class="row justify-content-end g-0">
-                        <div class="col-auto px-3"><select class="form-select form-select-sm mb-3" data-list-filter="data-list-filter">
-                                <option selected="" value="">Select payment status</option>
+                    <div class="row g-2 justify-content-end align-items-center mb-3">
+                        <!-- Apply for Loan Button -->
+                        <div class="col-auto">
+                            <button class="btn btn-outline-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#verticallyCentered">
+                                Apply For Loan
+                            </button>
+                        </div>
+
+                        <!-- Payment Status Dropdown -->
+                        <div class="col-auto">
+                            <select class="form-select form-select-sm" data-list-filter="data-list-filter">
+                                <option selected value="">Select payment status</option>
                                 <option value="Pending">Pending</option>
                                 <option value="Success">Accepted</option>
                                 <option value="Blocked">Rejected</option>
-                            </select></div>
+                            </select>
+                        </div>
                     </div>
-                    <div class="table-responsive">
-                        <table class="table table-sm fs-9 mb-0">
+
+
+
+                    <div class="table-responsive mb-3">
+                        <table class="table table-sm fs-9 mb-3">
                             <thead>
                                 <tr class="bg-body-highlight">
                                     <th class="sort border-top border-translucent ps-3" data-sort="name">Customer</th>
@@ -268,37 +281,58 @@
                         </div>
                     </div>
 
-
-                    <button class="btn btn-primary" type="button" data-bs-toggle="modal"
-                        data-bs-target="#verticallyCentered">Vertically centered modal</button>
                     <div class="modal fade" id="verticallyCentered" tabindex="-1"
                         aria-labelledby="verticallyCenteredModalLabel" aria-hidden="true" style="display: none;">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="verticallyCenteredModalLabel">Modal title</h5><button
-                                        class="btn btn-close p-1" type="button" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <p class="text-body-tertiary lh-lg mb-0">This is a static modal example (meaning its
-                                        position and display have been overridden). Included are the modal header, modal
-                                        body (required for padding), and modal footer (optional). </p>
-                                </div>
-                                <div class="modal-footer"><button class="btn btn-primary" type="button">Okay</button><button
-                                        class="btn btn-outline-primary" type="button"
-                                        data-bs-dismiss="modal">Cancel</button></div>
+
+                                <form class="row g-3 needs-validation px-5 py-4" novalidate="">
+                                    <!-- Loan Amount -->
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="loanAmount">
+                                            <i class="bi bi-cash-stack me-2"></i>Loan Amount
+                                        </label>
+                                        <input class="form-control" id="loanAmount" type="number" placeholder="Enter the loan amount" required="">
+                                        <div class="invalid-feedback">Please provide a valid loan amount.</div>
+                                    </div>
+
+                                    <!-- Loan Term -->
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="loanTerm">
+                                            <i class="bi bi-calendar-range me-2"></i>Loan Term (in months)
+                                        </label>
+                                        <input class="form-control" id="loanTerm" type="number" placeholder="Enter loan term in months" required="">
+                                        <div class="invalid-feedback">Please provide the loan term in months.</div>
+                                    </div>
+
+                                    <!-- Loan Purpose -->
+                                    <div class="col-md-12">
+                                        <label class="form-label" for="loanPurpose">
+                                            <i class="bi bi-pencil-square me-2"></i>Purpose of Loan
+                                        </label>
+                                        <textarea class="form-control" id="loanPurpose" placeholder="Describe the purpose of the loan" required=""></textarea>
+                                        <div class="invalid-feedback">Please provide the purpose of the loan.</div>
+                                    </div>
+
+                                    <!-- Submit Button -->
+                                    <div class="col-12">
+                                        <button class="btn btn-outline-primary" type="submit">
+                                            <i class="bi bi-check-circle me-2"></i>Submit
+                                        </button>
+                                    </div>
+                                </form>
+
                             </div>
                         </div>
                     </div>
                 </div>
 
-               
+
             </div>
-                         <!-- Footer -->
-         <?php include("../../Components/footer.php"); ?>
+            <!-- Footer -->
+            <?php include("../../Components/footer.php"); ?>
         </div>
-        
+
     </main>
 
     <!-- ===============================================-->
