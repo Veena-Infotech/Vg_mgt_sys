@@ -166,7 +166,7 @@
         </script>
         <div class="content">
             <div class="container">
-                <div class="d-flex align-items-center gap-2">     
+                <div class="d-flex align-items-center gap-2">
                     <h1 class="fw-bold mb-0" id="pageTitle">Receptionist Dashboard</h1>
                 </div>
                 <div class="d-flex align-items-center gap-2 mt-2 mb-4">
@@ -255,104 +255,156 @@
                 </div>
 
                 <!-- Charts Section -->
-                <div class="row g-4 mt-2" id="chartsSection">
 
-                    <!-- Bar Chart -->
-                    <div class="col-lg-8">
-                        <div class="border rounded-4 p-4 shadow-sm h-100">
-                            <h5 class="fw-bold d-flex align-items-center gap-2 mb-3">
-                                <i class="bi bi-bar-chart-line"></i> Contacts Created
-                            </h5>
-                            <p class="text-muted">Contacts received across all channels</p>
-                            <canvas id="contactsChart" height="150"></canvas>
-                        </div>
-                    </div>
-
-                    <!-- Doughnut Chart -->
-                    <div class="col-lg-4">
-                        <div class="border rounded-4 p-4 shadow-sm h-100">
-                            <h5 class="fw-bold d-flex align-items-center gap-2 mb-3">
-                                <i class="bi bi-pie-chart-fill"></i> New Contacts by Source
-                            </h5>
-                            <p class="text-muted">Distribution of contact sources</p>
-                            <canvas id="sourcesChart" height="150"></canvas>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="row g-4 py-5">
-
-                    <!-- To Do Section -->
+                <div class="row g-4 d-flex mt-4" id="chartsSection">
+                    <!-- Attendance Card -->
                     <div class="col-md-6">
-                        <div class="card h-100 shadow-sm">
+                        <div class="card shadow-sm border-0 rounded-4 h-100">
                             <div class="card-body d-flex flex-column">
-                                <h2 class="card-title mb-4"><i class="bi bi-list-task"></i> Pending Approval</h2>
+                                <h5 class="card-title mb-3">
+                                    <i class="bi bi-calendar-check"></i> Employee Attendance
+                                </h5>
 
-                                <div class="overflow-auto flex-grow-1" style="max-height: 300px;">
-                                    <ul class="list-group fs-6" id="todoList">
-                                        <li class=" small list-group-item">
-                                            <i class="bi bi-pencil-square me-2"></i> Finalize the geometric shapes
-                                            <div class="small text-muted mt-1 ms-4">Waiting for design team feedback</div>
-                                        </li>
-                                        <li class=" small list-group-item">
-                                            <i class="bi bi-people-fill me-2"></i> Daily meeting with team members
-                                            <div class="small text-muted mt-1 ms-4">Scheduling conflicts to resolve</div>
-                                        </li>
-                                        <li class="small list-group-item">
-                                            <i class="bi bi-calendar-check me-2"></i> Daily Standup Meetings
-                                            <div class="small text-muted mt-1 ms-4">Pending team confirmation</div>
-                                        </li>
-                                        <li class="small list-group-item">
-                                            <i class="bi bi-hourglass-split me-2"></i> Procrastinate for a month
-                                            <div class="small text-muted mt-1 ms-4">Needs management approval</div>
-                                        </li>
-                                        <li class="small list-group-item">
-                                            <i class="bi bi-fire me-2"></i> Warming up
-                                            <div class="small text-muted mt-1 ms-4">Pending on-boarding session</div>
-                                        </li>
-                                        <li class="small list-group-item">
-                                            <i class="bi bi-box-arrow-up-right me-2"></i> Make ready for release
-                                            <div class="small text-muted mt-1 ms-4">QA sign-off pending</div>
-                                        </li>
-                                    </ul>
+                                <!-- Month and Year Selection -->
+                                <div class="d-flex justify-content-between mb-4">
+                                    <select class="form-select w-auto" id="monthSelect">
+                                        <option selected>Month</option>
+                                        <option value="1">January</option>
+                                        <option value="2">February</option>
+                                        <option value="3">March</option>
+                                        <option value="4">April</option>
+                                        <option value="5">May</option>
+                                        <option value="6">June</option>
+                                        <option value="7">July</option>
+                                        <option value="8">August</option>
+                                        <option value="9">September</option>
+                                        <option value="10">October</option>
+                                        <option value="11">November</option>
+                                        <option value="12">December</option>
+                                    </select>
+
+                                    <select class="form-select w-auto" id="yearSelect">
+                                        <option selected>Year</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2021">2021</option>
+                                    </select>
                                 </div>
 
-                                <div class="mt-3">
-                                    <button class="btn btn-outline-primary w-100"><i class="bi bi-plus-circle me-2"></i> Add new task</button>
+                                <!-- Donut Chart -->
+                                <div class="d-flex justify-content-center">
+                                    <div style="width: 200px; height: 200px;">
+                                        <canvas id="attendanceChart"></canvas>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+
+                    <!-- To-Do List -->
+                    <div class="col-md-6">
+                        <div class="card shadow-sm border-0 rounded-4 h-100">
+                            <div class="card-body d-flex flex-column">
+                                <h2 class="card-title mb-4 fs-6">
+                                    <i class="bi bi-list-task"></i> To-Do List
+                                </h2>
+
+                                <ul class="list-group flex-grow-1" id="todoList">
+                                    <li class="list-group-item d-flex align-items-center">
+                                        <i class="bi bi-pencil-square me-2"></i> Complete project documentation
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-center">
+                                        <i class="bi bi-people-fill me-2"></i> Team meeting at 11 AM
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-center">
+                                        <i class="bi bi-calendar-event-fill me-2"></i> Update sprint board
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-center">
+                                        <i class="bi bi-gear-fill me-2"></i> Review system configurations
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-center">
+                                        <i class="bi bi-graph-up-arrow me-2"></i> Analyze weekly reports
+                                    </li>
+                                </ul>
+
+                                <div class="d-grid mt-4">
+                                    <button class="btn btn-outline-primary">
+                                        <i class="bi bi-plus-circle"></i> Add New Task
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4 py-5 d-flex">
+
+                    <!-- pending approvals -->
+                    <div class="col-md-6">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body d-flex flex-column">
+                                <h2 class=" fs-6 card-title mb-4 "><i class="bi bi-list-task"></i> Pending Approval</h2>
+
+                                <ul class="list-group fs-6" id="todoList">
+                                    <li class="small list-group-item">
+                                        <i class="bi bi-pencil-square me-2"></i> Finalize the geometric shapes
+                                        <div class="small text-muted mt-1 ms-4">Waiting for design team feedback</div>
+                                    </li>
+                                    <li class="small list-group-item">
+                                        <i class="bi bi-people-fill me-2"></i> Daily meeting with team members
+                                        <div class="small text-muted mt-1 ms-4">Scheduling conflicts to resolve</div>
+                                    </li>
+                                    <li class="small list-group-item">
+                                        <i class="bi bi-calendar-check me-2"></i> Daily Standup Meetings
+                                        <div class="small text-muted mt-1 ms-4">Pending team confirmation</div>
+                                    </li>
+                                    <li class="small list-group-item">
+                                        <i class="bi bi-hourglass-split me-2"></i> Procrastinate for a month
+                                        <div class="small text-muted mt-1 ms-4">Needs management approval</div>
+                                    </li>
+                                    <li class="small list-group-item">
+                                        <i class="bi bi-fire me-2"></i> Warming up
+                                        <div class="small text-muted mt-1 ms-4">Pending on-boarding session</div>
+                                    </li>
+                                </ul>
+                                <div class="mt-3">
+                                    <button class="btn btn-outline-primary w-100"><i class="bi bi-plus-circle me-2"></i>Veiw all task</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
 
                     <!-- Payroll Summary Section -->
                     <div class="col-md-6">
                         <div class="card h-100 shadow-sm">
                             <div class="card-body d-flex flex-column">
-                                <h2 class="card-title mb-4"><i class="bi bi-cash-coin"></i> Payroll Summary</h2>
+                                <h2 class="fs-6 card-title mb-4"><i class="bi bi-cash-coin"></i> Payroll Summary</h2>
                                 <p class="text-muted">Recent payroll activities</p>
 
-                                <div class="overflow-auto flex-grow-1">
-                                    <ul class="list-group mt-3" id="payrollSummary">
-                                        <li class="list-group-item">
-                                            <h5><i class="bi bi-currency-dollar me-2"></i> December 2023 Salary Disbursed</h5>
-                                            <p class="mb-0">All employees received December salaries on 1st Jan 2024.</p>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <h5><i class="bi bi-gift me-2"></i> Year-End Bonuses</h5>
-                                            <p class="mb-0">Bonuses credited on 20th Dec 2023.</p>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <h5><i class="bi bi-gear-fill me-2"></i> Payroll Adjustments</h5>
-                                            <p class="mb-0">Adjustments completed for reimbursements.</p>
-                                        </li>
-                                    </ul>
-                                </div>
+                                <ul class="list-group mt-3" id="payrollSummary">
+                                    <li class="list-group-item">
+                                        <h5><i class="bi bi-currency-dollar me-2"></i> December 2023 Salary Disbursed</h5>
+                                        <p class="mb-0">All employees received December salaries on 1st Jan 2024.</p>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <h5><i class="bi bi-gift me-2"></i> Year-End Bonuses</h5>
+                                        <p class="mb-0">Bonuses credited on 20th Dec 2023.</p>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <h5><i class="bi bi-gear-fill me-2"></i> Payroll Adjustments</h5>
+                                        <p class="mb-0">Adjustments completed for reimbursements.</p>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
+
             <!-- Footer -->
             <?php include("../../Components/footer.php"); ?>
         </div>
@@ -411,76 +463,37 @@
             delay: 0.2,
             ease: "power4.out"
         });
-       
-        // Animate all dashboard cards
-        gsap.from("#dashboardContent .col-lg-4, #dashboardContent .col-12", {
-            duration: 1,
-            y: 50,
-            opacity: 0,
-            stagger: 0.2,
-            ease: "back.out(1.7)"
-        });
 
-        // Animate Quick Action Buttons on hover
-        document.querySelectorAll('button').forEach(button => {
-            button.addEventListener('mouseenter', () => {
-                gsap.to(button, {
-                    scale: 1.05,
-                    duration: 0.2
-                });
-            });
-            button.addEventListener('mouseleave', () => {
-                gsap.to(button, {
-                    scale: 1,
-                    duration: 0.2
-                });
-            });
-        });
-
-        // Contacts Bar Chart
-        const contactsCtx = document.getElementById('contactsChart').getContext('2d');
-        new Chart(contactsCtx, {
-            type: 'bar',
+        // Donut Chart
+        const ctx = document.getElementById('attendanceChart').getContext('2d');
+        const attendanceChart = new Chart(ctx, {
+            type: 'doughnut',
             data: {
-                labels: ['18 Apr', '19 Apr', '20 Apr', '21 Apr', '22 Apr', '23 Apr', '24 Apr', '25 Apr', '26 Apr'],
+                labels: ['Present', 'Absent', 'On Leave'],
                 datasets: [{
-                    label: 'Contacts',
-                    data: [30, 20, 40, 35, 55, 38, 22, 34, 52],
-                    backgroundColor: 'rgba(13, 110, 253, 0.7)',
-                    borderRadius: 8
+                    data: [75, 15, 10],
+                    backgroundColor: ['#48A860', '#e74a3b', '#f6c23e'],
+                    borderWidth: 2,
+                    cutout: '70%' // Makes the donut unique and smaller inside
                 }]
             },
             options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'bottom'
                     }
                 }
             }
         });
 
-        // Sources Doughnut Chart
-        const sourcesCtx = document.getElementById('sourcesChart').getContext('2d');
-        new Chart(sourcesCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Organic', 'Paid Search', 'Direct'],
-                datasets: [{
-                    label: 'New Contacts',
-                    data: [80, 65, 40],
-                    backgroundColor: [
-                        'rgba(13, 110, 253, 0.7)',
-                        'rgba(25, 135, 84, 0.7)',
-                        'rgba(255, 193, 7, 0.7)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                cutout: '70%'
-            }
+        // GSAP Animations
+        gsap.from(".card", {
+            duration: 1,
+            y: 50,
+            opacity: 0,
+            stagger: 0.2,
+            ease: "power4.out"
         });
 
         gsap.from("#pageTitle", {
