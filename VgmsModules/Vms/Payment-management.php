@@ -31,7 +31,8 @@
     <!-- ===============================================-->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap"
+        rel="stylesheet">
     <link href="../../vendors/simplebar/simplebar.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../unicons.iconscout.com/release/v4.0.8/css/line.css">
     <link href="../../assets/css/theme-rtl.css" type="text/css" rel="stylesheet" id="style-rtl">
@@ -164,162 +165,352 @@
             }
         </script>
         <div class="content">
-<div class="content-body">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h4 class="card-title mb-0">Payments Details</h4>
-                        <div class="col-md-6 col-lg-10">
-                            <input type="text" class="form-control" id="searchInput" placeholder="Search payments...">
+            <div class="content">
+                <h2 class="mb-2 lh-sm">Payment History</h2>
+
+                <div id="tableExample3"
+                    data-list="{&quot;valueNames&quot;:[&quot;name&quot;,&quot;email&quot;,&quot;age&quot;],&quot;page&quot;:5,&quot;pagination&quot;:true}">
+                    <div class="search-box mb-3 mx-auto">
+                          <form class="position-relative"><input class="form-control search-input search form-control-sm" type="search" placeholder="Search" aria-label="Search">
+                            <svg class="svg-inline--fa fa-magnifying-glass search-box-icon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg><!-- <span class="fas fa-search search-box-icon"></span> Font Awesome fontawesome.com -->
+                          </form>
                         </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-striped table-sm fs-9 mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="sort border-top border-translucent ps-3" data-sort="number">#</th>
+                                    <th class="sort border-top border-translucent ps-3" data-sort="name">Visitor</th>
+                                    <th class="sort border-top" data-sort="email">Service</th>
+                                    <th class="sort border-top" data-sort="age">Date</th>
+                                    <th class="sort border-top" data-sort="age">Time</th>
+                                    <th class="sort border-top" data-sort="age">Amount</th>
+                                    <th class="sort border-top" data-sort="age">Payment method</th>
+                                    <th class="sort border-top" data-sort="age">Status</th>
+                                    <th class="sort text-end align-middle pe-0 border-top" scope="col">ACTION</th>
+                                </tr>
+                            </thead>
+                            <tbody class="list">
+                                <tr>
+                                    <td class="align-middle ps-3 name">1</td>
+                                    <td class="align-middle name">Mr.Aakash</td>
+                                    <td class="align-middle name">Workshop</td>
+                                    <td class="align-middle time">30 April 2025</td>
+                                    <td class="align-middle time">11.00 AM</td>
+                                    <td class="align-middle time">₹1000</td>
+                                    <td class="align-middle time">UPI</td>
+                                    <td class="align-middle status">
+                                    <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span
+                                                class="fw-bold">Success</span><span class="ms-1 fas fa-check"></span>
+                                    </div>
+                                    </td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                        <div class="btn-reveal-trigger position-static"><button
+                                                class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
+                                                type="button" data-bs-toggle="dropdown" data-boundary="window"
+                                                aria-haspopup="true" aria-expanded="false"
+                                                data-bs-reference="parent"><svg class="svg-inline--fa fa-ellipsis fs-10"
+                                                    aria-hidden="true" focusable="false" data-prefix="fas"
+                                                    data-icon="ellipsis" role="img" xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 448 512" data-fa-i2svg="">
+                                                    <path fill="currentColor"
+                                                        d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z">
+                                                    </path>
+                                                </svg><!-- <span class="fas fa-ellipsis-h fs-10"></span> Font Awesome fontawesome.com --></button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2" style=""><a
+                                                    class="dropdown-item" href="#!">View Receipt</a><a
+                                                    class="dropdown-item" href="#!">Reminder</a>
+                                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger"
+                                                    href="#!">Remove</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">1</td>
+                                    <td class="align-middle name">Mr.Aakash</td>
+                                    <td class="align-middle name">Workshop</td>
+                                    <td class="align-middle time">30 April 2025</td>
+                                    <td class="align-middle time">11.00 AM</td>
+                                    <td class="align-middle time">₹1000</td>
+                                    <td class="align-middle time">UPI</td>
+                                    <td class="align-middle status">
+                                        <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span
+                                                class="fw-bold">Success</span><span class="ms-1 fas fa-check"></span>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                        <div class="btn-reveal-trigger position-static"><button
+                                                class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
+                                                type="button" data-bs-toggle="dropdown" data-boundary="window"
+                                                aria-haspopup="true" aria-expanded="false"
+                                                data-bs-reference="parent"><svg class="svg-inline--fa fa-ellipsis fs-10"
+                                                    aria-hidden="true" focusable="false" data-prefix="fas"
+                                                    data-icon="ellipsis" role="img" xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 448 512" data-fa-i2svg="">
+                                                    <path fill="currentColor"
+                                                        d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z">
+                                                    </path>
+                                                </svg><!-- <span class="fas fa-ellipsis-h fs-10"></span> Font Awesome fontawesome.com --></button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2" style=""><a
+                                                    class="dropdown-item" href="#!">View Receipt</a><a
+                                                    class="dropdown-item" href="#!">Reminder</a>
+                                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger"
+                                                    href="#!">Remove</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">1</td>
+                                    <td class="align-middle name">Mr.Aakash</td>
+                                    <td class="align-middle name">Workshop</td>
+                                    <td class="align-middle time">30 April 2025</td>
+                                    <td class="align-middle time">11.00 AM</td>
+                                    <td class="align-middle time">₹1000</td>
+                                    <td class="align-middle time">UPI</td>
+                                    <td class="align-middle status">
+                                        <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span
+                                                class="fw-bold">Success</span><span class="ms-1 fas fa-check"></span>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                        <div class="btn-reveal-trigger position-static"><button
+                                                class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
+                                                type="button" data-bs-toggle="dropdown" data-boundary="window"
+                                                aria-haspopup="true" aria-expanded="false"
+                                                data-bs-reference="parent"><svg class="svg-inline--fa fa-ellipsis fs-10"
+                                                    aria-hidden="true" focusable="false" data-prefix="fas"
+                                                    data-icon="ellipsis" role="img" xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 448 512" data-fa-i2svg="">
+                                                    <path fill="currentColor"
+                                                        d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z">
+                                                    </path>
+                                                </svg><!-- <span class="fas fa-ellipsis-h fs-10"></span> Font Awesome fontawesome.com --></button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2" style=""><a
+                                                    class="dropdown-item" href="#!">View Receipt</a><a
+                                                    class="dropdown-item" href="#!">Reminder</a>
+                                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger"
+                                                    href="#!">Remove</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">1</td>
+                                    <td class="align-middle name">Mr.Aakash</td>
+                                    <td class="align-middle name">Workshop</td>
+                                    <td class="align-middle time">30 April 2025</td>
+                                    <td class="align-middle time">11.00 AM</td>
+                                    <td class="align-middle time">₹1000</td>
+                                    <td class="align-middle time">UPI</td>
+                                    <td class="align-middle status">
+                                        <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span
+                                                class="fw-bold">Success</span><span class="ms-1 fas fa-check"></span>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                        <div class="btn-reveal-trigger position-static"><button
+                                                class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
+                                                type="button" data-bs-toggle="dropdown" data-boundary="window"
+                                                aria-haspopup="true" aria-expanded="false"
+                                                data-bs-reference="parent"><svg class="svg-inline--fa fa-ellipsis fs-10"
+                                                    aria-hidden="true" focusable="false" data-prefix="fas"
+                                                    data-icon="ellipsis" role="img" xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 448 512" data-fa-i2svg="">
+                                                    <path fill="currentColor"
+                                                        d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z">
+                                                    </path>
+                                                </svg><!-- <span class="fas fa-ellipsis-h fs-10"></span> Font Awesome fontawesome.com --></button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2" style=""><a
+                                                    class="dropdown-item" href="#!">View Receipt</a><a
+                                                    class="dropdown-item" href="#!">Reminder</a>
+                                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger"
+                                                    href="#!">Remove</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">1</td>
+                                    <td class="align-middle name">Mr.Aakash</td>
+                                    <td class="align-middle name">Workshop</td>
+                                    <td class="align-middle time">30 April 2025</td>
+                                    <td class="align-middle time">11.00 AM</td>
+                                    <td class="align-middle time">₹1000</td>
+                                    <td class="align-middle time">UPI</td>
+                                    <td class="align-middle status">
+                                        <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span
+                                                class="fw-bold">Success</span><span class="ms-1 fas fa-check"></span>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                        <div class="btn-reveal-trigger position-static"><button
+                                                class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
+                                                type="button" data-bs-toggle="dropdown" data-boundary="window"
+                                                aria-haspopup="true" aria-expanded="false"
+                                                data-bs-reference="parent"><svg class="svg-inline--fa fa-ellipsis fs-10"
+                                                    aria-hidden="true" focusable="false" data-prefix="fas"
+                                                    data-icon="ellipsis" role="img" xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 448 512" data-fa-i2svg="">
+                                                    <path fill="currentColor"
+                                                        d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z">
+                                                    </path>
+                                                </svg><!-- <span class="fas fa-ellipsis-h fs-10"></span> Font Awesome fontawesome.com --></button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2" style=""><a
+                                                    class="dropdown-item" href="#!">View Receipt</a><a
+                                                    class="dropdown-item" href="#!">Reminder</a>
+                                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger"
+                                                    href="#!">Remove</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">1</td>
+                                    <td class="align-middle name">Mr.Aakash</td>
+                                    <td class="align-middle name">Workshop</td>
+                                    <td class="align-middle time">30 April 2025</td>
+                                    <td class="align-middle time">11.00 AM</td>
+                                    <td class="align-middle time">₹1000</td>
+                                    <td class="align-middle time">UPI</td>
+                                    <td class="align-middle status">
+                                        <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span
+                                                class="fw-bold">Success</span><span class="ms-1 fas fa-check"></span>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                        <div class="btn-reveal-trigger position-static"><button
+                                                class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
+                                                type="button" data-bs-toggle="dropdown" data-boundary="window"
+                                                aria-haspopup="true" aria-expanded="false"
+                                                data-bs-reference="parent"><svg class="svg-inline--fa fa-ellipsis fs-10"
+                                                    aria-hidden="true" focusable="false" data-prefix="fas"
+                                                    data-icon="ellipsis" role="img" xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 448 512" data-fa-i2svg="">
+                                                    <path fill="currentColor"
+                                                        d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z">
+                                                    </path>
+                                                </svg><!-- <span class="fas fa-ellipsis-h fs-10"></span> Font Awesome fontawesome.com --></button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2" style=""><a
+                                                    class="dropdown-item" href="#!">View Receipt</a><a
+                                                    class="dropdown-item" href="#!">Reminder</a>
+                                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger"
+                                                    href="#!">Remove</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">1</td>
+                                    <td class="align-middle name">Mr.Aakash</td>
+                                    <td class="align-middle name">Workshop</td>
+                                    <td class="align-middle time">30 April 2025</td>
+                                    <td class="align-middle time">11.00 AM</td>
+                                    <td class="align-middle time">₹1000</td>
+                                    <td class="align-middle time">UPI</td>
+                                    <td class="align-middle status">
+                                        <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span
+                                                class="fw-bold">Success</span><span class="ms-1 fas fa-check"></span>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                        <div class="btn-reveal-trigger position-static"><button
+                                                class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
+                                                type="button" data-bs-toggle="dropdown" data-boundary="window"
+                                                aria-haspopup="true" aria-expanded="false"
+                                                data-bs-reference="parent"><svg class="svg-inline--fa fa-ellipsis fs-10"
+                                                    aria-hidden="true" focusable="false" data-prefix="fas"
+                                                    data-icon="ellipsis" role="img" xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 448 512" data-fa-i2svg="">
+                                                    <path fill="currentColor"
+                                                        d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z">
+                                                    </path>
+                                                </svg><!-- <span class="fas fa-ellipsis-h fs-10"></span> Font Awesome fontawesome.com --></button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2" style=""><a
+                                                    class="dropdown-item" href="#!">View Receipt</a><a
+                                                    class="dropdown-item" href="#!">Reminder</a>
+                                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger"
+                                                    href="#!">Remove</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 name">1</td>
+                                    <td class="align-middle name">Mr.Aakash</td>
+                                    <td class="align-middle name">Workshop</td>
+                                    <td class="align-middle time">30 April 2025</td>
+                                    <td class="align-middle time">11.00 AM</td>
+                                    <td class="align-middle time">₹1000</td>
+                                    <td class="align-middle time">UPI</td>
+                                    <td class="align-middle status">
+                                        <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span
+                                                class="fw-bold">Success</span><span class="ms-1 fas fa-check"></span>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                        <div class="btn-reveal-trigger position-static"><button
+                                                class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
+                                                type="button" data-bs-toggle="dropdown" data-boundary="window"
+                                                aria-haspopup="true" aria-expanded="false"
+                                                data-bs-reference="parent"><svg class="svg-inline--fa fa-ellipsis fs-10"
+                                                    aria-hidden="true" focusable="false" data-prefix="fas"
+                                                    data-icon="ellipsis" role="img" xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 448 512" data-fa-i2svg="">
+                                                    <path fill="currentColor"
+                                                        d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z">
+                                                    </path>
+                                                </svg><!-- <span class="fas fa-ellipsis-h fs-10"></span> Font Awesome fontawesome.com --></button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2" style=""><a
+                                                    class="dropdown-item" href="#!">View Receipt</a><a
+                                                    class="dropdown-item" href="#!">Reminder</a>
+                                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger"
+                                                    href="#!">Remove</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-responsive-md">
-                                <thead>
-                                    <tr>
-                                        <th style="width:80px;"><strong>#</strong></th>
-                                        <th><strong>Visitor</strong></th>
-                                        <th><strong>Service</strong></th>
-                                        <th><strong>Date</strong></th>
-                                        <th><strong>Time</strong></th>
-                                        <th><strong>Amount</strong></th>
-                                        <th><strong>Payment Method</strong></th>
-                                        <th><strong>Status</strong></th>
-                                        <th><strong>Action</strong></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr style="background-color:white;">
-                                        <td><strong>01</strong></td>
-                                        <td>Mr. kartik</td>
-                                        <td>Guest Lecture</td>
-                                        <td>01 April 2025</td>
-                                        <td>11.00 pm</td>
-                                        <td>₹500</td>
-                                        <td>UPI</td>
-                                        <td><span class="badge bg-success text-white">Paid</span></td>
-                                        <td>
-                                            <div class="dropdown">
-                                                <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1">
-                                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                            <rect x="0" y="0" width="24" height="24"></rect>
-                                                            <circle fill="#000000" cx="5" cy="12" r="2"></circle>
-                                                            <circle fill="#000000" cx="12" cy="12" r="2"></circle>
-                                                            <circle fill="#000000" cx="19" cy="12" r="2"></circle>
-                                                        </g>
-                                                    </svg>
-                                                </button>
-                                                <ul class="dropdown-menu dropdown-menu-end" style="min-width: 150px;">
-                                                    <li><a class="dropdown-item" href="#">View Receipt</a></li>
-                                                    <li><a class="dropdown-item" href="#">Reminder</a></li>
-                                                </ul>
-                                            </div>
-                                        </td>
-                                     </tr>
-									<tr style="background-color: #f2f2f2;">
-                                        <td><strong>02</strong></td>
-                                        <td>Mr. Aman</td>
-                                        <td>Workshop</td>
-                                        <td>05 April 2025</td>
-                                        <td>12.30 pm</td>
-                                        <td>₹1000</td>
-                                        <td>Cash</td>
-                                        <td><span class="badge bg-success text-white">Paid</span></td>
-                                        <td>
-                                            <div class="dropdown">
-                                                <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1">
-                                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                            <rect x="0" y="0" width="24" height="24"></rect>
-                                                            <circle fill="#000000" cx="5" cy="12" r="2"></circle>
-                                                            <circle fill="#000000" cx="12" cy="12" r="2"></circle>
-                                                            <circle fill="#000000" cx="19" cy="12" r="2"></circle>
-                                                        </g>
-                                                    </svg>
-                                                </button>
-                                                <ul class="dropdown-menu dropdown-menu-end" style="min-width: 150px;">
-                                                    <li><a class="dropdown-item" href="#">View Receipt</a></li>
-                                                    <li><a class="dropdown-item" href="#">Reminder</a></li>
-                                                </ul>
-                                            </div>
-                                        </td>
-                                    </tr>
-									<tr>
-                                        <td><strong>03</strong></td>
-                                        <td>Mr. Yash</td>
-                                        <td>Event pass</td>
-                                        <td>10 April 2025</td>
-                                        <td>3.00 pm</td>
-                                        <td>₹2000</td>
-                                        <td>Card</td>
-                                        <td><span class="badge bg-warning text-dark">Pending</span></td>
-                                        <td>
-                                            <div class="dropdown">
-                                                <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1">
-                                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                            <rect x="0" y="0" width="24" height="24"></rect>
-                                                            <circle fill="#000000" cx="5" cy="12" r="2"></circle>
-                                                            <circle fill="#000000" cx="12" cy="12" r="2"></circle>
-                                                            <circle fill="#000000" cx="19" cy="12" r="2"></circle>
-                                                        </g>
-                                                    </svg>
-                                                </button>
-                                                <ul class="dropdown-menu dropdown-menu-end" style="min-width: 150px;">
-                                                    <li><a class="dropdown-item" href="#">View Receipt</a></li>
-                                                    <li><a class="dropdown-item" href="#">Reminder</a></li>
-                                                </ul>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr style="background-color: #f2f2f2;" >
-                                        <td><strong>03</strong></td>
-                                        <td>Mr. Yash</td>
-                                        <td>Event pass</td>
-                                        <td>10 April 2025</td>
-                                        <td>9.30 pm</td>
-                                        <td>₹2000</td>
-                                        <td>Card</td>
-                                        <td><span class="badge bg-warning text-dark">Pending</span></td>
-                                        <td>
-                                            <div class="dropdown">
-                                                <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1">
-                                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                            <rect x="0" y="0" width="24" height="24"></rect>
-                                                            <circle fill="#000000" cx="5" cy="12" r="2"></circle>
-                                                            <circle fill="#000000" cx="12" cy="12" r="2"></circle>
-                                                            <circle fill="#000000" cx="19" cy="12" r="2"></circle>
-                                                        </g>
-                                                    </svg>
-                                                </button>
-                                                <ul class="dropdown-menu dropdown-menu-end" style="min-width: 150px;">
-                                                    <li><a class="dropdown-item" href="#">View Receipt</a></li>
-                                                    <li><a class="dropdown-item" href="#">Reminder</a></li>
-                                                </ul>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                    <div class="d-flex justify-content-between mt-3"><span class="d-none d-sm-inline-block"
+                            data-list-info="data-list-info">1 to 5 <span class="text-body-tertiary"> Items of
+                            </span>43</span>
+                        <div class="d-flex"><button class="page-link disabled" data-list-pagination="prev"
+                                disabled=""><svg class="svg-inline--fa fa-chevron-left" aria-hidden="true"
+                                    focusable="false" data-prefix="fas" data-icon="chevron-left" role="img"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
+                                    <path fill="currentColor"
+                                        d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z">
+                                    </path>
+                                </svg><!-- <span class="fas fa-chevron-left"></span> Font Awesome fontawesome.com --></button>
+                            <ul class="mb-0 pagination">
+                                <li class="active"><button class="page" type="button" data-i="1"
+                                        data-page="5">1</button>
+                                </li>
+                                <li><button class="page" type="button" data-i="2" data-page="5">2</button></li>
+                                <li><button class="page" type="button" data-i="3" data-page="5">3</button></li>
+                                <li class="disabled"><button class="page" type="button">...</button></li>
+                            </ul><button class="page-link pe-0" data-list-pagination="next"><svg
+                                    class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false"
+                                    data-prefix="fas" data-icon="chevron-right" role="img"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
+                                    <path fill="currentColor"
+                                        d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z">
+                                    </path>
+                                </svg><!-- <span class="fas fa-chevron-right"></span> Font Awesome fontawesome.com --></button>
                         </div>
                     </div>
                 </div>
+                <!-- Footer -->
+                <?php include("../../Components/footer.php"); ?>
             </div>
-        </div>
-    </div>
-
-            <!-- Footer -->
-            <?php include("../../Components/footer.php"); ?>
-        </div>
 
 
 
-        </div>
+
 
 
     </main>
@@ -336,8 +527,8 @@
     <!-- ===============================================-->
     <!--Dropdown for contacted-to--->
 
-    <!-- <script src="../../vendors/popper/popper.min.js"></script>
-    <script src="../../vendors/bootstrap/bootstrap.min.js"></script> -->
+    <script src="../../vendors/popper/popper.min.js"></script>
+    <script src="../../vendors/bootstrap/bootstrap.min.js"></script>
     <script src="../../vendors/anchorjs/anchor.min.js"></script>
     <script src="../../vendors/is/is.min.js"></script>
     <script src="../../vendors/fontawesome/all.min.js"></script>
@@ -351,60 +542,15 @@
     <script src="../../assets/js/phoenix.js"></script>
     <script src="../../vendors/echarts/echarts.min.js"></script>
     <script src="../../assets/js/ecommerce-dashboard.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script>
-    document.getElementById('searchInput').addEventListener('input', function () {
-        const filter = this.value.toLowerCase();
-        const rows = document.querySelectorAll('tbody tr');
-        rows.forEach(row => {
-            const rowText = row.innerText.toLowerCase();
-            row.style.display = rowText.includes(filter) ? '' : 'none';
-        });
-    });
 
-    document.addEventListener("DOMContentLoaded", function () {
-        // Get the table container element
-        const tableContainer = document.querySelector(".table-responsive");
 
-        // Initially hide the overflow to prevent the scrollbar during animation
-        tableContainer.style.overflow = 'hidden';
 
-        const tl = gsap.timeline({ defaults: { ease: "power2.out", duration: 0.3 } });
 
-        // Animate the "Payment Details" heading from bottom to top
-        tl.from(".card-title", {
-            opacity: 0,
-            y: 30  // Animate from bottom
-        });
 
-        // Animate each row (excluding the last td for action buttons) with increased speed
-        document.querySelectorAll('tbody tr').forEach((row, index) => {
-            // Animate the row excluding the last td (action buttons)
-            const rowCells = Array.from(row.querySelectorAll('td')).slice(0, -1);  // Exclude the last td (action buttons)
-            tl.from(rowCells, {
-                opacity: 0,
-                y: 30,  // Animate from bottom to top
-                stagger: 0.05, // Faster stagger effect (0.05 seconds)
-                duration: 0.1, // Speed up the row animation duration to 0.1 seconds
-                clearProps: "all" // Clean up any previous styles
-            });
-        });
+    </script>
 
-        // Animate the search input from bottom to top
-        tl.from("#searchInput", {
-            opacity: 0,
-            y: 30  // Animate the search input from bottom to top
-        });
 
-        // After the animation completes, enable scrolling by setting overflow to 'auto'
-        setTimeout(() => {
-            tableContainer.style.overflow = 'auto';  // Enable scroll once animation is done
-        }, tl.duration() * 1000);  // Use the timeline duration for delay
-    });
-</script>
-</script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 
