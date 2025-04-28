@@ -1,3 +1,8 @@
+<?php
+   // Include database connection
+   include '../PhpFiles/connection.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr" data-navigation-type="default" data-navbar-horizontal-shape="default">
 
@@ -60,6 +65,54 @@
     <link href="../../vendors/leaflet/leaflet.css" rel="stylesheet">
     <link href="../../vendors/leaflet.markercluster/MarkerCluster.css" rel="stylesheet">
     <link href="../../vendors/leaflet.markercluster/MarkerCluster.Default.css" rel="stylesheet">
+
+    <style>
+        /* Style for the file upload drop area */
+        .file-drop-area {
+            border: 2px dashed #007bff;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            background-color: #f8f9fa;
+            transition: background-color 0.3s ease;
+        }
+
+        .file-drop-area:hover {
+            background-color: #e9ecef;
+        }
+
+        /* Hidden file input */
+        .file-drop-area input[type="file"] {
+            display: none;
+        }
+
+        /* Style for the message within the drop area */
+        .file-drop-message p {
+            margin: 0;
+            font-size: 14px;
+            color: #007bff;
+        }
+
+        /* Preview of uploaded files */
+        #filePreview {
+            display: flex;
+            flex-direction: column;
+            margin-top: 10px;
+        }
+
+        #filePreview .file-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        #filePreview .file-item img {
+            width: 30px;
+            margin-right: 10px;
+        }
+    </style>
 </head>
 
 <body>
@@ -170,13 +223,12 @@
         <div class="content">
             <div id="heading-gsap">
                 <h3 class="mb-4">Add Project </h3>
-                <form action="../PhpFiles/add_project1.php" method="post" class="dropzone dropzone-multiple p-0" id="dropzone-multiple" data-dropzone="data-dropzone">
+                <form action="../PhpFiles/add_project1.php" method="post" class="p-0" enctype="multipart/form-data">
                     <div class="row g-3">
                         <!-- Project Title -->
                         <div class="col-md-6">
                             <label class="form-label">Project Title <span style="color: red;">*</span></label>
-                            <input type="text" class="form-control" placeholder="Enter project title"
-                                name="project_title">
+                            <input type="text" class="form-control" placeholder="Enter project title" name="project_title">
                         </div>
 
                         <!-- Project Type Dropdown -->
@@ -190,23 +242,40 @@
                             </select>
                         </div>
 
-                        <!-- project manager  -->
+                        <?php
 
+
+                        // Fetch project managers from tbl_emp (or another table if project managers are stored separately)
+                        $sql = "SELECT id, CONCAT(f_name, ' ', l_name) AS full_name FROM tbl_emp "; // Adjust this query to fetch managers specifically
+                        $result = $conn->query($sql);
+
+                        if ($result->num_rows > 0) {
+                            // Begin the dropdown options
+                            $manager_options = "<option selected disabled>Select Manager</option>";
+
+                            // Fetch each manager and add them as options in the dropdown
+                            while ($row = $result->fetch_assoc()) {
+                                $manager_id = $row['id'];
+                                $manager_name = $row['full_name'];
+                                $manager_options .= "<option value=\"$manager_id\">$manager_name</option>";
+                            }
+                        } else {
+                            $manager_options = "<option>No managers found</option>";
+                        }
+                        ?>
+
+                        <!-- Project Manager Dropdown -->
                         <div class="col-md-6">
-                            <label class="form-label">Project Manager<span style="color: red;">*</span></label>
+                            <label class="form-label">Project Manager <span style="color: red;">*</span></label>
                             <select class="form-select" name="project_manager">
-                                <option selected disabled>Select Manager</option>
-                                <option value="1">Aryan Sir</option>
-                                <option value="2">Op sir</option>
-                                <option value="3">Aakash sir</option>
-                                <option value="4">Static</option>
+                                <?php echo $manager_options; ?>
                             </select>
                         </div>
 
-                        <!-- project client  -->
 
+                        <!-- Project Client -->
                         <div class="col-md-6">
-                            <label class="form-label">Project Client<span style="color: red;">*</span></label>
+                            <label class="form-label">Project Client <span style="color: red;">*</span></label>
                             <select class="form-select" name="project_client">
                                 <option selected disabled>Select client</option>
                                 <option value="1">Janesh</option>
@@ -216,25 +285,44 @@
                             </select>
                         </div>
 
+                        <?php
+                     
+
+                        // Fetch employees from tbl_emp
+                        $sql = "SELECT id, CONCAT(f_name, ' ', l_name) AS full_name FROM tbl_emp"; // Adjust status condition as necessary
+                        $result = $conn->query($sql);
+
+                        if ($result->num_rows > 0) {
+                            // Begin the dropdown options
+                            $options = "<option disabled>Select organizer...</option>";
+
+                            // Fetch each employee and add them as options in the dropdown
+                            while ($row = $result->fetch_assoc()) {
+                                $emp_id = $row['id'];
+                                $emp_name = $row['full_name'];
+                                $options .= "<option value=\"$emp_id\">$emp_name</option>";
+                            }
+                        } else {
+                            $options = "<option>No employees found</option>";
+                        }
+                        ?>
+
                         <!-- Assigned Teams Dropdown -->
                         <div class="col-md-6">
-                            <div class="mb-3"><label class="form-label">Assigned Employee<span style="color: red;">*</span></label><select class="form-select" id="organizerMultiple2" data-choices="data-choices" multiple="multiple" size="1" 
-                            name="organizerMultiple" required="required" data-options='{"removeItemButton":true,"placeholder":true}'>
-                                    <option >Select organizer...</option>
-                                    <option value="1">Neav Panjwani</option>
-                                    <option value="2">Om Pandey</option>
-                                    <option value="3">Janesh Chichriya</option>
-                                    <option value="4">Ishika sharma</option>
-                                    <option value="5">Static</option>
+                            <div class="mb-3">
+                                <label class="form-label">Assigned Employee <span style="color: red;">*</span></label>
+                                <select class="form-select" id="organizerMultiple2" data-choices="data-choices" multiple="multiple" size="1" name="organizerMultiple[]" required="required" data-options='{"removeItemButton":true,"placeholder":true}'>
+                                    <?php echo $options; ?>
                                 </select>
                                 <div class="invalid-feedback">Please select one or multiple</div>
                             </div>
                         </div>
 
 
+
                         <!-- Status Dropdown -->
                         <div class="col-md-6">
-                            <label class="form-label">Project Status<span style="color: red;">*</span></label>
+                            <label class="form-label">Project Status <span style="color: red;">*</span></label>
                             <select class="form-select" name="project_status">
                                 <option selected disabled>Select status</option>
                                 <option value="1">Pipeline</option>
@@ -244,26 +332,16 @@
                             </select>
                         </div>
 
-
-                        <!-- file Upload  -->
-                        <label class="form-label">Upload File <span style="color: red;">*</span></label>
-                        <div class="fallback"><input name="file" type="file" multiple="multiple" /></div>
-                        <div class="dz-message" data-dz-message="data-dz-message"><img class="me-2" src="../../../assets/img/icons/cloud-upload.svg" width="25" alt="" />Drop your files here</div>
-                        <div class="dz-preview dz-preview-multiple m-0 d-flex flex-column">
-                            <div class="d-flex mb-3 pb-3 border-bottom border-translucent media">
-                                <div class="border p-2 rounded-2 me-2"><img class="rounded-2 dz-image" src="../../../assets/img/icons/file.png" alt="..." data-dz-thumbnail="data-dz-thumbnail" /></div>
-                                <div class="flex-1 d-flex flex-between-center">
-                                    <div>
-                                        <h6 data-dz-name="data-dz-name"></h6>
-                                        <div class="d-flex align-items-center">
-                                            <p class="mb-0 fs-9 text-body-quaternary lh-1" data-dz-size="data-dz-size"></p>
-                                            <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress=""></span></div>
-                                        </div><span class="fs-10 text-danger" data-dz-errormessage="data-dz-errormessage"></span>
-                                    </div>
-                                    <div class="dropdown"><button class="btn btn-link text-body-tertiary btn-sm dropdown-toggle btn-reveal dropdown-caret-none" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><a class="dropdown-item" href="#!" data-dz-remove="data-dz-remove"><span style="color: red;">X</a></button>
-                                        <div class="dropdown-menu dropdown-menu-end border border-translucent py-2"><a class="dropdown-item" href="#!" data-dz-remove="data-dz-remove">Remove File</a></div>
-                                    </div>
+                        <!-- File Upload -->
+                        <div class="col-md-6">
+                            <label class="form-label">Upload File <span style="color: red;">*</span></label>
+                            <div class="file-drop-area" id="fileDropArea">
+                                <input type="file" class="form-control d-none" name="file" id="fileInput" multiple>
+                                <div class="file-drop-message text-center">
+                                    <img class="me-2" src="../../../assets/img/icons/cloud-upload.svg" width="25" alt="" />
+                                    <p>Drag & Drop your files here or <strong>browse</strong></p>
                                 </div>
+                                <div id="filePreview" class="mt-3"></div>
                             </div>
                         </div>
 
@@ -271,25 +349,24 @@
                         <!-- Description -->
                         <div class="col-12">
                             <label class="form-label">Project Description</label>
-                            <textarea class="form-control" rows="4" placeholder="Enter description..."
-                                name="project_desc"></textarea>
+                            <textarea class="form-control" rows="4" placeholder="Enter description..." name="project_desc"></textarea>
                         </div>
 
-                        <!-- start and end date of project  -->
-
-                        <label class="form-label" for="timepicker2">Select Time Range</label>
-                        <input class="form-control datetimepicker" id="timepicker2" type="text" placeholder="d/m/y to d/m/y"
-                        name="date_range" data-options='{"mode":"range","dateFormat":"d/m/y","disableMobile":true}' />
-
+                        <!-- Start and End Date of Project -->
+                        <div class="col-md-6">
+                            <label class="form-label" for="timepicker2">Select Time Range</label>
+                            <input class="form-control datetimepicker" id="timepicker2" type="text" placeholder="d/m/y to d/m/y" name="date_range" data-options='{"mode":"range","dateFormat":"d/m/y","disableMobile":true}' />
+                        </div>
 
                         <!-- Submit Button -->
                         <div class="col-12 text-end">
                             <button class="btn btn-primary" type="submit" id="submitBtn">Submit</button>
                             <button class="btn btn-secondary" type="reset">Clear</button>
-
                         </div>
                     </div>
-                </form><br><br>
+                </form>
+
+
 
 
 
@@ -359,23 +436,76 @@
             delay: 0.5
         });
     </script>
-    <!-- alert added extra testing  -->
+
     <script>
-        document.getElementById('submitBtn').addEventListener('click', function(event) {
-            event.preventDefault(); // Stop form from submitting immediately
+        // File preview and drag-and-drop functionality
+        document.getElementById('fileDropArea').addEventListener('click', function() {
+            document.getElementById('fileInput').click();
+        });
 
-            // Get the selected time range
-            var timeRange = document.getElementById('timepicker2').value;
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const filePreview = document.getElementById('filePreview');
+            filePreview.innerHTML = ''; // Clear existing preview
 
-            if (timeRange) {
-                alert("Project Deadline Selected: " + timeRange);
-                // After alert, you can submit the form manually if needed
-                // this.closest('form').submit();
-            } else {
-                alert("Please select a time range (deadline) before submitting!");
-            }
+            Array.from(e.target.files).forEach(file => {
+                const fileElement = document.createElement('div');
+                fileElement.classList.add('file-item');
+
+                const fileIcon = document.createElement('img');
+                fileIcon.src = '../../../assets/img/icons/file.png'; // Your file icon path
+                fileIcon.alt = file.name;
+
+                const fileName = document.createElement('span');
+                fileName.textContent = file.name;
+
+                fileElement.appendChild(fileIcon);
+                fileElement.appendChild(fileName);
+                filePreview.appendChild(fileElement);
+            });
+        });
+
+        // Drag & Drop handling
+        document.getElementById('fileDropArea').addEventListener('dragover', function(e) {
+            e.preventDefault();
+            this.style.backgroundColor = '#e9ecef'; // Change background color on drag
+        });
+
+        document.getElementById('fileDropArea').addEventListener('dragleave', function() {
+            this.style.backgroundColor = ''; // Reset background color when drag leaves
+        });
+
+        document.getElementById('fileDropArea').addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.style.backgroundColor = ''; // Reset background color when file is dropped
+
+            const fileInput = document.getElementById('fileInput');
+            const files = e.dataTransfer.files;
+
+            // Simulate file selection in the file input
+            fileInput.files = files;
+
+            // Update preview
+            const filePreview = document.getElementById('filePreview');
+            filePreview.innerHTML = ''; // Clear existing preview
+
+            Array.from(files).forEach(file => {
+                const fileElement = document.createElement('div');
+                fileElement.classList.add('file-item');
+
+                const fileIcon = document.createElement('img');
+                fileIcon.src = '../../../assets/img/icons/file.png'; // Your file icon path
+                fileIcon.alt = file.name;
+
+                const fileName = document.createElement('span');
+                fileName.textContent = file.name;
+
+                fileElement.appendChild(fileIcon);
+                fileElement.appendChild(fileName);
+                filePreview.appendChild(fileElement);
+            });
         });
     </script>
+
 
 
 </body>
