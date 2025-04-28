@@ -251,7 +251,7 @@
                                                 <div class="container mt-5">
                                                     <div class="row justify-content-center">
                                                         <div class="col-md-10">
-                                                            <div class="card border-0 shadow-lg rounded-4 bg-white"
+                                                            <div class="card border-0 shadow-lg rounded-4"
                                                                 style="min-height: 500px;">
                                                                 <div class="card-body p-5">
                                                                     <h3 class="text-center mb-4 text-primary fw-bold">
@@ -356,8 +356,9 @@
 
                                                                             <!-- Register Button (full width) -->
                                                                             <div class="col-12 d-grid">
-                                                                                <button type="submit"
-                                                                                    class="btn btn-primary btn-lg rounded-pill shadow-sm">Register</button>
+                                                                                <!-- <button type="submit"
+                                                                                    class="btn btn-primary btn-lg rounded-pill shadow-sm">Register</button> -->
+                                                                                <button class="btn btn-primary w-100 mb-3">Registration</button>
                                                                             </div>
                                                                         </div> <!-- row end -->
                                                                     </form>
@@ -371,7 +372,7 @@
                                                 <div class="container mt-5">
                                                     <div class="row justify-content-center">
                                                         <div class="col-md-7">
-                                                            <div class="card border-0 shadow-lg rounded-4 bg-white"
+                                                            <div class="card border-0 shadow-lg rounded-4"
                                                                 style="min-height: 500px;">
                                                                 <div class="card-body p-5">
                                                                     <h3 class="text-center mb-4 text-primary fw-bold">
@@ -414,8 +415,9 @@
                                                                             <label for="reason">Reason to Meet</label>
                                                                         </div>
                                                                         <div class="d-grid">
-                                                                            <button type="submit"
-                                                                                class="btn btn-primary btn-lg rounded-pill shadow-sm">Update</button>
+                                                                            <!-- <button type="submit"
+                                                                                class="btn btn-primary btn-lg rounded-pill shadow-sm">Update</button> -->
+                                                                                <button class="btn btn-primary w-100 mb-3">Update</button>
                                                                         </div>
                                                                     </form>
                                                                 </div>
