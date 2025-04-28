@@ -223,7 +223,7 @@
         <div class="content">
             <div id="heading-gsap">
                 <h3 class="mb-4">Add Project </h3>
-                <form action="../PhpFiles/add_project1.php" method="post" class="p-0" enctype="multipart/form-data">
+                <form action="../PhpFiles/handle_add_project.php" method="post" class="p-0" enctype="multipart/form-data">
                     <div class="row g-3">
                         <!-- Project Title -->
                         <div class="col-md-6">

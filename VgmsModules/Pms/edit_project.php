@@ -1,6 +1,6 @@
 <?php
-   // Include database connection
-   include '../PhpFiles/connection.php';
+// Include database connection
+include '../PhpFiles/connection.php';
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +35,7 @@
     <!--    Stylesheets-->
     <!-- ===============================================-->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <!-- <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin=""> -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap"
         rel="stylesheet">
     <link href="../../vendors/simplebar/simplebar.min.css" rel="stylesheet">
@@ -47,6 +47,9 @@
     <link href="../../assets/css/theme.min.css" type="text/css" rel="stylesheet" id="style-default">
     <link href="../../assets/css/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
     <link href="../../assets/css/user.min.css" type="text/css" rel="stylesheet" id="user-style-default">
+
+
+
     <script>
         var phoenixIsRTL = window.config.config.phoenixIsRTL;
         if (phoenixIsRTL) {
@@ -177,160 +180,173 @@
                 <h3 class="mb-4">Edit Project </h3>
                 <?php
                 include '../PhpFiles/connection.php';
-                $url_id = $_GET['id'];
-                $query = "SELECT * FROM tbl_project WHERE id = {$url_id}";
-                $result = mysqli_query($conn,$query) or die("Query Unsuccessful");
+                $project_id = $_GET['project_id'];
+                $query = "SELECT * FROM tbl_project WHERE id = {$project_id}";
+                $result = mysqli_query($conn, $query) or die("Query Unsuccessful");
 
-                if(mysqli_num_rows($result) > 0){
-                    while($row = mysqli_fetch_assoc($result)) {
+                if (mysqli_num_rows($result) > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) {
 
                 ?>
-                <form action="edit_project.php" method="POST" class="dropzone dropzone-multiple p-0" id="dropzone-multiple" data-dropzone="data-dropzone">
-                    <div class="row g-3">
-                        <!-- Project Title -->
-                        <div class="col-md-6">
-                            <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
-                            <label class="form-label">Project Title <span style="color: red;">*</span></label>
-                            <input type="text" class="form-control" placeholder="Enter project title"
-                                name="project_title" value="<?php echo $row['project_title'] ?>">
-                        </div>
+                        <form action="../PhpFiles/handle_edit_project.php" method="POST" class="dropzone dropzone-multiple p-0" id="dropzone-multiple" data-dropzone="data-dropzone">
+                            <div class="row g-3">
+                                <!-- Project Title -->
+                                <div class="col-md-6">
+                                    <input type="hidden" id="project_id" name="project_id" value="<?php echo $row['id'] ?>">
+                                    <label class="form-label">Project Title <span style="color: red;">*</span></label>
+                                    <input type="text" class="form-control" placeholder="Enter project title"
+                                        id="project_title" name="project_title" value="<?php echo $row['project_title'] ?>">
+                                </div>
 
-                        <!-- Project Type Dropdown -->
-                        <div class="col-md-6">
-                            <label class="form-label">Project Type <span style="color: red;">*</span></label>
-                            <?php
-                            $query1 = "SELECT * FROM project_type";
-                            $result1 = mysqli_query($conn,$query1) or die("Query Unsuccessful");
+                                <!-- Project Type Dropdown -->
+                                <div class="col-md-6">
+                                    <label class="form-label">Project Type <span style="color: red;">*</span></label>
+                                    <?php
+                                    $query1 = "SELECT * FROM tbl_project_type";
+                                    $result1 = mysqli_query($conn, $query1) or die("Query Unsuccessful");
 
-                            if(mysqli_num_rows($result1) > 0){
-                                echo '<select class="form-select" name="project_type">';
-                    
-                                
-                                 while($row1 = mysqli_fetch_assoc($result1)) {
-                                    if($row['project_type'] == $row1['srno']){
-                                        $select = 'SELECTED';
-                                    }else{
-                                        $select = "";
+                                    if (mysqli_num_rows($result1) > 0) {
+                                        echo '<select class="form-select" name="project_type">';
+
+                                        while ($row1 = mysqli_fetch_assoc($result1)) {
+                                            $select = ($row['project_type'] == $row1['srno']) ? 'SELECTED' : '';
+                                            echo "<option value='{$row1['srno']}' {$select}>{$row1['type']}</option>";
+                                        }
+
+                                        echo '</select>';
                                     }
-                                echo "<option value='{$row1['srno']}'>{$row1['type']}</option>";
-                                 }  //while condition above the select tag
+                                    ?>
+                                </div>
 
-                            echo'</select> ';
-                                } // if condition above the select tag
-                            ?>  
+                                <!-- Project Manager Dropdown -->
+                                <div class="col-md-6">
+                                    <label class="form-label">Project Manager <span style="color: red;">*</span></label>
+                                    <?php
+                                    $sql_manager = "SELECT id, f_name, l_name FROM tbl_emp";
+                                    $result_manager = mysqli_query($conn, $sql_manager) or die("Query Failed: Fetching Managers");
 
-                        </div>
+                                    echo '<select class="form-select" name="project_manager" required>';
+                                    echo '<option disabled>Select Manager</option>';
 
-                        <!-- project manager  -->
+                                    if (mysqli_num_rows($result_manager) > 0) {
+                                        while ($manager = mysqli_fetch_assoc($result_manager)) {
+                                            $manager_id = $manager['id'];
+                                            $manager_name = $manager['f_name'] . ' ' . $manager['l_name'];
 
-                        <div class="col-md-6">
-                            <label class="form-label">Project Manager<span style="color: red;">*</span></label>
-                            <select class="form-select" name="project_status">
-                                <option selected disabled>Select manager</option>
-                                <option>Aryan Sir</option>
-                                <option>Op sir</option>
-                                <option>Aakash sir</option>
-                                <option>Static</option>
-                            </select>
-                        </div>
+                                            $selected = ($row['project_manager'] == $manager_id) ? 'selected' : '';
+                                            echo "<option value='{$manager_id}' {$selected}>{$manager_name}</option>";
+                                        }
+                                    } else {
+                                        echo '<option disabled>No Managers Found</option>';
+                                    }
+                                    echo '</select>';
+                                    ?>
+                                </div>
 
-                         <!-- project client  -->
+                                <!-- Project Client Dropdown -->
+                                <div class="col-md-6">
+                                    <label class="form-label">Project Client <span style="color: red;">*</span></label>
+                                    <?php
+                                    $sql_client = "SELECT id, f_name, l_name FROM tbl_client";
+                                    $result_client = mysqli_query($conn, $sql_client) or die("Query Failed: Fetching Clients");
 
-                         <div class="col-md-6">
-                            <label class="form-label">Project Client<span style="color: red;">*</span></label>
-                            <select class="form-select" name="project_status">
-                                <option selected disabled>Select client</option>
-                                <option>Janesh</option>
-                                <option>Ishika</option>
-                                <option>Rahul</option>
-                                <option>Static</option>
-                            </select>
-                        </div>
+                                    echo '<select class="form-select" name="project_client" required>';
+                                    echo '<option disabled>Select Client</option>';
 
-                        <!-- Assigned Teams Dropdown -->
-                        <div class="col-md-6">
-                            <div class="mb-3"><label class="form-label">Assigned Employee<span style="color: red;">*</span></label><select class="form-select" id="organizerMultiple2" data-choices="data-choices" multiple="multiple" size="1" name="organizerMultiple" required="required" data-options='{"removeItemButton":true,"placeholder":true}'>
-                                    <option value="">Select organizer...</option>
-                                    <option>Neav Panjwani</option>
-                                    <option>Om Pandey</option>
-                                    <option>Janesh Chichriya</option>
-                                    <option>Ishika sharma</option>
-                                    <option>Static</option>
-                                </select>
-                                <div class="invalid-feedback">Please select one or multiple</div>
-                            </div>
-                        </div>
+                                    if (mysqli_num_rows($result_client) > 0) {
+                                        while ($client = mysqli_fetch_assoc($result_client)) {
+                                            $client_id = $client['id'];
+                                            $client_name = $client['f_name'] . ' ' . $client['l_name'];
 
+                                            $selected = ($row['project_client'] == $client_id) ? 'selected' : '';
+                                            echo "<option value='{$client_id}' {$selected}>{$client_name}</option>";
+                                        }
+                                    } else {
+                                        echo '<option disabled>No Clients Found</option>';
+                                    }
+                                    echo '</select>';
+                                    ?>
+                                </div>
 
-                        <!-- Status Dropdown -->
-                        <div class="col-md-6">
-                            <label class="form-label">Project Status<span style="color: red;">*</span></label>
-                            <select class="form-select" name="project_status">
-                                <option selected disabled>Select status</option>
-                                <option>Pipeline</option>
-                                <option>Ongoing</option>
-                                <option>Completed</option>
-                                <option>On Hold</option>
-                            </select>
-                        </div>
+                                <div id="file-list" class="mb-3">
+                                    <label class="form-label">Files in Project Folder</label>
+                                    <div class="file-list">
+                                        <?php
+                                        $project_folder = '../uploads/project/' . $row['project_title']; // project directory
 
+                                        // Check if directory exists
+                                        if (is_dir($project_folder)) {
+                                            // Open the directory and get all files
+                                            $files = scandir($project_folder);
 
-                        <!-- file Upload  -->
-                        <label class="form-label">Upload File <span style="color: red;">*</span></label>
-                        <div class="fallback"><input name="file" type="file" multiple="multiple" /></div>
-                        <div class="dz-message" data-dz-message="data-dz-message"><img class="me-2" src="../../../assets/img/icons/cloud-upload.svg" width="25" alt="" />Drop your files here</div>
-                        <div class="dz-preview dz-preview-multiple m-0 d-flex flex-column">
-                            <div class="d-flex mb-3 pb-3 border-bottom border-translucent media">
-                                <div class="border p-2 rounded-2 me-2"><img class="rounded-2 dz-image" src="../../../assets/img/icons/file.png" alt="..." data-dz-thumbnail="data-dz-thumbnail" /></div>
-                                <div class="flex-1 d-flex flex-between-center">
-                                    <div>
-                                        <h6 data-dz-name="data-dz-name"></h6>
-                                        <div class="d-flex align-items-center">
-                                            <p class="mb-0 fs-9 text-body-quaternary lh-1" data-dz-size="data-dz-size"></p>
-                                            <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress=""></span></div>
-                                        </div><span class="fs-10 text-danger" data-dz-errormessage="data-dz-errormessage"></span>
-                                    </div>
-                                    <div class="dropdown"><button class="btn btn-link text-body-tertiary btn-sm dropdown-toggle btn-reveal dropdown-caret-none" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><a class="dropdown-item" href="#!" data-dz-remove="data-dz-remove"><span style="color: red;">X</a></button>
-                                        <div class="dropdown-menu dropdown-menu-end border border-translucent py-2"><a class="dropdown-item" href="#!" data-dz-remove="data-dz-remove">Remove File</a></div>
+                                            // Filter out '.' and '..'
+                                            $files = array_diff($files, array('.', '..'));
+
+                                            if (!empty($files)) {
+                                                foreach ($files as $file) {
+                                                    $file_path = $project_folder . '/' . $file;
+                                                    echo '<div class="file-item d-flex justify-content-between align-items-center mb-2">';
+                                                    echo '<span>' . $file . '</span>';
+                                                    echo '<button type="button" class="btn btn-danger btn-sm remove-file" data-file="' . $file . '">Remove</button>';
+                                                    echo '</div>';
+                                                }
+                                            } else {
+                                                echo '<p>No files found in this project folder.</p>';
+                                            }
+                                        } else {
+                                            echo '<p>Project folder does not exist.</p>';
+                                        }
+                                        ?>
                                     </div>
                                 </div>
+
+                                <!-- File Upload Section -->
+                                <div class="mb-3">
+                                    <label class="form-label">Add Files</label>
+                                    <input type="file" name="project_files[]" id="file-upload" class="form-control" multiple>
+                                </div>
                             </div>
-                        </div>
 
+                            <!-- Project Description -->
+                            <div class="col-12">
+                                <label class="form-label">Project Description</label>
+                                <textarea class="form-control" rows="4" placeholder="Enter description..."
+                                    name="project_desc"><?php echo htmlspecialchars($row['project_description']); ?></textarea>
+                            </div>
 
-                        <!-- Description -->
-                        <div class="col-12">
-                            <label class="form-label">Project Description</label>
-                            <textarea class="form-control" rows="4" placeholder="Enter description..."
-                                name="project_desc" value="<?php echo $row['project_description'] ?>"></textarea>
-                        </div>
+                            <!-- Start and End Date of Project -->
+                            <label class="form-label" for="timepicker2">Select Time Range</label>
+                            <?php
+                            $start_date = date('d/m/Y', strtotime($row['project_start_date']));
+                            $end_date = date('d/m/Y', strtotime($row['project_end_date']));
+                            $range_value = $start_date . ' to ' . $end_date;
+                            ?>
+                            <input class="form-control datetimepicker" id="timepicker2" type="text"
+                                name="project_date_range"
+                                value="<?php echo $range_value; ?>"
+                                placeholder="d/m/y to d/m/y"
+                                data-options='{"mode":"range","dateFormat":"d/m/y","disableMobile":true}' />
 
-                        <!-- start and end date of project  -->
-
-                        <label class="form-label" for="timepicker2">Select Time Range</label>
-                        <input class="form-control datetimepicker" id="timepicker2" type="text" placeholder="d/m/y to d/m/y" data-options='{"mode":"range","dateFormat":"d/m/y","disableMobile":true}' />
-                        
-                        
-                        <!-- Submit Button -->
-                        <div class="col-12 text-end">
-                            <button class="btn btn-primary" type="submit" value="update">Submit</button>
-                            <button class="btn btn-secondary" type="reset">Clear</button>
-
-                        </div>
-                    </div>
-                </form><br><br>
-
-                
-                <?php }  // Curly braces of while condition above the form tag
-            }   //curly braces of if condition above theform tag
-            ?>
-
-
-
+                            <!-- Submit Button -->
+                            <div class="col-12 text-end">
+                                <button class="btn btn-primary" type="submit" value="update">Submit</button>
+                                <button class="btn btn-secondary" type="reset">Clear</button>
+                            </div>
             </div>
+            </form>
+            <br><br>
 
-            <!-- Footer -->
-            <?php include("../../Components/footer.php"); ?>
+
+    <?php }  // Curly braces of while condition above the form tag
+                }   //curly braces of if condition above theform tag
+    ?>
+
+
+
+        </div>
+
+        <!-- Footer -->
+        <?php include("../../Components/footer.php"); ?>
 
         </div>
         </div>
@@ -350,6 +366,106 @@
 
     <!-- ===============================================-->
     <!--Dropdown for contacted-to--->
+
+    <!-- <script>
+    document.querySelectorAll('.remove-file').forEach(button => {
+        button.addEventListener('click', function() {
+            const fileName = this.getAttribute('data-file');
+            const projectName = document.getElementById('project_title').value.trim(); // You can store the project name in a custom attribute
+
+            alert("Preparing to remove file: " + fileName + " from project: " + projectName);
+
+            if (confirm(`Are you sure you want to remove the file: ${fileName} from project: ${projectName}?`)) {
+                alert("User confirmed the file removal.");
+
+                const xhr = new XMLHttpRequest();
+                xhr.open("POST", "../PhpFiles/delete_project_file.php", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4) {
+                        console.log("Response status:", xhr.status);
+                        console.log("Response text:", xhr.responseText);
+                        
+                        if (xhr.status === 200) {
+                            const response = JSON.parse(xhr.responseText);
+                            console.log(response);
+
+                            if (response.success) {
+                                // alert("File removed successfully.");
+                                window.location.replace(window.location.href);  // Try replacing the page
+                            } else {
+                                alert("Error: Unable to remove the file. Response: " + response.error);
+                            }
+                        } else {
+                            alert("Error: AJAX request failed with status: " + xhr.status);
+                        }
+                    }
+                };
+
+                xhr.send(`action=delete_file&project_name=${encodeURIComponent(projectName)}&file_name=${encodeURIComponent(fileName)}`);
+            } else {
+                alert("File removal was canceled.");
+            }
+        });
+    });
+</script> -->
+
+<script>
+    document.querySelectorAll('.remove-file').forEach(button => {
+        button.addEventListener('click', function() {
+            const fileName = this.getAttribute('data-file');
+            const projectName = document.getElementById('project_title').value.trim(); // You can store the project name in a custom attribute
+            const projectId = document.getElementById('project_id').value.trim(); // Assuming the project ID is in a hidden input field with ID 'project_id'
+
+            // Alert before asking for confirmation
+            alert("Preparing to remove file: " + fileName + " from project: " + projectName);
+
+            // Ask for confirmation before deletion
+            if (confirm(`Are you sure you want to remove the file: ${fileName} from project: ${projectName}?`)) {
+                alert("User confirmed the file removal.");
+
+                // Create a new form dynamically
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = '../PhpFiles/delete_project_file.php'; // Your server-side PHP file
+
+                // Create hidden inputs for the form data
+                const projectIdInput = document.createElement('input');
+                projectIdInput.type = 'hidden';
+                projectIdInput.name = 'project_id';
+                projectIdInput.value = projectId;
+                form.appendChild(projectIdInput);
+
+                const projectTitleInput = document.createElement('input');
+                projectTitleInput.type = 'hidden';
+                projectTitleInput.name = 'project_title';
+                projectTitleInput.value = projectName;
+                form.appendChild(projectTitleInput);
+
+                const fileNameInput = document.createElement('input');
+                fileNameInput.type = 'hidden';
+                fileNameInput.name = 'file_name';
+                fileNameInput.value = fileName;
+                form.appendChild(fileNameInput);
+
+                // Append the form to the body and submit it
+                document.body.appendChild(form);
+                form.submit();
+
+                // Reload the page after form submission to reflect the change
+                alert("File is being removed. Page will reload.");
+                
+                // location.reload();
+            } else {
+                alert("File removal was canceled.");
+            }
+        });
+    });
+</script>
+
+
+
 
     <script src="../../vendors/popper/popper.min.js"></script>
     <script src="../../vendors/bootstrap/bootstrap.min.js"></script>
@@ -393,6 +509,12 @@
             delay: 0.5
         });
     </script>
+
+
+    <!-- // Script for document handling -->
+
+
+
 
 
 

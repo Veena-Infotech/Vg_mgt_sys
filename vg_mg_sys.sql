@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 28, 2025 at 02:51 PM
+-- Generation Time: Apr 29, 2025 at 12:47 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,29 @@ SET time_zone = "+00:00";
 --
 -- Database: `vg_mg_sys`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_client`
+--
+
+CREATE TABLE `tbl_client` (
+  `id` int(11) NOT NULL,
+  `uid` varchar(255) NOT NULL,
+  `f_name` varchar(255) NOT NULL,
+  `l_name` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_client`
+--
+
+INSERT INTO `tbl_client` (`id`, `uid`, `f_name`, `l_name`, `created_at`) VALUES
+(1, 'cli_0001', 'John', 'Doe', '2025-04-28 21:02:46'),
+(2, 'cli_0002', 'Martin', 'Garix', '2025-04-28 21:03:06'),
+(3, 'cli_0003', 'Simon', 'Roy', '2025-04-28 21:03:35');
 
 -- --------------------------------------------------------
 
@@ -258,10 +281,10 @@ CREATE TABLE `tbl_project` (
   `id` int(11) NOT NULL,
   `uid` varchar(256) DEFAULT NULL,
   `project_title` varchar(256) DEFAULT NULL,
-  `project_type` varchar(256) DEFAULT NULL,
+  `project_type` int(255) DEFAULT NULL,
   `project_manager` int(11) DEFAULT NULL,
-  `project_client` varchar(256) DEFAULT NULL,
-  `project_status` varchar(256) DEFAULT NULL,
+  `project_client` int(255) DEFAULT NULL,
+  `project_status` int(255) DEFAULT NULL,
   `file_path` varchar(256) DEFAULT NULL,
   `project_description` varchar(256) DEFAULT NULL,
   `project_start_date` date DEFAULT NULL,
@@ -275,9 +298,8 @@ CREATE TABLE `tbl_project` (
 --
 
 INSERT INTO `tbl_project` (`id`, `uid`, `project_title`, `project_type`, `project_manager`, `project_client`, `project_status`, `file_path`, `project_description`, `project_start_date`, `project_end_date`, `project_created_by`, `timestamp`) VALUES
-(20, 'prj_680f77b645a29', '', '', 0, '', '', '', '', NULL, NULL, 'admin', '2025-04-28'),
-(21, 'prj_680f77ed89734', 'infotech', '1', 1, '1', '1', '../uploads/project/infotech/DAA LAB Q3 OP.png', 'm, ff msd fk', '2025-04-28', '2025-05-11', 'admin', '2025-04-28'),
-(22, 'prj_680f780d1cc70', 'infotech2', '1', 1, '1', '1', '../uploads/project/infotech2/DAA LAB Q1 OP.png', 'm, ff msd fk', '2025-04-28', '2025-05-11', 'admin', '2025-04-28');
+(21, 'prj_680f77ed89734', 'infotech', 1, 1, 1, 1, '../uploads/project/infotech/DAA LAB Q3 OP.png', 'm, ff msd fk', '2025-04-28', '2025-05-11', 'admin', '2025-04-28'),
+(22, 'prj_680f780d1cc70', 'infotech2', 1, 1, 1, 1, '../uploads/project/infotech2/DAA LAB Q1 OP.png', 'm, ff msd fk', '2025-04-28', '2025-05-11', 'admin', '2025-04-28');
 
 -- --------------------------------------------------------
 
@@ -299,6 +321,48 @@ CREATE TABLE `tbl_project_emp` (
 INSERT INTO `tbl_project_emp` (`id`, `emp_id`, `project_id`, `timestamp`) VALUES
 (9, 1, 21, '2025-04-28'),
 (10, 1, 22, '2025-04-28');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_project_status`
+--
+
+CREATE TABLE `tbl_project_status` (
+  `id` int(11) NOT NULL,
+  `status_name` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_project_status`
+--
+
+INSERT INTO `tbl_project_status` (`id`, `status_name`, `created_at`) VALUES
+(1, 'On-Going', '2025-04-28 21:15:30'),
+(2, 'Waiting', '2025-04-28 21:15:41'),
+(3, 'Completed', '2025-04-28 21:15:51');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_project_type`
+--
+
+CREATE TABLE `tbl_project_type` (
+  `id` int(11) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_project_type`
+--
+
+INSERT INTO `tbl_project_type` (`id`, `type`, `created_at`) VALUES
+(1, 'Society', '2025-04-28 20:52:05'),
+(2, 'In-House', '2025-04-28 20:52:20'),
+(3, 'Lottery', '2025-04-28 20:52:41');
 
 -- --------------------------------------------------------
 
@@ -362,6 +426,13 @@ CREATE TABLE `tbl_visitor` (
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `tbl_client`
+--
+ALTER TABLE `tbl_client`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `uid` (`uid`);
 
 --
 -- Indexes for table `tbl_emp`
@@ -430,7 +501,10 @@ ALTER TABLE `tbl_payment`
 --
 ALTER TABLE `tbl_project`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `tbl_escape_pm` (`project_manager`);
+  ADD KEY `tbl_escape_pm` (`project_manager`),
+  ADD KEY `tbl_project_fk_project_type_id` (`project_type`),
+  ADD KEY `tbl_project_fk_tbl_client_id` (`project_client`),
+  ADD KEY `tbl_project_fk_tbl_project_status` (`project_status`);
 
 --
 -- Indexes for table `tbl_project_emp`
@@ -439,6 +513,18 @@ ALTER TABLE `tbl_project_emp`
   ADD PRIMARY KEY (`id`),
   ADD KEY `tbl_project_emp_fk_emp` (`emp_id`),
   ADD KEY `tbl_project_emp_fk_project` (`project_id`);
+
+--
+-- Indexes for table `tbl_project_status`
+--
+ALTER TABLE `tbl_project_status`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_project_type`
+--
+ALTER TABLE `tbl_project_type`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tbl_tasks`
@@ -464,6 +550,12 @@ ALTER TABLE `tbl_visitor`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `tbl_client`
+--
+ALTER TABLE `tbl_client`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_emp`
@@ -524,6 +616,18 @@ ALTER TABLE `tbl_project`
 --
 ALTER TABLE `tbl_project_emp`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `tbl_project_status`
+--
+ALTER TABLE `tbl_project_status`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tbl_project_type`
+--
+ALTER TABLE `tbl_project_type`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_tasks`
@@ -589,7 +693,10 @@ ALTER TABLE `tbl_misc`
 -- Constraints for table `tbl_project`
 --
 ALTER TABLE `tbl_project`
-  ADD CONSTRAINT `tbl_escape_pm` FOREIGN KEY (`project_manager`) REFERENCES `tbl_emp` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `tbl_escape_pm` FOREIGN KEY (`project_manager`) REFERENCES `tbl_emp` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `tbl_project_fk_project_type_id` FOREIGN KEY (`project_type`) REFERENCES `tbl_project_type` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `tbl_project_fk_tbl_client_id` FOREIGN KEY (`project_client`) REFERENCES `tbl_client` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `tbl_project_fk_tbl_project_status` FOREIGN KEY (`project_status`) REFERENCES `tbl_project_status` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_project_emp`
