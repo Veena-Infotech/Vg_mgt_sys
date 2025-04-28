@@ -13,7 +13,7 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>Loan Management</title>
+    <title>Legal File upload</title>
 
     <!-- ===============================================-->
     <!--    Favicons-->
@@ -31,16 +31,13 @@
     <!-- ===============================================-->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet">
     <link href="../../vendors/simplebar/simplebar.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../unicons.iconscout.com/release/v4.0.8/css/line.css">
     <link href="../../assets/css/theme-rtl.css" type="text/css" rel="stylesheet" id="style-rtl">
     <link href="../../assets/css/theme.min.css" type="text/css" rel="stylesheet" id="style-default">
     <link href="../../assets/css/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
     <link href="../../assets/css/user.min.css" type="text/css" rel="stylesheet" id="user-style-default">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-
     <script>
         var phoenixIsRTL = window.config.config.phoenixIsRTL;
         if (phoenixIsRTL) {
@@ -167,92 +164,97 @@
             }
         </script>
         <div class="content">
-            <div class="container mt-5">
 
 
+            <!-- Upload Card -->
+            <div class="card mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Upload Legal Document</h5>
+                </div>
+                <div class="card-body">
+                    <form id="uploadForm" enctype="multipart/form-data">
+                        <div class="row g-3">
+                            <div class="col-md-5">
+                                <label class="form-label">Document Name</label>
+                                <input type="text" class="form-control" id="documentName" placeholder="Enter Document Name" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Expiry Date</label>
+                                <input type="date" class="form-control" id="expiryDate" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Upload File</label>
+                                <input type="file" class="form-control" id="documentFile" required>
+                            </div>
+                        </div>
+                        <div class="text-end mt-3">
+                            <button type="submit" class="btn btn-primary">Upload</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
+            <!-- Search Bar -->
+            <div class="input-group mb-4">
+                <input type="text" class="form-control" id="searchInput" placeholder="Search Documents">
+            </div>
 
-
-                <div class="d-flex justify-content-between mt-3"><span class="d-none d-sm-inline-block"
-                        data-list-info="data-list-info">1 to 5 <span class="text-body-tertiary"> Items of
-                        </span>10</span>
-                    <div class="d-flex"><button class="page-link disabled" data-list-pagination="prev" disabled=""><svg
-                                class="svg-inline--fa fa-chevron-left" aria-hidden="true" focusable="false"
-                                data-prefix="fas" data-icon="chevron-left" role="img" xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 320 512" data-fa-i2svg="">
-                                <path fill="currentColor"
-                                    d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z">
-                                </path>
-                            </svg><!-- <span class="fas fa-chevron-left"></span> Font Awesome fontawesome.com --></button>
-                        <ul class="mb-0 pagination">
-                            <li class="active"><button class="page" type="button" data-i="1" data-page="5">1</button>
-                            </li>
-                            <li><button class="page" type="button" data-i="2" data-page="5">2</button></li>
-                        </ul><button class="page-link pe-0" data-list-pagination="next"><svg
-                                class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false"
-                                data-prefix="fas" data-icon="chevron-right" role="img"
-                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
-                                <path fill="currentColor"
-                                    d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z">
-                                </path>
-                            </svg><!-- <span class="fas fa-chevron-right"></span> Font Awesome fontawesome.com --></button>
+            <!-- Documents Table -->
+            <div class="card">
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-striped mb-0" id="documentsTable">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Document Name</th>
+                                    <th>Expiry Date</th>
+                                    <th>Status</th>
+                                    <th>File</th>
+                                    <th>Action</th>
+                                    <th>Delete</th> <!-- New Delete Column -->
+                                </tr>
+                            </thead>
+                            <tbody id="documentList">
+                                <!-- Dynamic rows will come here -->
+                            </tbody>
+                        </table>
                     </div>
                 </div>
+            </div>
 
-
-                <button class="btn btn-primary" type="button" data-bs-toggle="modal"
-                    data-bs-target="#verticallyCentered">Vertically centered modal</button>
-                <div class="modal fade" id="verticallyCentered" tabindex="-1"
-                    aria-labelledby="verticallyCenteredModalLabel" aria-hidden="true" style="display: none;">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="verticallyCenteredModalLabel">Modal title</h5><button
-                                    class="btn btn-close p-1" type="button" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <p class="text-body-tertiary lh-lg mb-0">This is a static modal example (meaning its
-                                    position and display have been overridden). Included are the modal header, modal
-                                    body (required for padding), and modal footer (optional). </p>
-                            </div>
-                            <div class="modal-footer"><button class="btn btn-primary" type="button">Okay</button><button
-                                    class="btn btn-outline-primary" type="button"
-                                    data-bs-dismiss="modal">Cancel</button></div>
+            <!-- View Document Modal -->
+            <div class="modal fade" id="viewDocumentModal" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">View Document</h5>
+                            <button class="btn-close" type="button" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body" id="modalDocumentContent">
+                            <!-- Dynamic document info here -->
                         </div>
                     </div>
                 </div>
             </div>
 
-
-            <!-- Bootstrap JS and Popper.js -->
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.1/gsap.min.js"></script>
-            <script>
-                // GSAP Animation for Title and Subtitle
-                gsap.from("#page-title", {
-                    duration: 1.5,
-                    opacity: 0,
-                    y: -50,
-                    ease: "power4.out"
-                });
-
-                gsap.from("#page-subtitle", {
-                    duration: 1.5,
-                    opacity: 0,
-                    y: 30,
-                    delay: 0.5,
-                    ease: "power4.out"
-                });
-            </script>
-
+            <!-- View Document Modal -->
+            <div class="modal fade" id="viewDocumentModal" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">View Document</h5>
+                            <button class="btn-close" type="button" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body" id="modalDocumentContent">
+                            <!-- Dynamic document info here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!-- Footer -->
             <?php include("../../Components/footer.php"); ?>
         </div>
-        </div>
-
-
-
 
 
     </main>
@@ -260,8 +262,6 @@
     <!-- ===============================================-->
     <!--    End of Main Content-->
     <!-- ===============================================-->
-
-
 
     <!-- ===============================================-->
     <!--    JavaScripts-->
@@ -284,17 +284,118 @@
     <script src="../../assets/js/phoenix.js"></script>
     <script src="../../vendors/echarts/echarts.min.js"></script>
     <script src="../../assets/js/ecommerce-dashboard.js"></script>
+    <!-- Scripts self implemented -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
+    <script>
+        // Handle Upload Form
+        document.getElementById('uploadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
 
+            const name = document.getElementById('documentName').value.trim();
+            const expiry = document.getElementById('expiryDate').value.trim();
+            const fileInput = document.getElementById('documentFile');
+            const file = fileInput.files[0];
 
+            if (!name || !expiry || !file) {
+                Swal.fire('Error', 'Please fill all fields and select a file to upload.', 'error');
+                return;
+            }
 
+            // Create new row
+            const row = document.createElement('tr');
+            const today = new Date();
+            const expiryDate = new Date(expiry);
+            const statusBadge = expiryDate >= today ?
+                `<span class="badge badge-phoenix badge-phoenix-success">Valid</span>` :
+                `<span class="badge badge-phoenix badge-phoenix-danger">Expired</span>`;
 
+            const fileUrl = URL.createObjectURL(file); // Create temporary URL for file
+
+            row.innerHTML = `
+        <td>${name}</td>
+        <td>${expiry}</td>
+        <td>${statusBadge}</td>
+        <td><a href="${fileUrl}" target="_blank" class="btn btn-sm btn-link">View File</a></td>
+        <td><button class="btn btn-sm btn-primary viewBtn" data-name="${name}" data-expiry="${expiry}" data-file="${fileUrl}">View</button></td>
+        <td><button class="btn btn-sm btn-danger deleteBtn">Delete</button></td> <!-- Delete Button -->
+    `;
+
+            document.getElementById('documentList').appendChild(row);
+
+            // Animate new row
+            gsap.from(row, {
+                opacity: 0,
+                y: 20,
+                duration: 0.5,
+                ease: "power2.out"
+            });
+
+            // Clear form
+            document.getElementById('uploadForm').reset();
+            fileInput.value = ''; // Reset file input
+
+            // Success Toast
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                title: 'Uploaded Successfully',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        });
+
+        // Handle View Button
+        document.getElementById('documentList').addEventListener('click', function(e) {
+            if (e.target.classList.contains('viewBtn')) {
+                const name = e.target.dataset.name;
+                const expiry = e.target.dataset.expiry;
+                const file = e.target.dataset.file;
+
+                document.getElementById('modalDocumentContent').innerHTML = `
+            <p><strong>Document Name:</strong> ${name}</p>
+            <p><strong>Expiry Date:</strong> ${expiry}</p>
+            <a href="${file}" target="_blank" class="btn btn-sm btn-primary">Download/View Document</a>
+        `;
+                const viewModal = new bootstrap.Modal(document.getElementById('viewDocumentModal'));
+                viewModal.show();
+            }
+        });
+
+        // Handle Delete Button
+        document.getElementById('documentList').addEventListener('click', function(e) {
+            if (e.target.classList.contains('deleteBtn')) {
+                const row = e.target.closest('tr');
+                row.remove(); // Remove the row from the table
+
+                // Success Toast after Deletion
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Document Deleted Successfully',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        });
+
+        // Handle Search Filter
+        document.getElementById('searchInput').addEventListener('keyup', function() {
+            const filter = this.value.toLowerCase();
+            const rows = document.querySelectorAll('#documentList tr');
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(filter) ? '' : 'none';
+            });
+        });
     </script>
 
-
+<!-- </script> -->
 
 </body>
-
 
 <!-- Mirrored from prium.github.io/phoenix/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Sep 2024 13:37:21 GMT -->
 

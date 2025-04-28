@@ -172,11 +172,11 @@
       <div class="container py-5">
         <div class="mb-4 text-start">
           <h1 class="display-6 fw-bold d-flex align-items-center gap-2">
-            <i class="bi bi-receipt" style="color: #0d6efd;"></i>
+            <!-- <i class="bi bi-receipt" style="color: #0d6efd;"></i> -->
             Salary Slip Generator
           </h1>
           <p class="text-muted ms-1">Easily view and generate employee payslips</p>
-          <hr class="w-25">
+          <hr class="hr">
         </div>
       </div>
 
@@ -203,7 +203,15 @@
               <option>January</option>
               <option>February</option>
               <option>March</option>
-              <!-- Add all months -->
+              <option>April</option>
+              <option>May</option>
+              <option>June</option>
+              <option>July</option>
+              <option>August</option>
+              <option>September</option>
+              <option>October</option>
+              <option>November</option>
+              <option>December</option>
             </select>
           </div>
           <div class="col-md-4">

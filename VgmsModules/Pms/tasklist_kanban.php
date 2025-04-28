@@ -168,7 +168,7 @@
         <div class="mb-9" style="margin-top: -7%;">
           <div class="border-bottom border-translucent mx-n4 mx-lg-n6 px-4 px-lg-6 pb-5">
             <div class="row justify-content-between gy-4">
-              <div class="col-auto">
+              <div class="col-auto" >
                 <h2>Boards <span class="text-body-tertiary fw-semibold">(2)</span></h2>
               </div>
               <div class="col-auto d-flex flex-wrap gap-2"><button class="btn px-4 btn-phoenix-primary d-flex"><span class="fa-solid fa-filter me-1"></span><span>Filter</span></button><select class="form-select w-auto" id="select-deals">
@@ -193,7 +193,7 @@
             <div class="swiper-theme-container kanban-boards-slider">
               <div class="swiper theme-slider" data-swiper='{"slidesPerView":1,"spaceBetween":24,"speed":800,"breakpoints":{"576":{"slidesPerView":2},"1200":{"slidesPerView":3},"1540":{"slidesPerView":4}}}'>
                 <div class="swiper-wrapper">
-                  <!-- <div class="swiper-slide"><a class="text-decoration-none" href="kanban.html">
+                  <!-- <div class="swiper-slide"><a class="text-decoration-none" href="../../VgmsModules/pms/view_task.php">
                       <div class="card overflow-hidden bg-transparent h-100">
                         <div class="position-relative">
                           <div class="bg-info-darker" style="height: 128px"></div>
@@ -228,7 +228,7 @@
                         </div>
                       </div> 
                     </a></div> -->
-                  <div class="swiper-slide"><a class="text-decoration-none" href="kanban.html">
+                  <div class="swiper-slide"><a class="text-decoration-none" href="../../VgmsModules/pms/view_task.php">
                       <div class="card overflow-hidden bg-transparent h-100">
                         <div class="position-relative"><img class="w-100" src="../../assets/img/kanban/board-2.png" style="height: 128px;" alt="" />
                           <div class="avatar-group position-absolute" style="bottom: 1rem; left: 1.5rem">
@@ -262,7 +262,7 @@
                         </div>
                       </div>
                     </a></div>
-                  <div class="swiper-slide"><a class="text-decoration-none" href="kanban.html">
+                  <div class="swiper-slide"><a class="text-decoration-none" href="../../VgmsModules/pms/view_task.php">
                       <div class="card overflow-hidden bg-transparent h-100">
                         <div class="position-relative"><img class="w-100" src="../../assets/img/kanban/board-3.png" style="height: 128px;" alt="" />
                           <div class="avatar-group position-absolute" style="bottom: 1rem; left: 1.5rem">
@@ -296,7 +296,7 @@
                         </div>
                       </div>
                     </a></div>
-                  <div class="swiper-slide"><a class="text-decoration-none" href="kanban.html">
+                  <div class="swiper-slide"><a class="text-decoration-none" href="../../VgmsModules/pms/view_task.php">
                       <div class="card overflow-hidden bg-transparent h-100">
                         <div class="position-relative"><img class="w-100" src="../../assets/img/kanban/board-4.png" style="height: 128px;" alt="" />
                           <div class="avatar-group position-absolute" style="bottom: 1rem; left: 1.5rem">
@@ -339,7 +339,7 @@
             <div class="swiper-theme-container kanban-boards-slider">
               <div class="swiper theme-slider" data-swiper='{"slidesPerView":1,"spaceBetween":24,"speed":800,"breakpoints":{"576":{"slidesPerView":2},"1200":{"slidesPerView":3},"1540":{"slidesPerView":4}}}'>
                 <div class="swiper-wrapper">
-                  <div class="swiper-slide"><a class="text-decoration-none" href="kanban.html">
+                  <div class="swiper-slide"><a class="text-decoration-none" href="../../VgmsModules/pms/view_task.php">
                       <div class="card overflow-hidden bg-transparent h-100">
                         <div class="position-relative"><img class="w-100" src="../../assets/img/kanban/board-5.png" style="height: 128px;" alt="" />
                           <div class="avatar-group position-absolute" style="bottom: 1rem; left: 1.5rem">
@@ -373,7 +373,7 @@
                         </div>
                       </div>
                     </a></div>
-                  <div class="swiper-slide"><a class="text-decoration-none" href="kanban.html">
+                  <div class="swiper-slide"><a class="text-decoration-none" href="../../VgmsModules/pms/view_task.php">
                       <div class="card overflow-hidden bg-transparent h-100">
                         <div class="position-relative"><img class="w-100" src="../../assets/img/kanban/board-6.png" style="height: 128px;" alt="" />
                           <div class="avatar-group position-absolute" style="bottom: 1rem; left: 1.5rem">
@@ -404,7 +404,7 @@
                         </div>
                       </div>
                     </a></div>
-                  <div class="swiper-slide"><a class="text-decoration-none" href="kanban.html">
+                  <div class="swiper-slide"><a class="text-decoration-none" href="../../VgmsModules/pms/view_task.php">
                       <div class="card overflow-hidden bg-transparent h-100">
                         <div class="position-relative">
                           <div class="bg-body-secondary" style="height: 128px"></div>
@@ -439,7 +439,7 @@
                         </div>
                       </div>
                     </a></div>
-                  <div class="swiper-slide"><a class="text-decoration-none" href="kanban.html">
+                  <div class="swiper-slide"><a class="text-decoration-none" href="../../VgmsModules/pms/view_task.php">
                       <div class="card overflow-hidden bg-transparent h-100">
                         <div class="position-relative"><img class="w-100" src="../../assets/img/kanban/board-8.png" style="height: 128px;" alt="" />
                           <div class="avatar-group position-absolute" style="bottom: 1rem; left: 1.5rem">
@@ -488,7 +488,7 @@
             <div class="swiper-theme-container kanban-boards-slider">
               <div class="swiper theme-slider" data-swiper='{"slidesPerView":1,"spaceBetween":24,"speed":800,"breakpoints":{"576":{"slidesPerView":2},"1200":{"slidesPerView":3},"1540":{"slidesPerView":4}}}'>
                 <div class="swiper-wrapper">
-                  <div class="swiper-slide"><a class="text-decoration-none" href="kanban.html">
+                  <div class="swiper-slide"><a class="text-decoration-none" href="../../VgmsModules/pms/view_task.php">
                       <div class="card overflow-hidden bg-transparent h-100">
                         <div class="position-relative"><img class="w-100" src="../../assets/img/kanban/board-9.png" style="height: 128px;" alt="" />
                           <div class="avatar-group position-absolute" style="bottom: 1rem; left: 1.5rem">

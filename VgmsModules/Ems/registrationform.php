@@ -164,8 +164,8 @@
       }
     </script>
     <div class="content">
-      <div class="container shadow-lg rounded-4 p-4 mt-4">
-        <h2 class="text-center mb-4 fw-bold text-primary">Veena Group Employee Onboarding</h2>
+      <div class="container shadow-lg rounded-4 p-4 mt-4 mb-2">
+      <h2 class="mb-1 fw-bold text-primary">Veena Group Employee Onboarding</h2>
 
         <div class="progress mb-4 rounded-pill">
           <div id="progress-bar" class="progress-bar bg-primary rounded-pill" role="progressbar" style="width: 0%"></div>
@@ -388,10 +388,40 @@
             </div>
           </div>
         </form>
+      </div>
+              <!-- Footer -->
+              <?php include("../../Components/footer.php"); ?>
+    </div>
+  </main>
+
+  <!-- ===============================================-->
+  <!--    End of Main Content-->
+  <!-- ===============================================-->
 
 
 
-        <script>
+  <!-- ===============================================-->
+  <!--    JavaScripts-->
+
+  <!-- ===============================================-->
+  <!--Dropdown for contacted-to--->
+
+  <script src="../../vendors/popper/popper.min.js"></script>
+  <script src="../../vendors/bootstrap/bootstrap.min.js"></script>
+  <script src="../../vendors/anchorjs/anchor.min.js"></script>
+  <script src="../../vendors/is/is.min.js"></script>
+  <script src="../../vendors/fontawesome/all.min.js"></script>
+  <script src="../../vendors/lodash/lodash.min.js"></script>
+  <script src="../../vendors/list.js/list.min.js"></script>
+  <script src="../../vendors/feather-icons/feather.min.js"></script>
+  <script src="../../vendors/dayjs/dayjs.min.js"></script>
+  <script src="../../vendors/leaflet/leaflet.js"></script>
+  <script src="../../vendors/leaflet.markercluster/leaflet.markercluster.js"></script>
+  <script src="../../vendors/leaflet.tilelayer.colorfilter/leaflet-tilelayer-colorfilter.min.js"></script>
+  <script src="../../assets/js/phoenix.js"></script>
+  <script src="../../vendors/echarts/echarts.min.js"></script>
+  <script src="../../assets/js/ecommerce-dashboard.js"></script>
+  <script>
           const steps = document.querySelectorAll('.step');
           const nextBtns = document.querySelectorAll('.next');
           const prevBtns = document.querySelectorAll('.prev');
@@ -428,48 +458,6 @@
 
           showStep(current);
         </script>
-
-
-        <!-- Footer -->
-        <?php include("../../Components/footer.php"); ?>
-
-      </div>
-    </div>
-  </main>
-
-  <!-- ===============================================-->
-  <!--    End of Main Content-->
-  <!-- ===============================================-->
-
-
-
-  <!-- ===============================================-->
-  <!--    JavaScripts-->
-
-  <!-- ===============================================-->
-  <!--Dropdown for contacted-to--->
-
-  <script src="../../vendors/popper/popper.min.js"></script>
-  <script src="../../vendors/bootstrap/bootstrap.min.js"></script>
-  <script src="../../vendors/anchorjs/anchor.min.js"></script>
-  <script src="../../vendors/is/is.min.js"></script>
-  <script src="../../vendors/fontawesome/all.min.js"></script>
-  <script src="../../vendors/lodash/lodash.min.js"></script>
-  <script src="../../vendors/list.js/list.min.js"></script>
-  <script src="../../vendors/feather-icons/feather.min.js"></script>
-  <script src="../../vendors/dayjs/dayjs.min.js"></script>
-  <script src="../../vendors/leaflet/leaflet.js"></script>
-  <script src="../../vendors/leaflet.markercluster/leaflet.markercluster.js"></script>
-  <script src="../../vendors/leaflet.tilelayer.colorfilter/leaflet-tilelayer-colorfilter.min.js"></script>
-  <script src="../../assets/js/phoenix.js"></script>
-  <script src="../../vendors/echarts/echarts.min.js"></script>
-  <script src="../../assets/js/ecommerce-dashboard.js"></script>
-
-
-
-
-
-  </script>
 
 
 

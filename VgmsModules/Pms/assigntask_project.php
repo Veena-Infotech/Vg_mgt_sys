@@ -33,6 +33,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap"
         rel="stylesheet">
+    <link href="../../vendors/choices/choices.min.css" rel="stylesheet" />
+    <link href="../../vendors/dropzone/dropzone.css" rel="stylesheet" />
+    <link href="../../vendors/flatpickr/flatpickr.min.css" rel="stylesheet" />
     <link href="../../vendors/simplebar/simplebar.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../unicons.iconscout.com/release/v4.0.8/css/line.css">
     <link href="../../assets/css/theme-rtl.css" type="text/css" rel="stylesheet" id="style-rtl">
@@ -184,21 +187,22 @@
 
                             <!-- Assigned To -->
                             <div class="col-md-6">
-                                <label for="assignedTo" class="form-label">Assigned To <span
-                                        class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="assignedTo"
-                                    placeholder="Enter assignee name" required>
+                                <div class="mb-3"><label class="form-label">Assigned Employee<span style="color: red;">*</span></label><select class="form-select" id="organizerMultiple2" data-choices="data-choices" multiple="multiple" size="1" name="organizerMultiple" required="required" data-options='{"removeItemButton":true,"placeholder":true}'>
+                                        <option value="">Select organizer...</option>
+                                        <option>Neav Panjwani</option>
+                                        <option>Om Pandey</option>
+                                        <option>Janesh Chichriya</option>
+                                        <option>Ishika sharma</option>
+                                        <option>Static</option>
+                                    </select>
+                                    <div class="invalid-feedback">Please select one or multiple</div>
+                                </div>
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <!-- Deadline -->
-                            <div class="col-md-6">
-                                <label for="deadline" class="form-label">Deadline <span
-                                        class="text-danger">*</span></label>
-                                <input type="date" class="form-control" id="deadline" required>
-                            </div>
-
+                             
                             <!-- Task Status -->
                             <div class="col-md-6">
                                 <label for="taskStatus" class="form-label">Task Status <span
@@ -211,6 +215,17 @@
                                     <option value="Blocked">Blocked</option>
                                 </select>
                             </div>
+                            <!-- Manager -->
+                            <div class="col-md-6">
+                            <label class="form-label">Project Manager<span style="color: red;">*</span></label>
+                            <select class="form-select" name="project_status">
+                                <option selected disabled>Select Manager</option>
+                                <option>Aryan Sir</option>
+                                <option>Op sir</option>
+                                <option>Aakash sir</option>
+                                <option>Static</option>
+                            </select>
+                        </div>
                         </div>
 
                         <!-- Description -->
@@ -219,6 +234,13 @@
                             <textarea class="form-control" id="taskDescription" rows="4"
                                 placeholder="Enter task description (optional)"></textarea>
                         </div>
+
+                        <!-- start and end date of project  -->
+
+                        <label class="form-label" for="timepicker2">Select Time Range</label>
+                        <input class="form-control datetimepicker" id="timepicker2" type="text" placeholder="d/m/y to d/m/y" data-options='{"mode":"range","dateFormat":"d/m/y","disableMobile":true}' />
+
+                        <br>
 
                         <!-- Submit Button -->
                         <div class="text-end">
@@ -512,8 +534,6 @@
 
     </script>
     <script>
-
-
         const rowsPerPage = 5;
         let rows = document.querySelectorAll('#projectTableBody tr');
         let filteredRows = Array.from(rows); // Initialize with all rows
@@ -635,9 +655,11 @@
         document.getElementById('projectStatusFilter').addEventListener('change', filterProjects);
         document.getElementById('filterType').addEventListener('change', filterProjects);
     </script>
-
+    <script src="../../vendors/dropzone/dropzone-min.js"></script>
+    <script src="../../vendors/choices/choices.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+    <script src="../../vendors/flatpickr/flatpickr.min.js"></script>
     <script>
         gsap.from("#formCard", {
             opacity: 0,
@@ -645,6 +667,7 @@
             duration: 1,
             ease: "power2.out"
         });
+
         function animateTableRows() {
             filteredRows.forEach((row, index) => {
                 gsap.from(row, {
@@ -680,8 +703,6 @@
             ease: "power2.out",
             delay: 0.1
         });
-
-
     </script>
 
 

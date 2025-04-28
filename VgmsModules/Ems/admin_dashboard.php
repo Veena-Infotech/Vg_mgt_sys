@@ -13,7 +13,7 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>Starter code</title>
+    <title>Admin Dashboard</title>
 
     <!-- ===============================================-->
     <!--    Favicons-->
@@ -165,229 +165,196 @@
             }
         </script>
         <div class="content">
-            <div class="mb-5">
-                <h1 class="fw-bold d-flex align-items-center gap-2" id="pageTitle">
-                    <i class="bi bi-person-workspace"></i> Receptionist Dashboard
-                </h1>
-                <p class="text-muted d-flex align-items-center gap-2" id="pageSubtitle">
-                    <i class="bi bi-briefcase"></i> Manage daily activities with ease
-                </p>
-            </div>
+            <div class="container">
+                <div class="d-flex align-items-center gap-2">     
+                    <h1 class="fw-bold mb-0" id="pageTitle">Receptionist Dashboard</h1>
+                </div>
+                <div class="d-flex align-items-center gap-2 mt-2 mb-4">
+                    <p class="text-muted mb-0" id="pageSubtitle">Manage daily activities with ease</p>
+                </div>
+                <!-- Dashboard Content -->
+                <div class="row g-4" id="dashboardContent">
 
-            <!-- Dashboard Content -->
-            <div class="row g-4" id="dashboardContent">
-
-                <!-- Today's Appointments -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="border rounded-4 p-4 shadow-sm h-100">
-                        <div class="d-flex align-items-center mb-3">
-                            <i class="bi bi-calendar-event display-5 text-primary"></i>
-                            <div class="ms-3">
-                                <p class="mb-0 text-muted">Today's Appointments</p>
-                                <h3 class="fw-bold">8</h3>
+                    <!-- Today's Appointments -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="border rounded-4 p-4 shadow-sm h-100">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-calendar-event display-5 text-primary"></i>
+                                <div class="ms-3">
+                                    <p class="mb-0 text-muted">Today's Appointments</p>
+                                    <h3 class="fw-bold">8</h3>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="badge bg-success-subtle text-success p-2">+15%</span>
+                                <small class="text-muted">Since yesterday</small>
                             </div>
                         </div>
-                        <hr>
-                        <div class="d-flex align-items-center gap-2">
-                            <span class="badge bg-success-subtle text-success p-2">+15%</span>
-                            <small class="text-muted">Since yesterday</small>
-                        </div>
                     </div>
-                </div>
 
-                <!-- New Guests Registered -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="border rounded-4 p-4 shadow-sm h-100">
-                        <div class="d-flex align-items-center mb-3">
-                            <i class="bi bi-person-plus-fill display-5 text-success"></i>
-                            <div class="ms-3">
-                                <p class="mb-0 text-muted">New Guests</p>
-                                <h3 class="fw-bold">5</h3>
+                    <!-- New Guests Registered -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="border rounded-4 p-4 shadow-sm h-100">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-person-plus-fill display-5 text-success"></i>
+                                <div class="ms-3">
+                                    <p class="mb-0 text-muted">New Guests</p>
+                                    <h3 class="fw-bold">5</h3>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="badge bg-danger-subtle text-danger p-2">-5%</span>
+                                <small class="text-muted">Compared to last week</small>
                             </div>
                         </div>
-                        <hr>
-                        <div class="d-flex align-items-center gap-2">
-                            <span class="badge bg-danger-subtle text-danger p-2">-5%</span>
-                            <small class="text-muted">Compared to last week</small>
-                        </div>
                     </div>
-                </div>
 
-                <!-- Messages -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="border rounded-4 p-4 shadow-sm h-100">
-                        <div class="d-flex align-items-center mb-3">
-                            <i class="bi bi-envelope-paper-fill display-5 text-warning"></i>
-                            <div class="ms-3">
-                                <p class="mb-0 text-muted">New Messages</p>
-                                <h3 class="fw-bold">12</h3>
+                    <!-- Messages -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="border rounded-4 p-4 shadow-sm h-100">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-envelope-paper-fill display-5 text-warning"></i>
+                                <div class="ms-3">
+                                    <p class="mb-0 text-muted">New Messages</p>
+                                    <h3 class="fw-bold">12</h3>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="badge bg-primary-subtle text-primary p-2">+8%</span>
+                                <small class="text-muted">Since yesterday</small>
                             </div>
                         </div>
-                        <hr>
-                        <div class="d-flex align-items-center gap-2">
-                            <span class="badge bg-primary-subtle text-primary p-2">+8%</span>
-                            <small class="text-muted">Since yesterday</small>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="col-12">
+                        <div class="border rounded-4 p-4 shadow-sm h-100">
+                            <h5 class="d-flex align-items-center gap-2 mb-4">
+                                <i class="bi bi-lightning-fill"></i> Quick Actions
+                            </h5>
+                            <div class="d-flex flex-wrap gap-3">
+                                <button class="btn btn-outline-primary d-flex align-items-center gap-2">
+                                    <i class="bi bi-plus-circle"></i> New Appointment
+                                </button>
+                                <button class="btn btn-outline-success d-flex align-items-center gap-2">
+                                    <i class="bi bi-person-add"></i> Register Guest
+                                </button>
+                                <button class="btn btn-outline-warning d-flex align-items-center gap-2">
+                                    <i class="bi bi-chat-left-text"></i> View Queries
+                                </button>
+                                <button class="btn btn-outline-danger d-flex align-items-center gap-2">
+                                    <i class="bi bi-box-arrow-right"></i> Logout
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Charts Section -->
+                <div class="row g-4 mt-2" id="chartsSection">
+
+                    <!-- Bar Chart -->
+                    <div class="col-lg-8">
+                        <div class="border rounded-4 p-4 shadow-sm h-100">
+                            <h5 class="fw-bold d-flex align-items-center gap-2 mb-3">
+                                <i class="bi bi-bar-chart-line"></i> Contacts Created
+                            </h5>
+                            <p class="text-muted">Contacts received across all channels</p>
+                            <canvas id="contactsChart" height="150"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Doughnut Chart -->
+                    <div class="col-lg-4">
+                        <div class="border rounded-4 p-4 shadow-sm h-100">
+                            <h5 class="fw-bold d-flex align-items-center gap-2 mb-3">
+                                <i class="bi bi-pie-chart-fill"></i> New Contacts by Source
+                            </h5>
+                            <p class="text-muted">Distribution of contact sources</p>
+                            <canvas id="sourcesChart" height="150"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row g-4 py-5">
+
+                    <!-- To Do Section -->
+                    <div class="col-md-6">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body d-flex flex-column">
+                                <h2 class="card-title mb-4"><i class="bi bi-list-task"></i> Pending Approval</h2>
+
+                                <div class="overflow-auto flex-grow-1" style="max-height: 300px;">
+                                    <ul class="list-group fs-6" id="todoList">
+                                        <li class=" small list-group-item">
+                                            <i class="bi bi-pencil-square me-2"></i> Finalize the geometric shapes
+                                            <div class="small text-muted mt-1 ms-4">Waiting for design team feedback</div>
+                                        </li>
+                                        <li class=" small list-group-item">
+                                            <i class="bi bi-people-fill me-2"></i> Daily meeting with team members
+                                            <div class="small text-muted mt-1 ms-4">Scheduling conflicts to resolve</div>
+                                        </li>
+                                        <li class="small list-group-item">
+                                            <i class="bi bi-calendar-check me-2"></i> Daily Standup Meetings
+                                            <div class="small text-muted mt-1 ms-4">Pending team confirmation</div>
+                                        </li>
+                                        <li class="small list-group-item">
+                                            <i class="bi bi-hourglass-split me-2"></i> Procrastinate for a month
+                                            <div class="small text-muted mt-1 ms-4">Needs management approval</div>
+                                        </li>
+                                        <li class="small list-group-item">
+                                            <i class="bi bi-fire me-2"></i> Warming up
+                                            <div class="small text-muted mt-1 ms-4">Pending on-boarding session</div>
+                                        </li>
+                                        <li class="small list-group-item">
+                                            <i class="bi bi-box-arrow-up-right me-2"></i> Make ready for release
+                                            <div class="small text-muted mt-1 ms-4">QA sign-off pending</div>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="mt-3">
+                                    <button class="btn btn-outline-primary w-100"><i class="bi bi-plus-circle me-2"></i> Add new task</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payroll Summary Section -->
+                    <div class="col-md-6">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body d-flex flex-column">
+                                <h2 class="card-title mb-4"><i class="bi bi-cash-coin"></i> Payroll Summary</h2>
+                                <p class="text-muted">Recent payroll activities</p>
+
+                                <div class="overflow-auto flex-grow-1">
+                                    <ul class="list-group mt-3" id="payrollSummary">
+                                        <li class="list-group-item">
+                                            <h5><i class="bi bi-currency-dollar me-2"></i> December 2023 Salary Disbursed</h5>
+                                            <p class="mb-0">All employees received December salaries on 1st Jan 2024.</p>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <h5><i class="bi bi-gift me-2"></i> Year-End Bonuses</h5>
+                                            <p class="mb-0">Bonuses credited on 20th Dec 2023.</p>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <h5><i class="bi bi-gear-fill me-2"></i> Payroll Adjustments</h5>
+                                            <p class="mb-0">Adjustments completed for reimbursements.</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Quick Actions -->
-                <div class="col-12">
-                    <div class="border rounded-4 p-4 shadow-sm h-100">
-                        <h5 class="d-flex align-items-center gap-2 mb-4">
-                            <i class="bi bi-lightning-fill"></i> Quick Actions
-                        </h5>
-                        <div class="d-flex flex-wrap gap-3">
-                            <button class="btn btn-outline-primary d-flex align-items-center gap-2">
-                                <i class="bi bi-plus-circle"></i> New Appointment
-                            </button>
-                            <button class="btn btn-outline-success d-flex align-items-center gap-2">
-                                <i class="bi bi-person-add"></i> Register Guest
-                            </button>
-                            <button class="btn btn-outline-warning d-flex align-items-center gap-2">
-                                <i class="bi bi-chat-left-text"></i> View Queries
-                            </button>
-                            <button class="btn btn-outline-danger d-flex align-items-center gap-2">
-                                <i class="bi bi-box-arrow-right"></i> Logout
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
             </div>
-
-            <!-- Charts Section -->
-            <div class="row g-4 mt-2" id="chartsSection">
-
-                <!-- Bar Chart -->
-                <div class="col-lg-8">
-                    <div class="border rounded-4 p-4 shadow-sm h-100">
-                        <h5 class="fw-bold d-flex align-items-center gap-2 mb-3">
-                            <i class="bi bi-bar-chart-line"></i> Contacts Created
-                        </h5>
-                        <p class="text-muted">Contacts received across all channels</p>
-                        <canvas id="contactsChart" height="150"></canvas>
-                    </div>
-                </div>
-
-                <!-- Doughnut Chart -->
-                <div class="col-lg-4">
-                    <div class="border rounded-4 p-4 shadow-sm h-100">
-                        <h5 class="fw-bold d-flex align-items-center gap-2 mb-3">
-                            <i class="bi bi-pie-chart-fill"></i> New Contacts by Source
-                        </h5>
-                        <p class="text-muted">Distribution of contact sources</p>
-                        <canvas id="sourcesChart" height="150"></canvas>
-                    </div>
-                </div>
-
-            </div>
-            <!-- Header -->
-            <div class="mb-4">
-                <h1 class="fw-bold d-flex align-items-center gap-2" id="pageTitle">
-                    <i class="bi bi-bar-chart-line"></i> Deal Forecast - <span class="text-primary">$90,303</span>
-                </h1>
-                <p class="text-muted d-flex align-items-center gap-2" id="pageSubtitle">
-                    <i class="bi bi-info-circle"></i> Show what you offer here
-                </p>
-            </div>
-
-            <!-- Date Picker and Customize Button -->
-            <div class="d-flex justify-content-end align-items-center gap-3 mb-4" id="topButtons">
-                <button class="btn btn-outline-primary d-flex align-items-center gap-2">
-                    <i class="bi bi-gear"></i> Customize
-                </button>
-                <div>
-                    <input type="date" class="form-control" value="2022-03-01">
-                </div>
-            </div>
-
-            <!-- Progress Bar -->
-            <div class="mb-5" id="progressSection">
-                <div class="d-flex justify-content-between small fw-bold mb-1">
-                    <span>$21.0k</span>
-                    <span>$3.4k</span>
-                    <span>$15.1k</span>
-                    <span>$4.6k</span>
-                </div>
-                <div class="progress" style="height: 10px;">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: 70%"></div>
-                    <div class="progress-bar bg-success" role="progressbar" style="width: 20%"></div>
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: 10%"></div>
-                </div>
-            </div>
-
-            <!-- Table Section -->
-            <div class="card border-0 shadow-sm rounded-4 mt-2" id="tableSection">
-                <div class="card-body">
-                    <h5 class="fw-bold d-flex align-items-center gap-2 mb-4">
-                        <i class="bi bi-people-fill"></i> Deal Forecast by Owner
-                    </h5>
-                    <div class="table-responsive">
-                        <table class="table table-hover align-middle">
-                            <thead class="table">
-                                <tr>
-                                    <th>Contact</th>
-                                    <th><i class="bi bi-calendar-check"></i> Appointment</th>
-                                    <th><i class="bi bi-award"></i> Qualified</th>
-                                    <th><i class="bi bi-check-circle-fill text-success"></i> Closed Won</th>
-                                    <th><i class="bi bi-send-check"></i> Contact Sent</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><a href="#" class="text-decoration-none">Carrie Anne</a></td>
-                                    <td>1000</td>
-                                    <td>$1256</td>
-                                    <td>$1200</td>
-                                    <td>$1200</td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#" class="text-decoration-none">Milind Mikuja</a></td>
-                                    <td>558</td>
-                                    <td>$2531</td>
-                                    <td>$2200</td>
-                                    <td>$2200</td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#" class="text-decoration-none">Stanley Drinkwater</a></td>
-                                    <td>1100</td>
-                                    <td>$100</td>
-                                    <td>$100</td>
-                                    <td>$100</td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#" class="text-decoration-none">Josef Stravinsky</a></td>
-                                    <td>856</td>
-                                    <td>$326</td>
-                                    <td>$265</td>
-                                    <td>$265</td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#" class="text-decoration-none">Roy Anderson</a></td>
-                                    <td>1200</td>
-                                    <td>$1452</td>
-                                    <td>$865</td>
-                                    <td>$865</td>
-                                </tr>
-                            </tbody>
-                            <tfoot class="fw-bold">
-                                <tr>
-                                    <td>Total</td>
-                                    <td>4,744</td>
-                                    <td>$5,665</td>
-                                    <td>$4,630</td>
-                                    <td>$4,630</td>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
             <!-- Footer -->
             <?php include("../../Components/footer.php"); ?>
-        </div>
         </div>
     </main>
 
@@ -431,22 +398,20 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <!-- GSAP Animations -->
     <script>
-        // Animate Title and Subtitle
+        // Animate the dashboard title and subtitle 
         gsap.from("#pageTitle", {
             duration: 1,
-            x: -100,
-            opacity: 0,
+            opacity: 1,
             ease: "power4.out"
         });
 
         gsap.from("#pageSubtitle", {
             duration: 1,
-            x: -100,
-            opacity: 0,
+            opacity: 1,
             delay: 0.2,
             ease: "power4.out"
         });
-
+       
         // Animate all dashboard cards
         gsap.from("#dashboardContent .col-lg-4, #dashboardContent .col-12", {
             duration: 1,
@@ -552,10 +517,75 @@
             delay: 0.5,
             ease: "back.out(1.7)"
         });
+        gsap.from("#tableSection table", {
+            duration: 1,
+            y: 50,
+            opacity: 0,
+            delay: 0.6,
+            ease: "back.out(1.7)"
+        });
+        gsap.from("#tableSection th, #tableSection td", {
+            duration: 1,
+            y: 50,
+            opacity: 0,
+            stagger: 0.1,
+            delay: 0.7,
+            ease: "back.out(1.7)"
+        });
+
+        // Animate the To-do list and Payroll Summary with a fade-in
+        gsap.from("#todoList li", {
+            opacity: 0,
+            x: -50,
+            duration: 0.8,
+            stagger: 0.2
+        });
+
+
+        gsap.from("#payrollSummary li", {
+            opacity: 0,
+            x: 50,
+            duration: 0.8,
+            stagger: 0.2
+        });
+
+
+        // Animate the Add new task button
+        gsap.from("#todoList button", {
+            opacity: 0,
+            scale: 0.8,
+            duration: 0.8,
+            delay: 0.5
+        });
+
+        // Animate the charts
+        gsap.from("#contactsChart", {
+            opacity: 0,
+            scale: 0.8,
+            duration: 0.8,
+            delay: 0.5
+        });
+        gsap.from("#sourcesChart", {
+            opacity: 0,
+            scale: 0.8,
+            duration: 0.8,
+            delay: 0.5
+        });
+
+        // Animate the charts with a bounce effect
+        gsap.from("#contactsChart", {
+            scale: 0.5,
+            duration: 0.8,
+            ease: "bounce.out",
+            delay: 0.5
+        });
+        gsap.from("#sourcesChart", {
+            scale: 0.5,
+            duration: 0.8,
+            ease: "bounce.out",
+            delay: 0.5
+        });
     </script>
-
-
-
 
 </body>
 

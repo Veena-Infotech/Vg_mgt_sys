@@ -31,7 +31,8 @@
     <!-- ===============================================-->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap"
+        rel="stylesheet">
     <link href="../../vendors/simplebar/simplebar.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../unicons.iconscout.com/release/v4.0.8/css/line.css">
     <link href="../../assets/css/theme-rtl.css" type="text/css" rel="stylesheet" id="style-rtl">
@@ -170,12 +171,12 @@
             <div class="container py-5">
                 <!-- Header -->
                 <div class="d-flex align-items-center mb-2" id="header">
-                    <i class="bi bi-calendar-check text-primary fs-2 me-2"></i>
+                    <!-- <i class="bi bi-calendar-check text-primary fs-2 me-2"></i> -->
                     <h2 class="fw-bold mb-0">My Leave Requests</h2>
                 </div>
 
                 <!-- Subtitle and line -->
-                <p class="text-secondary mb-1">Track all your submitted leave requests and check their approval status.</p>
+                <p class="mb-1">Track all your submitted leave requests and check their approval status.</p>
                 <hr class="mb-4 mt-1" />
 
                 <!-- Leave Requests Card -->
@@ -189,7 +190,8 @@
                         <div class="d-flex flex-wrap gap-2 mt-2 mt-sm-0">
 
                             <!-- Search -->
-                            <input type="text" id="searchBox" class="form-control form-control-sm w-auto" placeholder="Search..." style="min-width: 160px;" />
+                            <input type="text" id="searchBox" class="form-control form-control-sm w-auto"
+                                placeholder="Search..." style="min-width: 160px;" />
 
                             <!-- Apply Button -->
                             <button class="btn btn-outline-primary btn-sm">
@@ -197,179 +199,153 @@
                             </button>
                         </div>
                     </div>
-                    <div id="tableExample4" data-list='{"valueNames":["name","email","payment"],"page":5,"pagination":true,"filter":{"key":"payment"}}'>
+                    <div id="tableExample4"
+                        data-list='{"valueNames":["date-from","date-to","reason","approval-by","status"],"page":5,"pagination":true,"filter":{"key":"payment"}}'>
                         <div class="row justify-content-end g-0">
-                            
-                        <div class="table-responsive">
-                            <table class="table table-sm fs-9 mb-0">
-                                <thead>
-                                    <tr class="bg-body-highlight">
-                                       
-                                        <th class="sort border-top border-translucent" data-sort="date-from">From</th>
-                                        <th class="sort border-top border-translucent" data-sort="date-to">To</th>
-                                        <th class="sort border-top border-translucent" data-sort="reason">Reason</th>
-                                        <th class="sort border-top border-translucent" data-sort="approval-by">Approval By</th>
-                                        <th class="sort border-top border-translucent text-end pe-3" data-sort="status">Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="list">
-                                    <tr>
-                                        <td class="align-middle date-from">2025-05-01</td>
-                                        <td class="align-middle date-to">2025-07-01</td>
-                                        <td class="align-middle reason">Family Function</td>
-                                        <td class="align-middle approval-by">HR Manager</td>
-                                        <td class="align-middle payment text-end py-3 pe-3">
-                                            <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="fw-bold">Success</span><span class="ms-1 fas fa-check"></span></div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                    <td class="align-middle date-from">2025-05-01</td>
-                                        <td class="align-middle date-to">2025-07-01</td>
-                                        <td class="align-middle reason">Family Function</td>
-                                        <td class="align-middle approval-by">HR Manager</td>
-                                        <td class="align-middle payment text-end py-3 pe-3">
-                                            <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="fw-bold">Success</span><span class="ms-1 fas fa-check"></span></div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                    <td class="align-middle date-from">2025-05-01</td>
-                                        <td class="align-middle date-to">2025-07-01</td>
-                                        <td class="align-middle reason">Family Function</td>
-                                        <td class="align-middle approval-by">HR Manager</td>
-                                        <td class="align-middle payment text-end py-3 pe-3">
-                                            <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="fw-bold">Success</span><span class="ms-1 fas fa-check"></span></div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                    <td class="align-middle date-from">2025-05-01</td>
-                                        <td class="align-middle date-to">2025-07-01</td>
-                                        <td class="align-middle reason">Family Function</td>
-                                        <td class="align-middle approval-by">HR Manager</td>
-                                        <td class="align-middle payment text-end py-3 pe-3">
-                                            <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="fw-bold">Success</span><span class="ms-1 fas fa-check"></span></div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                    <td class="align-middle date-from">2025-05-01</td>
-                                        <td class="align-middle date-to">2025-07-01</td>
-                                        <td class="align-middle reason">Family Function</td>
-                                        <td class="align-middle approval-by">HR Manager</td>
-                                        <td class="align-middle payment text-end py-3 pe-3">
-                                            <div class="badge badge-phoenix fs-10 badge-phoenix-warning"><span class="fw-bold">Pending</span><span class="ms-1 fas fa-stream"></span></div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                    <td class="align-middle date-from">2025-05-01</td>
-                                        <td class="align-middle date-to">2025-07-01</td>
-                                        <td class="align-middle reason">Family Function</td>
-                                        <td class="align-middle approval-by">HR Manager</td>
-                                        <td class="align-middle payment text-end py-3 pe-3">
-                                            <div class="badge badge-phoenix fs-10 badge-phoenix-secondary"><span class="fw-bold">Blocked</span><span class="ms-1 fas fa-ban"></span></div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                    <td class="align-middle date-from">2025-05-01</td>
-                                        <td class="align-middle date-to">2025-07-01</td>
-                                        <td class="align-middle reason">Family Function</td>
-                                        <td class="align-middle approval-by">HR Manager</td>
-                                        <td class="align-middle payment text-end py-3 pe-3">
-                                            <div class="badge badge-phoenix fs-10 badge-phoenix-warning"><span class="fw-bold">Pending</span><span class="ms-1 fas fa-stream"></span></div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                    <td class="align-middle date-from">2025-05-01</td>
-                                        <td class="align-middle date-to">2025-07-01</td>
-                                        <td class="align-middle reason">Family Function</td>
-                                        <td class="align-middle approval-by">HR Manager</td>
-                                        <td class="align-middle payment text-end py-3 pe-3">
-                                            <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="fw-bold">Success</span><span class="ms-1 fas fa-check"></span></div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                    <td class="align-middle date-from">2025-05-01</td>
-                                        <td class="align-middle date-to">2025-07-01</td>
-                                        <td class="align-middle reason">Family Function</td>
-                                        <td class="align-middle approval-by">HR Manager</td>
-                                        <td class="align-middle payment text-end py-3 pe-3">
-                                            <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="fw-bold">Success</span><span class="ms-1 fas fa-check"></span></div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                    <td class="align-middle date-from">2025-05-01</td>
-                                        <td class="align-middle date-to">2025-07-01</td>
-                                        <td class="align-middle reason">Family Function</td>
-                                        <td class="align-middle approval-by">HR Manager</td>
-                                        <td class="align-middle payment text-end py-3 pe-3">
-                                            <div class="badge badge-phoenix fs-10 badge-phoenix-warning"><span class="fw-bold">Pending</span><span class="ms-1 fas fa-stream"></span></div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="d-flex justify-content-between mt-3"><span class="d-none d-sm-inline-block" data-list-info="data-list-info"></span>
-                            <div class="d-flex"><button class="page-link" data-list-pagination="prev"><span class="fas fa-chevron-left"></span></button>
-                                <ul class="mb-0 pagination"></ul><button class="page-link pe-0" data-list-pagination="next"><span class="fas fa-chevron-right"></span></button>
+
+                            <div class="table-responsive">
+                                <table class="table table-sm fs-9 mb-0">
+                                    <thead>
+                                        <tr class="bg-body-highlight">
+
+                                            <th class="sort border-top border-translucent" data-sort="date-from">From
+                                            </th>
+                                            <th class="sort border-top border-translucent" data-sort="date-to">To</th>
+                                            <th class="sort border-top border-translucent" data-sort="reason">Reason
+                                            </th>
+                                            <th class="sort border-top border-translucent" data-sort="approval-by">
+                                                Approval By</th>
+                                            <th class="sort border-top border-translucent text-end pe-3"
+                                                data-sort="status">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="list">
+                                        <tr>
+                                            <td class="align-middle date-from">2025-05-01</td>
+                                            <td class="align-middle date-to">2025-07-01</td>
+                                            <td class="align-middle reason">Family Function</td>
+                                            <td class="align-middle approval-by">HR Manager</td>
+                                            <td class="align-middle payment text-end py-3 pe-3">
+                                                <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span
+                                                        class="fw-bold">Success</span><span
+                                                        class="ms-1 fas fa-check"></span></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-middle date-from">2025-05-01</td>
+                                            <td class="align-middle date-to">2025-07-01</td>
+                                            <td class="align-middle reason">Family Function</td>
+                                            <td class="align-middle approval-by">HR Manager</td>
+                                            <td class="align-middle payment text-end py-3 pe-3">
+                                                <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span
+                                                        class="fw-bold">Success</span><span
+                                                        class="ms-1 fas fa-check"></span></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-middle date-from">2025-05-01</td>
+                                            <td class="align-middle date-to">2025-07-01</td>
+                                            <td class="align-middle reason">Family Function</td>
+                                            <td class="align-middle approval-by">HR Manager</td>
+                                            <td class="align-middle payment text-end py-3 pe-3">
+                                                <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span
+                                                        class="fw-bold">Success</span><span
+                                                        class="ms-1 fas fa-check"></span></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-middle date-from">2025-05-01</td>
+                                            <td class="align-middle date-to">2025-07-01</td>
+                                            <td class="align-middle reason">Family Function</td>
+                                            <td class="align-middle approval-by">HR Manager</td>
+                                            <td class="align-middle payment text-end py-3 pe-3">
+                                                <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span
+                                                        class="fw-bold">Success</span><span
+                                                        class="ms-1 fas fa-check"></span></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-middle date-from">2025-05-01</td>
+                                            <td class="align-middle date-to">2025-07-01</td>
+                                            <td class="align-middle reason">Family Function</td>
+                                            <td class="align-middle approval-by">HR Manager</td>
+                                            <td class="align-middle payment text-end py-3 pe-3">
+                                                <div class="badge badge-phoenix fs-10 badge-phoenix-warning"><span
+                                                        class="fw-bold">Pending</span><span
+                                                        class="ms-1 fas fa-stream"></span></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-middle date-from">2025-05-01</td>
+                                            <td class="align-middle date-to">2025-07-01</td>
+                                            <td class="align-middle reason">Family Function</td>
+                                            <td class="align-middle approval-by">HR Manager</td>
+                                            <td class="align-middle payment text-end py-3 pe-3">
+                                                <div class="badge badge-phoenix fs-10 badge-phoenix-secondary"><span
+                                                        class="fw-bold">Blocked</span><span
+                                                        class="ms-1 fas fa-ban"></span></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-middle date-from">2025-05-01</td>
+                                            <td class="align-middle date-to">2025-07-01</td>
+                                            <td class="align-middle reason">Family Function</td>
+                                            <td class="align-middle approval-by">HR Manager</td>
+                                            <td class="align-middle payment text-end py-3 pe-3">
+                                                <div class="badge badge-phoenix fs-10 badge-phoenix-warning"><span
+                                                        class="fw-bold">Pending</span><span
+                                                        class="ms-1 fas fa-stream"></span></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-middle date-from">2025-05-01</td>
+                                            <td class="align-middle date-to">2025-07-01</td>
+                                            <td class="align-middle reason">Family Function</td>
+                                            <td class="align-middle approval-by">HR Manager</td>
+                                            <td class="align-middle payment text-end py-3 pe-3">
+                                                <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span
+                                                        class="fw-bold">Success</span><span
+                                                        class="ms-1 fas fa-check"></span></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-middle date-from">2025-05-01</td>
+                                            <td class="align-middle date-to">2025-07-01</td>
+                                            <td class="align-middle reason">Family Function</td>
+                                            <td class="align-middle approval-by">HR Manager</td>
+                                            <td class="align-middle payment text-end py-3 pe-3">
+                                                <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span
+                                                        class="fw-bold">Success</span><span
+                                                        class="ms-1 fas fa-check"></span></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-middle date-from">2025-05-01</td>
+                                            <td class="align-middle date-to">2025-07-01</td>
+                                            <td class="align-middle reason">Family Function</td>
+                                            <td class="align-middle approval-by">HR Manager</td>
+                                            <td class="align-middle payment text-end py-3 pe-3">
+                                                <div class="badge badge-phoenix fs-10 badge-phoenix-warning"><span
+                                                        class="fw-bold">Pending</span><span
+                                                        class="ms-1 fas fa-stream"></span></div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="d-flex justify-content-between mt-3"><span class="d-none d-sm-inline-block" data-list-info="data-list-info"></span>
+                                <div class="d-flex"><button class="page-link" data-list-pagination="prev"><span class="fas fa-chevron-left"></span></button>
+                                    <ul class="mb-0 pagination"></ul><button class="page-link pe-0" data-list-pagination="next"><span class="fas fa-chevron-right"></span></button>
+                                </div>
                             </div>
                         </div>
+
+
                     </div>
-
-
                 </div>
             </div>
-
-
-
-            <!-- GSAP Animations -->
-            <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
-            <script>
-                window.addEventListener("DOMContentLoaded", () => {
-                    gsap.from("#header", {
-                        opacity: 0,
-                        y: -30,
-                        duration: 0.6,
-                        ease: "power2.out"
-                    });
-                    gsap.from("#cardBox", {
-                        opacity: 0,
-                        y: 40,
-                        duration: 0.8,
-                        delay: 0.2,
-                        ease: "power2.out"
-                    });
-                });
-
-                const filterSelect = document.getElementById("leaveFilter");
-                const searchBox = document.getElementById("searchBox");
-                const tableRows = document.querySelectorAll("#leaveTableBody tr");
-
-                function filterAndSearch() {
-                    const status = filterSelect.value.toLowerCase();
-                    const query = searchBox.value.toLowerCase();
-
-                    tableRows.forEach(row => {
-                        const reason = row.cells[3].textContent.toLowerCase();
-                        const statBadge = row.cells[4].textContent.toLowerCase();
-
-                        const matchesStatus = status === "all" || statBadge.includes(status);
-                        const matchesSearch = reason.includes(query);
-
-                        row.style.display = matchesStatus && matchesSearch ? "" : "none";
-                    });
-                }
-
-                filterSelect.addEventListener("change", filterAndSearch);
-                searchBox.addEventListener("input", filterAndSearch);
-            </script>
-
             <!-- Footer -->
             <?php include("../../Components/footer.php"); ?>
-        </div>
-
-
-
-
-
-
     </main>
 
     <!-- ===============================================-->
@@ -401,9 +377,47 @@
     <script src="../../assets/js/ecommerce-dashboard.js"></script>
 
 
+    <!-- GSAP Animations -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            gsap.from("#header", {
+                opacity: 0,
+                y: -30,
+                duration: 0.6,
+                ease: "power2.out"
+            });
+            gsap.from("#cardBox", {
+                opacity: 0,
+                y: 40,
+                duration: 0.8,
+                delay: 0.2,
+                ease: "power2.out"
+            });
+        });
 
 
+        const filterSelect = document.getElementById("leaveFilter");
+        const searchBox = document.getElementById("searchBox");
+        const tableRows = document.querySelectorAll("#leaveTableBody tr");
 
+        function filterAndSearch() {
+            const status = filterSelect.value.toLowerCase();
+            const query = searchBox.value.toLowerCase();
+
+            tableRows.forEach(row => {
+                const reason = row.cells[3].textContent.toLowerCase();
+                const statBadge = row.cells[4].textContent.toLowerCase();
+
+                const matchesStatus = status === "all" || statBadge.includes(status);
+                const matchesSearch = reason.includes(query);
+
+                row.style.display = matchesStatus && matchesSearch ? "" : "none";
+            });
+        }
+
+        filterSelect.addEventListener("change", filterAndSearch);
+        searchBox.addEventListener("input", filterAndSearch);
     </script>
 
 

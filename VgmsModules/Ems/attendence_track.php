@@ -513,6 +513,7 @@
                             </svg><!-- <span class="fas fa-chevron-right"></span> Font Awesome fontawesome.com --></button>
                     </div>
                 </div>
+                <?php include '../../Components/footer.php'; ?>
             </div>
 
         </div>
