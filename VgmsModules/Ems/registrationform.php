@@ -220,7 +220,7 @@
           <div class="step">
             <h5 class="fw-semibold text-secondary">2. Contact Details</h5>
             <div class="mb-3"><label class="form-label">Primary Contact Number</label><input type="text" id="primaryContact" class="form-control" required pattern="^\d{10}$" title="Please enter a valid 10-digit phone number."></div>
-            <div class="mb-3"><label class="form-label">Alternative Contact Number</label><input type="text" id="altContact" class="form-control" pattern="^\d{10}$" title="Please enter a valid 10-digit phone number."></div>
+            <div class="mb-3"><label class="form-label">Alternative Contact Number</label><input type="text" id="altContact" class="form-control" required pattern="^\d{10}$" title="Please enter a valid 10-digit phone number."></div>
             <div class="mb-3"><label class="form-label">Personal Email ID</label><input type="email" id="personalEmail" class="form-control" required></div>
             <div class="mb-3"><label class="form-label">Official Email ID</label><input type="email" id="officialEmail" class="form-control"></div>
             <div class="mb-3"><label class="form-label">Current Residential Address</label><textarea class="form-control" id="currentAddress" required></textarea></div>
@@ -474,23 +474,6 @@
 
     showStep(current);
 
-    // Validation function for the form
-    function validateForm() {
-      const form = document.getElementById("onboardingForm");
-      const requiredFields = form.querySelectorAll("[required]");
-
-      let isValid = true;
-      requiredFields.forEach((field) => {
-        if (!field.value || !field.checkValidity()) {
-          isValid = false;
-          field.classList.add("is-invalid");
-        } else {
-          field.classList.remove("is-invalid");
-        }
-      });
-
-      return isValid;
-    }
   </script>
 
 
