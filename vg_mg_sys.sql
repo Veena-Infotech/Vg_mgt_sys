@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 28, 2025 at 01:10 PM
+-- Generation Time: Apr 28, 2025 at 02:51 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -270,6 +270,15 @@ CREATE TABLE `tbl_project` (
   `timestamp` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `tbl_project`
+--
+
+INSERT INTO `tbl_project` (`id`, `uid`, `project_title`, `project_type`, `project_manager`, `project_client`, `project_status`, `file_path`, `project_description`, `project_start_date`, `project_end_date`, `project_created_by`, `timestamp`) VALUES
+(20, 'prj_680f77b645a29', '', '', 0, '', '', '', '', NULL, NULL, 'admin', '2025-04-28'),
+(21, 'prj_680f77ed89734', 'infotech', '1', 1, '1', '1', '../uploads/project/infotech/DAA LAB Q3 OP.png', 'm, ff msd fk', '2025-04-28', '2025-05-11', 'admin', '2025-04-28'),
+(22, 'prj_680f780d1cc70', 'infotech2', '1', 1, '1', '1', '../uploads/project/infotech2/DAA LAB Q1 OP.png', 'm, ff msd fk', '2025-04-28', '2025-05-11', 'admin', '2025-04-28');
+
 -- --------------------------------------------------------
 
 --
@@ -281,6 +290,35 @@ CREATE TABLE `tbl_project_emp` (
   `emp_id` int(11) DEFAULT NULL,
   `project_id` int(11) DEFAULT NULL,
   `timestamp` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_project_emp`
+--
+
+INSERT INTO `tbl_project_emp` (`id`, `emp_id`, `project_id`, `timestamp`) VALUES
+(9, 1, 21, '2025-04-28'),
+(10, 1, 22, '2025-04-28');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_tasks`
+--
+
+CREATE TABLE `tbl_tasks` (
+  `id` int(11) NOT NULL,
+  `uid` int(11) DEFAULT NULL,
+  `title` varchar(256) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `project_title` varchar(256) DEFAULT NULL,
+  `start_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
+  `assigned_employee` varchar(256) DEFAULT NULL,
+  `priority` varchar(256) DEFAULT NULL,
+  `tags` int(11) DEFAULT NULL,
+  `image_path` varchar(256) DEFAULT NULL,
+  `file_path` varchar(256) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -403,6 +441,12 @@ ALTER TABLE `tbl_project_emp`
   ADD KEY `tbl_project_emp_fk_project` (`project_id`);
 
 --
+-- Indexes for table `tbl_tasks`
+--
+ALTER TABLE `tbl_tasks`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tbl_todo`
 --
 ALTER TABLE `tbl_todo`
@@ -473,12 +517,18 @@ ALTER TABLE `tbl_payment`
 -- AUTO_INCREMENT for table `tbl_project`
 --
 ALTER TABLE `tbl_project`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `tbl_project_emp`
 --
 ALTER TABLE `tbl_project_emp`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `tbl_tasks`
+--
+ALTER TABLE `tbl_tasks`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
