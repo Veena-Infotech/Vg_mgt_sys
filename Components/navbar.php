@@ -76,7 +76,7 @@
                   <li class="collapsed-nav-item-title d-none">VMS</li>
 
                   <li class="nav-item">
-                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/vms/NewRegistration.php?tag=new-reg" id="new-reg">
+                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/vms/New-Registration.php?tag=new-reg" id="new-reg">
                       <div class="d-flex align-items-center">
                         <span class="me-2"><i class="fa-solid fa-user-plus"></i></span>
                         <span class="nav-link-text">New Registration</span>
@@ -103,7 +103,7 @@
                     <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/vms/Receptionist-side-meeting.php?tag=recp-meet" id="recp-meet">
                       <div class="d-flex align-items-center">
                         <span class="me-2"><i class="fa-regular fa-handshake"></i></span>
-                        <span class="nav-link-text">Receptionist Side Meeting</span>
+                        <span class="nav-link-text">Receptionist Side Meeting..</span>
                       </div>
                     </a>
                   </li>
