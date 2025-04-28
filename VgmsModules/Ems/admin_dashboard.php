@@ -463,6 +463,50 @@
             delay: 0.2,
             ease: "power4.out"
         });
+        document.addEventListener('DOMContentLoaded', function() {
+            gsap.from(".border.rounded-4", {
+                opacity: 0,
+                y: 30,
+                duration: 1,
+                ease: "power2.out",
+                stagger: 0.2 // slight delay between each card animation
+            });
+        });
+
+        // Animate the quick actions buttons
+        gsap.from(".btn-outline-primary", {
+            duration: 1,
+            y: -50,
+            opacity: 0,
+            stagger: 0.2,
+            ease: "power4.out"
+        });
+        gsap.from(".btn-outline-success", {
+            duration: 1,
+            y: -50,
+            opacity: 0,
+            stagger: 0.2,
+            delay: 0.1,
+            ease: "power4.out"
+        });
+        gsap.from(".btn-outline-warning", {
+            duration: 1,
+            y: -50,
+            opacity: 0,
+            stagger: 0.2,
+            delay: 0.2,
+            ease: "power4.out"
+        });
+        gsap.from(".btn-outline-danger", {
+            duration: 1,
+            y: -50,
+            opacity: 0,
+            stagger: 0.2,
+            delay: 0.3,
+            ease: "power4.out"
+        });
+
+
 
         // Donut Chart
         const ctx = document.getElementById('attendanceChart').getContext('2d');

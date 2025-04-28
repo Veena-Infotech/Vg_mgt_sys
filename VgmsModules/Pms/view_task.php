@@ -166,7 +166,7 @@
         navbarVertical.setAttribute('data-navbar-appearance', 'darker');
       }
     </script>
-    <div class="content">
+    <div class="content" style="margin-top: 1.5em;">
       <nav class="navbar navbar-vertical navbar-expand-lg" style="display:none;">
         <div class="collapse navbar-collapse" id="navbarVerticalCollapse">
           <!-- scrollbar removed-->

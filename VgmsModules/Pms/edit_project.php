@@ -1,3 +1,8 @@
+<?php
+   // Include database connection
+   include '../PhpFiles/connection.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr" data-navigation-type="default" data-navbar-horizontal-shape="default">
 
@@ -170,24 +175,50 @@
         <div class="content">
             <div id="heading-gsap">
                 <h3 class="mb-4">Edit Project </h3>
-                <form action="edit_project.php" method="post" class="dropzone dropzone-multiple p-0" id="dropzone-multiple" data-dropzone="data-dropzone">
+                <?php
+                include '../PhpFiles/connection.php';
+                $url_id = $_GET['id'];
+                $query = "SELECT * FROM tbl_project WHERE id = {$url_id}";
+                $result = mysqli_query($conn,$query) or die("Query Unsuccessful");
+
+                if(mysqli_num_rows($result) > 0){
+                    while($row = mysqli_fetch_assoc($result)) {
+
+                ?>
+                <form action="edit_project.php" method="POST" class="dropzone dropzone-multiple p-0" id="dropzone-multiple" data-dropzone="data-dropzone">
                     <div class="row g-3">
                         <!-- Project Title -->
                         <div class="col-md-6">
+                            <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
                             <label class="form-label">Project Title <span style="color: red;">*</span></label>
                             <input type="text" class="form-control" placeholder="Enter project title"
-                                name="project_title">
+                                name="project_title" value="<?php echo $row['project_title'] ?>">
                         </div>
 
                         <!-- Project Type Dropdown -->
                         <div class="col-md-6">
                             <label class="form-label">Project Type <span style="color: red;">*</span></label>
-                            <select class="form-select" name="project_type">
-                                <option selected disabled>Select type</option>
-                                <option>Pipeline</option>
-                                <option>Residential</option>
-                                <option>Commercial</option>
-                            </select>
+                            <?php
+                            $query1 = "SELECT * FROM project_type";
+                            $result1 = mysqli_query($conn,$query1) or die("Query Unsuccessful");
+
+                            if(mysqli_num_rows($result1) > 0){
+                                echo '<select class="form-select" name="project_type">';
+                    
+                                
+                                 while($row1 = mysqli_fetch_assoc($result1)) {
+                                    if($row['project_type'] == $row1['srno']){
+                                        $select = 'SELECTED';
+                                    }else{
+                                        $select = "";
+                                    }
+                                echo "<option value='{$row1['srno']}'>{$row1['type']}</option>";
+                                 }  //while condition above the select tag
+
+                            echo'</select> ';
+                                } // if condition above the select tag
+                            ?>  
+
                         </div>
 
                         <!-- project manager  -->
@@ -271,7 +302,7 @@
                         <div class="col-12">
                             <label class="form-label">Project Description</label>
                             <textarea class="form-control" rows="4" placeholder="Enter description..."
-                                name="project_desc"></textarea>
+                                name="project_desc" value="<?php echo $row['project_description'] ?>"></textarea>
                         </div>
 
                         <!-- start and end date of project  -->
@@ -282,12 +313,17 @@
                         
                         <!-- Submit Button -->
                         <div class="col-12 text-end">
-                            <button class="btn btn-primary" type="submit">Submit</button>
+                            <button class="btn btn-primary" type="submit" value="update">Submit</button>
                             <button class="btn btn-secondary" type="reset">Clear</button>
 
                         </div>
                     </div>
                 </form><br><br>
+
+                
+                <?php }  // Curly braces of while condition above the form tag
+            }   //curly braces of if condition above theform tag
+            ?>
 
 
 
