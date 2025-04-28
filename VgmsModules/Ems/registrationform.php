@@ -165,7 +165,7 @@
     </script>
     <div class="content">
       <div class="container shadow-lg rounded-4 p-4 mt-4 mb-2">
-      <h2 class="mb-1 fw-bold text-primary">Veena Group Employee Onboarding</h2>
+        <h2 class="mb-1 fw-bold text-primary">Veena Group Employee Onboarding</h2>
 
         <div class="progress mb-4 rounded-pill">
           <div id="progress-bar" class="progress-bar bg-primary rounded-pill" role="progressbar" style="width: 0%"></div>
@@ -178,9 +178,10 @@
           <div class="step">
             <h5 class="fw-semibold text-secondary">1. Personal Information</h5>
             <div class="row g-3">
-              <div class="col-md-6"><label class="form-label">Full Name</label><input type="text" class="form-control"></div>
+              <div class="col-md-6"><label class="form-label">Full Name</label><input type="text" id="fullName" class="form-control" required></div>
               <div class="col-md-6"><label class="form-label">Salutation</label>
-                <select class="form-select">
+                <select class="form-select" required>
+                  <option value="">Select</option>
                   <option>Mr.</option>
                   <option>Ms.</option>
                   <option>Mrs.</option>
@@ -188,20 +189,22 @@
                   <option>Other</option>
                 </select>
               </div>
-              <div class="col-md-6"><label class="form-label">Father's Name</label><input type="text" class="form-control"></div>
-              <div class="col-md-6"><label class="form-label">Mother's Name</label><input type="text" class="form-control"></div>
+              <div class="col-md-6"><label class="form-label">Father's Name</label><input type="text" id="fatherName" class="form-control" required></div>
+              <div class="col-md-6"><label class="form-label">Mother's Name</label><input type="text" id="motherName" class="form-control" required></div>
               <div class="col-md-6"><label class="form-label">Marital Status</label>
-                <select class="form-select">
+                <select class="form-select" required>
+                  <option value="">Select</option>
                   <option>Single</option>
                   <option>Married</option>
                   <option>Divorced</option>
                   <option>Widowed</option>
                 </select>
               </div>
-              <div class="col-md-6"><label class="form-label">Spouse’s Name</label><input type="text" class="form-control"></div>
-              <div class="col-md-6"><label class="form-label">Date of Birth</label><input type="date" class="form-control"></div>
+              <div class="col-md-6"><label class="form-label">Spouse’s Name</label><input type="text" id="spouseName" class="form-control"></div>
+              <div class="col-md-6"><label class="form-label">Date of Birth</label><input type="date" id="dob" class="form-control" required></div>
               <div class="col-md-6"><label class="form-label">Gender</label>
-                <select class="form-select">
+                <select class="form-select" required>
+                  <option value="">Select</option>
                   <option>Male</option>
                   <option>Female</option>
                   <option>Other</option>
@@ -216,12 +219,12 @@
           <!-- 2. Contact Details -->
           <div class="step">
             <h5 class="fw-semibold text-secondary">2. Contact Details</h5>
-            <div class="mb-3"><label class="form-label">Primary Contact Number</label><input type="text" class="form-control"></div>
-            <div class="mb-3"><label class="form-label">Alternative Contact Number</label><input type="text" class="form-control"></div>
-            <div class="mb-3"><label class="form-label">Personal Email ID</label><input type="email" class="form-control"></div>
-            <div class="mb-3"><label class="form-label">Official Email ID</label><input type="email" class="form-control"></div>
-            <div class="mb-3"><label class="form-label">Current Residential Address</label><textarea class="form-control"></textarea></div>
-            <div class="mb-3"><label class="form-label">Permanent Residential Address</label><textarea class="form-control"></textarea></div>
+            <div class="mb-3"><label class="form-label">Primary Contact Number</label><input type="text" id="primaryContact" class="form-control" required pattern="^\d{10}$" title="Please enter a valid 10-digit phone number."></div>
+            <div class="mb-3"><label class="form-label">Alternative Contact Number</label><input type="text" id="altContact" class="form-control" pattern="^\d{10}$" title="Please enter a valid 10-digit phone number."></div>
+            <div class="mb-3"><label class="form-label">Personal Email ID</label><input type="email" id="personalEmail" class="form-control" required></div>
+            <div class="mb-3"><label class="form-label">Official Email ID</label><input type="email" id="officialEmail" class="form-control"></div>
+            <div class="mb-3"><label class="form-label">Current Residential Address</label><textarea class="form-control" id="currentAddress" required></textarea></div>
+            <div class="mb-3"><label class="form-label">Permanent Residential Address</label><textarea class="form-control" id="permanentAddress" required></textarea></div>
             <div class="d-flex justify-content-between mt-4">
               <button type="button" class="btn btn-outline-primary prev">Back</button>
               <button type="button" class="btn btn-outline-primary next">Next</button>
@@ -232,19 +235,20 @@
           <div class="step">
             <h5 class="fw-semibold text-secondary">3. Identity and Banking Details</h5>
             <div class="row g-3">
-              <div class="col-md-6"><label class="form-label">Aadhar Card Number</label><input type="text" class="form-control"></div>
-              <div class="col-md-6"><label class="form-label">PAN Card Number</label><input type="text" class="form-control"></div>
-              <div class="col-md-6"><label class="form-label">Bank Name</label><input type="text" class="form-control"></div>
-              <div class="col-md-6"><label class="form-label">Bank Account Number</label><input type="text" class="form-control"></div>
-              <div class="col-md-6"><label class="form-label">IFSC Code</label><input type="text" class="form-control"></div>
-              <div class="col-md-6"><label class="form-label">Branch Name & Address</label><input type="text" class="form-control"></div>
+              <div class="col-md-6"><label class="form-label">Aadhar Card Number</label><input type="text" id="aadharCard" class="form-control" required pattern="^\d{12}$" title="Please enter a valid 12-digit Aadhar card number."></div>
+              <div class="col-md-6"><label class="form-label">PAN Card Number</label><input type="text" id="panCard" class="form-control" required pattern="^[A-Za-z]{5}\d{4}[A-Za-z]{1}$" title="Please enter a valid PAN card number."></div>
+              <div class="col-md-6"><label class="form-label">Bank Name</label><input type="text" id="bankName" class="form-control" required></div>
+              <div class="col-md-6"><label class="form-label">Bank Account Number</label><input type="text" id="bankAccount" class="form-control" required pattern="^\d+$" title="Please enter a valid bank account number."></div>
+              <div class="col-md-6"><label class="form-label">IFSC Code</label><input type="text" id="ifscCode" class="form-control" required pattern="^[A-Za-z]{4}\d{7}$" title="Please enter a valid IFSC code."></div>
+              <div class="col-md-6"><label class="form-label">Branch Name & Address</label><input type="text" id="branchName" class="form-control" required></div>
               <div class="col-md-6"><label class="form-label">Do you have a UPI ID?</label>
-                <select class="form-select">
+                <select class="form-select" id="upiOption" required>
+                  <option value="">Select</option>
                   <option>Yes</option>
                   <option>No</option>
                 </select>
               </div>
-              <div class="col-md-6"><label class="form-label">If Yes, Enter UPI ID</label><input type="text" class="form-control"></div>
+              <div class="col-md-6"><label class="form-label">If Yes, Enter UPI ID</label><input type="text" id="upiId" class="form-control" pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+$" title="Please enter a valid UPI ID."></div>
             </div>
             <div class="d-flex justify-content-between mt-4">
               <button type="button" class="btn btn-outline-primary prev">Back</button>
@@ -256,19 +260,21 @@
           <div class="step">
             <h5 class="fw-semibold text-secondary">4. Emergency & Nominee Details</h5>
             <div class="row g-3">
-              <div class="col-md-6"><label class="form-label">Emergency Contact Name</label><input type="text" class="form-control"></div>
+              <div class="col-md-6"><label class="form-label">Emergency Contact Name</label><input type="text" id="emergencyContactName" class="form-control" required></div>
               <div class="col-md-6"><label class="form-label">Emergency Relationship</label>
-                <select class="form-select">
+                <select class="form-select" id="emergencyRelationship" required>
+                  <option value="">Select</option>
                   <option>Father</option>
                   <option>Mother</option>
                   <option>Spouse</option>
                   <option>Other</option>
                 </select>
               </div>
-              <div class="col-md-6"><label class="form-label">Emergency Contact Number</label><input type="text" class="form-control"></div>
-              <div class="col-md-6"><label class="form-label">Nominee Name</label><input type="text" class="form-control"></div>
+              <div class="col-md-6"><label class="form-label">Emergency Contact Number</label><input type="text" id="emergencyContact" class="form-control" required pattern="^\d{10}$" title="Please enter a valid 10-digit phone number."></div>
+              <div class="col-md-6"><label class="form-label">Nominee Name</label><input type="text" id="nomineeName" class="form-control" required></div>
               <div class="col-md-6"><label class="form-label">Nominee Relationship</label>
-                <select class="form-select">
+                <select class="form-select" id="nomineeRelationship">
+                  <option value="">Select</option>
                   <option>Spouse</option>
                   <option>Parent</option>
                   <option>Child</option>
@@ -281,6 +287,7 @@
               <button type="button" class="btn btn-outline-primary next">Next</button>
             </div>
           </div>
+
 
           <!-- 5. Educational Background -->
           <div class="step">
@@ -314,9 +321,9 @@
               </select>
             </div>
             <div class="mb-3"><label class="form-label">Previous Employer Name</label><input type="text" class="form-control"></div>
-            <div class="mb-3"><label class="form-label">Previous Job Role</label><input type="text" class="form-control"></div>
-            <div class="mb-3"><label class="form-label">Employment Period</label><input type="text" class="form-control" placeholder="Start Date - End Date"></div>
-            <div class="mb-3"><label class="form-label">Reason for Leaving</label><textarea class="form-control"></textarea></div>
+            <div class="mb-3"><label class="form-label">Previous Job Role</label><input type="text" class="form-control" required></div>
+            <div class="mb-3"><label class="form-label">Employment Period</label><input type="text" class="form-control" placeholder="Start Date - End Date" required></div>
+            <div class="mb-3"><label class="form-label">Reason for Leaving</label><textarea class="form-control" required></textarea></div>
             <div class="mb-3"><label class="form-label">Upload Documents</label><input type="file" class="form-control"></div>
             <div class="d-flex justify-content-between mt-4">
               <button type="button" class="btn btn-outline-primary prev">Back</button>
@@ -326,7 +333,7 @@
 
           <!-- 7. Current Employment at WINA Group -->
           <div class="step">
-            <h5 class="fw-semibold text-secondary">7. Current Employment at WINA Group</h5>
+            <h5 class="fw-semibold text-secondary">7. Current Employment</h5>
             <div class="row g-3">
               <div class="col-md-6"><label class="form-label">Date of Joining</label><input type="date" class="form-control"></div>
               <div class="col-md-6"><label class="form-label">Current Job Role</label><input type="text" class="form-control"></div>
@@ -350,7 +357,16 @@
           <!-- 8. Work Policies & Leaves -->
           <div class="step">
             <h5 class="fw-semibold text-secondary">8. Work Policies & Leaves</h5>
-            <div class="mb-3"><label class="form-label">Official Work Timing</label><input type="text" class="form-control"></div>
+            <div class="mb-3">
+              <label class="form-label">Official Work Timing</label>
+              <select class="form-select">
+                <option>9:00 AM - 6:00 PM</option>
+                <option>10:00 AM - 7:00 PM</option>
+                <option>11:00 AM - 8:00 PM</option>
+                <option>Flexible</option>
+                <option>Other</option>
+              </select>
+            </div>
             <div class="mb-3"><label class="form-label">Weekly Off Day</label>
               <select class="form-select">
                 <option>Sunday</option>
@@ -369,7 +385,7 @@
           <!-- 9. Compliance -->
           <div class="step">
             <h5 class="fw-semibold text-secondary">9. Company Compliance & Declaration</h5>
-            <div class="mb-3"><label class="form-label">Agree to Policies?</label>
+            <div class="mb-3" required><label class="form-label">Agree to Policies?</label>
               <select class="form-select">
                 <option>Yes</option>
                 <option>No</option>
@@ -389,8 +405,8 @@
           </div>
         </form>
       </div>
-              <!-- Footer -->
-              <?php include("../../Components/footer.php"); ?>
+      <!-- Footer -->
+      <?php include("../../Components/footer.php"); ?>
     </div>
   </main>
 
@@ -422,42 +438,60 @@
   <script src="../../vendors/echarts/echarts.min.js"></script>
   <script src="../../assets/js/ecommerce-dashboard.js"></script>
   <script>
-          const steps = document.querySelectorAll('.step');
-          const nextBtns = document.querySelectorAll('.next');
-          const prevBtns = document.querySelectorAll('.prev');
-          const progress = document.getElementById('progress-bar');
-          let current = 0;
+    const steps = document.querySelectorAll('.step');
+    const nextBtns = document.querySelectorAll('.next');
+    const prevBtns = document.querySelectorAll('.prev');
+    const progress = document.getElementById('progress-bar');
+    let current = 0;
 
-          function showStep(i) {
-            steps.forEach((step, index) => step.style.display = 'none');
-            steps[i].style.display = 'block';
-            gsap.fromTo(steps[i], {
-              opacity: 0,
-              y: 50
-            }, {
-              opacity: 1,
-              y: 0,
-              duration: 0.5
-            });
-            progress.style.width = `${(i + 1) / steps.length * 100}%`;
-          }
+    function showStep(i) {
+      steps.forEach((step, index) => step.style.display = 'none');
+      steps[i].style.display = 'block';
+      gsap.fromTo(steps[i], {
+        opacity: 0,
+        y: 50
+      }, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5
+      });
+      progress.style.width = `${(i + 1) / steps.length * 100}%`;
+    }
 
-          nextBtns.forEach(btn => btn.addEventListener('click', () => {
-            if (current < steps.length - 1) {
-              current++;
-              showStep(current);
-            }
-          }));
+    nextBtns.forEach(btn => btn.addEventListener('click', () => {
+      if (current < steps.length - 1) {
+        current++;
+        showStep(current);
+      }
+    }));
 
-          prevBtns.forEach(btn => btn.addEventListener('click', () => {
-            if (current > 0) {
-              current--;
-              showStep(current);
-            }
-          }));
+    prevBtns.forEach(btn => btn.addEventListener('click', () => {
+      if (current > 0) {
+        current--;
+        showStep(current);
+      }
+    }));
 
-          showStep(current);
-        </script>
+    showStep(current);
+
+    // Validation function for the form
+    function validateForm() {
+      const form = document.getElementById("onboardingForm");
+      const requiredFields = form.querySelectorAll("[required]");
+
+      let isValid = true;
+      requiredFields.forEach((field) => {
+        if (!field.value || !field.checkValidity()) {
+          isValid = false;
+          field.classList.add("is-invalid");
+        } else {
+          field.classList.remove("is-invalid");
+        }
+      });
+
+      return isValid;
+    }
+  </script>
 
 
 
