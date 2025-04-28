@@ -184,14 +184,15 @@
       <form id="salaryForm" class="p-4 rounded shadow-sm">
         <div class="row mb-3">
           <div class="col-md-4">
-            <label class="form-label">
-              <i class="bi bi-person-fill me-1"></i>Select Employee
+            <label for="organizerSingle" class="form-label">
+              <i class="bi bi-person me-1"></i> Select Employee
             </label>
-            <select class="form-select">
-              <option selected disabled>Choose...</option>
-              <option>John Doe</option>
-              <option>Jane Smith</option>
-              <option>Rahul Kumar</option>
+            <select class="form-select" id="organizerSingle" data-choices="data-choices" data-options='{"removeItemButton":true,"placeholder":true}'>
+              <option value="">Select Employee...</option>
+              <option>priya</option>
+              <option>riya</option>
+              <option>siya</option>
+              <option>geeta</option>
             </select>
           </div>
           <div class="col-md-4">
@@ -258,12 +259,11 @@
               <input type="text" class="form-control" placeholder="e.g. 2,000">
             </div>
           </div>
-        </div>
-
-        <div class="text-end mt-4">
-          <button type="submit" class="btn btn-outline-success">
-            <i class="bi bi-send-check me-1"></i>Submit
-          </button>
+          <div class="text-end mt-4">
+            <button type="submit" class="btn btn-outline-success">
+              <i class="bi bi-send-check me-1"></i>Submit
+            </button>
+          </div>
         </div>
       </form>
 
@@ -309,6 +309,98 @@
           e.preventDefault();
           alert("Salary slip submitted successfully!");
         });
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+          const form = document.querySelector('form');
+          const yearSelect = document.getElementById('yearSelect');
+          const employeeSelect = document.getElementById('organizerSingle');
+          const monthSelect = form.querySelector('select:nth-of-type(2)'); // 2nd select inside the form
+          const currentDate = new Date();
+          const currentYear = currentDate.getFullYear();
+          const previousYear = currentYear - 1;
+          const currentMonthIndex = currentDate.getMonth();
+
+          const monthList = [
+            'January', 'February', 'March', 'April', 'May', 'June',
+            'July', 'August', 'September', 'October', 'November', 'December'
+          ];
+
+          // Populate Year Dropdown
+          [currentYear, previousYear].forEach(year => {
+            const option = new Option(year, year);
+            yearSelect.appendChild(option);
+          });
+
+          // Helper: Mark field valid/invalid
+          function setValidationState(element, isValid, message = '') {
+            if (isValid) {
+              element.classList.remove('is-invalid');
+              element.nextElementSibling?.remove?.(); // remove old error if any
+            } else {
+              element.classList.add('is-invalid');
+              if (!element.nextElementSibling || !element.nextElementSibling.classList.contains('invalid-feedback')) {
+                const error = document.createElement('div');
+                error.className = 'invalid-feedback';
+                error.textContent = message;
+                element.parentNode.appendChild(error);
+              }
+            }
+          }
+
+          // Disable future months if current year selected
+          function updateMonthOptions() {
+            const selectedYear = parseInt(yearSelect.value);
+            const options = monthSelect.options;
+            for (let i = 0; i < options.length; i++) {
+              options[i].disabled = (selectedYear === currentYear && i > currentMonthIndex);
+            }
+          }
+
+          yearSelect.addEventListener('change', updateMonthOptions);
+
+          form.addEventListener('submit', function(e) {
+            let isValid = true;
+
+            // Validate Employee Selection
+            if (!employeeSelect.value.trim()) {
+              setValidationState(employeeSelect, false, 'Please select an employee.');
+              isValid = false;
+            } else {
+              setValidationState(employeeSelect, true);
+            }
+
+            // Validate Year Selection
+            const selectedYear = parseInt(yearSelect.value);
+            if (![currentYear, previousYear].includes(selectedYear)) {
+              setValidationState(yearSelect, false, `Please select ${previousYear} or ${currentYear}.`);
+              isValid = false;
+            } else {
+              setValidationState(yearSelect, true);
+            }
+
+            // Validate Month Selection
+            const selectedMonthText = monthSelect.options[monthSelect.selectedIndex]?.text.trim();
+            const selectedMonthIndex = monthList.indexOf(selectedMonthText);
+
+            if (selectedMonthIndex === -1) {
+              setValidationState(monthSelect, false, 'Please select a valid month.');
+              isValid = false;
+            } else if (selectedYear === currentYear && selectedMonthIndex > currentMonthIndex) {
+              setValidationState(monthSelect, false, 'Cannot select a future month.');
+              isValid = false;
+            } else {
+              setValidationState(monthSelect, true);
+            }
+
+            // If not valid, stop submission
+            if (!isValid) {
+              e.preventDefault();
+              alert('Please correct the errors before proceeding.');
+            }
+          });
+
+        });
       </script>
 
 
@@ -338,6 +430,7 @@
   <script src="../../assets/js/phoenix.js"></script>
   <!-- you js code goes here -->
 </body>
+
 
 
 

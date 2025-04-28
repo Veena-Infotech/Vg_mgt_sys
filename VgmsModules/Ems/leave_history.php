@@ -180,19 +180,19 @@
         </div>
 
         <div class="d-flex align-items-center gap-3 mb-4 flex-wrap">
-  <div class="form-floating form-floating-advance-select" style="width: 250px;">
-    <select class="form-select" id="employeeSelect" data-choices="data-choices" data-options='{"removeItemButton":true,"placeholder":true}'>
-      <option selected disabled>Choose an employee</option>
-      <option>John Doe</option>
-      <option>Jane Smith</option>
-      <option>Rahul Kumar</option>
-    </select>
-    <label for="employeeSelect">Select Employee</label>
-  </div>
-  <div>
-    <button class="btn btn-outline-primary mb-4" id="loadHistory">Load History</button>
-  </div>
-</div>
+          <div class="form-floating form-floating-advance-select" style="width: 250px;">
+            <select class="form-select" id="employeeSelect" data-choices="data-choices" data-options='{"removeItemButton":true,"placeholder":true}'>
+              <option selected disabled>Choose an employee</option>
+              <option>John Doe</option>
+              <option>Jane Smith</option>
+              <option>Rahul Kumar</option>
+            </select>
+            <label for="employeeSelect">Select Employee</label>
+          </div>
+          <div>
+            <button class="btn btn-outline-primary mb-4 mt-1" id="loadHistory">Load History</button>
+          </div>
+        </div>
 
 
 
@@ -328,6 +328,25 @@
           ease: "power2.out"
         });
 
+        // Load history button animation
+        document.getElementById("loadHistory").addEventListener("mouseover", () => {
+          gsap.to("#loadHistory", {
+            scale: 1.05,
+            duration: 0.3,
+            ease: "power2.out"
+          });
+        });
+
+        document.getElementById("loadHistory").addEventListener("mouseout", () => {
+          gsap.to("#loadHistory", {
+            scale: 1,
+            duration: 0.3,
+            ease: "power2.out"
+          });
+        });
+
+        
+
         // Load table with animation
         document.getElementById("loadHistory").addEventListener("click", () => {
           const table = document.getElementById("historyTable");
@@ -347,43 +366,43 @@
         // Sample data for employees
         const employeeData = {
           'John Doe': [{
-            date: '2025-19-06',
-            leaveType: 'Casual',
-            approvedBy: 'Manager A',
-            status: 'Accepted'
-          },
-          {
-            date: '2025-20-06',
-            leaveType: 'Sick',
-            approvedBy: 'Manager B',
-            status: 'Pending'
-          },
+              date: '2025-19-06',
+              leaveType: 'Casual',
+              approvedBy: 'Manager A',
+              status: 'Accepted'
+            },
+            {
+              date: '2025-20-06',
+              leaveType: 'Sick',
+              approvedBy: 'Manager B',
+              status: 'Pending'
+            },
           ],
           'Jane Smith': [{
-            date: '2025-21-06',
-            leaveType: 'Casual',
-            approvedBy: 'Manager C',
-            status: 'Rejected'
-          },
-          {
-            date: '2025-22-06',
-            leaveType: 'Vacation',
-            approvedBy: 'Manager A',
-            status: 'Accepted'
-          },
+              date: '2025-21-06',
+              leaveType: 'Casual',
+              approvedBy: 'Manager C',
+              status: 'Rejected'
+            },
+            {
+              date: '2025-22-06',
+              leaveType: 'Vacation',
+              approvedBy: 'Manager A',
+              status: 'Accepted'
+            },
           ],
           'Rahul Kumar': [{
-            date: '2025-23-06',
-            leaveType: 'Maternity',
-            approvedBy: 'Manager B',
-            status: 'Pending'
-          },
-          {
-            date: '2025-24-06',
-            leaveType: 'Casual',
-            approvedBy: 'Manager A',
-            status: 'Rejected'
-          },
+              date: '2025-23-06',
+              leaveType: 'Maternity',
+              approvedBy: 'Manager B',
+              status: 'Pending'
+            },
+            {
+              date: '2025-24-06',
+              leaveType: 'Casual',
+              approvedBy: 'Manager A',
+              status: 'Rejected'
+            },
           ]
         };
 
@@ -425,13 +444,13 @@
         }
 
         // Add event listener to employee select dropdown
-        document.getElementById('employeeSelect').addEventListener('change', function () {
+        document.getElementById('employeeSelect').addEventListener('change', function() {
           const selectedEmployee = this.value;
           updateTableData(selectedEmployee);
         });
 
         // Initial load (e.g., default employee)
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
           const defaultEmployee = document.getElementById('employeeSelect').value;
           if (defaultEmployee) {
             updateTableData(defaultEmployee);
@@ -453,7 +472,7 @@
         }
 
         // Event listener for filtering by status
-        document.querySelector('[data-list-filter="data-list-filter"]').addEventListener('change', function () {
+        document.querySelector('[data-list-filter="data-list-filter"]').addEventListener('change', function() {
           const selectedStatus = this.value;
           const rows = document.querySelectorAll('#tableExample4 tbody .leave-row');
 
@@ -468,7 +487,7 @@
         });
 
         // Initial load (e.g., default employee)
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
           const defaultEmployee = document.getElementById('employeeSelect').value;
           if (defaultEmployee) {
             updateTableData(defaultEmployee);
