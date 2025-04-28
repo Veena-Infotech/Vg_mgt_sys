@@ -170,7 +170,7 @@
         <div class="content">
             <div id="heading-gsap">
                 <h3 class="mb-4">Add Project </h3>
-                <form action="edit_project.php" method="post" class="dropzone dropzone-multiple p-0" id="dropzone-multiple" data-dropzone="data-dropzone">
+                <form action="../PhpFiles/add_project1.php" method="post" class="dropzone dropzone-multiple p-0" id="dropzone-multiple" data-dropzone="data-dropzone">
                     <div class="row g-3">
                         <!-- Project Title -->
                         <div class="col-md-6">
@@ -184,9 +184,9 @@
                             <label class="form-label">Project Type <span style="color: red;">*</span></label>
                             <select class="form-select" name="project_type">
                                 <option selected disabled>Select type</option>
-                                <option>Pipeline</option>
-                                <option>Residential</option>
-                                <option>Commercial</option>
+                                <option value="1">Pipeline</option>
+                                <option value="2">Residential</option>
+                                <option value="3">Commercial</option>
                             </select>
                         </div>
 
@@ -194,12 +194,12 @@
 
                         <div class="col-md-6">
                             <label class="form-label">Project Manager<span style="color: red;">*</span></label>
-                            <select class="form-select" name="project_status">
+                            <select class="form-select" name="project_manager">
                                 <option selected disabled>Select Manager</option>
-                                <option>Aryan Sir</option>
-                                <option>Op sir</option>
-                                <option>Aakash sir</option>
-                                <option>Static</option>
+                                <option value="1">Aryan Sir</option>
+                                <option value="2">Op sir</option>
+                                <option value="3">Aakash sir</option>
+                                <option value="4">Static</option>
                             </select>
                         </div>
 
@@ -207,24 +207,25 @@
 
                         <div class="col-md-6">
                             <label class="form-label">Project Client<span style="color: red;">*</span></label>
-                            <select class="form-select" name="project_status">
+                            <select class="form-select" name="project_client">
                                 <option selected disabled>Select client</option>
-                                <option>Janesh</option>
-                                <option>Ishika</option>
-                                <option>Rahul</option>
-                                <option>Static</option>
+                                <option value="1">Janesh</option>
+                                <option value="2">Ishika</option>
+                                <option value="3">Rahul</option>
+                                <option value="4">Static</option>
                             </select>
                         </div>
 
                         <!-- Assigned Teams Dropdown -->
                         <div class="col-md-6">
-                            <div class="mb-3"><label class="form-label">Assigned Employee<span style="color: red;">*</span></label><select class="form-select" id="organizerMultiple2" data-choices="data-choices" multiple="multiple" size="1" name="organizerMultiple" required="required" data-options='{"removeItemButton":true,"placeholder":true}'>
-                                    <option value="">Select organizer...</option>
-                                    <option>Neav Panjwani</option>
-                                    <option>Om Pandey</option>
-                                    <option>Janesh Chichriya</option>
-                                    <option>Ishika sharma</option>
-                                    <option>Static</option>
+                            <div class="mb-3"><label class="form-label">Assigned Employee<span style="color: red;">*</span></label><select class="form-select" id="organizerMultiple2" data-choices="data-choices" multiple="multiple" size="1" 
+                            name="organizerMultiple" required="required" data-options='{"removeItemButton":true,"placeholder":true}'>
+                                    <option >Select organizer...</option>
+                                    <option value="1">Neav Panjwani</option>
+                                    <option value="2">Om Pandey</option>
+                                    <option value="3">Janesh Chichriya</option>
+                                    <option value="4">Ishika sharma</option>
+                                    <option value="5">Static</option>
                                 </select>
                                 <div class="invalid-feedback">Please select one or multiple</div>
                             </div>
@@ -236,10 +237,10 @@
                             <label class="form-label">Project Status<span style="color: red;">*</span></label>
                             <select class="form-select" name="project_status">
                                 <option selected disabled>Select status</option>
-                                <option>Pipeline</option>
-                                <option>Ongoing</option>
-                                <option>Completed</option>
-                                <option>On Hold</option>
+                                <option value="1">Pipeline</option>
+                                <option value="2">Ongoing</option>
+                                <option value="3">Completed</option>
+                                <option value="4">On Hold</option>
                             </select>
                         </div>
 
@@ -277,7 +278,8 @@
                         <!-- start and end date of project  -->
 
                         <label class="form-label" for="timepicker2">Select Time Range</label>
-                        <input class="form-control datetimepicker" id="timepicker2" type="text" placeholder="d/m/y to d/m/y" data-options='{"mode":"range","dateFormat":"d/m/y","disableMobile":true}' />
+                        <input class="form-control datetimepicker" id="timepicker2" type="text" placeholder="d/m/y to d/m/y"
+                        name="date_range" data-options='{"mode":"range","dateFormat":"d/m/y","disableMobile":true}' />
 
 
                         <!-- Submit Button -->
