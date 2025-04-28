@@ -43,6 +43,19 @@
     <link href="../../assets/css/theme.min.css" type="text/css" rel="stylesheet" id="style-default">
     <link href="../../assets/css/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
     <link href="../../assets/css/user.min.css" type="text/css" rel="stylesheet" id="user-style-default">
+    <style>
+        /* Ensure individual scrolling for each section */
+        .scrollable-container {
+            max-height: 500px; /* Adjust height as needed */
+            overflow-y: auto; /* Enable vertical scroll */
+            padding: 10px;
+        }
+        .visitor {
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
     <script>
         var phoenixIsRTL = window.config.config.phoenixIsRTL;
         if (phoenixIsRTL) {
@@ -168,95 +181,154 @@
                 navbarVertical.setAttribute('data-navbar-appearance', 'darker');
             }
         </script>
-        <div class="content">
+      
+      <div class="content">
+      <div class="container mt-4">
+        <h1 class="mb-4 fw-bold">Lobby Management</h1>
 
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
+        <div class="row">
+            <!-- Waiting Queue -->
+            <div class="col-md-4">
+                <h4>Waiting Queue</h4>
+                <div class="scrollable-container" id="waiting-queue">
+                    <?php
+                    $waitingVisitors = [
+                        ["name" => "Mushraf", "time" => "10:00 AM", "reason" => "Meeting with HR"],
+                        ["name" => "Vinit", "time" => "10:30 AM", "reason" => "Meeting with IT"],
+                    ];
+                    foreach ($waitingVisitors as $visitor) {
+                        echo '
                         <div class="card visitor">
-                            <div class="card-body">
-                                <h1 class="mb-4 fw-bold">Lobby Management</h1>
-
-                                <div class="row g-4">
-                                    <!-- Waiting Queue -->
-                                    <div class="col-md-4">
-                                        <h4>Waiting Queue</h4>
-                                        <div class="d-flex flex-column gap-1" id="waiting-queue">
-                                            <?php
-                                            $waitingVisitors = [
-                                                "Visitor 1 : Meeting with HR",
-                                                "Visitor 2 : Meeting with IT",
-                                                
-
-                                            ];
-                                            foreach ($waitingVisitors as $visitor) {
-                                                echo '
-                                            <div class="card visitor">
-                                                <div class="card-body animate-entry">
-                                                    ' . $visitor . '<br>
-                                                    <button class="btn btn-sm btn-primary mt-2 btn-action" onclick="moveToNext(this)">Move to Next</button>
-                                                </div>
-                                            </div>';
-                                            }
-                                            ?>
-                                        </div>
-                                    </div>
-
-                                    <!-- Next in Line -->
-                                    <div class="col-md-4">
-                                        <h4>In Meeting</h4>
-                                        <div class="d-flex flex-column gap-1" id="next-in-line">
-                                            <?php
-                                            $nextVisitors = [
-                                                "Visitor 12 : Meeting with HR",
-                                                "Visitor 13 : Meeting with IT",
-                                                "Visitor 14 : Meeting with CEO",
-                                               
-                                            ];
-                                            foreach ($nextVisitors as $visitor) {
-                                                echo '
-                                            <div class="card visitor">
-                                                <div class="card-body animate-entry">
-                                                    ' . $visitor . '<br>
-                                                    <button class="btn btn-sm btn-success mt-2 btn-action" onclick="moveToCompleted(this)">Complete</button>
-                                                </div>
-                                            </div>';
-                                            }
-                                            ?>
-                                        </div>
-                                    </div>
-
-                                    <!-- Completed Meetings -->
-                                    <div class="col-md-4">
-                                        <h4>Completed Meetings</h4>
-                                        <div class="d-flex flex-column gap-1" id="completed">
-                                            <?php
-                                            $completedVisitors = [];
-                                            foreach ($completedVisitors as $visitor) {
-                                                echo '
-                                            <div class="card visitor">
-                                                <div class="card-body animate-entry">
-                                                    ' . $visitor . '<br>
-                                                    <button class="btn btn-sm btn-danger mt-2 btn-action" >Remove</button>
-                                                </div>
-                                            </div>';
-                                            }
-                                            ?>
-                                        </div>
-                                    </div>
-                                </div> <!-- row g-4 -->
-                            </div> <!-- card-body -->
-                        </div> <!-- card -->
-                    </div> <!-- col-12 -->
-                </div> <!-- row -->
+                            <div class="card-body animate-entry">
+                                <strong>' . $visitor['name'] . '</strong><br>
+                                <small>' . $visitor['time'] . ' | ' . $visitor['reason'] . '</small><br>
+                                <button class="btn btn-sm btn-subtle-primary mt-2 btn-action" onclick="moveToNext(this)">Move to Next</button>
+                            </div>
+                        </div>';
+                    }
+                    ?>
+                </div>
             </div>
+
+            <!-- In Meeting -->
+            <div class="col-md-4">
+                <h4>In Meeting</h4>
+                <div class="scrollable-container" id="next-in-line">
+                    <?php
+                    $nextVisitors = [
+                        ["name" => "Visitor 12", "time" => "11:00 AM", "reason" => "Meeting with HR"],
+                        ["name" => "Visitor 13", "time" => "11:30 AM", "reason" => "Meeting with IT"],
+                        ["name" => "Visitor 14", "time" => "12:00 PM", "reason" => "Meeting with CEO"],
+                    ];
+                    foreach ($nextVisitors as $visitor) {
+                        echo '
+                        <div class="card visitor">
+                            <div class="card-body animate-entry">
+                                <strong>' . $visitor['name'] . '</strong><br>
+                                <small>' . $visitor['time'] . ' | ' . $visitor['reason'] . '</small><br>
+                                <button class="btn btn-sm btn-subtle-success mt-2 btn-action" onclick="moveToCompleted(this)">Complete</button>
+                            </div>
+                        </div>';
+                    }
+                    ?>
+                </div>
+            </div>
+
+            <!-- Completed Meetings -->
+            <div class="col-md-4">
+                <h4>Completed Meetings</h4>
+                <div class="scrollable-container" id="completed">
+                    <?php
+                    $completedVisitors = [];
+                    foreach ($completedVisitors as $visitor) {
+                        echo '
+                        <div class="card visitor">
+                            <div class="card-body animate-entry">
+                                <strong>' . $visitor['name'] . '</strong><br>
+                                <small>' . $visitor['time'] . ' | ' . $visitor['reason'] . '</small><br>
+                                <button class="btn btn-sm btn-subtle-danger mt-2 btn-action" onclick="removeCard(this)">Remove</button>
+                            </div>
+                        </div>';
+                    }
+                    ?>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // GSAP animation trigger function
+        function animateNewVisitorCard(node) {
+            if (node.classList && node.classList.contains('visitor')) {
+                gsap.from(node, {
+                    opacity: 0,
+                    y: 30,
+                    duration: 0.5,
+                    ease: "power2.out"
+                });
+            }
+        }
+
+        // Function to observe a container and animate new children
+        function observeContainer(containerId) {
+            const container = document.getElementById(containerId);
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    mutation.addedNodes.forEach((node) => {
+                        animateNewVisitorCard(node);
+                    });
+                });
+            });
+
+            observer.observe(container, { childList: true, subtree: false });
+        }
+
+        // Start observing all three containers
+        observeContainer('waiting-queue');
+        observeContainer('next-in-line');
+        observeContainer('completed');
+
+        // Move visitor from Waiting to In Meeting
+        function moveToNext(button) {
+            const card = button.closest('.card.visitor');
+            const targetContainer = document.getElementById('next-in-line');
+
+            // Change button for next action
+            button.textContent = "Complete";
+            button.classList.remove('btn-subtle-primary');
+            button.classList.add('btn-subtle-success');
+            button.setAttribute('onclick', 'moveToCompleted(this)');
+
+            targetContainer.appendChild(card);
+        }
+
+        // Move visitor from In Meeting to Completed
+        function moveToCompleted(button) {
+            const card = button.closest('.card.visitor');
+            const targetContainer = document.getElementById('completed');
+
+            // Change button for next action
+            button.textContent = "Remove";
+            button.classList.remove('btn-subtle-success');
+            button.classList.add('btn-subtle-danger');
+            button.setAttribute('onclick', 'removeCard(this)');
+
+            targetContainer.appendChild(card);
+        }
+
+        // Remove card from DOM
+        function removeCard(button) {
+            const card = button.closest('.card.visitor');
+            card.remove();
+        }
+    </script>
             <!-- Footer -->
             <?php include("../../Components/footer.php"); ?>
         </div>
 
 
-
-        </div>
+       
 
 
     </main>
@@ -269,69 +341,7 @@
 
     <!-- ===============================================-->
     <!--    JavaScripts-->
-    <script>
-    // GSAP animation trigger function
-    function animateNewVisitorCard(node) {
-        if (node.classList && node.classList.contains('visitor')) {
-            gsap.from(node, {
-                opacity: 0,
-                y: 30,
-                duration: 0.5,
-                ease: "power2.out"
-            });
-        }
-    }
-
-    // Function to observe a container and animate new children
-    function observeContainer(containerId) {
-        const container = document.getElementById(containerId);
-        const observer = new MutationObserver((mutations) => {
-            mutations.forEach((mutation) => {
-                mutation.addedNodes.forEach((node) => {
-                    animateNewVisitorCard(node);
-                });
-            });
-        });
-
-        observer.observe(container, {
-            childList: true,
-            subtree: false
-        });
-    }
-
-    // Start observing all three containers
-    observeContainer('waiting-queue');
-    observeContainer('next-in-line');
-    observeContainer('completed');
-
-    // Move visitor from Waiting to In Meeting
-    function moveToNext(button) {
-        const card = button.closest('.card.visitor');
-        const targetContainer = document.getElementById('next-in-line');
-        card.querySelector('button').textContent = "Complete";
-        card.querySelector('button').classList.remove('btn-primary');
-        card.querySelector('button').classList.add('btn-success');
-        card.querySelector('button').setAttribute('onclick', 'moveToCompleted(this)');
-        targetContainer.appendChild(card);
-    }
-
-    // Move visitor from In Meeting to Completed
-    function moveToCompleted(button) {
-        const card = button.closest('.card.visitor');
-        const targetContainer = document.getElementById('completed');
-        card.querySelector('button').textContent = "Remove";
-        card.querySelector('button').classList.remove('btn-success');
-        card.querySelector('button').classList.add('btn-danger');
-        card.querySelector('button').setAttribute('onclick', 'removeCard(this)');
-        targetContainer.appendChild(card);
-    }
-
-    // Remove card from DOM
-    function removeCard(button) {
-        const card = button.closest('.card.visitor');
-        card.remove();
-    }
-</script>
+   
 
 
     <!-- ===============================================-->
