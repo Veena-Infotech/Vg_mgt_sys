@@ -187,6 +187,8 @@
             </div>
           </div>
           <div class="d-flex flex-wrap gap-3 border-bottom border-translucent mx-n4 mx-lg-n6 px-4 px-lg-6 py-5"><a class="btn btn-primary px-3 px-sm-5 px-md-10" href="../../VgmsModules/pms/add_project.php"><span class="fas fa-plus me-2"></span>Create New Project</a></div>
+
+          <!-- This is the slider start -->
           <div class="mx-n4 mx-lg-n6 px-4 px-lg-6 py-5 border-bottom border-translucent">
             <h4>Active Boards</h4>
             <p class="mb-4">Boards which are Active . Can be private or public boards.</p>
@@ -228,6 +230,7 @@
                         </div>
                       </div> 
                     </a></div> -->
+                    <!-- This is the card start -->
                   <div class="swiper-slide"><a class="text-decoration-none" href="../../VgmsModules/pms/view_task.php">
                       <div class="card overflow-hidden bg-transparent h-100">
                         <div class="position-relative"><img class="w-100" src="../../assets/img/kanban/board-2.png" style="height: 128px;" alt="" />
@@ -249,6 +252,7 @@
                             </div>
                           </div>
                         </div>
+                        <!-- this is the card end -->
                         <div class="card-body d-flex flex-column justify-content-between">
                           <div>
                             <h3 class="text-body">Falcon React</h3>
@@ -333,6 +337,8 @@
               </div>
             </div>
           </div>
+          <!-- This is the slider end -->
+
           <div class="mx-n4 mx-lg-n6 px-4 px-lg-6 py-5 border-bottom border-translucent">
             <h4>Inactive Boards</h4>
             <p class="mb-4">Boards where you are either an Admin or a Member.</p>
