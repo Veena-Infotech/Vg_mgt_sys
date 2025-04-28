@@ -1,1 +1,0 @@
-http://localhost/vg_mgt_sys/modules/echarts/line-charts.html
