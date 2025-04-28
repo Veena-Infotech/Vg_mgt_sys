@@ -180,8 +180,8 @@
         </div>
 
         <div class="d-flex align-items-center gap-3 mb-4 flex-wrap">
-          <div class="form-floating form-floating-advance-select" style="width: 250px;">
-            <select class="form-select" id="employeeSelect" data-choices="data-choices" data-options='{"removeItemButton":true,"placeholder":true}'>
+          <div class="form-floating" style="width: 250px;">
+            <select class="form-select" id="employeeSelect">
               <option selected disabled>Choose an employee</option>
               <option>John Doe</option>
               <option>Jane Smith</option>
@@ -190,12 +190,9 @@
             <label for="employeeSelect">Select Employee</label>
           </div>
           <div>
-            <button class="btn btn-outline-primary mb-4 mt-1" id="loadHistory">Load History</button>
+            <button class="btn btn-outline-primary mb-4 mt-4" id="loadHistory">Load History</button>
           </div>
         </div>
-
-
-
       </div>
 
       <div id="tableExample4"
@@ -345,7 +342,7 @@
           });
         });
 
-        
+
 
         // Load table with animation
         document.getElementById("loadHistory").addEventListener("click", () => {
