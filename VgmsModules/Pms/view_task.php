@@ -7798,7 +7798,7 @@
     <div class="modal-dialog modal-fullscreen-sm-down modal-xl modal-dialog-centered">
       <div class="modal-content">
         <!-- added by me -->
-        <for action="../PhpFiles/handle_add_task" method="post" enctype="multipart/form-data">
+        <for action="../../PhpFiles/handle_add_task" method="post" enctype="multipart/form-data">
 
         <div class="modal-body">
           <h3>Edit Task</h3>
@@ -7851,10 +7851,16 @@
               <select class="form-select" id="organizerSingle" name="task_category" data-choices="data-choices" data-options='{"removeItemButton":true,"placeholder":true}'>
 
                 <option value="">Select organizer...</option>
-                <option>Massachusetts Institute of Technology</option>
+                <?php
+                  $cat_result = $conn->query("SELECT id, name FROM tbl_category");
+                  while ($cat = $cat_result->fetch_assoc()) {
+                    echo "<option value=\"{$cat['id']}\">{$cat['name']}</option>";
+                  }
+                ?>
+                <!--option>Massachusetts Institute of Technology</option>
                 <option>University of Chicago</option>
                 <option>GSAS Open Labs At Harvard</option>
-                <option>California Institute of Technology</option>
+                <option>California Institute of Technology</option-->
               </select>
             </div>
             
@@ -7870,11 +7876,17 @@
                 </select><label for="KanbanPriorityLavel">PRIORITY</label></div> -->
               <div class="mb-3"><label for="organizerSingle2" style="font-size : 12px">PRIORITY</label>
               <select class="form-select" id="organizerSingle2" data-choices="data-choices" name="organizerSingle" size="1" required="required"  data-options='{"removeItemButton":true,"placeholder":true}'>
-                  <option value="">Low (Default)</option>
+                <?php
+                  $pri_result = $conn->query("SELECT id, name FROM tbl_priority");
+                  while ($pri = $pri_result->fetch_assoc()) {
+                    echo "<option value=\"{$pri['id']}\">{$pri['name']}</option>";
+                  }
+                  ?>
+                  <!--option value="">Low (Default)</option>
                   <option>High</option>
                   <option>Medium</option>
                   <option>semi Urgent</option>
-                  <option>Urgent</option>
+                  <option>Urgent</option-->
                 </select>
                 <div class="invalid-feedback">Please select one</div>
               </div>
