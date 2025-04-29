@@ -57,10 +57,23 @@
     <link href="../../vendors/leaflet/leaflet.css" rel="stylesheet">
     <link href="../../vendors/leaflet.markercluster/MarkerCluster.css" rel="stylesheet">
     <link href="../../vendors/leaflet.markercluster/MarkerCluster.Default.css" rel="stylesheet">
-    
+    <style>
+        [contenteditable="true"]:focus {
+            outline: none;
+            box-shadow: none;
+        }
 
+        .btn-outline-yellow {
+            border-color:green;
+            color: green;
+        }
 
-
+        .btn-outline-yellow:hover {
+            background-color: green;
+            color: white;
+            border-color: green;
+        }
+    </style>
 </head>
 
 <body>
@@ -169,77 +182,67 @@
             }
         </script>
         <div class="content my-5" id="heading-gsap">
-            <h2 id="heading-gsap" class="mb-4" id="heading-gsap">📌 Team Pinboard</h2>
-
-            <div class="row" id="pinboard">
-
-                <!-- Card 1 -->
-                <div class="col-md-4 mb-4" draggable="true">
-                    <div class="card shadow-sm h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">🚀 Project Deadline</h5>
-                            <p class="card-text">Final submission date for PRMS module is April 28th. Make sure to push
-                                your latest changes.</p>
-                            <p class="text-muted small">Posted on: 24-Apr-2025</p>
-                        </div>
-                    </div>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="mb-0">Pinboard</h2>
+                <div>
+                    <button class="btn btn-success me-2" id="addNoteBtn">Add Note</button>
+                    <button class="btn btn-secondary" id="viewArchiveBtn">View Archives</button>
                 </div>
-                
-                <!-- Card 2 -->
-                <div class="col-md-4 mb-4" draggable="true">
-                    <div class="card shadow-sm h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">🧠 Tech Tip</h5>
-                            <p class="card-text">Remember to use `isset()` in PHP when handling form POST data to avoid
-                                warnings!</p>
-                            <p class="text-muted small">Posted on: 23-Apr-2025</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="col-md-4 mb-4" draggable="true">
-                    <div class="card shadow-sm h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">🎯 Motivation</h5>
-                            <p class="card-text">“Don’t watch the clock; do what it does. Keep going.” — Sam Levenson
-                            </p>
-                            <p class="text-muted small">Posted on: 22-Apr-2025</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 4 -->
-                <div class="col-md-4 mb-4" draggable="true">
-                    <div class="card shadow-sm h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">📅 Daily Reminder</h5>
-                            <p class="card-text">Team stand-up meeting at 10 AM sharp. Don’t be late!</p>
-                            <p class="text-muted small">Posted on: 25-Apr-2025</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 5 -->
-                <div class="col-md-4 mb-4" draggable="true">
-                    <div class="card shadow-sm h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">💡 Suggestion Box</h5>
-                            <p class="card-text">Have feedback or an idea? Drop a note in the shared Google Form link.
-                            </p>
-                            <p class="text-muted small">Posted on: 21-Apr-2025</p>
-                        </div>
-                        
-                    </div>
-                    
-                </div>
-
             </div>
-            
+
+            <!-- Pinboard (Active Notes) -->
+            <div class="row" id="pinboard">
+                <!-- Example Note -->
+                <div class="col-md-4 mb-4" draggable="true">
+                    <div class="card shadow-sm h-100 border border-info">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">🚀 Project Deadline</h5>
+                            <p class="card-text flex-grow-1">Final submission date for PRMS module is April 28th. Make
+                                sure to push
+                                your latest changes.</p>
+                            <div class="d-flex gap-3 align-items-center mt-3">
+
+                                <button class="btn btn-sm btn-outline-yellow archive-btn">Archive</button>
+                                <button class="btn btn-sm btn-outline-danger delete-btn">Delete</button>
+                                <button class="btn btn-sm btn-outline-info edit-btn">Edit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Archive Section (Hidden initially) -->
+            <div class="row mt-5" id="archiveSection" style="display: none;">
+                <h4 class="mb-4">📂 Archived Notes</h4>
+                <!-- Archived notes will be moved here -->
+            </div>
         </div>
-        
 
-
+        <!-- Edit Modal -->
+        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editModalLabel">Edit Note</h5>
+                        <button type="button" class="btn-close" id="modalCloseBtn" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="editNoteTitle" class="form-label">Note Title</label>
+                            <input type="text" class="form-control" id="editNoteTitle">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editNoteDescription" class="form-label">Note Description</label>
+                            <textarea class="form-control" id="editNoteDescription" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="closeModalBtn">Close</button>
+                        <button type="button" class="btn btn-primary" id="saveChangesBtn">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 
@@ -285,68 +288,185 @@
     </script>
     <script>
         let dragSrcEl = null;
+        const pinboard = document.getElementById('pinboard');
+        const archiveSection = document.getElementById('archiveSection');
+        const cards = pinboard.querySelectorAll('[draggable="true"]');
+        let currentCard = null; // Variable to store the current card being edited
+        let modal; // Store modal instance
 
         function handleDragStart(e) {
             dragSrcEl = this;
             e.dataTransfer.effectAllowed = 'move';
-            e.dataTransfer.setData('text/html', this.innerHTML);
-
-            // Adding animation for dragging effect
-            this.classList.add('dragging');
-            setTimeout(() => this.classList.add('invisible'), 0);  // Makes the card disappear during drag
+            e.dataTransfer.setData('text/html', this.outerHTML);
+            this.classList.add('opacity-50');
         }
 
         function handleDragOver(e) {
             if (e.preventDefault) e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
             return false;
         }
 
         function handleDrop(e) {
             if (e.stopPropagation) e.stopPropagation();
+
             if (dragSrcEl !== this) {
-                dragSrcEl.innerHTML = this.innerHTML;
-                this.innerHTML = e.dataTransfer.getData('text/html');
+                this.insertAdjacentHTML('beforebegin', e.dataTransfer.getData('text/html'));
+                const droppedCard = this.previousSibling;
+                attachCardEvents(droppedCard);
+                dragSrcEl.remove();
             }
             return false;
         }
 
         function handleDragEnd() {
-            document.querySelectorAll('#pinboard .col-md-4').forEach(col => col.classList.remove('opacity-50', 'dragging', 'invisible'));
+            const allCards = document.querySelectorAll('[draggable="true"]');
+            allCards.forEach(card => {
+                card.classList.remove('opacity-50');
+            });
         }
 
-        document.querySelectorAll('#pinboard .col-md-4').forEach(col => {
-            col.addEventListener('dragstart', handleDragStart);
-            col.addEventListener('dragover', handleDragOver);
-            col.addEventListener('drop', handleDrop);
-            col.addEventListener('dragend', handleDragEnd);
+        function attachCardEvents(card) {
+            card.addEventListener('dragstart', handleDragStart);
+            card.addEventListener('dragover', handleDragOver);
+            card.addEventListener('drop', handleDrop);
+            card.addEventListener('dragend', handleDragEnd);
+
+            const archiveBtn = card.querySelector('.archive-btn');
+            const deleteBtn = card.querySelector('.delete-btn');
+            const editBtn = card.querySelector('.edit-btn');
+
+            if (archiveBtn) {
+                archiveBtn.addEventListener('click', archiveNote);
+            }
+            if (deleteBtn) {
+                deleteBtn.addEventListener('click', deleteNote);
+            }
+            if (editBtn) {
+                editBtn.addEventListener('click', openEditModal); // Open edit modal
+            }
+        }
+
+        cards.forEach(attachCardEvents);
+
+        // Archive Note
+        function archiveNote(e) {
+            const card = e.target.closest('.col-md-4');
+            const archiveBtn = card.querySelector('.archive-btn');
+
+            // Disable the archive button after click
+            archiveBtn.disabled = true;
+
+            // Move the card to the archive section
+            archiveSection.appendChild(card);
+
+            // Update the button to "Unarchive" or something else, if needed
+            const unarchiveBtn = document.createElement('button');
+            unarchiveBtn.classList.add('btn', 'btn-sm', 'btn-outline-success', 'unarchive-btn');
+            unarchiveBtn.textContent = 'Unarchive';
+            unarchiveBtn.addEventListener('click', unarchiveNote);
+
+            // Replace archive button with unarchive button
+            archiveBtn.replaceWith(unarchiveBtn);
+        }
+
+        // Unarchive Note (moves it back to the pinboard)
+        function unarchiveNote(e) {
+            const card = e.target.closest('.col-md-4');
+            const unarchiveBtn = card.querySelector('.unarchive-btn');
+
+            // Move the card back to the pinboard
+            pinboard.appendChild(card);
+
+            // Create a new archive button and re-enable it
+            const archiveBtn = document.createElement('button');
+            archiveBtn.classList.add('btn', 'btn-sm', 'btn-outline-yellow', 'archive-btn');
+            archiveBtn.textContent = 'Archive';
+            archiveBtn.addEventListener('click', archiveNote);
+
+            // Replace unarchive button with the original archive button
+            unarchiveBtn.replaceWith(archiveBtn);
+        }
+
+        // Delete Note
+        function deleteNote(e) {
+            const card = e.target.closest('.col-md-4');
+            card.remove(); // Delete the note card
+        }
+
+        // View Archives toggle
+        document.getElementById('viewArchiveBtn').addEventListener('click', function () {
+            archiveSection.style.display = archiveSection.style.display === 'none' ? 'flex' : 'none';
+        });
+
+        // Add Note functionality
+        document.getElementById('addNoteBtn').addEventListener('click', function () {
+            const newNote = document.createElement('div');
+            newNote.className = 'col-md-4 mb-4';
+            newNote.setAttribute('draggable', 'true');
+            newNote.innerHTML = `
+        <div class="card shadow-sm h-100 border border-info">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title" >New Heading</h5>
+                <p class="card-text flex-grow-1" >Write your note content here...</p>
+                <div class="d-flex gap-3 align-items-center mt-3">
+                    <button class="btn btn-sm btn-outline-yellow archive-btn">Archive</button>
+                    <button class="btn btn-sm btn-outline-danger delete-btn">Delete</button>
+                    <button class="btn btn-sm btn-outline-info edit-btn">Edit</button>
+                </div>
+            </div>
+        </div>
+        `;
+            pinboard.appendChild(newNote);
+            attachCardEvents(newNote);
+        });
+
+        // Open Edit Modal
+        function openEditModal(e) {
+            currentCard = e.target.closest('.col-md-4');
+            const title = currentCard.querySelector('.card-title').textContent;
+            const description = currentCard.querySelector('.card-text').textContent;
+
+            document.getElementById('editNoteTitle').value = title;
+            document.getElementById('editNoteDescription').value = description;
+
+            // Initialize the modal if not done yet
+            if (!modal) {
+                modal = new bootstrap.Modal(document.getElementById('editModal'));
+            }
+
+            modal.show();
+        }
+
+        // Save Changes
+        document.getElementById('saveChangesBtn').addEventListener('click', function () {
+            const newTitle = document.getElementById('editNoteTitle').value;
+            const newDescription = document.getElementById('editNoteDescription').value;
+
+            currentCard.querySelector('.card-title').textContent = newTitle;
+            currentCard.querySelector('.card-text').textContent = newDescription;
+
+            modal.hide(); // Hide modal after saving changes
+        });
+
+        // Close Modal
+        document.getElementById('modalCloseBtn').addEventListener('click', function () {
+            modal.hide(); // Close modal
+        });
+
+        document.getElementById('closeModalBtn').addEventListener('click', function () {
+            modal.hide(); // Close modal
         });
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
-    <script>
-        gsap.from("#formCard", {
-            opacity: 0,
-            y: 60,
-            duration: 1,
-            ease: "power2.out"
-        });
-
-        gsap.from("#heading-gsap", {
-            opacity: 0,
-            y: 50,
-            duration: 1.0,
-            ease: "power2.out",
-            delay: 0.1
-        });
 
 
-    </script>
+
+
 
 
 
 </body>
 
 
-<!-- Mirrored from prium.github.io/phoenix/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Sep 2024 13:37:21 GMT -->
 
 </html>
