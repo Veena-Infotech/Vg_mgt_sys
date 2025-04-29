@@ -7797,17 +7797,24 @@
   <div class="modal fade" id="kanbanAddTask" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen-sm-down modal-xl modal-dialog-centered">
       <div class="modal-content">
+        <!-- added by me -->
+        <for action="../PhpFiles/handle_add_task" method="post" enctype="multipart/form-data">
+
         <div class="modal-body">
           <h3>Edit Task</h3>
           
           <div class="row gx-3 gy-4">
           <hr>
             <div class="col-sm-6 col-md-12" style="margin-top:-1%;">
-            <label class="form-label">Task Title </label>
-              <div class="form-floating"><input class="form-control" id="kanbanTaskTitle" type="text" placeholder="title" value="" /><label for="kanbanTaskTitle">Title</label></div>
+              <label class="form-label">Task Title </label>
+              <div class="form-floating">
+                <input class="form-control" id="kanbanTaskTitle" name="task_title" placeholder="title" value="" /><label for="kanbanTaskTitle">Title</label>
+              </div>
             </div>
             <div class="col-12 gy-4">
-              <div class="form-floating"><textarea class="form-control" id="floatingProjectDescription" placeholder="Leave a comment here" style="height: 128px"></textarea><label for="floatingProjectDescription">ADD A DESCRIPTION</label></div>
+              <div class="form-floating">
+                <textarea class="form-control" id="floatingProjectDescription" name="description" placeholder="Leave a comment here" style="height: 128px"></textarea>
+                <label for="floatingProjectDescription">ADD A DESCRIPTION</label></div>
             </div>
 
             <div class="col-sm-4" style="width: 50%;">
@@ -7818,15 +7825,16 @@
                 </select><label for="TaskType">BORAD TYPE</label></div> -->
               <label class="form-label">Project Name<span style="color: red;">*</span></label>
               <input type="text" class="form-control" placeholder="Enter project title"
-                name="project_title">
+                name="project_name">
             </div>
             <!-- date picker  -->
             <div class="col-sm-4" style="width: 50%;">
               <label class="form-label" for="timepicker2">Select Time Range</label>
-              <input class="form-control datetimepicker flatpickr-input" id="timepicker2" type="text" placeholder="d/m/y to d/m/y" data-options="{&quot;mode&quot;:&quot;range&quot;,&quot;dateFormat&quot;:&quot;d/m/y&quot;,&quot;disableMobile&quot;:true}" readonly="readonly">
+              <input class="form-control datetimepicker flatpickr-input" id="timepicker2" type="text" name="time_range" placeholder="d/m/y to d/m/y" data-options="{&quot;mode&quot;:&quot;range&quot;,&quot;dateFormat&quot;:&quot;d/m/y&quot;,&quot;disableMobile&quot;:true}" readonly="readonly">
             </div>
             <div class="col-sm-12">
-              <div class="mb-3"><label for="organizerMultiple2" style="font-size : 12px">Assigned Employee</label><select class="form-select" id="organizerMultiple2" data-choices="data-choices" multiple="multiple" size="1" name="organizerMultiple" required="required" data-options='{"removeItemButton":true,"placeholder":true}'>
+              <div class="mb-3"><label for="organizerMultiple2" style="font-size : 12px">Assigned Employee</label>
+              <select class="form-select" id="organizerMultiple2" data-choices="data-choices" name="organizerMultiple" multiple="multiple" size="1"  required="required" data-options='{"removeItemButton":true,"placeholder":true}'>
                   <option value="">Select organizer...</option>
                   <option>Massachusetts Institute of Technology</option>
                   <option>University of Chicago</option>
@@ -7840,7 +7848,7 @@
             <div class="col-sm-4" style="width: 50%; margin-top:-0.5% ; ">
             <label for="organizerSingle" style="font-size : 12px;">Task Category</label>
             <div class="s" >
-              <select class="form-select" id="organizerSingle" data-choices="data-choices" data-options='{"removeItemButton":true,"placeholder":true}'>
+              <select class="form-select" id="organizerSingle" name="task_category" data-choices="data-choices" data-options='{"removeItemButton":true,"placeholder":true}'>
 
                 <option value="">Select organizer...</option>
                 <option>Massachusetts Institute of Technology</option>
@@ -7860,7 +7868,8 @@
                   <option value="2">Medium</option>
                   <option value="2">Urgent</option>
                 </select><label for="KanbanPriorityLavel">PRIORITY</label></div> -->
-              <div class="mb-3"><label for="organizerSingle2" style="font-size : 12px">PRIORITY</label><select class="form-select" id="organizerSingle2" data-choices="data-choices" size="1" required="required" name="organizerSingle" data-options='{"removeItemButton":true,"placeholder":true}'>
+              <div class="mb-3"><label for="organizerSingle2" style="font-size : 12px">PRIORITY</label>
+              <select class="form-select" id="organizerSingle2" data-choices="data-choices" name="organizerSingle" size="1" required="required"  data-options='{"removeItemButton":true,"placeholder":true}'>
                   <option value="">Low (Default)</option>
                   <option>High</option>
                   <option>Medium</option>
@@ -7873,7 +7882,8 @@
             </div>
             <div class="col-sm-12" style="margin-top:-0.5% ;">
             <div class="col-sm-12" style="margin-top: 0.5%;">
-              <div class="mb-3"><label for="organizerMultiple2" style="font-size : 12px">Tags</label><select class="form-select" id="organizerMultiple2" data-choices="data-choices" multiple="multiple" size="1" name="organizerMultiple" required="required" data-options='{"removeItemButton":true,"placeholder":true}'>
+              <div class="mb-3"><label for="organizerMultiple2" style="font-size : 12px">Tags</label>
+              <select class="form-select" id="organizerMultiple2" data-choices="data-choices" multiple="multiple" size="1" name="tagsMultiple" required="required" data-options='{"removeItemButton":true,"placeholder":true}'>
                   <option value="">Select organizer...</option>
                   <option>1</option>
                   <option>2</option>
@@ -7887,7 +7897,7 @@
           </div>
         </div>
 
-        <!--  image -->
+        <!--  image upload -->
 
         <div class="col-12 gy-4" style="margin-top: -2%;">
           <label class="form-label">Upload Image <span style="color: red;">*</span></label>
@@ -7917,7 +7927,7 @@
         </div>
 
         <!-- file Upload  -->
-        <form class="dropzone dropzone-multiple p-0" id="dropzone-multiple" data-dropzone="data-dropzone" action="#!" style="margin-top: 1%;">
+        <div class="dropzone dropzone-multiple p-0" id="dropzone-multiple" data-dropzone="data-dropzone"  style="margin-top: 1%;">
           <label class="form-label">Upload File <span style="color: red;">*</span></label>
           <div class="fallback"><input name="file" type="file" multiple="multiple" /></div>
           <div class="dz-message" data-dz-message="data-dz-message"><img class="me-2" src="../../../assets/img/icons/cloud-upload.svg" width="25" alt="" />Drop your files here</div>
@@ -7938,8 +7948,12 @@
               </div>
             </div>
           </div>
-        </form>
-        <div class="modal-footer justify-content-between"><button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close"><span class="fas fa-times fs-10 me-1" data-fa-transform="up-1"></span>Close</button><button class="btn btn-primary px-6" type="button" data-bs-dismiss="modal">Done</button></div>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close">
+            <span class="fas fa-times fs-10 me-1" data-fa-transform="up-1"></span>Close</button>
+            <button class="btn btn-primary px-6" type="button" data-bs-dismiss="modal">Done</button>
+        </div></form>
       </div>
     </div>
   </div>
