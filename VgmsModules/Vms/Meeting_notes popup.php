@@ -5,14 +5,13 @@ $employeeName = "Jane Employee";
 $meetingID = uniqid("MTG-");
 $currentDateTime = date("Y-m-d\TH:i");
 ?>
-
 <html>
 
 <head>
     <title>Meeting Notes Popup</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
@@ -35,13 +34,16 @@ $currentDateTime = date("Y-m-d\TH:i");
             height: 100%;
             background-color: rgba(0, 0, 0, 0.6);
             z-index: 9999;
+            padding: 10px;
+            box-sizing: border-box;
         }
 
         .modal-content {
-            background-color: #0b0d17; /* Dark background */
+            background-color: #0b0d17;
             padding: 30px;
             border-radius: 12px;
-            width: 60%;
+            width: 100%;
+            max-width: 800px;
             max-height: 90vh;
             overflow-y: auto;
             box-shadow: 0px 0px 15px #00000066;
@@ -54,7 +56,7 @@ $currentDateTime = date("Y-m-d\TH:i");
         }
 
         .modal-content::-webkit-scrollbar-thumb {
-            background-color: #151822; /* Same as dark input bg */
+            background-color: #151822;
             border-radius: 4px;
         }
 
@@ -81,12 +83,14 @@ $currentDateTime = date("Y-m-d\TH:i");
             display: flex;
             align-items: center;
             margin-bottom: 15px;
+            flex-wrap: wrap;
         }
 
         label {
-            width: 200px;
+            width: 100%;
+            max-width: 200px;
             font-weight: 600;
-            margin-right: 15px;
+            margin-bottom: 5px;
             color: #ffffff;
         }
 
@@ -99,6 +103,8 @@ $currentDateTime = date("Y-m-d\TH:i");
             border-radius: 5px;
             background-color: #151822;
             color: #ffffff;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         textarea {
@@ -114,28 +120,59 @@ $currentDateTime = date("Y-m-d\TH:i");
             justify-content: space-between;
             align-items: center;
             margin-top: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .reset-btn,
+        .btn-primary {
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            max-width: 200px;
+            box-sizing: border-box;
         }
 
         .reset-btn {
             background-color: #e74c3c;
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
         }
 
         .btn-primary {
             background-color: #4CAF50;
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
         }
 
+        /* Responsive Tweaks */
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                padding: 20px;
+            }
+
+            .form-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            label {
+                width: 100%;
+            }
+
+            .form-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .reset-btn,
+            .btn-primary {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 
@@ -189,8 +226,6 @@ $currentDateTime = date("Y-m-d\TH:i");
                     <label>Additional Comments</label>
                     <textarea rows="3" placeholder="Any additional notes..."></textarea>
                 </div>
-
-                <!-- Updated Attachments section -->
                 <div class="form-group">
                     <label>Upload Images</label>
                     <input type="file" accept="image/*" multiple>
@@ -199,7 +234,6 @@ $currentDateTime = date("Y-m-d\TH:i");
                     <label>Upload Files</label>
                     <input type="file" multiple>
                 </div>
-
                 <div class="form-actions">
                     <button type="reset" class="reset-btn">Reset</button>
                     <button type="submit" class="btn-primary">Submit & Save</button>
@@ -215,8 +249,7 @@ $currentDateTime = date("Y-m-d\TH:i");
             rescheduleField.classList.toggle('hidden', status !== 'Rescheduled');
         }
 
-        // GSAP Animation
-        window.onload = function() {
+        window.onload = function () {
             gsap.to("#popup", { duration: 0.6, opacity: 1, scale: 1, ease: "power2.out" });
         };
     </script>

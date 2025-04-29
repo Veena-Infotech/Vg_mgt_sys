@@ -7571,8 +7571,8 @@
             </ul>
           </div>
         </div>
-        <div class="phoenix-offcanvas-backdrop" data-phoenix-backdrop="data-phoenix-backdrop"></div>
-        <footer class="footer position-absolute">
+      <!-- <div class="phoenix-offcanvas-backdrop" data-phoenix-backdrop="data-phoenix-backdrop"></div> -->
+        <!-- <footer class="footer position-absolute">
           <div class="row g-0 justify-content-between align-items-center h-100">
             <div class="col-12 col-sm-auto text-center">
               <p class="mb-0 mt-2 mt-sm-0 text-body">Thank you for creating with Phoenix<span class="d-none d-sm-inline-block"></span><span class="d-none d-sm-inline-block mx-1">|</span><br class="d-sm-none" />2024 &copy;<a class="mx-1" href="https://themewagon.com/">Themewagon</a></p>
@@ -7580,9 +7580,9 @@
             <div class="col-12 col-sm-auto text-center">
               <p class="mb-0 text-body-tertiary text-opacity-85">v1.19.0</p>
             </div>
-          </div>
-        </footer>
-      </div>
+          </div> 
+        </footer> -->
+      </div> 
       <div class="modal fade" id="searchBoxModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="true" data-phoenix-modal="data-phoenix-modal" style="--phoenix-backdrop-opacity: 1;">
         <div class="modal-dialog">
           <div class="modal-content mt-15 rounded-pill">
@@ -7702,39 +7702,6 @@
           </div>
         </div>
       </div>
-      <!-- <div class="support-chat-container">
-        <div class="container-fluid support-chat">
-          <div class="card bg-body-emphasis">
-            <div class="card-header d-flex flex-between-center px-4 py-3 border-bottom border-translucent">
-              <h5 class="mb-0 d-flex align-items-center gap-2">Demo widget<span class="fa-solid fa-circle text-success fs-11"></span></h5>
-              <div class="btn-reveal-trigger"><button class="btn btn-link p-0 dropdown-toggle dropdown-caret-none transition-none d-flex" type="button" id="support-chat-dropdown" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h text-body"></span></button>
-                <div class="dropdown-menu dropdown-menu-end py-2" aria-labelledby="support-chat-dropdown"><a class="dropdown-item" href="#!">Request a callback</a><a class="dropdown-item" href="#!">Search in chat</a><a class="dropdown-item" href="#!">Show history</a><a class="dropdown-item" href="#!">Report to Admin</a><a class="dropdown-item btn-support-chat" href="#!">Close Support</a></div>
-              </div>
-            </div>
-            <div class="card-body chat p-0">
-              <div class="d-flex flex-column-reverse scrollbar h-100 p-3">
-                <div class="text-end mt-6"><a class="mb-2 d-inline-flex align-items-center text-decoration-none text-body-emphasis bg-body-hover rounded-pill border border-primary py-2 ps-4 pe-3" href="#!">
-                    <p class="mb-0 fw-semibold fs-9">I need help with something</p><span class="fa-solid fa-paper-plane text-primary fs-9 ms-3"></span>
-                  </a><a class="mb-2 d-inline-flex align-items-center text-decoration-none text-body-emphasis bg-body-hover rounded-pill border border-primary py-2 ps-4 pe-3" href="#!">
-                    <p class="mb-0 fw-semibold fs-9">I can’t reorder a product I previously ordered</p><span class="fa-solid fa-paper-plane text-primary fs-9 ms-3"></span>
-                  </a><a class="mb-2 d-inline-flex align-items-center text-decoration-none text-body-emphasis bg-body-hover rounded-pill border border-primary py-2 ps-4 pe-3" href="#!">
-                    <p class="mb-0 fw-semibold fs-9">How do I place an order?</p><span class="fa-solid fa-paper-plane text-primary fs-9 ms-3"></span>
-                  </a><a class="false d-inline-flex align-items-center text-decoration-none text-body-emphasis bg-body-hover rounded-pill border border-primary py-2 ps-4 pe-3" href="#!">
-                    <p class="mb-0 fw-semibold fs-9">My payment method not working</p><span class="fa-solid fa-paper-plane text-primary fs-9 ms-3"></span>
-                  </a></div>
-                <div class="text-center mt-auto">
-                  <div class="avatar avatar-3xl status-online"><img class="rounded-circle border border-3 border-light-subtle" src="../../assets/img/team/30.webp" alt="" /></div>
-                  <h5 class="mt-2 mb-3">Eric</h5>
-                  <p class="text-center text-body-emphasis mb-0">Ask us anything – we’ll get back to you here or by email within 24 hours.</p>
-                </div>
-              </div>
-            </div>
-            <div class="card-footer d-flex align-items-center gap-2 border-top border-translucent ps-3 pe-4 py-3">
-              <div class="d-flex align-items-center flex-1 gap-3 border border-translucent rounded-pill px-4"><input class="form-control outline-none border-0 flex-1 fs-9 px-0" type="text" placeholder="Write message" /><label class="btn btn-link d-flex p-0 text-body-quaternary fs-9 border-0" for="supportChatPhotos"><span class="fa-solid fa-image"></span></label><input class="d-none" type="file" accept="image/*" id="supportChatPhotos" /><label class="btn btn-link d-flex p-0 text-body-quaternary fs-9 border-0" for="supportChatAttachment"> <span class="fa-solid fa-paperclip"></span></label><input class="d-none" type="file" id="supportChatAttachment" /></div><button class="btn p-0 border-0 send-btn"><span class="fa-solid fa-paper-plane fs-9"></span></button>
-            </div>
-          </div>
-        </div><button class="btn btn-support-chat p-0 border border-translucent"><span class="fs-8 btn-text text-primary text-nowrap">Chat demo</span><span class="ping-icon-wrapper mt-n4 ms-n6 mt-sm-0 ms-sm-2 position-absolute position-sm-relative"><span class="ping-icon-bg"></span><span class="fa-solid fa-circle ping-icon"></span></span><span class="fa-solid fa-headset text-primary fs-8 d-sm-none"></span><span class="fa-solid fa-chevron-down text-primary fs-7"></span></button>
-      </div> -->
 
 
 
@@ -7830,13 +7797,24 @@
   <div class="modal fade" id="kanbanAddTask" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen-sm-down modal-xl modal-dialog-centered">
       <div class="modal-content">
+        <!-- added by me -->
+        <for action="../../PhpFiles/handle_add_task" method="post" enctype="multipart/form-data">
+
         <div class="modal-body">
+          <h3>Edit Task</h3>
+          
           <div class="row gx-3 gy-4">
-            <div class="col-sm-6 col-md-12">
-              <div class="form-floating"><input class="form-control" id="kanbanTaskTitle" type="text" placeholder="title" value="" /><label for="kanbanTaskTitle">Title</label></div>
+          <hr>
+            <div class="col-sm-6 col-md-12" style="margin-top:-1%;">
+              <label class="form-label">Task Title </label>
+              <div class="form-floating">
+                <input class="form-control" id="kanbanTaskTitle" name="task_title" placeholder="title" value="" /><label for="kanbanTaskTitle">Title</label>
+              </div>
             </div>
             <div class="col-12 gy-4">
-              <div class="form-floating"><textarea class="form-control" id="floatingProjectDescription" placeholder="Leave a comment here" style="height: 128px"></textarea><label for="floatingProjectDescription">ADD A DESCRIPTION</label></div>
+              <div class="form-floating">
+                <textarea class="form-control" id="floatingProjectDescription" name="description" placeholder="Leave a comment here" style="height: 128px"></textarea>
+                <label for="floatingProjectDescription">ADD A DESCRIPTION</label></div>
             </div>
 
             <div class="col-sm-4" style="width: 50%;">
@@ -7845,24 +7823,18 @@
                   <option value="2">Boreas</option>
                   <option value="3">Erebus</option>
                 </select><label for="TaskType">BORAD TYPE</label></div> -->
-              <label class="form-label">Project Title <span style="color: red;">*</span></label>
+              <label class="form-label">Project Name<span style="color: red;">*</span></label>
               <input type="text" class="form-control" placeholder="Enter project title"
-                name="project_title">
+                name="project_name">
             </div>
             <!-- date picker  -->
             <div class="col-sm-4" style="width: 50%;">
               <label class="form-label" for="timepicker2">Select Time Range</label>
-              <input class="form-control datetimepicker flatpickr-input" id="timepicker2" type="text" placeholder="d/m/y to d/m/y" data-options="{&quot;mode&quot;:&quot;range&quot;,&quot;dateFormat&quot;:&quot;d/m/y&quot;,&quot;disableMobile&quot;:true}" readonly="readonly">
+              <input class="form-control datetimepicker flatpickr-input" id="timepicker2" type="text" name="time_range" placeholder="d/m/y to d/m/y" data-options="{&quot;mode&quot;:&quot;range&quot;,&quot;dateFormat&quot;:&quot;d/m/y&quot;,&quot;disableMobile&quot;:true}" readonly="readonly">
             </div>
-            <!-- <div class="col-sm-4">
-              <div class="form-floating"><select class="form-select" id="KanbanPlaceNumber">
-                  <option selected="selected">01</option>
-                  <option value="2">02</option>
-                  <option value="3">03</option>
-                </select><label for="KanbanPlaceNumber">PLACE</label></div>
-            </div> -->
             <div class="col-sm-12">
-              <div class="mb-3"><label for="organizerMultiple2" style="font-size : 12px">Assigned Employee</label><select class="form-select" id="organizerMultiple2" data-choices="data-choices" multiple="multiple" size="1" name="organizerMultiple" required="required" data-options='{"removeItemButton":true,"placeholder":true}'>
+              <div class="mb-3"><label for="organizerMultiple2" style="font-size : 12px">Assigned Employee</label>
+              <select class="form-select" id="organizerMultiple2" data-choices="data-choices" name="organizerMultiple" multiple="multiple" size="1"  required="required" data-options='{"removeItemButton":true,"placeholder":true}'>
                   <option value="">Select organizer...</option>
                   <option>Massachusetts Institute of Technology</option>
                   <option>University of Chicago</option>
@@ -7872,25 +7844,58 @@
                 <div class="invalid-feedback">Please select one or multiple</div>
               </div>
             </div>
-            <div class="col-sm-12" style="margin-top: 0.5%;">
+          
+            <div class="col-sm-4" style="width: 50%; margin-top:-0.5% ; ">
+            <label for="organizerSingle" style="font-size : 12px;">Task Category</label>
+            <div class="s" >
+              <select class="form-select" id="organizerSingle" name="task_category" data-choices="data-choices" data-options='{"removeItemButton":true,"placeholder":true}'>
+
+                <option value="">Select organizer...</option>
+                <?php
+                  $cat_result = $conn->query("SELECT id, name FROM tbl_category");
+                  while ($cat = $cat_result->fetch_assoc()) {
+                    echo "<option value=\"{$cat['id']}\">{$cat['name']}</option>";
+                  }
+                ?>
+                <!--option>Massachusetts Institute of Technology</option>
+                <option>University of Chicago</option>
+                <option>GSAS Open Labs At Harvard</option>
+                <option>California Institute of Technology</option-->
+              </select>
+            </div>
+            
+            </div>
+            
+            <div class="col-sm-4" style="width: 50%; margin-top:-0.5% ;">
+            <div class="col-sm-12" >
               <!-- <div class="form-floating" ><select class="form-select" id="KanbanPriorityLavel">
                   <option selected="selected">Low (Default)</option>
                   <option value="2">High</option>
                   <option value="2">Medium</option>
                   <option value="2">Urgent</option>
                 </select><label for="KanbanPriorityLavel">PRIORITY</label></div> -->
-              <div class="mb-3"><label for="organizerSingle2" style="font-size : 12px">PRIORITY</label><select class="form-select" id="organizerSingle2" data-choices="data-choices" size="1" required="required" name="organizerSingle" data-options='{"removeItemButton":true,"placeholder":true}'>
-                  <option value="">Low (Default)</option>
+              <div class="mb-3"><label for="organizerSingle2" style="font-size : 12px">PRIORITY</label>
+              <select class="form-select" id="organizerSingle2" data-choices="data-choices" name="organizerSingle" size="1" required="required"  data-options='{"removeItemButton":true,"placeholder":true}'>
+                <?php
+                  $pri_result = $conn->query("SELECT id, name FROM tbl_priority");
+                  while ($pri = $pri_result->fetch_assoc()) {
+                    echo "<option value=\"{$pri['id']}\">{$pri['name']}</option>";
+                  }
+                  ?>
+                  <!--option value="">Low (Default)</option>
                   <option>High</option>
                   <option>Medium</option>
                   <option>semi Urgent</option>
-                  <option>Urgent</option>
+                  <option>Urgent</option-->
                 </select>
                 <div class="invalid-feedback">Please select one</div>
               </div>
             </div>
+            </div>
+            <div class="col-sm-12" style="margin-top:-0.5% ;">
             <div class="col-sm-12" style="margin-top: 0.5%;">
-              <div class="mb-3"><label for="organizerMultiple2" style="font-size : 12px">Tags</label><select class="form-select" id="organizerMultiple2" data-choices="data-choices" multiple="multiple" size="1" name="organizerMultiple" required="required" data-options='{"removeItemButton":true,"placeholder":true}'>
+              <div class="mb-3"><label for="organizerMultiple2" style="font-size : 12px">Tags</label>
+              <select class="form-select" id="organizerMultiple2" data-choices="data-choices" multiple="multiple" size="1" name="tagsMultiple" required="required" data-options='{"removeItemButton":true,"placeholder":true}'>
                   <option value="">Select organizer...</option>
                   <option>1</option>
                   <option>2</option>
@@ -7900,10 +7905,11 @@
                 <div class="invalid-feedback">Please select one or multiple</div>
               </div>
             </div>
+            </div>
           </div>
         </div>
 
-        <!--  image -->
+        <!--  image upload -->
 
         <div class="col-12 gy-4" style="margin-top: -2%;">
           <label class="form-label">Upload Image <span style="color: red;">*</span></label>
@@ -7933,7 +7939,7 @@
         </div>
 
         <!-- file Upload  -->
-        <form class="dropzone dropzone-multiple p-0" id="dropzone-multiple" data-dropzone="data-dropzone" action="#!" style="margin-top: 1%;">
+        <div class="dropzone dropzone-multiple p-0" id="dropzone-multiple" data-dropzone="data-dropzone"  style="margin-top: 1%;">
           <label class="form-label">Upload File <span style="color: red;">*</span></label>
           <div class="fallback"><input name="file" type="file" multiple="multiple" /></div>
           <div class="dz-message" data-dz-message="data-dz-message"><img class="me-2" src="../../../assets/img/icons/cloud-upload.svg" width="25" alt="" />Drop your files here</div>
@@ -7954,8 +7960,12 @@
               </div>
             </div>
           </div>
-        </form>
-        <div class="modal-footer justify-content-between"><button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close"><span class="fas fa-times fs-10 me-1" data-fa-transform="up-1"></span>Close</button><button class="btn btn-primary px-6" type="button" data-bs-dismiss="modal">Done</button></div>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close">
+            <span class="fas fa-times fs-10 me-1" data-fa-transform="up-1"></span>Close</button>
+            <button class="btn btn-primary px-6" type="button" data-bs-dismiss="modal">Done</button>
+        </div></form>
       </div>
     </div>
   </div>
@@ -7983,13 +7993,13 @@
                   <P class="fs-9 mb-0">Reproduced below for those interested" is a phrase used to provide additional content or details for individuals who have expressed interest in a particular topic. It signals that what follows is optional and caters specifically to those who want to delve deeper into the subject matter.</P>
                 </div>
                 <div class="col-4 col-sm-3">
-                  <h6 class="text-body-tertiary fw-bolder lh-sm mt-1">BOARD </h6>
+                  <h6 class="text-body-tertiary fw-bolder lh-sm mt-1">PROJECT NAME</h6>
                 </div>
                 <div class="col-8 col-sm-9">
                   <P class="mb-0 text-body-emphasis fw-semibold">Phoenix</P>
                 </div>
                 <div class="col-4 col-sm-3">
-                  <h6 class="text-body-tertiary fw-bolder lh-sm mt-1">COLUMN </h6>
+                  <h6 class="text-body-tertiary fw-bolder lh-sm mt-1">STATUS</h6>
                 </div>
                 <div class="col-8 col-sm-9">
                   <P class="mb-0 text-body-emphasis fw-semibold d-inline-block kanban-column-underline-warning">Doing</P>
@@ -8142,7 +8152,7 @@
                 <div class="px-3">
                   <h5 class="mb-3 mt-4">Actions</h5>
                   <ul class="nav flex-column flex-sm-row flex-lg-column list-unstyled">
-                    <li class="kanban-action-item lh-sm nav-item me-2"><a class="nav-link text-body-emphasis fw-semibold fs-9 stretched-link" href="#!"><span class="me-2 fa-solid fa-file-export"></span>Move</a></li>
+                    <li class="kanban-action-item lh-sm nav-item me-2"><a class="nav-link text-body-emphasis fw-semibold fs-9 stretched-link" href="#!"><span class="me-2 fa-solid fa-file-export"></span>Change Status</a></li>
                     <li class="kanban-action-item lh-sm nav-item me-2"><a class="nav-link text-body-emphasis fw-semibold fs-9 stretched-link" href="#!"><span class="me-2 fa-solid fa-clone"></span>Duplicate</a></li>
                     <li class="kanban-action-item lh-sm nav-item me-2"><a class="nav-link text-body-emphasis fw-semibold fs-9 stretched-link" href="#!"><span class="me-2 fa-solid fa-share-nodes"></span>Share</a></li>
                     <li class="kanban-action-item lh-sm nav-item me-2"><a class="nav-link text-body-emphasis fw-semibold fs-9 stretched-link" href="#!"><span class="me-2 fa-solid fa-square-plus"></span>Create template</a></li>
