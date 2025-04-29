@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 29, 2025 at 11:05 PM
+-- Generation Time: Apr 29, 2025 at 12:47 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,28 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `vg_mg_sys`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_category`
---
-
-CREATE TABLE `tbl_category` (
-  `id` int(11) NOT NULL,
-  `category_name` varchar(256) DEFAULT NULL,
-  `created_at` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tbl_category`
---
-
-INSERT INTO `tbl_category` (`id`, `category_name`, `created_at`) VALUES
-(1, 'Massachusetts Institute of Technology', '2025-04-29'),
-(2, 'University of Chicago', '2025-04-29'),
-(3, 'GSAS Open Labs At Harvard', '2025-04-29'),
-(4, 'California Institute of Technology', '2025-04-29');
 
 -- --------------------------------------------------------
 
@@ -296,29 +274,6 @@ CREATE TABLE `tbl_payment` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_priority`
---
-
-CREATE TABLE `tbl_priority` (
-  `id` int(11) NOT NULL,
-  `priority` varchar(256) DEFAULT NULL,
-  `created_at` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tbl_priority`
---
-
-INSERT INTO `tbl_priority` (`id`, `priority`, `created_at`) VALUES
-(1, 'Low', '2025-04-29'),
-(2, 'High', '2025-04-29'),
-(3, 'Medium', '2025-04-29'),
-(4, 'Semi Urgent', '2025-04-29'),
-(5, 'Urgent', '2025-04-29');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `tbl_project`
 --
 
@@ -330,6 +285,7 @@ CREATE TABLE `tbl_project` (
   `project_manager` int(11) DEFAULT NULL,
   `project_client` int(255) DEFAULT NULL,
   `project_status` int(255) DEFAULT NULL,
+  `file_path` varchar(256) DEFAULT NULL,
   `project_description` varchar(256) DEFAULT NULL,
   `project_start_date` date DEFAULT NULL,
   `project_end_date` date DEFAULT NULL,
@@ -341,11 +297,9 @@ CREATE TABLE `tbl_project` (
 -- Dumping data for table `tbl_project`
 --
 
-INSERT INTO `tbl_project` (`id`, `uid`, `project_title`, `project_type`, `project_manager`, `project_client`, `project_status`, `project_description`, `project_start_date`, `project_end_date`, `project_created_by`, `timestamp`) VALUES
-(21, 'prj_680f77ed89734', 'infotech', 2, 0, 2, 1, 'test', '2020-04-20', '2020-05-20', 'admin', '2025-04-28'),
-(22, 'prj_680f780d1cc70', 'infotech2', 1, 1, 1, 1, 'm, ff msd fk', '2025-04-28', '2025-05-11', 'admin', '2025-04-28'),
-(24, 'prj_68113dc2705e7', 'test 2', 2, 1, 2, 1, 'sdfgsfdgsdg', '2025-04-30', '2025-05-11', 'admin', '2025-04-30'),
-(25, 'prj_68113ed38894b', 'test 3', 1, 0, 1, 1, 'asdcasdc', '2025-04-30', '2025-05-11', 'admin', '2025-04-30');
+INSERT INTO `tbl_project` (`id`, `uid`, `project_title`, `project_type`, `project_manager`, `project_client`, `project_status`, `file_path`, `project_description`, `project_start_date`, `project_end_date`, `project_created_by`, `timestamp`) VALUES
+(21, 'prj_680f77ed89734', 'infotech', 1, 1, 1, 1, '../uploads/project/infotech/DAA LAB Q3 OP.png', 'm, ff msd fk', '2025-04-28', '2025-05-11', 'admin', '2025-04-28'),
+(22, 'prj_680f780d1cc70', 'infotech2', 1, 1, 1, 1, '../uploads/project/infotech2/DAA LAB Q1 OP.png', 'm, ff msd fk', '2025-04-28', '2025-05-11', 'admin', '2025-04-28');
 
 -- --------------------------------------------------------
 
@@ -366,9 +320,7 @@ CREATE TABLE `tbl_project_emp` (
 
 INSERT INTO `tbl_project_emp` (`id`, `emp_id`, `project_id`, `timestamp`) VALUES
 (9, 1, 21, '2025-04-28'),
-(10, 1, 22, '2025-04-28'),
-(13, 1, 24, '2025-04-30'),
-(14, 1, 25, '2025-04-30');
+(10, 1, 22, '2025-04-28');
 
 -- --------------------------------------------------------
 
@@ -415,61 +367,22 @@ INSERT INTO `tbl_project_type` (`id`, `type`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_tags`
---
-
-CREATE TABLE `tbl_tags` (
-  `id` int(11) NOT NULL,
-  `tag_name` varchar(256) DEFAULT NULL,
-  `created_at` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `tbl_tasks`
 --
 
 CREATE TABLE `tbl_tasks` (
   `id` int(11) NOT NULL,
-  `uid` varchar(256) DEFAULT NULL,
+  `uid` int(11) DEFAULT NULL,
   `title` varchar(256) DEFAULT NULL,
   `description` text DEFAULT NULL,
-  `project_name` varchar(256) DEFAULT NULL,
+  `project_title` varchar(256) DEFAULT NULL,
   `start_date` date DEFAULT NULL,
   `end_date` date DEFAULT NULL,
   `assigned_employee` varchar(256) DEFAULT NULL,
-  `task_category` int(11) DEFAULT NULL,
-  `priority` int(11) DEFAULT NULL,
+  `priority` varchar(256) DEFAULT NULL,
   `tags` int(11) DEFAULT NULL,
   `image_path` varchar(256) DEFAULT NULL,
   `file_path` varchar(256) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_task_emp`
---
-
-CREATE TABLE `tbl_task_emp` (
-  `id` int(11) NOT NULL,
-  `emp_id` int(11) DEFAULT NULL,
-  `task_id` int(11) DEFAULT NULL,
-  `timestamp` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_task_tag`
---
-
-CREATE TABLE `tbl_task_tag` (
-  `id` int(11) NOT NULL,
-  `task_id` int(11) DEFAULT NULL,
-  `tag_id` int(11) DEFAULT NULL,
-  `timestamp` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -513,12 +426,6 @@ CREATE TABLE `tbl_visitor` (
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `tbl_category`
---
-ALTER TABLE `tbl_category`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tbl_client`
@@ -590,12 +497,6 @@ ALTER TABLE `tbl_payment`
   ADD UNIQUE KEY `uid` (`uid`);
 
 --
--- Indexes for table `tbl_priority`
---
-ALTER TABLE `tbl_priority`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `tbl_project`
 --
 ALTER TABLE `tbl_project`
@@ -626,34 +527,10 @@ ALTER TABLE `tbl_project_type`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tbl_tags`
---
-ALTER TABLE `tbl_tags`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `tbl_tasks`
 --
 ALTER TABLE `tbl_tasks`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_category` (`task_category`),
-  ADD KEY `fk_priority` (`priority`);
-
---
--- Indexes for table `tbl_task_emp`
---
-ALTER TABLE `tbl_task_emp`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `tbl_task_emp_fk_emp` (`emp_id`),
-  ADD KEY `tbl_task_emp_fk_task` (`task_id`);
-
---
--- Indexes for table `tbl_task_tag`
---
-ALTER TABLE `tbl_task_tag`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `tbl_tash_tag_fk_task` (`task_id`),
-  ADD KEY `tbl_tash_tag_fk_tags` (`tag_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tbl_todo`
@@ -673,12 +550,6 @@ ALTER TABLE `tbl_visitor`
 --
 -- AUTO_INCREMENT for dumped tables
 --
-
---
--- AUTO_INCREMENT for table `tbl_category`
---
-ALTER TABLE `tbl_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_client`
@@ -735,22 +606,16 @@ ALTER TABLE `tbl_payment`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `tbl_priority`
---
-ALTER TABLE `tbl_priority`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
 -- AUTO_INCREMENT for table `tbl_project`
 --
 ALTER TABLE `tbl_project`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `tbl_project_emp`
 --
 ALTER TABLE `tbl_project_emp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tbl_project_status`
@@ -765,27 +630,9 @@ ALTER TABLE `tbl_project_type`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `tbl_tags`
---
-ALTER TABLE `tbl_tags`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `tbl_tasks`
 --
 ALTER TABLE `tbl_tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `tbl_task_emp`
---
-ALTER TABLE `tbl_task_emp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `tbl_task_tag`
---
-ALTER TABLE `tbl_task_tag`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -857,27 +704,6 @@ ALTER TABLE `tbl_project`
 ALTER TABLE `tbl_project_emp`
   ADD CONSTRAINT `tbl_project_emp_fk_emp` FOREIGN KEY (`emp_id`) REFERENCES `tbl_emp` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `tbl_project_emp_fk_project` FOREIGN KEY (`project_id`) REFERENCES `tbl_project` (`id`) ON UPDATE CASCADE;
-
---
--- Constraints for table `tbl_tasks`
---
-ALTER TABLE `tbl_tasks`
-  ADD CONSTRAINT `fk_category` FOREIGN KEY (`task_category`) REFERENCES `tbl_category` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_priority` FOREIGN KEY (`priority`) REFERENCES `tbl_priority` (`id`) ON UPDATE CASCADE;
-
---
--- Constraints for table `tbl_task_emp`
---
-ALTER TABLE `tbl_task_emp`
-  ADD CONSTRAINT `tbl_task_emp_fk_emp` FOREIGN KEY (`emp_id`) REFERENCES `tbl_emp` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `tbl_task_emp_fk_task` FOREIGN KEY (`task_id`) REFERENCES `tbl_tasks` (`id`) ON UPDATE CASCADE;
-
---
--- Constraints for table `tbl_task_tag`
---
-ALTER TABLE `tbl_task_tag`
-  ADD CONSTRAINT `tbl_tash_tag_fk_tags` FOREIGN KEY (`tag_id`) REFERENCES `tbl_tags` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `tbl_tash_tag_fk_task` FOREIGN KEY (`task_id`) REFERENCES `tbl_tasks` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_todo`

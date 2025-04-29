@@ -1,6 +1,6 @@
 <?php
-   // Include database connection
-   include '../PhpFiles/connection.php';
+// Include database connection
+include '../PhpFiles/connection.php';
 ?>
 
 <!DOCTYPE html>
@@ -232,15 +232,30 @@
                         </div>
 
                         <!-- Project Type Dropdown -->
+                        <!-- Project Type -->
                         <div class="col-md-6">
                             <label class="form-label">Project Type <span style="color: red;">*</span></label>
-                            <select class="form-select" name="project_type">
+                            <select class="form-select" name="project_type" required>
                                 <option selected disabled>Select type</option>
-                                <option value="1">Pipeline</option>
-                                <option value="2">Residential</option>
-                                <option value="3">Commercial</option>
+                                <?php
+                                include 'connection.php'; // Ensure this path is correct
+
+                                $typeQuery = "SELECT id, type FROM tbl_project_type";
+                                $result = $conn->query($typeQuery);
+
+                                if ($result && $result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        echo '<option value="' . $row['id'] . '">' . htmlspecialchars($row['type']) . '</option>';
+                                    }
+                                } else {
+                                    echo '<option disabled>No project types found</option>';
+                                }
+
+                               
+                                ?>
                             </select>
                         </div>
+
 
                         <?php
 
@@ -276,17 +291,30 @@
                         <!-- Project Client -->
                         <div class="col-md-6">
                             <label class="form-label">Project Client <span style="color: red;">*</span></label>
-                            <select class="form-select" name="project_client">
+                            <select class="form-select" name="project_client" required>
                                 <option selected disabled>Select client</option>
-                                <option value="1">Janesh</option>
-                                <option value="2">Ishika</option>
-                                <option value="3">Rahul</option>
-                                <option value="4">Static</option>
+                                <?php
+                                include 'connection.php'; // Ensure correct path to your DB connection file
+
+                                $clientQuery = "SELECT id, CONCAT(f_name, ' ', l_name) AS full_name FROM tbl_client";
+                                $result = $conn->query($clientQuery);
+
+                                if ($result && $result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        echo '<option value="' . $row['id'] . '">' . htmlspecialchars($row['full_name']) . '</option>';
+                                    }
+                                } else {
+                                    echo '<option disabled>No clients available</option>';
+                                }
+
+                       
+                                ?>
                             </select>
                         </div>
 
+
                         <?php
-                     
+
 
                         // Fetch employees from tbl_emp
                         $sql = "SELECT id, CONCAT(f_name, ' ', l_name) AS full_name FROM tbl_emp"; // Adjust status condition as necessary
@@ -323,20 +351,34 @@
                         <!-- Status Dropdown -->
                         <div class="col-md-6">
                             <label class="form-label">Project Status <span style="color: red;">*</span></label>
-                            <select class="form-select" name="project_status">
+                            <select class="form-select" name="project_status" required>
                                 <option selected disabled>Select status</option>
-                                <option value="1">Pipeline</option>
-                                <option value="2">Ongoing</option>
-                                <option value="3">Completed</option>
-                                <option value="4">On Hold</option>
+                                <?php
+                                include 'connection.php'; // make sure this points to your DB connection
+
+                                $statusQuery = "SELECT id, status_name FROM tbl_project_status";
+                                $result = $conn->query($statusQuery);
+
+                                if ($result && $result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        echo '<option value="' . $row['id'] . '">' . htmlspecialchars($row['status_name']) . '</option>';
+                                    }
+                                } else {
+                                    echo '<option disabled>No status options available</option>';
+                                }
+
+                                $conn->close();
+                                ?>
                             </select>
                         </div>
+
 
                         <!-- File Upload -->
                         <div class="col-md-6">
                             <label class="form-label">Upload File <span style="color: red;">*</span></label>
                             <div class="file-drop-area" id="fileDropArea">
-                                <input type="file" class="form-control d-none" name="file" id="fileInput" multiple>
+                                <input type="file" class="form-control d-none" name="file[]" id="fileInput" multiple>
+
                                 <div class="file-drop-message text-center">
                                     <img class="me-2" src="../../../assets/img/icons/cloud-upload.svg" width="25" alt="" />
                                     <p>Drag & Drop your files here or <strong>browse</strong></p>

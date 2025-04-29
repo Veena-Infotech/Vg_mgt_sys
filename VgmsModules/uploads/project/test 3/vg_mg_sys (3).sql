@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 29, 2025 at 11:05 PM
+-- Generation Time: Apr 29, 2025 at 08:35 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -330,6 +330,7 @@ CREATE TABLE `tbl_project` (
   `project_manager` int(11) DEFAULT NULL,
   `project_client` int(255) DEFAULT NULL,
   `project_status` int(255) DEFAULT NULL,
+  `file_path` varchar(256) DEFAULT NULL,
   `project_description` varchar(256) DEFAULT NULL,
   `project_start_date` date DEFAULT NULL,
   `project_end_date` date DEFAULT NULL,
@@ -341,11 +342,9 @@ CREATE TABLE `tbl_project` (
 -- Dumping data for table `tbl_project`
 --
 
-INSERT INTO `tbl_project` (`id`, `uid`, `project_title`, `project_type`, `project_manager`, `project_client`, `project_status`, `project_description`, `project_start_date`, `project_end_date`, `project_created_by`, `timestamp`) VALUES
-(21, 'prj_680f77ed89734', 'infotech', 2, 0, 2, 1, 'test', '2020-04-20', '2020-05-20', 'admin', '2025-04-28'),
-(22, 'prj_680f780d1cc70', 'infotech2', 1, 1, 1, 1, 'm, ff msd fk', '2025-04-28', '2025-05-11', 'admin', '2025-04-28'),
-(24, 'prj_68113dc2705e7', 'test 2', 2, 1, 2, 1, 'sdfgsfdgsdg', '2025-04-30', '2025-05-11', 'admin', '2025-04-30'),
-(25, 'prj_68113ed38894b', 'test 3', 1, 0, 1, 1, 'asdcasdc', '2025-04-30', '2025-05-11', 'admin', '2025-04-30');
+INSERT INTO `tbl_project` (`id`, `uid`, `project_title`, `project_type`, `project_manager`, `project_client`, `project_status`, `file_path`, `project_description`, `project_start_date`, `project_end_date`, `project_created_by`, `timestamp`) VALUES
+(21, 'prj_680f77ed89734', 'infotech', 1, 1, 1, 1, '../uploads/project/infotech/DAA LAB Q3 OP.png', 'm, ff msd fk', '2025-04-28', '2025-05-11', 'admin', '2025-04-28'),
+(22, 'prj_680f780d1cc70', 'infotech2', 1, 1, 1, 1, '../uploads/project/infotech2/DAA LAB Q1 OP.png', 'm, ff msd fk', '2025-04-28', '2025-05-11', 'admin', '2025-04-28');
 
 -- --------------------------------------------------------
 
@@ -366,9 +365,7 @@ CREATE TABLE `tbl_project_emp` (
 
 INSERT INTO `tbl_project_emp` (`id`, `emp_id`, `project_id`, `timestamp`) VALUES
 (9, 1, 21, '2025-04-28'),
-(10, 1, 22, '2025-04-28'),
-(13, 1, 24, '2025-04-30'),
-(14, 1, 25, '2025-04-30');
+(10, 1, 22, '2025-04-28');
 
 -- --------------------------------------------------------
 
@@ -744,13 +741,13 @@ ALTER TABLE `tbl_priority`
 -- AUTO_INCREMENT for table `tbl_project`
 --
 ALTER TABLE `tbl_project`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `tbl_project_emp`
 --
 ALTER TABLE `tbl_project_emp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tbl_project_status`

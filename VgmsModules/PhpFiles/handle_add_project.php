@@ -2,7 +2,8 @@
 include 'connection.php'; // Make sure connection.php is correct
 
 // Helper function to sanitize folder name
-function sanitize_folder_name($string) {
+function sanitize_folder_name($string)
+{
     return preg_replace('/[^a-zA-Z0-9-_]/', '_', strtolower($string));
 }
 
@@ -37,54 +38,40 @@ if (!empty($date_range)) {
 }
 
 // Handle File Upload
-$file_path = '';
-if (isset($_FILES['file'])) {
-    echo "File upload detected.<br>";
+$file_paths = []; // Array to store file paths
 
-    if ($_FILES['file']['error'] === 0) {
-        $file_name = basename($_FILES['file']['name']);
-        echo "Original File Name: $file_name<br>";
+if (isset($_FILES['file']) && is_array($_FILES['file']['name'])) {
+    $project_folder_name = $project_title;
+    $upload_dir = "../uploads/project/" . $project_folder_name . "/";
 
-        $project_folder_name = sanitize_folder_name($project_title);
-        $upload_dir = "../uploads/project/" . $project_folder_name . "/";
-
-        echo "Upload Directory: $upload_dir<br>";
-
-        // Create folder if it doesn't exist
-        if (!file_exists($upload_dir)) {
-            if (mkdir($upload_dir, 0777, true)) {
-                echo "Project folder created successfully.<br>";
-            } else {
-                echo "Failed to create project folder.<br>";
-                exit;
-            }
-        } else {
-            echo "Project folder already exists.<br>";
-        }
-
-        $target_file = $upload_dir . $file_name;
-
-        // Move uploaded file
-        if (move_uploaded_file($_FILES['file']['tmp_name'], $target_file)) {
-            echo "File moved successfully.<br>";
-            $file_path = $target_file;
-        } else {
-            echo "Failed to move uploaded file.<br>";
-            print_r($_FILES['file']); // Debug file info
+    if (!file_exists($upload_dir)) {
+        if (!mkdir($upload_dir, 0777, true)) {
+            echo "❌ Failed to create project folder.<br>";
             exit;
         }
-    } else {
-        echo "Upload error: " . $_FILES['file']['error'] . "<br>";
-        print_r($_FILES['file']);
-        exit;
     }
-} else {
-    echo "No file found in form submission.<br>";
+
+    foreach ($_FILES['file']['name'] as $index => $file_name) {
+        if ($_FILES['file']['error'][$index] === 0) {
+            $tmp_name = $_FILES['file']['tmp_name'][$index];
+            $target_path = $upload_dir . basename($file_name);
+
+            if (move_uploaded_file($tmp_name, $target_path)) {
+                $file_paths[] = $target_path;
+                echo "✅ Uploaded: $file_name<br>";
+            } else {
+                echo "❌ Failed to upload: $file_name<br>";
+            }
+        } else {
+            echo "❌ Error uploading file: $file_name. Error code: " . $_FILES['file']['error'][$index] . "<br>";
+        }
+    }
 }
 
+
 // Insert into tbl_project
-$sql = "INSERT INTO tbl_project (uid, project_title, project_type, project_manager, project_client, project_status, file_path, project_description, project_start_date, project_end_date, project_created_by)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+$sql = "INSERT INTO tbl_project (uid, project_title, project_type, project_manager, project_client, project_status, project_description, project_start_date, project_end_date, project_created_by)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 $stmt = $conn->prepare($sql);
 if (!$stmt) {
@@ -96,14 +83,13 @@ $uid = uniqid('prj_');
 $created_by = 'admin'; // Hardcoded for now
 
 $stmt->bind_param(
-    "sssisssssss",
+    "sssissssss",
     $uid,
     $project_title,
     $project_type,
     $project_manager,
     $project_client,
     $project_status,
-    $file_path,
     $project_description,
     $start_date,
     $end_date,
@@ -139,11 +125,9 @@ if ($stmt->execute()) {
     } else {
         echo "No employees assigned to this project.<br>";
     }
-
 } else {
     echo "❌ Error inserting project: " . $stmt->error;
 }
 
 $stmt->close();
 $conn->close();
-?>

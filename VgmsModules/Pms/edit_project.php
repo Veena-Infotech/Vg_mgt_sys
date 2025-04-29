@@ -188,14 +188,15 @@ include '../PhpFiles/connection.php';
                     while ($row = mysqli_fetch_assoc($result)) {
 
                 ?>
-                        <form action="../PhpFiles/handle_edit_project.php" method="POST" class="dropzone dropzone-multiple p-0" id="dropzone-multiple" data-dropzone="data-dropzone">
+                        <form action="../PhpFiles/handle_edit_project.php" method="POST" enctype="multipart/form-data">
+
                             <div class="row g-3">
                                 <!-- Project Title -->
                                 <div class="col-md-6">
                                     <input type="hidden" id="project_id" name="project_id" value="<?php echo $row['id'] ?>">
                                     <label class="form-label">Project Title <span style="color: red;">*</span></label>
                                     <input type="text" class="form-control" placeholder="Enter project title"
-                                        id="project_title" name="project_title" value="<?php echo $row['project_title'] ?>">
+                                        id="project_title" name="project_title" value="<?php echo $row['project_title'] ?>" readonly>
                                 </div>
 
                                 <!-- Project Type Dropdown -->
@@ -209,8 +210,8 @@ include '../PhpFiles/connection.php';
                                         echo '<select class="form-select" name="project_type">';
 
                                         while ($row1 = mysqli_fetch_assoc($result1)) {
-                                            $select = ($row['project_type'] == $row1['srno']) ? 'SELECTED' : '';
-                                            echo "<option value='{$row1['srno']}' {$select}>{$row1['type']}</option>";
+                                            $select = ($row['project_type'] == $row1['id']) ? 'SELECTED' : '';
+                                            echo "<option value='{$row1['id']}' {$select}>{$row1['type']}</option>";
                                         }
 
                                         echo '</select>';
@@ -343,10 +344,10 @@ include '../PhpFiles/connection.php';
 
 
 
-        </div>
 
-        <!-- Footer -->
-        <?php include("../../Components/footer.php"); ?>
+
+    <!-- Footer -->
+    <?php include("../../Components/footer.php"); ?>
 
         </div>
         </div>
@@ -411,58 +412,58 @@ include '../PhpFiles/connection.php';
     });
 </script> -->
 
-<script>
-    document.querySelectorAll('.remove-file').forEach(button => {
-        button.addEventListener('click', function() {
-            const fileName = this.getAttribute('data-file');
-            const projectName = document.getElementById('project_title').value.trim(); // You can store the project name in a custom attribute
-            const projectId = document.getElementById('project_id').value.trim(); // Assuming the project ID is in a hidden input field with ID 'project_id'
+    <script>
+        document.querySelectorAll('.remove-file').forEach(button => {
+            button.addEventListener('click', function() {
+                const fileName = this.getAttribute('data-file');
+                const projectName = document.getElementById('project_title').value.trim(); // You can store the project name in a custom attribute
+                const projectId = document.getElementById('project_id').value.trim(); // Assuming the project ID is in a hidden input field with ID 'project_id'
 
-            // Alert before asking for confirmation
-            alert("Preparing to remove file: " + fileName + " from project: " + projectName);
+                // Alert before asking for confirmation
+                alert("Preparing to remove file: " + fileName + " from project: " + projectName);
 
-            // Ask for confirmation before deletion
-            if (confirm(`Are you sure you want to remove the file: ${fileName} from project: ${projectName}?`)) {
-                alert("User confirmed the file removal.");
+                // Ask for confirmation before deletion
+                if (confirm(`Are you sure you want to remove the file: ${fileName} from project: ${projectName}?`)) {
+                    alert("User confirmed the file removal.");
 
-                // Create a new form dynamically
-                const form = document.createElement('form');
-                form.method = 'POST';
-                form.action = '../PhpFiles/delete_project_file.php'; // Your server-side PHP file
+                    // Create a new form dynamically
+                    const form = document.createElement('form');
+                    form.method = 'POST';
+                    form.action = '../PhpFiles/delete_project_file.php'; // Your server-side PHP file
 
-                // Create hidden inputs for the form data
-                const projectIdInput = document.createElement('input');
-                projectIdInput.type = 'hidden';
-                projectIdInput.name = 'project_id';
-                projectIdInput.value = projectId;
-                form.appendChild(projectIdInput);
+                    // Create hidden inputs for the form data
+                    const projectIdInput = document.createElement('input');
+                    projectIdInput.type = 'hidden';
+                    projectIdInput.name = 'project_id';
+                    projectIdInput.value = projectId;
+                    form.appendChild(projectIdInput);
 
-                const projectTitleInput = document.createElement('input');
-                projectTitleInput.type = 'hidden';
-                projectTitleInput.name = 'project_title';
-                projectTitleInput.value = projectName;
-                form.appendChild(projectTitleInput);
+                    const projectTitleInput = document.createElement('input');
+                    projectTitleInput.type = 'hidden';
+                    projectTitleInput.name = 'project_title';
+                    projectTitleInput.value = projectName;
+                    form.appendChild(projectTitleInput);
 
-                const fileNameInput = document.createElement('input');
-                fileNameInput.type = 'hidden';
-                fileNameInput.name = 'file_name';
-                fileNameInput.value = fileName;
-                form.appendChild(fileNameInput);
+                    const fileNameInput = document.createElement('input');
+                    fileNameInput.type = 'hidden';
+                    fileNameInput.name = 'file_name';
+                    fileNameInput.value = fileName;
+                    form.appendChild(fileNameInput);
 
-                // Append the form to the body and submit it
-                document.body.appendChild(form);
-                form.submit();
+                    // Append the form to the body and submit it
+                    document.body.appendChild(form);
+                    form.submit();
 
-                // Reload the page after form submission to reflect the change
-                alert("File is being removed. Page will reload.");
-                
-                // location.reload();
-            } else {
-                alert("File removal was canceled.");
-            }
+                    // Reload the page after form submission to reflect the change
+                    alert("File is being removed. Page will reload.");
+
+                    // location.reload();
+                } else {
+                    alert("File removal was canceled.");
+                }
+            });
         });
-    });
-</script>
+    </script>
 
 
 
