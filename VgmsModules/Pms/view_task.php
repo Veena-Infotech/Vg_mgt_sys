@@ -7798,7 +7798,7 @@
     <div class="modal-dialog modal-fullscreen-sm-down modal-xl modal-dialog-centered">
       <div class="modal-content">
         <!-- added by me -->
-        <for action="../../PhpFiles/handle_add_task" method="post" enctype="multipart/form-data">
+        <for action="../../PhpFiles/handle_add_task.php" method="post" enctype="multipart/form-data">
 
         <div class="modal-body">
           <h3>Edit Task</h3>
