@@ -167,6 +167,7 @@
 
         <div class="content">
         <h2 class="mb-2 lh-sm">Employee Side Meeting Queue </h2>
+        <br><br>
             <div id="tableExample3" data-list="{&quot;valueNames&quot;:[&quot;name&quot;,&quot;email&quot;,&quot;age&quot;],&quot;page&quot;:5,&quot;pagination&quot;:true}">
                 <div class="search-box mb-3 mx-auto">
                     <form class="position-relative"><input class="form-control search-input search form-control-sm" type="search" placeholder="Search" aria-label="Search">
@@ -193,7 +194,7 @@
                                 <td class="align-middle ps-3 number">1</td>
                                 <td class="align-middle name">Mushraf</td>
                                 <td class="align-middle image">
-                                    <div class="avatar avatar-l ">
+                                    <div class="avatar avatar-l "style="height: 30px ; width: 30px;">
                                         <img class="rounded-circle " src="../../assets/img/team/30.webp" alt="" />
                                     </div>
                                 </td>
@@ -218,7 +219,7 @@
                                 <td class="align-middle ps-3 number">1</td>
                                 <td class="align-middle name">Vinit</td>
                                 <td class="align-middle image">
-                                    <div class="avatar avatar-l ">
+                                    <div class="avatar avatar-l "style="height: 30px ; width: 30px;">
                                         <img class="rounded-circle " src="../../assets/img/team/30.webp" alt="" />
                                     </div>
                                 </td>
@@ -243,7 +244,7 @@
                                 <td class="align-middle ps-3 number">1</td>
                                 <td class="align-middle name">Mushraf</td>
                                 <td class="align-middle image">
-                                    <div class="avatar avatar-l ">
+                                    <div class="avatar avatar-l "style="height: 30px ; width: 30px;">
                                         <img class="rounded-circle " src="../../assets/img/team/30.webp" alt="" />
                                     </div>
                                 </td>
@@ -268,7 +269,7 @@
                                 <td class="align-middle ps-3 number">1</td>
                                 <td class="align-middle name">Rajat</td>
                                 <td class="align-middle image">
-                                    <div class="avatar avatar-l ">
+                                    <div class="avatar avatar-l " style="height: 30px ; width: 30px;">
                                         <img class="rounded-circle " src="../../assets/img/team/30.webp" alt="" />
                                     </div>
                                 </td>
@@ -293,7 +294,7 @@
                                 <td class="align-middle ps-3 number">1</td>
                                 <td class="align-middle name">Maha</td>
                                 <td class="align-middle image">
-                                    <div class="avatar avatar-l ">
+                                    <div class="avatar avatar-l "style="height: 30px ; width: 30px;">
                                         <img class="rounded-circle " src="../../assets/img/team/30.webp" alt="" />
                                     </div>
                                 </td>
@@ -318,7 +319,7 @@
                                 <td class="align-middle ps-3 number">1</td>
                                 <td class="align-middle name">Ishika</td>
                                 <td class="align-middle image">
-                                    <div class="avatar avatar-l ">
+                                    <div class="avatar avatar-l "style="height: 30px ; width: 30px;"    >
                                         <img class="rounded-circle " src="../../assets/img/team/30.webp" alt="" />
                                     </div>
                                 </td>
