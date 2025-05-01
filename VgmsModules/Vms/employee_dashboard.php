@@ -22,6 +22,15 @@
   <link rel="manifest" href="../../assets/img/favicons/manifest.json">
   <meta name="msapplication-TileImage" content="../../assets/img/favicons/mstile-150x150.png">
   <meta name="theme-color" content="#ffffff">
+      <link rel="apple-touch-icon" sizes="180x180" href="../../assets/img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/img/favicons/favicon-16x16.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../../assets/img/favicons/favicon.ico">
+    <link rel="manifest" href="../../assets/img/favicons/manifest.json">
+    <meta name="msapplication-TileImage" content="../../assets/img/favicons/mstile-150x150.png">
+    <meta name="theme-color" content="#ffffff">
+    <script src="../../vendors/simplebar/simplebar.min.js"></script>
+    <script src="../../assets/js/config.js"></script>
 
   <script src="../../vendors/simplebar/simplebar.min.js"></script>
   <script src="../../assets/js/config.js"></script>
@@ -166,6 +175,62 @@
     </script>
     <div class="content">
       <!-- Content Should be here  -->
+      <!-- Here will be the Heading with the Calendar -->
+      <!-- Font Awesome for calendar icon -->
+      <!-- Font Awesome for calendar icon -->
+      <!-- Font Awesome for calendar icon -->
+      <!-- Font Awesome for calendar icon -->
+      <!-- Font Awesome for calendar icon -->
+      <!-- Font Awesome for calendar icon -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+      <div
+        style="display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; color: white; flex-wrap: wrap; padding-left: 0px;">
+
+        <!-- Left: Welcome Text -->
+        <h2 style="margin: 0; font-weight: 600;padding-bottom: 20px;">Welcome, Employee Name</h2>
+
+        <!-- Right: Custom Date Display and Calendar Icon -->
+        <div style="display: flex; align-items: center; font-size: 16px;">
+          <span id="displayDate" style="margin-right: 8px;">Loading...</span>
+
+          <!-- Hidden date input -->
+          <input type="date" id="datePicker"
+            style="opacity: 0; position: absolute; width: 1px; height: 1px; pointer-events: none;" />
+
+          <!-- Calendar icon to trigger the input -->
+          <i class="fa-solid fa-calendar-days" style="color: white; cursor: pointer; font-size: 18px;"
+            onclick="document.getElementById('datePicker').showPicker();"></i>
+        </div>
+      </div>
+
+      <script>
+        const dateInput = document.getElementById("datePicker");
+        const displaySpan = document.getElementById("displayDate");
+
+        function formatCustomDate(dateStr) {
+          const date = new Date(dateStr);
+          const weekday = date.toLocaleDateString(undefined, { weekday: 'long' });
+          const day = String(date.getDate()).padStart(2, '0');
+          const year = date.getFullYear();
+          return `${weekday} ${day} ${year}`;
+        }
+
+        // Set today's date by default
+        const today = new Date().toISOString().split("T")[0];
+        dateInput.value = today;
+        displaySpan.textContent = formatCustomDate(today);
+
+        // Update date on change
+        dateInput.addEventListener("change", () => {
+          if (dateInput.value) {
+            displaySpan.textContent = formatCustomDate(dateInput.value);
+          }
+        });
+      </script>
+
+
+
       <!-- To do list From Here -->
       <div class="mt 0 mx-lg-n4">
         <div class="row g-3">
@@ -174,8 +239,8 @@
               <div class="card-header border-bottom-0 pb-0">
                 <div class="row justify-content-between align-items-center mb-4">
                   <div class="col-auto">
-                    <h3 class="text-body-emphasis"> <a href="Vg_mgt_sys/VgmsModules/Vms/view_tasks.php"
-                        style="text-decoration: none; color: none;"> Daily Task</a></h3>
+                    <h3 class="text-body-emphasis"> <a href="/view_tasks.php"
+                        style="text-decoration: none; color: none;">To Do </a></h3>
                     <p class="mb-2 mb-md-0 mb-lg-2 text-body-tertiary">Task assigned to me</p>
                   </div>
                   <div class="col-auto w-100 w-md-auto">
@@ -535,20 +600,47 @@
                     </div>
                   </div>
                 </div>
-
               </div>
               <div class="card-footer border-0"><a class="fw-bold fs-9 mt-4" href="#!"><span
                     class="fas fa-plus me-1"></span>Add new task</a></div>
             </div>
           </div>
-
           <!-- Footer -->
           <?php include("../../Components/footer.php"); ?>
         </div>
-
-
-
       </div>
+
+
+
+      <!-- Attendence Chart From here -->
+      <!-- Area Line Chart Card aligned to top-right -->
+      <div class="Graph" style="margin-bottom: 100px; align-items: left;">
+
+        <div style="position: absolute; top: 167px; right: 100px; z-index: 1000; width: 500px; max-width: 100%;">
+          <div class="card shadow-none border" data-component-card="data-component-card">
+            <div class="card-header p-4 border-bottom bg-body">
+              <div class="row g-3 justify-content-between align-items-center">
+                <div class="col-12 col-md">
+                  <h4 class="text-body mb-0" data-anchor="data-anchor">Attendence tracking</h4>
+                </div>
+
+              </div>
+            </div>
+            <div class="card-body p-0">
+              <div class="collapse code-collapse" id="basic-area-line-chart-code">
+                <pre class="scrollbar" style="max-height:420px">
+<code class="language-html">&lt;div class=&quot;echart-area-line-chart-example&quot; style=&quot;min-height:300px&quot;&gt;&lt;/div&gt;</code></pre>
+              </div>
+              <div class="p-4 code-to-copy">
+                <div class="echart-area-line-chart-example" style="min-height:300px"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
       <!-- Recent Notification -->
       <div class="recent-notification">
         <div class="mt-3 mx-lg-n4">
@@ -596,33 +688,21 @@
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </div>
       <!-- Footer -->
       <?php include("../../Components/footer.php"); ?>
     </div>
-
-
-
     </div>
-
-
   </main>
-
   <!-- ===============================================-->
   <!--    End of Main Content-->
   <!-- ===============================================-->
-
-
-
   <!-- ===============================================-->
   <!--    JavaScripts-->
-
   <!-- ===============================================-->
   <!--Dropdown for contacted-to--->
-
   <script src="../../vendors/popper/popper.min.js"></script>
   <script src="../../vendors/bootstrap/bootstrap.min.js"></script>
   <script src="../../vendors/anchorjs/anchor.min.js"></script>
@@ -638,18 +718,21 @@
   <script src="../../assets/js/phoenix.js"></script>
   <script src="../../vendors/echarts/echarts.min.js"></script>
   <script src="../../assets/js/ecommerce-dashboard.js"></script>
-
-
-
-
-
+  <script src="../../vendors/popper/popper.min.js"></script>
+  <script src="../../vendors/bootstrap/bootstrap.min.js"></script>
+  <script src="../../vendors/anchorjs/anchor.min.js"></script>
+  <script src="../../vendors/is/is.min.js"></script>
+  <script src="../../vendors/fontawesome/all.min.js"></script>
+  <script src="../../vendors/lodash/lodash.min.js"></script>
+  <script src="../../vendors/list.js/list.min.js"></script>
+  <script src="../../vendors/feather-icons/feather.min.js"></script>
+  <script src="../../vendors/dayjs/dayjs.min.js"></script>
+  <script src="../../vendors/echarts/echarts.min.js"></script>
+  <script src="../../vendors/prism/prism.js"></script>
+  <script src="../../assets/js/phoenix.js"></script>
+  <script src="../../assets/js/echarts-example.js"></script>
   </script>
-
-
-
 </body>
-
-
 <!-- Mirrored from prium.github.io/phoenix/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Sep 2024 13:37:21 GMT -->
 
 </html>

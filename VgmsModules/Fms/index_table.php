@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr" data-navigation-type="default" data-navbar-horizontal-shape="default">
+
+
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- ===============================================-->
+    <!--    Document Title-->
+    <!-- ===============================================-->
+    <title>Starter code</title>
+
+    <!-- ===============================================-->
+    <!--    Favicons-->
+    <!-- ===============================================-->
+    <link rel="shortcut icon" type="image/x-icon" href="../../assets/img/favicons/favicon.ico">
+    <link rel="manifest" href="../../assets/img/favicons/manifest.json">
+    <meta name="msapplication-TileImage" content="../../assets/img/favicons/mstile-150x150.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <script src="../../vendors/simplebar/simplebar.min.js"></script>
+    <script src="../../assets/js/config.js"></script>
+
+    <!-- ===============================================-->
+    <!--    Stylesheets-->
+    <!-- ===============================================-->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <link href="../../vendors/simplebar/simplebar.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <link href="../../assets/css/theme-rtl.css" type="text/css" rel="stylesheet" id="style-rtl">
+    <link href="../../assets/css/theme.min.css" type="text/css" rel="stylesheet" id="style-default">
+    <link href="../../assets/css/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
+    <link href="../../assets/css/user.min.css" type="text/css" rel="stylesheet" id="user-style-default">
+    <script>
+        var phoenixIsRTL = window.config.config.phoenixIsRTL;
+        if (phoenixIsRTL) {
+            var linkDefault = document.getElementById('style-default');
+            var userLinkDefault = document.getElementById('user-style-default');
+            linkDefault.setAttribute('disabled', true);
+            userLinkDefault.setAttribute('disabled', true);
+            document.querySelector('html').setAttribute('dir', 'rtl');
+        } else {
+            var linkRTL = document.getElementById('style-rtl');
+            var userLinkRTL = document.getElementById('user-style-rtl');
+            linkRTL.setAttribute('disabled', true);
+            userLinkRTL.setAttribute('disabled', true);
+        }
+    </script>
+    <link href="../../vendors/leaflet/leaflet.css" rel="stylesheet">
+    <link href="../../vendors/leaflet.markercluster/MarkerCluster.css" rel="stylesheet">
+    <link href="../../vendors/leaflet.markercluster/MarkerCluster.Default.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- ===============================================-->
+    <!--    Main Content-->
+    <!-- ===============================================-->
+    <main class="main" id="top">
+        <?php include '../../Components/navbar.php'; ?>
+        <script>
+            var navbarTopShape = window.config.config.phoenixNavbarTopShape;
+            var navbarPosition = window.config.config.phoenixNavbarPosition;
+            var body = document.querySelector('body');
+            var navbarDefault = document.querySelector('#navbarDefault');
+            var navbarTop = document.querySelector('#navbarTop');
+            var topNavSlim = document.querySelector('#topNavSlim');
+            var navbarTopSlim = document.querySelector('#navbarTopSlim');
+            var navbarCombo = document.querySelector('#navbarCombo');
+            var navbarComboSlim = document.querySelector('#navbarComboSlim');
+            var dualNav = document.querySelector('#dualNav');
+
+            var documentElement = document.documentElement;
+            var navbarVertical = document.querySelector('.navbar-vertical');
+
+            if (navbarPosition === 'dual-nav') {
+                topNavSlim?.remove();
+                navbarTop?.remove();
+                navbarTopSlim?.remove();
+                navbarCombo?.remove();
+                navbarComboSlim?.remove();
+                navbarDefault?.remove();
+                navbarVertical?.remove();
+                dualNav.removeAttribute('style');
+                document.documentElement.setAttribute('data-navigation-type', 'dual');
+
+            } else if (navbarTopShape === 'slim' && navbarPosition === 'vertical') {
+                navbarDefault?.remove();
+                navbarTop?.remove();
+                navbarTopSlim?.remove();
+                navbarCombo?.remove();
+                navbarComboSlim?.remove();
+                topNavSlim.style.display = 'block';
+                navbarVertical.style.display = 'inline-block';
+                document.documentElement.setAttribute('data-navbar-horizontal-shape', 'slim');
+
+            } else if (navbarTopShape === 'slim' && navbarPosition === 'horizontal') {
+                navbarDefault?.remove();
+                navbarVertical?.remove();
+                navbarTop?.remove();
+                topNavSlim?.remove();
+                navbarCombo?.remove();
+                navbarComboSlim?.remove();
+                dualNav?.remove();
+                navbarTopSlim.removeAttribute('style');
+                document.documentElement.setAttribute('data-navbar-horizontal-shape', 'slim');
+            } else if (navbarTopShape === 'slim' && navbarPosition === 'combo') {
+                navbarDefault?.remove();
+                navbarTop?.remove();
+                topNavSlim?.remove();
+                navbarCombo?.remove();
+                navbarTopSlim?.remove();
+                dualNav?.remove();
+                navbarComboSlim.removeAttribute('style');
+                navbarVertical.removeAttribute('style');
+                document.documentElement.setAttribute('data-navbar-horizontal-shape', 'slim');
+            } else if (navbarTopShape === 'default' && navbarPosition === 'horizontal') {
+                navbarDefault?.remove();
+                topNavSlim?.remove();
+                navbarVertical?.remove();
+                navbarTopSlim?.remove();
+                navbarCombo?.remove();
+                navbarComboSlim?.remove();
+                dualNav?.remove();
+                navbarTop.removeAttribute('style');
+                document.documentElement.setAttribute('data-navigation-type', 'horizontal');
+            } else if (navbarTopShape === 'default' && navbarPosition === 'combo') {
+                topNavSlim?.remove();
+                navbarTop?.remove();
+                navbarTopSlim?.remove();
+                navbarDefault?.remove();
+                navbarComboSlim?.remove();
+                dualNav?.remove();
+                navbarCombo.removeAttribute('style');
+                navbarVertical.removeAttribute('style');
+                document.documentElement.setAttribute('data-navigation-type', 'combo');
+            } else {
+                topNavSlim?.remove();
+                navbarTop?.remove();
+                navbarTopSlim?.remove();
+                navbarCombo?.remove();
+                navbarComboSlim?.remove();
+                dualNav?.remove();
+                navbarDefault.removeAttribute('style');
+                navbarVertical.removeAttribute('style');
+            }
+
+            var navbarTopStyle = window.config.config.phoenixNavbarTopStyle;
+            var navbarTop = document.querySelector('.navbar-top');
+            if (navbarTopStyle === 'darker') {
+                navbarTop.setAttribute('data-navbar-appearance', 'darker');
+            }
+
+            var navbarVerticalStyle = window.config.config.phoenixNavbarVerticalStyle;
+            var navbarVertical = document.querySelector('.navbar-vertical');
+            if (navbarVerticalStyle === 'darker') {
+                navbarVertical.setAttribute('data-navbar-appearance', 'darker');
+            }
+        </script>
+        <div class="content">
+            <div class="d-flex justify-content-between align-items-start p-3 border-bottom">
+                <div>
+                    <h4 class="mb-0">File Manager</h4>
+                    <small>Organize and access your files easily</small>
+                </div>
+                <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#locationModal">+ Location</button>
+            </div>
+
+            <!-- Add Location Modal -->
+            <div class="modal fade mt-2" id="locationModal" tabindex="-1" aria-labelledby="locationModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content border-0">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="locationModalLabel">Add Location</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <form id="addLocationForm">
+                            <div class="modal-body">
+                                <input type="text" id="locationInput" class="form-control" placeholder="Enter location name" required>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-outline-success">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="tableExample3"
+                data-list="{&quot;valueNames&quot;:[&quot;name&quot;,&quot;email&quot;,&quot;phone&quot;,&quot;designation&quot;,&quot;address&quot;],&quot;page&quot;:5,&quot;pagination&quot;:true}">
+                <div class="search-box mb-3 mx-auto">
+                    <form class="position-relative">
+                        
+                            <path fill="currentColor"
+                                d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z">
+                            </path>
+                        </svg><!-- <span class="fas fa-search search-box-icon"></span> Font Awesome fontawesome.com -->
+                    </form>
+                </div>
+                <div class="table-responsive mt-3">
+                    <table class="table table-striped table-sm fs-9 mb-0 text-center justify-content-center align-items-center">
+                        <thead>
+                            <tr>
+                                <th class="sort border-top border-translucent ps-3" data-sort="profile">
+                                    <i class="bi bi-person-circle me-1"></i> Profile
+                                </th>
+                                <th class="sort border-top border-translucent ps-3" data-sort="name">
+                                    <i class="bi bi-person-badge me-1"></i> Name
+                                </th>
+                                <th class="sort border-top border-translucent ps-3" data-sort="email">
+                                    <i class="bi bi-envelope-at me-1"></i> Email
+                                </th>
+                                <th class="sort border-top border-translucent ps-3" data-sort="phone">
+                                    <i class="bi bi-telephone me-1"></i> Phone
+                                </th>
+                                <th class="sort border-top border-translucent ps-3" data-sort="designation">
+                                    <i class="bi bi-briefcase me-1"></i> Designation
+                                </th>
+                                <th class="sort border-top border-translucent ps-3" data-sort="address">
+                                    <i class="bi bi-geo-alt me-1"></i> Address
+                                </th>
+                                <th class="sort border-top border-translucent ps-3" data-sort="action">
+                                    <i class="bi bi-gear me-1"></i> Action
+                                </th>
+                            </tr>
+
+                        </thead>
+                        <tbody class="list">
+                            <tr>
+                                <td class="align-middle ps-3 profile">Anna</td>
+                                <td class="align-middle ps-3 name">Anna</td>
+                                <td class="align-middle email">anna@example.com</td>
+                                <td class="align-middle phone">18</td>
+                                <td class="align-middle ps-3 designation">Manager</td>
+                                <td class="align-middle ps-3 address">123 Street, City</td>
+                                <td class="align-middle white-space-nowrap text-center pe-0">
+                                    <div class="btn-reveal-trigger position-static"><button
+                                            class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
+                                            type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true"
+                                            aria-expanded="false" data-bs-reference="parent"><span
+                                                class="fas fa-ellipsis-h fs-10"></span></button>
+                                        <div class="dropdown-menu dropdown-menu-end py-2">
+                                            <a class="dropdown-item" href="#!">
+                                                <i class="bi bi-eye me-2"></i> View
+                                            </a>
+                                            <a class="dropdown-item" href="#!">
+                                                <i class="bi bi-box-arrow-up-right me-2"></i> Export
+                                            </a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item text-danger" href="#!">
+                                                <i class="bi bi-trash3 me-2"></i> Remove
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="align-middle ps-3 profile">John</td>
+                                <td class="align-middle ps-3 name">John</td>
+                                <td class="align-middle email">john@example.com</td>
+                                <td class="align-middle phone">22</td>
+                                <td class="align-middle ps-3 designation">Developer</td>
+                                <td class="align-middle ps-3 address">456 Avenue, City</td>
+                                <td class="align-middle white-space-nowrap text-center pe-0">
+                                    <div class="btn-reveal-trigger position-static"><button
+                                            class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
+                                            type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true"
+                                            aria-expanded="false" data-bs-reference="parent"><span
+                                                class="fas fa-ellipsis-h fs-10"></span></button>
+                                        <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a
+                                                class="dropdown-item" href="#!">Export</a>
+                                            <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="align-middle ps-3 profile">Sophia</td>
+                                <td class="align-middle ps-3 name">Sophia</td>
+                                <td class="align-middle email">sophia@example.com</td>
+                                <td class="align-middle phone">28</td>
+                                <td class="align-middle ps-3 designation">Designer</td>
+                                <td class="align-middle ps-3 address">789 Road, City</td>
+                                <td class="align-middle white-space-nowrap text-center pe-0">
+                                    <div class="btn-reveal-trigger position-static"><button
+                                            class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
+                                            type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true"
+                                            aria-expanded="false" data-bs-reference="parent"><span
+                                                class="fas fa-ellipsis-h fs-10"></span></button>
+                                        <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a
+                                                class="dropdown-item" href="#!">Export</a>
+                                            <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="align-middle ps-3 profile">David</td>
+                                <td class="align-middle ps-3 name">David</td>
+                                <td class="align-middle email">david@example.com</td>
+                                <td class="align-middle phone">35</td>
+                                <td class="align-middle ps-3 designation">HR</td>
+                                <td class="align-middle ps-3 address">101 Lane, City</td>
+                                <td class="align-middle white-space-nowrap text-center pe-0">
+                                    <div class="btn-reveal-trigger position-static"><button
+                                            class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
+                                            type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true"
+                                            aria-expanded="false" data-bs-reference="parent"><span
+                                                class="fas fa-ellipsis-h fs-10"></span></button>
+                                        <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a
+                                                class="dropdown-item" href="#!">Export</a>
+                                            <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="align-middle ps-3 profile">Eva</td>
+                                <td class="align-middle ps-3 name">Eva</td>
+                                <td class="align-middle email">eva@example.com</td>
+                                <td class="align-middle phone">26</td>
+                                <td class="align-middle ps-3 designation">Tester</td>
+                                <td class="align-middle ps-3 address">234 Boulevard, City</td>
+                                <td class="align-middle white-space-nowrap text-center pe-0">
+                                    <div class="btn-reveal-trigger position-static"><button
+                                            class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
+                                            type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true"
+                                            aria-expanded="false" data-bs-reference="parent"><span
+                                                class="fas fa-ellipsis-h fs-10"></span></button>
+                                        <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a
+                                                class="dropdown-item" href="#!">Export</a>
+                                            <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="align-middle ps-3 profile">Jack</td>
+                                <td class="align-middle ps-3 name">Jack</td>
+                                <td class="align-middle email">jack@example.com</td>
+                                <td class="align-middle phone">40</td>
+                                <td class="align-middle ps-3 designation">Support</td>
+                                <td class="align-middle ps-3 address">321 Circle, City</td>
+                                <td class="align-middle white-space-nowrap text-center pe-0">
+                                    <div class="btn-reveal-trigger position-static"><button
+                                            class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
+                                            type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true"
+                                            aria-expanded="false" data-bs-reference="parent"><span
+                                                class="fas fa-ellipsis-h fs-10"></span></button>
+                                        <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a
+                                                class="dropdown-item" href="#!">Export</a>
+                                            <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="align-middle ps-3 profile">Lily</td>
+                                <td class="align-middle ps-3 name">Lily</td>
+                                <td class="align-middle email">lily@example.com</td>
+                                <td class="align-middle phone">25</td>
+                                <td class="align-middle ps-3 designation">Sales</td>
+                                <td class="align-middle ps-3 address">432 Park, City</td>
+                                <td class="align-middle white-space-nowrap text-center pe-0">
+                                    <div class="btn-reveal-trigger position-static"><button
+                                            class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
+                                            type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true"
+                                            aria-expanded="false" data-bs-reference="parent"><span
+                                                class="fas fa-ellipsis-h fs-10"></span></button>
+                                        <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a
+                                                class="dropdown-item" href="#!">Export</a>
+                                            <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="align-middle ps-3 profile">Olivia</td>
+                                <td class="align-middle ps-3 name">Olivia</td>
+                                <td class="align-middle email">olivia@example.com</td>
+                                <td class="align-middle phone">30</td>
+                                <td class="align-middle ps-3 designation">Analyst</td>
+                                <td class="align-middle ps-3 address">678 Road, City</td>
+                                <td class="align-middle white-space-nowrap text-center pe-0">
+                                    <div class="btn-reveal-trigger position-static"><button
+                                            class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
+                                            type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true"
+                                            aria-expanded="false" data-bs-reference="parent"><span
+                                                class="fas fa-ellipsis-h fs-10"></span></button>
+                                        <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a
+                                                class="dropdown-item" href="#!">Export</a>
+                                            <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="align-middle ps-3 profile">Isabella</td>
+                                <td class="align-middle ps-3 name">Isabella</td>
+                                <td class="align-middle email">isabella@example.com</td>
+                                <td class="align-middle phone">24</td>
+                                <td class="align-middle ps-3 designation">Developer</td>
+                                <td class="align-middle ps-3 address">543 Avenue, City</td>
+                                <td class="align-middle white-space-nowrap text-center pe-0">
+                                    <div class="btn-reveal-trigger position-static"><button
+                                            class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
+                                            type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true"
+                                            aria-expanded="false" data-bs-reference="parent"><span
+                                                class="fas fa-ellipsis-h fs-10"></span></button>
+                                        <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a
+                                                class="dropdown-item" href="#!">Export</a>
+                                            <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="align-middle ps-3 profile">Lucas</td>
+                                <td class="align-middle ps-3 name">Lucas</td>
+                                <td class="align-middle email">lucas@example.com</td>
+                                <td class="align-middle phone">27</td>
+                                <td class="align-middle ps-3 designation">Manager</td>
+                                <td class="align-middle ps-3 address">987 Street, City</td>
+                                <td class="align-middle white-space-nowrap text-center pe-0">
+                                    <div class="btn-reveal-trigger position-static"><button
+                                            class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
+                                            type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true"
+                                            aria-expanded="false" data-bs-reference="parent"><span
+                                                class="fas fa-ellipsis-h fs-10"></span></button>
+                                        <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a
+                                                class="dropdown-item" href="#!">Export</a>
+                                            <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="align-middle ps-3 profile">Mia</td>
+                                <td class="align-middle ps-3 name">Mia</td>
+                                <td class="align-middle email">mia@example.com</td>
+                                <td class="align-middle phone">32</td>
+                                <td class="align-middle ps-3 designation">Support</td>
+                                <td class="align-middle ps-3 address">654 Boulevard, City</td>
+                                <td class="align-middle white-space-nowrap text-center pe-0">
+                                    <div class="btn-reveal-trigger position-static"><button
+                                            class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
+                                            type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true"
+                                            aria-expanded="false" data-bs-reference="parent"><span
+                                                class="fas fa-ellipsis-h fs-10"></span></button>
+                                        <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a
+                                                class="dropdown-item" href="#!">Export</a>
+                                            <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="align-middle ps-3 profile">Liam</td>
+                                <td class="align-middle ps-3 name">Liam</td>
+                                <td class="align-middle email">liam@example.com</td>
+                                <td class="align-middle phone">20</td>
+                                <td class="align-middle ps-3 designation">Sales</td>
+                                <td class="align-middle ps-3 address">890 Lane, City</td>
+                                <td class="align-middle white-space-nowrap text-center pe-0">
+                                    <div class="btn-reveal-trigger position-static"><button
+                                            class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
+                                            type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true"
+                                            aria-expanded="false" data-bs-reference="parent"><span
+                                                class="fas fa-ellipsis-h fs-10"></span></button>
+                                        <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a
+                                                class="dropdown-item" href="#!">Export</a>
+                                            <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+                <div class="d-flex justify-content-between mt-3"><span class="d-none d-sm-inline-block"
+                        data-list-info="data-list-info">1 to 5 <span class="text-body-tertiary"> Items of </span>43</span>
+                    <div class="d-flex"><button class="page-link disabled" data-list-pagination="prev" disabled=""><svg
+                                class="svg-inline--fa fa-chevron-left" aria-hidden="true" focusable="false" data-prefix="fas"
+                                data-icon="chevron-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"
+                                data-fa-i2svg="">
+                                <path fill="currentColor"
+                                    d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z">
+                                </path>
+                            </svg><!-- <span class="fas fa-chevron-left"></span> Font Awesome fontawesome.com --></button>
+                        <ul class="mb-0 pagination">
+                            <li class="active"><button class="page" type="button" data-i="1" data-page="5">1</button></li>
+                            <li><button class="page" type="button" data-i="2" data-page="5">2</button></li>
+                            <li><button class="page" type="button" data-i="3" data-page="5">3</button></li>
+                            <li class="disabled"><button class="page" type="button">...</button></li>
+                        </ul><button class="page-link pe-0" data-list-pagination="next"><svg class="svg-inline--fa fa-chevron-right"
+                                aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img"
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
+                                <path fill="currentColor"
+                                    d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z">
+                                </path>
+                            </svg><!-- <span class="fas fa-chevron-right"></span> Font Awesome fontawesome.com --></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <?php include("../../Components/footer.php"); ?>
+        </div>
+
+
+
+
+
+
+    </main>
+
+    <!-- ===============================================-->
+    <!--    End of Main Content-->
+    <!-- ===============================================-->
+
+
+
+    <!-- ===============================================-->
+    <!--    JavaScripts-->
+
+    <!-- ===============================================-->
+    <!--Dropdown for contacted-to--->
+
+    <script src="../../vendors/popper/popper.min.js"></script>
+    <script src="../../vendors/bootstrap/bootstrap.min.js"></script>
+    <script src="../../vendors/anchorjs/anchor.min.js"></script>
+    <script src="../../vendors/is/is.min.js"></script>
+    <script src="../../vendors/fontawesome/all.min.js"></script>
+    <script src="../../vendors/lodash/lodash.min.js"></script>
+    <script src="../../vendors/list.js/list.min.js"></script>
+    <script src="../../vendors/feather-icons/feather.min.js"></script>
+    <script src="../../vendors/dayjs/dayjs.min.js"></script>
+    <script src="../../vendors/leaflet/leaflet.js"></script>
+    <script src="../../vendors/leaflet.markercluster/leaflet.markercluster.js"></script>
+    <script src="../../vendors/leaflet.tilelayer.colorfilter/leaflet-tilelayer-colorfilter.min.js"></script>
+    <script src="../../assets/js/phoenix.js"></script>
+    <script src="../../vendors/echarts/echarts.min.js"></script>
+    <script src="../../assets/js/ecommerce-dashboard.js"></script>
+
+
+
+
+
+    </script>
+
+
+
+</body>
+
+
+<!-- Mirrored from prium.github.io/phoenix/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Sep 2024 13:37:21 GMT -->
+
+</html>
