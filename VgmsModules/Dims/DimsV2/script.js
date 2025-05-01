@@ -2,28 +2,55 @@ const breadcrumbs = document.getElementById('breadcrumbs');
 const directoryContent = document.getElementById('directory-content');
 let currentPath = ''; // Tracks the current directory path
 
-// Folder Icon: <i class="bi bi-folder"></i>
-// File Icon: <i class="bi bi-file-earmark"></i>
-
 function loadDirectory() {
     fetch(`server.php?current_path=${encodeURIComponent(currentPath)}`)
         .then(res => res.json())
         .then(data => {
             if (data.success) {
                 directoryContent.innerHTML = '';
+
+                const isInArchive = currentPath.split('/')[0] === 'archive';
+
                 // Render folders
                 data.folders.forEach(folder => {
                     const folderDiv = document.createElement('div');
                     folderDiv.className = 'col-12 col-sm-6 col-md-4 col-lg-3 folder';
                     folderDiv.innerHTML = `
-                        <i class="bi bi-folder" style="font-size: 40px;"></i>
-                        <p class="mt-2">${folder}</p>
+                        <i class="bi bi-folder" style="font-size: 40px; cursor: pointer;"></i>
+                        <p class="mt-2" style="cursor: pointer;">${folder}</p>
+                        ${!isInArchive ? `
+                        <button class="btn btn-sm btn-outline-secondary rename-btn mt-1" data-name="${folder}" data-type="folder">
+                            <i class="bi bi-pencil"></i> Rename
+                        </button>
+                        <button class="btn btn-sm btn-outline-warning archive-btn mt-1" data-name="${folder}" data-type="folder">
+                            <i class="bi bi-archive"></i> Archive
+                        </button>` : `
+                        <button class="btn btn-sm btn-outline-success restore-btn mt-1" data-name="${folder}" data-type="folder">
+                            <i class="bi bi-arrow-clockwise"></i> Restore
+                        </button>`}
                     `;
-                    folderDiv.onclick = () => {
+
+                    folderDiv.querySelector('i').onclick = () => {
                         currentPath = currentPath ? `${currentPath}/${folder}` : folder;
                         updateBreadcrumbs();
                         loadDirectory();
                     };
+                    folderDiv.querySelector('p').onclick = () => {
+                        currentPath = currentPath ? `${currentPath}/${folder}` : folder;
+                        updateBreadcrumbs();
+                        loadDirectory();
+                    };
+
+                    if (!isInArchive) {
+                        folderDiv.querySelector('.archive-btn').onclick = () => {
+                            archiveItem(folder, 'folder');
+                        };
+                    } else {
+                        folderDiv.querySelector('.restore-btn').onclick = () => {
+                            showRestoreModal(folder, 'folder');
+                        };
+                    }
+
                     directoryContent.appendChild(folderDiv);
                 });
 
@@ -34,10 +61,49 @@ function loadDirectory() {
                     fileDiv.innerHTML = `
                         <i class="bi bi-file-earmark" style="font-size: 40px;"></i>
                         <p class="mt-2">${file}</p>
+                        ${!isInArchive ? `
+                        <button class="btn btn-sm btn-outline-warning archive-btn mt-1" data-name="${file}" data-type="file">
+                            <i class="bi bi-archive"></i> Archive
+                        </button>` : `
+                        <button class="btn btn-sm btn-outline-success restore-btn mt-1" data-name="${file}" data-type="file">
+                            <i class="bi bi-arrow-clockwise"></i> Restore
+                        </button>`}
                     `;
+
                     fileDiv.onclick = () => previewFile(file);
+
+                    if (!isInArchive) {
+                        fileDiv.querySelector('.archive-btn').onclick = (e) => {
+                            e.stopPropagation();
+                            archiveItem(file, 'file');
+                        };
+                    } else {
+                        fileDiv.querySelector('.restore-btn').onclick = (e) => {
+                            e.stopPropagation();
+                            showRestoreModal(file, 'file');
+                        };
+                    }
+
                     directoryContent.appendChild(fileDiv);
                 });
+
+                if (!isInArchive) {
+                    // Attach rename logic
+                    document.querySelectorAll('.rename-btn').forEach(btn => {
+                        btn.addEventListener('click', e => {
+                            e.stopPropagation();
+                            const itemName = btn.getAttribute('data-name');
+                            const itemType = btn.getAttribute('data-type');
+
+                            document.getElementById('rename-item-name').value = itemName;
+                            document.getElementById('rename-item-type').value = itemType;
+                            document.getElementById('rename-form').setAttribute('data-old-name', itemName);
+
+                            $('#renameModal').modal('show');
+                        });
+                    });
+                }
+
             } else {
                 alert(data.error || 'Failed to load directory.');
             }
@@ -48,28 +114,15 @@ function loadDirectory() {
         });
 }
 
-
 function previewFile(filePath) {
-    console.log("File path:", filePath);
-    console.log("Current path:", currentPath);
-
-    // Construct the full path
     let newPath = `uploads/${currentPath ? currentPath + '/' : ''}${filePath}`;
     let fullURL = `http://localhost/vg_mgt_sys/VGMsModules/Dims/DimsV2/${newPath}`;
-    console.log("Full URL:", fullURL);
-
-    // Open the file in a new tab
     const popup = window.open(fullURL, "_blank");
 
-    // Check if the popup opened successfully
     if (!popup || popup.closed || typeof popup.closed === 'undefined') {
         alert("Popup blocked! Please allow popups for this website.");
     }
 }
-
-document.getElementById('preview-close').onclick = () => {
-    document.getElementById('preview-modal').style.display = 'none';
-};
 
 function updateBreadcrumbs() {
     breadcrumbs.innerHTML = '';
@@ -145,6 +198,94 @@ document.getElementById('upload-form').addEventListener('submit', e => {
         });
 });
 
+// Rename logic
+document.getElementById('rename-form').addEventListener('submit', e => {
+    e.preventDefault();
 
+    const newName = document.getElementById('rename-item-name').value.trim();
+    const itemType = document.getElementById('rename-item-type').value;
+    const oldName = document.getElementById('rename-form').getAttribute('data-old-name');
+
+    if (!newName || !oldName) return;
+
+    fetch('server.php', {
+        method: 'POST',
+        body: new URLSearchParams({
+            action: 'rename_item',
+            item_name: oldName,
+            new_name: newName,
+            item_type: itemType,
+            current_path: currentPath
+        })
+    })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                $('#renameModal').modal('hide');
+                loadDirectory();
+            } else {
+                alert(data.error || 'Rename failed');
+            }
+        });
+});
+
+// Archive logic
+function archiveItem(itemName, itemType) {
+    if (confirm(`Are you sure you want to archive this ${itemType}: ${itemName}?`)) {
+        fetch('server.php', {
+            method: 'POST',
+            body: new URLSearchParams({
+                action: 'archive_item',
+                item_name: itemName,
+                item_type: itemType,
+                current_path: currentPath
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                alert(`${itemType.charAt(0).toUpperCase() + itemType.slice(1)} archived successfully.`);
+                loadDirectory();
+            } else {
+                alert(data.error || 'Failed to archive item');
+            }
+        });
+    }
+}
+
+// Restore logic
+function showRestoreModal(itemName, itemType) {
+    document.getElementById('restore-item-name').value = itemName;
+    document.getElementById('restore-item-type').value = itemType;
+    document.getElementById('restore-form').setAttribute('data-old-name', itemName);
+
+    $('#restoreModal').modal('show');
+}
+
+document.getElementById('restore-form').addEventListener('submit', e => {
+    e.preventDefault();
+
+    const itemName = document.getElementById('restore-item-name').value;
+    const itemType = document.getElementById('restore-item-type').value;
+
+    fetch('server.php', {
+        method: 'POST',
+        body: new URLSearchParams({
+            action: 'restore_item',
+            item_name: itemName,
+            item_type: itemType,
+            current_path: currentPath
+        })
+    })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                $('#restoreModal').modal('hide');
+                loadDirectory();
+            } else {
+                alert(data.error || 'Restore failed');
+            }
+        });
+});
 
 loadDirectory();
