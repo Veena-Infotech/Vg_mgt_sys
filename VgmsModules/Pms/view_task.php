@@ -13,7 +13,7 @@
   <!-- ===============================================-->
   <!--    Document Title-->
   <!-- ===============================================-->
-  <title>Phoenix</title>
+  <title>Task Kanban</title>
 
   <!-- ===============================================-->
   <!--    Favicons-->
@@ -57,6 +57,8 @@
       userLinkRTL.setAttribute('disabled', true);
     }
   </script>
+  <link href="../../vendors/flatpickr/flatpickr.min.css" rel="stylesheet" />
+  <link href="../../vendors/choices/choices.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -209,7 +211,7 @@
         </div>
       </div>
       <div class="kanban-container scrollbar" data-kanban-container="data-kanban-container">
-        <div class="kanban-column scrollbar collapsed">
+        <!-- <div class="kanban-column scrollbar collapsed">
           <div class="kanban-column-header px-4 hover-actions-trigger">
             <div class="d-flex align-items-center border-bottom border-3 py-3 border-warning">
               <h5 class="mb-0 kanban-column-title">Unassaigned<span class="kanban-title-badge">3</span></h5>
@@ -379,7 +381,7 @@
                 class="fas fa-plus text-white dark__text-gray-400"
                 data-fa-transform="grow-4 down-1"></span></button><input
               class="form-control search-input rounded-3 px-3" placeholder="Add new task" /></div>
-        </div>
+        </div> -->
         <div class="kanban-column scrollbar">
           <div class="kanban-column-header px-4 hover-actions-trigger">
             <div class="d-flex align-items-center border-bottom border-3 py-3 border-300">
@@ -2132,13 +2134,13 @@
                 class="fa-solid fa-paper-plane fs-9"></span></button>
           </div>
         </div>
-      </div><button class="btn btn-support-chat p-0 border border-translucent"><span
+        <!-- </div><button class="btn btn-support-chat p-0 border border-translucent"><span
           class="fs-8 btn-text text-primary text-nowrap">Chat demo</span><span
           class="ping-icon-wrapper mt-n4 ms-n6 mt-sm-0 ms-sm-2 position-absolute position-sm-relative"><span
             class="ping-icon-bg"></span><span class="fa-solid fa-circle ping-icon"></span></span><span
           class="fa-solid fa-headset text-primary fs-8 d-sm-none"></span><span
           class="fa-solid fa-chevron-down text-primary fs-7"></span></button>
-    </div>
+    </div> -->
   </main><!-- ===============================================-->
   <!--    End of Main Content-->
   <!-- ===============================================-->
@@ -2287,7 +2289,7 @@
         template</a>
     </div>
   </div><a class="card setting-toggle" href="#settings-offcanvas" data-bs-toggle="offcanvas">
-    <div class="card-body d-flex align-items-center px-2 py-1">
+    <!-- <div class="card-body d-flex align-items-center px-2 py-1">
       <div class="position-relative rounded-start" style="height:34px;width:28px">
         <div class="settings-popover"><span class="ripple"><span
               class="fa-spin position-absolute all-0 d-flex flex-center"><span
@@ -2298,109 +2300,188 @@
                     fill="#2A7BE4"></path>
                 </svg></span></span></span></div>
       </div><small class="text-uppercase text-body-tertiary fw-bold py-2 pe-2 ps-1 rounded-end">customize</small>
-    </div>
+    </div> -->
   </a>
   <div class="modal fade" id="kanbanAddTask" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen-sm-down modal-xl modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-body">
-          <div class="row gx-3 gy-4">
-            <div class="col-sm-6 col-md-12">
-              <div class="form-floating"><input class="form-control" id="kanbanTaskTitle" type="text"
-                  placeholder="title" value="" /><label for="kanbanTaskTitle">Title</label></div>
-            </div>
-            <div class="col-12 gy-4">
-              <div class="form-floating"><textarea class="form-control" id="floatingProjectDescription"
-                  placeholder="Leave a comment here" style="height: 128px"></textarea><label
-                  for="floatingProjectDescription">ADD A DESCRIPTION</label></div>
-            </div>
-            <div class="col-12 gy-4">
-              <div class="dropzone dropzone-multiple bg-transparent p-0" id="Kanbandropzone"
-                data-dropzone="data-dropzone"
-                data-options='{"url":"valid/url","maxFiles":1,"dictDefaultMessage":"Choose or Drop a file here"}'>
-                <div class="fallback"><input type="file" name="file" /></div>
-                <div class="dz-message py-3" data-dz-message="data-dz-message">
-                  <div class="dz-message-text text-center text-body-secondary"><img class="mb-2"
-                      src="../../assets/img/icons/image-icon.png" width="24" alt="" /><br />Add cover image </div>
+        <!-- added by me -->
+        <form action="../../VgmsModules/PhpFiles/handle_add_task.php" method="post" enctype="multipart/form-data" class="needs-validation" novalidate="novalidate" class="dropzone dropzone-multiple p-0" id="dropzone-multiple" data-dropzone="data-dropzone">
+          <div class="modal-body">
+            <h3>Edit Task</h3>
+            <div class="row gx-3 gy-4">
+              <hr>
+              <div class="col-sm-6 col-md-12" style="margin-top: -1%;">
+                <label class="form-label" style="margin-left: -1%;">Task Title </label>
+                <div class="form-floating"><input class="form-control" id="kanbanTaskTitle" type="text"
+                    placeholder="title" value="" /><label for="kanbanTaskTitle">Title</label></div>
+              </div>
+              <div class="col-12 gy-4">
+                <label class="form-label" style="margin-left: -1%;">Description </label>
+                <div class="form-floating"><textarea class="form-control" id="floatingProjectDescription"
+                    placeholder="Leave a comment here" style="height: 128px"></textarea><label
+                    for="floatingProjectDescription">ADD A DESCRIPTION</label></div>
+              </div>
+
+              <div class="col-sm-4" style="width: 50%;">
+                <!-- <div class="form-floating"><select class="form-select" id="TaskType">
+                    <option selected="selected">Phoenix</option>
+                    <option value="2">Boreas</option>
+                    <option value="3">Erebus</option>
+                  </select><label for="TaskType">BORAD TYPE</label></div> -->
+                <label class="form-label">Project Name<span style="color: red;">*</span></label>
+                <input type="text" class="form-control" placeholder="Enter project title"
+                  name="project_name">
+
+              </div>
+              <div class="col-sm-4" style="width: 50%;">
+                <!-- <div class="form-floating"><select class="form-select" id="KanbanColumnType">
+                    <option selected="selected">Unassigned</option>
+                    <option value="2">To do</option>
+                    <option value="3">Doing</option>
+                    <option value="3">Review</option>
+                    <option value="3">Release</option>
+                  </select><label for="KanbanColumnType">COLUMN</label></div> -->
+                <label class="form-label" for="timepicker2">Select Time Range</label>
+                <input class="form-control datetimepicker flatpickr-input" id="timepicker2" type="text" name="time_range" placeholder="d/m/y to d/m/y" data-options="{&quot;mode&quot;:&quot;range&quot;,&quot;dateFormat&quot;:&quot;d/m/y&quot;,&quot;disableMobile&quot;:true}" readonly="readonly">
+
+              </div>
+              <!-- to add some field  -->
+              <!-- <div class="col-sm-4">
+                <div class="form-floating"><select class="form-select" id="KanbanPlaceNumber">
+                    <option selected="selected">01</option>
+                    <option value="2">02</option>
+                    <option value="3">03</option>
+                  </select><label for="KanbanPlaceNumber">PLACE</label></div>
+              </div> -->
+              <div class="col-sm-12">
+                <div class="mb-3"><label for="organizerMultiple2">Assigned Employee</label><select class="form-select" id="organizerMultiple2" data-choices="data-choices" multiple="multiple" size="1" name="organizerMultiple" required="required" data-options='{"removeItemButton":true,"placeholder":true}'>
+                    <option value="">Select employee...</option>
+                    <option>Massachusetts Institute of Technology</option>
+                    <option>University of Chicago</option>
+                    <option>GSAS Open Labs At Harvard</option>
+                    <option>California Institute of Technology</option>
+                  </select>
+                  <div class="invalid-feedback">Please select one or multiple</div>
                 </div>
-                <div class="dz-preview dz-preview-multiple m-0 d-flex flex-column">
-                  <div class="d-flex pb-3 border-bottom border-translucent media px-2">
-                    <div class="border border-dashed p-2 rounded-2 me-2"><img class="rounded-2 dz-image"
-                        src="../../assets/img/icons/file.png" alt="..." data-dz-thumbnail="data-dz-thumbnail" /></div>
-                    <div class="flex-1 d-flex flex-between-center">
-                      <div>
-                        <h6 data-dz-name="data-dz-name"></h6>
-                        <div class="d-flex align-items-center">
-                          <p class="mb-0 fs-9 text-body-quaternary lh-1" data-dz-size="data-dz-size"></p>
-                          <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress=""></span></div>
-                        </div><span class="fs-10 text-danger" data-dz-errormessage="data-dz-errormessage"></span>
-                      </div>
-                      <div class="dropdown"><button
-                          class="btn btn-link text-body-tertiary btn-sm dropdown-toggle btn-reveal dropdown-caret-none"
-                          type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span
-                            class="fas fa-ellipsis-h"></span></button>
-                        <div class="dropdown-menu dropdown-menu-end border border-translucent py-2"><a
-                            class="dropdown-item" href="#!" data-dz-remove="data-dz-remove">Remove File</a></div>
-                      </div>
+              </div>
+              <div class="col-sm-4" style="width: 50%; margin-top:-0.5% ; ">
+                <label for="organizerSingle" style="font-size : 12px;">Task Category</label>
+                <div class="s">
+                  <select class="form-select" id="organizerSingle" name="task_category" data-choices="data-choices" data-options='{"removeItemButton":true,"placeholder":true}'>
+                    <option value="">Select organizer...</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-4" style="width: 50%; margin-top:-0.5% ;">
+                <div class="mb-3"><label for="organizerSingle2" style="font-size : 12px">PRIORITY</label>
+                  <select class="form-select" id="organizerSingle2" data-choices="data-choices" name="organizerSingle" size="1" required="required" data-options='{"removeItemButton":true,"placeholder":true}'>
+                    <option value="">Low (Default)</option>
+                    <option>High</option>
+                    <option>Medium</option>
+                    <option>semi Urgent</option>
+                    <option>Urgent</option>
+                  </select>
+                  <div class="invalid-feedback">Please select one</div>
+                </div>
+              </div>
+              <!-- <div class="col-sm-12">
+                  <div class="form-floating"><select class="form-select" id="KanbanPriorityLavel">
+                      <option selected="selected">Low (Default)</option>
+                      <option value="2">High</option>
+                      <option value="2">Medium</option>
+                      <option value="2">Urgent</option>
+                    </select><label for="KanbanPriorityLavel">PRIORITY</label></div>
+                </div> -->
+              <!-- <div class="col-sm-12">
+                  <div class="form-floating"><select class="form-select" id="KanbanCategoryType">
+                      <option selected="selected">UNASSIGNED (Default)</option>
+                      <option value="2">Feature</option>
+                      <option value="2">Bug</option>
+                      <option value="2">Issue</option>
+                    </select><label for="KanbanCategoryType">CATEGORY</label></div>
+                </div> -->
+              <div class="col-sm-12" style="margin-top: -1%;">
+                <div class="mb-3"><label for="organizerMultiple2" style="font-size : 12px">Tags</label>
+                  <select class="form-select" id="organizerMultiple2" data-choices="data-choices" multiple="multiple" size="1" name="tagsMultiple" required="required" data-options='{"removeItemButton":true,"placeholder":true}'>
+                    <option value="">Select organizer...</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                  </select>
+                  <div class="invalid-feedback">Please select one or multiple</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <!-- image -->
+          <div class="col-12 gy-4" style="margin-top: -1%;">
+            <div class="dropzone dropzone-multiple bg-transparent p-0" id="Kanbandropzone"
+              data-dropzone="data-dropzone"
+              data-options='{"url":"valid/url","maxFiles":1,"dictDefaultMessage":"Choose or Drop a file here"}'>
+              <div class="fallback"><input type="file" name="file" /></div>
+              <div class="dz-message py-3" data-dz-message="data-dz-message">
+                <div class="dz-message-text text-center text-body-secondary"><img class="mb-2"
+                    src="../../assets/img/icons/image-icon.png" width="24" alt="" /><br />Add cover image </div>
+              </div>
+              <div class="dz-preview dz-preview-multiple m-0 d-flex flex-column">
+                <div class="d-flex pb-3 border-bottom border-translucent media px-2">
+                  <div class="border border-dashed p-2 rounded-2 me-2"><img class="rounded-2 dz-image"
+                      src="../../assets/img/icons/file.png" alt="..." data-dz-thumbnail="data-dz-thumbnail" /></div>
+                  <div class="flex-1 d-flex flex-between-center">
+                    <div>
+                      <h6 data-dz-name="data-dz-name"></h6>
+                      <div class="d-flex align-items-center">
+                        <p class="mb-0 fs-9 text-body-quaternary lh-1" data-dz-size="data-dz-size"></p>
+                        <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress=""></span></div>
+                      </div><span class="fs-10 text-danger" data-dz-errormessage="data-dz-errormessage"></span>
+                    </div>
+                    <div class="dropdown"><button
+                        class="btn btn-link text-body-tertiary btn-sm dropdown-toggle btn-reveal dropdown-caret-none"
+                        type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span
+                          class="fas fa-ellipsis-h"></span></button>
+                      <div class="dropdown-menu dropdown-menu-end border border-translucent py-2"><a
+                          class="dropdown-item" href="#!" data-dz-remove="data-dz-remove">Remove File</a></div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-sm-4">
-              <div class="form-floating"><select class="form-select" id="TaskType">
-                  <option selected="selected">Phoenix</option>
-                  <option value="2">Boreas</option>
-                  <option value="3">Erebus</option>
-                </select><label for="TaskType">BORAD TYPE</label></div>
-            </div>
-            <div class="col-sm-4">
-              <div class="form-floating"><select class="form-select" id="KanbanColumnType">
-                  <option selected="selected">Unassigned</option>
-                  <option value="2">To do</option>
-                  <option value="3">Doing</option>
-                  <option value="3">Review</option>
-                  <option value="3">Release</option>
-                </select><label for="KanbanColumnType">COLUMN</label></div>
-            </div>
-            <div class="col-sm-4">
-              <div class="form-floating"><select class="form-select" id="KanbanPlaceNumber">
-                  <option selected="selected">01</option>
-                  <option value="2">02</option>
-                  <option value="3">03</option>
-                </select><label for="KanbanPlaceNumber">PLACE</label></div>
-            </div>
-            <div class="col-sm-12">
-              <div class="form-floating"><select class="form-select" id="KanbanAssignedMember">
-                  <option selected="selected" value="1">Unassigned (Default)</option>
-                  <option value="2">Richard Dawkins</option>
-                  <option value="3">Ashley Garrett</option>
-                  <option value="4">Barbara Lucas</option>
-                  <option value="5">Woodrow Burton</option>
-                </select><label for="KanbanAssignedMember">ASSIGNED TO</label></div>
-            </div>
-            <div class="col-sm-12">
-              <div class="form-floating"><select class="form-select" id="KanbanPriorityLavel">
-                  <option selected="selected">Low (Default)</option>
-                  <option value="2">High</option>
-                  <option value="2">Medium</option>
-                  <option value="2">Urgent</option>
-                </select><label for="KanbanPriorityLavel">PRIORITY</label></div>
-            </div>
-            <div class="col-sm-12">
-              <div class="form-floating"><select class="form-select" id="KanbanCategoryType">
-                  <option selected="selected">UNASSIGNED (Default)</option>
-                  <option value="2">Feature</option>
-                  <option value="2">Bug</option>
-                  <option value="2">Issue</option>
-                </select><label for="KanbanCategoryType">CATEGORY</label></div>
+          </div>
+          <!-- file upload -->
+          <div class="dropzone dropzone-multiple p-0" id="dropzone-multiple" data-dropzone="data-dropzone" style="margin-top: 1%;">
+            <label class="form-label">Upload File <span style="color: red;">*</span></label>
+            <div class="fallback"><input name="file" type="file" multiple="multiple" /></div>
+            <div class="dz-message" data-dz-message="data-dz-message"><img class="me-2" src="../../assets/img/icons/cloud-upload.svg" width="25" alt="" style="margin-left:38%" />Drop your files here</div>
+            <div class="dz-preview dz-preview-multiple m-0 d-flex flex-column">
+              <div class="d-flex mb-3 pb-3 border-bottom border-translucent media">
+                <div class="border p-2 rounded-2 me-2"><img class="rounded-2 dz-image" src="../../assets/img/icons/file.png" alt="..." data-dz-thumbnail="data-dz-thumbnail" /></div>
+                <div class="flex-1 d-flex flex-between-center">
+                  <div>
+                    <h6 data-dz-name="data-dz-name"></h6>
+                    <div class="d-flex align-items-center">
+                      <p class="mb-0 fs-9 text-body-quaternary lh-1" data-dz-size="data-dz-size"></p>
+                      <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress=""></span></div>
+                    </div><span class="fs-10 text-danger" data-dz-errormessage="data-dz-errormessage"></span>
+                  </div>
+                  <div class="dropdown"><button class="btn btn-link text-body-tertiary btn-sm dropdown-toggle btn-reveal dropdown-caret-none" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><a class="dropdown-item" href="#!" data-dz-remove="data-dz-remove"><span style="color: red; font-size:30px;">...</a></button>
+                    <div class="dropdown-menu dropdown-menu-end border border-translucent py-2"><a class="dropdown-item" href="#!" data-dz-remove="data-dz-remove">Remove File</a></div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="modal-footer justify-content-between"><button class="btn p-1" type="button" data-bs-dismiss="modal"
-            aria-label="Close"><span class="fas fa-times fs-10 me-1"
-              data-fa-transform="up-1"></span>Close</button><button class="btn btn-primary px-6" type="button"
-            data-bs-dismiss="modal">Done</button></div>
+
+
+          <div class="modal-footer justify-content-between"><button class="btn p-1" type="button" data-bs-dismiss="modal"
+              aria-label="Close" value="refresh"><span class="fas fa-times fs-10 me-1"
+                data-fa-transform="up-1"></span>Close</button><button class="btn btn-primary px-6" type="close"
+              data-bs-dismiss="modal" value="submit">Done</button>
+          </div>
+
+        </form>
       </div>
     </div>
   </div>
@@ -2431,13 +2512,13 @@
                     subject matter.</P>
                 </div>
                 <div class="col-4 col-sm-3">
-                  <h6 class="text-body-tertiary fw-bolder lh-sm mt-1">BOARD </h6>
+                  <h6 class="text-body-tertiary fw-bolder lh-sm mt-1">PROJECT NAME </h6>
                 </div>
                 <div class="col-8 col-sm-9">
                   <P class="mb-0 text-body-emphasis fw-semibold">Phoenix</P>
                 </div>
                 <div class="col-4 col-sm-3">
-                  <h6 class="text-body-tertiary fw-bolder lh-sm mt-1">COLUMN </h6>
+                  <h6 class="text-body-tertiary fw-bolder lh-sm mt-1">STATUS</h6>
                 </div>
                 <div class="col-8 col-sm-9">
                   <P class="mb-0 text-body-emphasis fw-semibold d-inline-block kanban-column-underline-warning">Doing
@@ -2691,7 +2772,7 @@
                   <ul class="nav flex-column flex-sm-row flex-lg-column list-unstyled">
                     <li class="kanban-action-item lh-sm nav-item me-2"><a
                         class="nav-link text-body-emphasis fw-semibold fs-9 stretched-link" href="#!"><span
-                          class="me-2 fa-solid fa-file-export"></span>Move</a></li>
+                          class="me-2 fa-solid fa-file-export"></span>Change status</a></li>
                     <li class="kanban-action-item lh-sm nav-item me-2"><a
                         class="nav-link text-body-emphasis fw-semibold fs-9 stretched-link" href="#!"><span
                           class="me-2 fa-solid fa-clone"></span>Duplicate</a></li>
@@ -2800,6 +2881,8 @@
   <script src="../../vendors/dropzone/dropzone-min.js"></script>
   <script src="../../vendors/glightbox/glightbox.min.js"></script>
   <script src="../../assets/js/phoenix.js"></script>
+  <script src="../../vendors/choices/choices.min.js"></script>
+  <script src="../../vendors/flatpickr/flatpickr.min.js"></script>
 </body>
 
 
