@@ -114,15 +114,15 @@
                         <hr class="bg-body-secondary mt-5 mb-4" />
                         <div class="divider-content-center bg-body-emphasis">or use email</div>
                       </div> -->
-                      <form action="" method="post">
+                      <form action="../PhpFiles/verify_users.php" method="post">
                         <div class="mb-3 text-start"><label class="form-label" for="email">Email address</label>
                           <div class="form-icon-container"><input class="form-control form-icon-input" id="email"
-                              type="email" placeholder="name@example.com" /><span
+                              type="email" name="email" placeholder="name@example.com" /><span
                               class="fas fa-user text-body fs-9 form-icon"></span></div>
                         </div>
                         <div class="mb-3 text-start"><label class="form-label" for="password">Password</label>
                           <div class="form-icon-container" data-password="data-password"><input
-                              class="form-control form-icon-input pe-6" id="password" type="password"
+                              class="form-control form-icon-input pe-6" id="password" name="password" type="password"
                               placeholder="Password" data-password-input="data-password-input" /><span
                               class="fas fa-key text-body fs-9 form-icon"></span><button
                               class="btn px-3 py-0 h-100 position-absolute top-0 end-0 fs-7 text-body-tertiary"
