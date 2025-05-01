@@ -202,7 +202,7 @@
                         </select>
                     </div>
                 </div>
-                <br>
+           
                 <hr class="hr">
                 <br>
                 <div class="card mt-3">
@@ -356,7 +356,7 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
+
 
 
 
@@ -391,10 +391,10 @@
                     </div>
                 </div>
 
-
+                </div>
             </div>
         </div>
-        </div>
+
 
         <!-- Modal for Editing Project -->
         <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
@@ -449,14 +449,7 @@
 
 
         </div>
-
-
-
-
-
         </div>
-
-
     </main>
 
     <!-- ===============================================-->
