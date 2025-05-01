@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 29, 2025 at 11:05 PM
+-- Generation Time: May 01, 2025 at 07:37 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -145,6 +145,45 @@ CREATE TABLE `tbl_emp` (
 INSERT INTO `tbl_emp` (`id`, `uid`, `salutation`, `f_name`, `m_name`, `l_name`, `father's_name`, `mother's_name`, `marital_status`, `spouse_name`, `date_of_birth`, `gender`, `primary_phone_no`, `alternative_phone_no`, `personal_email`, `official_email`, `current_address`, `permanent_address`, `aadharcard_no`, `pancard_no`, `bank_name`, `bank_acc_no`, `ifsc_code`, `branch_name`, `branch_address`, `is_upi_id`, `upi_id`, `emergency_name`, `emergency_relationship`, `emergency_phone_no`, `nominee_name`, `nominee_relationship`, `high_education_qualification`, `institute_name`, `passing_year`, `education_certificate_path`, `have_worked_previously`, `previous_employer_name`, `previous_job_role`, `emp_period_start_date`, `emp_period_end_date`, `reason_leaving`, `document_path`, `joining_date`, `current_job_role`, `current_salary_ctc`, `in_hand_salary`, `conveyance`, `company_loan_advance`, `loan_amt_repayment`, `official_work_timing`, `weekly_off_day`, `annual_leave_entitlement`, `leave_application_process`, `is_policy_agree`, `willing_for_docs`, `additional_comments`, `family`, `position`, `branch`, `date_joined`, `password`, `timestamp`) VALUES
 (0, 'vms-0000', '', 'Unauthorised', 'Unauthorised', 'Unauthorised', '', '', 'Single', '', NULL, 'Male', '0', '1234567890', '', 'Unauthorised@gmail.com', 'Unauthorised', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1234.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Unauthorised', 'Unauthorised', 'Unauthorised', '2025-04-09', '$2y$10$5kpPviRdpHR3WqMRUu0mc.TeK5sgQ535AzuJEEH3Rfsy.e7KKlkaS', '2025-04-10 09:20:40'),
 (1, 'vms-001', '', 'receptionist', 'receptionist', 'receptionist', '', '', 'Single', '', NULL, 'Male', '0', '1234567890', '', 'receptionist@gmail.com', 'receptionist', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1234.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'receptionist', 'receptionist', 'receptionist', '2025-04-09', '$2y$10$5kpPviRdpHR3WqMRUu0mc.TeK5sgQ535AzuJEEH3Rfsy.e7KKlkaS', '2025-04-08 20:12:59');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_files`
+--
+
+CREATE TABLE `tbl_files` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `folder_id` int(11) NOT NULL,
+  `file_path` text NOT NULL,
+  `file_type` varchar(50) DEFAULT NULL,
+  `is_archived` tinyint(1) DEFAULT 0,
+  `uploaded_by` int(11) DEFAULT NULL,
+  `uploaded_at` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_folders`
+--
+
+CREATE TABLE `tbl_folders` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `parent_id` int(11) DEFAULT NULL,
+  `is_archived` tinyint(1) DEFAULT 0,
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_folders`
+--
+
+INSERT INTO `tbl_folders` (`id`, `name`, `parent_id`, `is_archived`, `created_at`, `updated_at`) VALUES
+(4, 'sdcsdc', 1, 0, '2025-05-01 00:47:19', '2025-05-01 00:49:03');
 
 -- --------------------------------------------------------
 
@@ -535,6 +574,20 @@ ALTER TABLE `tbl_emp`
   ADD UNIQUE KEY `uid` (`uid`);
 
 --
+-- Indexes for table `tbl_files`
+--
+ALTER TABLE `tbl_files`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `folder_id` (`folder_id`);
+
+--
+-- Indexes for table `tbl_folders`
+--
+ALTER TABLE `tbl_folders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `tbl_folders_ibfk_1` (`parent_id`);
+
+--
 -- Indexes for table `tbl_loans`
 --
 ALTER TABLE `tbl_loans`
@@ -693,6 +746,18 @@ ALTER TABLE `tbl_emp`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `tbl_files`
+--
+ALTER TABLE `tbl_files`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_folders`
+--
+ALTER TABLE `tbl_folders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `tbl_loans`
 --
 ALTER TABLE `tbl_loans`
@@ -803,6 +868,12 @@ ALTER TABLE `tbl_visitor`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `tbl_files`
+--
+ALTER TABLE `tbl_files`
+  ADD CONSTRAINT `tbl_files_ibfk_1` FOREIGN KEY (`folder_id`) REFERENCES `tbl_folders` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `tbl_loans`
