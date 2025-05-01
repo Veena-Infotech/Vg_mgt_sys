@@ -15,6 +15,7 @@ $currentDateTime = date("Y-m-d\TH:i");
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
+    <!-- Stylisng the Whole page using Custom CSS  -->
     <style>
         body {
             font-family: 'Inter', sans-serif;

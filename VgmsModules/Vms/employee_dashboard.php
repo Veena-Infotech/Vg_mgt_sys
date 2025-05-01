@@ -175,7 +175,7 @@
                 <div class="row justify-content-between align-items-center mb-4">
                   <div class="col-auto">
                     <h3 class="text-body-emphasis"> <a href="Vg_mgt_sys/VgmsModules/Vms/view_tasks.php"
-                        style="text-decoration: none; color: white;"> Daily Task</a></h3>
+                        style="text-decoration: none; color: none;"> Daily Task</a></h3>
                     <p class="mb-2 mb-md-0 mb-lg-2 text-body-tertiary">Task assigned to me</p>
                   </div>
                   <div class="col-auto w-100 w-md-auto">
