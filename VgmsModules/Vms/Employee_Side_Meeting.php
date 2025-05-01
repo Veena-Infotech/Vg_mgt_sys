@@ -31,7 +31,8 @@
     <!-- ===============================================-->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap"
+        rel="stylesheet">
     <link href="../../vendors/simplebar/simplebar.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../unicons.iconscout.com/release/v4.0.8/css/line.css">
     <link href="../../assets/css/theme-rtl.css" type="text/css" rel="stylesheet" id="style-rtl">
@@ -166,12 +167,20 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
         <div class="content">
-        <h2 class="mb-2 lh-sm">Employee Side Meeting Queue </h2>
-            <div id="tableExample3" data-list="{&quot;valueNames&quot;:[&quot;name&quot;,&quot;email&quot;,&quot;age&quot;],&quot;page&quot;:5,&quot;pagination&quot;:true}">
+            <h2 class="mb-2 lh-sm">Employee Side Meeting Queue </h2>
+            <p class="mb-3 text-muted">A list of visitors scheduled for employee-side meetings</p>
+            <hr class="hr" /><br>
+            <div id="tableExample3"
+            data-list='{"valueNames":["number", "name", "image", "meeting", "time"], "page":5, "pagination":true}'>
                 <div class="search-box mb-3 mx-auto">
-                    <form class="position-relative"><input class="form-control search-input search form-control-sm" type="search" placeholder="Search" aria-label="Search">
-                        <svg class="svg-inline--fa fa-magnifying-glass search-box-icon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
-                            <path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path>
+                    <form class="position-relative"><input class="form-control search-input search form-control-sm"
+                            type="search" placeholder="Search" aria-label="Search">
+                        <svg class="svg-inline--fa fa-magnifying-glass search-box-icon" aria-hidden="true"
+                            focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+                            <path fill="currentColor"
+                                d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z">
+                            </path>
                         </svg><!-- <span class="fas fa-search search-box-icon"></span> Font Awesome fontawesome.com -->
                     </form>
                 </div>
@@ -200,22 +209,36 @@
                                 <td class="align-middle meeting">Meeting With Admin</td>
                                 <td class="align-middle time">10:00 AM</td>
                                 <td class="align-middle status">
-                                    <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="fw-bold">Success</span><span class="ms-1 fas fa-check"></span></div>
+                                    <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span
+                                            class="fw-bold">Success</span><span class="ms-1 fas fa-check"></span></div>
 
                                 </td>
 
                                 <td class="align-middle white-space-nowrap text-end pe-0">
-                                    <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent" fdprocessedid="wjdyz6j"><svg class="svg-inline--fa fa-ellipsis fs-10" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
-                                                <path fill="currentColor" d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z"></path>
+                                    <div class="btn-reveal-trigger position-static"><button
+                                            class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
+                                            type="button" data-bs-toggle="dropdown" data-boundary="window"
+                                            aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"
+                                            fdprocessedid="wjdyz6j"><svg class="svg-inline--fa fa-ellipsis fs-10"
+                                                aria-hidden="true" focusable="false" data-prefix="fas"
+                                                data-icon="ellipsis" role="img" xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 448 512" data-fa-i2svg="">
+                                                <path fill="currentColor"
+                                                    d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z">
+                                                </path>
                                             </svg><!-- <span class="fas fa-ellipsis-h fs-10"></span> Font Awesome fontawesome.com --></button>
-                                        <div class="dropdown-menu dropdown-menu-end py-2" style=""><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Inactive</a>
-                                            <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                                        <div class="dropdown-menu dropdown-menu-end py-2" style=""><a
+                                                class="dropdown-item"
+                                                href="/VGMS/Vg_mgt_sys/VgmsModules/Vms/Meeting_notes popup.php">Add-edit
+                                                notes</a><a class="dropdown-item" href="#!">Complete</a>
+                                            <div class="dropdown-divider"></div><a class="dropdown-item text-danger"
+                                                href="#!">Reschedule</a>
                                         </div>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="align-middle ps-3 number">1</td>
+                                <td class="align-middle ps-3 number">2</td>
                                 <td class="align-middle name">Vinit</td>
                                 <td class="align-middle image">
                                     <div class="avatar avatar-l ">
@@ -225,16 +248,30 @@
                                 <td class="align-middle meeting">Meeting With Admin</td>
                                 <td class="align-middle time">10:00 AM</td>
                                 <td class="align-middle status">
-                                    <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="fw-bold">Success</span><span class="ms-1 fas fa-check"></span></div>
+                                    <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span
+                                            class="fw-bold">Success</span><span class="ms-1 fas fa-check"></span></div>
 
                                 </td>
 
                                 <td class="align-middle white-space-nowrap text-end pe-0">
-                                    <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent" fdprocessedid="wjdyz6j"><svg class="svg-inline--fa fa-ellipsis fs-10" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
-                                                <path fill="currentColor" d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z"></path>
+                                    <div class="btn-reveal-trigger position-static"><button
+                                            class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
+                                            type="button" data-bs-toggle="dropdown" data-boundary="window"
+                                            aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"
+                                            fdprocessedid="wjdyz6j"><svg class="svg-inline--fa fa-ellipsis fs-10"
+                                                aria-hidden="true" focusable="false" data-prefix="fas"
+                                                data-icon="ellipsis" role="img" xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 448 512" data-fa-i2svg="">
+                                                <path fill="currentColor"
+                                                    d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z">
+                                                </path>
                                             </svg><!-- <span class="fas fa-ellipsis-h fs-10"></span> Font Awesome fontawesome.com --></button>
-                                        <div class="dropdown-menu dropdown-menu-end py-2" style=""><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Inactive</a>
-                                            <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                                        <div class="dropdown-menu dropdown-menu-end py-2" style=""><a
+                                                class="dropdown-item"
+                                                href="/VGMS/Vg_mgt_sys/VgmsModules/Vms/Meeting_notes popup.php">Add-edit
+                                                notes</a><a class="dropdown-item" href="#!">Complete</a>
+                                            <div class="dropdown-divider"></div><a class="dropdown-item text-danger"
+                                                href="#!">Reschedule</a>
                                         </div>
                                     </div>
                                 </td>
@@ -250,16 +287,26 @@
                                 <td class="align-middle meeting">Meeting With Admin</td>
                                 <td class="align-middle time">10:00 AM</td>
                                 <td class="align-middle status">
-                                    <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="fw-bold">Success</span><span class="ms-1 fas fa-check"></span></div>
+                                    <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span
+                                            class="fw-bold">Success</span><span class="ms-1 fas fa-check"></span></div>
 
                                 </td>
 
                                 <td class="align-middle white-space-nowrap text-end pe-0">
-                                    <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent" fdprocessedid="wjdyz6j"><svg class="svg-inline--fa fa-ellipsis fs-10" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
-                                                <path fill="currentColor" d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z"></path>
+                                    <div class="btn-reveal-trigger position-static"><button
+                                            class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
+                                            type="button" data-bs-toggle="dropdown" data-boundary="window"
+                                            aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"
+                                            fdprocessedid="wjdyz6j"><svg class="svg-inline--fa fa-ellipsis fs-10"
+                                                aria-hidden="true" focusable="false" data-prefix="fas"
+                                                data-icon="ellipsis" role="img" xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 448 512" data-fa-i2svg="">
+                                                <path fill="currentColor"
+                                                    d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z">
+                                                </path>
                                             </svg><!-- <span class="fas fa-ellipsis-h fs-10"></span> Font Awesome fontawesome.com --></button>
-                                        <div class="dropdown-menu dropdown-menu-end py-2" style=""><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Inactive</a>
-                                            <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                                            <div class="dropdown-menu dropdown-menu-end py-2" style=""><a class="dropdown-item" href="/VGMS/Vg_mgt_sys/VgmsModules/Vms/Meeting_notes popup.php">Add-edit notes</a><a class="dropdown-item" href="#!">Complete</a>
+                                            <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Reschedule</a>
                                         </div>
                                     </div>
                                 </td>
@@ -275,16 +322,26 @@
                                 <td class="align-middle meeting">Meeting With Admin</td>
                                 <td class="align-middle time">10:00 AM</td>
                                 <td class="align-middle status">
-                                    <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="fw-bold">Success</span><span class="ms-1 fas fa-check"></span></div>
+                                    <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span
+                                            class="fw-bold">Success</span><span class="ms-1 fas fa-check"></span></div>
 
                                 </td>
 
                                 <td class="align-middle white-space-nowrap text-end pe-0">
-                                    <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent" fdprocessedid="wjdyz6j"><svg class="svg-inline--fa fa-ellipsis fs-10" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
-                                                <path fill="currentColor" d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z"></path>
+                                    <div class="btn-reveal-trigger position-static"><button
+                                            class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
+                                            type="button" data-bs-toggle="dropdown" data-boundary="window"
+                                            aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"
+                                            fdprocessedid="wjdyz6j"><svg class="svg-inline--fa fa-ellipsis fs-10"
+                                                aria-hidden="true" focusable="false" data-prefix="fas"
+                                                data-icon="ellipsis" role="img" xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 448 512" data-fa-i2svg="">
+                                                <path fill="currentColor"
+                                                    d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z">
+                                                </path>
                                             </svg><!-- <span class="fas fa-ellipsis-h fs-10"></span> Font Awesome fontawesome.com --></button>
-                                        <div class="dropdown-menu dropdown-menu-end py-2" style=""><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Inactive</a>
-                                            <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                                            <div class="dropdown-menu dropdown-menu-end py-2" style=""><a class="dropdown-item" href="/VGMS/Vg_mgt_sys/VgmsModules/Vms/Meeting_notes popup.php">Add-edit notes</a><a class="dropdown-item" href="#!">Complete</a>
+                                            <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Reschedule</a>
                                         </div>
                                     </div>
                                 </td>
@@ -300,16 +357,26 @@
                                 <td class="align-middle meeting">Meeting With Admin</td>
                                 <td class="align-middle time">10:00 AM</td>
                                 <td class="align-middle status">
-                                    <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="fw-bold">Success</span><span class="ms-1 fas fa-check"></span></div>
+                                    <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span
+                                            class="fw-bold">Success</span><span class="ms-1 fas fa-check"></span></div>
 
                                 </td>
 
                                 <td class="align-middle white-space-nowrap text-end pe-0">
-                                    <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent" fdprocessedid="wjdyz6j"><svg class="svg-inline--fa fa-ellipsis fs-10" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
-                                                <path fill="currentColor" d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z"></path>
+                                    <div class="btn-reveal-trigger position-static"><button
+                                            class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
+                                            type="button" data-bs-toggle="dropdown" data-boundary="window"
+                                            aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"
+                                            fdprocessedid="wjdyz6j"><svg class="svg-inline--fa fa-ellipsis fs-10"
+                                                aria-hidden="true" focusable="false" data-prefix="fas"
+                                                data-icon="ellipsis" role="img" xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 448 512" data-fa-i2svg="">
+                                                <path fill="currentColor"
+                                                    d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z">
+                                                </path>
                                             </svg><!-- <span class="fas fa-ellipsis-h fs-10"></span> Font Awesome fontawesome.com --></button>
-                                        <div class="dropdown-menu dropdown-menu-end py-2" style=""><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Inactive</a>
-                                            <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                                            <div class="dropdown-menu dropdown-menu-end py-2" style=""><a class="dropdown-item" href="/VGMS/Vg_mgt_sys/VgmsModules/Vms/Meeting_notes popup.php">Add-edit notes</a><a class="dropdown-item" href="#!">Complete</a>
+                                            <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Reschedule</a>
                                         </div>
                                     </div>
                                 </td>
@@ -325,16 +392,26 @@
                                 <td class="align-middle meeting">Meeting With Admin</td>
                                 <td class="align-middle time">10:00 AM</td>
                                 <td class="align-middle status">
-                                    <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="fw-bold">Success</span><span class="ms-1 fas fa-check"></span></div>
+                                    <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span
+                                            class="fw-bold">Success</span><span class="ms-1 fas fa-check"></span></div>
 
                                 </td>
 
                                 <td class="align-middle white-space-nowrap text-end pe-0">
-                                    <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent" fdprocessedid="wjdyz6j"><svg class="svg-inline--fa fa-ellipsis fs-10" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
-                                                <path fill="currentColor" d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z"></path>
+                                    <div class="btn-reveal-trigger position-static"><button
+                                            class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
+                                            type="button" data-bs-toggle="dropdown" data-boundary="window"
+                                            aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"
+                                            fdprocessedid="wjdyz6j"><svg class="svg-inline--fa fa-ellipsis fs-10"
+                                                aria-hidden="true" focusable="false" data-prefix="fas"
+                                                data-icon="ellipsis" role="img" xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 448 512" data-fa-i2svg="">
+                                                <path fill="currentColor"
+                                                    d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z">
+                                                </path>
                                             </svg><!-- <span class="fas fa-ellipsis-h fs-10"></span> Font Awesome fontawesome.com --></button>
-                                        <div class="dropdown-menu dropdown-menu-end py-2" style=""><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Inactive</a>
-                                            <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
+                                            <div class="dropdown-menu dropdown-menu-end py-2" style=""><a class="dropdown-item" href="/VGMS/Vg_mgt_sys/VgmsModules/Vms/Meeting_notes popup.php">Add-edit notes</a><a class="dropdown-item" href="#!">Complete</a>
+                                            <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Reschedule</a>
                                         </div>
                                     </div>
                                 </td>
@@ -348,17 +425,33 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="d-flex justify-content-between mt-3"><span class="d-none d-sm-inline-block" data-list-info="data-list-info">1 to 5 <span class="text-body-tertiary"> Items of </span>43</span>
-                    <div class="d-flex"><button class="page-link disabled" data-list-pagination="prev" fdprocessedid="v1lko3" disabled=""><svg class="svg-inline--fa fa-chevron-left" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
-                                <path fill="currentColor" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"></path>
+                <div class="d-flex justify-content-between mt-3"><span class="d-none d-sm-inline-block"
+                        data-list-info="data-list-info">1 to 5 <span class="text-body-tertiary"> Items of
+                        </span>43</span>
+                    <div class="d-flex"><button class="page-link disabled" data-list-pagination="prev"
+                            fdprocessedid="v1lko3" disabled=""><svg class="svg-inline--fa fa-chevron-left"
+                                aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-left"
+                                role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
+                                <path fill="currentColor"
+                                    d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z">
+                                </path>
                             </svg><!-- <span class="fas fa-chevron-left"></span> Font Awesome fontawesome.com --></button>
                         <ul class="mb-0 pagination">
-                            <li class="active"><button class="page" type="button" data-i="1" data-page="5" fdprocessedid="k1n2e">1</button></li>
-                            <li><button class="page" type="button" data-i="2" data-page="5" fdprocessedid="hlyt1j">2</button></li>
-                            <li><button class="page" type="button" data-i="3" data-page="5" fdprocessedid="2vukw6">3</button></li>
-                            <li class="disabled"><button class="page" type="button" fdprocessedid="n7zpuw">...</button></li>
-                        </ul><button class="page-link pe-0" data-list-pagination="next" fdprocessedid="do7p1"><svg class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
-                                <path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path>
+                            <li class="active"><button class="page" type="button" data-i="1" data-page="5"
+                                    fdprocessedid="k1n2e">1</button></li>
+                            <li><button class="page" type="button" data-i="2" data-page="5"
+                                    fdprocessedid="hlyt1j">2</button></li>
+                            <li><button class="page" type="button" data-i="3" data-page="5"
+                                    fdprocessedid="2vukw6">3</button></li>
+                            <li class="disabled"><button class="page" type="button" fdprocessedid="n7zpuw">...</button>
+                            </li>
+                        </ul><button class="page-link pe-0" data-list-pagination="next" fdprocessedid="do7p1"><svg
+                                class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false"
+                                data-prefix="fas" data-icon="chevron-right" role="img"
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
+                                <path fill="currentColor"
+                                    d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z">
+                                </path>
                             </svg><!-- <span class="fas fa-chevron-right"></span> Font Awesome fontawesome.com --></button>
                     </div>
                 </div>
@@ -422,7 +515,7 @@
     <script src="../../assets/js/phoenix.js"></script>
     <script src="../../vendors/echarts/echarts.min.js"></script>
     <script src="../../assets/js/ecommerce-dashboard.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
 
 
 

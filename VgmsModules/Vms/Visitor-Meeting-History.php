@@ -165,9 +165,11 @@
             }
         </script>
         <div class="content">
-            <h2 class="mb-2 lh-sm">Visitor Meeting History </h2>
+            <h2 class="mb-1 lh-sm">Visitor Meeting History </h2>
+            <p class="text-muted mb-3" style="font-size: 0.95rem;">A record of all previous meetings with visitors.</p>
+            <hr class="hr" /><br>
             <div id="tableExample3"
-                data-list="{&quot;valueNames&quot;:[&quot;name&quot;,&quot;email&quot;,&quot;age&quot;],&quot;page&quot;:5,&quot;pagination&quot;:true}">
+            data-list='{"valueNames":["number", "name", "Empname","meeting","date","time"], "page":5, "pagination":true}'>
                 <div class="search-box mb-3 mx-auto">
                     <form class="position-relative"><input class="form-control search-input search form-control-sm"
                             type="search" placeholder="Search" aria-label="Search">
@@ -186,21 +188,21 @@
                             <tr>
                                 <th class="sort border-top border-translucent ps-3" data-sort="number">#</th>
                                 <th class="sort border-top border-translucent ps-3" data-sort="name">Visitor</th>
-                                <th class="sort border-top" data-sort="email">Employee</th>
-                                <th class="sort border-top" data-sort="age">Meeting Purpose</th>
-                                <th class="sort border-top" data-sort="age">Date</th>
-                                <th class="sort border-top" data-sort="age">Time</th>
-                                <th class="sort border-top" data-sort="age">Status</th>
+                                <th class="sort border-top" data-sort="Empname">Employee</th>
+                                <th class="sort border-top" data-sort="meeting">Meeting Purpose</th>
+                                <th class="sort border-top" data-sort="date">Date</th>
+                                <th class="sort border-top" data-sort="time">Time</th>
+                                <th class="sort border-top" data-sort="status">Status</th>
                                 <th class="sort text-end align-middle pe-0 border-top" scope="col">ACTION</th>
                             </tr>
                         </thead>
                         <tbody class="list">
                             <tr>
-                                <td class="align-middle ps-3 name">1</td>
-                                <td class="align-middle name">Mr.Aakash</td>
-                                <td class="align-middle name">Mr.Raj</td>
+                                <td class="align-middle ps-3 number">1</td>
+                                <td class="align-middle name">Ramesh</td>
+                                <td class="align-middle Empname">Mr.Raj</td>
                                 <td class="align-middle meeting">Office Visit</td>
-                                <td class="align-middle time">30 April 2025</td>
+                                <td class="align-middle date">30 April 2025</td>
                                 <td class="align-middle time">11.00 AM</td>
                                 <td class="align-middle status">
                                     <span class="badge fs-10 badge-phoenix badge-phoenix-success">
@@ -242,11 +244,11 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="align-middle ps-3 name">1</td>
-                                <td class="align-middle name">Mr.Aakash</td>
-                                <td class="align-middle name">Mr.Raj</td>
+                            <td class="align-middle ps-3 number">2</td>
+                                <td class="align-middle name">yash</td>
+                                <td class="align-middle Empname">Mr.Raj</td>
                                 <td class="align-middle meeting">Office Visit</td>
-                                <td class="align-middle time">30 April 2025</td>
+                                <td class="align-middle date">30 April 2025</td>
                                 <td class="align-middle time">11.00 AM</td>
                                 <td class="align-middle status">
                                     <span class="badge fs-10 badge-phoenix badge-phoenix-success">
@@ -288,11 +290,11 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="align-middle ps-3 name">1</td>
-                                <td class="align-middle name">Mr.Aakash</td>
-                                <td class="align-middle name">Mr.Raj</td>
+                            <td class="align-middle ps-3 number">1</td>
+                                <td class="align-middle name">Ramesh</td>
+                                <td class="align-middle Empname">Mr.Raj</td>
                                 <td class="align-middle meeting">Office Visit</td>
-                                <td class="align-middle time">30 April 2025</td>
+                                <td class="align-middle date">30 April 2025</td>
                                 <td class="align-middle time">11.00 AM</td>
                                 <td class="align-middle status">
                                     <span class="badge fs-10 badge-phoenix badge-phoenix-success">
@@ -334,11 +336,11 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="align-middle ps-3 name">1</td>
-                                <td class="align-middle name">Mr.Aakash</td>
-                                <td class="align-middle name">Mr.Raj</td>
+                            <td class="align-middle ps-3 number">1</td>
+                                <td class="align-middle name">Ramesh</td>
+                                <td class="align-middle Empname">Mr.Raj</td>
                                 <td class="align-middle meeting">Office Visit</td>
-                                <td class="align-middle time">30 April 2025</td>
+                                <td class="align-middle date">30 April 2025</td>
                                 <td class="align-middle time">11.00 AM</td>
                                 <td class="align-middle status">
                                     <span class="badge fs-10 badge-phoenix badge-phoenix-success">
@@ -380,11 +382,11 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="align-middle ps-3 name">1</td>
-                                <td class="align-middle name">Mr.Aakash</td>
-                                <td class="align-middle name">Mr.Raj</td>
+                            <td class="align-middle ps-3 number">1</td>
+                                <td class="align-middle name">Ramesh</td>
+                                <td class="align-middle Empname">Mr.Raj</td>
                                 <td class="align-middle meeting">Office Visit</td>
-                                <td class="align-middle time">30 April 2025</td>
+                                <td class="align-middle date">30 April 2025</td>
                                 <td class="align-middle time">11.00 AM</td>
                                 <td class="align-middle status">
                                     <span class="badge fs-10 badge-phoenix badge-phoenix-success">
@@ -426,11 +428,11 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="align-middle ps-3 name">1</td>
-                                <td class="align-middle name">Mr.Aakash</td>
-                                <td class="align-middle name">Mr.Raj</td>
+                            <td class="align-middle ps-3 number">1</td>
+                                <td class="align-middle name">Ramesh</td>
+                                <td class="align-middle Empname">Mr.Raj</td>
                                 <td class="align-middle meeting">Office Visit</td>
-                                <td class="align-middle time">30 April 2025</td>
+                                <td class="align-middle date">30 April 2025</td>
                                 <td class="align-middle time">11.00 AM</td>
                                 <td class="align-middle status">
                                     <span class="badge fs-10 badge-phoenix badge-phoenix-success">
@@ -472,11 +474,11 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="align-middle ps-3 name">1</td>
-                                <td class="align-middle name">Mr.Aakash</td>
-                                <td class="align-middle name">Mr.Raj</td>
+                            <td class="align-middle ps-3 number">1</td>
+                                <td class="align-middle name">Ramesh</td>
+                                <td class="align-middle Empname">Mr.Raj</td>
                                 <td class="align-middle meeting">Office Visit</td>
-                                <td class="align-middle time">30 April 2025</td>
+                                <td class="align-middle date">30 April 2025</td>
                                 <td class="align-middle time">11.00 AM</td>
                                 <td class="align-middle status">
                                     <span class="badge fs-10 badge-phoenix badge-phoenix-success">
@@ -518,11 +520,11 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="align-middle ps-3 name">1</td>
-                                <td class="align-middle name">Mr.Aakash</td>
-                                <td class="align-middle name">Mr.Raj</td>
+                            <td class="align-middle ps-3 number">1</td>
+                                <td class="align-middle name">Ramesh</td>
+                                <td class="align-middle Empname">Mr.Raj</td>
                                 <td class="align-middle meeting">Office Visit</td>
-                                <td class="align-middle time">30 April 2025</td>
+                                <td class="align-middle date">30 April 2025</td>
                                 <td class="align-middle time">11.00 AM</td>
                                 <td class="align-middle status">
                                     <span class="badge fs-10 badge-phoenix badge-phoenix-success">
@@ -633,7 +635,7 @@
     <script src="../../assets/js/phoenix.js"></script>
     <script src="../../vendors/echarts/echarts.min.js"></script>
     <script src="../../assets/js/ecommerce-dashboard.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
 
 
 
