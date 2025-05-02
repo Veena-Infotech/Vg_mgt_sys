@@ -182,7 +182,7 @@
                 </div>
 
                 <!-- Scrollable Chat List -->
-                <div class="list-group list-group-flush overflow-y-auto" style="flex: 1;">
+                <div class="list-group list-group-flush scrollbar" style="flex: 1;">
                     <!-- Repeat this block for each chat -->
                     <a href="#!" class="list-group-item list-group-item-action px-3 py-2 d-flex align-items-center gap-2 border-0">
                         <div class="avatar avatar-lg rounded-circle overflow-hidden bg-body-secondary d-flex align-items-center justify-content-center">
