@@ -256,7 +256,8 @@
                                                                 <div class="card-body p-5">
                                                                     <h3 class="text-center mb-4 text-primary fw-bold">
                                                                         New Visitor Registration</h3>
-                                                                    <form>
+                                                                    <form action="../PhpFiles/register_visitor.php" method="POST" enctype="multipart/form-data">
+                                                                        <input type="hidden" name="capturedImage" id="captured_image_input">
                                                                         <div class="row">
                                                                             <!-- Full Name -->
                                                                             <div class="col-md-6 mb-4">
@@ -264,6 +265,7 @@
                                                                                     <input type="text"
                                                                                         class="form-control rounded-3"
                                                                                         id="name" placeholder="John Doe"
+                                                                                        name="name"
                                                                                         required
                                                                                         style="border: 1px solid #dcdcdc;">
                                                                                     <label for="name">Full Name</label>
@@ -276,6 +278,7 @@
                                                                                     <input type="email"
                                                                                         class="form-control rounded-3"
                                                                                         id="email"
+                                                                                        name="email"
                                                                                         placeholder="johndoe@example.com"
                                                                                         required
                                                                                         style="border: 1px solid #dcdcdc;">
@@ -289,6 +292,7 @@
                                                                                     <input type="tel"
                                                                                         class="form-control rounded-3"
                                                                                         id="phone"
+                                                                                        name="phone"
                                                                                         placeholder="123-456-7890"
                                                                                         required
                                                                                         style="border: 1px solid #dcdcdc;">
@@ -298,24 +302,30 @@
                                                                             </div>
 
                                                                             <!-- Whom to Meet -->
+                                                                            <?php
+                                                                            include('../PhpFiles/connection.php'); // Adjust path if needed
+
+                                                                            $sql = "SELECT id, f_name, l_name, position FROM tbl_emp ORDER BY f_name ASC";
+                                                                            $result = mysqli_query($conn, $sql);
+                                                                            ?>
+
                                                                             <div class="col-md-6 mb-4">
                                                                                 <div class="form-floating">
-                                                                                    <select
-                                                                                        class="form-select rounded-3"
-                                                                                        id="whomToMeet" required
-                                                                                        style="border: 1px solid #dcdcdc;">
-                                                                                        <option selected disabled>
-                                                                                            Choose...</option>
-                                                                                        <option value="1">Manager
-                                                                                        </option>
-                                                                                        <option value="2">HR</option>
-                                                                                        <option value="3">Receptionist
-                                                                                        </option>
+                                                                                    <select class="form-select rounded-3" id="whomToMeet" name="whomToMeet" required style="border: 1px solid #dcdcdc;">
+                                                                                        <option selected disabled>Choose...</option>
+                                                                                        <?php
+                                                                                        while ($row = mysqli_fetch_assoc($result)) {
+                                                                                            $emp_id = $row['id'];
+                                                                                            $full_name = $row['f_name'] . ' ' . $row['l_name'];
+                                                                                            $position = $row['position'];
+                                                                                            echo "<option value='$emp_id'>$full_name ($position)</option>";
+                                                                                        }
+                                                                                        ?>
                                                                                     </select>
-                                                                                    <label for="whomToMeet">Whom to
-                                                                                        Meet?</label>
+                                                                                    <label for="whomToMeet">Whom to Meet?</label>
                                                                                 </div>
                                                                             </div>
+
 
                                                                             <!-- Reason to Meet -->
                                                                             <div class="col-md-8 mb-4">
@@ -324,6 +334,7 @@
                                                                                         class="form-control rounded-3 h-100"
                                                                                         placeholder="Reason for meeting"
                                                                                         id="reason"
+                                                                                        name="reason"
                                                                                         style="min-height: 200px; border: 1px solid #dcdcdc;"
                                                                                         required></textarea>
                                                                                     <label for="reason">Reason to
@@ -377,39 +388,51 @@
                                                                 <div class="card-body p-5">
                                                                     <h3 class="text-center mb-4 text-primary fw-bold">
                                                                         Existing Visitor Registration</h3>
-                                                                    <form>
+                                                                    <form action="../PhpFiles/schedule_meeting.php" method="post">
+                                                                        <?php
+                                                                        include('../PhpFiles/connection.php'); // Update path as needed
+                                                                        ?>
+                                                                        <!-- Visitors Dropdown -->
                                                                         <div class="form-floating mb-4">
-                                                                            <select class="form-select rounded-3"
-                                                                                id="visitorName" required
-                                                                                style="border: 1px solid #dcdcdc;">
-                                                                                <option selected disabled>Choose...
-                                                                                </option>
-                                                                                <option value="Mr Aakash">Mr Aakash
-                                                                                </option>
-                                                                                <option value="Mr Kartik">Mr Kartik
-                                                                                </option>
-                                                                                <option value="Mr Omkar">Mr Omkar
-                                                                                </option>
+                                                                            <select class="form-select rounded-3" id="visitorName" name="visitorName" required style="border: 1px solid #dcdcdc;">
+                                                                                <option selected disabled>Choose...</option>
+                                                                                <?php
+                                                                                $visitorQuery = "SELECT id, f_name, m_name, l_name FROM tbl_visitor ORDER BY f_name ASC";
+                                                                                $visitorResult = mysqli_query($conn, $visitorQuery);
+
+                                                                                while ($visitor = mysqli_fetch_assoc($visitorResult)) {
+                                                                                    $visitor_id = $visitor['id'];
+                                                                                    $full_name = trim($visitor['f_name'] . ' ' . $visitor['m_name'] . ' ' . $visitor['l_name']);
+                                                                                    echo "<option value=\"$visitor_id\">$full_name</option>";
+                                                                                }
+                                                                                ?>
                                                                             </select>
                                                                             <label for="visitorName">Visitors</label>
                                                                         </div>
+
+                                                                        <!-- Whom to Meet Dropdown -->
                                                                         <div class="form-floating mb-4">
-                                                                            <select class="form-select rounded-3"
-                                                                                id="whomToMeet" required
-                                                                                style="border: 1px solid #dcdcdc;">
-                                                                                <option selected disabled>Choose...
-                                                                                </option>
-                                                                                <option value="1">Manager</option>
-                                                                                <option value="2">HR</option>
-                                                                                <option value="3">Receptionist</option>
+                                                                            <select class="form-select rounded-3" id="whomToMeet" name="whomToMeet" required style="border: 1px solid #dcdcdc;">
+                                                                                <option selected disabled>Choose...</option>
+                                                                                <?php
+                                                                                $empQuery = "SELECT id, f_name, l_name, position FROM tbl_emp ORDER BY f_name ASC";
+                                                                                $empResult = mysqli_query($conn, $empQuery);
+
+                                                                                while ($emp = mysqli_fetch_assoc($empResult)) {
+                                                                                    $emp_id = $emp['id'];
+                                                                                    $emp_name = $emp['f_name'] . ' ' . $emp['l_name'] . ' (' . $emp['position'] . ')';
+                                                                                    echo "<option value=\"$emp_id\">$emp_name</option>";
+                                                                                }
+                                                                                ?>
                                                                             </select>
-                                                                            <label for="whomToMeet">Whom to
-                                                                                Meet?</label>
+                                                                            <label for="whomToMeet">Whom to Meet?</label>
                                                                         </div>
+
                                                                         <div class="form-floating mb-4">
                                                                             <textarea class="form-control rounded-3"
                                                                                 placeholder="Reason for meeting"
                                                                                 id="reason"
+                                                                                name="reason"
                                                                                 style="height: 200px; border: 1px solid #dcdcdc;"
                                                                                 required></textarea>
                                                                             <label for="reason">Reason to Meet</label>
@@ -417,7 +440,7 @@
                                                                         <div class="d-grid">
                                                                             <!-- <button type="submit"
                                                                                 class="btn btn-primary btn-lg rounded-pill shadow-sm">Update</button> -->
-                                                                                <button class="btn btn-primary w-100 mb-3">Update</button>
+                                                                            <button class="btn btn-primary w-100 mb-3">Update</button>
                                                                         </div>
                                                                     </form>
                                                                 </div>
@@ -439,7 +462,7 @@
 
 
             <script>
-                document.addEventListener("DOMContentLoaded", function () {
+                document.addEventListener("DOMContentLoaded", function() {
                     const video = document.getElementById("video");
                     const canvas = document.getElementById("canvas");
                     const captureBtn = document.getElementById("captureBtn");
@@ -461,7 +484,7 @@
                     }
 
                     // Capture Image
-                    captureBtn.addEventListener("click", function () {
+                    captureBtn.addEventListener("click", function() {
                         if (!stream) {
                             alert("Camera not started. Please allow access.");
                             return;
@@ -484,6 +507,55 @@
                     startCamera();
                 });
             </script>
+
+            <!-- Script to handle the popup -->
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const success = urlParams.get('success');
+
+                    if (success) {
+                        const modal = new bootstrap.Modal(document.getElementById('statusModal'));
+                        const modalHeader = document.getElementById('statusModalHeader');
+                        const modalBody = document.getElementById('statusModalBody');
+
+                        if (success === 'true') {
+                            modalHeader.classList.remove('bg-danger');
+                            modalHeader.classList.add('bg-success');
+                            modalBody.textContent = "Visitor registered and meeting logged successfully!";
+                        } else {
+                            modalHeader.classList.remove('bg-success');
+                            modalHeader.classList.add('bg-danger');
+                            modalBody.textContent = "Failed to register visitor.";
+                        }
+
+                        modal.show();
+
+                        // Auto-hide modal after 5 seconds
+                        setTimeout(() => {
+                            modal.hide();
+                            window.history.replaceState(null, "", window.location.pathname);
+                        }, 5000);
+                    }
+                });
+            </script>
+
+
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="statusModal" tabindex="-1" aria-labelledby="statusModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header bg-success text-white" id="statusModalHeader">
+                            <h5 class="modal-title" id="statusModalLabel">Status</h5>
+                        </div>
+                        <div class="modal-body" id="statusModalBody">
+                            Operation successful.
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
 
@@ -520,7 +592,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
 
     <script>
-        window.onload = function () {
+        window.onload = function() {
             // Select the elements to animate
             const formFields = document.querySelectorAll('.card-body form .form-floating, .card-body form .btn, #captureImageBox');
             const cardBody = document.querySelector('.card-body');
@@ -529,8 +601,8 @@
 
             // Animate the entire form card to slide up with opacity transition
             gsap.from(cardBody, {
-                opacity: 0,  // Start as invisible
-                y: 50,       // Slide up from below
+                opacity: 0, // Start as invisible
+                y: 50, // Slide up from below
                 duration: 1, // Duration of the animation
                 ease: "power3.out", // Smooth easing
             });
@@ -538,7 +610,7 @@
             // Animate the form fields and capture image box one by one with a slight delay
             gsap.from(formFields, {
                 opacity: 0, // Start invisible
-                y: 20,      // Slide up from below
+                y: 20, // Slide up from below
                 duration: 0.8, // Duration for each field
                 stagger: 0.2, // Delay between each element
                 ease: "power3.out", // Smooth easing
@@ -566,22 +638,44 @@
         };
         const tabs = document.querySelectorAll('.nav-link');
         tabs.forEach(tab => {
-            tab.addEventListener('click', function (e) {
+            tab.addEventListener('click', function(e) {
                 const targetTabContent = document.querySelector(this.getAttribute('href'));
 
                 // Hide all tabs with a fade out animation
                 gsap.to('.tab-pane', {
                     opacity: 0,
                     duration: 0.5,
-                    onComplete: function () {
+                    onComplete: function() {
                         // After fade out completes, show the target tab content with a fade-in animation
-                        gsap.fromTo(targetTabContent,
-                            { opacity: 0 },
-                            { opacity: 1, duration: 0.5 }
-                        );
+                        gsap.fromTo(targetTabContent, {
+                            opacity: 0
+                        }, {
+                            opacity: 1,
+                            duration: 0.5
+                        });
                     }
                 });
             });
+        });
+    </script>
+
+    <!-- script for image handling -->
+
+    <script>
+        document.getElementById('captureBtn').addEventListener('click', function() {
+            const canvas = document.getElementById('canvas');
+            const video = document.getElementById('video');
+            const context = canvas.getContext('2d');
+
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            const dataURL = canvas.toDataURL('image/jpeg');
+
+            document.getElementById('capturedImage').src = dataURL;
+            document.getElementById('capturedImage').classList.remove('d-none');
+            document.getElementById('captured_image_input').value = dataURL;
         });
     </script>
 
