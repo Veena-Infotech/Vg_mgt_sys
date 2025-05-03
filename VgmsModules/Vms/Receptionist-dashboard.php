@@ -57,7 +57,7 @@
   <link href="../../vendors/leaflet/leaflet.css" rel="stylesheet">
   <link href="../../vendors/leaflet.markercluster/MarkerCluster.css" rel="stylesheet">
   <link href="../../vendors/leaflet.markercluster/MarkerCluster.Default.css" rel="stylesheet">
-  
+
 
 </head>
 
@@ -171,7 +171,7 @@
       <p class="text-muted mb-4">Manage and monitor visitor appointments, employee meetings, and their current statuses in real time.</p>
       <hr class="hr" /><br>
       <div id="tableExample3"
-      data-list='{"valueNames":["number", "name", "Empname", "meeting", "time"], "page":5, "pagination":true}'>
+        data-list='{"valueNames":["number", "name", "Empname", "meeting", "time"], "page":5, "pagination":true}'>
         <div class="d-flex align-items-center justify-content-between mb-3">
           <h3 class="mb-0">Meeting Details</h3>
           <div class="search-box me-auto" style="margin-left: 16rem;">
@@ -203,230 +203,73 @@
               </tr>
             </thead>
             <tbody class="list">
-              <tr>
-                <td class="align-middle ps-3 number">1</td>
-                <td class="align-middle name">Rajat</td>
-                <td class="align-middle Empname">kartik</td>
-                <td class="align-middle meeting">Office Visit</td>
-                <td class="align-middle time">11.00 AM</td>
-                <td class="align-middle status">
-                  <div class="badge badge-phoenix fs-10 badge-phoenix-warning"><span class="fw-bold">Waiting</span><span
-                      class="ms-1 fas fa-stream"></span></div>
-                </td>
-                <td class="align-middle white-space-nowrap text-end pe-0, action-cell">
-                  <div class="btn-reveal-trigger position-static"><button
-                      class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
-                      type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true"
-                      aria-expanded="false" data-bs-reference="parent"><svg class="svg-inline--fa fa-ellipsis fs-10"
-                        aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis" role="img"
-                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
-                        <path fill="currentColor"
-                          d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z">
-                        </path>
-                      </svg><!-- <span class="fas fa-ellipsis-h fs-10"></span> Font Awesome fontawesome.com --></button>
-                    <div class="dropdown-menu dropdown-menu-end py-2" style=""><a class="dropdown-item"
-                        href="#!">Completed</a><a class="dropdown-item" href="#!">Reschedule</a>
-                      <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Cancel</a>
+              <?php
+              include '../PhpFiles/connection.php';
+
+              $today = date('Y-m-d');
+
+              $sql = "SELECT m.id, v.f_name AS visitor_name, e.f_name AS emp_name, m.reason, m.time, m.meeting_status 
+                      FROM tbl_meeting_history m 
+                      JOIN tbl_visitor v ON m.visitor_id = v.id 
+                      JOIN tbl_emp e ON m.emp_id = e.id 
+                      WHERE m.date = '$today'";
+
+              $result = mysqli_query($conn, $sql);
+              $counter = 1;
+
+              while ($row = mysqli_fetch_assoc($result)) {
+              ?>
+                <tr>
+                  <td class="align-middle ps-3 number"><?php echo $counter++; ?></td>
+                  <td class="align-middle name"><?php echo htmlspecialchars($row['visitor_name']); ?></td>
+                  <td class="align-middle Empname"><?php echo htmlspecialchars($row['emp_name']); ?></td>
+                  <td class="align-middle meeting"><?php echo htmlspecialchars($row['reason']); ?></td>
+                  <td class="align-middle time"><?php echo date("h:i A", strtotime($row['time'])); ?></td>
+
+                  <td class="align-middle status">
+                    <?php
+                    $status = $row['meeting_status'];
+                    $badge_class = match ($status) {
+                      'Completed' => 'badge-phoenix-success',
+                      'Rescheduled' => 'badge-phoenix-info',
+                      'InProgress' => 'badge-phoenix-primary',
+                      default => 'badge-phoenix-warning'
+                    };
+                    ?>
+                    <div class="badge badge-phoenix fs-10 <?php echo $badge_class; ?>">
+                      <span class="fw-bold"><?php echo htmlspecialchars($status); ?></span>
                     </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-              <td class="align-middle ps-3 number">2</td>
-                <td class="align-middle name">Om</td>
-                <td class="align-middle Empname">kartik</td>
-                <td class="align-middle meeting">Office Visit</td>
-                <td class="align-middle time">11.00 AM</td>
-                <td class="align-middle status">
-                  <div class="badge badge-phoenix fs-10 badge-phoenix-warning"><span class="fw-bold">Waiting</span><span
-                      class="ms-1 fas fa-stream"></span></div>
-                </td>
-                <td class="align-middle white-space-nowrap text-end pe-0">
-                  <div class="btn-reveal-trigger position-static"><button
-                      class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
-                      type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true"
-                      aria-expanded="false" data-bs-reference="parent"><svg class="svg-inline--fa fa-ellipsis fs-10"
-                        aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis" role="img"
-                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
-                        <path fill="currentColor"
-                          d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z">
-                        </path>
-                      </svg><!-- <span class="fas fa-ellipsis-h fs-10"></span> Font Awesome fontawesome.com --></button>
-                    <div class="dropdown-menu dropdown-menu-end py-2" style=""><a class="dropdown-item"
-                        href="#!">Completed</a><a class="dropdown-item" href="#!">Reschedule</a>
-                      <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Cancel</a>
+                  </td>
+
+                  <td class="align-middle white-space-nowrap text-end pe-0 action-cell">
+                    <div class="btn-reveal-trigger position-static">
+                      <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
+                        type="button" data-bs-toggle="dropdown" data-boundary="window"
+                        aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis"></i>
+                      </button>
+                      <div class="dropdown-menu dropdown-menu-end py-2">
+                        <form method="POST" action="../PhpFiles/update_status.php">
+                          <input type="hidden" name="meeting_id" value="<?php echo $row['id']; ?>">
+                          <?php
+                          $allStatuses = ['Scheduled', 'InProgress', 'Completed', 'Rescheduled'];
+                          foreach ($allStatuses as $option) {
+                            if ($option !== $status) {
+                              echo "<button class='dropdown-item' type='submit' name='status' value='$option'>Move to $option</button>";
+                            }
+                          }
+                          ?>
+                        </form>
+                      </div>
                     </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-              <td class="align-middle ps-3 number">1</td>
-                <td class="align-middle name">Rajat</td>
-                <td class="align-middle Empname">kartik</td>
-                <td class="align-middle meeting">Office Visit</td>
-                <td class="align-middle time">11.00 AM</td>
-                <td class="align-middle status">
-                  <div class="badge badge-phoenix fs-10 badge-phoenix-warning"><span class="fw-bold">Waiting</span><span
-                      class="ms-1 fas fa-stream"></span></div>
-                </td>
-                <td class="align-middle white-space-nowrap text-end pe-0">
-                  <div class="btn-reveal-trigger position-static"><button
-                      class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
-                      type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true"
-                      aria-expanded="false" data-bs-reference="parent"><svg class="svg-inline--fa fa-ellipsis fs-10"
-                        aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis" role="img"
-                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
-                        <path fill="currentColor"
-                          d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z">
-                        </path>
-                      </svg><!-- <span class="fas fa-ellipsis-h fs-10"></span> Font Awesome fontawesome.com --></button>
-                    <div class="dropdown-menu dropdown-menu-end py-2" style=""><a class="dropdown-item"
-                        href="#!">Completed</a><a class="dropdown-item" href="#!">Reschedule</a>
-                      <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Cancel</a>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-              <td class="align-middle ps-3 number">1</td>
-                <td class="align-middle name">Rajat</td>
-                <td class="align-middle Empname">kartik</td>
-                <td class="align-middle meeting">Office Visit</td>
-                <td class="align-middle time">11.00 AM</td>
-                <td class="align-middle status">
-                  <div class="badge badge-phoenix fs-10 badge-phoenix-warning"><span class="fw-bold">Waiting</span><span
-                      class="ms-1 fas fa-stream"></span></div>
-                </td>
-                <td class="align-middle white-space-nowrap text-end pe-0">
-                  <div class="btn-reveal-trigger position-static"><button
-                      class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
-                      type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true"
-                      aria-expanded="false" data-bs-reference="parent"><svg class="svg-inline--fa fa-ellipsis fs-10"
-                        aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis" role="img"
-                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
-                        <path fill="currentColor"
-                          d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z">
-                        </path>
-                      </svg><!-- <span class="fas fa-ellipsis-h fs-10"></span> Font Awesome fontawesome.com --></button>
-                    <div class="dropdown-menu dropdown-menu-end py-2" style=""><a class="dropdown-item"
-                        href="#!">Completed</a><a class="dropdown-item" href="#!">Reschedule</a>
-                      <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Cancel</a>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-              <td class="align-middle ps-3 number">1</td>
-                <td class="align-middle name">Rajat</td>
-                <td class="align-middle Empname">kartik</td>
-                <td class="align-middle meeting">Office Visit</td>
-                <td class="align-middle time">11.00 AM</td>
-                <td class="align-middle status">
-                  <div class="badge badge-phoenix fs-10 badge-phoenix-warning"><span class="fw-bold">Waiting</span><span
-                      class="ms-1 fas fa-stream"></span></div>
-                </td>
-                <td class="align-middle white-space-nowrap text-end pe-0">
-                  <div class="btn-reveal-trigger position-static"><button
-                      class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
-                      type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true"
-                      aria-expanded="false" data-bs-reference="parent"><svg class="svg-inline--fa fa-ellipsis fs-10"
-                        aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis" role="img"
-                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
-                        <path fill="currentColor"
-                          d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z">
-                        </path>
-                      </svg><!-- <span class="fas fa-ellipsis-h fs-10"></span> Font Awesome fontawesome.com --></button>
-                    <div class="dropdown-menu dropdown-menu-end py-2" style=""><a class="dropdown-item"
-                        href="#!">Completed</a><a class="dropdown-item" href="#!">Reschedule</a>
-                      <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Cancel</a>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-              <td class="align-middle ps-3 number">1</td>
-                <td class="align-middle name">Rajat</td>
-                <td class="align-middle Empname">kartik</td>
-                <td class="align-middle meeting">Office Visit</td>
-                <td class="align-middle time">11.00 AM</td>
-                <td class="align-middle status">
-                  <div class="badge badge-phoenix fs-10 badge-phoenix-warning"><span class="fw-bold">Waiting</span><span
-                      class="ms-1 fas fa-stream"></span></div>
-                </td>
-                <td class="align-middle white-space-nowrap text-end pe-0">
-                  <div class="btn-reveal-trigger position-static"><button
-                      class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
-                      type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true"
-                      aria-expanded="false" data-bs-reference="parent"><svg class="svg-inline--fa fa-ellipsis fs-10"
-                        aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis" role="img"
-                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
-                        <path fill="currentColor"
-                          d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z">
-                        </path>
-                      </svg><!-- <span class="fas fa-ellipsis-h fs-10"></span> Font Awesome fontawesome.com --></button>
-                    <div class="dropdown-menu dropdown-menu-end py-2" style=""><a class="dropdown-item"
-                        href="#!">Completed</a><a class="dropdown-item" href="#!">Reschedule</a>
-                      <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Cancel</a>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-              <td class="align-middle ps-3 number">1</td>
-                <td class="align-middle name">Rajat</td>
-                <td class="align-middle Empname">kartik</td>
-                <td class="align-middle meeting">Office Visit</td>
-                <td class="align-middle time">11.00 AM</td>
-                <td class="align-middle status">
-                  <div class="badge badge-phoenix fs-10 badge-phoenix-warning"><span class="fw-bold">Waiting</span><span
-                      class="ms-1 fas fa-stream"></span></div>
-                </td>
-                <td class="align-middle white-space-nowrap text-end pe-0">
-                  <div class="btn-reveal-trigger position-static"><button
-                      class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
-                      type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true"
-                      aria-expanded="false" data-bs-reference="parent"><svg class="svg-inline--fa fa-ellipsis fs-10"
-                        aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis" role="img"
-                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
-                        <path fill="currentColor"
-                          d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z">
-                        </path>
-                      </svg><!-- <span class="fas fa-ellipsis-h fs-10"></span> Font Awesome fontawesome.com --></button>
-                    <div class="dropdown-menu dropdown-menu-end py-2" style=""><a class="dropdown-item"
-                        href="#!">Completed</a><a class="dropdown-item" href="#!">Reschedule</a>
-                      <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Cancel</a>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-              <td class="align-middle ps-3 number">1</td>
-                <td class="align-middle name">Rajat</td>
-                <td class="align-middle Empname">kartik</td>
-                <td class="align-middle meeting">Office Visit</td>
-                <td class="align-middle time">11.00 AM</td>
-                <td class="align-middle status">
-                  <div class="badge badge-phoenix fs-10 badge-phoenix-warning"><span class="fw-bold">Waiting</span><span
-                      class="ms-1 fas fa-stream"></span></div>
-                </td>
-                <td class="align-middle white-space-nowrap text-end pe-0">
-                  <div class="btn-reveal-trigger position-static"><button
-                      class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
-                      type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true"
-                      aria-expanded="false" data-bs-reference="parent"><svg class="svg-inline--fa fa-ellipsis fs-10"
-                        aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis" role="img"
-                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
-                        <path fill="currentColor"
-                          d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z">
-                        </path>
-                      </svg><!-- <span class="fas fa-ellipsis-h fs-10"></span> Font Awesome fontawesome.com --></button>
-                    <div class="dropdown-menu dropdown-menu-end py-2" style=""><a class="dropdown-item"
-                        href="#!">Completed</a><a class="dropdown-item" href="#!">Reschedule</a>
-                      <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Cancel</a>
-                    </div>
-                  </div>
-                </td>
-              </tr>
+                  </td>
+
+
+                <?php
+              }
+                ?>
+
+            </tbody>
             </tbody>
           </table>
         </div>
@@ -498,59 +341,59 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
   <script>
-  // Animate dashboard heading
-  gsap.from(".content h2", {
-    y: -50,
-    opacity: 0,
-    duration: 1,
-    ease: "power2.out"
-  });
+    // Animate dashboard heading
+    gsap.from(".content h2", {
+      y: -50,
+      opacity: 0,
+      duration: 1,
+      ease: "power2.out"
+    });
 
-  // Animate subheading
-  gsap.from(".content h3", {
-    y: -30,
-    opacity: 0,
-    delay: 0.3,
-    duration: 1
-  });
+    // Animate subheading
+    gsap.from(".content h3", {
+      y: -30,
+      opacity: 0,
+      delay: 0.3,
+      duration: 1
+    });
 
-  // Animate search box
-  gsap.from(".search-box", {
-    scale: 0.8,
-    opacity: 0,
-    delay: 0.5,
-    duration: 0.8
-  });
+    // Animate search box
+    gsap.from(".search-box", {
+      scale: 0.8,
+      opacity: 0,
+      delay: 0.5,
+      duration: 0.8
+    });
 
-  // ✅ Animate table header (thead)
-  gsap.from("thead", {
-    opacity: 0,
-    y: -20,
-    duration: 0.6,
-    delay: 0.7,
-    ease: "power2.out"
-  });
+    // ✅ Animate table header (thead)
+    gsap.from("thead", {
+      opacity: 0,
+      y: -20,
+      duration: 0.6,
+      delay: 0.7,
+      ease: "power2.out"
+    });
 
-  // ✅ Animate table rows with opacity and clip-path
-  gsap.from("tbody.list tr", {
-    opacity: 0,
-    clipPath: "inset(0 0 100% 0)",
-    duration: 0.6,
-    stagger: 0.1,
-    delay: 0.8,
-    ease: "power2.out"
-  });
+    // ✅ Animate table rows with opacity and clip-path
+    gsap.from("tbody.list tr", {
+      opacity: 0,
+      clipPath: "inset(0 0 100% 0)",
+      duration: 0.6,
+      stagger: 0.1,
+      delay: 0.8,
+      ease: "power2.out"
+    });
 
-  // Animate badge status
-  gsap.from(".badge", {
-    scale: 0,
-    opacity: 0,
-    duration: 0.5,
-    delay: 1,
-    stagger: 0.2,
-    ease: "back.out(1.7)"
-  });
-</script>
+    // Animate badge status
+    gsap.from(".badge", {
+      scale: 0,
+      opacity: 0,
+      duration: 0.5,
+      delay: 1,
+      stagger: 0.2,
+      ease: "back.out(1.7)"
+    });
+  </script>
 
 
 

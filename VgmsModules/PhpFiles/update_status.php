@@ -3,11 +3,11 @@ include 'connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $meetingId = intval($_POST['meeting_id']);
-    $newStatus = $_POST['status'];
+    $newStatus = $_POST['status']; // Or 'action', depending on your form
 
     $validStatuses = ['Scheduled', 'InProgress', 'Completed', 'Rescheduled'];
     if (!in_array($newStatus, $validStatuses)) {
-        header("Location: ../vms/LobbyManagement.php?error=invalid_status");
+        header("Location: " . $_SERVER['HTTP_REFERER'] . "?error=invalid_status");
         exit;
     }
 
@@ -16,15 +16,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param("si", $newStatus, $meetingId);
 
     if ($stmt->execute()) {
-        header("Location: ../vms/LobbyManagement.php?status=success");
+        header("Location: " . $_SERVER['HTTP_REFERER'] . "?status=success");
     } else {
-        header("Location: ../vms/LobbyManagement.php?error=db_error");
+        header("Location: " . $_SERVER['HTTP_REFERER'] . "?error=db_error");
     }
 
     $stmt->close();
     $conn->close();
 } else {
-    header("Location: ../vms/LobbyManagement.php?error=invalid_request");
+    header("Location: " . $_SERVER['HTTP_REFERER'] . "?error=invalid_request");
 }
 exit;
 ?>
