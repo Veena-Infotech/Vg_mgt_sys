@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 01, 2025 at 07:37 AM
+-- Generation Time: May 03, 2025 at 08:01 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -253,7 +253,8 @@ INSERT INTO `tbl_logs` (`id`, `emp_id`, `action`, `status`, `timestamp`, `ip_add
 (18, 1, 'login_request', 'failed', '2025-04-10 08:44:44', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36'),
 (21, 0, 'login_request', 'failed', '2025-04-10 09:21:00', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36'),
 (22, 1, 'login_request', 'completed', '2025-04-10 10:27:18', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36'),
-(23, 1, 'login_request', 'completed', '2025-04-10 10:27:45', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36');
+(23, 1, 'login_request', 'completed', '2025-04-10 10:27:45', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36'),
+(24, 1, 'login_request', 'completed', '2025-05-01 17:17:18', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36');
 
 -- --------------------------------------------------------
 
@@ -275,9 +276,17 @@ CREATE TABLE `tbl_meeting_history` (
   `payment_status` enum('Paid','Unpaid') DEFAULT NULL,
   `payment_mode` enum('Cash','Card','Online') DEFAULT NULL,
   `amount` decimal(10,2) DEFAULT NULL,
-  `meeting_status` enum('Scheduled','Completed','Cancelled') DEFAULT NULL,
+  `meeting_status` enum('Scheduled','Completed','InProgress','Rescheduled') DEFAULT 'Scheduled',
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_meeting_history`
+--
+
+INSERT INTO `tbl_meeting_history` (`id`, `uid`, `date`, `time`, `visitor_id`, `emp_id`, `reason`, `location`, `in_time`, `out_time`, `payment_status`, `payment_mode`, `amount`, `meeting_status`, `timestamp`) VALUES
+(2, 'meet_6814e4b88a182', '2025-05-02', '17:28:56', 1, 1, 'testing for images', NULL, NULL, NULL, NULL, NULL, NULL, 'Scheduled', '2025-05-02 15:30:40'),
+(3, 'meet_6814e813400eb', '2025-05-02', '17:43:15', 1, 0, 'testing with redirection ', NULL, NULL, NULL, NULL, NULL, NULL, 'Scheduled', '2025-05-02 15:43:15');
 
 -- --------------------------------------------------------
 
@@ -550,6 +559,13 @@ CREATE TABLE `tbl_visitor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Dumping data for table `tbl_visitor`
+--
+
+INSERT INTO `tbl_visitor` (`id`, `uid`, `f_name`, `m_name`, `l_name`, `phone_no`, `email`, `address`, `img`, `registered_date`, `timestamp`) VALUES
+(1, 'visitor_6814e4b888426', 'Aryan', 'Nitin', 'Shirodkar', '7304680494', 'ans@gmail.com', '', 'visitor_1.jpg', '2025-05-02', '2025-05-02 15:28:56');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -615,9 +631,8 @@ ALTER TABLE `tbl_logs`
 --
 ALTER TABLE `tbl_meeting_history`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `uid` (`uid`),
-  ADD KEY `emp_id` (`emp_id`),
-  ADD KEY `tbl_meeting_history_ibfk_1` (`visitor_id`);
+  ADD KEY `tbl_meeting_history_ibfk_1` (`visitor_id`),
+  ADD KEY `tbl_meeting_history_ibfk_2` (`emp_id`);
 
 --
 -- Indexes for table `tbl_meeting_notes`
@@ -773,13 +788,13 @@ ALTER TABLE `tbl_loan_status`
 -- AUTO_INCREMENT for table `tbl_logs`
 --
 ALTER TABLE `tbl_logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `tbl_meeting_history`
 --
 ALTER TABLE `tbl_meeting_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_meeting_notes`
@@ -863,7 +878,7 @@ ALTER TABLE `tbl_todo`
 -- AUTO_INCREMENT for table `tbl_visitor`
 --
 ALTER TABLE `tbl_visitor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
