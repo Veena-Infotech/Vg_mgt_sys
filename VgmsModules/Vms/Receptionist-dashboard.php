@@ -208,12 +208,35 @@
 
               $today = date('Y-m-d');
 
-              $sql = "SELECT m.id, v.f_name AS visitor_name, e.f_name AS emp_name, m.reason, m.time, m.meeting_status 
-                      FROM tbl_meeting_history m 
-                      JOIN tbl_visitor v ON m.visitor_id = v.id 
-                      JOIN tbl_emp e ON m.emp_id = e.id 
-                      WHERE m.date = '$today'";
+              // Check if "view=all" is set in the URL, show all meetings, else show today's meetings
+              if (isset($_GET['view']) && $_GET['view'] === 'all') {
+                $sql = "SELECT m.id, v.f_name AS visitor_name, e.f_name AS emp_name, m.reason, m.time, m.meeting_status 
+                        FROM tbl_meeting_history m 
+                        JOIN tbl_visitor v ON m.visitor_id = v.id 
+                        JOIN tbl_emp e ON m.emp_id = e.id 
+                        ORDER BY m.date DESC, m.time DESC";
+                        
+              } else {
+                $sql = "SELECT m.id, v.f_name AS visitor_name, e.f_name AS emp_name, m.reason, m.time, m.meeting_status 
+                        FROM tbl_meeting_history m 
+                        JOIN tbl_visitor v ON m.visitor_id = v.id 
+                        JOIN tbl_emp e ON m.emp_id = e.id 
+                        WHERE m.date = '$today'
+                        ORDER BY m.time DESC";
+              }
 
+              // Clone the same query used above, but only for counting rows
+              if (isset($_GET['view']) && $_GET['view'] === 'all') {
+                $count_query = "SELECT COUNT(*) AS total FROM tbl_meeting_history";
+              } else {
+                $count_query = "SELECT COUNT(*) AS total FROM tbl_meeting_history WHERE date = '$today'";
+              }
+
+              $count_result = mysqli_query($conn, $count_query);
+              $count_row = mysqli_fetch_assoc($count_result);
+              $total_items = $count_row['total'];
+
+              
               $result = mysqli_query($conn, $sql);
               $counter = 1;
 
@@ -263,8 +286,7 @@
                       </div>
                     </div>
                   </td>
-
-
+                  
                 <?php
               }
                 ?>
@@ -273,9 +295,15 @@
             </tbody>
           </table>
         </div>
-        <div class="d-flex justify-content-between mt-3"><span class="d-none d-sm-inline-block"
-            data-list-info="data-list-info">1 to 5 <span class="text-body-tertiary"> Items of </span>43</span><a
-            href="/VGMS/Vg_mgt_sys/VgmsModules/Vms/Visitor-Meeting-History.php">View History</a>
+        <div class="d-flex justify-content-between mt-3">
+        <span class="d-none d-sm-inline-block" data-list-info="data-list-info">
+          1 to <?php echo min(5, $total_items); ?> 
+          <span class="text-body-tertiary"> Items of </span> 
+          <?php echo $total_items; ?>
+        </span>
+
+          <a href="../Vms/MeetingHistory.php">View History</a>
+
           <div class="d-flex"><button class="page-link disabled" data-list-pagination="prev" disabled=""><svg
                 class="svg-inline--fa fa-chevron-left" aria-hidden="true" focusable="false" data-prefix="fas"
                 data-icon="chevron-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"
