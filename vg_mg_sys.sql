@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 04, 2025 at 06:23 AM
+-- Generation Time: May 04, 2025 at 06:45 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -304,7 +304,8 @@ INSERT INTO `tbl_logs` (`id`, `emp_id`, `action`, `status`, `timestamp`, `ip_add
 (25, 3, 'login_request', 'failed', '2025-05-03 07:54:49', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36'),
 (26, 3, 'login_request', 'failed', '2025-05-03 07:55:21', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36'),
 (27, 1, 'login_request', 'completed', '2025-05-03 07:55:51', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36'),
-(28, 1, 'login_request', 'completed', '2025-05-03 10:35:39', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36');
+(28, 1, 'login_request', 'completed', '2025-05-03 10:35:39', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36'),
+(29, 1, 'login_request', 'completed', '2025-05-04 09:10:46', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36');
 
 -- --------------------------------------------------------
 
@@ -336,8 +337,9 @@ CREATE TABLE `tbl_meeting_history` (
 
 INSERT INTO `tbl_meeting_history` (`id`, `uid`, `date`, `time`, `visitor_id`, `emp_id`, `reason`, `location`, `in_time`, `out_time`, `payment_status`, `payment_mode`, `amount`, `meeting_status`, `timestamp`) VALUES
 (2, 'meet_6814e4b88a182', '2025-05-02', '17:28:56', 1, 1, 'testing for images', NULL, NULL, NULL, NULL, NULL, NULL, 'Completed', '2025-05-03 10:39:31'),
-(3, 'meet_6814e813400eb', '2025-05-02', '17:43:15', 1, 0, 'testing with redirection ', NULL, NULL, NULL, NULL, NULL, NULL, 'Rescheduled', '2025-05-03 10:39:26'),
-(4, 'meet_6815f2052ed34', '2025-05-03', '12:37:57', 2, 3, 'Aaron and ', NULL, NULL, NULL, NULL, NULL, NULL, 'InProgress', '2025-05-03 10:38:11');
+(3, 'meet_6814e813400eb', '2025-05-02', '17:43:15', 2, 1, 'testing with redirection ', NULL, NULL, NULL, NULL, NULL, NULL, 'Rescheduled', '2025-05-04 09:21:16'),
+(4, 'meet_6815f2052ed34', '2025-05-03', '12:37:57', 2, 3, 'Aaron and ', NULL, NULL, NULL, NULL, NULL, NULL, 'InProgress', '2025-05-03 10:38:11'),
+(5, 'meet_681731fa35c7b', '2025-05-04', '11:23:06', 2, 1, 'testing for today date query', NULL, NULL, NULL, NULL, NULL, NULL, 'Scheduled', '2025-05-04 09:23:06');
 
 -- --------------------------------------------------------
 
@@ -395,6 +397,29 @@ CREATE TABLE `tbl_payment` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_pin_board`
+--
+
+CREATE TABLE `tbl_pin_board` (
+  `srno` int(11) NOT NULL,
+  `pinboard_id` int(11) NOT NULL,
+  `pin_headline` varchar(255) NOT NULL,
+  `pin_content` varchar(255) NOT NULL,
+  `created_on` datetime NOT NULL DEFAULT current_timestamp(),
+  `archive` enum('Yes','No') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_pin_board`
+--
+
+INSERT INTO `tbl_pin_board` (`srno`, `pinboard_id`, `pin_headline`, `pin_content`, `created_on`, `archive`) VALUES
+(1, 24, 'JAVA', 'STARTED', '2025-05-02 14:51:28', 'No'),
+(2, 21, 'veena Infotech', 'project', '2025-05-02 14:48:24', 'No');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_priority`
 --
 
@@ -445,7 +470,9 @@ INSERT INTO `tbl_project` (`id`, `uid`, `project_title`, `project_type`, `projec
 (22, 'prj_680f780d1cc70', 'infotech2', 1, 1, 1, 1, 'm, ff msd fk', '2025-04-28', '2025-05-11', 'admin', '2025-04-28'),
 (24, 'prj_68113dc2705e7', 'test 2', 2, 1, 2, 1, 'sdfgsfdgsdg', '2025-04-30', '2025-05-11', 'admin', '2025-04-30'),
 (25, 'prj_68113ed38894b', 'test 3', 1, 0, 1, 1, 'asdcasdc', '2025-04-30', '2025-05-11', 'admin', '2025-04-30'),
-(26, 'prj_6816093886f8f', 'Maitri Park', 1, 3, 2, 1, 'hdivdocaspovmsd', '2025-05-03', '2025-06-08', 'admin', '2025-05-03');
+(26, 'prj_6816093886f8f', 'Maitri Park', 1, 3, 2, 1, 'hdivdocaspovmsd', '2025-05-03', '2025-06-08', 'admin', '2025-05-03'),
+(27, 'prj_68170d04d7144', 'New Project Dims', 1, 0, 1, 1, 'testing for new location in dims', '2025-05-04', '2025-05-11', 'admin', '2025-05-04'),
+(28, 'prj_68170ec7c809e', 'dims x pms', 1, 3, 2, 1, 'lknscjksdno', '2025-05-04', '2025-05-11', 'admin', '2025-05-04');
 
 -- --------------------------------------------------------
 
@@ -471,7 +498,11 @@ INSERT INTO `tbl_project_emp` (`id`, `emp_id`, `project_id`, `timestamp`) VALUES
 (14, 1, 25, '2025-04-30'),
 (15, 1, 26, '2025-05-03'),
 (16, 3, 26, '2025-05-03'),
-(17, 0, 26, '2025-05-03');
+(17, 0, 26, '2025-05-03'),
+(18, 3, 27, '2025-05-04'),
+(19, 3, 28, '2025-05-04'),
+(20, 1, 28, '2025-05-04'),
+(21, 0, 28, '2025-05-04');
 
 -- --------------------------------------------------------
 
@@ -745,6 +776,13 @@ ALTER TABLE `tbl_payment`
   ADD UNIQUE KEY `uid` (`uid`);
 
 --
+-- Indexes for table `tbl_pin_board`
+--
+ALTER TABLE `tbl_pin_board`
+  ADD UNIQUE KEY `srno` (`srno`),
+  ADD KEY `fk_srno` (`pinboard_id`);
+
+--
 -- Indexes for table `tbl_priority`
 --
 ALTER TABLE `tbl_priority`
@@ -893,13 +931,13 @@ ALTER TABLE `tbl_loan_status`
 -- AUTO_INCREMENT for table `tbl_logs`
 --
 ALTER TABLE `tbl_logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `tbl_meeting_history`
 --
 ALTER TABLE `tbl_meeting_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_meeting_notes`
@@ -929,13 +967,13 @@ ALTER TABLE `tbl_priority`
 -- AUTO_INCREMENT for table `tbl_project`
 --
 ALTER TABLE `tbl_project`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `tbl_project_emp`
 --
 ALTER TABLE `tbl_project_emp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `tbl_project_status`
@@ -1038,6 +1076,12 @@ ALTER TABLE `tbl_meeting_notes`
 --
 ALTER TABLE `tbl_misc`
   ADD CONSTRAINT `tbl_misc_ibfk_1` FOREIGN KEY (`applied_by`) REFERENCES `tbl_emp` (`id`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tbl_pin_board`
+--
+ALTER TABLE `tbl_pin_board`
+  ADD CONSTRAINT `fk_srno` FOREIGN KEY (`pinboard_id`) REFERENCES `tbl_project` (`id`);
 
 --
 -- Constraints for table `tbl_project`
