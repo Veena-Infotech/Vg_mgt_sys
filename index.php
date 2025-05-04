@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr" data-navigation-type="default" data-navbar-horizontal-shape="default">
 
+<!-- Instant redirect -->
+<meta http-equiv="refresh" content="0; URL=./VgmsModules/Authentication/Sign-in.php">
 
 
-<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<!-- <meta http-equiv="content-type" content="text/html;charset=utf-8" /> -->
+
 
 <head>
   <meta charset="utf-8">

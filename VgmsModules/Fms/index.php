@@ -31,7 +31,8 @@
     <!-- ===============================================-->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap"
+        rel="stylesheet">
     <link href="../../vendors/simplebar/simplebar.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../unicons.iconscout.com/release/v4.0.8/css/line.css">
     <link href="../../assets/css/theme-rtl.css" type="text/css" rel="stylesheet" id="style-rtl">
@@ -173,20 +174,103 @@
                         <h4 class="mb-0">File Manager</h4>
                         <small>Organize and access your files easily</small>
                     </div>
-                    <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#locationModal">+ Location</button>
+                    <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#locationModal">+
+                        Location</button>
                 </div>
 
-                <!-- Location Entries -->
-                <div id="locationList" class="px-3 py-2 d-flex flex-wrap gap-3 mt-2">
-                    <!-- Dynamic location card -->
-                    <div class="border rounded d-flex flex-column justify-content-between align-items-center p-2" style="width: 200px; height: 200px;">
-                        <div><strong>Sample Location</strong></div>
-                        <button class="btn btn-outline-secondary btn-sm">Open</button>
+
+                <div class="container mt-4">
+                    <!-- Filter and View Icons -->
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <select id="roomFilter" class="form-select w-auto">
+                            <option value="all">All Rooms</option>
+                            <!-- <option value="living room">Living Room</option>
+                            <option value="kitchen">Kitchen</option>
+                            <option value="bedroom">Bedroom</option> -->
+                            <?php
+                            // Fetch and display additional rooms from the database
+                            include '../Phpfiles/connection.php';
+                            $sql = "SELECT room_name FROM tbl_rooms";
+                            $result = $conn->query($sql);
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    echo '<option value="' . htmlspecialchars($row['room_name']) . '">' . htmlspecialchars($row['room_name']) . '</option>';
+                                }
+                            } else {
+                                echo '<option value="">No rooms available</option>';
+                            }
+                            ?>
+                        </select>
+                        <div class="d-flex gap-3">
+                            <a href="index.php"><i class="bi bi-grid-fill fs-6" id="cardView" data-bs-toggle="tooltip"
+                            title="Bifurcated View" style="cursor:pointer;"></i></a>
+                            <a href="list_view.php"><i class="bi bi-list-ul fs-6" id="listView" data-bs-toggle="tooltip" title="All-in-One View"
+                            style="cursor:pointer;"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Location Cards -->
+                    <div id="locationList" class="row g-3">
+                        <?php
+                        // Fetch and display additional rooms from the database
+                        include '../Phpfiles/connection.php';
+                        $sql = "SELECT * FROM tbl_rooms";
+                        $result = $conn->query($sql);
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo '<div class="col-md-4 location-card" data-room="' . htmlspecialchars($row['room_name']) . '">
+                            <div class="card text-center h-100">
+                                <div class="card-body d-flex flex-column justify-content-center">
+                                    <i class="bi bi-folder-fill display-4 text-secondary"></i>
+                                    <h5 class="card-title mt-2">'.htmlspecialchars($row['room_name']) .'</h5>
+                                    <a href="index_table.php?id='.$row['id'].'"><button
+                                            class="btn btn-outline-secondary btn-sm mt-2">Open</button></a>
+                                </div>
+                            </div>
+                        </div>';
+                            }
+                        } else {
+                            echo '<option value="">No rooms available</option>';
+                        }
+                        ?>
+                        <!-- <div class="col-md-4 location-card" data-room="living room">
+                            <div class="card text-center h-100">
+                                <div class="card-body d-flex flex-column justify-content-center">
+                                    <i class="bi bi-folder-fill display-4 text-secondary"></i>
+                                    <h5 class="card-title mt-2">Living Room</h5>
+                                    <a href="index_table.php"><button
+                                            class="btn btn-outline-secondary btn-sm mt-2">Open</button></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 location-card" data-room="kitchen">
+                            <div class="card text-center h-100">
+                                <div class="card-body d-flex flex-column justify-content-center">
+                                    <i class="bi bi-folder-fill display-4 text-secondary"></i>
+                                    <h5 class="card-title mt-2">Kitchen</h5>
+                                    <a href="index_table.php"><button
+                                            class="btn btn-outline-secondary btn-sm mt-2">Open</button></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 location-card" data-room="bedroom">
+                            <div class="card text-center h-100">
+                                <div class="card-body d-flex flex-column justify-content-center">
+                                    <i class="bi bi-folder-fill display-4 text-secondary"></i>
+                                    <h5 class="card-title mt-2">Bedroom</h5>
+                                    <a href="index_table.php"><button
+                                            class="btn btn-outline-secondary btn-sm mt-2">Open</button></a>
+                                </div>
+                            </div>
+                        </div> -->
                     </div>
                 </div>
 
                 <!-- Add Location Modal -->
-                <div class="modal fade mt-2" id="locationModal" tabindex="-1" aria-labelledby="locationModalLabel" aria-hidden="true">
+                <div class="modal fade mt-2" id="locationModal" tabindex="-1" aria-labelledby="locationModalLabel"
+                    aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content border-0">
                             <div class="modal-header">
@@ -195,7 +279,8 @@
                             </div>
                             <form id="addLocationForm">
                                 <div class="modal-body">
-                                    <input type="text" id="locationInput" class="form-control" placeholder="Enter location name" required>
+                                    <input type="text" id="locationInput" class="form-control"
+                                        placeholder="Enter location name" required>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="submit" class="btn btn-outline-success">Submit</button>
@@ -252,10 +337,12 @@
     </script>
     <!-- JS with GSAP -->
     <!-- Bootstrap JS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const locationList = document.getElementById('locationList');
             const addLocationForm = document.getElementById('addLocationForm');
             const locationInput = document.getElementById('locationInput');
@@ -291,7 +378,7 @@
             });
 
             // Handle new location submission
-            addLocationForm.addEventListener('submit', function(e) {
+            addLocationForm.addEventListener('submit', function (e) {
                 e.preventDefault();
                 const name = locationInput.value.trim();
                 if (!name) return;
@@ -319,7 +406,7 @@
             });
 
             // Button hover animations
-            document.addEventListener('mouseover', function(e) {
+            document.addEventListener('mouseover', function (e) {
                 if (e.target.classList.contains('btn')) {
                     gsap.to(e.target, {
                         scale: 1.05,
@@ -328,7 +415,7 @@
                 }
             });
 
-            document.addEventListener('mouseout', function(e) {
+            document.addEventListener('mouseout', function (e) {
                 if (e.target.classList.contains('btn')) {
                     gsap.to(e.target, {
                         scale: 1,
@@ -336,6 +423,43 @@
                     });
                 }
             });
+        });
+    </script>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+
+    <script>
+        // Tooltip init
+        const tooltipTriggerList = Array.from(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        tooltipTriggerList.forEach(el => new bootstrap.Tooltip(el));
+
+        // Room filter logic
+        const filterSelect = document.getElementById('roomFilter');
+        const cards = document.querySelectorAll('.location-card');
+
+        filterSelect.addEventListener('change', () => {
+            const selectedRoom = filterSelect.value;
+
+            cards.forEach(card => {
+                const room = card.dataset.room;
+                const match = selectedRoom === 'all' || room === selectedRoom;
+
+                if (match) {
+                    card.classList.remove('d-none');
+                    gsap.fromTo(card, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5 });
+                } else {
+                    card.classList.add('d-none');
+                }
+            });
+        });
+
+        // GSAP on initial load
+        gsap.from(".location-card", {
+            opacity: 0,
+            y: 20,
+            duration: 0.6,
+            stagger: 0.1
         });
     </script>
 

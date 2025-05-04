@@ -6,7 +6,10 @@
 <meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 
 <head>
+<<<<<<< HEAD
     
+=======
+>>>>>>> bd8895b020ad489efa29ae3a8dbc83e28fbf861f
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,7 +17,11 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
+<<<<<<< HEAD
     <title>Pinboard</title>
+=======
+    <title>Meeting Notes</title>
+>>>>>>> bd8895b020ad489efa29ae3a8dbc83e28fbf861f
 
     <!-- ===============================================-->
     <!--    Favicons-->
@@ -32,8 +39,12 @@
     <!-- ===============================================-->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+<<<<<<< HEAD
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap"
         rel="stylesheet">
+=======
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet">
+>>>>>>> bd8895b020ad489efa29ae3a8dbc83e28fbf861f
     <link href="../../vendors/simplebar/simplebar.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../unicons.iconscout.com/release/v4.0.8/css/line.css">
     <link href="../../assets/css/theme-rtl.css" type="text/css" rel="stylesheet" id="style-rtl">
@@ -55,6 +66,7 @@
             userLinkRTL.setAttribute('disabled', true);
         }
     </script>
+<<<<<<< HEAD
     <style></style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <link href="../../vendors/leaflet/leaflet.css" rel="stylesheet">
@@ -77,6 +89,65 @@
             border-color: green;
         }
     </style>
+=======
+    <link href="../../vendors/leaflet/leaflet.css" rel="stylesheet">
+    <link href="../../vendors/leaflet.markercluster/MarkerCluster.css" rel="stylesheet">
+    <link href="../../vendors/leaflet.markercluster/MarkerCluster.Default.css" rel="stylesheet">
+    <!-- self -->
+    <link href="../../vendors/flatpickr/flatpickr.min.css" rel="stylesheet" />
+    <link href="../../vendors/dropzone/dropzone.css" rel="stylesheet" />
+    <style>
+        .file-drop-area {
+            border: 1px dashed #5c6370;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            background-color: #0d0f17;
+            /* dark background */
+            transition: background-color 0.3s ease;
+            color: #9da5b4;
+            /* soft light text */
+
+        }
+
+        .file-drop-area:hover {
+            background-color: #11131c;
+        }
+
+        .file-drop-area input[type="file"] {
+            display: none;
+        }
+
+        .file-drop-message p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #9da5b4;
+            /* match text to the soft icon tone */
+        }
+
+        #filePreview {
+            display: flex;
+            flex-direction: column;
+            margin-top: 0.625rem;
+        }
+
+        #filePreview .file-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.625rem;
+            color: #ccc;
+        }
+
+        #filePreview .file-item img {
+            width: 30px;
+            margin-right: 0.625rem;
+        }
+    </style>
+
+
+
+>>>>>>> bd8895b020ad489efa29ae3a8dbc83e28fbf861f
 </head>
 
 <body>
@@ -184,6 +255,7 @@
                 navbarVertical.setAttribute('data-navbar-appearance', 'darker');
             }
         </script>
+<<<<<<< HEAD
         <div class="content my-5" id="heading-gsap">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h2 class="mb-0">Meeting Notes</h2>
@@ -246,6 +318,125 @@
                 </div>
             </div>
         </div>
+=======
+        <div class="content">
+            <div id="heading-gsap">
+                <h3 class="mb-4">Meeting Notes</h3>
+                <h5 class="mb-4" style="margin-top:-1%;">Access shared summaries from recent internal meetings relevant to your project.</h5>
+                <form action="#" method="post" class="p-0" enctype="multipart/form-data">
+                    <div class="row g-3">
+                        <hr>
+                        <!-- Project Title -->
+                        <div class="col-sm-6 col-md-12">
+                            <label class="form-label" style="margin-left: -1%;">Project Title<span style="color: red;">*</span></label>
+                            <div class="form-floating"><input class="form-control" id="kanbanTaskTitle" type="text" placeholder="title" value="" />
+                                <label for="kanbanTaskTitle">Title</label>
+                            </div>
+                            <hr style="margin-top: 1.8%;">
+                        </div>
+                    </div>
+                    <div class="date" style="margin-top: 0.2%;">
+                        <label class="form-label" for="datetimepicker">Date & Time<span style="color: red;"> *</span></label>
+                        <input class="form-control datetimepicker" id="datetimepicker" type="text" placeholder="dd/mm/yyyy hour : minute" data-options='{"enableTime":true,"dateFormat":"d/m/y H:i","disableMobile":true}' />
+                        <hr style="margin-top: 1.8%;">
+                    </div>
+                    <div class="select" style="display: flex; gap: 1rem; align-items: flex-end;">
+                        <div class="col-md-6" style="width: 33%;">
+                            <label class="form-label">Project Manager <span style="color: red;">*</span></label>
+                            <select class="form-select" name="project_manager">
+                                <option value="">Select organizer...</option>
+                                <option>Massachusetts Institute of Technology</option>
+                                <option>University of Chicago</option>
+                                <option>GSAS Open Labs At Harvard</option>
+                                <option>California Institute of Technology</option>
+                            </select>
+                        </div>
+                        <!-- Project Client -->
+                        <div class="col-md-6" style="width: 33%;">
+                            <label class="form-label">Project Client <span style="color: red;">*</span></label>
+                            <select class="form-select" name="project_client" required>
+                                <option selected disabled>Select client</option>
+                                <option value="">Select organizer...</option>
+                                <option>Massachusetts Institute of Technology</option>
+                                <option>University of Chicago</option>
+                                <option>GSAS Open Labs At Harvard</option>
+                                <option>California Institute of Technology</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6" style="width: 32%;">
+                            <label class="form-label">Task <span style="color: red;">*</span></label>
+                            <select class="form-select" name="project_client" required>
+                                <option selected disabled>Select Task</option>
+                                <option value="">Select organizer...</option>
+                                <option>Massachusetts Institute of Technology</option>
+                                <option>University of Chicago</option>
+                                <option>GSAS Open Labs At Harvard</option>
+                                <option>California Institute of Technology</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <hr style="margin-top: 1.8%;">
+                    <div class="priority">
+                        <label for="organizerSingle">priority<span style="color: red;">*</span></label><select class="form-select" id="organizerSingle" data-choices="data-choices" data-options='{"removeItemButton":true,"placeholder":true}'>
+                            <option value="">Select priority...</option>
+                            <option>Urgent</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                        </select>
+                        <hr style="margin-top: 1.8%;">
+                    </div>
+                    <div class="row g-3">
+                        <!-- Project Title -->
+                        <div class="col-sm-6 col-md-12">
+                            <label class="form-label" style="margin-left: -1%;">Location <span style="color: red;">*</span></label>
+                            <div class="form-floating"><input class="form-control" id="kanbanTaskTitle" type="text" placeholder="location...." value="" />
+                                <label for="kanbanTaskTitle">location....</label>
+                            </div>
+                            <hr style="margin-top: 1.8%;">
+                        </div>
+                    </div>
+                    <!-- text area  -->
+                    <div class="mb-0">
+                        <label class="form-label" for="exampleTextarea">Meeting Content </label>
+                        <textarea class="form-control" id="exampleTextarea" rows="3"> </textarea>
+                        <hr style="margin-top: 1.8%;">
+                    </div>
+                    <!-- file upload -->
+                    <div class="row">
+                        <div class="col-12">
+                            <label class="form-label text-uppercase text-light">Upload File <span style="color: red;">*</span></label>
+                            <div class="file-drop-area" id="fileDropArea">
+                                <input type="file" class="form-control d-none" name="file[]" id="fileInput" multiple>
+
+                                <div class="file-drop-message text-center">
+                                    <img class="me-2" src="../../../assets/img/icons/cloud-upload.svg" width="25" alt="" />
+                                    <p>Drag & Drop your files here or <strong>browse</strong></p>
+                                </div>
+
+                                <div id="filePreview" class="mt-3"></div>
+                            </div>
+                        </div>
+                        <hr style="margin-top: 1.8%;">
+                    </div>
+                    <!-- buttons -->
+                    <div class="col-12 text-end" style="margin-bottom: 2%;">
+                        <button class="btn btn-primary" type="submit" id="submitBtn">Submit</button>
+                        <button class="btn btn-secondary" type="reset">Clear</button>
+                    </div>
+                </form>
+            </div>
+            <!-- Footer -->
+            <?php include("../../Components/footer.php"); ?>
+        </div>
+
+
+
+
+
+
+>>>>>>> bd8895b020ad489efa29ae3a8dbc83e28fbf861f
     </main>
 
     <!-- ===============================================-->
@@ -260,6 +451,10 @@
     <!-- ===============================================-->
     <!--Dropdown for contacted-to--->
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> bd8895b020ad489efa29ae3a8dbc83e28fbf861f
     <script src="../../vendors/popper/popper.min.js"></script>
     <script src="../../vendors/bootstrap/bootstrap.min.js"></script>
     <script src="../../vendors/anchorjs/anchor.min.js"></script>
@@ -275,6 +470,7 @@
     <script src="../../assets/js/phoenix.js"></script>
     <script src="../../vendors/echarts/echarts.min.js"></script>
     <script src="../../assets/js/ecommerce-dashboard.js"></script>
+<<<<<<< HEAD
     </script>
     <script>
         let dragSrcEl = null;
@@ -451,13 +647,21 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
     
+=======
+>>>>>>> bd8895b020ad489efa29ae3a8dbc83e28fbf861f
     <script>
         gsap.from("#heading-gsap", {
             opacity: 0,
             y: 50,
+<<<<<<< HEAD
             duration: 0.8,
             ease: "power2.out",
             delay: 0.2
+=======
+            duration: 0.7,
+            ease: "power2.out",
+            delay: 0.7
+>>>>>>> bd8895b020ad489efa29ae3a8dbc83e28fbf861f
         });
         gsap.from("#filterType", {
             opacity: 0,
@@ -467,5 +671,46 @@
             delay: 0.5
         });
     </script>
+<<<<<<< HEAD
 </body>
+=======
+    <!-- self -->
+    <script src="../../vendors/flatpickr/flatpickr.min.js"></script>
+    <script src="../../vendors/dropzone/dropzone-min.js"></script>
+    <script>
+        const fileDropArea = document.getElementById('fileDropArea');
+        const fileInput = document.getElementById('fileInput');
+        const filePreview = document.getElementById('filePreview');
+
+        // Trigger file input on click
+        fileDropArea.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        // Handle file input change
+        fileInput.addEventListener('change', () => {
+            filePreview.innerHTML = '';
+            Array.from(fileInput.files).forEach(file => {
+                const item = document.createElement('div');
+                item.classList.add('file-item');
+                item.innerHTML = `
+        <img src="../../../assets/img/icons/file.svg" alt="file">
+        <span>${file.name}</span>
+      `;
+                filePreview.appendChild(item);
+            });
+        });
+    </script>
+
+
+    </script>
+
+
+
+</body>
+
+
+<!-- Mirrored from prium.github.io/phoenix/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Sep 2024 13:37:21 GMT -->
+
+>>>>>>> bd8895b020ad489efa29ae3a8dbc83e28fbf861f
 </html>

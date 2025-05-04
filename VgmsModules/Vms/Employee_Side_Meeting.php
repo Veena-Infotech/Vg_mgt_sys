@@ -1,3 +1,8 @@
+<?php
+include('../PhpFiles/connection.php');
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr" data-navigation-type="default" data-navbar-horizontal-shape="default">
 
@@ -171,7 +176,7 @@
             <p class="mb-3 text-muted">A list of visitors scheduled for employee-side meetings</p>
             <hr class="hr" /><br>
             <div id="tableExample3"
-            data-list='{"valueNames":["number", "name", "image", "meeting", "time"], "page":5, "pagination":true}'>
+                data-list='{"valueNames":["number", "name", "image", "meeting", "time"], "page":5, "pagination":true}'>
                 <div class="search-box mb-3 mx-auto">
                     <form class="position-relative"><input class="form-control search-input search form-control-sm"
                             type="search" placeholder="Search" aria-label="Search">
@@ -185,245 +190,85 @@
                     </form>
                 </div>
                 <div class="table-responsive">
+                    <?php
+
+                    $uid = $_SESSION['user_id'];
+
+                    $query = "SELECT mh.*, v.f_name, v.m_name, v.l_name, v.id AS visitor_id 
+          FROM tbl_meeting_history mh 
+          JOIN tbl_visitor v ON mh.visitor_id = v.id 
+          WHERE mh.emp_id = '$uid' 
+          AND mh.date = CURDATE()
+          ORDER BY mh.id DESC";
+
+
+                    $result = mysqli_query($conn, $query);
+
+                    $statusColors = [
+                        'Scheduled'   => 'primary',
+                        'Completed'   => 'success',
+                        'InProgress'  => 'warning',
+                        'Rescheduled' => 'info'
+                    ];
+                    ?>
+
                     <table class="table table-striped table-sm fs-9 mb-0">
                         <thead>
                             <tr>
-                                <th class="sort border-top border-translucent ps-3" data-sort="number">#</th>
-                                <th class="sort border-top" data-sort="name">Visitor</th>
-                                <th class="sort border-top" data-sort="image">Image</th>
-                                <th class="sort border-top" data-sort="meeting">Meeting Purpose</th>
-                                <th class="sort border-top" data-sort="time">Time</th>
-                                <th class="sort border-top" data-sort="status">Status</th>
-                                <th class="sort text-end align-middle pe-0 border-top" scope="col">ACTION</th>
+                                <th class="border-top ps-3">#</th>
+                                <th class="border-top">Visitor</th>
+                                <th class="border-top">Image</th>
+                                <th class="border-top">Meeting Purpose</th>
+                                <th class="border-top">Time</th>
+                                <th class="border-top">Status</th>
+                                <th class="text-end align-middle pe-0 border-top">ACTION</th>
                             </tr>
                         </thead>
-                        <tbody class="list">
-                            <tr>
-                                <td class="align-middle ps-3 number">1</td>
-                                <td class="align-middle name">Mushraf</td>
-                                <td class="align-middle image">
-                                    <div class="avatar avatar-l ">
-                                        <img class="rounded-circle " src="../../assets/img/team/30.webp" alt="" />
-                                    </div>
-                                </td>
-                                <td class="align-middle meeting">Meeting With Admin</td>
-                                <td class="align-middle time">10:00 AM</td>
-                                <td class="align-middle status">
-                                    <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span
-                                            class="fw-bold">Success</span><span class="ms-1 fas fa-check"></span></div>
+                        <tbody>
+                            <?php
+                            $count = 1;
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                $fullName = trim($row['f_name'] . ' ' . $row['m_name'] . ' ' . $row['l_name']);
+                                $imagePath = "../uploads/visitor_img/visitor_" . $row['visitor_id'] . ".jpg"; // or .png depending on your naming
+                                $status = $row['meeting_status'];
+                                $badgeClass = $statusColors[$status] ?? 'secondary';
+                            ?>
+                                <tr>
+                                <input type="hidden" value="<?php echo $row['id']; ?>">
 
-                                </td>
-
-                                <td class="align-middle white-space-nowrap text-end pe-0">
-                                    <div class="btn-reveal-trigger position-static"><button
-                                            class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
-                                            type="button" data-bs-toggle="dropdown" data-boundary="window"
-                                            aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"
-                                            fdprocessedid="wjdyz6j"><svg class="svg-inline--fa fa-ellipsis fs-10"
-                                                aria-hidden="true" focusable="false" data-prefix="fas"
-                                                data-icon="ellipsis" role="img" xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 448 512" data-fa-i2svg="">
-                                                <path fill="currentColor"
-                                                    d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z">
-                                                </path>
-                                            </svg><!-- <span class="fas fa-ellipsis-h fs-10"></span> Font Awesome fontawesome.com --></button>
-                                        <div class="dropdown-menu dropdown-menu-end py-2" style=""><a
-                                                class="dropdown-item"
-                                                href="/VGMS/Vg_mgt_sys/VgmsModules/Vms/Meeting_notes popup.php">Add-edit
-                                                notes</a><a class="dropdown-item" href="#!">Complete</a>
-                                            <div class="dropdown-divider"></div><a class="dropdown-item text-danger"
-                                                href="#!">Reschedule</a>
+                                    <td class="align-middle ps-3"><?php echo $count++; ?></td>
+                                    <td class="align-middle"><?php echo htmlspecialchars($fullName); ?></td>
+                                    <td class="align-middle">
+                                        <div class="avatar avatar-l">
+                                            <img class="rounded-circle" src="<?php echo $imagePath; ?>" alt="Visitor Image" onerror="this.src='../../assets/img/default-avatar.png';">
                                         </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="align-middle ps-3 number">2</td>
-                                <td class="align-middle name">Vinit</td>
-                                <td class="align-middle image">
-                                    <div class="avatar avatar-l ">
-                                        <img class="rounded-circle " src="../../assets/img/team/30.webp" alt="" />
-                                    </div>
-                                </td>
-                                <td class="align-middle meeting">Meeting With Admin</td>
-                                <td class="align-middle time">10:00 AM</td>
-                                <td class="align-middle status">
-                                    <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span
-                                            class="fw-bold">Success</span><span class="ms-1 fas fa-check"></span></div>
-
-                                </td>
-
-                                <td class="align-middle white-space-nowrap text-end pe-0">
-                                    <div class="btn-reveal-trigger position-static"><button
-                                            class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
-                                            type="button" data-bs-toggle="dropdown" data-boundary="window"
-                                            aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"
-                                            fdprocessedid="wjdyz6j"><svg class="svg-inline--fa fa-ellipsis fs-10"
-                                                aria-hidden="true" focusable="false" data-prefix="fas"
-                                                data-icon="ellipsis" role="img" xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 448 512" data-fa-i2svg="">
-                                                <path fill="currentColor"
-                                                    d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z">
-                                                </path>
-                                            </svg><!-- <span class="fas fa-ellipsis-h fs-10"></span> Font Awesome fontawesome.com --></button>
-                                        <div class="dropdown-menu dropdown-menu-end py-2" style=""><a
-                                                class="dropdown-item"
-                                                href="/VGMS/Vg_mgt_sys/VgmsModules/Vms/Meeting_notes popup.php">Add-edit
-                                                notes</a><a class="dropdown-item" href="#!">Complete</a>
-                                            <div class="dropdown-divider"></div><a class="dropdown-item text-danger"
-                                                href="#!">Reschedule</a>
+                                    </td>
+                                    <td class="align-middle"><?php echo htmlspecialchars($row['reason']); ?></td>
+                                    <td class="align-middle"><?php echo date("h:i A", strtotime($row['time'])); ?></td>
+                                    <td class="align-middle">
+                                        <div class="badge badge-phoenix fs-10 badge-phoenix-<?php echo $badgeClass; ?>">
+                                            <span class="fw-bold"><?php echo $status; ?></span>
                                         </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="align-middle ps-3 number">1</td>
-                                <td class="align-middle name">Mushraf</td>
-                                <td class="align-middle image">
-                                    <div class="avatar avatar-l ">
-                                        <img class="rounded-circle " src="../../assets/img/team/30.webp" alt="" />
-                                    </div>
-                                </td>
-                                <td class="align-middle meeting">Meeting With Admin</td>
-                                <td class="align-middle time">10:00 AM</td>
-                                <td class="align-middle status">
-                                    <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span
-                                            class="fw-bold">Success</span><span class="ms-1 fas fa-check"></span></div>
-
-                                </td>
-
-                                <td class="align-middle white-space-nowrap text-end pe-0">
-                                    <div class="btn-reveal-trigger position-static"><button
-                                            class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
-                                            type="button" data-bs-toggle="dropdown" data-boundary="window"
-                                            aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"
-                                            fdprocessedid="wjdyz6j"><svg class="svg-inline--fa fa-ellipsis fs-10"
-                                                aria-hidden="true" focusable="false" data-prefix="fas"
-                                                data-icon="ellipsis" role="img" xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 448 512" data-fa-i2svg="">
-                                                <path fill="currentColor"
-                                                    d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z">
-                                                </path>
-                                            </svg><!-- <span class="fas fa-ellipsis-h fs-10"></span> Font Awesome fontawesome.com --></button>
-                                            <div class="dropdown-menu dropdown-menu-end py-2" style=""><a class="dropdown-item" href="/VGMS/Vg_mgt_sys/VgmsModules/Vms/Meeting_notes popup.php">Add-edit notes</a><a class="dropdown-item" href="#!">Complete</a>
-                                            <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Reschedule</a>
+                                    </td>
+                                    <td class="align-middle text-end pe-0">
+                                        <div class="btn-reveal-trigger position-static">
+                                            <button class="btn btn-sm dropdown-toggle dropdown-caret-none btn-reveal fs-10"
+                                                type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="fas fa-ellipsis fs-10"></i>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2">
+                                                <a class="dropdown-item" href="Meeting_notes_popup.php?meeting_id=<?php echo $row['id']; ?>">Add-edit notes</a>
+                                                <a class="dropdown-item" href="CompleteMeeting.php?id=<?php echo $row['id']; ?>">Complete</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item text-danger" href="RescheduleMeeting.php?id=<?php echo $row['id']; ?>">Reschedule</a>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="align-middle ps-3 number">1</td>
-                                <td class="align-middle name">Rajat</td>
-                                <td class="align-middle image">
-                                    <div class="avatar avatar-l ">
-                                        <img class="rounded-circle " src="../../assets/img/team/30.webp" alt="" />
-                                    </div>
-                                </td>
-                                <td class="align-middle meeting">Meeting With Admin</td>
-                                <td class="align-middle time">10:00 AM</td>
-                                <td class="align-middle status">
-                                    <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span
-                                            class="fw-bold">Success</span><span class="ms-1 fas fa-check"></span></div>
-
-                                </td>
-
-                                <td class="align-middle white-space-nowrap text-end pe-0">
-                                    <div class="btn-reveal-trigger position-static"><button
-                                            class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
-                                            type="button" data-bs-toggle="dropdown" data-boundary="window"
-                                            aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"
-                                            fdprocessedid="wjdyz6j"><svg class="svg-inline--fa fa-ellipsis fs-10"
-                                                aria-hidden="true" focusable="false" data-prefix="fas"
-                                                data-icon="ellipsis" role="img" xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 448 512" data-fa-i2svg="">
-                                                <path fill="currentColor"
-                                                    d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z">
-                                                </path>
-                                            </svg><!-- <span class="fas fa-ellipsis-h fs-10"></span> Font Awesome fontawesome.com --></button>
-                                            <div class="dropdown-menu dropdown-menu-end py-2" style=""><a class="dropdown-item" href="/VGMS/Vg_mgt_sys/VgmsModules/Vms/Meeting_notes popup.php">Add-edit notes</a><a class="dropdown-item" href="#!">Complete</a>
-                                            <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Reschedule</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="align-middle ps-3 number">1</td>
-                                <td class="align-middle name">Maha</td>
-                                <td class="align-middle image">
-                                    <div class="avatar avatar-l ">
-                                        <img class="rounded-circle " src="../../assets/img/team/30.webp" alt="" />
-                                    </div>
-                                </td>
-                                <td class="align-middle meeting">Meeting With Admin</td>
-                                <td class="align-middle time">10:00 AM</td>
-                                <td class="align-middle status">
-                                    <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span
-                                            class="fw-bold">Success</span><span class="ms-1 fas fa-check"></span></div>
-
-                                </td>
-
-                                <td class="align-middle white-space-nowrap text-end pe-0">
-                                    <div class="btn-reveal-trigger position-static"><button
-                                            class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
-                                            type="button" data-bs-toggle="dropdown" data-boundary="window"
-                                            aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"
-                                            fdprocessedid="wjdyz6j"><svg class="svg-inline--fa fa-ellipsis fs-10"
-                                                aria-hidden="true" focusable="false" data-prefix="fas"
-                                                data-icon="ellipsis" role="img" xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 448 512" data-fa-i2svg="">
-                                                <path fill="currentColor"
-                                                    d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z">
-                                                </path>
-                                            </svg><!-- <span class="fas fa-ellipsis-h fs-10"></span> Font Awesome fontawesome.com --></button>
-                                            <div class="dropdown-menu dropdown-menu-end py-2" style=""><a class="dropdown-item" href="/VGMS/Vg_mgt_sys/VgmsModules/Vms/Meeting_notes popup.php">Add-edit notes</a><a class="dropdown-item" href="#!">Complete</a>
-                                            <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Reschedule</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="align-middle ps-3 number">1</td>
-                                <td class="align-middle name">Ishika</td>
-                                <td class="align-middle image">
-                                    <div class="avatar avatar-l ">
-                                        <img class="rounded-circle " src="../../assets/img/team/30.webp" alt="" />
-                                    </div>
-                                </td>
-                                <td class="align-middle meeting">Meeting With Admin</td>
-                                <td class="align-middle time">10:00 AM</td>
-                                <td class="align-middle status">
-                                    <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span
-                                            class="fw-bold">Success</span><span class="ms-1 fas fa-check"></span></div>
-
-                                </td>
-
-                                <td class="align-middle white-space-nowrap text-end pe-0">
-                                    <div class="btn-reveal-trigger position-static"><button
-                                            class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
-                                            type="button" data-bs-toggle="dropdown" data-boundary="window"
-                                            aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"
-                                            fdprocessedid="wjdyz6j"><svg class="svg-inline--fa fa-ellipsis fs-10"
-                                                aria-hidden="true" focusable="false" data-prefix="fas"
-                                                data-icon="ellipsis" role="img" xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 448 512" data-fa-i2svg="">
-                                                <path fill="currentColor"
-                                                    d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z">
-                                                </path>
-                                            </svg><!-- <span class="fas fa-ellipsis-h fs-10"></span> Font Awesome fontawesome.com --></button>
-                                            <div class="dropdown-menu dropdown-menu-end py-2" style=""><a class="dropdown-item" href="/VGMS/Vg_mgt_sys/VgmsModules/Vms/Meeting_notes popup.php">Add-edit notes</a><a class="dropdown-item" href="#!">Complete</a>
-                                            <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Reschedule</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-
-
-
-
-
-
+                                    </td>
+                                </tr>
+                            <?php } ?>
                         </tbody>
                     </table>
+
                 </div>
                 <div class="d-flex justify-content-between mt-3"><span class="d-none d-sm-inline-block"
                         data-list-info="data-list-info">1 to 5 <span class="text-body-tertiary"> Items of

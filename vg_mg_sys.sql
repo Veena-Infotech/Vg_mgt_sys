@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 01, 2025 at 07:37 AM
+-- Generation Time: May 04, 2025 at 06:23 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `vg_mg_sys`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shelfs_cubboards`
+--
+
+CREATE TABLE `shelfs_cubboards` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `room_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `shelfs_cubboards`
+--
+
+INSERT INTO `shelfs_cubboards` (`id`, `name`, `room_name`) VALUES
+(1, 'shelf1', 'Conference room'),
+(2, 'shelf 2', '\nPrivate Cabin 1'),
+(3, 'shelf 3', 'Conference room'),
+(4, 'shelf 3', 'Conference room');
 
 -- --------------------------------------------------------
 
@@ -144,7 +166,8 @@ CREATE TABLE `tbl_emp` (
 
 INSERT INTO `tbl_emp` (`id`, `uid`, `salutation`, `f_name`, `m_name`, `l_name`, `father's_name`, `mother's_name`, `marital_status`, `spouse_name`, `date_of_birth`, `gender`, `primary_phone_no`, `alternative_phone_no`, `personal_email`, `official_email`, `current_address`, `permanent_address`, `aadharcard_no`, `pancard_no`, `bank_name`, `bank_acc_no`, `ifsc_code`, `branch_name`, `branch_address`, `is_upi_id`, `upi_id`, `emergency_name`, `emergency_relationship`, `emergency_phone_no`, `nominee_name`, `nominee_relationship`, `high_education_qualification`, `institute_name`, `passing_year`, `education_certificate_path`, `have_worked_previously`, `previous_employer_name`, `previous_job_role`, `emp_period_start_date`, `emp_period_end_date`, `reason_leaving`, `document_path`, `joining_date`, `current_job_role`, `current_salary_ctc`, `in_hand_salary`, `conveyance`, `company_loan_advance`, `loan_amt_repayment`, `official_work_timing`, `weekly_off_day`, `annual_leave_entitlement`, `leave_application_process`, `is_policy_agree`, `willing_for_docs`, `additional_comments`, `family`, `position`, `branch`, `date_joined`, `password`, `timestamp`) VALUES
 (0, 'vms-0000', '', 'Unauthorised', 'Unauthorised', 'Unauthorised', '', '', 'Single', '', NULL, 'Male', '0', '1234567890', '', 'Unauthorised@gmail.com', 'Unauthorised', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1234.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Unauthorised', 'Unauthorised', 'Unauthorised', '2025-04-09', '$2y$10$5kpPviRdpHR3WqMRUu0mc.TeK5sgQ535AzuJEEH3Rfsy.e7KKlkaS', '2025-04-10 09:20:40'),
-(1, 'vms-001', '', 'receptionist', 'receptionist', 'receptionist', '', '', 'Single', '', NULL, 'Male', '0', '1234567890', '', 'receptionist@gmail.com', 'receptionist', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1234.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'receptionist', 'receptionist', 'receptionist', '2025-04-09', '$2y$10$5kpPviRdpHR3WqMRUu0mc.TeK5sgQ535AzuJEEH3Rfsy.e7KKlkaS', '2025-04-08 20:12:59');
+(1, 'vms-001', '', 'receptionist', 'receptionist', 'receptionist', '', '', 'Single', '', NULL, 'Male', '0', '1234567890', '', 'receptionist@gmail.com', 'receptionist', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1234.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'receptionist', 'receptionist', 'receptionist', '2025-04-09', '$2y$10$5kpPviRdpHR3WqMRUu0mc.TeK5sgQ535AzuJEEH3Rfsy.e7KKlkaS', '2025-04-08 20:12:59'),
+(3, 'vi-101', 'mr', 'Om', 'RK', 'Pandey', 'RK', 'Archana', 'Single', '', '2005-07-22', 'Male', NULL, NULL, 'email@email.com', 'email@email.com', 'infotech office ', 'Aryan sir\'s heart', '987667893278', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2a$12$M2gJn5kRLDVmYMaVt/3KP.jddbP2MVNcSB6fpDXc3LtluJmkBt8.q', '2025-05-03 07:51:34');
 
 -- --------------------------------------------------------
 
@@ -162,6 +185,29 @@ CREATE TABLE `tbl_files` (
   `uploaded_by` int(11) DEFAULT NULL,
   `uploaded_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_fms`
+--
+
+CREATE TABLE `tbl_fms` (
+  `id` int(11) NOT NULL,
+  `room_name` varchar(255) NOT NULL,
+  `cubboard_name` varchar(255) NOT NULL,
+  `file_name` varchar(255) NOT NULL,
+  `time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `added_by` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_fms`
+--
+
+INSERT INTO `tbl_fms` (`id`, `room_name`, `cubboard_name`, `file_name`, `time`, `added_by`) VALUES
+(1, 'Conference room', 'dr-1', 'personal test file 📂', '2025-05-04 04:15:05', 'receptionist'),
+(3, 'Conference room', 'shelf 3', 'addd', '2025-05-04 04:12:54', 'receptionist');
 
 -- --------------------------------------------------------
 
@@ -253,7 +299,12 @@ INSERT INTO `tbl_logs` (`id`, `emp_id`, `action`, `status`, `timestamp`, `ip_add
 (18, 1, 'login_request', 'failed', '2025-04-10 08:44:44', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36'),
 (21, 0, 'login_request', 'failed', '2025-04-10 09:21:00', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36'),
 (22, 1, 'login_request', 'completed', '2025-04-10 10:27:18', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36'),
-(23, 1, 'login_request', 'completed', '2025-04-10 10:27:45', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36');
+(23, 1, 'login_request', 'completed', '2025-04-10 10:27:45', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36'),
+(24, 1, 'login_request', 'completed', '2025-05-01 17:17:18', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36'),
+(25, 3, 'login_request', 'failed', '2025-05-03 07:54:49', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36'),
+(26, 3, 'login_request', 'failed', '2025-05-03 07:55:21', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36'),
+(27, 1, 'login_request', 'completed', '2025-05-03 07:55:51', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36'),
+(28, 1, 'login_request', 'completed', '2025-05-03 10:35:39', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36');
 
 -- --------------------------------------------------------
 
@@ -275,9 +326,18 @@ CREATE TABLE `tbl_meeting_history` (
   `payment_status` enum('Paid','Unpaid') DEFAULT NULL,
   `payment_mode` enum('Cash','Card','Online') DEFAULT NULL,
   `amount` decimal(10,2) DEFAULT NULL,
-  `meeting_status` enum('Scheduled','Completed','Cancelled') DEFAULT NULL,
+  `meeting_status` enum('Scheduled','Completed','InProgress','Rescheduled') DEFAULT 'Scheduled',
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_meeting_history`
+--
+
+INSERT INTO `tbl_meeting_history` (`id`, `uid`, `date`, `time`, `visitor_id`, `emp_id`, `reason`, `location`, `in_time`, `out_time`, `payment_status`, `payment_mode`, `amount`, `meeting_status`, `timestamp`) VALUES
+(2, 'meet_6814e4b88a182', '2025-05-02', '17:28:56', 1, 1, 'testing for images', NULL, NULL, NULL, NULL, NULL, NULL, 'Completed', '2025-05-03 10:39:31'),
+(3, 'meet_6814e813400eb', '2025-05-02', '17:43:15', 1, 0, 'testing with redirection ', NULL, NULL, NULL, NULL, NULL, NULL, 'Rescheduled', '2025-05-03 10:39:26'),
+(4, 'meet_6815f2052ed34', '2025-05-03', '12:37:57', 2, 3, 'Aaron and ', NULL, NULL, NULL, NULL, NULL, NULL, 'InProgress', '2025-05-03 10:38:11');
 
 -- --------------------------------------------------------
 
@@ -384,7 +444,8 @@ INSERT INTO `tbl_project` (`id`, `uid`, `project_title`, `project_type`, `projec
 (21, 'prj_680f77ed89734', 'infotech', 2, 0, 2, 1, 'test', '2020-04-20', '2020-05-20', 'admin', '2025-04-28'),
 (22, 'prj_680f780d1cc70', 'infotech2', 1, 1, 1, 1, 'm, ff msd fk', '2025-04-28', '2025-05-11', 'admin', '2025-04-28'),
 (24, 'prj_68113dc2705e7', 'test 2', 2, 1, 2, 1, 'sdfgsfdgsdg', '2025-04-30', '2025-05-11', 'admin', '2025-04-30'),
-(25, 'prj_68113ed38894b', 'test 3', 1, 0, 1, 1, 'asdcasdc', '2025-04-30', '2025-05-11', 'admin', '2025-04-30');
+(25, 'prj_68113ed38894b', 'test 3', 1, 0, 1, 1, 'asdcasdc', '2025-04-30', '2025-05-11', 'admin', '2025-04-30'),
+(26, 'prj_6816093886f8f', 'Maitri Park', 1, 3, 2, 1, 'hdivdocaspovmsd', '2025-05-03', '2025-06-08', 'admin', '2025-05-03');
 
 -- --------------------------------------------------------
 
@@ -407,7 +468,10 @@ INSERT INTO `tbl_project_emp` (`id`, `emp_id`, `project_id`, `timestamp`) VALUES
 (9, 1, 21, '2025-04-28'),
 (10, 1, 22, '2025-04-28'),
 (13, 1, 24, '2025-04-30'),
-(14, 1, 25, '2025-04-30');
+(14, 1, 25, '2025-04-30'),
+(15, 1, 26, '2025-05-03'),
+(16, 3, 26, '2025-05-03'),
+(17, 0, 26, '2025-05-03');
 
 -- --------------------------------------------------------
 
@@ -450,6 +514,25 @@ INSERT INTO `tbl_project_type` (`id`, `type`, `created_at`) VALUES
 (1, 'Society', '2025-04-28 20:52:05'),
 (2, 'In-House', '2025-04-28 20:52:20'),
 (3, 'Lottery', '2025-04-28 20:52:41');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_rooms`
+--
+
+CREATE TABLE `tbl_rooms` (
+  `id` int(11) NOT NULL,
+  `room_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_rooms`
+--
+
+INSERT INTO `tbl_rooms` (`id`, `room_name`) VALUES
+(1, 'Conference room'),
+(2, 'Private Cabin 1');
 
 -- --------------------------------------------------------
 
@@ -550,8 +633,22 @@ CREATE TABLE `tbl_visitor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Dumping data for table `tbl_visitor`
+--
+
+INSERT INTO `tbl_visitor` (`id`, `uid`, `f_name`, `m_name`, `l_name`, `phone_no`, `email`, `address`, `img`, `registered_date`, `timestamp`) VALUES
+(1, 'visitor_6814e4b888426', 'Aryan', 'Nitin', 'Shirodkar', '7304680494', 'ans@gmail.com', '', 'visitor_1.jpg', '2025-05-02', '2025-05-02 15:28:56'),
+(2, 'visitor_6815f2052cdfb', 'om', '', '', '9321871957', 'om@gmail.com', '', 'visitor_2.jpg', '2025-05-03', '2025-05-03 10:37:57');
+
+--
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `shelfs_cubboards`
+--
+ALTER TABLE `shelfs_cubboards`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tbl_category`
@@ -579,6 +676,12 @@ ALTER TABLE `tbl_emp`
 ALTER TABLE `tbl_files`
   ADD PRIMARY KEY (`id`),
   ADD KEY `folder_id` (`folder_id`);
+
+--
+-- Indexes for table `tbl_fms`
+--
+ALTER TABLE `tbl_fms`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tbl_folders`
@@ -615,9 +718,8 @@ ALTER TABLE `tbl_logs`
 --
 ALTER TABLE `tbl_meeting_history`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `uid` (`uid`),
-  ADD KEY `emp_id` (`emp_id`),
-  ADD KEY `tbl_meeting_history_ibfk_1` (`visitor_id`);
+  ADD KEY `tbl_meeting_history_ibfk_1` (`visitor_id`),
+  ADD KEY `tbl_meeting_history_ibfk_2` (`emp_id`);
 
 --
 -- Indexes for table `tbl_meeting_notes`
@@ -679,6 +781,12 @@ ALTER TABLE `tbl_project_type`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tbl_rooms`
+--
+ALTER TABLE `tbl_rooms`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tbl_tags`
 --
 ALTER TABLE `tbl_tags`
@@ -728,6 +836,12 @@ ALTER TABLE `tbl_visitor`
 --
 
 --
+-- AUTO_INCREMENT for table `shelfs_cubboards`
+--
+ALTER TABLE `shelfs_cubboards`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `tbl_category`
 --
 ALTER TABLE `tbl_category`
@@ -743,13 +857,19 @@ ALTER TABLE `tbl_client`
 -- AUTO_INCREMENT for table `tbl_emp`
 --
 ALTER TABLE `tbl_emp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_files`
 --
 ALTER TABLE `tbl_files`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_fms`
+--
+ALTER TABLE `tbl_fms`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_folders`
@@ -773,13 +893,13 @@ ALTER TABLE `tbl_loan_status`
 -- AUTO_INCREMENT for table `tbl_logs`
 --
 ALTER TABLE `tbl_logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `tbl_meeting_history`
 --
 ALTER TABLE `tbl_meeting_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_meeting_notes`
@@ -809,13 +929,13 @@ ALTER TABLE `tbl_priority`
 -- AUTO_INCREMENT for table `tbl_project`
 --
 ALTER TABLE `tbl_project`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `tbl_project_emp`
 --
 ALTER TABLE `tbl_project_emp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `tbl_project_status`
@@ -828,6 +948,12 @@ ALTER TABLE `tbl_project_status`
 --
 ALTER TABLE `tbl_project_type`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tbl_rooms`
+--
+ALTER TABLE `tbl_rooms`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_tags`
@@ -863,7 +989,7 @@ ALTER TABLE `tbl_todo`
 -- AUTO_INCREMENT for table `tbl_visitor`
 --
 ALTER TABLE `tbl_visitor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables

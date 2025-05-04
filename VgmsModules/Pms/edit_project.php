@@ -273,7 +273,7 @@ include '../PhpFiles/connection.php';
                                     <label class="form-label">Files in Project Folder</label>
                                     <div class="file-list">
                                         <?php
-                                        $project_folder = '../uploads/project/' . $row['project_title']; // project directory
+                                        $project_folder = '../Dims/DimsV2/uploads/project/' . $row['project_title']; // project directory
 
                                         // Check if directory exists
                                         if (is_dir($project_folder)) {
