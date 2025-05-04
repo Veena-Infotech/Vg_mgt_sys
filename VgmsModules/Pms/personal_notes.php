@@ -181,6 +181,8 @@
                 navbarVertical.setAttribute('data-navbar-appearance', 'darker');
             }
         </script>
+
+
         <div class="content my-5" id="heading-gsap">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h2 class="mb-0">Personal Notes</h2>
@@ -191,14 +193,26 @@
             </div>
 
             <!-- Pinboard (Active Notes) -->
-            <div class="row" id="pinboard">
+
+            <?php
+            include '../PhpFiles/connection.php';
+
+            $query = "SELECT * FROM tbl_personal_notes";
+            $result = mysqli_query($conn, $query) or die('Query Unsuccessful');
+
+            if (mysqli_num_rows($result) > 0) {
+                // Open the row container just once
+                echo '<div class="row" id="pinboard">';
+
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo '
+
                 <!-- Example Note -->
                 <div class="col-md-4 mb-4" draggable="true">
                     <div class="card shadow-sm h-100 border border-info">
                         <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">🚀 Database Design</h5>
-                            <p class="card-text flex-grow-1">Finalize the structure for PRMS
-                                proposals table.</p>
+                            <h5 class="card-title">' . $row['personal_notes_title'] . '</h5>
+                            <p class="card-text flex-grow-1">' . $row['personal_notes_content'] . '</p>
                             <div class="d-flex gap-3 align-items-center mt-3">
 
                                 <button class="btn btn-sm btn-outline-yellow archive-btn">Archive</button>
@@ -241,12 +255,10 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-
-
-
-
+        </div>';
+                }
+            };
+            ?>
 
 
 
@@ -394,12 +406,12 @@
         }
 
         // View Archives toggle
-        document.getElementById('viewArchiveBtn').addEventListener('click', function () {
+        document.getElementById('viewArchiveBtn').addEventListener('click', function() {
             archiveSection.style.display = archiveSection.style.display === 'none' ? 'flex' : 'none';
         });
 
         // Add Note functionality
-        document.getElementById('addNoteBtn').addEventListener('click', function () {
+        document.getElementById('addNoteBtn').addEventListener('click', function() {
             const newNote = document.createElement('div');
             newNote.className = 'col-md-4 mb-4';
             newNote.setAttribute('draggable', 'true');
@@ -438,7 +450,7 @@
         }
 
         // Save Changes
-        document.getElementById('saveChangesBtn').addEventListener('click', function () {
+        document.getElementById('saveChangesBtn').addEventListener('click', function() {
             const newTitle = document.getElementById('editNoteTitle').value;
             const newDescription = document.getElementById('editNoteDescription').value;
 
@@ -449,11 +461,11 @@
         });
 
         // Close Modal
-        document.getElementById('modalCloseBtn').addEventListener('click', function () {
+        document.getElementById('modalCloseBtn').addEventListener('click', function() {
             modal.hide(); // Close modal
         });
 
-        document.getElementById('closeModalBtn').addEventListener('click', function () {
+        document.getElementById('closeModalBtn').addEventListener('click', function() {
             modal.hide(); // Close modal
         });
     </script>
