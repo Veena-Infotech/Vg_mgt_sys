@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($stmt->execute()) {
         // Handle file upload
-        $basePath = $_SERVER['DOCUMENT_ROOT'] . '/Vg_mgt_sys/VgmsModules/uploads/project/';
+        $basePath = $_SERVER['DOCUMENT_ROOT'] . '/Vg_mgt_sys/VgmsModules/Dims/DimsV2/uploads/project';
         $projectFolder = $basePath . $projectTitle;
 
         // Create directory if not exists

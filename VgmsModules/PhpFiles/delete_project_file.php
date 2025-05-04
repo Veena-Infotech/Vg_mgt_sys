@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Construct the full file path based on the project title and file name
-    $basePath = $_SERVER['DOCUMENT_ROOT'] . '/Vg_mgt_sys/VgmsModules/uploads/project/';
+    $basePath = $_SERVER['DOCUMENT_ROOT'] . '/Vg_mgt_sys/VgmsModules/Dims/DimsV2/uploads/project';
     $filePath = realpath($basePath . $projectTitle . '/' . $fileName);
 
     // Send alert with the file path (for debugging purposes)

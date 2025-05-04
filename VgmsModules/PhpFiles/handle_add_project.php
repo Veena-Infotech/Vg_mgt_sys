@@ -42,7 +42,7 @@ $file_paths = []; // Array to store file paths
 
 if (isset($_FILES['file']) && is_array($_FILES['file']['name'])) {
     $project_folder_name = $project_title;
-    $upload_dir = "../uploads/project/" . $project_folder_name . "/";
+    $upload_dir = "../Dims/DimsV2/uploads/project/" . $project_folder_name . "/";
 
     if (!file_exists($upload_dir)) {
         if (!mkdir($upload_dir, 0777, true)) {

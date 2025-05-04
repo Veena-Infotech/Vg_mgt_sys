@@ -69,8 +69,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $newName = basename($_POST['new_name'] ?? '');
         $itemType = $_POST['item_type'] ?? '';
 
-        if ($itemName === 'archive') {
-            echo json_encode(['success' => false, 'error' => 'Cannot rename archive folder']);
+        if ($itemName === 'archive' || $itemName === 'project') {
+            echo json_encode(['success' => false, 'error' => 'Cannot rename this folder folder']);
             exit;
         }
 
@@ -107,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $itemName = basename($_POST['item_name'] ?? '');
         $itemType = $_POST['item_type'] ?? '';
 
-        if ($itemName === 'archive') {
+        if ($itemName === 'archive' || $itemName === 'project') {
             echo json_encode(['success' => false, 'error' => 'Cannot archive the archive folder']);
             exit;
         }
