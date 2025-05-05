@@ -20,7 +20,7 @@
       <div class="navbar-vertical-content">
         <ul class="navbar-nav flex-column" id="navbarVerticalNav">
           <li class="nav-item">
-            <!----Dashboard---> 
+            <!----Dashboard--->
             <div class="nav-item-wrapper">
               <a class="nav-link dropdown-indicator label-1" href="#nv-dashboard" role="button"
                 data-bs-toggle="collapse" aria-expanded="true" aria-controls="nv-dashboard">
@@ -57,7 +57,7 @@
                 </ul>
               </div>
             </div>
-            <!---VMS--> 
+            <!---VMS-->
             <div class="nav-item-wrapper">
               <a class="nav-link dropdown-indicator label-1" href="#nv-vms" role="button"
                 data-bs-toggle="collapse" aria-expanded="true" aria-controls="nv-vms">
@@ -222,6 +222,67 @@
                       <div class="d-flex align-items-center">
                         <span class="me-2"><i class="fas fa-tasks"></i></span>
                         <span class="nav-link-text">Leave A-R Admin</span>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+
+            </div>
+            <!----FMS MODULE--->
+            <div class="nav-item-wrapper">
+              <a class="nav-link dropdown-indicator label-1" href="#nv-fms" role="button"
+                data-bs-toggle="collapse" aria-expanded="true" aria-controls="nv-fms">
+                <div class="d-flex align-items-center">
+                  <div class="dropdown-indicator-icon-wrapper">
+                    <span class="fas fa-caret-right dropdown-indicator-icon"></span>
+                  </div>
+                  <span class="nav-link-icon"><span class="fas fa-user-tie"></span></span>
+                  <span class="nav-link-text">FMS</span>
+                  <span class="fa-solid text-info ms-1" style="font-size: 6px"></span>
+                </div>
+              </a>
+
+              <div class="parent-wrapper label-1">
+                <ul class="nav collapse parent " data-bs-parent="#navbarVerticalCollapse" id="nv-fms">
+                  <li class="collapsed-nav-item-title d-none">FMS</li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/Fms/index_table.php?tag=FMS" id="FMS">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fas fa-tasks"></i></span>
+                        <span class="nav-link-text">FMS</span>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!---DIMS-->
+            <div class="nav-item-wrapper">
+              <a class="nav-link dropdown-indicator label-1" href="#nv-dims" role="button"
+                data-bs-toggle="collapse" aria-expanded="true" aria-controls="nv-dims">
+                <div class="d-flex align-items-center">
+                  <div class="dropdown-indicator-icon-wrapper">
+                    <span class="fas fa-caret-right dropdown-indicator-icon"></span>
+                  </div>
+                  <span class="nav-link-icon"><span class="fas fa-user-tie"></span></span>
+                  <span class="nav-link-text">DIMS</span>
+                  <span class="fa-solid text-info ms-1" style="font-size: 6px"></span>
+                </div>
+              </a>
+
+              <div class="parent-wrapper label-1">
+                <ul class="nav collapse parent " data-bs-parent="#navbarVerticalCollapse" id="nv-dims">
+                  <li class="collapsed-nav-item-title d-none">DIMS</li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/DIMS/index.php?tag=DIMS" id="DIMS">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fas fa-tasks"></i></span>
+                        <span class="nav-link-text">DIMS</span>
                       </div>
                     </a>
                   </li>
