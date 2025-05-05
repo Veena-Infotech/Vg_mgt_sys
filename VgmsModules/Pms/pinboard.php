@@ -186,47 +186,14 @@ session_start();
             }
         </script>
 
-<!-- delete button -->
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const deleteBtns = document.querySelectorAll('.delete-btn');
 
-                deleteBtns.forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        const pinboardId = this.getAttribute('data-id');
-
-                        if (confirm('Are you sure you want to delete this item?')) {
-                            fetch('../PhpFiles/handle_delete_pinboard.php', {
-                                    method: 'POST',
-                                    headers: {
-                                        'Content-Type': 'application/x-www-form-urlencoded'
-                                    },
-                                    body: 'id=' + encodeURIComponent(pinboardId)
-                                })
-                                .then(response => response.text())
-                                .then(data => {
-                                    if (data.trim() === 'success') {
-                                        alert('Record deleted successfully');
-                                        location.reload();
-                                    } else {
-                                        alert('Error: ' + data);
-                                    }
-                                })
-                                .catch(error => {
-                                    console.error('Error:', error);
-                                });
-                        }
-                    });
-                });
-            });
-        </script>
 
 
         <div class="content my-5" id="heading-gsap">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h2 class="mb-0">Pinboard Notes</h2>
                 <div>
-                <button class="btn btn-success me-2" id="addNoteBtn">Add Note</button>
+                    <button class="btn btn-success me-2" id="addNoteBtn">Add Note</button>
                     <button class="btn btn-secondary" id="viewArchiveBtn">View Archives</button>
                 </div>
             </div>
@@ -236,16 +203,16 @@ session_start();
             <!-- Pinboard (Active Notes) -->
 
             <?php
-include '../PhpFiles/connection.php';
+            include '../PhpFiles/connection.php';
 
-// Fetch active notes
-$query_active = "SELECT * FROM tbl_pin_board WHERE is_archived = 0";
-$result_active = mysqli_query($conn, $query_active) or die('Query Failed');
+            // Fetch active notes
+            $query_active = "SELECT * FROM tbl_pin_board WHERE is_archived = 0";
+            $result_active = mysqli_query($conn, $query_active) or die('Query Failed');
 
-echo '<div class="row" id="pinboard">';
-if (mysqli_num_rows($result_active) > 0) {
-    while ($row2 = mysqli_fetch_assoc($result_active)) {
-        echo '<div class="col-md-4 mb-4" draggable="true">
+            echo '<div class="row" id="pinboard">';
+            if (mysqli_num_rows($result_active) > 0) {
+                while ($row2 = mysqli_fetch_assoc($result_active)) {
+                    echo '<div class="col-md-4 mb-4" draggable="true">
             <div class="card shadow-sm h-100 border border-info">
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title">' . htmlspecialchars($row2['pinboard_title']) . '</h5>
@@ -262,9 +229,9 @@ if (mysqli_num_rows($result_active) > 0) {
                 </div>
             </div>
         </div>';
-    }
-}
-echo '</div>';
+                }
+            }
+            echo '</div>';
 
 
             // Archived Notes
@@ -290,7 +257,7 @@ echo '</div>';
                 </div>
               </div>';
                 }
-            }  
+            }
             // <button class="btn btn-sm btn-outline-success unarchive-btn" data-id="' . $row3['pinboard_id'] . '">Unarchive</button>
 
             echo '</div>';
@@ -307,34 +274,34 @@ echo '</div>';
         </div>
 
         <!-- Edit Modal -->
-       <!-- Modal -->
-<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form id="editNoteForm">
-                <div class="modal-header">
-                    <h5 class="modal-title">Edit Note</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <!-- Modal -->
+        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form id="editNoteForm">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Edit Note</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" id="editNoteId" name="note_id">
+                            <div class="mb-3">
+                                <label for="editNoteTitle" class="form-label">Title</label>
+                                <input type="text" class="form-control" id="editNoteTitle" name="note_title" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editNoteDescription" class="form-label">Description</label>
+                                <textarea class="form-control" id="editNoteDescription" name="note_content" rows="3" required></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="modal-body">
-                    <input type="hidden" id="editNoteId" name="note_id">
-                    <div class="mb-3">
-                        <label for="editNoteTitle" class="form-label">Title</label>
-                        <input type="text" class="form-control" id="editNoteTitle" name="note_title" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editNoteDescription" class="form-label">Description</label>
-                        <textarea class="form-control" id="editNoteDescription" name="note_content" rows="3" required></textarea>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
-            </form>
+            </div>
         </div>
-    </div>
-</div>
 
 
     </main>
@@ -566,109 +533,113 @@ echo '</div>';
         });
     </script>
 
-<!-- archive and unarchive button -->
-<script>
-document.addEventListener('DOMContentLoaded', function () {
+    <!-- archive and unarchive button -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
 
-    function handleArchiveToggle(selector, actionType) {
-        document.querySelectorAll(selector).forEach(button => {
-            button.addEventListener('click', function () {
-                const id = this.dataset.id;
+            function handleArchiveToggle(selector, actionType) {
+                document.querySelectorAll(selector).forEach(button => {
+                    button.addEventListener('click', function() {
+                        const id = this.dataset.id;
 
-                fetch('../PhpFiles/handle_pinboard_archive.php', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: 'id=' + encodeURIComponent(id) + '&action=' + actionType
-                })
-                .then(response => response.text())
-                .then(data => {
-                    if (data.trim() === 'success') {
-                        location.reload();
-                    } else {
-                        alert('Error: ' + data);
-                    }
+                        fetch('../PhpFiles/handle_pinboard_archive.php', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/x-www-form-urlencoded'
+                                },
+                                body: 'id=' + encodeURIComponent(id) + '&action=' + actionType
+                            })
+                            .then(response => response.text())
+                            .then(data => {
+                                if (data.trim() === 'success') {
+                                    location.reload();
+                                } else {
+                                    alert('Error: ' + data);
+                                }
+                            });
+                    });
+                });
+            }
+
+            handleArchiveToggle('.archive-btn', 'archive');
+            handleArchiveToggle('.unarchive-btn', 'unarchive');
+        });
+    </script>
+
+    <!-- edit button -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const editButtons = document.querySelectorAll('.edit-btn');
+            const editModal = new bootstrap.Modal(document.getElementById('editModal'));
+
+            editButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = this.getAttribute('data-id');
+                    const title = this.getAttribute('data-title');
+                    const content = this.getAttribute('data-content');
+
+                    document.getElementById('editNoteId').value = id;
+                    document.getElementById('editNoteTitle').value = title;
+                    document.getElementById('editNoteDescription').value = content;
+
+                    editModal.show();
                 });
             });
+
+            document.getElementById('editNoteForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const formData = new FormData(this);
+
+                fetch('../PhpFiles/handle_pinboard_edit.php', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.text())
+                    .then(data => {
+                        if (data.trim() === 'success') {
+                            alert('Note updated successfully!');
+                            location.reload();
+                        } else {
+                            alert('Error: ' + data);
+                        }
+                    })
+                    .catch(err => {
+                        alert('Request failed');
+                        console.error(err);
+                    });
+            });
         });
-    }
+    </script>
 
-    handleArchiveToggle('.archive-btn', 'archive');
-    handleArchiveToggle('.unarchive-btn', 'unarchive');
-});
-</script>
+    <!-- add note button -->
+    <script>
+        document.getElementById('addNoteBtn').addEventListener('click', function() {
+            const title = prompt("Enter note title:");
+            if (!title) return;
 
-<!-- edit button -->
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    const editButtons = document.querySelectorAll('.edit-btn');
-    const editModal = new bootstrap.Modal(document.getElementById('editModal'));
+            const content = prompt("Enter note content:");
+            if (!content) return;
 
-    editButtons.forEach(btn => {
-        btn.addEventListener('click', function () {
-            const id = this.getAttribute('data-id');
-            const title = this.getAttribute('data-title');
-            const content = this.getAttribute('data-content');
-
-            document.getElementById('editNoteId').value = id;
-            document.getElementById('editNoteTitle').value = title;
-            document.getElementById('editNoteDescription').value = content;
-
-            editModal.show();
-        });
-    });
-
-    document.getElementById('editNoteForm').addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        const formData = new FormData(this);
-
-        fetch('../PhpFiles/handle_pinboard_edit.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.text())
-        .then(data => {
-            if (data.trim() === 'success') {
-                alert('Note updated successfully!');
-                location.reload();
-            } else {
-                alert('Error: ' + data);
-            }
-        })
-        .catch(err => {
-            alert('Request failed');
-            console.error(err);
-        });
-    });
-});
-</script>
-
-<!-- add note button -->
-<script>
-document.getElementById('addNoteBtn').addEventListener('click', function () {
-    const title = prompt("Enter note title:");
-    if (!title) return;
-
-    const content = prompt("Enter note content:");
-    if (!content) return;
-
-    // Send data to server
-    fetch('../PhpFiles/add_note.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({
-            note_title: title,
-            note_content: content
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            // Append new card to pinboard
-            const pinboard = document.getElementById('pinboard');
-            const newCard = document.createElement('div');
-            newCard.className = 'col-md-4 mb-4';
-            newCard.innerHTML = `
+            // Send data to server
+            fetch('../PhpFiles/handle_pinboard_addnote.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: new URLSearchParams({
+                        note_title: title,
+                        note_content: content
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Append new card to pinboard
+                        const pinboard = document.getElementById('pinboard');
+                        const newCard = document.createElement('div');
+                        newCard.className = 'col-md-4 mb-4';
+                        newCard.innerHTML = `
                 <div class="card shadow-sm h-100 border border-info">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">${title}</h5>
@@ -685,20 +656,53 @@ document.getElementById('addNoteBtn').addEventListener('click', function () {
                     </div>
                 </div>
             `;
-            pinboard.prepend(newCard);
-        } else {
-            alert('Error adding note.');
-        }
-    })
-    .catch(err => {
-        console.error(err);
-        alert('Request failed.');
-    });
-});
-</script>
+                        pinboard.prepend(newCard);
+                    } else {
+                        alert('Error adding note.');
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    alert('Request failed.');
+                });
+        });
+    </script>
 
 
+        <!-- delete button -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const deleteBtns = document.querySelectorAll('.delete-btn');
 
+                deleteBtns.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const pinboardId = this.getAttribute('data-id');
+
+                        if (confirm('Are you sure you want to delete this item?')) {
+                            fetch('../PhpFiles/handle_delete_pinboard.php', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/x-www-form-urlencoded'
+                                    },
+                                    body: 'id=' + encodeURIComponent(pinboardId)
+                                })
+                                .then(response => response.text())
+                                .then(data => {
+                                    if (data.trim() === 'success') {
+                                        alert('Record deleted successfully');
+                                        location.reload();
+                                    } else {
+                                        alert('Error: ' + data);
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                });
+                        }
+                    });
+                });
+            });
+        </script>
 
 
 </body>
