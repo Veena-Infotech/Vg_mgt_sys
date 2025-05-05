@@ -58,7 +58,7 @@
     <link href="../../vendors/leaflet.markercluster/MarkerCluster.css" rel="stylesheet">
     <link href="../../vendors/leaflet.markercluster/MarkerCluster.Default.css" rel="stylesheet">
     <style>
-        .hidden{
+        .hidden {
             display: none;
         }
     </style>
@@ -169,7 +169,7 @@
                 navbarVertical.setAttribute('data-navbar-appearance', 'darker');
             }
         </script>
-        <div class="content">
+        <div class="content" id="heading-gsap">
             <!-- view leads table  -->
             <div class="row g-0 justify-content-between align-items-center h-100">
                 <!-- Container for the Title -->
@@ -603,6 +603,25 @@
             } else if (leadProfileDropdown.value === "friend/collegue") {
                 friendcollegue.style.display = "flex";
             }
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+
+    <script>
+        gsap.from("#heading-gsap", {
+            opacity: 0,
+            y: 50,
+            duration: 0.8,
+            ease: "power2.out",
+            delay: 0.2
+        });
+        gsap.from("#filterType", {
+            opacity: 0,
+            y: 50,
+            duration: 0.8,
+            ease: "power2.out",
+            delay: 0.5
         });
     </script>
 

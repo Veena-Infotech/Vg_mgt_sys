@@ -164,7 +164,7 @@
                 navbarVertical.setAttribute('data-navbar-appearance', 'darker');
             }
         </script>
-        <div class="content">
+        <div class="content" id="#heading-gsap">
             <div class="container-xl" id="heading-gsap">
                 <!-- Manage Leads Header -->
                 <div class="d-flex justify-content-between align-items-center mt-4">
@@ -256,7 +256,7 @@
                                         <button class="btn btn-sm btn-danger">Delete</button>
                                     </td>
                                 </tr>
-                                
+
                                 <!-- More lead rows can be added here -->
                             </tbody>
                         </table>
@@ -485,6 +485,18 @@
         // Initialize the page
         showPage(1);
 
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+    <script>
+        gsap.from("#heading-gsap", {
+            opacity: 0,
+            y: 50,
+            duration: 0.8,
+            ease: "power2.out",
+            delay: 0.2
+        });
+        
     </script>
 
 
