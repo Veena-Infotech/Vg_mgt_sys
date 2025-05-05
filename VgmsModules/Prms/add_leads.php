@@ -2,7 +2,6 @@
 <html lang="en-US" dir="ltr" data-navigation-type="default" data-navbar-horizontal-shape="default">
 
 
-<!-- Mirrored from prium.github.io/phoenix/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Sep 2024 13:37:21 GMT -->
 
 <meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 
@@ -14,7 +13,7 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>Add leads</title>
+    <title>Add Leads</title>
 
     <!-- ===============================================-->
     <!--    Favicons-->
@@ -59,7 +58,7 @@
     <link href="../../vendors/leaflet.markercluster/MarkerCluster.css" rel="stylesheet">
     <link href="../../vendors/leaflet.markercluster/MarkerCluster.Default.css" rel="stylesheet">
     <style>
-        .hidden {
+        .hidden{
             display: none;
         }
     </style>
@@ -472,7 +471,13 @@
         </div>
 
 
-    </main><!-- ===============================================-->
+
+
+
+
+    </main>
+
+    <!-- ===============================================-->
     <!--    End of Main Content-->
     <!-- ===============================================-->
 
@@ -480,8 +485,31 @@
 
     <!-- ===============================================-->
     <!--    JavaScripts-->
+
     <!-- ===============================================-->
     <!--Dropdown for contacted-to--->
+
+    <script src="../../vendors/popper/popper.min.js"></script>
+    <script src="../../vendors/bootstrap/bootstrap.min.js"></script>
+    <script src="../../vendors/anchorjs/anchor.min.js"></script>
+    <script src="../../vendors/is/is.min.js"></script>
+    <script src="../../vendors/fontawesome/all.min.js"></script>
+    <script src="../../vendors/lodash/lodash.min.js"></script>
+    <script src="../../vendors/list.js/list.min.js"></script>
+    <script src="../../vendors/feather-icons/feather.min.js"></script>
+    <script src="../../vendors/dayjs/dayjs.min.js"></script>
+    <script src="../../vendors/leaflet/leaflet.js"></script>
+    <script src="../../vendors/leaflet.markercluster/leaflet.markercluster.js"></script>
+    <script src="../../vendors/leaflet.tilelayer.colorfilter/leaflet-tilelayer-colorfilter.min.js"></script>
+    <script src="../../assets/js/phoenix.js"></script>
+    <script src="../../vendors/echarts/echarts.min.js"></script>
+    <script src="../../assets/js/ecommerce-dashboard.js"></script>
+
+
+
+
+
+    </script>
     <script>
         // Function to toggle visibility of reference fields based on radio selection
         function toggleFields() {
@@ -501,22 +529,6 @@
             toggleFields(); // This ensures the correct state is applied when the page loads
         });
     </script>
-    <script src="../../../vendors/popper/popper.min.js"></script>
-    <script src="../../../vendors/bootstrap/bootstrap.min.js"></script>
-    <script src="../../../vendors/anchorjs/anchor.min.js"></script>
-    <script src="../../../vendors/is/is.min.js"></script>
-    <script src="../../../vendors/fontawesome/all.min.js"></script>
-    <script src="../../../vendors/lodash/lodash.min.js"></script>
-    <script src="../../../vendors/list.js/list.min.js"></script>
-    <script src="../../../vendors/feather-icons/feather.min.js"></script>
-    <script src="../../../vendors/dayjs/dayjs.min.js"></script>
-    <script src="../../../vendors/leaflet/leaflet.js"></script>
-    <script src="../../../vendors/leaflet.markercluster/leaflet.markercluster.js"></script>
-    <script src="../../../vendors/leaflet.tilelayer.colorfilter/leaflet-tilelayer-colorfilter.min.js"></script>
-    <script src="../../../assets/js/phoenix.js"></script>
-    <script src="../../../vendors/echarts/echarts.min.js"></script>
-    <script src="../../../assets/js/ecommerce-dashboard.js"></script>
-    <script src="vendors/choices/choices.min.js"></script>
     <script>
         asssociety = document.getElementById('snarea');
         dropdownvalue = document.getElementById('Current-lead-Profile');
@@ -593,6 +605,9 @@
             }
         });
     </script>
+
+
+
 </body>
 
 
