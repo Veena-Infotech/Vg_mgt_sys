@@ -6,6 +6,10 @@
 <meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 
 <head>
+<<<<<<< HEAD
+    
+=======
+>>>>>>> bd8895b020ad489efa29ae3a8dbc83e28fbf861f
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,7 +17,11 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
+<<<<<<< HEAD
+    <title>Pinboard</title>
+=======
     <title>Meeting Notes</title>
+>>>>>>> bd8895b020ad489efa29ae3a8dbc83e28fbf861f
 
     <!-- ===============================================-->
     <!--    Favicons-->
@@ -31,7 +39,12 @@
     <!-- ===============================================-->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+<<<<<<< HEAD
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap"
+        rel="stylesheet">
+=======
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet">
+>>>>>>> bd8895b020ad489efa29ae3a8dbc83e28fbf861f
     <link href="../../vendors/simplebar/simplebar.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../unicons.iconscout.com/release/v4.0.8/css/line.css">
     <link href="../../assets/css/theme-rtl.css" type="text/css" rel="stylesheet" id="style-rtl">
@@ -53,6 +66,30 @@
             userLinkRTL.setAttribute('disabled', true);
         }
     </script>
+<<<<<<< HEAD
+    <style></style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link href="../../vendors/leaflet/leaflet.css" rel="stylesheet">
+    <link href="../../vendors/leaflet.markercluster/MarkerCluster.css" rel="stylesheet">
+    <link href="../../vendors/leaflet.markercluster/MarkerCluster.Default.css" rel="stylesheet">
+    <style>
+        [contenteditable="true"]:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
+        .btn-outline-yellow {
+            border-color: green;
+            color: green;
+        }
+
+        .btn-outline-yellow:hover {
+            background-color: green;
+            color: white;
+            border-color: green;
+        }
+    </style>
+=======
     <link href="../../vendors/leaflet/leaflet.css" rel="stylesheet">
     <link href="../../vendors/leaflet.markercluster/MarkerCluster.css" rel="stylesheet">
     <link href="../../vendors/leaflet.markercluster/MarkerCluster.Default.css" rel="stylesheet">
@@ -110,6 +147,7 @@
 
 
 
+>>>>>>> bd8895b020ad489efa29ae3a8dbc83e28fbf861f
 </head>
 
 <body>
@@ -217,6 +255,70 @@
                 navbarVertical.setAttribute('data-navbar-appearance', 'darker');
             }
         </script>
+<<<<<<< HEAD
+        <div class="content my-5" id="heading-gsap">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="mb-0">Meeting Notes</h2>
+                <div>
+                    <button class="btn btn-success me-2" id="addNoteBtn">Add Note</button>
+                    <button class="btn btn-secondary" id="viewArchiveBtn">View Archives</button>
+                </div>
+            </div>
+
+            <!-- Pinboard (Active Notes) -->
+            <div class="row" id="pinboard">
+                <!-- Example Note -->
+                <div class="col-md-4 mb-4" draggable="true">
+                    <div class="card shadow-sm h-100 border border-info">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">🚀 Project Deadline</h5>
+                            <p class="card-text flex-grow-1">Final submission date for PRMS module is April 28th. Make
+                                sure to push
+                                your latest changes.</p>
+                            <div class="d-flex gap-3 align-items-center mt-3">
+
+                                <button class="btn btn-sm btn-outline-yellow archive-btn">Archive</button>
+                                <button class="btn btn-sm btn-outline-danger delete-btn">Delete</button>
+                                <button class="btn btn-sm btn-outline-info edit-btn">Edit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Archive Section (Hidden initially) -->
+            <div class="row mt-5" id="archiveSection" style="display: none;">
+                <h4 class="mb-4">📂 Archived Notes</h4>
+                <!-- Archived notes will be moved here -->
+            </div>
+        </div>
+
+        <!-- Edit Modal -->
+        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editModalLabel">Edit Note</h5>
+                        <button type="button" class="btn-close" id="modalCloseBtn" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="editNoteTitle" class="form-label">Note Title</label>
+                            <input type="text" class="form-control" id="editNoteTitle">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editNoteDescription" class="form-label">Note Description</label>
+                            <textarea class="form-control" id="editNoteDescription" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="closeModalBtn">Close</button>
+                        <button type="button" class="btn btn-primary" id="saveChangesBtn">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+=======
         <div class="content">
             <div id="heading-gsap">
                 <h3 class="mb-4">Meeting Notes</h3>
@@ -334,6 +436,7 @@
 
 
 
+>>>>>>> bd8895b020ad489efa29ae3a8dbc83e28fbf861f
     </main>
 
     <!-- ===============================================-->
@@ -348,7 +451,10 @@
     <!-- ===============================================-->
     <!--Dropdown for contacted-to--->
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> bd8895b020ad489efa29ae3a8dbc83e28fbf861f
     <script src="../../vendors/popper/popper.min.js"></script>
     <script src="../../vendors/bootstrap/bootstrap.min.js"></script>
     <script src="../../vendors/anchorjs/anchor.min.js"></script>
@@ -364,13 +470,198 @@
     <script src="../../assets/js/phoenix.js"></script>
     <script src="../../vendors/echarts/echarts.min.js"></script>
     <script src="../../assets/js/ecommerce-dashboard.js"></script>
+<<<<<<< HEAD
+    </script>
+    <script>
+        let dragSrcEl = null;
+        const pinboard = document.getElementById('pinboard');
+        const archiveSection = document.getElementById('archiveSection');
+        const cards = pinboard.querySelectorAll('[draggable="true"]');
+        let currentCard = null; // Variable to store the current card being edited
+        let modal; // Store modal instance
+
+        function handleDragStart(e) {
+            dragSrcEl = this;
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/html', this.outerHTML);
+            this.classList.add('opacity-50');
+        }
+
+        function handleDragOver(e) {
+            if (e.preventDefault) e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            return false;
+        }
+
+        function handleDrop(e) {
+            if (e.stopPropagation) e.stopPropagation();
+
+            if (dragSrcEl !== this) {
+                this.insertAdjacentHTML('beforebegin', e.dataTransfer.getData('text/html'));
+                const droppedCard = this.previousSibling;
+                attachCardEvents(droppedCard);
+                dragSrcEl.remove();
+            }
+            return false;
+        }
+
+        function handleDragEnd() {
+            const allCards = document.querySelectorAll('[draggable="true"]');
+            allCards.forEach(card => {
+                card.classList.remove('opacity-50');
+            });
+        }
+
+        function attachCardEvents(card) {
+            card.addEventListener('dragstart', handleDragStart);
+            card.addEventListener('dragover', handleDragOver);
+            card.addEventListener('drop', handleDrop);
+            card.addEventListener('dragend', handleDragEnd);
+
+            const archiveBtn = card.querySelector('.archive-btn');
+            const deleteBtn = card.querySelector('.delete-btn');
+            const editBtn = card.querySelector('.edit-btn');
+
+            if (archiveBtn) {
+                archiveBtn.addEventListener('click', archiveNote);
+            }
+            if (deleteBtn) {
+                deleteBtn.addEventListener('click', deleteNote);
+            }
+            if (editBtn) {
+                editBtn.addEventListener('click', openEditModal); // Open edit modal
+            }
+        }
+
+        cards.forEach(attachCardEvents);
+
+        // Archive Note
+        function archiveNote(e) {
+            const card = e.target.closest('.col-md-4');
+            const archiveBtn = card.querySelector('.archive-btn');
+
+            // Disable the archive button after click
+            archiveBtn.disabled = true;
+
+            // Move the card to the archive section
+            archiveSection.appendChild(card);
+
+            // Update the button to "Unarchive" or something else, if needed
+            const unarchiveBtn = document.createElement('button');
+            unarchiveBtn.classList.add('btn', 'btn-sm', 'btn-outline-success', 'unarchive-btn');
+            unarchiveBtn.textContent = 'Unarchive';
+            unarchiveBtn.addEventListener('click', unarchiveNote);
+
+            // Replace archive button with unarchive button
+            archiveBtn.replaceWith(unarchiveBtn);
+        }
+
+        // Unarchive Note (moves it back to the pinboard)
+        function unarchiveNote(e) {
+            const card = e.target.closest('.col-md-4');
+            const unarchiveBtn = card.querySelector('.unarchive-btn');
+
+            // Move the card back to the pinboard
+            pinboard.appendChild(card);
+
+            // Create a new archive button and re-enable it
+            const archiveBtn = document.createElement('button');
+            archiveBtn.classList.add('btn', 'btn-sm', 'btn-outline-yellow', 'archive-btn');
+            archiveBtn.textContent = 'Archive';
+            archiveBtn.addEventListener('click', archiveNote);
+
+            // Replace unarchive button with the original archive button
+            unarchiveBtn.replaceWith(archiveBtn);
+        }
+
+        // Delete Note
+        function deleteNote(e) {
+            const card = e.target.closest('.col-md-4');
+            card.remove(); // Delete the note card
+        }
+
+        // View Archives toggle
+        document.getElementById('viewArchiveBtn').addEventListener('click', function () {
+            archiveSection.style.display = archiveSection.style.display === 'none' ? 'flex' : 'none';
+        });
+
+        // Add Note functionality
+        document.getElementById('addNoteBtn').addEventListener('click', function () {
+            const newNote = document.createElement('div');
+            newNote.className = 'col-md-4 mb-4';
+            newNote.setAttribute('draggable', 'true');
+            newNote.innerHTML = `
+        <div class="card shadow-sm h-100 border border-info">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title" >New Heading</h5>
+                <p class="card-text flex-grow-1" >Write your note content here...</p>
+                <div class="d-flex gap-3 align-items-center mt-3">
+                    <button class="btn btn-sm btn-outline-yellow archive-btn">Archive</button>
+                    <button class="btn btn-sm btn-outline-danger delete-btn">Delete</button>
+                    <button class="btn btn-sm btn-outline-info edit-btn">Edit</button>
+                </div>
+            </div>
+        </div>
+        `;
+            pinboard.appendChild(newNote);
+            attachCardEvents(newNote);
+        });
+
+        // Open Edit Modal
+        function openEditModal(e) {
+            currentCard = e.target.closest('.col-md-4');
+            const title = currentCard.querySelector('.card-title').textContent;
+            const description = currentCard.querySelector('.card-text').textContent;
+
+            document.getElementById('editNoteTitle').value = title;
+            document.getElementById('editNoteDescription').value = description;
+
+            // Initialize the modal if not done yet
+            if (!modal) {
+                modal = new bootstrap.Modal(document.getElementById('editModal'));
+            }
+
+            modal.show();
+        }
+
+        // Save Changes
+        document.getElementById('saveChangesBtn').addEventListener('click', function () {
+            const newTitle = document.getElementById('editNoteTitle').value;
+            const newDescription = document.getElementById('editNoteDescription').value;
+
+            currentCard.querySelector('.card-title').textContent = newTitle;
+            currentCard.querySelector('.card-text').textContent = newDescription;
+
+            modal.hide(); // Hide modal after saving changes
+        });
+
+        // Close Modal
+        document.getElementById('modalCloseBtn').addEventListener('click', function () {
+            modal.hide(); // Close modal
+        });
+
+        document.getElementById('closeModalBtn').addEventListener('click', function () {
+            modal.hide(); // Close modal
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+    
+=======
+>>>>>>> bd8895b020ad489efa29ae3a8dbc83e28fbf861f
     <script>
         gsap.from("#heading-gsap", {
             opacity: 0,
             y: 50,
+<<<<<<< HEAD
+            duration: 0.8,
+            ease: "power2.out",
+            delay: 0.2
+=======
             duration: 0.7,
             ease: "power2.out",
             delay: 0.7
+>>>>>>> bd8895b020ad489efa29ae3a8dbc83e28fbf861f
         });
         gsap.from("#filterType", {
             opacity: 0,
@@ -380,6 +671,9 @@
             delay: 0.5
         });
     </script>
+<<<<<<< HEAD
+</body>
+=======
     <!-- self -->
     <script src="../../vendors/flatpickr/flatpickr.min.js"></script>
     <script src="../../vendors/dropzone/dropzone-min.js"></script>
@@ -418,4 +712,5 @@
 
 <!-- Mirrored from prium.github.io/phoenix/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Sep 2024 13:37:21 GMT -->
 
+>>>>>>> bd8895b020ad489efa29ae3a8dbc83e28fbf861f
 </html>

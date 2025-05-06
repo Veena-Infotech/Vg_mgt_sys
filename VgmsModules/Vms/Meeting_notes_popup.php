@@ -1,259 +1,456 @@
-<?php
-// Simulated data (replace with actual backend logic later)
-$visitorName = "John Doe";
-$employeeName = "Jane Employee";
-$meetingID = uniqid("MTG-");
-$currentDateTime = date("Y-m-d\TH:i");
-?>
-<html>
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr" data-navigation-type="default" data-navbar-horizontal-shape="default">
+
+
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 
 <head>
-    <title>Meeting Notes Popup</title>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <!-- ===============================================-->
+    <!--    Document Title-->
+    <!-- ===============================================-->
+    <title>Registration Form</title>
 
-    <!-- Stylisng the Whole page using Custom CSS  -->
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: rgba(0, 0, 0, 0.4);
-            margin: 0;
-            padding: 0;
+    <!-- ===============================================-->
+    <!--    Favicons-->
+    <!-- ===============================================-->
+    <link rel="shortcut icon" type="image/x-icon" href="../../assets/img/favicons/favicon.ico">
+    <link rel="manifest" href="../../assets/img/favicons/manifest.json">
+    <meta name="msapplication-TileImage" content="../../assets/img/favicons/mstile-150x150.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <script src="../../vendors/simplebar/simplebar.min.js"></script>
+    <script src="../../assets/js/config.js"></script>
+
+    <!-- ===============================================-->
+    <!--    Stylesheets-->
+    <!-- ===============================================-->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap"
+        rel="stylesheet">
+    <link href="../../vendors/simplebar/simplebar.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <link href="../../assets/css/theme-rtl.css" type="text/css" rel="stylesheet" id="style-rtl">
+    <link href="../../assets/css/theme.min.css" type="text/css" rel="stylesheet" id="style-default">
+    <link href="../../assets/css/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
+    <link href="../../assets/css/user.min.css" type="text/css" rel="stylesheet" id="user-style-default">
+    <script>
+        var phoenixIsRTL = window.config.config.phoenixIsRTL;
+        if (phoenixIsRTL) {
+            var linkDefault = document.getElementById('style-default');
+            var userLinkDefault = document.getElementById('user-style-default');
+            linkDefault.setAttribute('disabled', true);
+            userLinkDefault.setAttribute('disabled', true);
+            document.querySelector('html').setAttribute('dir', 'rtl');
+        } else {
+            var linkRTL = document.getElementById('style-rtl');
+            var userLinkRTL = document.getElementById('user-style-rtl');
+            linkRTL.setAttribute('disabled', true);
+            userLinkRTL.setAttribute('disabled', true);
         }
-
-        .modal {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            z-index: 9999;
-            padding: 10px;
-            box-sizing: border-box;
-        }
-
-        .modal-content {
-            background-color: #0b0d17;
-            padding: 30px;
-            border-radius: 12px;
-            width: 100%;
-            max-width: 800px;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: 0px 0px 15px #00000066;
-            transform: scale(0.8);
-            opacity: 0;
-        }
-
-        .modal-content::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .modal-content::-webkit-scrollbar-thumb {
-            background-color: #151822;
-            border-radius: 4px;
-        }
-
-        .modal-content h2 {
-            margin-bottom: 20px;
-            text-align: center;
-            color: #ffffff;
-            font-weight: 600;
-        }
-
-        hr {
-            border: none;
-            height: 2px;
-            background-color: #2c2f3a;
-            margin: 10px 0 25px;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-group {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-        }
-
-        label {
-            width: 100%;
-            max-width: 200px;
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: #ffffff;
-        }
-
-        input,
-        textarea,
-        select {
-            flex: 1;
-            padding: 10px;
-            border: 1px solid #2c2f3a;
-            border-radius: 5px;
-            background-color: #151822;
-            color: #ffffff;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        textarea {
-            resize: vertical;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .form-actions {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 20px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .reset-btn,
-        .btn-primary {
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            width: 100%;
-            max-width: 200px;
-            box-sizing: border-box;
-        }
-
-        .reset-btn {
-            background-color: #e74c3c;
-            color: white;
-            border: none;
-        }
-
-        .btn-primary {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-        }
-
-        /* Responsive Tweaks */
-        @media (max-width: 768px) {
-            .modal-content {
-                width: 95%;
-                padding: 20px;
-            }
-
-            .form-group {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            label {
-                width: 100%;
-            }
-
-            .form-actions {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .reset-btn,
-            .btn-primary {
-                width: 100%;
-            }
-        }
-    </style>
+    </script>
+    <link href="../../vendors/leaflet/leaflet.css" rel="stylesheet">
+    <link href="../../vendors/leaflet.markercluster/MarkerCluster.css" rel="stylesheet">
+    <link href="../../vendors/leaflet.markercluster/MarkerCluster.Default.css" rel="stylesheet">
 </head>
 
 <body>
-    <div class="modal">
-        <div class="modal-content" id="popup">
-            <h2><strong>Meeting Notes</strong></h2>
-            <hr>
-            <form>
-                <div class="form-group">
-                    <label>Meeting ID</label>
-                    <input type="text" value="<?php echo $meetingID; ?>" readonly>
-                </div>
-                <div class="form-group">
-                    <label>Visitor Name</label>
-                    <input type="text" value="<?php echo $visitorName; ?>" readonly>
-                </div>
-                <div class="form-group">
-                    <label>Employee Name</label>
-                    <input type="text" value="<?php echo $employeeName; ?>" readonly>
-                </div>
-                <div class="form-group">
-                    <label>Meeting Date & Time</label>
-                    <input type="datetime-local" value="<?php echo $currentDateTime; ?>">
-                </div>
-                <div class="form-group">
-                    <label>Meeting Status</label>
-                    <select id="status" onchange="toggleRescheduleField()">
-                        <option value="Completed">Completed</option>
-                        <option value="Rescheduled">Rescheduled</option>
-                        <option value="Cancelled">Cancelled</option>
-                    </select>
-                </div>
-                <div class="form-group hidden" id="rescheduleField">
-                    <label>Rescheduled Date</label>
-                    <input type="date">
-                </div>
-                <div class="form-group">
-                    <label>Discussion Summary</label>
-                    <textarea rows="4" placeholder="Enter meeting discussion summary..."></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Action Items</label>
-                    <textarea rows="3" placeholder="Enter follow-up action items..."></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Payment Amount (If applicable)</label>
-                    <input type="number" placeholder="Enter amount">
-                </div>
-                <div class="form-group">
-                    <label>Additional Comments</label>
-                    <textarea rows="3" placeholder="Any additional notes..."></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Upload Images</label>
-                    <input type="file" accept="image/*" multiple>
-                </div>
-                <div class="form-group">
-                    <label>Upload Files</label>
-                    <input type="file" multiple>
-                </div>
-                <div class="form-actions">
-                    <button type="reset" class="reset-btn">Reset</button>
-                    <button type="submit" class="btn-primary">Submit & Save</button>
-                </div>
-            </form>
-        </div>
-    </div>
+    <!-- ===============================================-->
+    <!--    Main Content-->
+    <!-- ===============================================-->
+    <main class="main" id="top">
+        <?php include_once('../../Components/navbar.php'); ?>
+        <script>
+            var navbarTopShape = window.config.config.phoenixNavbarTopShape;
+            var navbarPosition = window.config.config.phoenixNavbarPosition;
+            var body = document.querySelector('body');
+            var navbarDefault = document.querySelector('#navbarDefault');
+            var navbarTop = document.querySelector('#navbarTop');
+            var topNavSlim = document.querySelector('#topNavSlim');
+            var navbarTopSlim = document.querySelector('#navbarTopSlim');
+            var navbarCombo = document.querySelector('#navbarCombo');
+            var navbarComboSlim = document.querySelector('#navbarComboSlim');
+            var dualNav = document.querySelector('#dualNav');
 
+            var documentElement = document.documentElement;
+            var navbarVertical = document.querySelector('.navbar-vertical');
+
+            if (navbarPosition === 'dual-nav') {
+                topNavSlim?.remove();
+                navbarTop?.remove();
+                navbarTopSlim?.remove();
+                navbarCombo?.remove();
+                navbarComboSlim?.remove();
+                navbarDefault?.remove();
+                navbarVertical?.remove();
+                dualNav.removeAttribute('style');
+                document.documentElement.setAttribute('data-navigation-type', 'dual');
+
+            } else if (navbarTopShape === 'slim' && navbarPosition === 'vertical') {
+                navbarDefault?.remove();
+                navbarTop?.remove();
+                navbarTopSlim?.remove();
+                navbarCombo?.remove();
+                navbarComboSlim?.remove();
+                topNavSlim.style.display = 'block';
+                navbarVertical.style.display = 'inline-block';
+                document.documentElement.setAttribute('data-navbar-horizontal-shape', 'slim');
+
+            } else if (navbarTopShape === 'slim' && navbarPosition === 'horizontal') {
+                navbarDefault?.remove();
+                navbarVertical?.remove();
+                navbarTop?.remove();
+                topNavSlim?.remove();
+                navbarCombo?.remove();
+                navbarComboSlim?.remove();
+                dualNav?.remove();
+                navbarTopSlim.removeAttribute('style');
+                document.documentElement.setAttribute('data-navbar-horizontal-shape', 'slim');
+            } else if (navbarTopShape === 'slim' && navbarPosition === 'combo') {
+                navbarDefault?.remove();
+                navbarTop?.remove();
+                topNavSlim?.remove();
+                navbarCombo?.remove();
+                navbarTopSlim?.remove();
+                dualNav?.remove();
+                navbarComboSlim.removeAttribute('style');
+                navbarVertical.removeAttribute('style');
+                document.documentElement.setAttribute('data-navbar-horizontal-shape', 'slim');
+            } else if (navbarTopShape === 'default' && navbarPosition === 'horizontal') {
+                navbarDefault?.remove();
+                topNavSlim?.remove();
+                navbarVertical?.remove();
+                navbarTopSlim?.remove();
+                navbarCombo?.remove();
+                navbarComboSlim?.remove();
+                dualNav?.remove();
+                navbarTop.removeAttribute('style');
+                document.documentElement.setAttribute('data-navigation-type', 'horizontal');
+            } else if (navbarTopShape === 'default' && navbarPosition === 'combo') {
+                topNavSlim?.remove();
+                navbarTop?.remove();
+                navbarTopSlim?.remove();
+                navbarDefault?.remove();
+                navbarComboSlim?.remove();
+                dualNav?.remove();
+                navbarCombo.removeAttribute('style');
+                navbarVertical.removeAttribute('style');
+                document.documentElement.setAttribute('data-navigation-type', 'combo');
+            } else {
+                topNavSlim?.remove();
+                navbarTop?.remove();
+                navbarTopSlim?.remove();
+                navbarCombo?.remove();
+                navbarComboSlim?.remove();
+                dualNav?.remove();
+                navbarDefault.removeAttribute('style');
+                navbarVertical.removeAttribute('style');
+            }
+
+            var navbarTopStyle = window.config.config.phoenixNavbarTopStyle;
+            var navbarTop = document.querySelector('.navbar-top');
+            if (navbarTopStyle === 'darker') {
+                navbarTop.setAttribute('data-navbar-appearance', 'darker');
+            }
+
+            var navbarVerticalStyle = window.config.config.phoenixNavbarVerticalStyle;
+            var navbarVertical = document.querySelector('.navbar-vertical');
+            if (navbarVerticalStyle === 'darker') {
+                navbarVertical.setAttribute('data-navbar-appearance', 'darker');
+            }
+        </script>
+        <div class="content">
+            <div class="container shadow-lg rounded-4 p-4 mt-4 mb-2">
+                <h2 class="mb-1 fw-bold text-primary">Meeting Notes</h2>
+
+                <div class="progress mb-4 rounded-pill">
+                    <div id="progress-bar" class="progress-bar bg-primary rounded-pill" role="progressbar"
+                        style="width: 0%">
+                    </div>
+                </div>
+
+                <form id="onboardingForm" enctype="multipart/form-data">
+
+                    <!-- STEP TEMPLATE START -->
+                    <!-- Repeat this template per section with unique content -->
+                    <div class="step">
+                        <div class="row g-3">
+                            <div class="col-md-6"><label class="form-label">Meeting ID</label><input type="text"
+                                    id="fullName" class="form-control" required></div>
+                            <div class="col-md-6"><label class="form-label">Visotr Name</label><input type="text"
+                                    id="fullName" class="form-control" required></div>
+                            <div class="col-md-6"><label class="form-label">Employe's Name</label><input type="text"
+                                    id="fatherName" class="form-control" required></div>
+                            <div class="col-md-6"><label class="form-label">Meeting Date & Time</label><input
+                                    type="date" id="dob" class="form-control" required></div>
+                            <div class="col-md-6"><label class="form-label">Meeting Status</label>
+                                <select class="form-select" required>
+                                    <option value="">NA</option>
+                                    <option>Completed</option>
+                                    <option>Rescheduled</option>
+                                    <option>Canceled</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6"><label class="form-label">Discussion Summary</label><input type="text"
+                                    id="motherName" class="form-control" required></div>
+                            <div class="col-md-6"><label class="form-label">Action Items</label><input type="text"
+                                    id="motherName" class="form-control" required></div>
+                            <div class="col-md-6"><label class="form-label">Payment Amount (If applicable)</label><input
+                                    type="text" id="motherName" class="form-control" required></div>
+                            <div class="col-md-6"><label class="form-label">Additional Comments</label><input
+                                    type="text" id="motherName" class="form-control" required></div>
+                           
+                            <div class="col-md-6">
+                                <label for="uploadFile" class="form-label">Upload File</label>
+                                <input type="file" id="uploadFile" name="uploadFile" class="form-control">
+                            </div>
+
+
+
+                        </div>
+                        <div class="d-flex justify-content-end mt-4 gap-2">
+  <button type="reset" class="btn btn-outline-secondary">Reset</button>
+  <button type="button" class="btn btn-outline-primary next">Submit</button>
+</div>
+
+                    </div>
+
+                    <!-- 2. Contact Details -->
+
+
+                    <!-- 3. Identity and Banking Details -->
+
+                    <!-- 4. Emergency & Nominee Details -->
+            </div>
+
+            <!-- Footer -->
+            <?php include("../../Components/footer.php"); ?>
+        </div>
+    </main>
+
+    <!-- ===============================================-->
+    <!--    End of Main Content-->
+    <!-- ===============================================-->
+
+
+
+    <!-- ===============================================-->
+    <!--    JavaScripts-->
+
+    <!-- ===============================================-->
+    <!--Dropdown for contacted-to--->
+
+    <script src="../../vendors/popper/popper.min.js"></script>
+    <script src="../../vendors/bootstrap/bootstrap.min.js"></script>
+    <script src="../../vendors/anchorjs/anchor.min.js"></script>
+    <script src="../../vendors/is/is.min.js"></script>
+    <script src="../../vendors/fontawesome/all.min.js"></script>
+    <script src="../../vendors/lodash/lodash.min.js"></script>
+    <script src="../../vendors/list.js/list.min.js"></script>
+    <script src="../../vendors/feather-icons/feather.min.js"></script>
+    <script src="../../vendors/dayjs/dayjs.min.js"></script>
+    <script src="../../vendors/leaflet/leaflet.js"></script>
+    <script src="../../vendors/leaflet.markercluster/leaflet.markercluster.js"></script>
+    <script src="../../vendors/leaflet.tilelayer.colorfilter/leaflet-tilelayer-colorfilter.min.js"></script>
+    <script src="../../assets/js/phoenix.js"></script>
+    <script src="../../vendors/echarts/echarts.min.js"></script>
+    <script src="../../assets/js/ecommerce-dashboard.js"></script>
     <script>
-        function toggleRescheduleField() {
-            const status = document.getElementById('status').value;
-            const rescheduleField = document.getElementById('rescheduleField');
-            rescheduleField.classList.toggle('hidden', status !== 'Rescheduled');
+        const steps = document.querySelectorAll('.step');
+        const nextBtns = document.querySelectorAll('.next');
+        const prevBtns = document.querySelectorAll('.prev');
+        const progress = document.getElementById('progress-bar');
+        let current = 0;
+
+        function showStep(i) {
+            steps.forEach((step, index) => step.style.display = 'none');
+            steps[i].style.display = 'block';
+            gsap.fromTo(steps[i], {
+                opacity: 0,
+                y: 50
+            }, {
+                opacity: 1,
+                y: 0,
+                duration: 0.5
+            });
+            progress.style.width = `${(i + 1) / steps.length * 100}%`;
         }
 
-        window.onload = function () {
-            gsap.to("#popup", { duration: 0.6, opacity: 1, scale: 1, ease: "power2.out" });
-        };
+        // Next button click
+        nextBtns.forEach(btn => {
+            btn.addEventListener('click', function () {
+                if (validateStep(currentStep)) {
+                    currentStep++;
+                    if (currentStep < steps.length) {
+                        showStep(currentStep);
+                    }
+                } else {
+                    // Wait for 3 seconds, then remove is-invalid with a fade animation
+                    setTimeout(() => {
+                        const invalidInputs = steps[currentStep].querySelectorAll('.is-invalid');
+                        invalidInputs.forEach(input => {
+                            gsap.to(input, {
+                                borderColor: "#ced4da", // Bootstrap normal border color
+                                duration: 0.5,
+                                onComplete: () => {
+                                    input.classList.remove('is-invalid');
+                                }
+                            });
+                        });
+                    }, 3000);
+                }
+            });
+        });
+
+
+
+        prevBtns.forEach(btn => btn.addEventListener('click', () => {
+            if (current > 0) {
+                current--;
+                showStep(current);
+            }
+        }));
+
+        showStep(current);
+
     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('onboardingForm');
+            const steps = document.querySelectorAll('.step');
+            const nextBtns = document.querySelectorAll('.next');
+            const prevBtns = document.querySelectorAll('.prev');
+            let currentStep = 0;
+
+            showStep(currentStep);
+
+            // Show the current step and hide others
+            function showStep(step) {
+                steps.forEach((s, index) => {
+                    s.style.display = (index === step) ? 'block' : 'none';
+                });
+            }
+
+            // Validate current step
+            function validateStep(stepIndex) {
+                let valid = true;
+                const step = steps[stepIndex];
+                const inputs = step.querySelectorAll('input, select, textarea');
+
+                inputs.forEach(input => {
+                    const value = input.value.trim();
+                    const type = input.getAttribute('type');
+                    const isRequired = true; // You can later make some fields optional if needed
+
+                    if (isRequired && value === '') {
+                        input.classList.add('is-invalid');
+                        valid = false;
+                    } else {
+                        input.classList.remove('is-invalid');
+                    }
+
+                    // Specific validations
+                    if (type === 'email' && value !== '') {
+                        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        if (!emailPattern.test(value)) {
+                            input.classList.add('is-invalid');
+                            valid = false;
+                        }
+                    }
+
+                    if (type === 'date' && value !== '') {
+                        const date = new Date(value);
+                        if (isNaN(date.getTime())) {
+                            input.classList.add('is-invalid');
+                            valid = false;
+                        }
+                    }
+
+                    if (input.closest('label')?.textContent?.includes('Contact Number') && value !== '') {
+                        if (!/^\d{10}$/.test(value)) {
+                            input.classList.add('is-invalid');
+                            valid = false;
+                        }
+                    }
+
+                    if (input.closest('label')?.textContent?.includes('Aadhar Card Number') && value !== '') {
+                        if (!/^\d{12}$/.test(value)) {
+                            input.classList.add('is-invalid');
+                            valid = false;
+                        }
+                    }
+
+                    if (input.closest('label')?.textContent?.includes('PAN Card Number') && value !== '') {
+                        if (!/[A-Z]{5}[0-9]{4}[A-Z]{1}/.test(value)) {
+                            input.classList.add('is-invalid');
+                            valid = false;
+                        }
+                    }
+
+                    if (type === 'file' && input.required && input.files.length === 0) {
+                        input.classList.add('is-invalid');
+                        valid = false;
+                    }
+
+                    // Conditional validations
+                    if (input.closest('label')?.textContent?.includes('Do you have a UPI ID?')) {
+                        const upiSelect = input;
+                        const upiInput = step.querySelector('input[type="text"][placeholder="Enter UPI ID"]') || step.querySelector('input[placeholder="If Yes, Enter UPI ID"]');
+                        if (upiSelect.value === 'Yes' && upiInput && upiInput.value.trim() === '') {
+                            upiInput.classList.add('is-invalid');
+                            valid = false;
+                        }
+                    }
+
+                });
+
+                return valid;
+            }
+
+            // Next button click
+            nextBtns.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    if (validateStep(currentStep)) {
+                        currentStep++;
+                        if (currentStep < steps.length) {
+                            showStep(currentStep);
+                        }
+                    } else {
+                        alert('Please fill all required fields correctly.');
+                    }
+                });
+            });
+
+            // Previous button click
+            prevBtns.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    currentStep--;
+                    if (currentStep >= 0) {
+                        showStep(currentStep);
+                    }
+                });
+            });
+
+            // Final form submit
+            form.addEventListener('submit', function (e) {
+                if (!validateStep(currentStep)) {
+                    e.preventDefault();
+                    alert('Please complete all required fields correctly before submitting.');
+                }
+            });
+        });
+    </script>
+
+
+
 </body>
+
+
+<!-- Mirrored from prium.github.io/phoenix/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Sep 2024 13:37:21 GMT -->
 
 </html>

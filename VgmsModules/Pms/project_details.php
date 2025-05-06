@@ -63,7 +63,11 @@
     <!--    Main Content-->
     <!-- ===============================================-->
     <main class="main" id="top">
-        <?php include '../../Components/navbar.php'; ?>
+        <?php
+
+        use Dom\Mysql;
+
+        include '../../Components/navbar.php'; ?>
         <script>
             var navbarTopShape = window.config.config.phoenixNavbarTopShape;
             var navbarPosition = window.config.config.phoenixNavbarPosition;
@@ -168,14 +172,33 @@
             <div class="content px-0 pt-navbar" style="margin-top: -4.5%;">
                 <div class="row g-0">
                     <div class="col-12 col-xxl-8 px-0 bg-body">
-                        <div class="px-4 px-lg-6 pt-6 pb-9">
+                        <?php
+                        // include '../PhpFiles/connection.php';
+                        include '../PhpFiles/handle_project_details.php';
+
+                        if (isset($_GET['project_id'])) {
+                            $project_id = intval($_GET['project_id']);
+                        
+                            $query = "SELECT p.*, c.f_name, c.l_name ,s.*
+                            FROM tbl_project p 
+                            INNER JOIN tbl_client c ON p.project_client = c.client_id 
+                            INNER JOIN tbl_project_status s ON p.project_status = s.id
+                            WHERE p.project_id = $project_id";
+                  
+                        
+                        $result = mysqli_query($conn, $query) or die("Query Unsucessfull");
+
+                        if ( mysqli_num_rows($result) > 0 ) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo ' 
+                                <div class="px-4 px-lg-6 pt-6 pb-9">
                             <div class="mb-5">
                                 <div class="d-flex justify-content-between">
-                                    <h2 class="text-body-emphasis fw-bolder mb-2">Retrieving Old Repos to Redirect to a new URL</h2>
+                                    <h2 class="text-body-emphasis fw-bolder mb-2">' . $row['project_title'] . '</h2>
                                     <div class="btn-reveal-trigger"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h"></span></button>
                                         <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">Edit</a><a class="dropdown-item text-danger" href="#!">Delete</a><a class="dropdown-item" href="#!">Download</a><a class="dropdown-item" href="#!">Report abuse</a></div>
                                     </div>
-                                </div><span class="badge badge-phoenix badge-phoenix-primary">Ongoing<span class="ms-1 uil uil-stopwatch"></span></span>
+                                </div><span class="badge badge-phoenix badge-phoenix-primary">' . $row['status_name'] . '<span class="ms-1 uil uil-stopwatch"></span></span>
                             </div>
                             <div class="row gx-0 gx-sm-5 gy-8 mb-8">
                                 <div class="col-12 col-xl-3 col-xxl-4 pe-xl-0">
@@ -197,7 +220,7 @@
                                                                     <h5 class="text-body mb-0 text-nowrap">Client :</h5>
                                                                 </div>
                                                             </td>
-                                                            <td class="ps-1 py-1"><a class="fw-semibold d-block lh-sm" href="#!">Gobble the Bleep Inc</a></td>
+                                                            <td class="ps-1 py-1"><a class="fw-semibold d-block lh-sm" href="#!">'.$row['f_name'].' '.$row['l_name'].'</a></td>
                                                         </tr>
                                                         <tr>
                                                             <td class="align-top py-1">
@@ -215,11 +238,11 @@
                                                     <tbody>
                                                         <tr>
                                                             <td class="align-top py-1 text-body text-nowrap fw-bold">Started : </td>
-                                                            <td class="text-body-tertiary text-opacity-85 fw-semibold ps-3">17th Nov, 2020</td>
+                                                            <td class="text-body-tertiary text-opacity-85 fw-semibold ps-3">' . $row['project_start_date'] . '</td>
                                                         </tr>
                                                         <tr>
                                                             <td class="align-top py-1 text-body text-nowrap fw-bold">Deadline :</td>
-                                                            <td class="text-body-tertiary text-opacity-85 fw-semibold ps-3">21st May, 2028</td>
+                                                            <td class="text-body-tertiary text-opacity-85 fw-semibold ps-3">' . $row['project_end_date'] . '</td>
                                                         </tr>
                                                         <tr>
                                                             <td class="align-top py-1 text-body text-nowrap fw-bold">Progress :</td>
@@ -482,9 +505,16 @@
                                 </div>
                             </div>
                             <h3 class="text-body-emphasis mb-4">Project overview</h3>
-                            <p class="text-body-secondary mb-4">The new redirection team is happy to announce that we’ve fixed all our unresponsive URLs and redirected them to new URLs. The tremendous assistance from our support team and the dev team, as well as that of the team lead’s, this team has made an impossible possible within a week. They didn’t stop for a moment, and we got our pages working again for all the valuable users. </p>
-                            <p class="text-body-secondary mb-0">Join us in celebrating the massive success of data transferring and getting us a huge revenue by eating out. Free public viewing and a buffet is offered for the great team as well as for the other teams working with us. We’ll be checking out places for the best option available at hands and we’ll let you know the schedule once we decide on one.<a class="fw-semibold" href="#!">read more </a></p>
-                        </div>
+                            <p class="text-body-secondary mb-4">' . $row['project_description'] . '</p>
+                           
+                        </div>';
+                            }
+                        }
+                    }
+                        ?>
+
+
+
                     </div>
                     <div class="col-12 col-xxl-4 px-0 border-start-xxl border-top-sm">
                         <div class="bg-light dark__bg-gray-1100 h-100">
@@ -492,7 +522,7 @@
                                 <h3 class="text-body-highlight mb-4 fw-bold" style="position: sticky; top: 0; z-index: 1; margin-top:3%">
                                     Recent activity
                                 </h3>
-                                
+
                             </div>
                             <hr>
                             <div style="max-height: 500px; overflow-y: auto;">
@@ -641,6 +671,8 @@
                         </div>
                     </div>
                 </div>
+
+
 
             </div>
 

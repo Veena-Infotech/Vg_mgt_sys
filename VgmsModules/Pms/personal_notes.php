@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr" data-navigation-type="default" data-navbar-horizontal-shape="default">
 
@@ -13,7 +17,7 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>Personal pages</title>
+    <title>Personal notes</title>
 
     <!-- ===============================================-->
     <!--    Favicons-->
@@ -64,14 +68,14 @@
         }
 
         .btn-outline-yellow {
-            border-color: yellow;
-            color: yellow;
+            border-color: green;
+            color: green;
         }
 
         .btn-outline-yellow:hover {
-            background-color: yellow;
-            color: black;
-            border-color: yellow;
+            background-color: green;
+            color: white;
+            border-color: green;
         }
     </style>
 </head>
@@ -181,6 +185,11 @@
                 navbarVertical.setAttribute('data-navbar-appearance', 'darker');
             }
         </script>
+
+        <!-- delete button -->
+
+
+
         <div class="content my-5" id="heading-gsap">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h2 class="mb-0">Personal Notes</h2>
@@ -190,25 +199,73 @@
                 </div>
             </div>
 
-            <!-- Pinboard (Active Notes) -->
-            <div class="row" id="pinboard">
-                <!-- Example Note -->
-                <div class="col-md-4 mb-4" draggable="true">
-                    <div class="card shadow-sm h-100 border border-info">
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">🚀 Database Design</h5>
-                            <p class="card-text flex-grow-1">Finalize the structure for PRMS
-                                proposals table.</p>
-                            <div class="d-flex gap-3 align-items-center mt-3">
 
-                                <button class="btn btn-sm btn-outline-yellow archive-btn">Archive</button>
-                                <button class="btn btn-sm btn-outline-danger delete-btn">Delete</button>
-                                <button class="btn btn-sm btn-outline-info edit-btn">Edit</button>
-                            </div>
-                        </div>
+
+            <!-- Pinboard (Active Notes) -->
+
+            <?php
+            include '../PhpFiles/connection.php';
+
+            // Fetch active notes
+            $query_active = "SELECT * FROM tbl_personal_notes WHERE is_archived = 0";
+            $result_active = mysqli_query($conn, $query_active) or die('Query Failed');
+
+            echo '<div class="row" id="pinboard">';
+            if (mysqli_num_rows($result_active) > 0) {
+                while ($row2 = mysqli_fetch_assoc($result_active)) {
+                    echo '<div class="col-md-4 mb-4" draggable="true">
+            <div class="card shadow-sm h-100 border border-info">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">' . htmlspecialchars($row2['personal_notes_title']) . '</h5>
+                    <p class="card-text flex-grow-1">' . htmlspecialchars($row2['personal_notes_content']) . '</p>
+                    <div class="d-flex gap-3 align-items-center mt-3">
+                        <button class="btn btn-sm btn-outline-warning archive-btn" data-id="' . $row2['id'] . '">Archive</button>
+                        <button class="btn btn-sm btn-outline-danger delete-btn" data-id="' . $row2['id'] . '">Delete</button>
+                        <button class="btn btn-sm btn-outline-info edit-btn"
+                            data-id="' . $row2['id'] . '"
+                            data-title="' . htmlspecialchars($row2['personal_notes_title']) . '"
+                            data-content="' . htmlspecialchars($row2['personal_notes_content']) . '"
+                        >Edit</button>
                     </div>
                 </div>
             </div>
+        </div>';
+                }
+            }
+            echo '</div>';
+
+
+            // Archived Notes
+            $query_archived = "SELECT * FROM tbl_personal_notes WHERE is_archived = 1";
+            $result_archived = mysqli_query($conn, $query_archived) or die('Query Unsuccessful');
+
+            echo '<div class="row mt-5" id="archiveSection">';
+            echo '<h4 class="mb-4">📂 Archived Notes</h4>';
+
+            if (mysqli_num_rows($result_archived) > 0) {
+                while ($row3 = mysqli_fetch_assoc($result_archived)) {
+                    echo '<div class="col-md-4 mb-4" draggable="true">
+                <div class="card shadow-sm h-100 border border-info">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">' . $row3['personal_notes_title'] . '</h5>
+                        <p class="card-text flex-grow-1">' . $row3['personal_notes_content'] . '</p>
+                        <div class="d-flex gap-3 align-items-center mt-3">
+                            <button class="btn btn-sm btn-outline-success unarchive-btn" data-id="' . $row3['id'] . '">Unarchive</button>
+                            <button class="btn btn-sm btn-outline-danger delete-btn" data-id="' . $row3['id'] . '">Delete</button>
+                            <button class="btn btn-sm btn-outline-info edit-btn">Edit</button>
+                        </div>
+                    </div>
+                </div>
+              </div>';
+                }
+            }
+            // <button class="btn btn-sm btn-outline-success unarchive-btn" data-id="' . $row3['pinboard_id'] . '">Unarchive</button>
+
+            echo '</div>';
+            ?>
+
+
+
 
             <!-- Archive Section (Hidden initially) -->
             <div class="row mt-5" id="archiveSection" style="display: none;">
@@ -218,36 +275,34 @@
         </div>
 
         <!-- Edit Modal -->
+        <!-- Modal -->
         <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="editModalLabel">Edit Note</h5>
-                        <button type="button" class="btn-close" id="modalCloseBtn" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="editNoteTitle" class="form-label">Note Title</label>
-                            <input type="text" class="form-control" id="editNoteTitle">
+                    <form id="editNoteForm">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Edit Note</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="mb-3">
-                            <label for="editNoteDescription" class="form-label">Note Description</label>
-                            <textarea class="form-control" id="editNoteDescription" rows="3"></textarea>
+                        <div class="modal-body">
+                            <input type="hidden" id="editNoteId" name="note_id">
+                            <div class="mb-3">
+                                <label for="editNoteTitle" class="form-label">Title</label>
+                                <input type="text" class="form-control" id="editNoteTitle" name="note_title" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editNoteDescription" class="form-label">Description</label>
+                                <textarea class="form-control" id="editNoteDescription" name="note_content" rows="3" required></textarea>
+                            </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" id="closeModalBtn">Close</button>
-                        <button type="button" class="btn btn-primary" id="saveChangesBtn">Save changes</button>
-                    </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-
-
-
-
-
-
 
 
     </main>
@@ -285,6 +340,8 @@
 
 
     </script>
+
+
     <script>
         let dragSrcEl = null;
         const pinboard = document.getElementById('pinboard');
@@ -394,19 +451,19 @@
         }
 
         // View Archives toggle
-        document.getElementById('viewArchiveBtn').addEventListener('click', function () {
+        document.getElementById('viewArchiveBtn').addEventListener('click', function() {
             archiveSection.style.display = archiveSection.style.display === 'none' ? 'flex' : 'none';
         });
 
         // Add Note functionality
-        document.getElementById('addNoteBtn').addEventListener('click', function () {
+        document.getElementById('addNoteBtn').addEventListener('click', function() {
             const newNote = document.createElement('div');
             newNote.className = 'col-md-4 mb-4';
             newNote.setAttribute('draggable', 'true');
             newNote.innerHTML = `
         <div class="card shadow-sm h-100 border border-info">
             <div class="card-body d-flex flex-column">
-                <h5 class="card-title" >🆕 New Note</h5>
+                <h5 class="card-title" >New Heading</h5>
                 <p class="card-text flex-grow-1" >Write your note content here...</p>
                 <div class="d-flex gap-3 align-items-center mt-3">
                     <button class="btn btn-sm btn-outline-yellow archive-btn">Archive</button>
@@ -438,7 +495,7 @@
         }
 
         // Save Changes
-        document.getElementById('saveChangesBtn').addEventListener('click', function () {
+        document.getElementById('saveChangesBtn').addEventListener('click', function() {
             const newTitle = document.getElementById('editNoteTitle').value;
             const newDescription = document.getElementById('editNoteDescription').value;
 
@@ -449,11 +506,11 @@
         });
 
         // Close Modal
-        document.getElementById('modalCloseBtn').addEventListener('click', function () {
+        document.getElementById('modalCloseBtn').addEventListener('click', function() {
             modal.hide(); // Close modal
         });
 
-        document.getElementById('closeModalBtn').addEventListener('click', function () {
+        document.getElementById('closeModalBtn').addEventListener('click', function() {
             modal.hide(); // Close modal
         });
     </script>
@@ -477,7 +534,175 @@
         });
     </script>
 
+    <!-- archive and unarchive button -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
 
+            function handleArchiveToggle(selector, actionType) {
+                document.querySelectorAll(selector).forEach(button => {
+                    button.addEventListener('click', function() {
+                        const id = this.dataset.id;
+
+                        fetch('../PhpFiles/handle_personal_notes_archive.php', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/x-www-form-urlencoded'
+                                },
+                                body: 'id=' + encodeURIComponent(id) + '&action=' + actionType
+                            })
+                            .then(response => response.text())
+                            .then(data => {
+                                if (data.trim() === 'success') {
+                                    location.reload();
+                                } else {
+                                    alert('Error: ' + data);
+                                }
+                            });
+                    });
+                });
+            }
+
+            handleArchiveToggle('.archive-btn', 'archive');
+            handleArchiveToggle('.unarchive-btn', 'unarchive');
+        });
+    </script>
+
+<!-- delete button -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const deleteBtns = document.querySelectorAll('.delete-btn');
+
+            deleteBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const pinboardId = this.getAttribute('data-id');
+
+                    if (confirm('Are you sure you want to delete this item?')) {
+                        fetch('../PhpFiles/handle_personal_notes_delete.php', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/x-www-form-urlencoded'
+                                },
+                                body: 'id=' + encodeURIComponent(pinboardId)
+                            })
+                            .then(response => response.text())
+                            .then(data => {
+                                if (data.trim() === 'success') {
+                                    alert('Record deleted successfully');
+                                    location.reload();
+                                } else {
+                                    alert('Error: ' + data);
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- edit button -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const editButtons = document.querySelectorAll('.edit-btn');
+            const editModal = new bootstrap.Modal(document.getElementById('editModal'));
+
+            editButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = this.getAttribute('data-id');
+                    const title = this.getAttribute('data-title');
+                    const content = this.getAttribute('data-content');
+
+                    document.getElementById('editNoteId').value = id;
+                    document.getElementById('editNoteTitle').value = title;
+                    document.getElementById('editNoteDescription').value = content;
+
+                    editModal.show();
+                });
+            });
+
+            document.getElementById('editNoteForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const formData = new FormData(this);
+
+                fetch('../PhpFiles/handle_personal_notes_edit.php', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.text())
+                    .then(data => {
+                        if (data.trim() === 'success') {
+                            alert('Note updated successfully!');
+                            location.reload();
+                        } else {
+                            alert('Error: ' + data);
+                        }
+                    })
+                    .catch(err => {
+                        alert('Request failed');
+                        console.error(err);
+                    });
+            });
+        });
+    </script>
+
+    <!-- add note button -->
+    <script>
+        document.getElementById('addNoteBtn').addEventListener('click', function() {
+            const title = prompt("Enter note title:");
+            if (!title) return;
+
+            const content = prompt("Enter note content:");
+            if (!content) return;
+
+            // Send data to server
+            fetch('../PhpFiles/handle_personal_notes_addnote.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: new URLSearchParams({
+                        note_title: title,
+                        note_content: content
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Append new card to pinboard
+                        const pinboard = document.getElementById('pinboard');
+                        const newCard = document.createElement('div');
+                        newCard.className = 'col-md-4 mb-4';
+                        newCard.innerHTML = `
+                <div class="card shadow-sm h-100 border border-info">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">${title}</h5>
+                        <p class="card-text flex-grow-1">${content}</p>
+                        <div class="d-flex gap-3 align-items-center mt-3">
+                            <button class="btn btn-sm btn-outline-warning archive-btn" data-id="${data.id}">Archive</button>
+                            <button class="btn btn-sm btn-outline-danger delete-btn" data-id="${data.id}">Delete</button>
+                            <button class="btn btn-sm btn-outline-info edit-btn"
+                                data-id="${data.id}"
+                                data-title="${title}"
+                                data-content="${content}"
+                            >Edit</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+                        pinboard.prepend(newCard);
+                    } else {
+                        alert('Error adding note.');
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    alert('Request failed.');
+                });
+        });
+    </script>
 
 
 
