@@ -87,6 +87,59 @@
                 padding: 1rem 0;
             }
         }
+
+        .table-wrapper1 {
+            height: 450px;
+            /* or whatever height you want */
+            overflow-y: auto;
+            /* Allows vertical scrolling */
+            overflow-x: hidden;
+            /* Prevents horizontal scrolling */
+            scrollbar-width: thin;
+            scrollbar-color: #aaa #1c1c1c;
+            /* Firefox styles */
+        }
+
+        /* For Chrome, Edge, and Safari */
+        .table-wrapper1::-webkit-scrollbar {
+            width: 8px;
+            /* Vertical scrollbar width */
+            height: 0;
+            /* No horizontal scrollbar */
+        }
+
+        .table-wrapper1::-webkit-scrollbar-track {
+            background: #1c1c1c;
+        }
+
+        .table-wrapper1::-webkit-scrollbar-thumb {
+            background-color: #aaa;
+            border-radius: 10px;
+        }
+
+
+        .table-wrapper {
+            height: 750px;
+            /* or whatever height you want */
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #aaa #1c1c1c;
+            /* scrollbar thumb and track for Firefox */
+        }
+
+        /* For Chrome, Edge, and Safari */
+        .table-wrapper::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .table-wrapper::-webkit-scrollbar-track {
+            background: #1c1c1c;
+        }
+
+        .table-wrapper::-webkit-scrollbar-thumb {
+            background-color: #aaa;
+            border-radius: 10px;
+        }
     </style>
 
 </head>
@@ -207,10 +260,10 @@
                     <div class="col-left">
                         <div class="col-12 col-xxl-8 px-0 bg-body" style="margin-top: -6%; margin-left:-6%;">
                             <div class="px-4 px-lg-6 pt-6 pb-9">
-                                <div class="mb-5" >
+                                <div class="mb-5">
                                     <div class="d-flex justify-content-between">
                                         <h2 class="text-body-emphasis fw-bolder mb-2">Retrieving Old Repos to Redirect to a new URL</h2>
-                                        
+
                                         <div class="btn-reveal-trigger"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h"></span></button>
                                             <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">Edit</a><a class="dropdown-item text-danger" href="#!">Delete</a><a class="dropdown-item" href="#!">Download</a><a class="dropdown-item" href="#!">Report abuse</a></div>
                                         </div>
@@ -533,110 +586,240 @@
                         <div class="row justify-content-end">
                             <div class="col-12 col-xxl-4 px-0 border-start-xxl border-top-sm">
                                 <div class="bg-light dark__bg-gray-1100 h-100">
-                                    <div class="p-4 p-lg-6">
+
+                                    <div class="p-4 p-lg-6 scrollbar ">
                                         <h3 class="text-body-highlight mb-4 fw-bold">Recent activity</h3>
-                                        <div class="timeline-vertical timeline-with-details">
-                                            <div class="timeline-item position-relative">
-                                                <div class="row g-md-3">
-                                                    <div class="col-12 col-md-auto d-flex">
-                                                        <div class="timeline-item-date order-1 order-md-0 me-md-4">
-                                                            <p class="fs-10 fw-semibold text-body-tertiary text-opacity-85 text-end">01 DEC, 2023<br class="d-none d-md-block" /> 10:30 AM</p>
+                                        <hr>
+                                        <div class="scroll table-wrapper1">
+                                            <div class="timeline-vertical timeline-with-details ">
+                                                <div class="timeline-item position-relative ">
+                                                    <div class="row g-md-3">
+                                                        <div class="col-12 col-md-auto d-flex">
+                                                            <div class="timeline-item-date order-1 order-md-0 me-md-4">
+                                                                <p class="fs-10 fw-semibold text-body-tertiary text-opacity-85 text-end">01 DEC, 2023<br class="d-none d-md-block" /> 10:30 AM</p>
+                                                            </div>
+                                                            <div class="timeline-item-bar position-md-relative me-3 me-md-0">
+                                                                <div class="icon-item icon-item-sm rounded-7 shadow-none bg-primary-subtle"><span class="fa-solid fa-chess text-primary-dark fs-10"></span></div><span class="timeline-bar border-end border-dashed"></span>
+                                                            </div>
                                                         </div>
-                                                        <div class="timeline-item-bar position-md-relative me-3 me-md-0">
-                                                            <div class="icon-item icon-item-sm rounded-7 shadow-none bg-primary-subtle"><span class="fa-solid fa-chess text-primary-dark fs-10"></span></div><span class="timeline-bar border-end border-dashed"></span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="timeline-item-content ps-6 ps-md-3">
-                                                            <h5 class="fs-9 lh-sm">Phoenix Template: Unleashing Creative Possibilities</h5>
-                                                            <p class="fs-9">by <a class="fw-semibold" href="#!">Shantinon Mekalan</a></p>
-                                                            <p class="fs-9 text-body-secondary mb-5">Discover limitless creativity with the Phoenix template! Our latest update offers an array of innovative features and design options.</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="timeline-item position-relative">
-                                                <div class="row g-md-3">
-                                                    <div class="col-12 col-md-auto d-flex">
-                                                        <div class="timeline-item-date order-1 order-md-0 me-md-4">
-                                                            <p class="fs-10 fw-semibold text-body-tertiary text-opacity-85 text-end">05 DEC, 2023<br class="d-none d-md-block" /> 12:30 AM</p>
-                                                        </div>
-                                                        <div class="timeline-item-bar position-md-relative me-3 me-md-0">
-                                                            <div class="icon-item icon-item-sm rounded-7 shadow-none bg-primary-subtle"><span class="fa-solid fa-dove text-primary-dark fs-10"></span></div><span class="timeline-bar border-end border-dashed"></span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="timeline-item-content ps-6 ps-md-3">
-                                                            <h5 class="fs-9 lh-sm">Empower Your Digital Presence: The Phoenix Template Unveiled</h5>
-                                                            <p class="fs-9">by <a class="fw-semibold" href="#!">Bookworm22</a></p>
-                                                            <p class="fs-9 text-body-secondary mb-5">Unveiling the Phoenix template, a game-changer for your digital presence. With its powerful features and sleek design,</p>
+                                                        <div class="col">
+                                                            <div class="timeline-item-content ps-6 ps-md-3">
+                                                                <h5 class="fs-9 lh-sm">Phoenix Template: Unleashing Creative Possibilities</h5>
+                                                                <p class="fs-9">by <a class="fw-semibold" href="#!">Shantinon Mekalan</a></p>
+                                                                <p class="fs-9 text-body-secondary mb-5">Discover limitless creativity with the Phoenix template! Our latest update offers an array of innovative features and design options.</p>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="timeline-item position-relative">
-                                                <div class="row g-md-3">
-                                                    <div class="col-12 col-md-auto d-flex">
-                                                        <div class="timeline-item-date order-1 order-md-0 me-md-4">
-                                                            <p class="fs-10 fw-semibold text-body-tertiary text-opacity-85 text-end">15 DEC, 2023<br class="d-none d-md-block" /> 2:30 AM</p>
+                                                <div class="timeline-item position-relative">
+                                                    <div class="row g-md-3">
+                                                        <div class="col-12 col-md-auto d-flex">
+                                                            <div class="timeline-item-date order-1 order-md-0 me-md-4">
+                                                                <p class="fs-10 fw-semibold text-body-tertiary text-opacity-85 text-end">05 DEC, 2023<br class="d-none d-md-block" /> 12:30 AM</p>
+                                                            </div>
+                                                            <div class="timeline-item-bar position-md-relative me-3 me-md-0">
+                                                                <div class="icon-item icon-item-sm rounded-7 shadow-none bg-primary-subtle"><span class="fa-solid fa-dove text-primary-dark fs-10"></span></div><span class="timeline-bar border-end border-dashed"></span>
+                                                            </div>
                                                         </div>
-                                                        <div class="timeline-item-bar position-md-relative me-3 me-md-0">
-                                                            <div class="icon-item icon-item-sm rounded-7 shadow-none bg-primary-subtle"><span class="fa-solid fa-dungeon text-primary-dark fs-10"></span></div>
+                                                        <div class="col">
+                                                            <div class="timeline-item-content ps-6 ps-md-3">
+                                                                <h5 class="fs-9 lh-sm">Empower Your Digital Presence: The Phoenix Template Unveiled</h5>
+                                                                <p class="fs-9">by <a class="fw-semibold" href="#!">Bookworm22</a></p>
+                                                                <p class="fs-9 text-body-secondary mb-5">Unveiling the Phoenix template, a game-changer for your digital presence. With its powerful features and sleek design,</p>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col">
-                                                        <div class="timeline-item-content ps-6 ps-md-3">
-                                                            <h5 class="fs-9 lh-sm">Phoenix Template: Simplified Design, Maximum Impact</h5>
-                                                            <p class="fs-9">by <a class="fw-semibold" href="#!">Sharuka Nijibum</a></p>
-                                                            <p class="fs-9 text-body-secondary mb-0">Introducing the Phoenix template, where simplified design meets maximum impact. Elevate your digital presence with its sleek and intuitive features.</p>
+                                                </div>
+                                                <div class="timeline-item position-relative">
+                                                    <div class="row g-md-3">
+                                                        <div class="col-12 col-md-auto d-flex">
+                                                            <div class="timeline-item-date order-1 order-md-0 me-md-4">
+                                                                <p class="fs-10 fw-semibold text-body-tertiary text-opacity-85 text-end">15 DEC, 2023<br class="d-none d-md-block" /> 2:30 AM</p>
+                                                            </div>
+                                                            <div class="timeline-item-bar position-md-relative me-3 me-md-0">
+                                                                <div class="icon-item icon-item-sm rounded-7 shadow-none bg-primary-subtle"><span class="fa-solid fa-dungeon text-primary-dark fs-10"></span></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="timeline-item-content ps-6 ps-md-3">
+                                                                <h5 class="fs-9 lh-sm">Phoenix Template: Simplified Design, Maximum Impact</h5>
+                                                                <p class="fs-9">by <a class="fw-semibold" href="#!">Sharuka Nijibum</a></p>
+                                                                <p class="fs-9 text-body-secondary mb-0">Introducing the Phoenix template, where simplified design meets maximum impact. Elevate your digital presence with its sleek and intuitive features.</p>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="px-4 px-lg-6">
-                                        <h4 class="mb-3">Files</h4>
-                                    </div>
-                                    <div class="border-top px-4 px-lg-6 py-4">
-                                        <div class="me-n3">
-                                            <div class="d-flex flex-between-center">
-                                                <div class="d-flex mb-1"><span class="fa-solid fa-image me-2 text-body-tertiary fs-9"></span>
-                                                    <p class="text-body-highlight mb-0 lh-1">Silly_sight_1.png</p>
-                                                </div>
-                                                <div class="btn-reveal-trigger"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h"></span></button>
-                                                    <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">Edit</a><a class="dropdown-item text-danger" href="#!">Delete</a><a class="dropdown-item" href="#!">Download</a><a class="dropdown-item" href="#!">Report abuse</a></div>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex fs-9 text-body-tertiary mb-2 flex-wrap"><span>768 kb</span><span class="text-body-quaternary mx-1">| </span><a href="#!">Shantinan Mekalan </a><span class="text-body-quaternary mx-1">| </span><span class="text-nowrap">21st Dec, 12:56 PM</span></div><img class="rounded-2" src="../../assets/img/generic/40.png" alt="" style="width:320px" />
-                                        </div>
-                                    </div>
-                                    <div class="border-top px-4 px-lg-6 py-4">
-                                        <div class="me-n3">
-                                            <div class="d-flex flex-between-center">
-                                                <div>
-                                                    <div class="d-flex align-items-center mb-1"><span class="fa-solid fa-image me-2 fs-9 text-body-tertiary"></span>
-                                                        <p class="text-body-highlight mb-0 lh-1">All_images.zip</p>
-                                                    </div>
-                                                    <div class="d-flex fs-9 text-body-tertiary mb-0 flex-wrap"><span>12.8 mb</span><span class="text-body-quaternary mx-1">| </span><a href="#!">Yves Tanguy </a><span class="text-body-quaternary mx-1">| </span><span class="text-nowrap">19th Dec, 08:56 PM</span></div>
-                                                </div>
-                                                <div class="btn-reveal-trigger"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h"></span></button>
-                                                    <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">Edit</a><a class="dropdown-item text-danger" href="#!">Delete</a><a class="dropdown-item" href="#!">Download</a><a class="dropdown-item" href="#!">Report abuse</a></div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="border-top px-4 px-lg-6 py-4 ">
-                                        <div class="me-n3">
-                                            <div class="d-flex flex-between-center">
-                                                <div>
-                                                    <div class="d-flex align-items-center mb-1 flex-wrap"><span class="fa-solid fa-file-lines me-2 fs-9 text-body-tertiary"></span>
-                                                        <p class="text-body-highlight mb-0 lh-1">Project.txt</p>
+                                    <hr>
+                                    <div class="files list-group-flush scrollbar " style="flex: 1;">
+                                        <div class="px-4 px-lg-6">
+                                            <h4 class="mb-3">Files</h4>
+                                        </div>
+                                        <div class="scroll table-wrapper">
+                                            <div class="border-top px-4 px-lg-6 py-4 ">
+                                                <div class="me-n3">
+                                                    <div class="d-flex flex-between-center">
+                                                        <div class="d-flex mb-1"><span class="fa-solid fa-image me-2 text-body-tertiary fs-9"></span>
+                                                            <p class="text-body-highlight mb-0 lh-1">Silly_sight_1.png</p>
+                                                        </div>
+                                                        <div class="btn-reveal-trigger"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h"></span></button>
+                                                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">Edit</a><a class="dropdown-item text-danger" href="#!">Delete</a><a class="dropdown-item" href="#!">Download</a><a class="dropdown-item" href="#!">Report abuse</a></div>
+                                                        </div>
                                                     </div>
-                                                    <div class="d-flex fs-9 text-body-tertiary mb-0 flex-wrap"><span>123 kb</span><span class="text-body-quaternary mx-1">| </span><a href="#!">Shantinan Mekalan </a><span class="text-body-quaternary mx-1">| </span><span class="text-nowrap">12th Dec, 12:56 PM</span></div>
+                                                    <div class="d-flex fs-9 text-body-tertiary mb-2 flex-wrap"><span>768 kb</span><span class="text-body-quaternary mx-1">| </span><a href="#!">Shantinan Mekalan </a><span class="text-body-quaternary mx-1">| </span><span class="text-nowrap">21st Dec, 12:56 PM</span></div><img class="rounded-2" src="../../assets/img/generic/40.png" alt="" />
                                                 </div>
-                                                <div class="btn-reveal-trigger"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h"></span></button>
-                                                    <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">Edit</a><a class="dropdown-item text-danger" href="#!">Delete</a><a class="dropdown-item" href="#!">Download</a><a class="dropdown-item" href="#!">Report abuse</a></div>
+                                            </div>
+                                            <div class="border-top px-4 px-lg-6 py-4">
+                                                <div class="me-n3">
+                                                    <div class="d-flex flex-between-center">
+                                                        <div>
+                                                            <div class="d-flex align-items-center mb-1"><span class="fa-solid fa-image me-2 fs-9 text-body-tertiary"></span>
+                                                                <p class="text-body-highlight mb-0 lh-1">All_images.zip</p>
+                                                            </div>
+                                                            <div class="d-flex fs-9 text-body-tertiary mb-0 flex-wrap"><span>12.8 mb</span><span class="text-body-quaternary mx-1">| </span><a href="#!">Yves Tanguy </a><span class="text-body-quaternary mx-1">| </span><span class="text-nowrap">19th Dec, 08:56 PM</span></div>
+                                                        </div>
+                                                        <div class="btn-reveal-trigger"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h"></span></button>
+                                                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">Edit</a><a class="dropdown-item text-danger" href="#!">Delete</a><a class="dropdown-item" href="#!">Download</a><a class="dropdown-item" href="#!">Report abuse</a></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="border-top px-4 px-lg-6 py-4">
+                                                <div class="me-n3">
+                                                    <div class="d-flex flex-between-center">
+                                                        <div>
+                                                            <div class="d-flex align-items-center mb-1"><span class="fa-solid fa-image me-2 fs-9 text-body-tertiary"></span>
+                                                                <p class="text-body-highlight mb-0 lh-1">All_images.zip</p>
+                                                            </div>
+                                                            <div class="d-flex fs-9 text-body-tertiary mb-0 flex-wrap"><span>12.8 mb</span><span class="text-body-quaternary mx-1">| </span><a href="#!">Yves Tanguy </a><span class="text-body-quaternary mx-1">| </span><span class="text-nowrap">19th Dec, 08:56 PM</span></div>
+                                                        </div>
+                                                        <div class="btn-reveal-trigger"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h"></span></button>
+                                                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">Edit</a><a class="dropdown-item text-danger" href="#!">Delete</a><a class="dropdown-item" href="#!">Download</a><a class="dropdown-item" href="#!">Report abuse</a></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="border-top px-4 px-lg-6 py-4">
+                                                <div class="me-n3">
+                                                    <div class="d-flex flex-between-center">
+                                                        <div>
+                                                            <div class="d-flex align-items-center mb-1"><span class="fa-solid fa-image me-2 fs-9 text-body-tertiary"></span>
+                                                                <p class="text-body-highlight mb-0 lh-1">All_images.zip</p>
+                                                            </div>
+                                                            <div class="d-flex fs-9 text-body-tertiary mb-0 flex-wrap"><span>12.8 mb</span><span class="text-body-quaternary mx-1">| </span><a href="#!">Yves Tanguy </a><span class="text-body-quaternary mx-1">| </span><span class="text-nowrap">19th Dec, 08:56 PM</span></div>
+                                                        </div>
+                                                        <div class="btn-reveal-trigger"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h"></span></button>
+                                                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">Edit</a><a class="dropdown-item text-danger" href="#!">Delete</a><a class="dropdown-item" href="#!">Download</a><a class="dropdown-item" href="#!">Report abuse</a></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="border-top px-4 px-lg-6 py-4">
+                                                <div class="me-n3">
+                                                    <div class="d-flex flex-between-center">
+                                                        <div>
+                                                            <div class="d-flex align-items-center mb-1"><span class="fa-solid fa-image me-2 fs-9 text-body-tertiary"></span>
+                                                                <p class="text-body-highlight mb-0 lh-1">All_images.zip</p>
+                                                            </div>
+                                                            <div class="d-flex fs-9 text-body-tertiary mb-0 flex-wrap"><span>12.8 mb</span><span class="text-body-quaternary mx-1">| </span><a href="#!">Yves Tanguy </a><span class="text-body-quaternary mx-1">| </span><span class="text-nowrap">19th Dec, 08:56 PM</span></div>
+                                                        </div>
+                                                        <div class="btn-reveal-trigger"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h"></span></button>
+                                                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">Edit</a><a class="dropdown-item text-danger" href="#!">Delete</a><a class="dropdown-item" href="#!">Download</a><a class="dropdown-item" href="#!">Report abuse</a></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="border-top px-4 px-lg-6 py-4">
+                                                <div class="me-n3">
+                                                    <div class="d-flex flex-between-center">
+                                                        <div>
+                                                            <div class="d-flex align-items-center mb-1"><span class="fa-solid fa-image me-2 fs-9 text-body-tertiary"></span>
+                                                                <p class="text-body-highlight mb-0 lh-1">All_images.zip</p>
+                                                            </div>
+                                                            <div class="d-flex fs-9 text-body-tertiary mb-0 flex-wrap"><span>12.8 mb</span><span class="text-body-quaternary mx-1">| </span><a href="#!">Yves Tanguy </a><span class="text-body-quaternary mx-1">| </span><span class="text-nowrap">19th Dec, 08:56 PM</span></div>
+                                                        </div>
+                                                        <div class="btn-reveal-trigger"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h"></span></button>
+                                                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">Edit</a><a class="dropdown-item text-danger" href="#!">Delete</a><a class="dropdown-item" href="#!">Download</a><a class="dropdown-item" href="#!">Report abuse</a></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="border-top px-4 px-lg-6 py-4">
+                                                <div class="me-n3">
+                                                    <div class="d-flex flex-between-center">
+                                                        <div>
+                                                            <div class="d-flex align-items-center mb-1"><span class="fa-solid fa-image me-2 fs-9 text-body-tertiary"></span>
+                                                                <p class="text-body-highlight mb-0 lh-1">All_images.zip</p>
+                                                            </div>
+                                                            <div class="d-flex fs-9 text-body-tertiary mb-0 flex-wrap"><span>12.8 mb</span><span class="text-body-quaternary mx-1">| </span><a href="#!">Yves Tanguy </a><span class="text-body-quaternary mx-1">| </span><span class="text-nowrap">19th Dec, 08:56 PM</span></div>
+                                                        </div>
+                                                        <div class="btn-reveal-trigger"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h"></span></button>
+                                                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">Edit</a><a class="dropdown-item text-danger" href="#!">Delete</a><a class="dropdown-item" href="#!">Download</a><a class="dropdown-item" href="#!">Report abuse</a></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="border-top px-4 px-lg-6 py-4">
+                                                <div class="me-n3">
+                                                    <div class="d-flex flex-between-center">
+                                                        <div>
+                                                            <div class="d-flex align-items-center mb-1"><span class="fa-solid fa-image me-2 fs-9 text-body-tertiary"></span>
+                                                                <p class="text-body-highlight mb-0 lh-1">All_images.zip</p>
+                                                            </div>
+                                                            <div class="d-flex fs-9 text-body-tertiary mb-0 flex-wrap"><span>12.8 mb</span><span class="text-body-quaternary mx-1">| </span><a href="#!">Yves Tanguy </a><span class="text-body-quaternary mx-1">| </span><span class="text-nowrap">19th Dec, 08:56 PM</span></div>
+                                                        </div>
+                                                        <div class="btn-reveal-trigger"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h"></span></button>
+                                                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">Edit</a><a class="dropdown-item text-danger" href="#!">Delete</a><a class="dropdown-item" href="#!">Download</a><a class="dropdown-item" href="#!">Report abuse</a></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="border-top px-4 px-lg-6 py-4">
+                                                <div class="me-n3">
+                                                    <div class="d-flex flex-between-center">
+                                                        <div>
+                                                            <div class="d-flex align-items-center mb-1"><span class="fa-solid fa-image me-2 fs-9 text-body-tertiary"></span>
+                                                                <p class="text-body-highlight mb-0 lh-1">All_images.zip</p>
+                                                            </div>
+                                                            <div class="d-flex fs-9 text-body-tertiary mb-0 flex-wrap"><span>12.8 mb</span><span class="text-body-quaternary mx-1">| </span><a href="#!">Yves Tanguy </a><span class="text-body-quaternary mx-1">| </span><span class="text-nowrap">19th Dec, 08:56 PM</span></div>
+                                                        </div>
+                                                        <div class="btn-reveal-trigger"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h"></span></button>
+                                                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">Edit</a><a class="dropdown-item text-danger" href="#!">Delete</a><a class="dropdown-item" href="#!">Download</a><a class="dropdown-item" href="#!">Report abuse</a></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="border-top px-4 px-lg-6 py-4">
+                                                <div class="me-n3">
+                                                    <div class="d-flex flex-between-center">
+                                                        <div>
+                                                            <div class="d-flex align-items-center mb-1"><span class="fa-solid fa-image me-2 fs-9 text-body-tertiary"></span>
+                                                                <p class="text-body-highlight mb-0 lh-1">All_images.zip</p>
+                                                            </div>
+                                                            <div class="d-flex fs-9 text-body-tertiary mb-0 flex-wrap"><span>12.8 mb</span><span class="text-body-quaternary mx-1">| </span><a href="#!">Yves Tanguy </a><span class="text-body-quaternary mx-1">| </span><span class="text-nowrap">19th Dec, 08:56 PM</span></div>
+                                                        </div>
+                                                        <div class="btn-reveal-trigger"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h"></span></button>
+                                                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">Edit</a><a class="dropdown-item text-danger" href="#!">Delete</a><a class="dropdown-item" href="#!">Download</a><a class="dropdown-item" href="#!">Report abuse</a></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="border-top px-4 px-lg-6 py-4 ">
+                                                <div class="me-n3">
+                                                    <div class="d-flex flex-between-center">
+                                                        <div>
+                                                            <div class="d-flex align-items-center mb-1 flex-wrap"><span class="fa-solid fa-file-lines me-2 fs-9 text-body-tertiary"></span>
+                                                                <p class="text-body-highlight mb-0 lh-1">Project.txt</p>
+                                                            </div>
+                                                            <div class="d-flex fs-9 text-body-tertiary mb-0 flex-wrap"><span>123 kb</span><span class="text-body-quaternary mx-1">| </span><a href="#!">Shantinan Mekalan </a><span class="text-body-quaternary mx-1">| </span><span class="text-nowrap">12th Dec, 12:56 PM</span></div>
+                                                        </div>
+                                                        <div class="btn-reveal-trigger"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h"></span></button>
+                                                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">Edit</a><a class="dropdown-item text-danger" href="#!">Delete</a><a class="dropdown-item" href="#!">Download</a><a class="dropdown-item" href="#!">Report abuse</a></div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
