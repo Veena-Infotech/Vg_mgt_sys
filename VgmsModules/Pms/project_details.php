@@ -119,7 +119,7 @@
 
 
         .table-wrapper {
-            height: 750px;
+            height: 550px;
             /* or whatever height you want */
             overflow-y: auto;
             scrollbar-width: thin;
