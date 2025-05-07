@@ -465,8 +465,8 @@
                                 </a>
                             </div>
 
-                             <!-- User Message -->
-                             <div class="d-flex justify-content-end mt-2">
+                            <!-- User Message -->
+                            <div class="d-flex justify-content-end mt-2">
                                 <a class="bg-body-hover border border-primary d-inline-flex align-items-center text-decoration-none p-2 px-3 rounded-pill" href="#!">
                                     <p class="mb-0 fw-semibold fs-9">I need help with something</p>
                                     <span class="fa-solid fa-paper-plane text-primary fs-9 ms-3"></span>
@@ -481,8 +481,8 @@
                                 </a>
                             </div>
 
-                             <!-- User Message -->
-                             <div class="d-flex justify-content-end mt-2">
+                            <!-- User Message -->
+                            <div class="d-flex justify-content-end mt-2">
                                 <a class="bg-body-hover border border-primary d-inline-flex align-items-center text-decoration-none p-2 px-3 rounded-pill" href="#!">
                                     <p class="mb-0 fw-semibold fs-9">I need help with something</p>
                                     <span class="fa-solid fa-paper-plane text-primary fs-9 ms-3"></span>
@@ -497,8 +497,8 @@
                                 </a>
                             </div>
 
-                             <!-- User Message -->
-                             <div class="d-flex justify-content-end mt-2">
+                            <!-- User Message -->
+                            <div class="d-flex justify-content-end mt-2">
                                 <a class="bg-body-hover border border-primary d-inline-flex align-items-center text-decoration-none p-2 px-3 rounded-pill" href="#!">
                                     <p class="mb-0 fw-semibold fs-9">I need help with something</p>
                                     <span class="fa-solid fa-paper-plane text-primary fs-9 ms-3"></span>
@@ -513,8 +513,8 @@
                                 </a>
                             </div>
 
-                             <!-- User Message -->
-                             <div class="d-flex justify-content-end mt-2">
+                            <!-- User Message -->
+                            <div class="d-flex justify-content-end mt-2">
                                 <a class="bg-body-hover border border-primary d-inline-flex align-items-center text-decoration-none p-2 px-3 rounded-pill" href="#!">
                                     <p class="mb-0 fw-semibold fs-9">I need help with something</p>
                                     <span class="fa-solid fa-paper-plane text-primary fs-9 ms-3"></span>
@@ -529,8 +529,8 @@
                                 </a>
                             </div>
 
-                             <!-- User Message -->
-                             <div class="d-flex justify-content-end mt-2">
+                            <!-- User Message -->
+                            <div class="d-flex justify-content-end mt-2">
                                 <a class="bg-body-hover border border-primary d-inline-flex align-items-center text-decoration-none p-2 px-3 rounded-pill" href="#!">
                                     <p class="mb-0 fw-semibold fs-9">I need help with something</p>
                                     <span class="fa-solid fa-paper-plane text-primary fs-9 ms-3"></span>
@@ -545,8 +545,8 @@
                                 </a>
                             </div>
 
-                             <!-- User Message -->
-                             <div class="d-flex justify-content-end mt-2">
+                            <!-- User Message -->
+                            <div class="d-flex justify-content-end mt-2">
                                 <a class="bg-body-hover border border-primary d-inline-flex align-items-center text-decoration-none p-2 px-3 rounded-pill" href="#!">
                                     <p class="mb-0 fw-semibold fs-9">I need help with something</p>
                                     <span class="fa-solid fa-paper-plane text-primary fs-9 ms-3"></span>
@@ -561,8 +561,8 @@
                                 </a>
                             </div>
 
-                             <!-- User Message -->
-                             <div class="d-flex justify-content-end mt-2">
+                            <!-- User Message -->
+                            <div class="d-flex justify-content-end mt-2">
                                 <a class="bg-body-hover border border-primary d-inline-flex align-items-center text-decoration-none p-2 px-3 rounded-pill" href="#!">
                                     <p class="mb-0 fw-semibold fs-9">I need help with something</p>
                                     <span class="fa-solid fa-paper-plane text-primary fs-9 ms-3"></span>
@@ -577,8 +577,8 @@
                                 </a>
                             </div>
 
-                             <!-- User Message -->
-                             <div class="d-flex justify-content-end mt-2">
+                            <!-- User Message -->
+                            <div class="d-flex justify-content-end mt-2">
                                 <a class="bg-body-hover border border-primary d-inline-flex align-items-center text-decoration-none p-2 px-3 rounded-pill" href="#!">
                                     <p class="mb-0 fw-semibold fs-9">I need help with something</p>
                                     <span class="fa-solid fa-paper-plane text-primary fs-9 ms-3"></span>
@@ -593,8 +593,8 @@
                                 </a>
                             </div>
 
-                             <!-- User Message -->
-                             <div class="d-flex justify-content-end mt-2">
+                            <!-- User Message -->
+                            <div class="d-flex justify-content-end mt-2">
                                 <a class="bg-body-hover border border-primary d-inline-flex align-items-center text-decoration-none p-2 px-3 rounded-pill" href="#!">
                                     <p class="mb-0 fw-semibold fs-9">I need help with something</p>
                                     <span class="fa-solid fa-paper-plane text-primary fs-9 ms-3"></span>
@@ -609,8 +609,8 @@
                                 </a>
                             </div>
 
-                             <!-- User Message -->
-                             <div class="d-flex justify-content-end mt-2">
+                            <!-- User Message -->
+                            <div class="d-flex justify-content-end mt-2">
                                 <a class="bg-body-hover border border-primary d-inline-flex align-items-center text-decoration-none p-2 px-3 rounded-pill" href="#!">
                                     <p class="mb-0 fw-semibold fs-9">I need help with something</p>
                                     <span class="fa-solid fa-paper-plane text-primary fs-9 ms-3"></span>
@@ -625,8 +625,8 @@
                                 </a>
                             </div>
 
-                             <!-- User Message -->
-                             <div class="d-flex justify-content-end mt-2">
+                            <!-- User Message -->
+                            <div class="d-flex justify-content-end mt-2">
                                 <a class="bg-body-hover border border-primary d-inline-flex align-items-center text-decoration-none p-2 px-3 rounded-pill" href="#!">
                                     <p class="mb-0 fw-semibold fs-9">I need help with something</p>
                                     <span class="fa-solid fa-paper-plane text-primary fs-9 ms-3"></span>
@@ -641,8 +641,8 @@
                                 </a>
                             </div>
 
-                             <!-- User Message -->
-                             <div class="d-flex justify-content-end mt-2">
+                            <!-- User Message -->
+                            <div class="d-flex justify-content-end mt-2">
                                 <a class="bg-body-hover border border-primary d-inline-flex align-items-center text-decoration-none p-2 px-3 rounded-pill" href="#!">
                                     <p class="mb-0 fw-semibold fs-9">I need help with something</p>
                                     <span class="fa-solid fa-paper-plane text-primary fs-9 ms-3"></span>
@@ -659,10 +659,10 @@
 
                             <!-- You can repeat the above two blocks for each new message -->
                         </div>
-                    </div>
 
+                    </div>
                     <!-- Chat Input -->
-                    <div class="card-footer d-flex align-items-center gap-2 border-top border-translucent ps-3 pe-4 py-3">
+                    <div class="card-footer d-flex align-items-center gap-2 border-top border-translucent ps-3 pe-4 py-3" style="margin-top: -3%;">
                         <div class="d-flex align-items-center flex-1 gap-3 border border-translucent rounded-pill px-4">
                             <input class="form-control outline-none border-0 flex-1 fs-9 px-0" type="text" placeholder="Write message" />
                             <label class="btn btn-link d-flex p-0 text-body-quaternary fs-9 border-0" for="supportChatPhotos">
@@ -678,6 +678,10 @@
                             <span class="fa-solid fa-paper-plane fs-9"></span>
                         </button>
                     </div>
+
+                  
+
+
                 </div>
 
 
