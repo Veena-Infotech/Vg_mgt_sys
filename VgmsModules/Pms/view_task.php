@@ -211,6 +211,7 @@
         </div>
       </div>
       <div class="kanban-container scrollbar" data-kanban-container="data-kanban-container">
+        <!-- <div></div> -->
         <!-- <div class="kanban-column scrollbar collapsed">
           <div class="kanban-column-header px-4 hover-actions-trigger">
             <div class="d-flex align-items-center border-bottom border-3 py-3 border-warning">
