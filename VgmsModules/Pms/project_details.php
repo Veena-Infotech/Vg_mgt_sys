@@ -272,30 +272,42 @@
                                     <span class="badge badge-phoenix badge-phoenix-primary">Ongoing<span class="ms-1 uil uil-stopwatch"></span></span>
                                 </div>
                                 <div class="row gx-0 gx-sm-5 gy-8 mb-8">
-                                    <div class="col-12 col-xl-3 col-xxl-4 pe-xl-0">
-                                        <div class="mb-4 mb-xl-7">
+                                    <div class="row">
+                                        <!-- Top: Project Info Section -->
+                                        <div class="col-12 mb-4">
+                                            <div class="d-flex align-items-center mb-3">
+                                                <span class="badge bg-primary rounded-pill fs-10 px-3 py-1 me-2">
+                                                    ONGOING <i class="fa-regular fa-clock ms-1"></i>
+                                                </span>
+                                            </div>
+
                                             <div class="row gx-0 gx-sm-7">
-                                                <div class="col-12 col-sm-auto">
-                                                    <table class="lh-sm mb-4 mb-sm-0 mb-xl-4">
+                                                <div class="col-12 col-sm-auto mb-4 mb-sm-0">
+                                                    <table class="lh-sm mb-3">
                                                         <tbody>
                                                             <tr>
-                                                                <td class="py-1" colspan="2">
-                                                                    <div class="d-flex"><span class="fa-solid fa-earth-americas me-2 text-body-tertiary fs-9"></span>
-                                                                        <h5 class="text-body">Public project</h5>
+                                                                <td colspan="2">
+                                                                    <div class="d-flex mb-2">
+                                                                        <span class="fa-solid fa-earth-americas me-2 text-body-tertiary fs-9"></span>
+                                                                        <h5 class="text-body mb-0">Public project</h5>
                                                                     </div>
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td class="align-top py-1">
-                                                                    <div class="d-flex"><span class="fa-solid fa-user me-2 text-body-tertiary fs-9"></span>
+                                                                    <div class="d-flex">
+                                                                        <span class="fa-solid fa-user me-2 text-body-tertiary fs-9"></span>
                                                                         <h5 class="text-body mb-0 text-nowrap">Client :</h5>
                                                                     </div>
                                                                 </td>
-                                                                <td class="ps-1 py-1"><a class="fw-semibold d-block lh-sm" href="#!">Gobble the Bleep Inc</a></td>
+                                                                <td class="ps-1 py-1">
+                                                                    <a class="fw-semibold d-block lh-sm" href="#!">Gobble the Bleep Inc</a>
+                                                                </td>
                                                             </tr>
                                                             <tr>
                                                                 <td class="align-top py-1">
-                                                                    <div class="d-flex"><span class="fa-regular fa-credit-card me-2 text-body-tertiary fs-9"></span>
+                                                                    <div class="d-flex">
+                                                                        <span class="fa-regular fa-credit-card me-2 text-body-tertiary fs-9"></span>
                                                                         <h5 class="text-body mb-0 text-nowrap">Budget : </h5>
                                                                     </div>
                                                                 </td>
@@ -304,46 +316,54 @@
                                                         </tbody>
                                                     </table>
                                                 </div>
+
                                                 <div class="col-12 col-sm-auto">
-                                                    <table class="lh-sm">
+                                                    <table class="lh-sm mb-3">
                                                         <tbody>
                                                             <tr>
-                                                                <td class="align-top py-1 text-body text-nowrap fw-bold">Started : </td>
+                                                                <td class="align-top py-1 text-body fw-bold">Started :</td>
                                                                 <td class="text-body-tertiary text-opacity-85 fw-semibold ps-3">17th Nov, 2020</td>
                                                             </tr>
                                                             <tr>
-                                                                <td class="align-top py-1 text-body text-nowrap fw-bold">Deadline :</td>
+                                                                <td class="align-top py-1 text-body fw-bold">Deadline :</td>
                                                                 <td class="text-body-tertiary text-opacity-85 fw-semibold ps-3">21st May, 2028</td>
                                                             </tr>
                                                             <tr>
-                                                                <td class="align-top py-1 text-body text-nowrap fw-bold">Progress :</td>
+                                                                <td class="align-top py-1 text-body fw-bold">Progress :</td>
                                                                 <td class="text-warning fw-semibold ps-3">80%</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div>
-                                            <div class="d-flex align-items-center"><span class="fa-solid fa-list-check me-2 text-body-tertiary fs-9"></span>
-                                                <h5 class="text-body-emphasis mb-0 me-2">91<span class="text-body fw-normal ms-2">tasks</span></h5><a class="fw-bold fs-9 mt-1" href="#!">See tasks <span class="fa-solid fa-chevron-right me-2 fs-10"></span></a>
+
+                                            <div class="d-flex align-items-center">
+                                                <span class="fa-solid fa-list-check me-2 text-body-tertiary fs-9"></span>
+                                                <h5 class="text-body-emphasis mb-0 me-2">91 <span class="text-body fw-normal ms-2">tasks</span></h5>
+                                                <a class="fw-bold fs-9 mt-1" href="#!">See tasks <span class="fa-solid fa-chevron-right me-1 fs-10"></span></a>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-12 col-xl-9 col-xxl-8">
-                                        <div class="row flex-between-center mb-3 g-3">
-                                            <div class="col-auto">
-                                                <h4 class="text-body-emphasis">Task completed over time</h4>
-                                                <p class="text-body-tertiary mb-0">Hard works done across all projects</p>
+
+                                        <!-- Bottom: Chart Section -->
+                                        <div class="col-12">
+                                            <div class="row flex-between-center mb-3 g-3">
+                                                <div class="col-auto">
+                                                    <h4 class="text-body-emphasis mb-1">Task completed over time</h4>
+                                                    <p class="text-body-tertiary mb-0">Hard works done across all projects</p>
+                                                </div>
+                                                <div class="col-8 col-sm-4">
+                                                    <select class="form-select form-select-sm">
+                                                        <option>Mar 1 - 31, 2022</option>
+                                                        <option>Apr 1 - 30, 2022</option>
+                                                        <option>May 1 - 31, 2022</option>
+                                                    </select>
+                                                </div>
                                             </div>
-                                            <div class="col-8 col-sm-4"><select class="form-select form-select-sm">
-                                                    <option>Mar 1 - 31, 2022</option>
-                                                    <option>April 1 - 30, 2022</option>
-                                                    <option>May 1 - 31, 2022</option>
-                                                </select></div>
+                                            <div class="echart-completed-task-chart" style="min-height: 200px; width: 100%"></div>
                                         </div>
-                                        <div class="echart-completed-task-chart" style="min-height:200px;width:100%"></div>
                                     </div>
+
+
                                     <div class="col-12 col-sm-5 col-lg-4 col-xl-3 col-xxl-4">
                                         <div class="mb-5">
                                             <h4 class="text-body-emphasis">Work loads</h4>
