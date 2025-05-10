@@ -189,22 +189,7 @@
                         // Get current status from URL (e.g., ?status=On-Going)
                         $current_status = isset($_GET['status']) ? $_GET['status'] : '';
 
-                        // ✅ 🔽 ADD THIS BLOCK RIGHT HERE
-$sql = "
-SELECT p.*, s.status_name 
-FROM tbl_project p 
-LEFT JOIN tbl_project_status s ON p.project_status = s.id
-";
-
-if (!empty($current_status)) {
-    $safe_status = mysqli_real_escape_string($conn, $current_status);
-    $sql .= " WHERE s.status_name = '$safe_status'";
-}
-
-$sql .= " ORDER BY p.id DESC";
-
-$result = mysqli_query($conn, $sql);
-?>    
+    
                     ?>
                     <div class="row g-3 justify-content-between align-items-end mb-4">
                         <div class="col-12 col-sm-auto">
@@ -262,6 +247,13 @@ $result = mysqli_query($conn, $sql);
                                <?php
                                     include '../PhpFiles/connection.php';    // Database connection file
 
+                                    // Step 1: Handle filter from URL
+                                    $status_filter = '';
+                                    if (isset($_GET['status']) && $_GET['status'] !== '') {
+                                        $status = mysqli_real_escape_string($conn, $_GET['status']);
+                                        $status_filter = "WHERE s.status_name = '$status'";
+                                    }
+
                                     $sql = "
                                         SELECT
                                             p.id,
@@ -274,6 +266,7 @@ $result = mysqli_query($conn, $sql);
                                         FROM tbl_project p
                                         INNER JOIN tbl_project_status s ON p.project_status = s.id
                                         LEFT JOIN tbl_tasks t ON p.project_title = t.project_name
+                                        $status_filter
                                         GROUP BY p.id
                                         ORDER BY p.project_start_date DESC
                                     ";
@@ -281,12 +274,9 @@ $result = mysqli_query($conn, $sql);
 
                                 if (mysqli_num_rows($result) > 0) {
                                     while ($row = mysqli_fetch_assoc($result)) {
-
-
-
                                         echo '<tr class="position-static">
                                         <td class="align-middle time white-space-nowrap ps-0 projectName py-4"><a class="fw-bold fs-8" href="#">' . htmlspecialchars($row['project_title']) . '</a></td>
-                                    <td class="align-middle white-space-nowrap assignees ps-3 py-4">
+                                        <td class="align-middle white-space-nowrap assignees ps-3 py-4">
                                         <div class="avatar-group avatar-group-dense"><a class="dropdown-toggle dropdown-caret-none d-inline-block" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
                                                 <div class="avatar avatar-s  rounded-circle">
                                                     <img class="rounded-circle " src="../../assets/img/team/34.webp" alt="" />
