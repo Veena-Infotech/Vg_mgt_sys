@@ -218,7 +218,7 @@
                             <!-- Add Note Modal -->
                             <div class="modal fade" id="addNoteModal" tabindex="-1" aria-hidden="true">
                                 <div class="modal-dialog">
-                                <div class="modal-content animate-note-modal border border-300 shadow">
+                                    <div class="modal-content animate-note-modal border border-300 shadow">
                                         <div class="modal-header">
                                             <h5 class="modal-title text-primary" id="addNoteModalLabel">Add Note</h5>
                                             <button class="btn btn-close p-1" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -493,8 +493,12 @@
                     </table>
                 </div>
 
-                <!-- Pagination -->
-                <div class="d-flex justify-content-end mt-3">
+                <!-- Button and Pagination -->
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                    <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#followUpModal">
+                        Create Follow-up
+                    </button>
+
                     <div class="d-flex">
                         <button class="page-link" data-list-pagination="prev">
                             <span class="fas fa-chevron-left"></span>
@@ -504,7 +508,117 @@
                             <span class="fas fa-chevron-right"></span>
                         </button>
                     </div>
-                              
+                </div>
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="followUpModal" tabindex="-1" aria-labelledby="followUpModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-md">
+                        <div class="modal-content bg-dark text-white">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="followUpModalLabel">Create Follow-up</h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <!-- Title -->
+                                    <div class="mb-3">
+                                        <label class="form-label">Title</label>
+                                        <input type="text" class="form-control" placeholder="Enter title" />
+                                    </div>
+
+                                    <!-- Type Radio -->
+                                    <div class="mb-3">
+                                        <label class="form-label d-block">Type</label>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="type" id="society" value="Society" checked>
+                                            <label class="form-check-label" for="society">Society</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="type" id="lead" value="Lead">
+                                            <label class="form-check-label" for="lead">Lead</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="type" id="landlord" value="Landlord">
+                                            <label class="form-check-label" for="landlord">Land Lord</label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Dropdowns Row -->
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Select Society</label>
+                                            <select class="form-select">
+                                                <option selected>Select society</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Society Type</label>
+                                            <select class="form-select">
+                                                <option selected>Select society type</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <!-- Date & Time -->
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Start Date</label>
+                                            <input type="date" class="form-control" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Time</label>
+                                            <input type="time" class="form-control" />
+                                        </div>
+                                    </div>
+
+                                    <!-- Mode & Contact Person -->
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Mode</label>
+                                            <select class="form-select">
+                                                <option selected>Select Mode</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Contact Person Name</label>
+                                            <input type="text" class="form-control" placeholder="Contact name" />
+                                        </div>
+                                    </div>
+
+                                    <!-- Mobile & Email -->
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Mobile No.</label>
+                                            <input type="text" class="form-control" placeholder="Enter mobile no" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Email</label>
+                                            <input type="email" class="form-control" placeholder="Enter email" />
+                                        </div>
+                                    </div>
+
+                                    <!-- Follow-up Details -->
+                                    <div class="mb-3">
+                                        <label class="form-label">Follow-up Details</label>
+                                        <textarea class="form-control" rows="3" placeholder="Enter details here..."></textarea>
+                                    </div>
+
+                                    <!-- File Upload -->
+                                    <div class="mb-3">
+                                        <label class="form-label">Upload Documents</label>
+                                        <input type="file" class="form-control" />
+                                    </div>
+
+                                    <!-- Modal Footer -->
+                                    <div class="d-flex justify-content-end">
+                                        <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Create Followup</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- Footer -->
                 <?php include("../../Components/footer.php"); ?>
@@ -574,6 +688,14 @@
                 ease: 'power2.in'
             });
         });
+    </script>
+
+    <!-- JS to toggle form -->
+    <script>
+        function toggleForm() {
+            const form = document.getElementById('myForm');
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        }
     </script>
 
 
