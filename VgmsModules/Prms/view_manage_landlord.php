@@ -10,7 +10,7 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>View Society</title>
+    <title>View Landlord</title>
 
     <!-- ===============================================-->
     <!--    Favicons-->
@@ -165,49 +165,13 @@
             <div class="row g-0 justify-content-between align-items-center">
                 <div class="container">
                     <div style="width: 100%; text-align: center; margin: 20px 0;">
-                        <h3 style="margin: 0;">Society Details</h3>
+                        <h3 style="margin: 0;">View/Manage Landlord</h3>
                     </div>
-                    <!-- <form method="POST">
-                        <div class="row g-3 mb-4">
-                            <div class="col-md-4">
-                                <label for="ward" class="form-label">Select Wards</label>
-                                <select class="form-select" id="ward" name="ward">
-                                    <option>All Wards</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="district" class="form-label">Select District</label>
-                                <select class="form-select" id="district" name="district">
-                                    <option value="">All Districts</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="taluka" class="form-label">Select Taluka</label>
-                                <select class="form-select" id="taluka" name="taluka">
-                                    <option value="">All Talukas</option>
-                                    <option value=""></option>
-                                </select>
-                            </div>
-                        </div>
 
-                        <div class="mb-4">
-                            <label for="range" class="form-label">Select Range</label>
-                            <div id="range" data-nouislider='{
-                        "start": [10, 90],
-                        "connect": true,
-                        "range": {
-                            "min": 0,
-                            "max": 100
-                        },
-                        "tooltips": true
-                    }'></div>
-                            <input type="hidden" id="range-value" name="range" value="10,90" />
-                        </div>
-                        <button type="submit" class="btn btn-primary">Filter</button>
-                    </form> -->
 
-                    <div id="tableExample2"
-                        data-list='{"valueNames":["name","cts","address","ward","unit"],"page":5,"pagination":{"innerWindow":2,"left":1,"right":1}}'>
+                    <div id="landlordTable"
+                        data-list='{"valueNames":["landlord","mobile"],"page":5,"pagination":{"innerWindow":2,"left":1,"right":1}}'>
+
                         <div class="search-box mb-3 mx-auto">
                             <form class="position-relative">
                                 <input class="form-control search-input search form-control-sm" type="search"
@@ -219,189 +183,77 @@
                             <table class="table table-striped table-sm fs-9 mb-0" id="data-table">
                                 <thead>
                                     <tr>
-                                        <th class="sort border-top border-translucent ps-3" data-sort="name">Name</th>
-                                        <th class="sort border-top border-translucent ps-3" data-sort="ward">Ward</th>
-                                        <th class="sort border-top border-translucent ps-3" data-sort="unit">Unit</th>
-                                        <th class="sort border-top" data-sort="address">Address</th>
+                                        <th class="sort border-top border-translucent ps-3" data-sort="landlord">
+                                            Landlord Name</th>
+                                        <th class="sort border-top border-translucent ps-3" data-sort="mobile">Mobile
+                                            Number</th>
                                         <th class="sort text-end align-middle pe-0 border-top" scope="col">ACTION</th>
                                     </tr>
                                 </thead>
+
                                 <tbody class="list">
                                     <tr>
-                                        <td class='align-middle ps-3 name'>Green Heights</td>
-                                        <td class='align-middle cts'>Ward A</td>
-                                        <td class='align-middle address'>48</td>
-                                        <td class='align-middle address'>Bandra West, Mumbai</td>
-                                        <td class='align-middle white-space-nowrap text-end pe-0'>
-                                            <div class='btn-reveal-trigger position-static'>
-                                                <button class='btn btn-sm btn-reveal fs-10 open-action-modal'
-                                                    data-id='1' data-bs-toggle='modal' data-bs-target='#actionModal'>
-                                                    <span class='fas fa-ellipsis-h fs-10'></span>
+                                        <td class="align-middle ps-3 landlord">Rajesh Mehta</td>
+                                        <td class="align-middle mobile">9876543210</td>
+                                        <td class="align-middle white-space-nowrap text-end pe-0">
+                                            <div class="btn-reveal-trigger position-static">
+                                                <button class="btn btn-sm btn-reveal fs-10 open-action-modal"
+                                                    data-id="1" data-bs-toggle="modal" data-bs-target="#actionModal">
+                                                    <span class="fas fa-ellipsis-h fs-10"></span>
                                                 </button>
-
-                                                <div class='dropdown-menu dropdown-menu-end py-2'>
-                                                    <a class='dropdown-item'
-                                                        href='society-details.php?soc_id=1'>View</a>
-                                                    <a class='dropdown-item' href='edit-society.php?soc_id=1'>Edit
-                                                        Society Details</a>
-                                                    <a class='dropdown-item'
-                                                        href='edit-members-directory.php?soc_id=1'>Edit Members
-                                                        Directory</a>
-                                                    <a class='dropdown-item'
-                                                        href='edit-committe-details.php?soc_id=1'>Edit Committee
+                                                <div class="dropdown-menu dropdown-menu-end py-2">
+                                                    <a class="dropdown-item"
+                                                        href="view-landlord.php?landlord_id=1">View</a>
+                                                    <a class="dropdown-item" href="edit-landlord.php?landlord_id=1">Edit
                                                         Details</a>
-                                                    <div class='dropdown-divider'></div>
-                                                    <a class='dropdown-item text-danger' href='#!'>Inactive</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item text-danger" href="#!">Deactivate</a>
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class='align-middle ps-3 name'>Sunrise Residency</td>
-                                        <td class='align-middle cts'>Ward B</td>
-                                        <td class='align-middle address'>60</td>
-                                        <td class='align-middle address'>Andheri East, Mumbai</td>
-                                        <td class='align-middle white-space-nowrap text-end pe-0'>
-                                            <div class='btn-reveal-trigger position-static'>
-                                                <button class='btn btn-sm btn-reveal fs-10 open-action-modal'
-                                                    data-id='1' data-bs-toggle='modal' data-bs-target='#actionModal'>
-                                                    <span class='fas fa-ellipsis-h fs-10'></span>
+                                        <td class="align-middle ps-3 landlord">Sneha Kulkarni</td>
+                                        <td class="align-middle mobile">9123456780</td>
+                                        <td class="align-middle white-space-nowrap text-end pe-0">
+                                            <div class="btn-reveal-trigger position-static">
+                                                <button class="btn btn-sm btn-reveal fs-10 open-action-modal"
+                                                    data-id="2" data-bs-toggle="modal" data-bs-target="#actionModal">
+                                                    <span class="fas fa-ellipsis-h fs-10"></span>
                                                 </button>
-
-                                                <div class='dropdown-menu dropdown-menu-end py-2'>
-                                                    <a class='dropdown-item'
-                                                        href='society-details.php?soc_id=2'>View</a>
-                                                    <a class='dropdown-item' href='edit-society.php?soc_id=2'>Edit
-                                                        Society Details</a>
-                                                    <a class='dropdown-item'
-                                                        href='edit-members-directory.php?soc_id=2'>Edit Members
-                                                        Directory</a>
-                                                    <a class='dropdown-item'
-                                                        href='edit-committe-details.php?soc_id=2'>Edit Committee
+                                                <div class="dropdown-menu dropdown-menu-end py-2">
+                                                    <a class="dropdown-item"
+                                                        href="view-landlord.php?landlord_id=2">View</a>
+                                                    <a class="dropdown-item" href="edit-landlord.php?landlord_id=2">Edit
                                                         Details</a>
-                                                    <div class='dropdown-divider'></div>
-                                                    <a class='dropdown-item text-danger' href='#!'>Inactive</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item text-danger" href="#!">Deactivate</a>
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class='align-middle ps-3 name'>Sunrise Residency</td>
-                                        <td class='align-middle cts'>Ward A</td>
-                                        <td class='align-middle address'>60</td>
-                                        <td class='align-middle address'>Andheri East, Mumbai</td>
-                                        <td class='align-middle white-space-nowrap text-end pe-0'>
-                                            <div class='btn-reveal-trigger position-static'>
-                                                <button class='btn btn-sm btn-reveal fs-10 open-action-modal'
-                                                    data-id='1' data-bs-toggle='modal' data-bs-target='#actionModal'>
-                                                    <span class='fas fa-ellipsis-h fs-10'></span>
+                                        <td class="align-middle ps-3 landlord">Imran Sheikh</td>
+                                        <td class="align-middle mobile">9988776655</td>
+                                        <td class="align-middle white-space-nowrap text-end pe-0">
+                                            <div class="btn-reveal-trigger position-static">
+                                                <button class="btn btn-sm btn-reveal fs-10 open-action-modal"
+                                                    data-id="3" data-bs-toggle="modal" data-bs-target="#actionModal">
+                                                    <span class="fas fa-ellipsis-h fs-10"></span>
                                                 </button>
-
-                                                <div class='dropdown-menu dropdown-menu-end py-2'>
-                                                    <a class='dropdown-item'
-                                                        href='society-details.php?soc_id=2'>View</a>
-                                                    <a class='dropdown-item' href='edit-society.php?soc_id=2'>Edit
-                                                        Society Details</a>
-                                                    <a class='dropdown-item'
-                                                        href='edit-members-directory.php?soc_id=2'>Edit Members
-                                                        Directory</a>
-                                                    <a class='dropdown-item'
-                                                        href='edit-committe-details.php?soc_id=2'>Edit Committee
+                                                <div class="dropdown-menu dropdown-menu-end py-2">
+                                                    <a class="dropdown-item"
+                                                        href="view-landlord.php?landlord_id=3">View</a>
+                                                    <a class="dropdown-item" href="edit-landlord.php?landlord_id=3">Edit
                                                         Details</a>
-                                                    <div class='dropdown-divider'></div>
-                                                    <a class='dropdown-item text-danger' href='#!'>Inactive</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class='align-middle ps-3 name'>Blue Heights</td>
-                                        <td class='align-middle cts'>Ward A</td>
-                                        <td class='align-middle address'>48</td>
-                                        <td class='align-middle address'>Bandra West, Mumbai</td>
-                                        <td class='align-middle white-space-nowrap text-end pe-0'>
-                                            <div class='btn-reveal-trigger position-static'>
-                                                <button class='btn btn-sm btn-reveal fs-10 open-action-modal'
-                                                    data-id='1' data-bs-toggle='modal' data-bs-target='#actionModal'>
-                                                    <span class='fas fa-ellipsis-h fs-10'></span>
-                                                </button>
-
-                                                <div class='dropdown-menu dropdown-menu-end py-2'>
-                                                    <a class='dropdown-item'
-                                                        href='society-details.php?soc_id=1'>View</a>
-                                                    <a class='dropdown-item' href='edit-society.php?soc_id=1'>Edit
-                                                        Society Details</a>
-                                                    <a class='dropdown-item'
-                                                        href='edit-members-directory.php?soc_id=1'>Edit Members
-                                                        Directory</a>
-                                                    <a class='dropdown-item'
-                                                        href='edit-committe-details.php?soc_id=1'>Edit Committee
-                                                        Details</a>
-                                                    <div class='dropdown-divider'></div>
-                                                    <a class='dropdown-item text-danger' href='#!'>Inactive</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class='align-middle ps-3 name'>Blue Heights</td>
-                                        <td class='align-middle cts'>Ward A</td>
-                                        <td class='align-middle address'>48</td>
-                                        <td class='align-middle address'>Bandra West, Mumbai</td>
-                                        <td class='align-middle white-space-nowrap text-end pe-0'>
-                                            <div class='btn-reveal-trigger position-static'>
-                                                <button class='btn btn-sm btn-reveal fs-10 open-action-modal'
-                                                    data-id='1' data-bs-toggle='modal' data-bs-target='#actionModal'>
-                                                    <span class='fas fa-ellipsis-h fs-10'></span>
-                                                </button>
-
-                                                <div class='dropdown-menu dropdown-menu-end py-2'>
-                                                    <a class='dropdown-item'
-                                                        href='society-details.php?soc_id=1'>View</a>
-                                                    <a class='dropdown-item' href='edit-society.php?soc_id=1'>Edit
-                                                        Society Details</a>
-                                                    <a class='dropdown-item'
-                                                        href='edit-members-directory.php?soc_id=1'>Edit Members
-                                                        Directory</a>
-                                                    <a class='dropdown-item'
-                                                        href='edit-committe-details.php?soc_id=1'>Edit Committee
-                                                        Details</a>
-                                                    <div class='dropdown-divider'></div>
-                                                    <a class='dropdown-item text-danger' href='#!'>Inactive</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class='align-middle ps-3 name'>Blue Heights</td>
-                                        <td class='align-middle cts'>Ward A</td>
-                                        <td class='align-middle address'>48</td>
-                                        <td class='align-middle address'>Bandra West, Mumbai</td>
-                                        <td class='align-middle white-space-nowrap text-end pe-0'>
-                                            <div class='btn-reveal-trigger position-static'>
-                                                <button class='btn btn-sm btn-reveal fs-10 open-action-modal'
-                                                    data-id='1' data-bs-toggle='modal' data-bs-target='#actionModal'>
-                                                    <span class='fas fa-ellipsis-h fs-10'></span>
-                                                </button>
-
-                                                <div class='dropdown-menu dropdown-menu-end py-2'>
-                                                    <a class='dropdown-item'
-                                                        href='society-details.php?soc_id=1'>View</a>
-                                                    <a class='dropdown-item' href='edit-society.php?soc_id=1'>Edit
-                                                        Society Details</a>
-                                                    <a class='dropdown-item'
-                                                        href='edit-members-directory.php?soc_id=1'>Edit Members
-                                                        Directory</a>
-                                                    <a class='dropdown-item'
-                                                        href='edit-committe-details.php?soc_id=1'>Edit Committee
-                                                        Details</a>
-                                                    <div class='dropdown-divider'></div>
-                                                    <a class='dropdown-item text-danger' href='#!'>Inactive</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item text-danger" href="#!">Deactivate</a>
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
                                 </tbody>
+
                             </table>
                             <!-- Common Action Modal -->
                             <div class="modal fade" id="actionModal" tabindex="-1" aria-labelledby="actionModalLabel"
@@ -523,7 +375,7 @@
 
 
 
-    
+
 
 
 

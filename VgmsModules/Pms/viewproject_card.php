@@ -168,39 +168,143 @@
         </script>
         <div class="content">
 
+            <?php
+            include '../PhpFiles/connection.php';
+
+            // Get filters
+            $searchTerm = isset($_GET['search']) ? trim($_GET['search']) : '';
+            $statusId = isset($_GET['status']) ? intval($_GET['status']) : 0;
+
+            // ---------------------
+            // Get counts per status
+            // ---------------------
+            $statusCounts = [];
+            $countQuery = "SELECT project_status, COUNT(*) AS count FROM tbl_project GROUP BY project_status";
+            $countResult = $conn->query($countQuery);
+            while ($row = $countResult->fetch_assoc()) {
+                $statusCounts[$row['project_status']] = $row['count'];
+            }
+
+            // Get total count
+            $totalQuery = $conn->query("SELECT COUNT(*) AS total FROM tbl_project");
+            $totalCount = $totalQuery->fetch_assoc()['total'];
+
+            // Get all statuses
+            $statusResult = $conn->query("SELECT id, status_name FROM tbl_project_status");
+            $statuses = [];
+            while ($row = $statusResult->fetch_assoc()) {
+                $statuses[] = $row;
+            }
+
+            // --------------------
+            // Build Main Query
+            // --------------------
+            $query = "
+    SELECT 
+        p.*, 
+        p.id AS project_id,
+        c.f_name, 
+        c.l_name, 
+        c.id AS client_id,
+        p_status.id AS status_id,
+        p_status.status_name
+    FROM tbl_project p 
+    INNER JOIN tbl_client c ON p.project_client = c.id
+    INNER JOIN tbl_project_status p_status ON p.project_status = p_status.id
+";
+            $params = [];
+            $types = "";
+
+            // Add search filter
+            if ($searchTerm !== '') {
+                $query .= " AND p.project_title LIKE ?";
+                $params[] = '%' . $searchTerm . '%';
+                $types .= "s";
+            }
+
+            // Add status filter
+            if ($statusId > 0) {
+                $query .= " AND s.id = ?";
+                $params[] = $statusId;
+                $types .= "i";
+            }
+
+            // Prepare and execute
+            $stmt = $conn->prepare($query);
+            if (!empty($params)) {
+                $stmt->bind_param($types, ...$params);
+            }
+            $stmt->execute();
+            $result = $stmt->get_result();
+            ?>
 
             <div class="content" style="margin-top: -7%;">
 
                 <div class="row gx-6 gy-3 mb-4 align-items-center">
                     <div class="col-auto">
-                        <h2 class="mb-0">Projects<span class="fw-normal text-body-tertiary ms-3">(32)</span></h2>
+                        <h2 class="mb-0">Projects<span class="fw-normal text-body-tertiary ms-3">
+                                <?php
+                                // Fetch total project count
+                                $countQuery = $conn->query("SELECT COUNT(*) AS total FROM tbl_project");
+                                $totalRow = $countQuery->fetch_assoc();
+                                $totalProjects = $totalRow['total'];
+                                ?>
+
+                            </span></h2>
                     </div>
                     <div class="col-auto"><a class="btn btn-primary px-5" href="create-new.html"><i
                                 class="fa-solid fa-plus me-2"></i>Add new project</a></div>
                 </div>
                 <div class="row justify-content-between align-items-end mb-4 g-3">
                     <div class="col-12 col-sm-auto">
-                        <ul class="nav nav-links mx-n2">
-                            <li class="nav-item"><a class="nav-link px-2 py-1 active" aria-current="page"
-                                    href="#"><span>All</span><span
-                                        class="text-body-tertiary fw-semibold">(32)</span></a></li>
-                            <li class="nav-item"><a class="nav-link px-2 py-1" href="#"><span>Ongoing</span><span
-                                        class="text-body-tertiary fw-semibold">(14)</span></a></li>
-                            <li class="nav-item"><a class="nav-link px-2 py-1" href="#"><span>Cancelled</span><span
-                                        class="text-body-tertiary fw-semibold">(2)</span></a></li>
-                            <li class="nav-item"><a class="nav-link px-2 py-1" href="#"><span>Finished</span><span
-                                        class="text-body-tertiary fw-semibold">(14)</span></a></li>
-                            <li class="nav-item"><a class="nav-link px-2 py-1" href="#"><span>Postponed</span><span
-                                        class="text-body-tertiary fw-semibold">(2)</span></a></li>
+                        <!-- <ul class="nav nav-links mx-n2"> -->
+                        <ul class="nav mb-4">
+                            <?php
+                            $isActiveAll = ($statusId === 0);
+                            $url = ($searchTerm !== '') ? "?search=" . urlencode($searchTerm) : "?";
+                            echo '<li class="nav-item">
+            <a class="nav-link px-2 py-1 ' . ($isActiveAll ? 'active' : '') . '" href="' . $url . '">
+                All <span class="text-body-tertiary fw-semibold">(' . $totalCount . ')</span>
+            </a>
+          </li>';
+
+                            foreach ($statuses as $status) {
+                                $isActive = ($status['id'] == $statusId);
+                                $url = "?status=" . $status['id'];
+                                if ($searchTerm !== '') $url .= "&search=" . urlencode($searchTerm);
+                                $count = $statusCounts[$status['id']] ?? 0;
+
+                                echo '<li class="nav-item">
+                <a class="nav-link px-2 py-1 ' . ($isActive ? 'active' : '') . '" href="' . $url . '">
+                    ' . htmlspecialchars($status['status_name']) . ' <span class="text-body-tertiary fw-semibold">(' . $count . ')</span>
+                </a>
+              </li>';
+                            }
+                            ?>
                         </ul>
+
+                        <!-- </ul> -->
                     </div>
                     <div class="col-12 col-sm-auto">
                         <div class="d-flex align-items-center">
                             <div class="search-box me-3">
-                                <form class="position-relative"><input class="form-control search-input search"
-                                        type="search" placeholder="Search projects" aria-label="Search" />
+
+
+                                <!-- <form class="position-relative" method="get" action="">
+                                    <input class="form-control search-input search" type="search" placeholder="Search projects" aria-label="Search" name="search" value="<?php echo htmlspecialchars($searchTerm); ?>" />
+                                    <span class="fas fa-search search-box-icon"></span>
+                                </form> -->
+                                <!-- 🔍 Search Form -->
+                                <form class="position-relative mb-3" method="get" action="">
+                                    <input class="form-control search-input search" type="search" placeholder="Search projects" name="search" value="<?php echo htmlspecialchars($searchTerm); ?>" />
+                                    <?php if ($statusId): ?>
+                                        <input type="hidden" name="status" value="<?php echo htmlspecialchars($statusId); ?>">
+                                    <?php endif; ?>
                                     <span class="fas fa-search search-box-icon"></span>
                                 </form>
+
+
+
                             </div><a class="btn btn-phoenix-primary px-3 me-1"
                                 href="../../VgmsModules/pms/viewproject_list.php" data-bs-toggle="tooltip"
                                 data-bs-placement="top" data-bs-title="List view"><span
@@ -228,63 +332,52 @@
                 </div>
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-3 row-cols-xxl-4 g-3 mb-9">
 
+                    <!-- code -->
+
+
+
                     <?php
-                    include '../PhpFiles/connection.php';
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo '
+        <div class="col-md-4">
+            <div class="card h-100 hover-actions-trigger">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <h4 class="mb-2 line-clamp-1 lh-sm flex-1 me-5">' . htmlspecialchars($row['project_title']) . '</h4>
+                        <input type="hidden" value="' . htmlspecialchars($row['id']) . '" id="prj_id">
+                        <div class="hover-actions top-0 end-0 mt-4 me-4"  ><button
+    class="btn btn-primary btn-icon flex-shrink-0 toggle-button" 
+    data-id="' . $row['project_id'] . '" 
+    type="button">
 
-                   $query = "
-    SELECT p.*, c.f_name, c.l_name, p_status.*
-    FROM tbl_project p 
-    INNER JOIN tbl_client c ON p.project_client = c.id
-    INNER JOIN tbl_project_status p_status ON p.project_status = p_status.id
-";
 
-
-
-                    $result = mysqli_query($conn, $query) or die("Query Unsuccessful");
-
-                    if (mysqli_num_rows($result) > 0) {
-                        while ($row = mysqli_fetch_assoc($result)) {
-
-                            echo '<div class="col">
-                        <div class="card h-100 hover-actions-trigger">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center">
-                                    <h4 class="mb-2 line-clamp-1 lh-sm flex-1 me-5"> ' . $row['project_title'] . '
-                                    </h4>
-                                    <input type="hidden" value=' . $row['id'] . ' id="prj_id">
-                                    <div class="hover-actions top-0 end-0 mt-4 me-4"><button
-                                            class="btn btn-primary btn-icon flex-shrink-0" data-bs-toggle="modal"
-                                            data-bs-target="#projectsCardViewModal" id="toggle_button"><span
+                                            <span
                                                 class="fa-solid fa-chevron-right"></span></button></div>
-                                </div><span class="badge badge-phoenix fs-10 mb-4 badge-phoenix-warning">' . $row['project_status'] . '</span>
-                                <div class="d-flex align-items-center mb-2"><span
-                                        class="fa-solid fa-user me-2 text-body-tertiary fs-9 fw-extra-bold"></span>
-                                    <p class="fw-bold mb-0 text-truncate lh-1">Client : <span
-                                            class="fw-semibold text-primary ms-1"> '.$row['f_name'].' '.$row['l_name'].'</span></p>
-                                </div>
-                                <div class="d-flex align-items-center mb-4"><span
-                                        class="fa-solid fa-credit-card me-2 text-body-tertiary fs-9 fw-extra-bold"></span>
-                                    <p class="fw-bold mb-0 lh-1">Budget : <span
-                                            class="ms-1 text-body-emphasis">10,500$</span></p>
-                                </div>
-                                <div class="d-flex justify-content-between text-body-tertiary fw-semibold">
-                                    <p class="mb-2"> Progress</p>
-                                    <p class="mb-2 text-body-emphasis">76%</p>
-                                </div>
-                                <div class="progress bg-warning-subtle">
-                                    <div class="progress-bar rounded bg-warning" role="progressbar"
-                                        aria-label="Success example" style="width: 76%" aria-valuenow="25"
-                                        aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <div class="d-flex align-items-center mt-4">
-                                    <p class="mb-0 fw-bold fs-9">Started :<span
-                                            class="fw-semibold text-body-tertiary text-opactity-85 ms-1"> ' . $row['project_start_date'] . '</span></p>
-                                </div>
-                                <div class="d-flex align-items-center mt-2">
-                                    <p class="mb-0 fw-bold fs-9">Deadline : <span
-                                            class="fw-semibold text-body-tertiary text-opactity-85 ms-1">' . $row['project_end_date'] . '/span></p>
-                                </div>
-                                <div
+                    </div>
+                    <span class="badge badge-phoenix fs-10 mb-4 badge-phoenix-warning">' . htmlspecialchars($row['status_name']) . '</span>
+                    <div class="d-flex align-items-center mb-2">
+                        <span class="fa-solid fa-user me-2 text-body-tertiary fs-9 fw-extra-bold"></span>
+                        <p class="fw-bold mb-0 text-truncate lh-1">Client : <span class="fw-semibold text-primary ms-1">' . htmlspecialchars($row['f_name']) . ' ' . htmlspecialchars($row['l_name']) . '</span></p>
+                    </div>
+                    <div class="d-flex align-items-center mb-4">
+                        <span class="fa-solid fa-credit-card me-2 text-body-tertiary fs-9 fw-extra-bold"></span>
+                        <p class="fw-bold mb-0 lh-1">Budget : <span class="ms-1 text-body-emphasis">$ 2000</span></p>
+                    </div>
+                    <div class="d-flex justify-content-between text-body-tertiary fw-semibold">
+                        <p class="mb-2">Progress</p>
+                        <p class="mb-2 text-body-emphasis">50%</p>
+                    </div>
+                    <div class="progress bg-warning-subtle">
+                        <div class="progress-bar rounded bg-warning" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="d-flex align-items-center mt-4">
+                        <p class="mb-0 fw-bold fs-9">Started :<span class="fw-semibold text-body-tertiary text-opactity-85 ms-1">' . htmlspecialchars($row['project_start_date'] ?? '-') . '</span></p>
+                    </div>
+                    <div class="d-flex align-items-center mt-2">
+                        <p class="mb-0 fw-bold fs-9">Deadline : <span class="fw-semibold text-body-tertiary text-opactity-85 ms-1">' . htmlspecialchars($row['project_end_date'] ?? '-') . '</span></p>
+                    </div>
+                     <div
                                     class="d-flex d-lg-block d-xl-flex justify-content-between align-items-center mt-3">
                                     <div class="avatar-group"><a
                                             class="dropdown-toggle dropdown-caret-none d-inline-block" href="#"
@@ -452,14 +545,17 @@
                                         </p>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>';
+                </div>
+            </div>
+        </div>';
                         }
-                    };
-                    
-              
-            ?>
+                    } else {
+                        echo '<p class="text-center mt-4">No projects found.</p>';
+                    }
+                    ?>
+                </div>
+
+
 
                 <script>
                     function getCookie(name) {
@@ -471,15 +567,15 @@
                 </script>
 
                 <?php
-                 include '../PhpFiles/connection.php';
+                include '../PhpFiles/connection.php';
 
 
-                 $query = "SELECT * FROM tbl_project";
-                 $result = mysqli_query($conn, $query) or die("Query Unsuccessful");
-                 if(mysqli_num_rows($result) > 0){
-                     while($row = mysqli_fetch_assoc($result)){
+                $query = "SELECT * FROM tbl_project";
+                $result = mysqli_query($conn, $query) or die("Query Unsuccessful");
+                if (mysqli_num_rows($result) > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) {
 
-                echo '<div class="modal fade" id="projectsCardViewModal" tabindex="-1" aria-labelledby="projectsCardViewModal"
+                        echo '<div class="modal fade" id="projectsCardViewModal" tabindex="-1" aria-labelledby="projectsCardViewModal"
                     aria-hidden="true">
                     <div class="modal-dialog modal-md">
                         <div class="modal-content overflow-hidden">
@@ -497,7 +593,7 @@
                                 <div class="row g-5">
                                     <div class="col-12 col-md-9">
                                         <div class="mb-4">
-                                            <h3 class="fw-bolder lh-sm">'.$row['project_title'].'</h3>
+                                            <h3 class="fw-bolder lh-sm">' . $row['project_title'] . '</h3>
                                             <p class="text-body-highlight fw-semibold mb-0">In list<a
                                                     class="ms-1 fw-bold" href="#!">Review </a></p>
                                         </div>
@@ -910,12 +1006,6 @@
                                                 class="btn btn-sm btn-primary px-6">Comment</button>
                                         </div>
 
-
-
-
-
-
-
                                         <div class="mb-3">
                                             <h4 class="mb-4">Top 5 tasks</h4>
 
@@ -1026,19 +1116,6 @@
                                         </div>
 
                                         <br>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                                         <h4 class="mb-3">Files</h4>
                                         <div class="border-top pt-3 pb-4">
@@ -1166,12 +1243,11 @@
                         </div>
                     </div>
                 </div>';
+                    }
+                };
+                ?>
 
-                     }
-                    };
-              ?>
 
-                
             </div>
             <div class="modal fade" id="searchBoxModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="true"
                 data-phoenix-modal="data-phoenix-modal" style="--phoenix-backdrop-opacity: 1;">
@@ -1396,17 +1472,22 @@
 
 
 
+    
 
 
-    </script>
-    <script>
-        document.getElementById('toggle_button').onclick = () => {
-           window.location.href = 'viewproject_card_details.php?project_id=21'
-        };
-    </script>
-
-
-
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".toggle-button").forEach(function (btn) {
+            btn.addEventListener("click", function (e) {
+                e.preventDefault(); // stop modal behavior if any
+                const projectId = this.getAttribute("data-id");
+                alert("Project ID: " + projectId);
+                // redirect after alert
+                window.location.href = "viewproject_card_details.php?project_id=" + projectId;
+            });
+        });
+    });
+</script>
 
 </body>
 

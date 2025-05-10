@@ -231,7 +231,19 @@
                     <?php
                     include '../PhpFiles/connection.php';
 
-                    $query = "SELECT * FROM tbl_project";
+                    $query = "
+    SELECT 
+        p.*, 
+        p.id AS project_id,
+        c.f_name, 
+        c.l_name, 
+        c.id AS client_id,
+        p_status.id AS status_id,
+        p_status.status_name
+    FROM tbl_project p 
+    INNER JOIN tbl_client c ON p.project_client = c.id
+    INNER JOIN tbl_project_status p_status ON p.project_status = p_status.id
+";
                     $result = mysqli_query($conn, $query) or die("Query Unsuccessful");
 
                     if (mysqli_num_rows($result) > 0) {
@@ -244,10 +256,27 @@
                                     <h4 class="mb-2 line-clamp-1 lh-sm flex-1 me-5"> ' . $row['project_title'] . '
                                     </h4>
                                     <input type="hidden" value=' . $row['id'] . ' id="prj_id">
-                                    <div class="hover-actions top-0 end-0 mt-4 me-4"><button
-                                            class="btn btn-primary btn-icon flex-shrink-0" data-bs-toggle="modal"
-                                            data-bs-target="#projectsCardViewModal" id="toggle_button"><span
-                                                class="fa-solid fa-chevron-right"></span></button></div>
+                                   <div class="hover-actions top-0 end-0 mt-4 me-4"  ><button
+    class="btn btn-primary btn-icon flex-shrink-0 toggle-button" 
+    data-id="' . $row['project_id'] . '" 
+    type="button" data-bs-toggle="modal"
+                                            data-bs-target="#projectsCardViewModal" id="toggle_button">
+
+
+                                            <span
+                                                class="fa-solid fa-chevron-right"></span></button>
+                                                </div>
+
+                                                <div class="hover-actions top-0 end-0 mt-4 me-4"  ><button
+    class="btn btn-primary btn-icon flex-shrink-0 toggle-button" 
+    data-id="' . $row['project_id'] . '" 
+    type="button" data-bs-toggle="modal"
+                                            data-bs-target="#projectsCardViewModal2" id="toggle_button2">
+
+
+                                            <span
+                                                class="fa-solid fa-chevron-right"></span></button>
+                                                </div>
                                 </div><span class="badge badge-phoenix fs-10 mb-4 badge-phoenix-warning">' . $row['project_status'] . '</span>
                                 <div class="d-flex align-items-center mb-2"><span
                                         class="fa-solid fa-user me-2 text-body-tertiary fs-9 fw-extra-bold"></span>
@@ -276,6 +305,8 @@
                                     <p class="mb-0 fw-bold fs-9">Deadline : <span
                                             class="fw-semibold text-body-tertiary text-opactity-85 ms-1">' . $row['project_end_date'] . '/span></p>
                                 </div>
+
+                                
                                 <div
                                     class="d-flex d-lg-block d-xl-flex justify-content-between align-items-center mt-3">
                                     <div class="avatar-group"><a
@@ -465,19 +496,16 @@
 
 
                     <?php
-                    // Include database connection
-                    include '../PhpFiles/connection.php';
+include '../PhpFiles/connection.php';
+$project_id = $_GET['project_id'];
+$query = "SELECT * FROM tbl_project WHERE id = $project_id";
+$result = mysqli_query($conn, $query) or die("Query Failed");
 
-
-                    $query = "SELECT * FROM tbl_project";
-                    $result = mysqli_query($conn, $query) or die("Query Unsuccessful");
-                    if (mysqli_num_rows($result) > 0) {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            // $modalId = 'projectsCardViewModal_' . $row['id'];
-
-                            echo '
-                    <div class="modal fade" id="projectsCardViewModal" tabindex="-1" aria-labelledby="projectsCardViewModal"
-                        aria-hidden="true">
+if (mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        echo '
+                    <div class="modal fade" id="projectsCardViewModal2" tabindex="-1" aria-labelledby="projectsCardViewModal"
+                        aria-hidden="false">
                         <div class="modal-dialog modal-md">
                          <div class="modal-content overflow-hidden">
                                 <div class="modal-header position-relative p-0"><input class="d-none" id="projectCoverInput"
@@ -485,8 +513,11 @@
                                         for="projectCoverInput"><span
                                             class="project-modal-btn d-inline-block bg-body-emphasis dark__text-gray-100 rounded-2 py-2 px-3 fs-9 fw-bolder mt-3 ms-3 cursor-pointer"><span
                                                 class="fa-solid fa-image me-1"></span>Change</span></label><button
-                                        class="btn btn-circle project-modal-btn position-absolute end-0 top-0 mt-3 me-3 bg-body-emphasis"
-                                        data-bs-dismiss="modal"><span
+    id="modalCloseRedirect"
+    class="btn btn-circle project-modal-btn position-absolute end-0 top-0 mt-3 me-3 bg-body-emphasis">
+    <span class="fa-solid fa-xmark text-body dark__text-gray-100"></span>
+</button>
+<span
                                             class="fa-solid fa-xmark text-body dark__text-gray-100"></span></button><img
                                         class="w-100" src="../../assets/img/generic/43.png" alt=""
                                         style="max-height: 200px;min-height: 150px;" /></div>
@@ -494,7 +525,7 @@
                                     <div class="row g-5">
                                         <div class="col-12 col-md-9">
                                             <div class="mb-4">
-                                                <h3 class="fw-bolder lh-sm"> ' . $row['project_title'] . ' </h3>
+                                                <h3 class="fw-bolder lh-sm"> abc ' . htmlspecialchars($row['project_title']) . ' </h3>
                                                 <p class="text-body-highlight fw-semibold mb-0">In list<a
                                                         class="ms-1 fw-bold" href="#!">Review </a></p>
                                             </div>
@@ -509,7 +540,7 @@
                                             <div class="flatpickr-input-container flatpickr-input-sm w-50 mb-3"><input
                                                     class="form-control form-control-sm ps-6 datetimepicker" id="datepicker"
                                                     type="text"
-                                                    data-options={"dateFormat":"M j, Y","disableMobile":true,"defaultDate":"Mar 1, 2022"} /><span
+                                                    data-options={ { dateFormat: M j, Y,disableMobile:true,defaultDate : Mar 1, 2022 } /><span
                                                     class="uil uil-calendar-alt flatpickr-icon text-body-tertiary mt-1"></span>
                                             </div>
                                             <div class="mb-3">
@@ -1398,22 +1429,55 @@
     <script src="../../assets/js/phoenix.js"></script>
 
 
-
-
-
-    </script>
-    <!-- <script>
-        document.getElementById('toggle_button').onclick = () => {
-            let id = document.getElementById('prj_id').value;
-            document.cookie = `project_id=${id}; path=/;`;
-        };
-    </script> -->
-
     <script>
         window.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('toggle_button').click();
+            document.getElementById('toggle_button2').click();
         });
     </script>
+
+
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const modalElement = document.getElementById('projectsCardViewModal2');
+
+        if (modalElement) {
+            const modal = new bootstrap.Modal(modalElement, {
+                backdrop: 'static', // Prevent close on backdrop click
+                keyboard: false     // Prevent close on ESC key
+            });
+
+            // Optional: Automatically show modal if project_id exists
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get("project_id")) {
+                modal.show();
+            }
+        }
+    });
+</script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const closeBtn = document.getElementById("modalCloseRedirect");
+        const modalEl = document.getElementById("projectsCardViewModal2");
+        const urlParams = new URLSearchParams(window.location.search);
+        const projectId = urlParams.get("project_id");
+
+        if (closeBtn && modalEl && projectId) {
+            const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+
+            closeBtn.addEventListener("click", function () {
+                modal.hide(); // Manually close the modal
+
+                // Redirect to the view page
+                window.location.href = "viewproject_card.php";
+            });
+        }
+    });
+</script>
 
 
 
