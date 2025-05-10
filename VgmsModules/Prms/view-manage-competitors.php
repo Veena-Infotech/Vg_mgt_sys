@@ -179,6 +179,11 @@
                     data-list='{"valueNames":["name","contact","email","company"],"page":5,"pagination":true}'
                     style="width: 100%; padding-top: 20px;">
 
+                     <!-- Add Button -->
+                    <div class="d-flex  mb-3">
+                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addCompetitorModal">Add Competitor</button>
+                    </div>
+                    
                     <!-- Search Box -->
                     <div class="search-box mb-3 mx-auto">
                         <form class="position-relative">
@@ -189,10 +194,7 @@
                         </form>
                     </div>
 
-                    <!-- Add Button -->
-                    <div class="d-flex justify-content-end mb-3">
-                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addCompetitorModal">Add Competitor</button>
-                    </div>
+                   
 
                     <!-- Table -->
                     <div class="table-responsive">

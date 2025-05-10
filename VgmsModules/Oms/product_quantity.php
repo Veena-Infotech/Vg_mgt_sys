@@ -13,7 +13,7 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>Manage Reservation</title>
+    <title>Starter code</title>
 
     <!-- ===============================================-->
     <!--    Favicons-->
@@ -167,11 +167,14 @@
             <!-- view leads table  -->
             <div class="row g-0 justify-content-between align-items-center h-100">
                 <!-- Container for the Title -->
-                <div style="width: 100%; text-align: center; margin: 20px 0;">
-                    <h3 style="margin: 0;">View/Manage reservation</h3>
+                <div style="width: 100%; margin: 20px 0;">
+                    <h4 style="margin: 0;">Manage Product Types & Units</h4>
+                    <h6 style="margin: 0;">Add, edit or remove product types and quantity units.</h6>
                 </div>
+
                 <hr>
-                <!-- button to add reservation Name -->
+
+                <!-- button to add Sources Name -->
                 <div>
                     <button class="btn btn-primary" type="button" data-bs-toggle="modal"
                         data-bs-target="#verticallyCentered">ADD</button>
@@ -180,41 +183,46 @@
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="verticallyCenteredModalLabel">Add reservation Name</h5>
+                                    <h5 class="modal-title" id="verticallyCenteredModalLabel">Add New Data</h5>
                                     <button class="btn btn-close p-1" type="button" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form id="addreservationForm" method="post">
+                                    <form id="addsourceForm" method="post">
                                         <div class="mb-3">
-                                            <label for="name" class="form-label">Name Of the reservation Name</label>
+                                            <label for="name" class="form-label">Name</label>
                                             <input class="form-control" type="text" id="name" name="name"
-                                                placeholder="Enter reservation Name" required>
+                                                placeholder="Enter Name" required>
                                         </div>
-                                        <input type="hidden" name="action" value="add_reservation">
+                                        <input type="hidden" name="action" value="add_source">
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button class="btn btn-primary" type="submit" form="addreservationForm">ADD</button>
+                                    <button class="btn btn-primary" type="submit" form="addsourceForm">ADD</button>
                                     <button class="btn btn-outline-primary" type="button"
                                         data-bs-dismiss="modal">Cancel</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
                 </div>
+
                 <!-- Container for the Table -->
-                <div id="tableExample3"
-                    data-list='{"valueNames":["id","name"],"page":5,"pagination":true}'
+                <div id="tableExample3" data-list='{"valueNames":["id","name"],"page":5,"pagination":true}'
                     style="width: 100%; padding-top: 20px;">
 
-                    <!-- Search -->
+                    <!-- Search Bar -->
                     <div class="search-box mb-3 mx-auto">
                         <form class="position-relative">
                             <input class="form-control search-input search form-control-sm" type="search"
                                 placeholder="Search" aria-label="Search">
+                            <svg class="svg-inline--fa fa-magnifying-glass search-box-icon" aria-hidden="true"
+                                focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img"
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <path fill="currentColor"
+                                    d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z">
+                                </path>
+                            </svg>
                         </form>
                     </div>
 
@@ -223,62 +231,32 @@
                         <table class="table table-striped table-sm fs-9 mb-0">
                             <thead>
                                 <tr>
-                                    <th class="sort border-top border-translucent ps-3" data-sort="id">ID</th>
-                                    <th class="sort border-top" data-sort="name">Reservation Name</th>
-                                    <th class="border-top">Edit</th>
-                                    <th class="border-top">Remove</th>
+                                    <th class="sort border-top border-translucent ps-3" data-sort="id">Id</th>
+                                    <th class="sort border-top border-translucent text-center" data-sort="name">Name</th>
+                                    <th class="sort text-end align-middle pe-0 border-top" scope="col">ACTION</th>
                                 </tr>
                             </thead>
-                            <tbody class="list" id="reservationTableBody">
-                                <!-- Sample Data -->
+                            <tbody class="list">
                                 <tr>
-                                    <td class="id">1</td>
-                                    <td class="name">Alpha Reservation</td>
-                                    <td><button class="btn btn-sm btn-outline-primary edit-btn"
-                                            data-bs-toggle="modal" data-bs-target="#editreservation"
-                                            data-id="1" data-name="Alpha Reservation" style="border: none;">🖉</button></td>
-                                    <td><button class="btn btn-sm btn-outline-danger delete-btn" style="border: none;">🗑</button></td>
+                                    <td class="align-middle ps-3 id">1</td>
+                                    <td class="align-middle name text-center">Neav</td>
+                                    <td class="align-middle white-space-nowrap text-end pe-0">
+                                        <div class="btn-reveal-trigger position-static">
+                                            <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
+                                                type="button" data-bs-toggle="dropdown" data-boundary="window"
+                                                aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
+                                                <span class="fas fa-ellipsis-h fs-10"></span>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end py-2">
+                                                <a class="dropdown-item text-primary" href="#" data-bs-toggle="modal"
+                                                    data-bs-target="#editSourceModal">Edit</a>
+                                                <a class="dropdown-item text-danger" href="#"
+                                                    onclick="return confirm('Are you sure you want to remove this item?')">Remove</a>
+                                            </div>
+                                        </div>
+                                    </td>
                                 </tr>
-                                <tr>
-                                    <td class="id">2</td>
-                                    <td class="name">Beta Booking</td>
-                                    <td><button class="btn btn-sm btn-outline-primary edit-btn"
-                                            data-bs-toggle="modal" data-bs-target="#editreservation"
-                                            data-id="2" data-name="Beta Booking" style="border: none;">🖉</button></td>
-                                    <td><button class="btn btn-sm btn-outline-danger delete-btn" style="border: none;">🗑</button></td>
-                                </tr>
-                                <tr>
-                                    <td class="id">3</td>
-                                    <td class="name">Gamma Retreat</td>
-                                    <td><button class="btn btn-sm btn-outline-primary edit-btn"
-                                            data-bs-toggle="modal" data-bs-target="#editreservation"
-                                            data-id="3" data-name="Gamma Retreat" style="border: none;">🖉</button></td>
-                                    <td><button class="btn btn-sm btn-outline-danger delete-btn" style="border: none;">🗑</button></td>
-                                </tr>
-                                <tr>
-                                    <td class="id">4</td>
-                                    <td class="name">Delta Stay</td>
-                                    <td><button class="btn btn-sm btn-outline-primary edit-btn"
-                                            data-bs-toggle="modal" data-bs-target="#editreservation"
-                                            data-id="4" data-name="Delta Stay" style="border: none;">🖉</button></td>
-                                    <td><button class="btn btn-sm btn-outline-danger delete-btn" style="border: none;">🗑</button></td>
-                                </tr>
-                                <tr>
-                                    <td class="id">5</td>
-                                    <td class="name">Epsilon Lodge</td>
-                                    <td><button class="btn btn-sm btn-outline-primary edit-btn"
-                                            data-bs-toggle="modal" data-bs-target="#editreservation"
-                                            data-id="5" data-name="Epsilon Lodge" style="border: none;">🖉</button></td>
-                                    <td><button class="btn btn-sm btn-outline-danger delete-btn" style="border: none;">🗑</button></td>
-                                </tr>
-                                <tr>
-                                    <td class="id">6</td>
-                                    <td class="name">Zeta Room</td>
-                                    <td><button class="btn btn-sm btn-outline-primary edit-btn"
-                                            data-bs-toggle="modal" data-bs-target="#editreservation"
-                                            data-id="6" data-name="Zeta Room" style="border: none;">🖉</button></td>
-                                    <td><button class="btn btn-sm btn-outline-danger delete-btn" style="border: none;">🗑</button></td>
-                                </tr>
+                                <!-- Add more rows as needed -->
                             </tbody>
                         </table>
                     </div>
@@ -297,33 +275,66 @@
                     </div>
                 </div>
 
-                <!-- Edit Modal -->
-                <div class="modal fade" id="editreservation" tabindex="-1" aria-labelledby="editregionLabel" aria-hidden="true">
+                <!-- Edit Source Modal -->
+                <div class="modal fade" id="editSourceModal" tabindex="-1" aria-labelledby="editSourceLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editSourceLabel">Edit Data</h5>
+                                <button type="button" class="btn-close p-1" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+
+                            <div class="modal-body">
+                                <form id="editSourceForm" method="post">
+                                    <div class="mb-3">
+                                        <label for="edit_source_name" class="form-label">Name of the Source</label>
+                                        <input class="form-control" type="text" id="edit_source_name"
+                                            name="edit_source_name" placeholder="Enter Name" required>
+                                    </div>
+                                    <input type="hidden" id="edit_source_id" name="edit_source_id">
+                                </form>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="submit" form="editSourceForm">EDIT</button>
+                                <button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">Cancel</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Extra Modal (Not touched) -->
+                <div class="modal fade" id="editservices" tabindex="-1" aria-labelledby="editregionLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">Edit Reservation</h5>
-                                <button class="btn btn-close p-1" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <h5 class="modal-title" id="editregionLabel">Edit Data</h5>
+                                <button class="btn btn-close p-1" type="button" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form id="editreservationform">
+                                <form id="editwardform" method="post">
                                     <div class="mb-3">
-                                        <label for="edit_name" class="form-label">Name of Reservation</label>
-                                        <input class="form-control" type="text" id="edit_name" name="edit_name" required>
+                                        <label for="edit_name" class="form-label">Name Name</label>
+                                        <input class="form-control" type="text" id="edit_name" name="edit_name"
+                                            placeholder="Enter Name" required>
                                     </div>
                                     <input type="hidden" id="edit_id" name="edit_id">
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <button class="btn btn-primary" type="submit" form="editreservationform">Edit</button>
-                                <button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">Cancel</button>
+                                <button class="btn btn-primary" type="submit" form="editwardform">EDIT</button>
+                                <button class="btn btn-outline-primary" type="button"
+                                    data-bs-dismiss="modal">Cancel</button>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
             </div>
+
             <footer>
                 <!-- Footer -->
                 <?php include("../../Components/footer.php"); ?>
@@ -364,37 +375,7 @@
     <script src="../../assets/js/phoenix.js"></script>
     <script src="../../vendors/echarts/echarts.min.js"></script>
     <script src="../../assets/js/ecommerce-dashboard.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const editModal = document.getElementById('editreservation');
-            editModal.addEventListener('show.bs.modal', function(event) {
-                const button = event.relatedTarget; // Button that triggered the modal
-                const id = button.getAttribute('data-id');
-                const type = button.getAttribute('data-type');
-
-                // Populate the form fields
-                editModal.querySelector('#edit_id').value = id;
-                editModal.querySelector('#edit_name').value = type;
-            });
-        });
-    </script>
-    <script>
-        // Edit button handler
-        document.querySelectorAll('.edit-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                document.getElementById('edit_name').value = button.getAttribute('data-name');
-                document.getElementById('edit_id').value = button.getAttribute('data-id');
-            });
-        });
-
-        // Delete button handler
-        document.querySelectorAll('.delete-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                const row = button.closest('tr');
-                row.remove(); // delete row
-            });
-        });
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
 
 
 
