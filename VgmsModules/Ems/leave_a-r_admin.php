@@ -182,7 +182,7 @@
                 data-list="{&quot;valueNames&quot;:[&quot;empName&quot;,&quot;leaveType&quot;,&quot;startDate&quot;,&quot;endDate&quot;,&quot;reason&quot;,&quot;overtime&quot;,&quot;remarkpermissions&quot;,&quot;localtion&quot;],&quot;page&quot;:5,&quot;pagination&quot;:true}">
                 <div class="search-box mb-3 mx-auto mt-4">
                     <form class="position-relative"><input
-                            class="form-control search-input search form-control-sm animate-search" type="search"
+                            class="form-control search-input search form-control-sm animate-search" type="search" name="searchQuery" 
                             placeholder="Search" aria-label="Search">
                         <svg class="svg-inline--fa fa-magnifying-glass search-box-icon" aria-hidden="true"
                             focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img"

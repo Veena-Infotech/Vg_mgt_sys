@@ -182,8 +182,8 @@
                     <div class="col-md-4">
                         <div class="form-floating form-floating-advance-select mb-3">
                             <label for="floaTingLabelSingleSelect">Select Employee</label>
-                            <select class="form-select" id="floaTingLabelSingleSelect" data-choices="data-choices"
-                                data-options='{"removeItemButton":true,"placeholder":true}'>
+                            <select class="form-select" id="floaTingLabelSingleSelect" name="employee"
+                                data-choices="data-choices" data-options='{"removeItemButton":true,"placeholder":true}'>
                                 <option>Massachusetts Institute of Technology</option>
                                 <option>University of Chicago</option>
                                 <option>GSAS Open Labs At Harvard</option>
@@ -198,7 +198,7 @@
                     <div class="col-md-4 position-relative">
                         <!-- Floating Label Input for Time Range -->
                         <div class="form-floating">
-                            <input class="form-control datetimepicker flatpickr-input" id="timepicker2" type="text"
+                            <input class="form-control datetimepicker flatpickr-input" id="timepicker2" name="timeRange" type="text"
                                 placeholder="d/m/y to d/m/y"
                                 data-options='{"mode":"range","dateFormat":"d/m/y","disableMobile":true}'
                                 readonly="readonly">
@@ -212,7 +212,7 @@
                 data-list="{&quot;valueNames&quot;:[&quot;date&quot;,&quot;status&quot;,&quot;mode&quot;,&quot;intime&quot;,&quot;outtime&quot;,&quot;overtime&quot;,&quot;remarkpermissions&quot;,&quot;localtion&quot;],&quot;page&quot;:5,&quot;pagination&quot;:true}">
                 <div class="search-box mb-3 mx-auto">
                     <form class="position-relative"><input
-                            class="form-control search-input search form-control-sm animate-search" type="search"
+                            class="form-control search-input search form-control-sm animate-search" type="search" name="searchQuery"
                             placeholder="Search" aria-label="Search">
                         <svg class="svg-inline--fa fa-magnifying-glass search-box-icon" aria-hidden="true"
                             focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img"
@@ -549,7 +549,7 @@
 
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input class="form-control datetimepicker" id="editDate" placeholder="Date" required
+                                    <input class="form-control datetimepicker" id="editDate" name="date" placeholder="Date"
                                         type="text" placeholder="dd/mm/yyyy"
                                         data-options='{"disableMobile":true,"dateFormat":"d/m/Y"}' />
                                     <label for="editDate">Date</label>
@@ -558,7 +558,7 @@
 
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <select class="form-select" id="editStatus" aria-label="Status">
+                                    <select class="form-select" id="editStatus" name="status" aria-label="Status">
                                         <option selected disabled>Choose status</option>
                                         <option>Present</option>
                                         <option>Absent</option>
@@ -570,7 +570,7 @@
 
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <select class="form-select" id="editMode" aria-label="Mode">
+                                    <select class="form-select" id="editMode" name="mode" aria-label="Mode">
                                         <option selected disabled>Choose mode</option>
                                         <option>Work from Home</option>
                                         <option>Office</option>
@@ -581,7 +581,7 @@
 
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="time" class="form-control datetimepicker" id="editInTime"
+                                    <input type="time" class="form-control datetimepicker" id="editInTime" name="in_time"
                                         placeholder="Intime" type="text" placeholder="hour : minute"
                                         data-options='{"enableTime":true,"noCalendar":true,"dateFormat":"H:i","disableMobile":true}'>
                                     <label for="editInTime">In Time</label>
@@ -590,7 +590,7 @@
 
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input class="form-control datetimepicker" id="editOutTime" type="text"
+                                    <input class="form-control datetimepicker" id="editOutTime" name="out_time" type="text"
                                         placeholder="hour : minute"
                                         data-options='{"enableTime":true,"noCalendar":true,"dateFormat":"H:i","disableMobile":true}'>
                                     <label for="editOutTime">Out Time</label>
@@ -599,14 +599,14 @@
 
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="number" class="form-control" id="editOvertime" placeholder="Overtime">
+                                    <input type="number" class="form-control" id="editOvertime" name="overtime" placeholder="Overtime">
                                     <label for="editOvertime">Overtime (in hours)</label>
                                 </div>
                             </div>
 
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <select class="form-select" id="editRemarks" aria-label="Remarks">
+                                    <select class="form-select" id="editRemarks" name="remarks" aria-label="Remarks">
                                         <option selected disabled>Select remark</option>
                                         <option>Permission granted</option>
                                         <option>Medical Leave</option>
@@ -622,6 +622,7 @@
                             <button class="btn btn-primary" type="submit">Save</button>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>
@@ -679,14 +680,13 @@
                 opacity: 0,
                 duration: 0.5,
                 ease: "back.in(1.7)",
-                onComplete: function () {
+                onComplete: function() {
                     // After the animation, hide the popup and clear the map frame
                     popup.classList.add('d-none');
                     document.getElementById('mapFrame').src = '';
                 }
             });
         }
-
     </script>
     <script>
         document.querySelectorAll('.filter-btn').forEach(btn => {

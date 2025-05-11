@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr" data-navigation-type="default" data-navbar-horizontal-shape="default">
 
@@ -181,91 +182,92 @@
       </div>
 
 
-      <form id="salaryForm" class="p-4 rounded shadow-sm">
-        <div class="row mb-3">
-          <div class="col-md-4">
-            <label for="organizerSingle" class="form-label">
-              <i class="bi bi-person me-1"></i> Select Employee
-            </label>
-            <select class="form-select" id="organizerSingle" data-choices="data-choices" data-options='{"removeItemButton":true,"placeholder":true}'>
-              <option value="">Select Employee...</option>
-              <option>priya</option>
-              <option>riya</option>
-              <option>siya</option>
-              <option>geeta</option>
-            </select>
-          </div>
-          <div class="col-md-4">
-            <label class="form-label">
-              <i class="bi bi-calendar-month me-1"></i>Select Month
-            </label>
-            <select class="form-select">
-              <option selected disabled>Choose...</option>
-              <option>January</option>
-              <option>February</option>
-              <option>March</option>
-              <option>April</option>
-              <option>May</option>
-              <option>June</option>
-              <option>July</option>
-              <option>August</option>
-              <option>September</option>
-              <option>October</option>
-              <option>November</option>
-              <option>December</option>
-            </select>
-          </div>
-          <div class="col-md-4">
-            <label class="form-label">
-              <i class="bi bi-calendar3 me-1"></i>Select Year
-            </label>
-            <select class="form-select" id="yearSelect"></select>
-          </div>
-        </div>
+     <form id="salaryForm" class="p-4 rounded shadow-sm">
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <label for="organizerSingle" class="form-label">
+        <i class="bi bi-person me-1"></i> Select Employee
+      </label>
+      <select class="form-select" id="organizerSingle" name="employee" required>
+        <option value="">Select Employee...</option>
+        <option value="priya">Priya</option>
+        <option value="riya">Riya</option>
+        <option value="siya">Siya</option>
+        <option value="geeta">Geeta</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">
+        <i class="bi bi-calendar-month me-1"></i>Select Month
+      </label>
+      <select class="form-select" name="month" required>
+        <option value="" disabled selected>Choose...</option>
+        <option value="January">January</option>
+        <option value="February">February</option>
+        <option value="March">March</option>
+        <option value="April">April</option>
+        <option value="May">May</option>
+        <option value="June">June</option>
+        <option value="July">July</option>
+        <option value="August">August</option>
+        <option value="September">September</option>
+        <option value="October">October</option>
+        <option value="November">November</option>
+        <option value="December">December</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">
+        <i class="bi bi-calendar3 me-1"></i>Select Year
+      </label>
+      <select class="form-select" id="yearSelect" name="year" required></select>
+    </div>
+  </div>
 
-        <div class="d-flex justify-content-end mb-4">
-          <button type="button" class="btn btn-outline-primary" id="fetchBtn">
-            <i class="bi bi-search me-1"></i>Fetch
-          </button>
-        </div>
+  <div class="d-flex justify-content-end mb-4">
+    <button type="button" class="btn btn-outline-primary" id="fetchBtn">
+      <i class="bi bi-search me-1"></i>Fetch
+    </button>
+  </div>
 
-        <div id="slipPreview" class="border-top pt-4" style="display: none;">
-          <h5 class="mb-3">
-            <i class="bi bi-file-earmark-text me-1"></i>Salary Slip Details
-          </h5>
-          <div class="row g-3">
-            <div class="col-md-6">
-              <label class="form-label">
-                <i class="bi bi-cash-stack me-1"></i>Basic Salary
-              </label>
-              <input type="text" class="form-control" placeholder="e.g. 40,000">
-            </div>
-            <div class="col-md-6">
-              <label class="form-label">
-                <i class="bi bi-house-door me-1"></i>HRA
-              </label>
-              <input type="text" class="form-control" placeholder="e.g. 12,000">
-            </div>
-            <div class="col-md-6">
-              <label class="form-label">
-                <i class="bi bi-briefcase me-1"></i>Allowances
-              </label>
-              <input type="text" class="form-control" placeholder="e.g. 5,000">
-            </div>
-            <div class="col-md-6">
-              <label class="form-label">
-                <i class="bi bi-dash-circle me-1"></i>Deductions
-              </label>
-              <input type="text" class="form-control" placeholder="e.g. 2,000">
-            </div>
-          </div>
-          <div class="text-end mt-4">
-            <button type="submit" class="btn btn-outline-success">
-              <i class="bi bi-send-check me-1"></i>Submit
-            </button>
-          </div>
-        </div>
-      </form>
+  <div id="slipPreview" class="border-top pt-4" style="display: none;">
+    <h5 class="mb-3">
+      <i class="bi bi-file-earmark-text me-1"></i>Salary Slip Details
+    </h5>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label">
+          <i class="bi bi-cash-stack me-1"></i>Basic Salary
+        </label>
+        <input type="text" class="form-control" name="basicSalary" placeholder="e.g. 40000" pattern="^\d+(\.\d{1,2})?$" required>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">
+          <i class="bi bi-house-door me-1"></i>HRA
+        </label>
+        <input type="text" class="form-control" name="hra" placeholder="e.g. 12000" pattern="^\d+(\.\d{1,2})?$" required>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">
+          <i class="bi bi-briefcase me-1"></i>Allowances
+        </label>
+        <input type="text" class="form-control" name="allowances" placeholder="e.g. 5000" pattern="^\d+(\.\d{1,2})?$" required>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">
+          <i class="bi bi-dash-circle me-1"></i>Deductions
+        </label>
+        <input type="text" class="form-control" name="deductions" placeholder="e.g. 2000" pattern="^\d+(\.\d{1,2})?$" required>
+      </div>
+    </div>
+    <div class="text-end mt-4">
+      <button type="submit" class="btn btn-outline-success">
+        <i class="bi bi-send-check me-1"></i>Submit
+      </button>
+    </div>
+  </div>
+</form>
+
 
 
       <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
