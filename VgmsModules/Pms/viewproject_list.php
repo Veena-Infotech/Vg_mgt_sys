@@ -487,7 +487,7 @@ echo $statusColumnHtml;
 
                                     echo '<td class="align-middle text-end white-space-nowrap pe-0 action">
                                         <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-                                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
+                                            <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="project_details.php?project_id=' . $row['id'] . '">View</a><a class="dropdown-item" href="#!">Export</a>
                                                 <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
                                             </div>
                                         </div>

@@ -236,7 +236,7 @@
           <div class="border-bottom border-translucent mx-n4 mx-lg-n6 px-4 px-lg-6 pb-5">
             <div class="row justify-content-between gy-4">
               <div class="col-auto">
-                <h2>Boards <span class="text-body-tertiary fw-semibold">(2)</span></h2>
+                <h2>Boards <span class="text-body-tertiary fw-semibold"></span></h2>
               </div>
               <div class="col-auto d-flex flex-wrap gap-2"><button class="btn px-4 btn-phoenix-primary d-flex"><span class="fa-solid fa-filter me-1"></span><span>Filter</span></button><select class="form-select w-auto" id="select-deals">
                   <option>Sort by - Last visited</option>
@@ -256,49 +256,56 @@
           <div class="d-flex flex-wrap gap-3 border-bottom border-translucent mx-n4 mx-lg-n6 px-4 px-lg-6 py-5"><a class="btn btn-primary px-3 px-sm-5 px-md-10" href="../../VgmsModules/pms/add_project.php"><span class="fas fa-plus me-2"></span>Create New Project</a></div>
 
           <!-- This is the slider start -->
+          <?php
+            include '../PhpFiles/connection.php'; // Database connection
+
+
+            // Get all statuses
+            $status_sql = "SELECT * FROM tbl_project_status";
+            $status_result = mysqli_query($conn, $status_sql);
+
+            while ($status = mysqli_fetch_assoc($status_result)) {
+              $status_id = $status['id'];
+              $status_name = $status['status_name'];
+              $badge_color = $status['bagde_color'];
+  
+
+            // Start a new row for each status
+          ?>
           <div class="mx-n4 mx-lg-n6 px-4 px-lg-6 py-5 border-bottom border-translucent">
-            <h4>Active Boards</h4>
-            <p class="mb-4">Boards which are Active . Can be private or public boards.</p>
+            <h4 style="color: <?php echo $badge_color; ?>"><h4 style="color: <?php echo $badge_color; ?>"></h4>
+            <p class="mb-4">Projects with status "<?php echo htmlspecialchars($status_name); ?>"</p>
             <div class="swiper-theme-container kanban-boards-slider">
               <div class="swiper theme-slider" data-swiper='{"slidesPerView":1,"spaceBetween":24,"speed":800,"breakpoints":{"576":{"slidesPerView":2},"1200":{"slidesPerView":3},"1540":{"slidesPerView":4}}}'>
                 <div class="swiper-wrapper">
-                  <!-- <div class="swiper-slide"><a class="text-decoration-none" href="../../VgmsModules/pms/view_task.php">
-                      <div class="card overflow-hidden bg-transparent h-100">
-                        <div class="position-relative">
-                          <div class="bg-info-darker" style="height: 128px"></div>
-                          <div class="avatar-group position-absolute" style="bottom: 1rem; left: 1.5rem">
-                            <div class="avatar avatar-m  border border-light-subtle rounded-circle">
-                              <img class="rounded-circle " src="../../assets/img/team/1.webp" alt="" />
-                            </div>
-                            <div class="avatar avatar-m  border border-light-subtle rounded-circle">
-                              <img class="rounded-circle " src="../../assets/img/team/2.webp" alt="" />
-                            </div>
-                            <div class="avatar avatar-m  border border-light-subtle rounded-circle">
-                              <img class="rounded-circle " src="../../assets/img/team/3.webp" alt="" />
-                            </div>
-                            <div class="avatar avatar-m  border border-light-subtle rounded-circle">
-                              <img class="rounded-circle " src="../../assets/img/team/4.webp" alt="" />
-                            </div>
-                            <div class="avatar avatar-m  border border-light-subtle rounded-circle">
-                              <img class="rounded-circle " src="../../assets/img/team/avatar-placeholder.webp" alt="" />
-                            </div>
-                          </div>
-                        </div>
-                        <div class="card-body d-flex flex-column justify-content-between">
-                          <div>
-                            <h3 class="text-body">Issue Tickets</h3>
-                            <p class="text-body-tertiary mb-4">Daily task</p>
-                          </div>
-                          <div class="d-flex gap-4">
-                            <h5 class="text-body"><span class="fa-solid fa-list-check text-body-tertiary me-1"></span>44</h5>
-                            <h5 class="text-body"><span class="fa-solid fa-comment text-body-tertiary me-1"></span>12</h5>
-                            <h5 class="text-body"><span class="fa-solid fa-calendar-xmark text-body-tertiary me-1"></span>3</h5>
-                          </div>
-                        </div>
-                      </div> 
-                    </a></div> -->
+                  
                     <!-- This is the card start -->
-                  <div class="swiper-slide"><a class="text-decoration-none" href="../../VgmsModules/pms/view_task.php">
+                  
+                      <?php
+                        include '../PhpFiles/connection.php';    // Database connection file
+
+                        $sql = "
+                          SELECT 
+                            p.id,
+                            p.project_title,
+                            CONCAT(c.f_name, ' ', c.l_name) AS client_name,
+                            COUNT(DISTINCT t.id) AS task_count,
+                            COUNT(DISTINCT pe.emp_id) AS team_member_count,
+                            p.project_end_date
+                          FROM tbl_project p
+                          LEFT JOIN tbl_client c ON p.project_client = c.id
+                          LEFT JOIN tbl_tasks t ON t.project_id = p.id
+                          LEFT JOIN tbl_project_emp pe ON pe.project_id = p.id
+                          WHERE p.project_status = $status_id
+                          GROUP BY p.id, p.project_title, c.f_name, c.l_name, p.project_end_date
+                        ";
+
+
+                          $result = mysqli_query($conn, $sql) or die("Query Unsuccessful");
+                      if (mysqli_num_rows($result) > 0) {
+                        while ($project = mysqli_fetch_assoc($result)) {
+                      ?>
+                  <div class="swiper-slide"><a class="text-decoration-none" href="../../VgmsModules/pms/view_task.php?project_id=<?php echo $project['id']; ?>">
                       <div class="card overflow-hidden bg-transparent h-100">
                         <div class="position-relative"><img class="w-100" src="../../assets/img/kanban/board-2.png" style="height: 128px;" alt="" />
                           <div class="avatar-group position-absolute" style="bottom: 1rem; left: 1.5rem">
@@ -320,81 +327,33 @@
                           </div>
                         </div>
                         <!-- this is the card end -->
-                        <div class="card-body d-flex flex-column justify-content-between">
+                      
+                       <div class="card-body d-flex flex-column justify-content-between gap-4">
                           <div>
-                            <h3 class="text-body">Falcon React</h3>
-                            <p class="text-body-tertiary mb-4">Production line</p>
+                            <h3 class="text-body mb-1"><?php echo htmlspecialchars($project['project_title']); ?></h3>
+                            <p class="text-body-tertiary mb-4"><?php echo htmlspecialchars($project['client_name']); ?></p>
                           </div>
-                          <div class="d-flex gap-4">
-                            <h5 class="text-body"><span class="fa-solid fa-list-check text-body-tertiary me-1"></span>11</h5>
-                            <h5 class="text-body"><span class="fa-solid fa-comment text-body-tertiary me-1"></span>29</h5>
-                            <h5 class="text-body"><span class="fa-solid fa-calendar-xmark text-body-tertiary me-1"></span>9</h5>
+                          <div class="d-flex justify-content-between">
+                            <h5 class="text-body mb-1"><span class="fa-solid fa-list-check text-body-tertiary me-1"></span>
+                                <?php echo (int)$project['task_count']; ?> Tasks
+                            </h5>
+                            <h5 class="text-body mb-1"><span class="fa-solid fa-comment text-body-tertiary me-1"></span>
+                              <?php echo (int)$project['team_member_count']; ?> Members
+                            </h5>
                           </div>
+                            <h5 class="text-body mt-2 text-start"><span class="fa-solid fa-calendar-xmark text-body-tertiary me-1"></span>
+                              <?php echo (!empty($project['project_end_date']) ? date('d M Y', strtotime($project['project_end_date'])) : 'No deadline'); ?>
+                            </h5>
+                          
                         </div>
                       </div>
                     </a></div>
-                  <div class="swiper-slide"><a class="text-decoration-none" href="../../VgmsModules/pms/view_task.php">
-                      <div class="card overflow-hidden bg-transparent h-100">
-                        <div class="position-relative"><img class="w-100" src="../../assets/img/kanban/board-3.png" style="height: 128px;" alt="" />
-                          <div class="avatar-group position-absolute" style="bottom: 1rem; left: 1.5rem">
-                            <div class="avatar avatar-m  border border-light-subtle rounded-circle">
-                              <img class="rounded-circle " src="../../assets/img/team/10.webp" alt="" />
-                            </div>
-                            <div class="avatar avatar-m  border border-light-subtle rounded-circle">
-                              <img class="rounded-circle " src="../../assets/img/team/11.webp" alt="" />
-                            </div>
-                            <div class="avatar avatar-m  border border-light-subtle rounded-circle">
-                              <img class="rounded-circle " src="../../assets/img/team/12.webp" alt="" />
-                            </div>
-                            <div class="avatar avatar-m  border border-light-subtle rounded-circle">
-                              <img class="rounded-circle " src="../../assets/img/team/13.webp" alt="" />
-                            </div>
-                            <div class="avatar avatar-m  border border-light-subtle rounded-circle">
-                              <img class="rounded-circle " src="../../assets/img/team/avatar-placeholder.webp" alt="" />
-                            </div>
-                          </div>
-                        </div>
-                        <div class="card-body d-flex flex-column justify-content-between">
-                          <div>
-                            <h3 class="text-body">Rebuilding</h3>
-                            <p class="text-body-tertiary mb-4">Production line</p>
-                          </div>
-                          <div class="d-flex gap-4">
-                            <h5 class="text-body"><span class="fa-solid fa-list-check text-body-tertiary me-1"></span>13</h5>
-                            <h5 class="text-body"><span class="fa-solid fa-comment text-body-tertiary me-1"></span>11</h5>
-                            <h5 class="text-body"><span class="fa-solid fa-calendar-xmark text-body-tertiary me-1"></span>15</h5>
-                          </div>
-                        </div>
-                      </div>
-                    </a></div>
-                  <div class="swiper-slide"><a class="text-decoration-none" href="../../VgmsModules/pms/view_task.php">
-                      <div class="card overflow-hidden bg-transparent h-100">
-                        <div class="position-relative"><img class="w-100" src="../../assets/img/kanban/board-4.png" style="height: 128px;" alt="" />
-                          <div class="avatar-group position-absolute" style="bottom: 1rem; left: 1.5rem">
-                            <div class="avatar avatar-m  border border-light-subtle rounded-circle">
-                              <img class="rounded-circle " src="../../assets/img/team/14.webp" alt="" />
-                            </div>
-                            <div class="avatar avatar-m  border border-light-subtle rounded-circle">
-                              <img class="rounded-circle " src="../../assets/img/team/15.webp" alt="" />
-                            </div>
-                            <div class="avatar avatar-m  border border-light-subtle rounded-circle">
-                              <img class="rounded-circle " src="../../assets/img/team/16.webp" alt="" />
-                            </div>
-                          </div>
-                        </div>
-                        <div class="card-body d-flex flex-column justify-content-between">
-                          <div>
-                            <h3 class="text-body">ThemePro Devs</h3>
-                            <p class="text-body-tertiary mb-4">Project Management</p>
-                          </div>
-                          <div class="d-flex gap-4">
-                            <h5 class="text-body"><span class="fa-solid fa-list-check text-body-tertiary me-1"></span>103</h5>
-                            <h5 class="text-body"><span class="fa-solid fa-comment text-body-tertiary me-1"></span>2</h5>
-                            <h5 class="text-body"><span class="fa-solid fa-calendar-xmark text-body-tertiary me-1"></span>20</h5>
-                          </div>
-                        </div>
-                      </div>
-                    </a></div>
+                  <?php
+                        } // End of while loop
+                      } else {
+                        echo "<p class='text-muted ps-3'>No projects under \"$status_name\".</p>";
+                      }
+                  ?>
                   <div class="swiper-slide"><a class="btn btn-phoenix-primary d-flex flex-center h-100 w-100 fs-7 fw-semibold text-truncate" href="create-kanban-board.html"><span class="fa-solid fa-plus-circle fs-8 me-2"></span>Create New Board</a></div>
                 </div>
               </div>
@@ -404,157 +363,12 @@
               </div>
             </div>
           </div>
+          <?php
+              } // End of status while loop
+          ?>
           <!-- This is the slider end -->
 
-          <div class="mx-n4 mx-lg-n6 px-4 px-lg-6 py-5 border-bottom border-translucent">
-            <h4>Inactive Boards</h4>
-            <p class="mb-4">Boards where you are either an Admin or a Member.</p>
-            <div class="swiper-theme-container kanban-boards-slider">
-              <div class="swiper theme-slider" data-swiper='{"slidesPerView":1,"spaceBetween":24,"speed":800,"breakpoints":{"576":{"slidesPerView":2},"1200":{"slidesPerView":3},"1540":{"slidesPerView":4}}}'>
-                <div class="swiper-wrapper">
-                  <div class="swiper-slide"><a class="text-decoration-none" href="../../VgmsModules/pms/view_task.php">
-                      <div class="card overflow-hidden bg-transparent h-100">
-                        <div class="position-relative"><img class="w-100" src="../../assets/img/kanban/board-5.png" style="height: 128px;" alt="" />
-                          <div class="avatar-group position-absolute" style="bottom: 1rem; left: 1.5rem">
-                            <div class="avatar avatar-m  border border-light-subtle rounded-circle">
-                              <img class="rounded-circle " src="../../assets/img/team/14.webp" alt="" />
-                            </div>
-                            <div class="avatar avatar-m  border border-light-subtle rounded-circle">
-                              <img class="rounded-circle " src="../../assets/img/team/19.webp" alt="" />
-                            </div>
-                            <div class="avatar avatar-m  border border-light-subtle rounded-circle">
-                              <img class="rounded-circle " src="../../assets/img/team/68.webp" alt="" />
-                            </div>
-                            <div class="avatar avatar-m  border border-light-subtle rounded-circle">
-                              <img class="rounded-circle " src="../../assets/img/team/69.webp" alt="" />
-                            </div>
-                            <div class="avatar avatar-m  border border-light-subtle rounded-circle">
-                              <img class="rounded-circle " src="../../assets/img/team/avatar-placeholder.webp" alt="" />
-                            </div>
-                          </div>
-                        </div>
-                        <div class="card-body d-flex flex-column justify-content-between">
-                          <div>
-                            <h3 class="text-body">Post Tracking</h3>
-                            <p class="text-body-tertiary mb-4">Deals Tracking</p>
-                          </div>
-                          <div class="d-flex gap-4">
-                            <h5 class="text-body"><span class="fa-solid fa-list-check text-body-tertiary me-1"></span>142</h5>
-                            <h5 class="text-body"><span class="fa-solid fa-comment text-body-tertiary me-1"></span>21</h5>
-                            <h5 class="text-body"><span class="fa-solid fa-calendar-xmark text-body-tertiary me-1"></span>100</h5>
-                          </div>
-                        </div>
-                      </div>
-                    </a></div>
-                  <div class="swiper-slide"><a class="text-decoration-none" href="../../VgmsModules/pms/view_task.php">
-                      <div class="card overflow-hidden bg-transparent h-100">
-                        <div class="position-relative"><img class="w-100" src="../../assets/img/kanban/board-6.png" style="height: 128px;" alt="" />
-                          <div class="avatar-group position-absolute" style="bottom: 1rem; left: 1.5rem">
-                            <div class="avatar avatar-m  border border-light-subtle rounded-circle">
-                              <img class="rounded-circle " src="../../assets/img/team/17.webp" alt="" />
-                            </div>
-                            <div class="avatar avatar-m  border border-light-subtle rounded-circle">
-                              <img class="rounded-circle " src="../../assets/img/team/18.webp" alt="" />
-                            </div>
-                            <div class="avatar avatar-m  border border-light-subtle rounded-circle">
-                              <img class="rounded-circle " src="../../assets/img/team/19.webp" alt="" />
-                            </div>
-                            <div class="avatar avatar-m  border border-light-subtle rounded-circle">
-                              <img class="rounded-circle " src="../../assets/img/team/20.webp" alt="" />
-                            </div>
-                          </div>
-                        </div>
-                        <div class="card-body d-flex flex-column justify-content-between">
-                          <div>
-                            <h3 class="text-body">Automation Team</h3>
-                            <p class="text-body-tertiary mb-4">Remote team</p>
-                          </div>
-                          <div class="d-flex gap-4">
-                            <h5 class="text-body"><span class="fa-solid fa-list-check text-body-tertiary me-1"></span>6</h5>
-                            <h5 class="text-body"><span class="fa-solid fa-comment text-body-tertiary me-1"></span>761</h5>
-                            <h5 class="text-body"><span class="fa-solid fa-calendar-xmark text-body-tertiary me-1"></span>2</h5>
-                          </div>
-                        </div>
-                      </div>
-                    </a></div>
-                  <div class="swiper-slide"><a class="text-decoration-none" href="../../VgmsModules/pms/view_task.php">
-                      <div class="card overflow-hidden bg-transparent h-100">
-                        <div class="position-relative">
-                          <div class="bg-body-secondary" style="height: 128px"></div>
-                          <div class="avatar-group position-absolute" style="bottom: 1rem; left: 1.5rem">
-                            <div class="avatar avatar-m  border border-light-subtle rounded-circle">
-                              <img class="rounded-circle " src="../../assets/img/team/21.webp" alt="" />
-                            </div>
-                            <div class="avatar avatar-m  border border-light-subtle rounded-circle">
-                              <img class="rounded-circle " src="../../assets/img/team/19.webp" alt="" />
-                            </div>
-                            <div class="avatar avatar-m  border border-light-subtle rounded-circle">
-                              <img class="rounded-circle " src="../../assets/img/team/22.webp" alt="" />
-                            </div>
-                            <div class="avatar avatar-m  border border-light-subtle rounded-circle">
-                              <img class="rounded-circle " src="../../assets/img/team/23.webp" alt="" />
-                            </div>
-                            <div class="avatar avatar-m  border border-light-subtle rounded-circle">
-                              <img class="rounded-circle " src="../../assets/img/team/avatar-placeholder.webp" alt="" />
-                            </div>
-                          </div>
-                        </div>
-                        <div class="card-body d-flex flex-column justify-content-between">
-                          <div>
-                            <h3 class="text-body">Phoenix Kanban</h3>
-                            <p class="text-body-tertiary mb-4">Project Management</p>
-                          </div>
-                          <div class="d-flex gap-4">
-                            <h5 class="text-body"><span class="fa-solid fa-list-check text-body-tertiary me-1"></span>43</h5>
-                            <h5 class="text-body"><span class="fa-solid fa-comment text-body-tertiary me-1"></span>22</h5>
-                            <h5 class="text-body"><span class="fa-solid fa-calendar-xmark text-body-tertiary me-1"></span>17</h5>
-                          </div>
-                        </div>
-                      </div>
-                    </a></div>
-                  <div class="swiper-slide"><a class="text-decoration-none" href="../../VgmsModules/pms/view_task.php">
-                      <div class="card overflow-hidden bg-transparent h-100">
-                        <div class="position-relative"><img class="w-100" src="../../assets/img/kanban/board-8.png" style="height: 128px;" alt="" />
-                          <div class="avatar-group position-absolute" style="bottom: 1rem; left: 1.5rem">
-                            <div class="avatar avatar-m  border border-light-subtle rounded-circle">
-                              <img class="rounded-circle " src="../../assets/img/team/24.webp" alt="" />
-                            </div>
-                            <div class="avatar avatar-m  border border-light-subtle rounded-circle">
-                              <img class="rounded-circle " src="../../assets/img/team/19.webp" alt="" />
-                            </div>
-                            <div class="avatar avatar-m  border border-light-subtle rounded-circle">
-                              <img class="rounded-circle " src="../../assets/img/team/avatar-placeholder.webp" alt="" />
-                            </div>
-                            <div class="avatar avatar-m  border border-light-subtle rounded-circle">
-                              <img class="rounded-circle " src="../../assets/img/team/68.webp" alt="" />
-                            </div>
-                            <div class="avatar avatar-m  border border-light-subtle rounded-circle">
-                              <img class="rounded-circle " src="../../assets/img/team/69.webp" alt="" />
-                            </div>
-                          </div>
-                        </div>
-                        <div class="card-body d-flex flex-column justify-content-between">
-                          <div>
-                            <h3 class="text-body">Reconciling Backlogs</h3>
-                            <p class="text-body-tertiary mb-4">Meeting Agenda</p>
-                          </div>
-                          <div class="d-flex gap-4">
-                            <h5 class="text-body"><span class="fa-solid fa-list-check text-body-tertiary me-1"></span>23</h5>
-                            <h5 class="text-body"><span class="fa-solid fa-comment text-body-tertiary me-1"></span>111</h5>
-                            <h5 class="text-body"><span class="fa-solid fa-calendar-xmark text-body-tertiary me-1"></span>23</h5>
-                          </div>
-                        </div>
-                      </div>
-                    </a></div>
-                  <div class="swiper-slide"><a class="btn btn-phoenix-primary d-flex flex-center h-100 w-100 fs-7 fw-semibold text-truncate" href="create-kanban-board.html"><span class="fa-solid fa-plus-circle fs-8 me-2"></span>Create New Board</a></div>
-                </div>
-              </div>
-              <div class="swiper-nav">
-                <div class="swiper-button-next"><span class="fas fa-chevron-right fs-11"></span></div>
-                <div class="swiper-button-prev"><span class="fas fa-chevron-left fs-11"></span></div>
-              </div>
-            </div>
-          </div>
+          
           <!-- <div class="mx-n4 mx-lg-n6 px-4 px-lg-6 py-5 border-bottom border-translucent">
             <h4>Private Boards</h4>
             <p class="mb-4">Your eyes only</p>

@@ -2303,6 +2303,14 @@
       </div><small class="text-uppercase text-body-tertiary fw-bold py-2 pe-2 ps-1 rounded-end">customize</small>
     </div> -->
   </a>
+  <?php
+if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+    $project_id = (int) $_GET['id'];
+} else {
+    echo "Invalid project ID.";
+    exit;
+}
+?>
   <div class="modal fade" id="kanbanAddTask" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen-sm-down modal-xl modal-dialog-centered">
       <div class="modal-content">
