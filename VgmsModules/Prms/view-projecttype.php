@@ -13,7 +13,7 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>View Manage Sources</title>
+    <title>View Manage Project Type</title>
 
     <!-- ===============================================-->
     <!--    Favicons-->
@@ -170,7 +170,7 @@
             <div class="row g-0 justify-content-between align-items-center h-100">
                 <!-- Container for the Title -->
                 <div style="width: 100%; text-align: center; margin: 20px 0;">
-                    <h3 style="margin: 0;">View/Manage Sources</h3>
+                    <h3 style="margin: 0;">View/Manage Project Type</h3>
                 </div>
                 <hr>
                 <!-- button to add Sources Name -->
@@ -182,16 +182,16 @@
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="verticallyCenteredModalLabel">Add Sources Name</h5>
+                                    <h5 class="modal-title" id="verticallyCenteredModalLabel">Add Project Type</h5>
                                     <button class="btn btn-close p-1" type="button" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <form id="addsourceForm" method="post">
                                         <div class="mb-3">
-                                            <label for="name" class="form-label">Name Of the Sources Name</label>
+                                            <label for="name" class="form-label">Project Type</label>
                                             <input class="form-control" type="text" id="name" name="name"
-                                                placeholder="Enter Sources Name" required>
+                                                placeholder="Enter Project Type" required>
                                         </div>
                                         <input type="hidden" name="action" value="add_source">
                                     </form>
@@ -234,7 +234,7 @@
                             <thead>
                                 <tr>
                                     <th class="sort border-top border-translucent ps-3" data-sort="id">Id</th>
-                                    <th class="sort border-top" data-sort="name">Sources Name</th>
+                                    <th class="sort border-top" data-sort="name">Project Type</th>
                                     <th class="border-top">Edit</th>
                                     <th class="border-top">Remove</th>
                                 </tr>
@@ -242,7 +242,7 @@
                             <tbody class="list">
                                 <tr>
                                     <td class="align-middle ps-3 id">1</td>
-                                    <td class="align-middle name">Source A</td>
+                                    <td class="align-middle name">Type 1</td>
                                     <td class="align-middle">
                                         <button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editSourceModal" style="border: none;">🖉</button>
                                     </td>
@@ -275,15 +275,15 @@
                         <div class="modal-content">
 
                             <div class="modal-header">
-                                <h5 class="modal-title" id="editSourceLabel">Edit Source</h5>
+                                <h5 class="modal-title" id="editSourceLabel">Edit Project Type</h5>
                                 <button type="button" class="btn-close p-1" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
 
                             <div class="modal-body">
                                 <form id="editSourceForm" method="post">
                                     <div class="mb-3">
-                                        <label for="edit_source_name" class="form-label">Name of the Source</label>
-                                        <input class="form-control" type="text" id="edit_source_name" name="edit_source_name" placeholder="Enter Source Name" required>
+                                        <label for="edit_source_name" class="form-label">Project Type</label>
+                                        <input class="form-control" type="text" id="edit_source_name" name="edit_source_name" placeholder="Enter Project Type" required>
                                     </div>
                                     <input type="hidden" id="edit_source_id" name="edit_source_id">
                                 </form>
