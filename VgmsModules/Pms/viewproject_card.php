@@ -167,6 +167,68 @@
             }
         </script>
         <div class="content">
+            <?php
+            include '../PhpFiles/connection.php';
+            // Assuming $project_id is already available from previous logic or DB result
+
+            $query = "
+    SELECT 
+        COUNT(*) AS total_tasks,
+        SUM(CASE WHEN s.name = 'completed' THEN 1 ELSE 0 END) AS completed_tasks
+    FROM tbl_tasks t
+    INNER JOIN tbl_task_status s ON t.status = s.id
+    WHERE t.project_id = 21
+";
+
+
+            $result = mysqli_query($conn, $query);
+            $progressPercentage = 0;
+            $barColor = 'bg-danger';
+
+            if ($row = mysqli_fetch_assoc($result)) {
+                $total = (int)$row['total_tasks'];
+                $completed = (int)$row['completed_tasks'];
+
+                if ($total > 0) {
+                    $progressPercentage = round(($completed / $total) * 100);
+                }
+
+                if ($progressPercentage <= 35) {
+                    $barColor = 'bg-danger';
+                } elseif ($progressPercentage <= 65) {
+                    $barColor = 'bg-warning';
+                } elseif ($progressPercentage <= 99) {
+                    $barColor = 'bg-primary';
+                } else {
+                    $barColor = 'bg-success';
+                }
+            }
+            ?>
+
+            <!-- total task count -->
+            <?php
+            // Make sure DB connection is established
+            include_once '../PhpFiles/connection.php'; // Adjust path
+
+            $project_id = $_GET['project_id'] ?? 0; // Or use your existing way to get project ID
+
+            $count_query = "SELECT COUNT(*) AS total_tasks FROM tbl_tasks WHERE project_id = ?";
+            $stmt = $conn->prepare($count_query);
+
+
+
+            if ($stmt) {
+                $stmt->bind_param("i", $project_id);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $row = $result->fetch_assoc();
+                $total_tasks = $row['total_tasks'] ?? 0;
+                $stmt->close();
+            } else {
+                $total_tasks = 0;
+            }
+            ?>
+
 
             <?php
             include '../PhpFiles/connection.php';
@@ -213,8 +275,9 @@
             INNER JOIN tbl_project_status p_status ON p.project_status = p_status.id
             WHERE 1=1
             ";
-            
-        
+
+
+
             $params = [];
             $types = "";
 
@@ -229,7 +292,7 @@
                 $params[] = $statusId;
                 $types .= "i";
             }
-            
+
             // Prepare and execute
             $stmt = $conn->prepare($query);
             if (!empty($params)) {
@@ -338,8 +401,68 @@
 
 
                     <?php
+
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
+
+                            // status text and
+                            $status = strtolower($row['status_name']); // Normalize to lowercase
+
+                            $colorStyle = '';
+                            switch ($status) {
+                                case 'waiting':
+                                    $colorStyle = 'color: #0d6efd; border: 1px solid #0d6efd;'; // blue
+                                    break;
+                                case 'on-going':
+                                case 'ongoing':
+                                    $colorStyle = 'color: #ffc107; border: 1px solid #ffc107;'; // yellow
+                                    break;
+                                case 'completed':
+                                    $colorStyle = 'color: #198754; border: 1px solid #198754;'; // green
+                                    break;
+                                case 'cancelled':
+                                    $badgeClass = 'badge bg-danger text-white'; // red background + white text
+                                    break;
+                                default:
+                                    $colorStyle = 'color: #6c757d; border: 1px solid #6c757d;'; // gray fallback
+                                    break;
+                            }
+                            $project_id = $row['project_id'];
+                            $query1 = "
+                                SELECT 
+                                    COUNT(*) AS total_tasks,
+                                    SUM(CASE WHEN s.name = 'completed' THEN 1 ELSE 0 END) AS completed_tasks
+                                FROM tbl_tasks t
+                                INNER JOIN tbl_task_status s ON t.status = s.id
+                                WHERE t.project_id = $project_id
+                            ";
+                            $result1 = mysqli_query($conn, $query1);
+
+                            $total_tasks = 0;
+                            $completed_tasks = 0;
+                            $progressPercentage = 0;
+                            $barColor = '';
+
+                            if ($result1 && $result1->num_rows > 0) {
+                                $taskData = $result1->fetch_assoc();
+                                $total_tasks = (int)$taskData['total_tasks'];
+                                $completed_tasks = (int)$taskData['completed_tasks'];
+                                if ($total_tasks > 0) {
+                                    $progressPercentage = round(($completed_tasks / $total_tasks) * 100);
+                                }
+
+                                // Determine progress bar color
+                                if ($progressPercentage <= 35) {
+                                    $barColor = 'bg-danger';
+                                } elseif ($progressPercentage <= 65) {
+                                    $barColor = 'bg-warning';
+                                } elseif ($progressPercentage <= 99) {
+                                    $barColor = 'bg-primary';
+                                } else {
+                                    $barColor = 'bg-success';
+                                }
+                            }
+
                             echo '
         <div class="col-md-4">
             <div class="card h-100 hover-actions-trigger">
@@ -356,21 +479,24 @@
                                             <span
                                                 class="fa-solid fa-chevron-right"></span></button></div>
                     </div>
-                    <span class="badge badge-phoenix fs-10 mb-4 badge-phoenix-warning">' . htmlspecialchars($row['status_name']) . '</span>
+<span class="badge fs-10 mb-4" style="' . $colorStyle . '">'
+                                . htmlspecialchars($row['status_name']) . '</span>
+</span>
                     <div class="d-flex align-items-center mb-2">
                         <span class="fa-solid fa-user me-2 text-body-tertiary fs-9 fw-extra-bold"></span>
                         <p class="fw-bold mb-0 text-truncate lh-1">Client : <span class="fw-semibold text-primary ms-1">' . htmlspecialchars($row['f_name']) . ' ' . htmlspecialchars($row['l_name']) . '</span></p>
                     </div>
                     <div class="d-flex align-items-center mb-4">
                         <span class="fa-solid fa-credit-card me-2 text-body-tertiary fs-9 fw-extra-bold"></span>
-                        <p class="fw-bold mb-0 lh-1">Budget : <span class="ms-1 text-body-emphasis">$ 2000</span></p>
+                        <p class="fw-bold mb-0 lh-1">Budget : <span class="ms-1 text-body-emphasis">$ ' . htmlspecialchars($row['budget']) . '</span></p>
                     </div>
-                    <div class="d-flex justify-content-between text-body-tertiary fw-semibold">
+                    <!-- Progress UI -->
+<div class="d-flex justify-content-between text-body-tertiary fw-semibold">
                         <p class="mb-2">Progress</p>
-                        <p class="mb-2 text-body-emphasis">50%</p>
+                        <p class="mb-2 text-body-emphasis">' . $progressPercentage . '%</p>
                     </div>
-                    <div class="progress bg-warning-subtle">
-                        <div class="progress-bar rounded bg-warning" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress bg-body-secondary">
+                        <div class="progress-bar rounded ' . $barColor . '" role="progressbar" style="width: ' . $progressPercentage . '%" aria-valuenow="' . $progressPercentage . '" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <div class="d-flex align-items-center mt-4">
                         <p class="mb-0 fw-bold fs-9">Started :<span class="fw-semibold text-body-tertiary text-opactity-85 ms-1">' . htmlspecialchars($row['project_start_date'] ?? '-') . '</span></p>
@@ -541,10 +667,13 @@
                                                     href="#!">Unassign </a></div>
                                         </div>
                                     </div>
-                                    <div class="mt-lg-3 mt-xl-0"> <i class="fa-solid fa-list-check me-1"></i>
-                                        <p class="d-inline-block fw-bold mb-0">125<span class="fw-normal"> Task</span>
-                                        </p>
-                                    </div>
+                                    <div class="mt-lg-3 mt-xl-0">
+    <i class="fa-solid fa-list-check me-1"></i>
+    <p class="d-inline-block fw-bold mb-0">' . $total_tasks . ' <span class="fw-normal"> Task</span>
+    </p>
+</div>
+
+
                                 </div>
                 </div>
             </div>
@@ -555,6 +684,7 @@
                     }
                     ?>
                 </div>
+
 
 
 
@@ -1473,22 +1603,22 @@
 
 
 
-    
 
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        document.querySelectorAll(".toggle-button").forEach(function (btn) {
-            btn.addEventListener("click", function (e) {
-                e.preventDefault(); // stop modal behavior if any
-                const projectId = this.getAttribute("data-id");
-                alert("Project ID: " + projectId);
-                // redirect after alert
-                window.location.href = "viewproject_card_details.php?project_id=" + projectId;
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".toggle-button").forEach(function(btn) {
+                btn.addEventListener("click", function(e) {
+                    e.preventDefault(); // stop modal behavior if any
+                    const projectId = this.getAttribute("data-id");
+                    alert("Project ID: " + projectId);
+                    // redirect after alert
+                    window.location.href = "viewproject_card_details.php?project_id=" + projectId;
+                });
             });
         });
-    });
-</script>
+    </script>
 
 </body>
 

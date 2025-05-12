@@ -494,17 +494,41 @@
                     </script> -->
 
 
+                    <?php
+function getStatusBadgeClass($status) {
+    switch (strtolower($status)) {
+        case 'waiting':
+            return 'bg-primary text-white';   // blue
+        case 'on-going':
+        case 'ongoing':
+            return 'bg-warning text-dark';    // yellow
+        case 'completed':
+            return 'bg-success text-white';   // green
+        default:
+            return 'bg-secondary text-white'; // default gray
+    }
+}
+?>
+
+
 
                     <?php
                     include '../PhpFiles/connection.php';
                     $project_id = $_GET['project_id'];
 
-                    $query = "SELECT p.*, t.* 
-FROM tbl_project p 
-LEFT JOIN tbl_tasks t ON p.id = t.project_id
-WHERE p.id = $project_id
-ORDER BY t.end_date DESC 
-LIMIT 5";
+                    $query = "SELECT p.*, t.*
+FROM tbl_project p
+LEFT JOIN (
+    SELECT * FROM (
+        SELECT * 
+        FROM tbl_tasks 
+        WHERE project_id = $project_id 
+        ORDER BY end_date DESC 
+        LIMIT 5
+    ) AS latest_tasks
+) t ON p.id = t.project_id
+WHERE p.id = $project_id;
+";
 
                     $result = mysqli_query($conn, $query) or die("Query Failed");
 
@@ -535,7 +559,7 @@ LIMIT 5";
                             <div class="row g-5">
                                 <div class="col-12 col-md-9">
                                     <div class="mb-4">
-                                        <h3 class="fw-bolder lh-sm">abc ' . htmlspecialchars($row['project_title']) . ' </h3>
+                                        <h3 class="fw-bolder lh-sm">' . htmlspecialchars($row['project_title']) . ' </h3>
                                         <p class="text-body-highlight fw-semibold mb-0">In list<a class="ms-1 fw-bold" href="#!">Review</a></p>
                                     </div>
                                     <div class="d-flex align-items-center mb-4">
@@ -547,7 +571,7 @@ LIMIT 5";
                                     <h6 class="text-body-secondary mb-2">Due date</h6>
                                     <div class="flatpickr-input-container flatpickr-input-sm w-50 mb-3">
                                         <input class="form-control form-control-sm ps-6 datetimepicker" id="datepicker" type="text" />
-                                        <span class="uil uil-calendar-alt flatpickr-icon text-body-tertiary mt-1"></span>
+                                        <span class="uil uil-calendar-alt flatpickr-icon text-body-tertiary mt-1">'.htmlspecialchars($row['project_end_date']).'</span>
                                     </div>
                                     <div class="mb-6">
                                         <div class="d-flex align-items-center mb-2">
@@ -568,9 +592,9 @@ LIMIT 5";
                         <div class="d-flex align-items-center justify-content-between">
                             <p class="mb-0 fs-8 fw-semibold">' . htmlspecialchars($row['title']) . '</p>
                             <div class="d-flex align-items-center">
-                                <span class="badge badge-phoenix fs-10 me-2 badge-phoenix-info">CLOSE</span>
+                                
                                 <p class="text-body-tertiary fs-10 mb-0 me-2">' . htmlspecialchars($row['end_date']) . '</p>
-                                <p class="text-body-tertiary fs-10 fw-bold mb-0">' . htmlspecialchars($row['end_time']) . '</p>
+                                
                             </div>
                         </div>
                         <p class="mb-1 text-body-secondary fs-10">Assigned by: Admin</p>
@@ -617,7 +641,7 @@ LIMIT 5";
                                                         class="rounded-2" src="../../assets/img/generic/40.png" alt="" />
                                                 </div>
                                             </div>
- <div class="border-top py-3">
+                                            <div class="border-top py-3">
                                                 <div class="me-n3">
                                                     <div class="d-flex flex-between-center">
                                                         <div class="d-flex mb-1"><span
@@ -641,7 +665,7 @@ LIMIT 5";
                                                         </span><span class="text-nowrap">19th Dec, 08:56 PM</span></p>
                                                 </div>
                                             </div>
-<div class="border-top border-bottom py-3 mb-3">
+                                            <div class="border-top border-bottom py-3 mb-3">
                                                 <div class="me-n3">
                                                     <div class="d-flex flex-between-center">
                                                         <div class="d-flex align-items-center mb-1"><span
@@ -668,7 +692,7 @@ LIMIT 5";
                                                     class="fas fa-plus me-1"></span>Add file(s)</label><input class="d-none"
                                                 id="customFile" type="file" />
                                         </div>
-<div class="col-12 col-md-3">
+                                        <div class="col-12 col-md-3">
                                             <h5 class="text-body-secondary mb-3">Add to card</h5>
                                             <div class="mb-6"><button
                                                     class="btn btn-sm btn-subtle-secondary rounded-3 mb-2 d-flex align-items-center w-100"><span
