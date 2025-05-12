@@ -496,579 +496,101 @@
 
 
                     <?php
-include '../PhpFiles/connection.php';
-$project_id = $_GET['project_id'];
-$query = "SELECT * FROM tbl_project WHERE id = $project_id";
-$result = mysqli_query($conn, $query) or die("Query Failed");
+                    include '../PhpFiles/connection.php';
+                    $project_id = $_GET['project_id'];
 
-if (mysqli_num_rows($result) > 0) {
-    while ($row = mysqli_fetch_assoc($result)) {
-        echo '
-                    <div class="modal fade" id="projectsCardViewModal2" tabindex="-1" aria-labelledby="projectsCardViewModal"
-                        aria-hidden="false">
-                        <div class="modal-dialog modal-md">
-                         <div class="modal-content overflow-hidden">
-                                <div class="modal-header position-relative p-0"><input class="d-none" id="projectCoverInput"
-                                        type="file" /><label class="position-absolute top-0 start-0"
-                                        for="projectCoverInput"><span
-                                            class="project-modal-btn d-inline-block bg-body-emphasis dark__text-gray-100 rounded-2 py-2 px-3 fs-9 fw-bolder mt-3 ms-3 cursor-pointer"><span
-                                                class="fa-solid fa-image me-1"></span>Change</span></label><button
-    id="modalCloseRedirect"
-    class="btn btn-circle project-modal-btn position-absolute end-0 top-0 mt-3 me-3 bg-body-emphasis">
-    <span class="fa-solid fa-xmark text-body dark__text-gray-100"></span>
-</button>
-<span
-                                            class="fa-solid fa-xmark text-body dark__text-gray-100"></span></button><img
-                                        class="w-100" src="../../assets/img/generic/43.png" alt=""
-                                        style="max-height: 200px;min-height: 150px;" /></div>
-                                <div class="modal-body p-5 px-md-6">
-                                    <div class="row g-5">
-                                        <div class="col-12 col-md-9">
-                                            <div class="mb-4">
-                                                <h3 class="fw-bolder lh-sm"> abc ' . htmlspecialchars($row['project_title']) . ' </h3>
-                                                <p class="text-body-highlight fw-semibold mb-0">In list<a
-                                                        class="ms-1 fw-bold" href="#!">Review </a></p>
-                                            </div>
-                                            <div class="d-flex align-items-center mb-4">
-                                                <p class="text-body-highlight fw-700 mb-0 me-2">64%</p>
-                                                <div class="progress flex-1">
-                                                    <div class="progress-bar rounded-3" role="progressbar"
-                                                        style="width: 64%"></div>
-                                                </div>
-                                            </div>
-                                            <h6 class="text-body-secondary mb-2">Due date</h6>
-                                            <div class="flatpickr-input-container flatpickr-input-sm w-50 mb-3"><input
-                                                    class="form-control form-control-sm ps-6 datetimepicker" id="datepicker"
-                                                    type="text"
-                                                    data-options={ { dateFormat: M j, Y,disableMobile:true,defaultDate : Mar 1, 2022 } /><span
-                                                    class="uil uil-calendar-alt flatpickr-icon text-body-tertiary mt-1"></span>
-                                            </div>
-                                            <div class="mb-3">
-                                                <h6 class="text-body-secondary mb-2">Assignees</h6>
-                                                <div class="d-flex">
-                                                    <div class="dropdown"><a
-                                                            class="dropdown-toggle dropdown-caret-none d-inline-block"
-                                                            href="#" role="button" data-bs-toggle="dropdown"
-                                                            aria-expanded="false" data-bs-auto-close="outside">
-                                                            <div class="avatar avatar-m  me-1">
-                                                                <img class="rounded-circle "
-                                                                    src="../../assets/img/team/60.webp" alt="" />
-                                                            </div>
-                                                        </a>
-                                                        <div class="dropdown-menu avatar-dropdown-menu p-0 overflow-hidden"
-                                                            style="width: 320px;">
-                                                            <div class="position-relative">
-                                                                <div class="bg-holder z-n1"
-                                                                    style="background-image:url(../../assets/img/bg/bg-32.png);background-size: auto;">
-                                                                </div>
-                                                                <!--/.bg-holder-->
-                                                                <div class="p-3">
-                                                                    <div class="text-end"><button class="btn p-0 me-2"><span
-                                                                                class="fa-solid fa-user-plus text-white"></span></button><button
-                                                                            class="btn p-0"><span
-                                                                                class="fa-solid fa-ellipsis text-white"></span></button>
-                                                                    </div>
-                                                                    <div class="text-center">
-                                                                        <div
-                                                                            class="avatar avatar-xl status-online position-relative me-2 me-sm-0 me-xl-2 mb-2">
-                                                                            <img class="rounded-circle border border-light-subtle"
-                                                                                src="../../assets/img/team/60.webp"
-                                                                                alt="" />
-                                                                        </div>
-                                                                        <h6 class="text-white">Emma Watson</h6>
-                                                                        <p
-                                                                            class="text-light text-opacity-50 fw-semibold fs-10 mb-2">
-                                                                            @tyrion222</p>
-                                                                        <div class="d-flex flex-center mb-3">
-                                                                            <h6 class="text-white mb-0">224 <span
-                                                                                    class="fw-normal text-light text-opacity-75">connections</span>
-                                                                            </h6><span
-                                                                                class="fa-solid fa-circle text-body-tertiary mx-1"
-                                                                                data-fa-transform="shrink-10 up-2"></span>
-                                                                            <h6 class="text-white mb-0">23 <span
-                                                                                    class="fw-normal text-light text-opacity-75">mutual</span>
-                                                                            </h6>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="bg-body-emphasis">
-                                                                <div class="p-3 border-bottom border-translucent">
-                                                                    <div class="d-flex justify-content-between">
-                                                                        <div class="d-flex"><button
-                                                                                class="btn btn-phoenix-secondary btn-icon btn-icon-lg me-2"><span
-                                                                                    class="fa-solid fa-phone"></span></button><button
-                                                                                class="btn btn-phoenix-secondary btn-icon btn-icon-lg me-2"><span
-                                                                                    class="fa-solid fa-message"></span></button><button
-                                                                                class="btn btn-phoenix-secondary btn-icon btn-icon-lg"><span
-                                                                                    class="fa-solid fa-video"></span></button>
-                                                                        </div><button class="btn btn-phoenix-primary"><span
-                                                                                class="fa-solid fa-envelope me-2"></span>Send
-                                                                            Email</button>
-                                                                    </div>
-                                                                </div>
-                                                                <ul class="nav d-flex flex-column py-3 border-bottom">
-                                                                    <li class="nav-item"><a
-                                                                            class="nav-link px-3 d-flex flex-between-center"
-                                                                            href="#!"> <span
-                                                                                class="me-2 text-body d-inline-block"
-                                                                                data-feather="clipboard"></span><span
-                                                                                class="text-body-highlight flex-1">Assigned
-                                                                                Projects</span><span
-                                                                                class="fa-solid fa-chevron-right fs-11"></span></a>
-                                                                    </li>
-                                                                    <li class="nav-item"><a
-                                                                            class="nav-link px-3 d-flex flex-between-center"
-                                                                            href="#!"> <span class="me-2 text-body"
-                                                                                data-feather="pie-chart"></span><span
-                                                                                class="text-body-highlight flex-1">View
-                                                                                activiy</span><span
-                                                                                class="fa-solid fa-chevron-right fs-11"></span></a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="p-3 d-flex justify-content-between"><a
-                                                                    class="btn btn-link p-0 text-decoration-none"
-                                                                    href="#!">Details </a><a
-                                                                    class="btn btn-link p-0 text-decoration-none text-danger"
-                                                                    href="#!">Unassign </a></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="dropdown"><a
-                                                            class="dropdown-toggle dropdown-caret-none d-inline-block"
-                                                            href="#" role="button" data-bs-toggle="dropdown"
-                                                            aria-expanded="false" data-bs-auto-close="outside">
-                                                            <div class="avatar avatar-m  me-1">
-                                                                <img class="rounded-circle "
-                                                                    src="../../assets/img/team/58.webp" alt="" />
-                                                            </div>
-                                                        </a>
-                                                        <div class="dropdown-menu avatar-dropdown-menu p-0 overflow-hidden"
-                                                            style="width: 320px;">
-                                                            <div class="position-relative">
-                                                                <div class="bg-holder z-n1"
-                                                                    style="background-image:url(../../assets/img/bg/bg-32.png);background-size: auto;">
-                                                                </div>
-                                                                <!--/.bg-holder-->
-                                                                <div class="p-3">
-                                                                    <div class="text-end"><button class="btn p-0 me-2"><span
-                                                                                class="fa-solid fa-user-plus text-white"></span></button><button
-                                                                            class="btn p-0"><span
-                                                                                class="fa-solid fa-ellipsis text-white"></span></button>
-                                                                    </div>
-                                                                    <div class="text-center">
-                                                                        <div
-                                                                            class="avatar avatar-xl status-online position-relative me-2 me-sm-0 me-xl-2 mb-2">
-                                                                            <img class="rounded-circle border border-light-subtle"
-                                                                                src="../../assets/img/team/58.webp"
-                                                                                alt="" />
-                                                                        </div>
-                                                                        <h6 class="text-white">Igor Borvibson</h6>
-                                                                        <p
-                                                                            class="text-light text-opacity-50 fw-semibold fs-10 mb-2">
-                                                                            @tyrion222</p>
-                                                                        <div class="d-flex flex-center mb-3">
-                                                                            <h6 class="text-white mb-0">224 <span
-                                                                                    class="fw-normal text-light text-opacity-75">connections</span>
-                                                                            </h6><span
-                                                                                class="fa-solid fa-circle text-body-tertiary mx-1"
-                                                                                data-fa-transform="shrink-10 up-2"></span>
-                                                                            <h6 class="text-white mb-0">23 <span
-                                                                                    class="fw-normal text-light text-opacity-75">mutual</span>
-                                                                            </h6>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="bg-body-emphasis">
-                                                                <div class="p-3 border-bottom border-translucent">
-                                                                    <div class="d-flex justify-content-between">
-                                                                        <div class="d-flex"><button
-                                                                                class="btn btn-phoenix-secondary btn-icon btn-icon-lg me-2"><span
-                                                                                    class="fa-solid fa-phone"></span></button><button
-                                                                                class="btn btn-phoenix-secondary btn-icon btn-icon-lg me-2"><span
-                                                                                    class="fa-solid fa-message"></span></button><button
-                                                                                class="btn btn-phoenix-secondary btn-icon btn-icon-lg"><span
-                                                                                    class="fa-solid fa-video"></span></button>
-                                                                        </div><button class="btn btn-phoenix-primary"><span
-                                                                                class="fa-solid fa-envelope me-2"></span>Send
-                                                                            Email</button>
-                                                                    </div>
-                                                                </div>
-                                                                <ul class="nav d-flex flex-column py-3 border-bottom">
-                                                                    <li class="nav-item"><a
-                                                                            class="nav-link px-3 d-flex flex-between-center"
-                                                                            href="#!"> <span
-                                                                                class="me-2 text-body d-inline-block"
-                                                                                data-feather="clipboard"></span><span
-                                                                                class="text-body-highlight flex-1">Assigned
-                                                                                Projects</span><span
-                                                                                class="fa-solid fa-chevron-right fs-11"></span></a>
-                                                                    </li>
-                                                                    <li class="nav-item"><a
-                                                                            class="nav-link px-3 d-flex flex-between-center"
-                                                                            href="#!"> <span class="me-2 text-body"
-                                                                                data-feather="pie-chart"></span><span
-                                                                                class="text-body-highlight flex-1">View
-                                                                                activiy</span><span
-                                                                                class="fa-solid fa-chevron-right fs-11"></span></a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="p-3 d-flex justify-content-between"><a
-                                                                    class="btn btn-link p-0 text-decoration-none"
-                                                                    href="#!">Details </a><a
-                                                                    class="btn btn-link p-0 text-decoration-none text-danger"
-                                                                    href="#!">Unassign </a></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="dropdown"><a
-                                                            class="dropdown-toggle dropdown-caret-none d-inline-block"
-                                                            href="#" role="button" data-bs-toggle="dropdown"
-                                                            aria-expanded="false" data-bs-auto-close="outside">
-                                                            <div class="avatar avatar-m  me-1">
-                                                                <img class="rounded-circle "
-                                                                    src="../../assets/img/team/59.webp" alt="" />
-                                                            </div>
-                                                        </a>
-                                                        <div class="dropdown-menu avatar-dropdown-menu p-0 overflow-hidden"
-                                                            style="width: 320px;">
-                                                            <div class="position-relative">
-                                                                <div class="bg-holder z-n1"
-                                                                    style="background-image:url(../../assets/img/bg/bg-32.png);background-size: auto;">
-                                                                </div>
-                                                                <!--/.bg-holder-->
-                                                                <div class="p-3">
-                                                                    <div class="text-end"><button class="btn p-0 me-2"><span
-                                                                                class="fa-solid fa-user-plus text-white"></span></button><button
-                                                                            class="btn p-0"><span
-                                                                                class="fa-solid fa-ellipsis text-white"></span></button>
-                                                                    </div>
-                                                                    <div class="text-center">
-                                                                        <div
-                                                                            class="avatar avatar-xl status-online position-relative me-2 me-sm-0 me-xl-2 mb-2">
-                                                                            <img class="rounded-circle border border-light-subtle"
-                                                                                src="../../assets/img/team/59.webp"
-                                                                                alt="" />
-                                                                        </div>
-                                                                        <h6 class="text-white">Katerina Karenin</h6>
-                                                                        <p
-                                                                            class="text-light text-opacity-50 fw-semibold fs-10 mb-2">
-                                                                            @tyrion222</p>
-                                                                        <div class="d-flex flex-center mb-3">
-                                                                            <h6 class="text-white mb-0">224 <span
-                                                                                    class="fw-normal text-light text-opacity-75">connections</span>
-                                                                            </h6><span
-                                                                                class="fa-solid fa-circle text-body-tertiary mx-1"
-                                                                                data-fa-transform="shrink-10 up-2"></span>
-                                                                            <h6 class="text-white mb-0">23 <span
-                                                                                    class="fw-normal text-light text-opacity-75">mutual</span>
-                                                                            </h6>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="bg-body-emphasis">
-                                                                <div class="p-3 border-bottom border-translucent">
-                                                                    <div class="d-flex justify-content-between">
-                                                                        <div class="d-flex"><button
-                                                                                class="btn btn-phoenix-secondary btn-icon btn-icon-lg me-2"><span
-                                                                                    class="fa-solid fa-phone"></span></button><button
-                                                                                class="btn btn-phoenix-secondary btn-icon btn-icon-lg me-2"><span
-                                                                                    class="fa-solid fa-message"></span></button><button
-                                                                                class="btn btn-phoenix-secondary btn-icon btn-icon-lg"><span
-                                                                                    class="fa-solid fa-video"></span></button>
-                                                                        </div><button class="btn btn-phoenix-primary"><span
-                                                                                class="fa-solid fa-envelope me-2"></span>Send
-                                                                            Email</button>
-                                                                    </div>
-                                                                </div>
-                                                                <ul class="nav d-flex flex-column py-3 border-bottom">
-                                                                    <li class="nav-item"><a
-                                                                            class="nav-link px-3 d-flex flex-between-center"
-                                                                            href="#!"> <span
-                                                                                class="me-2 text-body d-inline-block"
-                                                                                data-feather="clipboard"></span><span
-                                                                                class="text-body-highlight flex-1">Assigned
-                                                                                Projects</span><span
-                                                                                class="fa-solid fa-chevron-right fs-11"></span></a>
-                                                                    </li>
-                                                                    <li class="nav-item"><a
-                                                                            class="nav-link px-3 d-flex flex-between-center"
-                                                                            href="#!"> <span class="me-2 text-body"
-                                                                                data-feather="pie-chart"></span><span
-                                                                                class="text-body-highlight flex-1">View
-                                                                                activiy</span><span
-                                                                                class="fa-solid fa-chevron-right fs-11"></span></a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="p-3 d-flex justify-content-between"><a
-                                                                    class="btn btn-link p-0 text-decoration-none"
-                                                                    href="#!">Details </a><a
-                                                                    class="btn btn-link p-0 text-decoration-none text-danger"
-                                                                    href="#!">Unassign </a></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="dropdown"><a
-                                                            class="dropdown-toggle dropdown-caret-none d-inline-block"
-                                                            href="#" role="button" data-bs-toggle="dropdown"
-                                                            aria-expanded="false" data-bs-auto-close="outside">
-                                                            <div class="avatar avatar-m  me-1">
-                                                                <img class="rounded-circle "
-                                                                    src="../../assets/img/team/34.webp" alt="" />
-                                                            </div>
-                                                        </a>
-                                                        <div class="dropdown-menu avatar-dropdown-menu p-0 overflow-hidden"
-                                                            style="width: 320px;">
-                                                            <div class="position-relative">
-                                                                <div class="bg-holder z-n1"
-                                                                    style="background-image:url(../../assets/img/bg/bg-32.png);background-size: auto;">
-                                                                </div>
-                                                                <!--/.bg-holder-->
-                                                                <div class="p-3">
-                                                                    <div class="text-end"><button class="btn p-0 me-2"><span
-                                                                                class="fa-solid fa-user-plus text-white"></span></button><button
-                                                                            class="btn p-0"><span
-                                                                                class="fa-solid fa-ellipsis text-white"></span></button>
-                                                                    </div>
-                                                                    <div class="text-center">
-                                                                        <div
-                                                                            class="avatar avatar-xl status-online position-relative me-2 me-sm-0 me-xl-2 mb-2">
-                                                                            <img class="rounded-circle border border-light-subtle"
-                                                                                src="../../assets/img/team/34.webp"
-                                                                                alt="" />
-                                                                        </div>
-                                                                        <h6 class="text-white">Jean Renoir</h6>
-                                                                        <p
-                                                                            class="text-light text-opacity-50 fw-semibold fs-10 mb-2">
-                                                                            @tyrion222</p>
-                                                                        <div class="d-flex flex-center mb-3">
-                                                                            <h6 class="text-white mb-0">224 <span
-                                                                                    class="fw-normal text-light text-opacity-75">connections</span>
-                                                                            </h6><span
-                                                                                class="fa-solid fa-circle text-body-tertiary mx-1"
-                                                                                data-fa-transform="shrink-10 up-2"></span>
-                                                                            <h6 class="text-white mb-0">23 <span
-                                                                                    class="fw-normal text-light text-opacity-75">mutual</span>
-                                                                            </h6>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="bg-body-emphasis">
-                                                                <div class="p-3 border-bottom border-translucent">
-                                                                    <div class="d-flex justify-content-between">
-                                                                        <div class="d-flex"><button
-                                                                                class="btn btn-phoenix-secondary btn-icon btn-icon-lg me-2"><span
-                                                                                    class="fa-solid fa-phone"></span></button><button
-                                                                                class="btn btn-phoenix-secondary btn-icon btn-icon-lg me-2"><span
-                                                                                    class="fa-solid fa-message"></span></button><button
-                                                                                class="btn btn-phoenix-secondary btn-icon btn-icon-lg"><span
-                                                                                    class="fa-solid fa-video"></span></button>
-                                                                        </div><button class="btn btn-phoenix-primary"><span
-                                                                                class="fa-solid fa-envelope me-2"></span>Send
-                                                                            Email</button>
-                                                                    </div>
-                                                                </div>
-                                                                <ul class="nav d-flex flex-column py-3 border-bottom">
-                                                                    <li class="nav-item"><a
-                                                                            class="nav-link px-3 d-flex flex-between-center"
-                                                                            href="#!"> <span
-                                                                                class="me-2 text-body d-inline-block"
-                                                                                data-feather="clipboard"></span><span
-                                                                                class="text-body-highlight flex-1">Assigned
-                                                                                Projects</span><span
-                                                                                class="fa-solid fa-chevron-right fs-11"></span></a>
-                                                                    </li>
-                                                                    <li class="nav-item"><a
-                                                                            class="nav-link px-3 d-flex flex-between-center"
-                                                                            href="#!"> <span class="me-2 text-body"
-                                                                                data-feather="pie-chart"></span><span
-                                                                                class="text-body-highlight flex-1">View
-                                                                                activiy</span><span
-                                                                                class="fa-solid fa-chevron-right fs-11"></span></a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="p-3 d-flex justify-content-between"><a
-                                                                    class="btn btn-link p-0 text-decoration-none"
-                                                                    href="#!">Details </a><a
-                                                                    class="btn btn-link p-0 text-decoration-none text-danger"
-                                                                    href="#!">Unassign </a></div>
-                                                        </div>
-                                                    </div><button class="btn btn-sm btn-phoenix-secondary btn-circle"><span
-                                                            class="fa-solid fa-plus"></span></button>
-                                                </div>
-                                            </div>
-                                            <div class="mb-5">
-                                                <h6 class="text-body-secondary mb-2">Labels</h6>
-                                                <div class="d-flex align-items-center"><span
-                                                        class="badge badge-phoenix badge-phoenix-info fs-10 me-2">INFO</span><span
-                                                        class="badge badge-phoenix badge-phoenix-warning fs-10 me-2">URGENT</span><span
-                                                        class="badge badge-phoenix badge-phoenix-success fs-10 me-2">DONE</span><a
-                                                        class="text-body fw-bolder fs-9 lh-1 text-decoration-none"
-                                                        href="#!"> <span class="fa-solid fa-plus me-1"></span>Add
-                                                        another</a></div>
-                                            </div>
-                                            <div class="mb-6">
-                                                <div class="d-flex align-items-center mb-2">
-                                                    <h4 class="me-3">Description</h4><button class="btn btn-link p-0"><span
-                                                            class="fa-solid fa-pen"></span></button>
-                                                </div>
-                                                <p class="text-body-highlight">The female circus horse-rider is a recurring
-                                                    subject in Chagall’s work. In 1926 the art dealer Ambroise Vollard
-                                                    invited Chagall to make a project based on the circus. They visited
-                                                    Paris’s historic Cirque d’Hiver Bouglione together; Vollard lent Chagall
-                                                    his private box seats. Chagall completed 19 gouaches...<a
-                                                        class="fw-semibold" href="#!">see more </a></p>
-                                            </div>
-                                            <textarea class="form-control form-control mb-3" rows="3"
-                                                placeholder="Add comment"></textarea>
-                                            <div
-                                                class="d-flex flex-between-center pb-3 border-bottom border-translucent mb-6">
-                                                <div class="d-flex"><button class="btn btn-sm ps-0 pe-2 py-0"><span
-                                                            class="fa-solid fa-image fs-8"></span></button><button
-                                                        class="btn btn-sm px-2 py-0"><span
-                                                            class="fa-solid fa-calendar-days fs-8"></span></button><button
-                                                        class="btn btn-sm px-2 py-0"><span
-                                                            class="fa-solid fa-location-dot fs-8"></span></button><button
-                                                        class="btn btn-sm px-2 py-0"><span
-                                                            class="fa-solid fa-tag fs-8"></span></button></div><button
-                                                    class="btn btn-sm btn-primary px-6">Comment</button>
-                                            </div>
+                    $query = "SELECT p.*, t.* 
+FROM tbl_project p 
+LEFT JOIN tbl_tasks t ON p.id = t.project_id
+WHERE p.id = $project_id
+ORDER BY t.end_date DESC 
+LIMIT 5";
 
+                    $result = mysqli_query($conn, $query) or die("Query Failed");
 
+                    if (mysqli_num_rows($result) > 0) {
+                        $taskCount = 0;
+                        $tasksHtml = '';
+                        $modalPrinted = false;
 
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            if (!$modalPrinted) {
+                                echo '
+            <div class="modal fade" id="projectsCardViewModal2" tabindex="-1" aria-labelledby="projectsCardViewModal" aria-hidden="false">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content overflow-hidden">
+                        <div class="modal-header position-relative p-0">
+                            <input class="d-none" id="projectCoverInput" type="file" />
+                            <label class="position-absolute top-0 start-0" for="projectCoverInput">
+                                <span class="project-modal-btn d-inline-block bg-body-emphasis dark__text-gray-100 rounded-2 py-2 px-3 fs-9 fw-bolder mt-3 ms-3 cursor-pointer">
+                                    <span class="fa-solid fa-image me-1"></span>Change
+                                </span>
+                            </label>
+                            <button id="modalCloseRedirect" class="btn btn-circle project-modal-btn position-absolute end-0 top-0 mt-3 me-3 bg-body-emphasis">
+                                <span class="fa-solid fa-xmark text-body dark__text-gray-100"></span>
+                            </button>
+                            <img class="w-100" src="../../assets/img/generic/43.png" alt="" style="max-height: 200px;min-height: 150px;" />
+                        </div>
+                        <div class="modal-body p-5 px-md-6">
+                            <div class="row g-5">
+                                <div class="col-12 col-md-9">
+                                    <div class="mb-4">
+                                        <h3 class="fw-bolder lh-sm">abc ' . htmlspecialchars($row['project_title']) . ' </h3>
+                                        <p class="text-body-highlight fw-semibold mb-0">In list<a class="ms-1 fw-bold" href="#!">Review</a></p>
+                                    </div>
+                                    <div class="d-flex align-items-center mb-4">
+                                        <p class="text-body-highlight fw-700 mb-0 me-2">64%</p>
+                                        <div class="progress flex-1">
+                                            <div class="progress-bar rounded-3" role="progressbar" style="width: 64%"></div>
+                                        </div>
+                                    </div>
+                                    <h6 class="text-body-secondary mb-2">Due date</h6>
+                                    <div class="flatpickr-input-container flatpickr-input-sm w-50 mb-3">
+                                        <input class="form-control form-control-sm ps-6 datetimepicker" id="datepicker" type="text" />
+                                        <span class="uil uil-calendar-alt flatpickr-icon text-body-tertiary mt-1"></span>
+                                    </div>
+                                    <div class="mb-6">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <h4 class="me-3">Description</h4>
+                                            <button class="btn btn-link p-0"><span class="fa-solid fa-pen"></span></button>
+                                        </div>
+                                        <p class="text-body-highlight">' . htmlspecialchars($row['project_description']) . '<a class="fw-semibold" href="#!"><br>see more</a></p>
+                                    </div>
+                                    <div class="mb-3">
+                                        <h4 class="mb-4">Top 5 tasks</h4>';
+                                $modalPrinted = true;
+                            }
 
+                            if (!empty($row['title'])) {
+                                $tasksHtml .= '
+                <div class="border-top py-3 row gx-0 justify-content-between align-items-md-center hover-actions-trigger btn-reveal-trigger">
+                    <div class="col-12">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <p class="mb-0 fs-8 fw-semibold">' . htmlspecialchars($row['title']) . '</p>
+                            <div class="d-flex align-items-center">
+                                <span class="badge badge-phoenix fs-10 me-2 badge-phoenix-info">CLOSE</span>
+                                <p class="text-body-tertiary fs-10 mb-0 me-2">' . htmlspecialchars($row['end_date']) . '</p>
+                                <p class="text-body-tertiary fs-10 fw-bold mb-0">' . htmlspecialchars($row['end_time']) . '</p>
+                            </div>
+                        </div>
+                        <p class="mb-1 text-body-secondary fs-10">Assigned by: Admin</p>
+                        <p class="mb-0 text-body fs-10">Team sync-up to review yesterday’s progress.</p>
+                    </div>
+                </div>';
+                                $taskCount++;
+                            }
+                        }
 
+                        // Add task output or "no tasks found" fallback
+                        echo ($taskCount > 0) ? $tasksHtml : '<p class="text-body-secondary text-center">No tasks found for this project.</p>';
 
-
-                                            <div class="mb-3">
-                                                <h4 class="mb-4">Top 5 tasks</h4>
-
-                                                <div
-                                                    class="border-top py-3 row gx-0 justify-content-between align-items-md-center hover-actions-trigger btn-reveal-trigger">
-                                                    <div class="col-12">
-                                                        <div class="d-flex align-items-center justify-content-between">
-                                                            <p class="mb-0 fs-8 fw-semibold">Daily meeting with team members
-                                                            </p>
-                                                            <div class="d-flex align-items-center">
-                                                                <span
-                                                                    class="badge badge-phoenix fs-10 me-2 badge-phoenix-info">CLOSE</span>
-                                                                <p class="text-body-tertiary fs-10 mb-0 me-2">1 Nov, 2021
-                                                                </p>
-                                                                <p class="text-body-tertiary fs-10 fw-bold mb-0">12:00 PM
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                        <p class="mb-1 text-body-secondary fs-10">Assigned by: Admin</p>
-                                                        <p class="mb-0 text-body fs-10">Team sync-up to review yesterday’s
-                                                            progress.</p>
-                                                    </div>
-                                                </div>
-
-                                                <div
-                                                    class="border-top py-3 row gx-0 justify-content-between align-items-md-center hover-actions-trigger btn-reveal-trigger">
-                                                    <div class="col-12">
-                                                        <div class="d-flex align-items-center justify-content-between">
-                                                            <p class="mb-0 fs-8 fw-semibold">Daily Standup Meetings</p>
-                                                            <div class="d-flex align-items-center">
-                                                                <span
-                                                                    class="badge badge-phoenix fs-10 me-2 badge-phoenix-info">CLOSE</span>
-                                                                <p class="text-body-tertiary fs-10 mb-0 me-2">13 Nov, 2021
-                                                                </p>
-                                                                <p class="text-body-tertiary fs-10 fw-bold mb-0">10:00 PM
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                        <p class="mb-1 text-body-secondary fs-10">Assigned by: Team Lead</p>
-                                                        <p class="mb-0 text-body fs-10">Standup to track daily deliverables.
-                                                        </p>
-                                                    </div>
-                                                </div>
-
-                                                <div
-                                                    class="border-top py-3 row gx-0 justify-content-between align-items-md-center hover-actions-trigger btn-reveal-trigger">
-                                                    <div class="col-12">
-                                                        <div class="d-flex align-items-center justify-content-between">
-                                                            <p class="mb-0 fs-8 fw-semibold">Procrastinate for a month</p>
-                                                            <div class="d-flex align-items-center">
-                                                                <span
-                                                                    class="badge badge-phoenix fs-10 me-2 badge-phoenix-info">CLOSE</span>
-                                                                <p class="text-body-tertiary fs-10 mb-0 me-2">12 Nov, 2021
-                                                                </p>
-                                                                <p class="text-body-tertiary fs-10 fw-bold mb-0">12:00 PM
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                        <p class="mb-1 text-body-secondary fs-10">Assigned by: Project
-                                                            Manager</p>
-                                                        <p class="mb-0 text-body fs-10">Reflect and refine sprint goals.</p>
-                                                    </div>
-                                                </div>
-
-                                                <div
-                                                    class="border-top py-3 row gx-0 justify-content-between align-items-md-center hover-actions-trigger btn-reveal-trigger">
-                                                    <div class="col-12">
-                                                        <div class="d-flex align-items-center justify-content-between">
-                                                            <p class="mb-0 fs-8 fw-semibold">Warming up</p>
-                                                            <div class="d-flex align-items-center">
-                                                                <span
-                                                                    class="badge badge-phoenix fs-10 me-2 badge-phoenix-info">CLOSE</span>
-                                                                <p class="text-body-tertiary fs-10 mb-0 me-2">12 Nov, 2021
-                                                                </p>
-                                                                <p class="text-body-tertiary fs-10 fw-bold mb-0">12:00 PM
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                        <p class="mb-1 text-body-secondary fs-10">Assigned by: QA Lead</p>
-                                                        <p class="mb-0 text-body fs-10">Prepare test environments and tools.
-                                                        </p>
-                                                    </div>
-                                                </div>
-
-                                                <div
-                                                    class="border-top border-bottom py-3 row gx-0 justify-content-between align-items-md-center hover-actions-trigger btn-reveal-trigger">
-                                                    <div class="col-12">
-                                                        <div class="d-flex align-items-center justify-content-between">
-                                                            <p class="mb-0 fs-8 fw-semibold">Make ready for release</p>
-                                                            <div class="d-flex align-items-center">
-                                                                <span
-                                                                    class="badge badge-phoenix fs-10 me-2 badge-phoenix-info">CLOSE</span>
-                                                                <p class="text-body-tertiary fs-10 mb-0 me-2">20 Nov, 2021
-                                                                </p>
-                                                                <p class="text-body-tertiary fs-10 fw-bold mb-0">1:00 AM</p>
-                                                            </div>
-                                                        </div>
-                                                        <p class="mb-1 text-body-secondary fs-10">Assigned by: Deployment
-                                                            Team</p>
-                                                        <p class="mb-0 text-body fs-10">Finalize packaging and deployment
-                                                            files.</p>
-                                                    </div>
-                                                </div>
-
-                                                <a href="tasklist_kanban.php" class="fw-bold fs-9 mt-3 d-inline-block">
-                                                    <span class="fas fa-list me-1"></span>View all tasks
-                                                </a>
-                                            </div>
-
-                                            <br>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            <h4 class="mb-3">Files</h4>
+                        echo '
+            <a href="tasklist_kanban.php" class="fw-bold fs-9 mt-3 d-inline-block">
+                <span class="fas fa-list me-1"></span>View all tasks
+            </a>
+            </div> <!-- end mb-3 -->
+            <!-- You can continue the rest of your modal (Files, etc.) here -->
+             <h4 class="mb-3">Files</h4>
                                             <div class="border-top pt-3 pb-4">
                                                 <div class="me-n3">
                                                     <div class="d-flex flex-between-center">
@@ -1095,7 +617,7 @@ if (mysqli_num_rows($result) > 0) {
                                                         class="rounded-2" src="../../assets/img/generic/40.png" alt="" />
                                                 </div>
                                             </div>
-                                            <div class="border-top py-3">
+ <div class="border-top py-3">
                                                 <div class="me-n3">
                                                     <div class="d-flex flex-between-center">
                                                         <div class="d-flex mb-1"><span
@@ -1119,7 +641,7 @@ if (mysqli_num_rows($result) > 0) {
                                                         </span><span class="text-nowrap">19th Dec, 08:56 PM</span></p>
                                                 </div>
                                             </div>
-                                            <div class="border-top border-bottom py-3 mb-3">
+<div class="border-top border-bottom py-3 mb-3">
                                                 <div class="me-n3">
                                                     <div class="d-flex flex-between-center">
                                                         <div class="d-flex align-items-center mb-1"><span
@@ -1146,7 +668,7 @@ if (mysqli_num_rows($result) > 0) {
                                                     class="fas fa-plus me-1"></span>Add file(s)</label><input class="d-none"
                                                 id="customFile" type="file" />
                                         </div>
-                                        <div class="col-12 col-md-3">
+<div class="col-12 col-md-3">
                                             <h5 class="text-body-secondary mb-3">Add to card</h5>
                                             <div class="mb-6"><button
                                                     class="btn btn-sm btn-subtle-secondary rounded-3 mb-2 d-flex align-items-center w-100"><span
@@ -1188,19 +710,13 @@ if (mysqli_num_rows($result) > 0) {
 
 
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
 
-
-                        </div>
-                    </div>';
-                        }
-                    };
-
-
+        </div>
+    </div>
+</div>
+</div>
+</div>';
+                    }
                     ?>
 
 
@@ -1439,45 +955,45 @@ if (mysqli_num_rows($result) > 0) {
 
 
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const modalElement = document.getElementById('projectsCardViewModal2');
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const modalElement = document.getElementById('projectsCardViewModal2');
 
-        if (modalElement) {
-            const modal = new bootstrap.Modal(modalElement, {
-                backdrop: 'static', // Prevent close on backdrop click
-                keyboard: false     // Prevent close on ESC key
-            });
+            if (modalElement) {
+                const modal = new bootstrap.Modal(modalElement, {
+                    backdrop: 'static', // Prevent close on backdrop click
+                    keyboard: false // Prevent close on ESC key
+                });
 
-            // Optional: Automatically show modal if project_id exists
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get("project_id")) {
-                modal.show();
+                // Optional: Automatically show modal if project_id exists
+                const urlParams = new URLSearchParams(window.location.search);
+                if (urlParams.get("project_id")) {
+                    modal.show();
+                }
             }
-        }
-    });
-</script>
+        });
+    </script>
 
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const closeBtn = document.getElementById("modalCloseRedirect");
-        const modalEl = document.getElementById("projectsCardViewModal2");
-        const urlParams = new URLSearchParams(window.location.search);
-        const projectId = urlParams.get("project_id");
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const closeBtn = document.getElementById("modalCloseRedirect");
+            const modalEl = document.getElementById("projectsCardViewModal2");
+            const urlParams = new URLSearchParams(window.location.search);
+            const projectId = urlParams.get("project_id");
 
-        if (closeBtn && modalEl && projectId) {
-            const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+            if (closeBtn && modalEl && projectId) {
+                const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
 
-            closeBtn.addEventListener("click", function () {
-                modal.hide(); // Manually close the modal
+                closeBtn.addEventListener("click", function() {
+                    modal.hide(); // Manually close the modal
 
-                // Redirect to the view page
-                window.location.href = "viewproject_card.php";
-            });
-        }
-    });
-</script>
+                    // Redirect to the view page
+                    window.location.href = "viewproject_card.php";
+                });
+            }
+        });
+    </script>
 
 
 

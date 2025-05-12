@@ -200,18 +200,21 @@
             // Build Main Query
             // --------------------
             $query = "
-    SELECT 
-        p.*, 
-        p.id AS project_id,
-        c.f_name, 
-        c.l_name, 
-        c.id AS client_id,
-        p_status.id AS status_id,
-        p_status.status_name
-    FROM tbl_project p 
-    INNER JOIN tbl_client c ON p.project_client = c.id
-    INNER JOIN tbl_project_status p_status ON p.project_status = p_status.id
-";
+            SELECT 
+                p.*, 
+                p.id AS project_id,
+                c.f_name, 
+                c.l_name, 
+                c.id AS client_id,
+                p_status.id AS status_id,
+                p_status.status_name
+            FROM tbl_project p 
+            INNER JOIN tbl_client c ON p.project_client = c.id
+            INNER JOIN tbl_project_status p_status ON p.project_status = p_status.id
+            WHERE 1=1
+            ";
+            
+        
             $params = [];
             $types = "";
 
@@ -221,14 +224,12 @@
                 $params[] = '%' . $searchTerm . '%';
                 $types .= "s";
             }
-
-            // Add status filter
             if ($statusId > 0) {
-                $query .= " AND s.id = ?";
+                $query .= " AND p.project_status = ?"; // Use correct column for filtering by status
                 $params[] = $statusId;
                 $types .= "i";
             }
-
+            
             // Prepare and execute
             $stmt = $conn->prepare($query);
             if (!empty($params)) {
@@ -498,7 +499,7 @@
                                                             <h6 class="text-white mb-0">23 <span
                                                                     class="fw-normal text-light text-opacity-75">mutual</span>
                                                             </h6>
-                                                        </div>
+                                                            </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -998,7 +999,7 @@
                                             <div class="d-flex"><button class="btn btn-sm ps-0 pe-2 py-0"><span
                                                         class="fa-solid fa-image fs-8"></span></button><button
                                                     class="btn btn-sm px-2 py-0"><span
-                                                        class="fa-solid fa-calendar-days fs-8"></span></button><button
+                                                    class="fa-solid fa-calendar-days fs-8"></span></button><button
                                                     class="btn btn-sm px-2 py-0"><span
                                                         class="fa-solid fa-location-dot fs-8"></span></button><button
                                                     class="btn btn-sm px-2 py-0"><span
@@ -1486,7 +1487,7 @@
                 window.location.href = "viewproject_card_details.php?project_id=" + projectId;
             });
         });
-    });
+    });
 </script>
 
 </body>
