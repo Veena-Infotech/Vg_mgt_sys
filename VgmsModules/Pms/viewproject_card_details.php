@@ -599,7 +599,7 @@ if ($result1 && $result1->num_rows > 0) {
                                         <p class="text-body-highlight fw-semibold mb-0">In list<a class="ms-1 fw-bold" href="#!">Review</a></p>
                                     </div>
                                     <div class="d-flex justify-content-between text-body-tertiary fw-semibold">
-    <p class="mb-2">Progress</p>
+    <h4 class="me-3">Progress</h4>
     <p class="mb-2 text-body-emphasis">' . $progressPercentage . '%</p>
 </div>
 <div class="progress bg-body-secondary">
@@ -612,10 +612,13 @@ if ($result1 && $result1->num_rows > 0) {
     </div>
 </div>
                                    <br>
-                                    <h6 class="text-body-secondary mb-2">Due date</h6>
+                                    <h4 class="me-3">Due date</h4>
                                     <div class="flatpickr-input-container flatpickr-input-sm w-50 mb-3">
-                                        <input class="form-control form-control-sm ps-6 datetimepicker" id="datepicker" type="text" />
-                                        <span class="uil uil-calendar-alt flatpickr-icon text-body-tertiary mt-1">'.htmlspecialchars($row['project_end_date']).'</span>
+ 
+                                        <span class="text-body-tertiary flatpickr-icon  mt-1">
+    '.htmlspecialchars($row['project_end_date']).'
+</span> <br>    
+
                                     </div>
                                     <div class="mb-6">
                                         <div class="d-flex align-items-center mb-2">
