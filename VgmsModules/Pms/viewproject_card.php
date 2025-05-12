@@ -490,7 +490,7 @@
                         <span class="fa-solid fa-credit-card me-2 text-body-tertiary fs-9 fw-extra-bold"></span>
                         <p class="fw-bold mb-0 lh-1">Budget : <span class="ms-1 text-body-emphasis">$ ' . htmlspecialchars($row['budget']) . '</span></p>
                     </div>
-                    <!-- Progress UI -->
+                    
 <div class="d-flex justify-content-between text-body-tertiary fw-semibold">
                         <p class="mb-2">Progress</p>
                         <p class="mb-2 text-body-emphasis">' . $progressPercentage . '%</p>

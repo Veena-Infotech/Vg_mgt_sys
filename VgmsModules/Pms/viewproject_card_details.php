@@ -516,18 +516,17 @@ function getStatusBadgeClass($status) {
                     include '../PhpFiles/connection.php';
                     $project_id = $_GET['project_id'];
 
-                    $query = "SELECT p.*, t.*
-FROM tbl_project p
-LEFT JOIN (
-    SELECT * FROM (
-        SELECT * 
-        FROM tbl_tasks 
-        WHERE project_id = $project_id 
-        ORDER BY end_date DESC 
+                    $query = "
+    SELECT p.*, t.*
+    FROM tbl_project p
+    LEFT JOIN (
+        SELECT *
+        FROM tbl_tasks
+        WHERE project_id = $project_id
+        ORDER BY end_date DESC
         LIMIT 5
-    ) AS latest_tasks
-) t ON p.id = t.project_id
-WHERE p.id = $project_id;
+    ) t ON p.id = t.project_id
+    WHERE p.id = $project_id
 ";
 
                     $result = mysqli_query($conn, $query) or die("Query Failed");
@@ -539,6 +538,43 @@ WHERE p.id = $project_id;
 
                         while ($row = mysqli_fetch_assoc($result)) {
                             if (!$modalPrinted) {
+
+                                $progressQuery = "
+    SELECT 
+        COUNT(*) AS total_tasks,
+        SUM(CASE WHEN s.name = 'completed' THEN 1 ELSE 0 END) AS completed_tasks
+    FROM tbl_tasks t
+    INNER JOIN tbl_task_status s ON t.status = s.id
+    WHERE t.project_id = $project_id
+";
+$result1 = $conn->query($progressQuery);
+
+$total_tasks = 0;
+$completed_tasks = 0;
+$progressPercentage = 0;
+$barColor = 'bg-secondary'; // default fallback
+
+if ($result1 && $result1->num_rows > 0) {
+    $taskData = $result1->fetch_assoc();
+    $total_tasks = (int)$taskData['total_tasks'];
+    $completed_tasks = (int)$taskData['completed_tasks'];
+    if ($total_tasks > 0) {
+        $progressPercentage = round(($completed_tasks / $total_tasks) * 100);
+    }
+
+    // Determine progress bar color
+    if ($progressPercentage <= 35) {
+        $barColor = 'bg-danger';
+    } elseif ($progressPercentage <= 65) {
+        $barColor = 'bg-warning';
+    } elseif ($progressPercentage <= 99) {
+        $barColor = 'bg-primary';
+    } else {
+        $barColor = 'bg-success';
+    }
+}
+
+
                                 echo '
             <div class="modal fade" id="projectsCardViewModal2" tabindex="-1" aria-labelledby="projectsCardViewModal" aria-hidden="false">
                 <div class="modal-dialog modal-md">
@@ -562,12 +598,20 @@ WHERE p.id = $project_id;
                                         <h3 class="fw-bolder lh-sm">' . htmlspecialchars($row['project_title']) . ' </h3>
                                         <p class="text-body-highlight fw-semibold mb-0">In list<a class="ms-1 fw-bold" href="#!">Review</a></p>
                                     </div>
-                                    <div class="d-flex align-items-center mb-4">
-                                        <p class="text-body-highlight fw-700 mb-0 me-2">64%</p>
-                                        <div class="progress flex-1">
-                                            <div class="progress-bar rounded-3" role="progressbar" style="width: 64%"></div>
-                                        </div>
-                                    </div>
+                                    <div class="d-flex justify-content-between text-body-tertiary fw-semibold">
+    <p class="mb-2">Progress</p>
+    <p class="mb-2 text-body-emphasis">' . $progressPercentage . '%</p>
+</div>
+<div class="progress bg-body-secondary">
+    <div class="progress-bar rounded ' . $barColor . '" 
+        role="progressbar" 
+        style="width: ' . $progressPercentage . '%" 
+        aria-valuenow="' . $progressPercentage . '" 
+        aria-valuemin="0" 
+        aria-valuemax="100">
+    </div>
+</div>
+                                   <br>
                                     <h6 class="text-body-secondary mb-2">Due date</h6>
                                     <div class="flatpickr-input-container flatpickr-input-sm w-50 mb-3">
                                         <input class="form-control form-control-sm ps-6 datetimepicker" id="datepicker" type="text" />
