@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mail->SMTPSecure = 'tls';
         $mail->Port       = 587;
 
-        $mail->setFrom('aryanshirodkar03@gmil.com', 'Your Name');
+        $mail->setFrom('aryanshirodkar03@gmil.com', 'Your Name');   
         $mail->addAddress($email);
 
         $mail->isHTML(true);

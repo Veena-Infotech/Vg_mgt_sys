@@ -2,7 +2,6 @@
 <html lang="en-US" dir="ltr" data-navigation-type="default" data-navbar-horizontal-shape="default">
 
 
-
 <meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 
 <head>
@@ -25,6 +24,8 @@
 
   <script src="../../vendors/simplebar/simplebar.min.js"></script>
   <script src="../../assets/js/config.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
 
   <!-- ===============================================-->
   <!--    Stylesheets-->
@@ -34,7 +35,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap"
     rel="stylesheet">
   <link href="../../vendors/simplebar/simplebar.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="../../unicons.iconscout.com/release/v4.0.8/css/line.css">
+  <!-- <link rel="stylesheet" href="../../unicons.iconscout.com/release/v4.0.8/css/line.css"> -->
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
   <link href="../../assets/css/theme-rtl.css" type="text/css" rel="stylesheet" id="style-rtl">
   <link href="../../assets/css/theme.min.css" type="text/css" rel="stylesheet" id="style-default">
   <link href="../../assets/css/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
@@ -173,31 +175,48 @@
           </div>
         </div>
 
-        <form id="onboardingForm" enctype="multipart/form-data">
+        <form id="onboardingForm" enctype="multipart/form-data" action="submit_onboarding.php" method="POST">
 
           <!-- STEP TEMPLATE START -->
-          <!-- Repeat this template per section with unique content -->
           <div class="step">
             <h5 class="fw-semibold text-secondary">1. Personal Information</h5>
             <div class="row g-3">
-              <div class="col-md-6"><label class="form-label">Full Name</label><input type="text" id="fullName"
-                  class="form-control" required></div>
-              <div class="col-md-6"><label class="form-label">Salutation</label>
-                <select class="form-select" required>
+
+              <div class="col-md-6">
+                <label class="form-label">Salutation</label>
+                <select class="form-select" name="salutation" required>
                   <option value="">Select</option>
-                  <option>Mr.</option>
-                  <option>Ms.</option>
-                  <option>Mrs.</option>
-                  <option>Dr.</option>
-                  <option>Other</option>
+                  <option value="Mr.">Mr.</option>
+                  <option value="Ms.">Ms.</option>
+                  <option value="Mrs.">Mrs.</option>
+                  <option value="Dr.">Dr.</option>
+                  <option value="Other">Other</option>
                 </select>
               </div>
-              <div class="col-md-6"><label class="form-label">Father's Name</label><input type="text" id="fatherName"
-                  class="form-control" required></div>
-              <div class="col-md-6"><label class="form-label">Mother's Name</label><input type="text" id="motherName"
-                  class="form-control" required></div>
-              <div class="col-md-6"><label class="form-label">Marital Status</label>
-                <select class="form-select" required>
+
+              <div class="col-md-6">
+                <label class="form-label">First Name</label>
+                <input type="text" id="f_name" class="form-control" name="f_name" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Middle Name</label>
+                <input type="text" id="m_name" class="form-control" name="m_name" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Last Name</label>
+                <input type="text" id="l_name" class="form-control" name="l_name" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Father's Name</label>
+                <input type="text" id="fatherName" class="form-control" name="fatherName" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Mother's Name</label>
+                <input type="text" id="motherName" class="form-control" name="motherName" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Marital Status</label>
+                <select class="form-select" name="maritalStatus" required>
                   <option value="">Select</option>
                   <option>Single</option>
                   <option>Married</option>
@@ -205,12 +224,17 @@
                   <option>Widowed</option>
                 </select>
               </div>
-              <div class="col-md-6"><label class="form-label">Spouse’s Name</label><input type="text" id="spouseName"
-                  class="form-control"></div>
-              <div class="col-md-6"><label class="form-label">Date of Birth</label><input type="date" id="dob"
-                  class="form-control" required></div>
-              <div class="col-md-6"><label class="form-label">Gender</label>
-                <select class="form-select" required>
+              <div class="col-md-6">
+                <label class="form-label">Spouse’s Name</label>
+                <input type="text" id="spouseName" class="form-control" name="spouseName">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Date of Birth</label>
+                <input type="date" id="dob" class="form-control" name="dob" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Gender</label>
+                <select class="form-select" name="gender" required>
                   <option value="">Select</option>
                   <option>Male</option>
                   <option>Female</option>
@@ -222,59 +246,93 @@
               <button type="button" class="btn btn-outline-primary next">Next</button>
             </div>
           </div>
+          <!-- STEP TEMPLATE END -->
+
 
           <!-- 2. Contact Details -->
           <div class="step">
             <h5 class="fw-semibold text-secondary">2. Contact Details</h5>
-            <div class="mb-3"><label class="form-label">Primary Contact Number</label><input type="text"
-                id="primaryContact" class="form-control" required pattern="^\d{10}$"
-                title="Please enter a valid 10-digit phone number."></div>
-            <div class="mb-3"><label class="form-label">Alternative Contact Number</label><input type="text"
-                id="altContact" class="form-control" required pattern="^\d{10}$"
-                title="Please enter a valid 10-digit phone number."></div>
-            <div class="mb-3"><label class="form-label">Personal Email ID</label><input type="email" id="personalEmail"
-                class="form-control" required></div>
-            <div class="mb-3"><label class="form-label">Official Email ID</label><input type="email" id="officialEmail"
-                class="form-control"></div>
-            <div class="mb-3"><label class="form-label">Current Residential Address</label><textarea
-                class="form-control" id="currentAddress" required></textarea></div>
-            <div class="mb-3"><label class="form-label">Permanent Residential Address</label><textarea
-                class="form-control" id="permanentAddress" required></textarea></div>
+            <div class="mb-3">
+              <label class="form-label">Primary Contact Number</label>
+              <input type="text" id="primary_phone_no" class="form-control" name="primary_phone_no" required
+                pattern="^\d{10}$" title="Please enter a valid 10-digit phone number.">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Alternative Contact Number</label>
+              <input type="text" id="alternative_phone_no" class="form-control" name="alternative_phone_no" required pattern="^\d{10}$"
+                title="Please enter a valid 10-digit phone number.">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Personal Email ID</label>
+              <input type="email" id="personalEmail" class="form-control" name="personalEmail" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Official Email ID</label>
+              <input type="email" id="officialEmail" class="form-control" name="officialEmail">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Current Residential Address</label>
+              <textarea class="form-control" id="currentAddress" name="currentAddress" required></textarea>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Permanent Residential Address</label>
+              <textarea class="form-control" id="permanentAddress" name="permanentAddress" required></textarea>
+            </div>
             <div class="d-flex justify-content-between mt-4">
               <button type="button" class="btn btn-outline-primary prev">Back</button>
               <button type="button" class="btn btn-outline-primary next">Next</button>
             </div>
           </div>
+
 
           <!-- 3. Identity and Banking Details -->
           <div class="step">
             <h5 class="fw-semibold text-secondary">3. Identity and Banking Details</h5>
             <div class="row g-3">
-              <div class="col-md-6"><label class="form-label">Aadhar Card Number</label><input type="text"
-                  id="aadharCard" class="form-control" required pattern="^\d{12}$"
-                  title="Please enter a valid 12-digit Aadhar card number."></div>
-              <div class="col-md-6"><label class="form-label">PAN Card Number</label><input type="text" id="panCard"
-                  class="form-control" required pattern="^[A-Za-z]{5}\d{4}[A-Za-z]{1}$"
-                  title="Please enter a valid PAN card number."></div>
-              <div class="col-md-6"><label class="form-label">Bank Name</label><input type="text" id="bankName"
-                  class="form-control" required></div>
-              <div class="col-md-6"><label class="form-label">Bank Account Number</label><input type="text"
-                  id="bankAccount" class="form-control" required pattern="^\d+$"
-                  title="Please enter a valid bank account number."></div>
-              <div class="col-md-6"><label class="form-label">IFSC Code</label><input type="text" id="ifscCode"
-                  class="form-control" required pattern="^[A-Za-z]{4}\d{7}$" title="Please enter a valid IFSC code.">
+              <div class="col-md-6">
+                <label class="form-label">Aadhar Card Number</label>
+                <input type="text" id="aadharcard_no" class="form-control" name="aadharcard_no" required pattern="^\d{12}$"
+                  title="Please enter a valid 12-digit Aadhar card number.">
               </div>
-              <div class="col-md-6"><label class="form-label">Branch Name & Address</label><input type="text"
-                  id="branchName" class="form-control" required></div>
-              <div class="col-md-6"><label class="form-label">Do you have a UPI ID?</label>
-                <select class="form-select" id="upiOption" required>
+              <div class="col-md-6">
+                <label class="form-label">PAN Card Number</label>
+                <input type="text" id="panCard" class="form-control" name="panCard" required
+                  pattern="^[A-Za-z]{5}\d{4}[A-Za-z]{1}$" title="Please enter a valid PAN card number.">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Bank Name</label>
+                <input type="text" id="bankName" class="form-control" name="bankName" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Bank Account Number</label>
+                <input type="text" id="bank_acc_no" class="form-control" name="bank_acc_no" required pattern="^\d+$"
+                  title="Please enter a valid bank account number.">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">IFSC Code</label>
+                <input type="text" id="ifsc_code" class="form-control" name="ifsc_code" required
+                  pattern="^[A-Za-z]{4}\d{7}$" title="Please enter a valid IFSC code.">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Branch Name</label>
+                <input type="text" id="branchName" class="form-control" name="branchName" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Branch Address</label>
+                <input type="text" id="branchAddress" class="form-control" name="branchAddress" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Do you have a UPI ID?</label>
+                <select class="form-select" id="upiOption" name="upiOption" required>
                   <option value="">Select</option>
                   <option>Yes</option>
                   <option>No</option>
                 </select>
               </div>
-              <div class="col-md-6"><label class="form-label">If Yes, Enter UPI ID</label><input type="text" id="upiId"
-                  class="form-control" pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+$" title="Please enter a valid UPI ID.">
+              <div class="col-md-6">
+                <label class="form-label">If Yes, Enter UPI ID</label>
+                <input type="text" id="upiId" class="form-control" name="upiId"
+                  pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+$" title="Please enter a valid UPI ID.">
               </div>
             </div>
             <div class="d-flex justify-content-between mt-4">
@@ -283,14 +341,18 @@
             </div>
           </div>
 
+
           <!-- 4. Emergency & Nominee Details -->
           <div class="step">
             <h5 class="fw-semibold text-secondary">4. Emergency & Nominee Details</h5>
             <div class="row g-3">
-              <div class="col-md-6"><label class="form-label">Emergency Contact Name</label><input type="text"
-                  id="emergencyContactName" class="form-control" required></div>
-              <div class="col-md-6"><label class="form-label">Emergency Relationship</label>
-                <select class="form-select" id="emergencyRelationship" required>
+              <div class="col-md-6">
+                <label class="form-label">Emergency Contact Name</label>
+                <input type="text" id="emergencyContactName" class="form-control" name="emergencyContactName" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Emergency Relationship</label>
+                <select class="form-select" id="emergencyRelationship" name="emergencyRelationship" required>
                   <option value="">Select</option>
                   <option>Father</option>
                   <option>Mother</option>
@@ -298,13 +360,18 @@
                   <option>Other</option>
                 </select>
               </div>
-              <div class="col-md-6"><label class="form-label">Emergency Contact Number</label><input type="text"
-                  id="emergencyContact" class="form-control" required pattern="^\d{10}$"
-                  title="Please enter a valid 10-digit phone number."></div>
-              <div class="col-md-6"><label class="form-label">Nominee Name</label><input type="text" id="nomineeName"
-                  class="form-control" required></div>
-              <div class="col-md-6"><label class="form-label">Nominee Relationship</label>
-                <select class="form-select" id="nomineeRelationship">
+              <div class="col-md-6">
+                <label class="form-label">Emergency Contact Number</label>
+                <input type="text" id="emergency_phone_no" class="form-control" name="emergency_phone_no" required
+                  pattern="^\d{10}$" title="Please enter a valid 10-digit phone number.">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Nominee Name</label>
+                <input type="text" id="nomineeName" class="form-control" name="nomineeName" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Nominee Relationship</label>
+                <select class="form-select" id="nomineeRelationship" name="nomineeRelationship">
                   <option value="">Select</option>
                   <option>Spouse</option>
                   <option>Parent</option>
@@ -320,11 +387,13 @@
           </div>
 
 
+
           <!-- 5. Educational Background -->
           <div class="step">
             <h5 class="fw-semibold text-secondary">5. Educational Background</h5>
-            <div class="mb-3"><label class="form-label">Highest Educational Qualification</label>
-              <select class="form-select">
+            <div class="mb-3">
+              <label class="form-label">Highest Educational Qualification</label>
+              <select class="form-select" name="highestQualification">
                 <option>10th</option>
                 <option>12th</option>
                 <option>Diploma</option>
@@ -333,78 +402,114 @@
                 <option>PhD</option>
               </select>
             </div>
-            <div class="mb-3"><label class="form-label">Institution Name</label><input type="text" class="form-control">
+            <div class="mb-3">
+              <label class="form-label">Institution Name</label>
+              <input type="text" class="form-control" name="institutionName">
             </div>
-            <div class="mb-3"><label class="form-label">Year of Passing</label><input type="text" class="form-control">
+            <div class="mb-3">
+              <label class="form-label">Year of Passing</label>
+              <input type="text" class="form-control" name="yearOfPassing">
             </div>
-            <div class="mb-3"><label class="form-label">Upload Education Certificates</label><input type="file"
-                class="form-control"></div>
+            <div class="mb-3">
+              <label class="form-label">Upload Education Certificates</label>
+              <input type="file" class="form-control" name="educationCertificates">
+            </div>
             <div class="d-flex justify-content-between mt-4">
               <button type="button" class="btn btn-outline-primary prev">Back</button>
               <button type="button" class="btn btn-outline-primary next">Next</button>
             </div>
           </div>
 
+
           <!-- 6. Employment History -->
           <div class="step">
             <h5 class="fw-semibold text-secondary">6. Employment History</h5>
-            <div class="mb-3"><label class="form-label">Have you worked previously?</label>
-              <select class="form-select">
+            <div class="mb-3">
+              <label class="form-label">Have you worked previously?</label>
+              <select class="form-select" name="workedPreviously">
                 <option>Yes</option>
                 <option>No</option>
               </select>
             </div>
-            <div class="mb-3"><label class="form-label">Previous Employer Name</label><input type="text"
-                class="form-control"></div>
-            <div class="mb-3"><label class="form-label">Previous Job Role</label><input type="text" class="form-control"
-                required></div>
-            <div class="mb-3"><label class="form-label">Employment Period</label><input type="text" class="form-control"
-                placeholder="Start Date - End Date" required></div>
-            <div class="mb-3"><label class="form-label">Reason for Leaving</label><textarea class="form-control"
-                required></textarea></div>
-            <div class="mb-3"><label class="form-label">Upload Documents</label><input type="file" class="form-control">
+            <div class="mb-3">
+              <label class="form-label">Previous Employer Name</label>
+              <input type="text" class="form-control" name="previousEmployerName">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Previous Job Role</label>
+              <input type="text" class="form-control" name="previousJobRole" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Employment Period</label>
+              <input type="date" class="form-control" name="empPeriodStartDate" placeholder="Start Date"
+                required>
+              <input type="date" class="form-control" name="empPeriodEndDate" placeholder="End Date"
+                required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Reason for Leaving</label>
+              <textarea class="form-control" name="reasonForLeaving" required></textarea>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Upload Documents</label>
+              <input type="file" class="form-control" name="employmentDocuments">
             </div>
             <div class="d-flex justify-content-between mt-4">
               <button type="button" class="btn btn-outline-primary prev">Back</button>
               <button type="button" class="btn btn-outline-primary next">Next</button>
             </div>
           </div>
+
 
           <!-- 7. Current Employment at WINA Group -->
           <div class="step">
             <h5 class="fw-semibold text-secondary">7. Current Employment</h5>
             <div class="row g-3">
-              <div class="col-md-6"><label class="form-label">Date of Joining</label><input type="date"
-                  class="form-control"></div>
-              <div class="col-md-6"><label class="form-label">Current Job Role</label><input type="text"
-                  class="form-control"></div>
-              <div class="col-md-4"><label class="form-label">Current Salary (CTC)</label><input type="text"
-                  class="form-control"></div>
-              <div class="col-md-4"><label class="form-label">In-Hand Salary</label><input type="text"
-                  class="form-control"></div>
-              <div class="col-md-4"><label class="form-label">Conveyance</label><input type="text" class="form-control">
+              <div class="col-md-6">
+                <label class="form-label">Date of Joining</label>
+                <input type="date" class="form-control" name="dateOfJoining">
               </div>
-              <div class="col-md-6"><label class="form-label">Company Loan or Advance?</label>
-                <select class="form-select">
+              <div class="col-md-6">
+                <label class="form-label">Current Job Role</label>
+                <input type="text" class="form-control" name="currentJobRole">
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Current Salary (CTC)</label>
+                <input type="text" class="form-control" name="currentSalary">
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">In-Hand Salary</label>
+                <input type="text" class="form-control" name="inHandSalary">
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Conveyance</label>
+                <input type="text" class="form-control" name="conveyance">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Company Loan or Advance?</label>
+                <select class="form-select" name="companyLoan">
                   <option>Yes</option>
                   <option>No</option>
                 </select>
               </div>
-              <div class="col-md-6"><label class="form-label">If Yes, Loan Amount & Repayment</label><input type="text"
-                  class="form-control"></div>
+              <div class="col-md-6">
+                <label class="form-label">If Yes, Loan Amount & Repayment</label>
+                <input type="text" class="form-control" name="loanAmountRepayment">
+              </div>
             </div>
             <div class="d-flex justify-content-between mt-4">
               <button type="button" class="btn btn-outline-primary prev">Back</button>
               <button type="button" class="btn btn-outline-primary next">Next</button>
             </div>
           </div>
+
 
           <!-- 8. Work Policies & Leaves -->
           <div class="step">
             <h5 class="fw-semibold text-secondary">8. Work Policies & Leaves</h5>
             <div class="mb-3">
               <label class="form-label">Official Work Timing</label>
-              <select class="form-select">
+              <select class="form-select" name="workTiming">
                 <option>9:00 AM - 6:00 PM</option>
                 <option>10:00 AM - 7:00 PM</option>
                 <option>11:00 AM - 8:00 PM</option>
@@ -412,45 +517,56 @@
                 <option>Other</option>
               </select>
             </div>
-            <div class="mb-3"><label class="form-label">Weekly Off Day</label>
-              <select class="form-select">
+            <div class="mb-3">
+              <label class="form-label">Weekly Off Day</label>
+              <select class="form-select" name="offDay">
                 <option>Sunday</option>
                 <option>Saturday</option>
                 <option>Rotational</option>
               </select>
             </div>
-            <div class="mb-3"><label class="form-label">Annual Leave Entitlement</label><input type="text"
-                class="form-control"></div>
-            <div class="mb-3"><label class="form-label">Leave Application Process</label><textarea
-                class="form-control"></textarea></div>
+            <div class="mb-3">
+              <label class="form-label">Annual Leave Entitlement</label>
+              <input type="text" class="form-control" name="annualLeave">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Leave Application Process</label>
+              <textarea class="form-control" name="leaveApplicationProcess"></textarea>
+            </div>
             <div class="d-flex justify-content-between mt-4">
               <button type="button" class="btn btn-outline-primary prev">Back</button>
               <button type="button" class="btn btn-outline-primary next">Next</button>
             </div>
           </div>
 
+
           <!-- 9. Compliance -->
           <div class="step">
             <h5 class="fw-semibold text-secondary">9. Company Compliance & Declaration</h5>
-            <div class="mb-3" required><label class="form-label">Agree to Policies?</label>
-              <select class="form-select">
+            <div class="mb-3">
+              <label class="form-label">Agree to Policies?</label>
+              <select class="form-select" name="agreeToPolicies" required>
                 <option>Yes</option>
                 <option>No</option>
               </select>
             </div>
-            <div class="mb-3"><label class="form-label">Willing to Provide Documents?</label>
-              <select class="form-select">
+            <div class="mb-3">
+              <label class="form-label">Willing to Provide Documents?</label>
+              <select class="form-select" name="willingToProvideDocuments">
                 <option>Yes</option>
                 <option>No</option>
               </select>
             </div>
-            <div class="mb-3"><label class="form-label">Any Additional Comments</label><textarea
-                class="form-control"></textarea></div>
+            <div class="mb-3">
+              <label class="form-label">Any Additional Comments</label>
+              <textarea class="form-control" name="additionalComments"></textarea>
+            </div>
             <div class="d-flex justify-content-between mt-4">
               <button type="button" class="btn btn-outline-primary prev">Back</button>
               <button type="submit" class="btn btn-outline-success">Submit</button>
             </div>
           </div>
+
         </form>
       </div>
       <!-- Footer -->
@@ -508,29 +624,29 @@
 
     // Next button click
     nextBtns.forEach(btn => {
-  btn.addEventListener('click', function() {
-    if (validateStep(currentStep)) {
-      currentStep++;
-      if (currentStep < steps.length) {
-        showStep(currentStep);
-      }
-    } else {
-      // Wait for 3 seconds, then remove is-invalid with a fade animation
-      setTimeout(() => {
-        const invalidInputs = steps[currentStep].querySelectorAll('.is-invalid');
-        invalidInputs.forEach(input => {
-          gsap.to(input, {
-            borderColor: "#ced4da", // Bootstrap normal border color
-            duration: 0.5,
-            onComplete: () => {
-              input.classList.remove('is-invalid');
-            }
-          });
-        });
-      }, 3000);
-    }
-  });
-});
+      btn.addEventListener('click', function () {
+        if (validateStep(currentStep)) {
+          currentStep++;
+          if (currentStep < steps.length) {
+            showStep(currentStep);
+          }
+        } else {
+          // Wait for 3 seconds, then remove is-invalid with a fade animation
+          setTimeout(() => {
+            const invalidInputs = steps[currentStep].querySelectorAll('.is-invalid');
+            invalidInputs.forEach(input => {
+              gsap.to(input, {
+                borderColor: "#ced4da", // Bootstrap normal border color
+                duration: 0.5,
+                onComplete: () => {
+                  input.classList.remove('is-invalid');
+                }
+              });
+            });
+          }, 3000);
+        }
+      });
+    });
 
 
 

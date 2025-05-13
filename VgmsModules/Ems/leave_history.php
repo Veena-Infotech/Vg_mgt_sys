@@ -181,7 +181,7 @@
 
         <div class="d-flex align-items-center gap-3 mb-4 flex-wrap">
           <div class="form-floating" style="width: 250px;">
-            <select class="form-select" id="employeeSelect">
+            <select class="form-select" id="employeeSelect" name="employee">
               <option selected disabled>Choose an employee</option>
               <option>John Doe</option>
               <option>Jane Smith</option>

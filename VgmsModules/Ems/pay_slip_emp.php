@@ -285,7 +285,7 @@
         <div id="filterSection" class="d-flex justify-content-between align-items-center flex-wrap my-4">
           <div class="d-flex flex-row gap-3">
 
-            <select class="form-select" aria-label="Select Month">
+            <select class="form-select" name="month" aria-label="Select Month">
               <option selected>Select Month</option>
               <option value="Jan">January</option>
               <option value="Feb">February</option>

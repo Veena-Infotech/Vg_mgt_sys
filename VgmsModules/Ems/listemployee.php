@@ -179,7 +179,7 @@
       <div id="tableExample3"
         data-list="{&quot;valueNames&quot;:[&quot;name&quot;,&quot;email&quot;,&quot;phone&quot;,&quot;designation&quot;,&quot;address&quot;],&quot;page&quot;:5,&quot;pagination&quot;:true}">
         <div class="search-box mb-3 mx-auto">
-          <form class="position-relative"><input class="form-control search-input search form-control-sm" type="search"
+          <form class="position-relative"><input class="form-control search-input search form-control-sm" type="search"  name="searchQuery"
               placeholder="Search" aria-label="Search">
             <svg class="svg-inline--fa fa-magnifying-glass search-box-icon" aria-hidden="true" focusable="false"
               data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg"

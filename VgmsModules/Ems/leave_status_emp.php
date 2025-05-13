@@ -190,8 +190,10 @@
                         <div class="d-flex flex-wrap gap-2 mt-2 mt-sm-0">
 
                             <!-- Search -->
-                            <input type="text" id="searchBox" class="form-control form-control-sm w-auto"
+                            <!-- Search -->
+                            <input type="text" id="searchBox" name="searchQuery" class="form-control form-control-sm w-auto"
                                 placeholder="Search..." style="min-width: 160px;" />
+
 
                             <!-- Apply Button -->
                             <button class="btn btn-outline-primary btn-sm">

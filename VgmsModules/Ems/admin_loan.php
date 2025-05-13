@@ -178,7 +178,7 @@
                 <div class="d-flex flex-wrap gap-2 mb-4">
                     <button class="btn btn-outline-primary">Loan</button>
                     <button class="btn btn-outline-success">Advance</button>
-                    <input type="text" class="form-control w-auto" placeholder="Search" />
+                    <input type="text" name="searchQuery1" class="form-control w-auto" placeholder="Search" />
                     <button class="btn btn-outline-secondary ms-auto">Export</button>
                 </div>
 
@@ -186,7 +186,7 @@
 
                 <div id="tableExample3" data-list='{"valueNames":["name","email","age"],"page":5,"pagination":true}'>
                     <div class="search-box mb-3 mx-auto">
-                        <form class="position-relative"><input class="form-control search-input search form-control-sm" type="search" placeholder="Search" aria-label="Search" />
+                        <form class="position-relative"><input type="search" name="searchQuery2" class="form-control search-input search form-control-sm" placeholder="Search" aria-label="Search" />
                             <span class="fas fa-search search-box-icon"></span>
                         </form>
                     </div>

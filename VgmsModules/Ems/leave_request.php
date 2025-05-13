@@ -186,32 +186,32 @@
                 <div class="row g-3">
                   <div class="col-md-6">
                     <label class="form-label"><i class="bi bi-person-fill me-1"></i>Employee Name</label>
-                    <input type="text" class="form-control" placeholder="Please enter your name" required>
+                    <input type="text" class="form-control" name="employeeName" placeholder="Please enter your name" required>
                   </div>
 
                   <div class="col-md-6">
                     <label class="form-label"><i class="bi bi-card-list me-1"></i>Leave Type</label>
-                    <select class="form-select" required>
+                    <select class="form-select" name="leaveType" required>
                       <option selected disabled value="">Select type</option>
-                      <option><i class="bi bi-airplane"></i> Casual Leave</option>
-                      <option><i class="bi bi-thermometer-half"></i> Sick Leave</option>
-                      <option><i class="bi bi-wallet2"></i> Earned Leave</option>
+                      <option value="Casual Leave"><i class="bi bi-airplane"></i> Casual Leave</option>
+                      <option value="Sick Leave"><i class="bi bi-thermometer-half"></i> Sick Leave</option>
+                      <option value="Earned Leave"><i class="bi bi-wallet2"></i> Earned Leave</option>
                     </select>
                   </div>
 
                   <div class="col-md-6">
                     <label class="form-label"><i class="bi bi-calendar-event me-1"></i>From Date</label>
-                    <input type="date" class="form-control" required>
+                    <input type="date" class="form-control" name="fromDate" required>
                   </div>
 
                   <div class="col-md-6">
                     <label class="form-label"><i class="bi bi-calendar-check me-1"></i>To Date</label>
-                    <input type="date" class="form-control" required>
+                    <input type="date" class="form-control" name="toDate" required>
                   </div>
 
                   <div class="col-12">
                     <label class="form-label"><i class="bi bi-pencil-square me-1"></i>Reason</label>
-                    <textarea class="form-control" rows="3" placeholder="Write your reason here..." required></textarea>
+                    <textarea class="form-control" name="leaveReason" rows="3" placeholder="Write your reason here..." required></textarea>
                   </div>
 
                   <div class="col-12 mt-3">
@@ -224,10 +224,14 @@
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- Footer -->
-      <?php include("../../Components/footer.php"); ?>
+      </div>
+    </div>
+    </div>
+    </div>
+
+    <!-- Footer -->
+    <?php include("../../Components/footer.php"); ?>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -242,7 +246,7 @@
     </script>
 
     </div>
-    
+
   </main>
 
   <!-- ===============================================-->
