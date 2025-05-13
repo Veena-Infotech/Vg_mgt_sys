@@ -69,19 +69,19 @@ include '../PhpFiles/connection.php';
     <style>
         /* Style for the file upload drop area */
         .file-drop-area {
-            border: 2px dashed #007bff;
+            border: 2px dashed rgb(97, 107, 117);
             border-radius: 8px;
             padding: 20px;
             text-align: center;
             cursor: pointer;
             position: relative;
-            background-color: #f8f9fa;
+            /* background-color: #f8f9fa; */
             transition: background-color 0.3s ease;
         }
 
-        .file-drop-area:hover {
+        /* .file-drop-area:hover {
             background-color: #e9ecef;
-        }
+        } */
 
         /* Hidden file input */
         .file-drop-area input[type="file"] {
@@ -92,7 +92,7 @@ include '../PhpFiles/connection.php';
         .file-drop-message p {
             margin: 0;
             font-size: 14px;
-            color: #007bff;
+            color: rgb(98, 111, 125);
         }
 
         /* Preview of uploaded files */
@@ -112,7 +112,32 @@ include '../PhpFiles/connection.php';
             width: 30px;
             margin-right: 10px;
         }
+
+        #photoMessage {
+            display: none;
+            background-color: #e0f2fe;
+            border: 1px solid #0284c7;
+            color: #0369a1;
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-top: 12px;
+            font-size: 14px;
+        }
+
+        #customMessage {
+            display: none;
+            background-color: #e0f2fe;
+            border: 1px solid #0284c7;
+            color: #0369a1;
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-top: 12px;
+            font-size: 14px;
+        }
     </style>
+
+
+
 </head>
 
 <body>
@@ -251,7 +276,7 @@ include '../PhpFiles/connection.php';
                                     echo '<option disabled>No project types found</option>';
                                 }
 
-                               
+
                                 ?>
                             </select>
                         </div>
@@ -307,7 +332,7 @@ include '../PhpFiles/connection.php';
                                     echo '<option disabled>No clients available</option>';
                                 }
 
-                       
+
                                 ?>
                             </select>
                         </div>
@@ -387,6 +412,58 @@ include '../PhpFiles/connection.php';
                             </div>
                         </div>
 
+                        <div class="col-md-6" style="margin-top: -1%;">
+                            <div class="max-w-md mx-auto p-6 rounded shadow-md">
+                                <label class="form-label">Cover Photo<span style="color: red;">*</span></label>
+
+                                <!-- Checkbox Options -->
+                                <div class="flex flex-col gap-3">
+                                    <!-- Use Default -->
+                                    <label class="inline-flex items-center gap-2">
+                                        <input
+                                            type="checkbox"
+                                            id="useDefault"
+                                            class="border border-gray-300 rounded text-blue-600"
+                                            onclick="toggleCoverUpload('default')" />
+                                        <span class="text-sm text-gray-700">Use Default</span>
+                                    </label>
+
+                                    <!-- Use Customized -->
+                                    <label class="inline-flex items-center gap-2">
+                                        <input
+                                            type="checkbox"
+                                            id="useCustom"
+                                            class="border border-gray-300 rounded text-blue-600"
+                                            onclick="toggleCoverUpload('custom')" />
+                                        <span class="text-sm text-gray-700">Use Customized</span>
+                                    </label>
+                                </div>
+
+                                <!-- File Upload Box -->
+                                <div class="dropzone dropzone-single p-0" id="dropzone" data-dropzone="data-dropzone" data-options='{"url":"valid/url","maxFiles":1,"maxFilesize":5,"acceptedFiles":"image/*","dictDefaultMessage":"Choose or Drop a file here"}'>
+                                    <div class="fallback"><input type="file" name="file" /></div>
+                                    <div class="dz-message" data-dz-message="data-dz-message">
+                                        <div class="dz-message-text"><img class="me-2" src="../../../assets/img/icons/cloud-upload.svg" width="25" alt="" />Drop your file here</div>
+                                        <button class="btn dz-upload-btn border-0 position-absolute z-5 bg-black bg-opacity-50 text-white mt-3 ms-3 px-3" data-dz-message="data-dz-message">
+                                            Change Picture<span class="fa-solid fa-camera fs-10 ms-1"></span>
+                                        </button>
+                                    </div>
+                                    <div class="dz-preview d-block m-0">
+                                        <div class="rounded-2 position-relative" style="height: 144px">
+                                            <img class="rounded-2 w-100 h-100 object-fit-cover" src="../../../assets/img/icons/file-bg.png" alt="..." data-dz-thumbnail="data-dz-thumbnail" />
+                                            <button class="btn border-0 position-absolute top-0 end-0 z-5 bg-black bg-opacity-50 text-white mt-3 me-3 px-3 cursor-pointer" data-dz-remove="data-dz-remove">
+                                                <span class="fa-solid fa-xmark cursor-pointer"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="photoMessage">Photo already selected ✅</div>
+                                <div id="customMessage">Please Insert Image</div> <!-- New message for custom upload -->
+                            </div>
+                        </div>
+
+
 
                         <!-- Description -->
                         <div class="col-12">
@@ -413,10 +490,10 @@ include '../PhpFiles/connection.php';
 
 
             </div>
-
-            <!-- Footer -->
-            <?php include("../../Components/footer.php"); ?>
-
+            <footer>
+                <!-- Footer -->
+                <?php include("../../Components/footer.php"); ?>
+            </footer>
         </div>
         </div>
 
@@ -547,6 +624,71 @@ include '../PhpFiles/connection.php';
             });
         });
     </script>
+
+    <script>
+        let myDropzone;
+        let hasFile = false;
+
+        window.addEventListener("DOMContentLoaded", () => {
+            const dropzoneElement = document.getElementById("dropzone");
+            const photoMessage = document.getElementById("photoMessage");
+            const customMessage = document.getElementById("customMessage");
+
+            // Initially hide the Dropzone and any messages
+            dropzoneElement.style.display = "none";
+            photoMessage.style.display = "none";
+            customMessage.style.display = "none";
+
+            myDropzone = new Dropzone(dropzoneElement, {
+                url: "/upload", // Replace with your actual backend URL
+                maxFiles: 1,
+                maxFilesize: 5,
+                acceptedFiles: "image/*",
+                dictDefaultMessage: "Choose or Drop a file here",
+                autoProcessQueue: false,
+                init: function() {
+                    this.on("addedfile", function() {
+                        hasFile = true;
+                        toggleCoverUpload("custom"); // Show customized message when file is added
+                    });
+
+                    this.on("removedfile", function() {
+                        hasFile = false;
+                        toggleCoverUpload("default"); // Show default message when file is removed
+                    });
+                }
+            });
+        });
+
+        function toggleCoverUpload(option) {
+            const useDefault = document.getElementById("useDefault");
+            const useCustom = document.getElementById("useCustom");
+            const dropzone = document.getElementById("dropzone");
+
+            const photoMessage = document.getElementById("photoMessage");
+            const customMessage = document.getElementById("customMessage");
+
+            // When the "Use Default" option is selected
+            if (option === "default") {
+                useCustom.checked = false;
+                dropzone.style.display = "none"; // Hide the file upload box
+                customMessage.style.display = "none"; // Hide the custom message
+                photoMessage.style.display = "block"; // Show the default photo message
+            }
+            // When the "Use Customized" option is selected
+            else if (option === "custom") {
+                useDefault.checked = false;
+                dropzone.style.display = "block"; // Show the file upload box
+                customMessage.style.display = "block"; // Show the custom message
+                photoMessage.style.display = "none"; // Hide the default photo message
+            }
+        }
+    </script>
+
+
+
+
+
 
 
 
