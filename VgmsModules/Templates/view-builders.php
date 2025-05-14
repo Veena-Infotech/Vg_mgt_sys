@@ -178,12 +178,6 @@
                     data-list='{"valueNames":["id","name","contact","email","company"],"page":5,"pagination":true}'
                     style="width: 100%; padding-top: 20px;">
 
-                     <!-- Add Button -->
-                    <div class="d-flex mb-3">
-                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addBuilderModal">Add Builder</button>
-                    </div>
-
-
                     <!-- Search Bar -->
                     <div class="search-box mb-3 mx-auto">
                         <form class="position-relative">
@@ -199,7 +193,11 @@
                         </form>
                     </div>
 
-                   
+                    <!-- Add Button -->
+                    <div class="d-flex justify-content-end mb-3">
+                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addBuilderModal">Add Builder</button>
+                    </div>
+
                     <!-- Table Section -->
                     <div class="table-responsive">
                         <table class="table table-striped table-sm fs-9 mb-0" id="builderTable">
@@ -215,19 +213,55 @@
                             </thead>
                             <tbody class="list" id="builderTableBody">
                                 <!-- Data goes here dynamically -->
-                                <tr>
-                                    <td class="align-middle ps-3 id">1</td>
-                                    <td class="align-middle name">Top Builders Agency</td>
-                                    <td class="align-middle email">contact@topbuilders.com</td>
-                                    <td class="align-middle company">John Doe</td>
-                                    <td class="align-middle">
-                                    <button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editBuilderModal" data-id="123" data-name="ABC Builder" data-contact="9876543210" data-email="abc@example.com" data-company="ABC Constructions" style="border: none;">🖉</button>
+                                <!-- fetching and displaying the data -->
+                                <?php
+                                include '../PhpFiles/connection.php';
+
+                                $query = "SELECT * FROM tbl_manage_builders";
+                                $result = mysqli_query($conn, $query);
+
+                                if ($result && mysqli_num_rows($result) > 0) {
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        // echo $row['builder_name'] . "<br>";
+                                        $builder_id = $row['id'];
+                                        // echo  $builder_id;
+                                        echo ' <tr>
+                                    <td class="align-middle ps-3 id">' . $row['builder_name'] . '</td>
+                                    <td class="align-middle name">' . $row['builder_contact'] . '</td>
+                                    <td class="align-middle email">' . $row['builder_email'] . '</td>
+                                    <td class="align-middle company">' . $row['company_name'] . '</td>
+                                    <td class="align-middle">';
+                                    
+                                        // updating
+                                        echo '<button class="btn btn-sm btn-outline-primary edit-btn"
+    data-bs-toggle="modal"
+    data-bs-target="#editBuilderModal"
+    data-id="' . $builder_id . '"
+    data-name="' . htmlspecialchars($row['builder_name']) . '"
+    data-contact="' . htmlspecialchars($row['builder_contact']) . '"
+    data-email="' . htmlspecialchars($row['builder_email']) . '"
+    data-company="' . htmlspecialchars($row['company_name']) . '"
+    style="border: none;">
+    🖉
+</button>
+
+
 
                                     </td>
                                     <td class="align-middle">
-                                        <button class="btn btn-sm btn-outline-danger" style="border: none;">🗑️</button>
+                                        <button class="btn btn-sm btn-outline-danger" style="border: none;">
+                                        <a href="view-builders.php?deleteid=' . $builder_id . ' " >🗑️ </a> </button>
                                     </td>
-                                </tr>
+                                </tr>';
+                                    }
+                                } else {
+                                    echo "No builders found.";
+                                }
+                                ?>
+
+
+
+
                             </tbody>
                         </table>
                         <!-- <div class="pagination-container text-center">
@@ -252,6 +286,35 @@
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <form id="addBuilderForm" method="POST">
+
+                                    <!-- inserting data in data base -->
+                                    <?php
+                                    // connecting to database
+                                    include '../PhpFiles/connection.php';
+                                    if (isset($_POST['add'])) {
+                                        $builder_name = $_POST['builder_name'];
+                                        $builder_contact = $_POST['builder_contact'];
+                                        $builder_email = $_POST['builder_email'];
+                                        $company_name = $_POST['company_name'];
+
+                                        $query = "INSERT INTO `tbl_manage_builders` (`builder_name`, `builder_contact`, `builder_email`, `company_name`) VALUES ('$builder_name', '$builder_contact', '$builder_email', '$company_name')";
+
+                                        $result = mysqli_query($conn, $query) or die("Query Unsuccessfull");
+
+                                        if ($result) {
+                                            // Success - redirect or show success message
+                                            echo "<script>
+                                                alert('Builder added successfully');
+                                                window.location.href = 'view-builders.php'; // Redirect to listing page
+                                            </script>";
+                                        } else {
+                                            // Error - show the error
+                                            echo "Error: " . mysqli_error($conn);
+                                        }
+                                    }
+                                    ?>
+
+
                                     <div class="modal-header">
                                         <h5 class="modal-title">Add Builder</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -276,7 +339,7 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button class="btn btn-success" type="submit" id="addBuilderBtn">Add</button>
+                                        <button class="btn btn-success" type="submit" id="addBuilderBtn" name="add">Add</button>
                                         <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
                                     </div>
                                 </form>
@@ -284,48 +347,106 @@
                         </div>
                     </div>
 
+
                     <!-- Edit Builder Modal -->
                     <div class="modal fade" id="editBuilderModal" tabindex="-1" aria-labelledby="editBuilderModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
-                                <form id="editBuilderForm" method="POST">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="editBuilderModalLabel">Edit Builder</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <input type="hidden" id="edit_id" name="edit_id">
+                            <form id="editBuilderForm" method="POST">
+                            <?php
+include '../PhpFiles/connection.php';
 
-                                        <div class="mb-3">
-                                            <label for="edit_name" class="form-label">Builder Name</label>
-                                            <input type="text" class="form-control" id="edit_name" name="edit_name" required>
-                                        </div>
+if (isset($_POST['edit_builder'])) {
+    $id = $_POST['edit_id'];
+    $name = $_POST['edit_name'];
+    $contact = $_POST['edit_contact'];
+    $email = $_POST['edit_email'];
+    $company = $_POST['edit_company'];
 
-                                        <div class="mb-3">
-                                            <label for="edit_contact" class="form-label">Builder Contact</label>
-                                            <input type="tel" class="form-control" id="edit_contact" name="edit_contact" required>
-                                        </div>
+    $query = "UPDATE tbl_manage_builders SET 
+                builder_name = ?, 
+                builder_contact = ?, 
+                builder_email = ?, 
+                company_name = ?
+              WHERE id = ?";
 
-                                        <div class="mb-3">
-                                            <label for="edit_email" class="form-label">Builder Email</label>
-                                            <input type="email" class="form-control" id="edit_email" name="edit_email" required>
-                                        </div>
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("ssssi", $name, $contact, $email, $company, $id);
 
-                                        <div class="mb-3">
-                                            <label for="edit_company" class="form-label">Company Name</label>
-                                            <input type="text" class="form-control" id="edit_company" name="edit_company" required>
-                                        </div>
-                                    </div>
+    if ($stmt->execute()) {
+        echo "<script>
+                alert('Builder updated successfully');
+                window.location.href = 'view-builders.php';
+              </script>";
+    } else {
+        echo "Error: " . $stmt->error;
+    }
 
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary" name="edit_builder">Save Changes</button>
-                                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                                    </div>
-                                </form>
+    $stmt->close();
+    $conn->close();
+}
+?>
+
+
+    <div class="modal-header">
+        <h5 class="modal-title" id="editBuilderModalLabel">Edit Builder</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <input type="hidden" id="edit_id" name="edit_id">
+
+        <div class="mb-3">
+            <label for="edit_name" class="form-label">Builder Name</label>
+            <input type="text" class="form-control" id="edit_name" name="edit_name" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="edit_contact" class="form-label">Builder Contact</label>
+            <input type="tel" class="form-control" id="edit_contact" name="edit_contact" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="edit_email" class="form-label">Builder Email</label>
+            <input type="email" class="form-control" id="edit_email" name="edit_email" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="edit_company" class="form-label">Company Name</label>
+            <input type="text" class="form-control" id="edit_company" name="edit_company" required>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" name="edit_builder">Save Changes</button>
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+    </div>
+</form>
+
                             </div>
                         </div>
                     </div>
 
+                    <!-- delete operation -->
+                    <?php
+                    include '../PhpFiles/connection.php';
+
+                    if (isset($_GET['deleteid'])) {
+                        $id = $_GET['deleteid'];
+                        $query = "DELETE FROM `tbl_manage_builders` WHERE id = $id";
+                        $result = mysqli_query($conn, $query) or die("Query Unsuccesfull");
+
+                        if ($result) {
+                            // Success - redirect or show success message
+                            echo "<script>
+                                alert('Builder deleteded successfully');
+                                window.location.href = 'view-builders.php'; // Redirect to listing page
+                            </script>";
+                        } else {
+                            // Error - show the error
+                            echo "Error: " . mysqli_error($conn);
+                        }
+                    }
+                    ?>
 
 
                 </div>
@@ -372,53 +493,62 @@
 
 
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Initialize List.js for table pagination & search
-        const builderList = new List('tableExample3', {
-            valueNames: ['name', 'contact', 'email', 'company'],
-            page: 5,
-            pagination: true
-        });
-
-        window.refreshBuilderList = function () {
-            builderList.reIndex();
-            builderList.update();
-        };
-
-        // Handle Bootstrap 5 Modal Show Event properly
-        const editModalEl = document.getElementById('editBuilderModal');
-        if (editModalEl) {
-            editModalEl.addEventListener('show.bs.modal', function (event) {
-                const button = event.relatedTarget;
-                if (!button) return;
-
-                // Safely extract data attributes
-                const id = button.getAttribute('data-id') || '';
-                const name = button.getAttribute('data-name') || '';
-                const contact = button.getAttribute('data-contact') || '';
-                const email = button.getAttribute('data-email') || '';
-                const company = button.getAttribute('data-company') || '';
-
-                // Populate modal form fields
-                editModalEl.querySelector('#edit_id').value = id;
-                editModalEl.querySelector('#edit_name').value = name;
-                editModalEl.querySelector('#edit_contact').value = contact;
-                editModalEl.querySelector('#edit_email').value = email;
-                editModalEl.querySelector('#edit_company').value = company;
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize List.js for table pagination & search
+            const builderList = new List('tableExample3', {
+                valueNames: ['name', 'contact', 'email', 'company'],
+                page: 5,
+                pagination: true
             });
-        }
+
+            window.refreshBuilderList = function() {
+                builderList.reIndex();
+                builderList.update();
+            };
+
+            // Handle Bootstrap 5 Modal Show Event properly
+            const editModalEl = document.getElementById('editBuilderModal');
+            if (editModalEl) {
+                editModalEl.addEventListener('show.bs.modal', function(event) {
+                    const button = event.relatedTarget;
+                    if (!button) return;
+
+                    // Safely extract data attributes
+                    const id = button.getAttribute('data-id') || '';
+                    const name = button.getAttribute('data-name') || '';
+                    const contact = button.getAttribute('data-contact') || '';
+                    const email = button.getAttribute('data-email') || '';
+                    const company = button.getAttribute('data-company') || '';
+
+                    // Populate modal form fields
+                    editModalEl.querySelector('#edit_id').value = id;
+                    editModalEl.querySelector('#edit_name').value = name;
+                    editModalEl.querySelector('#edit_contact').value = contact;
+                    editModalEl.querySelector('#edit_email').value = email;
+                    editModalEl.querySelector('#edit_company').value = company;
+                });
+            }
+        });
+    </script>
+    </script>
+
+    <script>
+document.querySelectorAll('.edit-btn').forEach(button => {
+    button.addEventListener('click', function () {
+        document.getElementById('edit_id').value = this.dataset.id;
+        document.getElementById('edit_name').value = this.dataset.name;
+        document.getElementById('edit_contact').value = this.dataset.contact;
+        document.getElementById('edit_email').value = this.dataset.email;
+        document.getElementById('edit_company').value = this.dataset.company;
+
+        const url = new URL(window.location);
+        url.searchParams.set('update_id', this.dataset.id);
+        window.history.pushState({}, '', url);
     });
+});
 </script>
 
 
-
-
-
-
-
-
-
-    </script>
 
 
 
