@@ -210,7 +210,7 @@
                         data-list='{"valueNames":["name","cts","address","ward","unit"],"page":5,"pagination":{"innerWindow":2,"left":1,"right":1}}'>
                         <div class="search-box mb-3 mx-auto">
                             <form class="position-relative">
-                                <input class="form-control search-input search form-control-sm" type="search"
+                                <input class="form-control search-input search form-control-sm" type="search" id="search-box"
                                     placeholder="Search" aria-label="Search" />
                                 <span class="fas fa-search search-box-icon"></span>
                             </form>
@@ -227,11 +227,18 @@
                                     </tr>
                                 </thead>
                                 <tbody class="list">
-                                    <tr>
-                                        <td class='align-middle ps-3 name'>Green Heights</td>
-                                        <td class='align-middle cts'>Ward A</td>
-                                        <td class='align-middle address'>48</td>
-                                        <td class='align-middle address'>Bandra West, Mumbai</td>
+                                    <?php
+                                    include '../PhpFiles/connection.php';
+
+                                    $query = "SELECT * FROM tbl_society_details";
+                                    $result = mysqli_query($conn, $query) or die('Unsuccessful query'.mysqli_error($conn));
+                                    if($result){
+                                        while($row = mysqli_fetch_assoc($result)){
+                                            echo "<tr>
+                                        <td class='align-middle ps-3 name society_name'>".$row['society_name']."</td>
+                                        <td class='align-middle cts ward'>".$row['ward']."</td>
+                                        <td class='align-middle address unit'>".$row['unit']."</td>
+                                        <td class='align-middle address'>".$row['address']."</td>
                                         <td class='align-middle white-space-nowrap text-end pe-0'>
                                             <div class='btn-reveal-trigger position-static'>
                                                 <button class='btn btn-sm btn-reveal fs-10 open-action-modal'
@@ -255,152 +262,10 @@
                                                 </div>
                                             </div>
                                         </td>
-                                    </tr>
-                                    <tr>
-                                        <td class='align-middle ps-3 name'>Sunrise Residency</td>
-                                        <td class='align-middle cts'>Ward B</td>
-                                        <td class='align-middle address'>60</td>
-                                        <td class='align-middle address'>Andheri East, Mumbai</td>
-                                        <td class='align-middle white-space-nowrap text-end pe-0'>
-                                            <div class='btn-reveal-trigger position-static'>
-                                                <button class='btn btn-sm btn-reveal fs-10 open-action-modal'
-                                                    data-id='1' data-bs-toggle='modal' data-bs-target='#actionModal'>
-                                                    <span class='fas fa-ellipsis-h fs-10'></span>
-                                                </button>
-
-                                                <div class='dropdown-menu dropdown-menu-end py-2'>
-                                                    <a class='dropdown-item'
-                                                        href='society-details.php?soc_id=2'>View</a>
-                                                    <a class='dropdown-item' href='edit-society.php?soc_id=2'>Edit
-                                                        Society Details</a>
-                                                    <a class='dropdown-item'
-                                                        href='edit-members-directory.php?soc_id=2'>Edit Members
-                                                        Directory</a>
-                                                    <a class='dropdown-item'
-                                                        href='edit-committe-details.php?soc_id=2'>Edit Committee
-                                                        Details</a>
-                                                    <div class='dropdown-divider'></div>
-                                                    <a class='dropdown-item text-danger' href='#!'>Inactive</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class='align-middle ps-3 name'>Sunrise Residency</td>
-                                        <td class='align-middle cts'>Ward A</td>
-                                        <td class='align-middle address'>60</td>
-                                        <td class='align-middle address'>Andheri East, Mumbai</td>
-                                        <td class='align-middle white-space-nowrap text-end pe-0'>
-                                            <div class='btn-reveal-trigger position-static'>
-                                                <button class='btn btn-sm btn-reveal fs-10 open-action-modal'
-                                                    data-id='1' data-bs-toggle='modal' data-bs-target='#actionModal'>
-                                                    <span class='fas fa-ellipsis-h fs-10'></span>
-                                                </button>
-
-                                                <div class='dropdown-menu dropdown-menu-end py-2'>
-                                                    <a class='dropdown-item'
-                                                        href='society-details.php?soc_id=2'>View</a>
-                                                    <a class='dropdown-item' href='edit-society.php?soc_id=2'>Edit
-                                                        Society Details</a>
-                                                    <a class='dropdown-item'
-                                                        href='edit-members-directory.php?soc_id=2'>Edit Members
-                                                        Directory</a>
-                                                    <a class='dropdown-item'
-                                                        href='edit-committe-details.php?soc_id=2'>Edit Committee
-                                                        Details</a>
-                                                    <div class='dropdown-divider'></div>
-                                                    <a class='dropdown-item text-danger' href='#!'>Inactive</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class='align-middle ps-3 name'>Blue Heights</td>
-                                        <td class='align-middle cts'>Ward A</td>
-                                        <td class='align-middle address'>48</td>
-                                        <td class='align-middle address'>Bandra West, Mumbai</td>
-                                        <td class='align-middle white-space-nowrap text-end pe-0'>
-                                            <div class='btn-reveal-trigger position-static'>
-                                                <button class='btn btn-sm btn-reveal fs-10 open-action-modal'
-                                                    data-id='1' data-bs-toggle='modal' data-bs-target='#actionModal'>
-                                                    <span class='fas fa-ellipsis-h fs-10'></span>
-                                                </button>
-
-                                                <div class='dropdown-menu dropdown-menu-end py-2'>
-                                                    <a class='dropdown-item'
-                                                        href='society-details.php?soc_id=1'>View</a>
-                                                    <a class='dropdown-item' href='edit-society.php?soc_id=1'>Edit
-                                                        Society Details</a>
-                                                    <a class='dropdown-item'
-                                                        href='edit-members-directory.php?soc_id=1'>Edit Members
-                                                        Directory</a>
-                                                    <a class='dropdown-item'
-                                                        href='edit-committe-details.php?soc_id=1'>Edit Committee
-                                                        Details</a>
-                                                    <div class='dropdown-divider'></div>
-                                                    <a class='dropdown-item text-danger' href='#!'>Inactive</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class='align-middle ps-3 name'>Blue Heights</td>
-                                        <td class='align-middle cts'>Ward A</td>
-                                        <td class='align-middle address'>48</td>
-                                        <td class='align-middle address'>Bandra West, Mumbai</td>
-                                        <td class='align-middle white-space-nowrap text-end pe-0'>
-                                            <div class='btn-reveal-trigger position-static'>
-                                                <button class='btn btn-sm btn-reveal fs-10 open-action-modal'
-                                                    data-id='1' data-bs-toggle='modal' data-bs-target='#actionModal'>
-                                                    <span class='fas fa-ellipsis-h fs-10'></span>
-                                                </button>
-
-                                                <div class='dropdown-menu dropdown-menu-end py-2'>
-                                                    <a class='dropdown-item'
-                                                        href='society-details.php?soc_id=1'>View</a>
-                                                    <a class='dropdown-item' href='edit-society.php?soc_id=1'>Edit
-                                                        Society Details</a>
-                                                    <a class='dropdown-item'
-                                                        href='edit-members-directory.php?soc_id=1'>Edit Members
-                                                        Directory</a>
-                                                    <a class='dropdown-item'
-                                                        href='edit-committe-details.php?soc_id=1'>Edit Committee
-                                                        Details</a>
-                                                    <div class='dropdown-divider'></div>
-                                                    <a class='dropdown-item text-danger' href='#!'>Inactive</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class='align-middle ps-3 name'>Blue Heights</td>
-                                        <td class='align-middle cts'>Ward A</td>
-                                        <td class='align-middle address'>48</td>
-                                        <td class='align-middle address'>Bandra West, Mumbai</td>
-                                        <td class='align-middle white-space-nowrap text-end pe-0'>
-                                            <div class='btn-reveal-trigger position-static'>
-                                                <button class='btn btn-sm btn-reveal fs-10 open-action-modal'
-                                                    data-id='1' data-bs-toggle='modal' data-bs-target='#actionModal'>
-                                                    <span class='fas fa-ellipsis-h fs-10'></span>
-                                                </button>
-
-                                                <div class='dropdown-menu dropdown-menu-end py-2'>
-                                                    <a class='dropdown-item'
-                                                        href='society-details.php?soc_id=1'>View</a>
-                                                    <a class='dropdown-item' href='edit-society.php?soc_id=1'>Edit
-                                                        Society Details</a>
-                                                    <a class='dropdown-item'
-                                                        href='edit-members-directory.php?soc_id=1'>Edit Members
-                                                        Directory</a>
-                                                    <a class='dropdown-item'
-                                                        href='edit-committe-details.php?soc_id=1'>Edit Committee
-                                                        Details</a>
-                                                    <div class='dropdown-divider'></div>
-                                                    <a class='dropdown-item text-danger' href='#!'>Inactive</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    </tr>";
+                                        }
+                                    }
+                                    ?> 
                                 </tbody>
                             </table>
                             <!-- Common Action Modal -->
@@ -524,6 +389,26 @@
 
 
     
+<script>
+    document.getElementById('search-box').addEventListener('input', function () {
+        const searchValue = this.value.toLowerCase();
+        const rows = document.querySelectorAll('#data-table tbody tr');
+
+        rows.forEach(row => {
+            const society_name = row.querySelector('.society_name')?.textContent.toLowerCase() || '';
+            const ward = row.querySelector('.ward')?.textContent.toLowerCase() || '';
+            const unit = row.querySelector('.unit')?.textContent.toLowerCase() || '';
+            const address = row.querySelector('.address')?.textContent.toLowerCase() || '';
+
+            if (society_name.includes(searchValue) || ward.includes(searchValue) || unit.includes(searchValue) || address.includes(searchValue)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+</script>
+
 
 
 

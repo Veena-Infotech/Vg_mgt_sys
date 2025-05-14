@@ -173,10 +173,10 @@
                         data-list='{"valueNames":["landlord","mobile"],"page":5,"pagination":{"innerWindow":2,"left":1,"right":1}}'>
 
                         <div class="search-box mb-3 mx-auto">
-                            <form class="position-relative">
-                                <input class="form-control search-input search form-control-sm" type="search"
-                                    placeholder="Search" aria-label="Search" />
-                                <span class="fas fa-search search-box-icon"></span>
+                            <form class="position-relative mb-4">
+                                <input class="form-control search-input form-control-sm" type="search"
+                                    placeholder="Search by name or phone" aria-label="Search" id="search-box" />
+                                <span class="fas fa-search search-box-icon position-absolute" style="right: 15px; top: 10px;"></span>
                             </form>
                         </div>
                         <div class="table-responsive">
@@ -190,11 +190,20 @@
                                         <th class="sort text-end align-middle pe-0 border-top" scope="col">ACTION</th>
                                     </tr>
                                 </thead>
+                                <?php
 
-                                <tbody class="list">
+                                include '../PhpFiles/connection.php';
+
+                                $query = "SELECT * FROM tbl_manage_landlord";
+                                $result = mysqli_query($conn, $query) or die("Query Unsuccessfully" . mysqli_error($conn));
+
+                                if ($result) {
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        echo '
+                                                <tbody class="list">
                                     <tr>
-                                        <td class="align-middle ps-3 landlord">Rajesh Mehta</td>
-                                        <td class="align-middle mobile">9876543210</td>
+                                                <td class="align-middle ps-3 landlord">' . $row['landlord_name'] . '</td>
+                                        <td class="align-middle mobile">' . $row['contact_number'] . '</td>
                                         <td class="align-middle white-space-nowrap text-end pe-0">
                                             <div class="btn-reveal-trigger position-static">
                                                 <button class="btn btn-sm btn-reveal fs-10 open-action-modal"
@@ -210,48 +219,11 @@
                                                     <a class="dropdown-item text-danger" href="#!">Deactivate</a>
                                                 </div>
                                             </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="align-middle ps-3 landlord">Sneha Kulkarni</td>
-                                        <td class="align-middle mobile">9123456780</td>
-                                        <td class="align-middle white-space-nowrap text-end pe-0">
-                                            <div class="btn-reveal-trigger position-static">
-                                                <button class="btn btn-sm btn-reveal fs-10 open-action-modal"
-                                                    data-id="2" data-bs-toggle="modal" data-bs-target="#actionModal">
-                                                    <span class="fas fa-ellipsis-h fs-10"></span>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-end py-2">
-                                                    <a class="dropdown-item"
-                                                        href="view-landlord.php?landlord_id=2">View</a>
-                                                    <a class="dropdown-item" href="edit-landlord.php?landlord_id=2">Edit
-                                                        Details</a>
-                                                    <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item text-danger" href="#!">Deactivate</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="align-middle ps-3 landlord">Imran Sheikh</td>
-                                        <td class="align-middle mobile">9988776655</td>
-                                        <td class="align-middle white-space-nowrap text-end pe-0">
-                                            <div class="btn-reveal-trigger position-static">
-                                                <button class="btn btn-sm btn-reveal fs-10 open-action-modal"
-                                                    data-id="3" data-bs-toggle="modal" data-bs-target="#actionModal">
-                                                    <span class="fas fa-ellipsis-h fs-10"></span>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-end py-2">
-                                                    <a class="dropdown-item"
-                                                        href="view-landlord.php?landlord_id=3">View</a>
-                                                    <a class="dropdown-item" href="edit-landlord.php?landlord_id=3">Edit
-                                                        Details</a>
-                                                    <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item text-danger" href="#!">Deactivate</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                        </td>';
+                                    }
+                                }
+                                ?>
+                                </tr>
                                 </tbody>
 
                             </table>
@@ -373,6 +345,23 @@
         });
     </script>
 
+   <script>
+    document.getElementById('search-box').addEventListener('input', function () {
+        const searchValue = this.value.toLowerCase();
+        const rows = document.querySelectorAll('#data-table tbody tr');
+
+        rows.forEach(row => {
+            const name = row.querySelector('.landlord')?.textContent.toLowerCase() || '';
+            const phone = row.querySelector('.mobile')?.textContent.toLowerCase() || '';
+
+            if (name.includes(searchValue) || phone.includes(searchValue)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+</script>
 
 
 
