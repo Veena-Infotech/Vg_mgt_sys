@@ -173,8 +173,10 @@
                 <hr>
                 <!-- button to add Agencies Name -->
                 <div>
-                    <button class="btn btn-primary" type="button" data-bs-toggle="modal"
-                        data-bs-target="#verticallyCentered">ADD</button>
+                    <!-- ADD Button -->
+                    <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#verticallyCentered">
+                        ADD
+                    </button>
                     <div class="modal fade" id="verticallyCentered" tabindex="-1"
                         aria-labelledby="verticallyCenteredModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
@@ -186,23 +188,50 @@
                                 </div>
                                 <div class="modal-body">
                                     <form id="add_agency" method="post">
-                                        <div class="mb-3">
-                                            <label for="name" class="form-label">Name Of the Agencies Name</label>
-                                            <input class="form-control" type="text" id="name" name="name"
-                                                placeholder="Enter Agencies Name" required>
+                                        <!-- adding the data -->
+                                        <?php
+                                        include '../PhpFiles/connection.php';
 
-                                            <label for="edit_name" class="form-label">Name Of the Agencies Email</label>
-                                            <input class="form-control" type="text" id="email" name="email"
-                                                placeholder="Enter Agencies Name" required>
+                                        if (isset($_POST['ADD'])) {
+                                            $agent_name = $_POST['name'];
+                                            $agencies_email = $_POST['email'];
+                                            $agencies_name = $_POST['company'];
 
-                                            <label for="edit_name" class="form-label">Name Of the Agencies</label>
-                                            <input class="form-control" type="text" id="company" name="company"
-                                                placeholder="Enter Agencies Name" required>
+                                            $query = "INSERT INTO `tbl_manage_agencies` (`person_name`, `email`, `agencies_name`) 
+              VALUES ('$agent_name', '$agencies_email', '$agencies_name')";
+
+                                            $result = mysqli_query($conn, $query) or die("Query Unsuccessful: " . mysqli_error($conn));
+
+                                            if ($result) {
+                                                echo "<script>
+            alert('Agency added successfully');
+            window.location.href = 'view-manage-agencies.php';
+        </script>";
+                                            }
+                                        }
+                                        ?>
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="verticallyCenteredLabel">Add Agency</h5>
+                                            <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
+
+                                        <div class="modal-body">
+                                            <div class="mb-3">
+                                                <label for="name" class="form-label">Agent Name</label>
+                                                <input class="form-control" type="text" id="name" name="name" placeholder="Enter Agent Name" required>
+
+                                                <label for="email" class="form-label mt-3">Agency Email</label>
+                                                <input class="form-control" type="email" id="email" name="email" placeholder="Enter Agency Email" required>
+
+                                                <label for="company" class="form-label mt-3">Agency Name</label>
+                                                <input class="form-control" type="text" id="company" name="company" placeholder="Enter Agency Name" required>
+                                            </div>
+                                        </div>
+
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button class="btn btn-primary" type="submit" form="add_agency">ADD</button>
+                                    <button class="btn btn-primary" type="submit" form="add_agency" name="ADD">ADD</button>
                                     <button class="btn btn-outline-primary" type="button"
                                         data-bs-dismiss="modal">Cancel</button>
                                 </div>
@@ -218,7 +247,7 @@
                     style="width: 100%; padding-top: 20px;">
                     <div class="search-box mb-3 mx-auto">
                         <form class="position-relative">
-                            <input class="form-control search-input search form-control-sm" type="search"
+                            <input class="form-control search-input search form-control-sm" type="search" id="search-box"
                                 placeholder="Search" aria-label="Search">
                             <svg class="svg-inline--fa fa-magnifying-glass search-box-icon" aria-hidden="true"
                                 focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img"
@@ -242,18 +271,43 @@
                                 </tr>
                             </thead>
                             <tbody class="list">
-                                <tr>
-                                    <td class="align-middle ps-3 id">1</td>
-                                    <td class="align-middle name">Top Builders Agency</td>
-                                    <td class="align-middle email">contact@topbuilders.com</td>
-                                    <td class="align-middle company">John Doe</td>
+                                <?php
+                                include '../PhpFiles/connection.php';
+
+                                $query = "SELECT * FROM tbl_manage_agencies";
+
+                                $result = mysqli_query($conn, $query) or die("Query Unsuccessful" . mysqli_error($conn));
+                                if ($result) {
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        echo '
+                                        <tr>
+                                    <td class="align-middle ps-3 id">' . $row['id'] . '</td>
+                                    <td class="align-middle company">' . $row['agencies_name'] . '</td>
+                                    <td class="align-middle email">' . $row['email'] . '</td>
+                                    <td class="align-middle name">' . $row['person_name'] . '</td>
                                     <td class="align-middle">
-                                        <button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editAgency" style="border: none;">🖉</button>
+                                        <!-- Example edit button (populate these dynamically from PHP) -->
+<button class="btn btn-sm btn-outline-primary edit-btn"
+    data-bs-toggle="modal"
+    data-bs-target="#editAgency"
+    data-id="' . $row["id"] . '"
+    data-name="' . htmlspecialchars($row['person_name']) . '"
+    data-email="' . htmlspecialchars($row['email']) . '"
+    data-company="' . htmlspecialchars($row['agencies_name']) . '"
+    style="border: none;">
+    🖉
+</button>
+
                                     </td>
                                     <td class="align-middle">
-                                        <button class="btn btn-sm btn-outline-danger" style="border: none;">🗑️</button>
+                                        <button class="btn btn-sm btn-outline-danger" style="border: none;"><a href="view-manage-agencies.php?deleteid=' . $row['id'] . '" >🗑️</button>
                                     </td>
                                 </tr>
+                                ';
+                                    }
+                                }
+                                ?>
+
 
 
                             </tbody>
@@ -273,39 +327,89 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal fade" id="editAgency" tabindex="-1" aria-labelledby="editAgency" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
+                <!-- Edit Modal -->
+                <div class="modal fade" id="editAgency" tabindex="-1" aria-labelledby="editAgencyLabel" aria-hidden="true">
+                    <div class="modal-dialog">
                         <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="editAgency">Edit Agencies</h5>
-                                <button class="btn btn-close p-1" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form id="editAgencyForm" method="post">
-                                    <div class="mb-3">
-                                        <label for="edit_name" class="form-label">Name Of the Person</label>
-                                        <input class="form-control" type="text" id="edit_name" name="edit_name"
-                                            placeholder="Enter Agency Name" required>
+                            <form id="editAgencyForm" method="POST">
+                                <?php
+                                include '../PhpFiles/connection.php';
 
-                                        <label for="edit_email" class="form-label">Agency Email</label>
-                                        <input class="form-control" type="email" id="edit_email" name="edit_email"
-                                            placeholder="Enter Agency Email" required>
+                                if (isset($_POST['update_agency'])) {
+                                    $id = $_POST['edit_id'];
+                                    $name = $_POST['edit_name'];
+                                    $email = $_POST['edit_email'];
+                                    $company = $_POST['edit_company'];
 
-                                        <label for="edit_company" class="form-label">Agency Company Name</label>
-                                        <input class="form-control" type="text" id="edit_company" name="edit_company"
-                                            placeholder="Enter Company Name" required>
-                                    </div>
+                                    $query = "UPDATE `tbl_manage_agencies` 
+              SET person_name = '$name', email = '$email', agencies_name = '$company' 
+              WHERE id = '$id'";
+
+                                    $result = mysqli_query($conn, $query);
+
+                                    if ($result) {
+                                        echo "<script>
+            alert('Agency updated successfully.');
+            window.location.href = 'view-manage-agencies.php';
+        </script>";
+                                    } else {
+                                        echo "<script>alert('Update failed: " . mysqli_error($conn) . "');</script>";
+                                    }
+                                }
+                                ?>
+                                ]/*
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editAgencyLabel">Edit Agency</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+
+                                <div class="modal-body">
                                     <input type="hidden" id="edit_id" name="edit_id">
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-primary" type="submit" form="editAgencyForm">EDIT</button>
-                                <button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">Cancel</button>
-                            </div>
+
+                                    <div class="mb-3">
+                                        <label for="edit_name" class="form-label">Name of the Person</label>
+                                        <input class="form-control" type="text" id="edit_name" name="edit_name" placeholder="Enter Agent Name" required>
+
+                                        <label for="edit_email" class="form-label mt-3">Agency Email</label>
+                                        <input class="form-control" type="email" id="edit_email" name="edit_email" placeholder="Enter Agency Email" required>
+
+                                        <label for="edit_company" class="form-label mt-3">Agency Company Name</label>
+                                        <input class="form-control" type="text" id="edit_company" name="edit_company" placeholder="Enter Company Name" required>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="submit" name="update_agency" class="btn btn-primary">Save Changes</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
 
+
+
+
+
+                <!-- delete operation -->
+                <?php
+                include '../PhpFiles/connection.php';
+
+                if (isset($_GET['deleteid'])) {
+                    $id = $_GET['deleteid'];
+                    $query = "DELETE FROM `tbl_manage_agencies` WHERE id = $id";
+                    $result = mysqli_query($conn, $query) or die("Query Unsuccessful" . mysqli_error($conn));
+                    if ($result) {
+                        echo "<script>
+                alert('data deleted successfully');
+                window.location.href = 'view-manage-agencies.php';
+              </script>";
+                    } else {
+                        // Error - show the error
+                        echo "Error: " . mysqli_error($conn);
+                    }
+                }
+                ?>
             </div>
             <footer>
                 <!-- Footer -->
@@ -367,6 +471,45 @@
     </script>
 
 
+    <script>
+        document.getElementById('search-box').addEventListener('input', function() {
+            const searchValue = this.value.toLowerCase().trim();
+            const rows = document.querySelectorAll('#data-table tbody tr');
+
+            rows.forEach(row => {
+                const id = row.querySelector('.id')?.textContent.toLowerCase() || '';
+                const company = row.querySelector('.company')?.textContent.toLowerCase() || '';
+                const name = row.querySelector('.name')?.textContent.toLowerCase() || '';
+                const email = row.querySelector('.email')?.textContent.toLowerCase() || '';
+
+                const isMatch =
+                    id.includes(searchValue) ||
+                    company.includes(searchValue) ||
+                    name.includes(searchValue) ||
+                    email.includes(searchValue);
+
+                row.style.display = isMatch ? '' : 'none';
+            });
+        });
+    </script>
+
+
+    <!-- edit functionally  -->
+    <script>
+        document.querySelectorAll('.edit-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const id = button.getAttribute('data-id');
+                const name = button.getAttribute('data-name');
+                const email = button.getAttribute('data-email');
+                const company = button.getAttribute('data-company');
+
+                document.getElementById('edit_id').value = id;
+                document.getElementById('edit_name').value = name;
+                document.getElementById('edit_email').value = email;
+                document.getElementById('edit_company').value = company;
+            });
+        });
+    </script>
 
 
 
