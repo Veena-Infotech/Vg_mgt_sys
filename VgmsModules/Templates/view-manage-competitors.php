@@ -179,11 +179,13 @@
                     data-list='{"valueNames":["name","contact","email","company"],"page":5,"pagination":true}'
                     style="width: 100%; padding-top: 20px;">
 
-                     <!-- Add Button -->
+                    <!-- Add Button -->
                     <div class="d-flex  mb-3">
-                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addCompetitorModal">Add Competitor</button>
+                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addCompetitorModal" name="add_competitor">Add Competitor</button>
                     </div>
-                    
+
+
+
                     <!-- Search Box -->
                     <div class="search-box mb-3 mx-auto">
                         <form class="position-relative">
@@ -194,7 +196,7 @@
                         </form>
                     </div>
 
-                   
+
 
                     <!-- Table -->
                     <div class="table-responsive">
@@ -211,86 +213,39 @@
                             </thead>
                             <tbody class="list" id="competitorTableBody">
                                 <!-- Populated dynamically -->
-                                <tr>
-                                    <td class="name">Alpha Builders</td>
-                                    <td class="contact">9876543210</td>
-                                    <td class="email">alpha@example.com</td>
-                                    <td class="company">Alpha Constructions</td>
-                                    <td><button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editCompetitorModal" data-id="1" data-name="Alpha Builders" data-contact="9876543210" data-email="alpha@example.com" data-company="Alpha Constructions" style="border: none;">🖉</button></td>
-                                    <td><button class="btn btn-sm btn-outline-danger" style="border: none;">🗑</button></td>
-                                </tr>
-                                <tr>
-                                    <td class="name">Beta Constructions</td>
-                                    <td class="contact">9123456789</td>
-                                    <td class="email">beta@example.com</td>
-                                    <td class="company">Beta Group</td>
-                                    <td><button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editCompetitorModal" data-id="7" data-name="Theta Developers" data-contact="9776655443" data-email="theta@example.com" data-company="Theta Realty" style="border: none;">🖉</button></td>
-                                    <td><button class="btn btn-sm btn-outline-danger" style="border: none;">🗑</button></td>
-                                </tr>
-                                <tr>
-                                    <td class="name">Gamma Realty</td>
-                                    <td class="contact">9988776655</td>
-                                    <td class="email">gamma@example.com</td>
-                                    <td class="company">Gamma Developers</td>
-                                    <td><button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editCompetitorModal" data-id="3" data-name="Gamma Realty" data-contact="9988776655" data-email="gamma@example.com" data-company="Gamma Developers" style="border: none;">🖉</button></td>
-                                    <td><button class="btn btn-sm btn-outline-danger" style="border: none;">🗑</button></td>
-                                </tr>
-                                <tr>
-                                    <td class="name">Delta Infra</td>
-                                    <td class="contact">9001122334</td>
-                                    <td class="email">delta@example.com</td>
-                                    <td class="company">Delta Builders</td>
-                                    <td><button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editCompetitorModal" data-id="4" data-name="Delta Infra" data-contact="9001122334" data-email="delta@example.com" data-company="Delta Builders" style="border: none;">🖉</button></td>
-                                    <td><button class="btn btn-sm btn-outline-danger" style="border: none;">🗑</button></td>
-                                </tr>
-                                <tr>
-                                    <td class="name">Epsilon Estates</td>
-                                    <td class="contact">8899001122</td>
-                                    <td class="email">epsilon@example.com</td>
-                                    <td class="company">Epsilon Infra</td>
-                                    <td><button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editCompetitorModal" data-id="5" data-name="Epsilon Estates" data-contact="8899001122" data-email="epsilon@example.com" data-company="Epsilon Infra" style="border: none;">🖉</button></td>
-                                    <td><button class="btn btn-sm btn-outline-danger" style="border: none;">🗑</button></td>
-                                </tr>
-                                <tr>
-                                    <td class="name">Zeta Homes</td>
-                                    <td class="contact">9112233445</td>
-                                    <td class="email">zeta@example.com</td>
-                                    <td class="company">Zeta Constructions</td>
-                                    <td><button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editCompetitorModal" data-id="6" data-name="Zeta Homes" data-contact="9112233445" data-email="zeta@example.com" data-company="Zeta Constructions" style="border: none;">🖉</button></td>
-                                    <td><button class="btn btn-sm btn-outline-danger" style="border: none;">🗑</button></td>
-                                </tr>
-                                <tr>
-                                    <td class="name">Theta Developers</td>
-                                    <td class="contact">9776655443</td>
-                                    <td class="email">theta@example.com</td>
-                                    <td class="company">Theta Realty</td>
-                                    <td><button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editCompetitorModal" data-id="7" data-name="Theta Developers" data-contact="9776655443" data-email="theta@example.com" data-company="Theta Realty" style="border: none;">🖉</button></td>
-                                    <td><button class="btn btn-sm btn-outline-danger" style="border: none;">🗑</button></td>
-                                </tr>
-                                <tr>
-                                    <td class="name">Iota Builders</td>
-                                    <td class="contact">9344556677</td>
-                                    <td class="email">iota@example.com</td>
-                                    <td class="company">Iota Estates</td>
-                                    <td><button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editCompetitorModal" data-id="7" data-name="Theta Developers" data-contact="9776655443" data-email="theta@example.com" data-company="Theta Realty" style="border: none;">🖉</button></td>
-                                    <td><button class="btn btn-sm btn-outline-danger" style="border: none;">🗑</button></td>
-                                </tr>
-                                <tr>
-                                    <td class="name">Kappa Group</td>
-                                    <td class="contact">9088776655</td>
-                                    <td class="email">kappa@example.com</td>
-                                    <td class="company">Kappa Constructions</td>
-                                    <td><button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editCompetitorModal" data-id="7" data-name="Theta Developers" data-contact="9776655443" data-email="theta@example.com" data-company="Theta Realty" style="border: none;">🖉</button></td>
-                                    <td><button class="btn btn-sm btn-outline-danger" style="border: none;">🗑</button></td>
-                                </tr>
-                                <tr>
-                                    <td class="name">Lambda Estates</td>
-                                    <td class="contact">9011223344</td>
-                                    <td class="email">lambda@example.com</td>
-                                    <td class="company">Lambda Group</td>
-                                    <td><button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editCompetitorModal" data-id="7" data-name="Theta Developers" data-contact="9776655443" data-email="theta@example.com" data-company="Theta Realty" style="border: none;">🖉</button></td>
-                                    <td><button class="btn btn-sm btn-outline-danger" style="border: none;">🗑</button></td>
-                                </tr>
+                                <?php
+                                include '../PhpFiles/connection.php';
+
+                                $query = "SELECT * FROM tbl_manage_competitors";
+                                $result = mysqli_query($conn, $query) or die("Query Unsuccessful" . mysqli_error($conn));
+                                if ($result) {
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        echo '<tr>
+                                    <td class="name">' . $row['competitor_name'] . '</td>
+                                    <td class="contact">' . $row['contact'] . '</td>
+                                    <td class="email">' . $row['email'] . '</td>
+                                    <td class="company">' . $row['company_name'] . '</td>
+                                    <td><button class="btn btn-sm btn-outline-primary edit-btn" 
+    data-bs-toggle="modal" 
+    data-bs-target="#editCompetitorModal" 
+    data-id="' . $row['id'] . '" 
+    data-name="' . $row['competitor_name'] . '" 
+    data-contact="' . $row['contact'] . '" 
+    data-email="' . $row['email'] . '" 
+    data-company="' . $row['company_name'] . '" 
+    style="border: none;">🖉</button></td>
+                                    <td>
+    <button class="btn btn-sm btn-outline-danger delete-btn" 
+            style="border: none;"><a href = "view-manage-competitors.php?delete-id=' . $row['id'] . ' ">
+        🗑 </a>
+    </button>
+</td>
+                                </tr>';
+                                    }
+                                }
+                                ?>
+
+
 
                             </tbody>
                         </table>
@@ -315,6 +270,30 @@
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <form id="addCompetitorForm" method="post">
+                                    <?php
+                                    include '../PhpFiles/connection.php';
+
+                                    if (isset($_POST['add'])) {
+                                        $competitor_name = $_POST['competitor_name'];
+                                        $contact = $_POST['competitor_contact'];
+                                        $email = $_POST['competitor_email'];
+                                        $company_name = $_POST['company_name'];
+
+                                        $query = "INSERT INTO `tbl_manage_competitors` (`competitor_name`, `contact`, `email`, `company_name`) 
+                    VALUES ('$competitor_name', '$contact', '$email', '$company_name')";
+
+                                        $result = mysqli_query($conn, $query) or die("Query Unsuccessful" . mysqli_error($conn));
+                                        if ($result) {
+                                            echo '
+                        <script> alert("Data successfully added");
+                        window.location.href = "view-manage-competitors.php" 
+                        </script>';
+                                        } else {
+                                            echo "<script>alert('Update failed: " . mysqli_error($conn) . "');</script>";
+                                        }
+                                    }
+                                    ?>
+
                                     <div class="modal-header">
                                         <h5 class="modal-title">Add Competitor</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -339,7 +318,7 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button class="btn btn-success" type="submit">Add</button>
+                                        <button class="btn btn-success" type="submit" name="add">Add</button>
                                         <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
                                     </div>
                                 </form>
@@ -376,18 +355,67 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button class="btn btn-primary" type="submit">Save Changes</button>
+                                        <button class="btn btn-primary" type="submit" name="edit">Save Changes</button>
                                         <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
+
                 </div>
+                <!-- updating functionality -->
+                <?php
+                include '../PhpFiles/connection.php';
+
+                if (isset($_POST['edit'])) {
+                    $id = $_POST['edit_id'];
+                    $competitor_name = $_POST['edit_name'];
+                    $contact = $_POST['edit_contact'];
+                    $email = $_POST['edit_email'];
+                    $company_name = $_POST['edit_company'];
+
+                    $query = "UPDATE tbl_manage_competitors SET 
+                competitor_name = '$competitor_name', 
+                contact = '$contact', 
+                email = '$email', 
+                company_name = '$company_name' 
+              WHERE id = $id";
+
+                    $result = mysqli_query($conn, $query);
+
+                    if ($result) {
+                        echo '<script>
+                alert("Successfully Updated");
+                window.location.href = "view-manage-competitors.php";
+              </script>';
+                    } else {
+                        echo "<script>alert('Update failed: " . mysqli_error($conn) . "');</script>";
+                    }
+                }
+                ?>
 
 
 
+                <!-- delete -->
+                <?php
+                include '../PhpFiles/connection.php';
 
+                if (isset($_GET['delete-id'])) {
+                    $id = $_GET['delete-id'];
+
+                    $query = "DELETE FROM tbl_manage_competitors WHERE id = $id";
+                    $result = mysqli_query($conn, $query) or die("Query Unsuccessfull" . mysqli_error($conn));
+                    if ($result) {
+                        echo "<script>
+                alert('data deleted successfully');
+                window.location.href = 'view-manage-competitors.php';
+              </script>";
+                    } else {
+                        echo "<script>alert('Update failed: " . mysqli_error($conn) . "');</script>";
+                    }
+                }
+                ?>
 
 
 
@@ -457,6 +485,21 @@
             });
         });
     </script>
+
+    <!-- edit functionally  -->
+    <script>
+        document.querySelectorAll('.edit-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                document.getElementById('edit_id').value = button.getAttribute('data-id');
+                document.getElementById('edit_name').value = button.getAttribute('data-name');
+                document.getElementById('edit_contact').value = button.getAttribute('data-contact');
+                document.getElementById('edit_email').value = button.getAttribute('data-email');
+                document.getElementById('edit_company').value = button.getAttribute('data-company');
+            });
+        });
+    </script>
+
+
 
 
 
