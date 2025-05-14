@@ -16,9 +16,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param("si", $newStatus, $meetingId);
 
     if ($stmt->execute()) {
-        header("Location: " . $_SERVER['HTTP_REFERER'] . "?status=success");
+        header("Location: ../Vms/LobbyManagement.php?status=success");
+        exit;
     } else {
-        header("Location: " . $_SERVER['HTTP_REFERER'] . "?error=db_error");
+        // header("Location: " . $_SERVER['HTTP_REFERER'] . "?error=db_error");
+        header("Location: ../Vms/LobbyManagement.php?error=db_error");
+exit;
+
     }
 
     $stmt->close();
@@ -27,4 +31,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header("Location: " . $_SERVER['HTTP_REFERER'] . "?error=invalid_request");
 }
 exit;
-?>
