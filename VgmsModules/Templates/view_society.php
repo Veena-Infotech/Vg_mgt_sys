@@ -54,6 +54,35 @@
     <link href="../../vendors/leaflet/leaflet.css" rel="stylesheet">
     <link href="../../vendors/leaflet.markercluster/MarkerCluster.css" rel="stylesheet">
     <link href="../../vendors/leaflet.markercluster/MarkerCluster.Default.css" rel="stylesheet">
+    <style>
+        #tableExample2 .search-box {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            /* left align everything */
+            gap: 10px;
+            /* space between button and search input */
+            max-width: 600px;
+            /* optional, adjust width */
+            margin: 0 auto 1rem auto;
+            /* vertical spacing */
+        }
+
+        #tableExample2 .search-box form {
+            flex-grow: 1;
+            margin-bottom: 0;
+            position: relative;
+        }
+
+        #tableExample2 .search-box-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            pointer-events: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -209,11 +238,20 @@
                     <div id="tableExample2"
                         data-list='{"valueNames":["name","cts","address","ward","unit"],"page":5,"pagination":{"innerWindow":2,"left":1,"right":1}}'>
                         <div class="search-box mb-3 mx-auto">
+                            <a href="/Vg_mgt_sys/VgmsModules/Prms/add_property.php" >
+                                <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#verticallyCentered">
+                                    ADD +
+                                </button>
+                            </a>
+
                             <form class="position-relative">
-                                <input class="form-control search-input search form-control-sm" type="search" id="search-box"
-                                    placeholder="Search" aria-label="Search" />
+                                <input class="form-control search-input search form-control-sm" type="search"
+                                    id="search-box" placeholder="Search" aria-label="Search" />
                                 <span class="fas fa-search search-box-icon"></span>
                             </form>
+
+
                         </div>
                         <div class="table-responsive">
                             <table class="table table-striped table-sm fs-9 mb-0" id="data-table">
@@ -227,45 +265,96 @@
                                     </tr>
                                 </thead>
                                 <tbody class="list">
-                                    <?php
-                                    include '../PhpFiles/connection.php';
-
-                                    $query = "SELECT * FROM tbl_society_details";
-                                    $result = mysqli_query($conn, $query) or die('Unsuccessful query'.mysqli_error($conn));
-                                    if($result){
-                                        while($row = mysqli_fetch_assoc($result)){
-                                            echo "<tr>
-                                        <td class='align-middle ps-3 name society_name'>".$row['society_name']."</td>
-                                        <td class='align-middle cts ward'>".$row['ward']."</td>
-                                        <td class='align-middle address unit'>".$row['unit']."</td>
-                                        <td class='align-middle address'>".$row['address']."</td>
-                                        <td class='align-middle white-space-nowrap text-end pe-0'>
-                                            <div class='btn-reveal-trigger position-static'>
-                                                <button class='btn btn-sm btn-reveal fs-10 open-action-modal'
-                                                    data-id='1' data-bs-toggle='modal' data-bs-target='#actionModal'>
-                                                    <span class='fas fa-ellipsis-h fs-10'></span>
+                                    <tr>
+                                        <td class="align-middle ps-3 name society_name">Sunshine Apartments</td>
+                                        <td class="align-middle cts ward">Ward 5</td>
+                                        <td class="align-middle address unit">12B</td>
+                                        <td class="align-middle address">123 Sunny Street, Mumbai</td>
+                                        <td class="align-middle white-space-nowrap text-end pe-0">
+                                            <div class="btn-reveal-trigger position-static">
+                                                <button class="btn btn-sm btn-reveal fs-10 open-action-modal"
+                                                    data-id="1" data-bs-toggle="modal" data-bs-target="#actionModal">
+                                                    <span class="fas fa-ellipsis-h fs-10"></span>
                                                 </button>
 
-                                                <div class='dropdown-menu dropdown-menu-end py-2'>
-                                                    <a class='dropdown-item'
-                                                        href='society-details.php?soc_id=1'>View</a>
-                                                    <a class='dropdown-item' href='edit-society.php?soc_id=1'>Edit
+                                                <div class="dropdown-menu dropdown-menu-end py-2">
+                                                    <a class="dropdown-item"
+                                                        href="society-details.php?soc_id=1">View</a>
+                                                    <a class="dropdown-item" href="edit-society.php?soc_id=1">Edit
                                                         Society Details</a>
-                                                    <a class='dropdown-item'
-                                                        href='edit-members-directory.php?soc_id=1'>Edit Members
+                                                    <a class="dropdown-item"
+                                                        href="edit-members-directory.php?soc_id=1">Edit Members
                                                         Directory</a>
-                                                    <a class='dropdown-item'
-                                                        href='edit-committe-details.php?soc_id=1'>Edit Committee
+                                                    <a class="dropdown-item"
+                                                        href="edit-committe-details.php?soc_id=1">Edit Committee
                                                         Details</a>
-                                                    <div class='dropdown-divider'></div>
-                                                    <a class='dropdown-item text-danger' href='#!'>Inactive</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item text-danger" href="#!">Inactive</a>
                                                 </div>
                                             </div>
                                         </td>
-                                    </tr>";
-                                        }
-                                    }
-                                    ?> 
+                                    </tr>
+
+                                    <tr>
+                                        <td class="align-middle ps-3 name society_name">Greenwood Residency</td>
+                                        <td class="align-middle cts ward">Ward 7</td>
+                                        <td class="align-middle address unit">8A</td>
+                                        <td class="align-middle address">45 Green Lane, Pune</td>
+                                        <td class="align-middle white-space-nowrap text-end pe-0">
+                                            <div class="btn-reveal-trigger position-static">
+                                                <button class="btn btn-sm btn-reveal fs-10 open-action-modal"
+                                                    data-id="2" data-bs-toggle="modal" data-bs-target="#actionModal">
+                                                    <span class="fas fa-ellipsis-h fs-10"></span>
+                                                </button>
+
+                                                <div class="dropdown-menu dropdown-menu-end py-2">
+                                                    <a class="dropdown-item"
+                                                        href="society-details.php?soc_id=2">View</a>
+                                                    <a class="dropdown-item" href="edit-society.php?soc_id=2">Edit
+                                                        Society Details</a>
+                                                    <a class="dropdown-item"
+                                                        href="edit-members-directory.php?soc_id=2">Edit Members
+                                                        Directory</a>
+                                                    <a class="dropdown-item"
+                                                        href="edit-committe-details.php?soc_id=2">Edit Committee
+                                                        Details</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item text-danger" href="#!">Inactive</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="align-middle ps-3 name society_name">Ocean View Towers</td>
+                                        <td class="align-middle cts ward">Ward 2</td>
+                                        <td class="align-middle address unit">5C</td>
+                                        <td class="align-middle address">89 Beach Road, Goa</td>
+                                        <td class="align-middle white-space-nowrap text-end pe-0">
+                                            <div class="btn-reveal-trigger position-static">
+                                                <button class="btn btn-sm btn-reveal fs-10 open-action-modal"
+                                                    data-id="3" data-bs-toggle="modal" data-bs-target="#actionModal">
+                                                    <span class="fas fa-ellipsis-h fs-10"></span>
+                                                </button>
+
+                                                <div class="dropdown-menu dropdown-menu-end py-2">
+                                                    <a class="dropdown-item"
+                                                        href="society-details.php?soc_id=3">View</a>
+                                                    <a class="dropdown-item" href="edit-society.php?soc_id=3">Edit
+                                                        Society Details</a>
+                                                    <a class="dropdown-item"
+                                                        href="edit-members-directory.php?soc_id=3">Edit Members
+                                                        Directory</a>
+                                                    <a class="dropdown-item"
+                                                        href="edit-committe-details.php?soc_id=3">Edit Committee
+                                                        Details</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item text-danger" href="#!">Inactive</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
                                 </tbody>
                             </table>
                             <!-- Common Action Modal -->
@@ -279,15 +368,16 @@
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body d-flex flex-column gap-2">
-                                            <a id="viewLink" href="#" class="btn btn-outline-primary btn-sm">View</a>
-                                            <a id="editSocietyLink" href="#"
+                                            <a id="viewLink" class="btn btn-outline-primary btn-sm">View</a>
+                                            <a id="editSocietyLink" href=""
                                                 class="btn btn-outline-secondary btn-sm">Edit Society Details</a>
                                             <a id="editMembersLink" href="#"
                                                 class="btn btn-outline-secondary btn-sm">Edit Members Directory</a>
                                             <a id="editCommitteeLink" href="#"
                                                 class="btn btn-outline-secondary btn-sm">Edit Committee Details</a>
                                             <hr>
-                                            <a href="#!" class="btn btn-outline-danger btn-sm">Inactive</a>
+                                            <a href="/Vg_mgt_sys/VgmsModules/Templates/view_proposal.php"
+                                                class="btn btn-outline-danger btn-sm">Inactive</a>
                                         </div>
                                     </div>
                                 </div>
@@ -388,26 +478,26 @@
 
 
 
-    
-<script>
-    document.getElementById('search-box').addEventListener('input', function () {
-        const searchValue = this.value.toLowerCase();
-        const rows = document.querySelectorAll('#data-table tbody tr');
 
-        rows.forEach(row => {
-            const society_name = row.querySelector('.society_name')?.textContent.toLowerCase() || '';
-            const ward = row.querySelector('.ward')?.textContent.toLowerCase() || '';
-            const unit = row.querySelector('.unit')?.textContent.toLowerCase() || '';
-            const address = row.querySelector('.address')?.textContent.toLowerCase() || '';
+    <script>
+        document.getElementById('search-box').addEventListener('input', function () {
+            const searchValue = this.value.toLowerCase();
+            const rows = document.querySelectorAll('#data-table tbody tr');
 
-            if (society_name.includes(searchValue) || ward.includes(searchValue) || unit.includes(searchValue) || address.includes(searchValue)) {
-                row.style.display = '';
-            } else {
-                row.style.display = 'none';
-            }
+            rows.forEach(row => {
+                const society_name = row.querySelector('.society_name')?.textContent.toLowerCase() || '';
+                const ward = row.querySelector('.ward')?.textContent.toLowerCase() || '';
+                const unit = row.querySelector('.unit')?.textContent.toLowerCase() || '';
+                const address = row.querySelector('.address')?.textContent.toLowerCase() || '';
+
+                if (society_name.includes(searchValue) || ward.includes(searchValue) || unit.includes(searchValue) || address.includes(searchValue)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
         });
-    });
-</script>
+    </script>
 
 
 
