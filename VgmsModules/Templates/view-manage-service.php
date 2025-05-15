@@ -227,11 +227,10 @@
                                     <th class="sort border-top border-translucent ps-3" data-sort="id">Id</th>
                                     <th class="sort border-top" data-sort="name">Ward Name</th>
                                     <th class="border-top">Edit</th>
-                                    <th class="border-top">Remove</th>
+                                    <th class="border-top">Action</th>
                                 </tr>
                             </thead>
                             <tbody class="list">
-                                <!-- Sample Row -->
                                 <tr>
                                     <td class="align-middle ps-3 id">1</td>
                                     <td class="align-middle name">Public</td>
@@ -239,12 +238,53 @@
                                         <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editWardModal" style="border: none;">🖉</button>
                                     </td>
                                     <td class="align-middle">
-                                        <button class="btn btn-sm btn-outline-danger" style="border: none;">🗑️</button>
+                                        <input class="form-check-input" type="checkbox" checked>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 id">2</td>
+                                    <td class="align-middle name">Private</td>
+                                    <td class="align-middle">
+                                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editWardModal" style="border: none;">🖉</button>
+                                    </td>
+                                    <td class="align-middle">
+                                        <input class="form-check-input" type="checkbox">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 id">3</td>
+                                    <td class="align-middle name">Semi-Public</td>
+                                    <td class="align-middle">
+                                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editWardModal" style="border: none;">🖉</button>
+                                    </td>
+                                    <td class="align-middle">
+                                        <input class="form-check-input" type="checkbox" checked>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 id">4</td>
+                                    <td class="align-middle name">VIP</td>
+                                    <td class="align-middle">
+                                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editWardModal" style="border: none;">🖉</button>
+                                    </td>
+                                    <td class="align-middle">
+                                        <input class="form-check-input" type="checkbox">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 id">5</td>
+                                    <td class="align-middle name">ICU</td>
+                                    <td class="align-middle">
+                                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editWardModal" style="border: none;">🖉</button>
+                                    </td>
+                                    <td class="align-middle">
+                                        <input class="form-check-input" type="checkbox" checked>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
+
 
                     <!-- Pagination -->
                     <div class="d-flex justify-content-end mt-3">

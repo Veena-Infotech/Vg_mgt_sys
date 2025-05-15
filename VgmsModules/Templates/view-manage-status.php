@@ -180,28 +180,37 @@
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="verticallyCenteredModalLabel">Add reservation Name</h5>
-                                    <button class="btn btn-close p-1" type="button" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
+                                    <h5 class="modal-title" id="verticallyCenteredModalLabel">Add Reservation Name</h5>
+                                    <button class="btn btn-close p-1" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <form id="addreservationForm" method="post">
                                         <div class="mb-3">
-                                            <label for="name" class="form-label">Name Of the reservation Name</label>
+                                            <label for="name" class="form-label">Name of the Reservation</label>
                                             <input class="form-control" type="text" id="name" name="name"
-                                                placeholder="Enter reservation Name" required>
+                                                placeholder="Enter Reservation Name" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="status" class="form-label">Status</label>
+                                            <select class="form-select" id="status" name="status" required>
+                                                <option value="" disabled selected>Select status</option>
+                                                <option value="Completed">Completed</option>
+                                                <option value="Ongoing">Ongoing</option>
+                                                <option value="Cancelled">Cancelled</option>
+                                                <option value="Pending">Pending</option>
+                                            </select>
                                         </div>
                                         <input type="hidden" name="action" value="add_reservation">
                                     </form>
                                 </div>
                                 <div class="modal-footer">
                                     <button class="btn btn-primary" type="submit" form="addreservationForm">ADD</button>
-                                    <button class="btn btn-outline-primary" type="button"
-                                        data-bs-dismiss="modal">Cancel</button>
+                                    <button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">Cancel</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+
 
 
                 </div>
@@ -227,58 +236,66 @@
                                     <th class="sort border-top" data-sort="name">Reservation Name</th>
                                     <th class="sort border-top" data-sort="status">Status</th>
                                     <th class="border-top">Edit</th>
-                                    <th class="border-top">Remove</th>
+                                    <th class="border-top">Action</th>
                                 </tr>
                             </thead>
                             <tbody class="list" id="reservationTableBody">
-                                <!-- Sample Data with Status Badges -->
                                 <tr>
                                     <td class="id">1</td>
                                     <td class="name">Alpha Reservation</td>
                                     <td class="status"><span class="badge bg-success">Completed</span></td>
                                     <td>
-                                        <button class="btn btn-sm btn-outline-primary edit-btn"
-                                            data-bs-toggle="modal" data-bs-target="#editreservation"
-                                            data-id="1" data-name="Alpha Reservation" data-status="Completed" style="border: none;">🖉</button>
+                                        <button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editreservation" data-id="1" data-name="Alpha Reservation" data-status="Completed" style="border: none;">🖉</button>
                                     </td>
-                                    <td><button class="btn btn-sm btn-outline-danger delete-btn" style="border: none;">🗑</button></td>
+                                    <td class="align-middle">
+                                        <div class="form-check mb-0">
+                                            <input class="form-check-input" type="checkbox" id="reservationCheck1" />
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="id">2</td>
                                     <td class="name">Beta Booking</td>
                                     <td class="status"><span class="badge bg-warning text-dark">Ongoing</span></td>
                                     <td>
-                                        <button class="btn btn-sm btn-outline-primary edit-btn"
-                                            data-bs-toggle="modal" data-bs-target="#editreservation"
-                                            data-id="2" data-name="Beta Booking" data-status="Ongoing" style="border: none;">🖉</button>
+                                        <button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editreservation" data-id="2" data-name="Beta Booking" data-status="Ongoing" style="border: none;">🖉</button>
                                     </td>
-                                    <td><button class="btn btn-sm btn-outline-danger delete-btn" style="border: none;">🗑</button></td>
+                                    <td class="align-middle">
+                                        <div class="form-check mb-0">
+                                            <input class="form-check-input" type="checkbox" id="reservationCheck2" />
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="id">3</td>
                                     <td class="name">Gamma Retreat</td>
                                     <td class="status"><span class="badge bg-danger">Cancelled</span></td>
                                     <td>
-                                        <button class="btn btn-sm btn-outline-primary edit-btn"
-                                            data-bs-toggle="modal" data-bs-target="#editreservation"
-                                            data-id="3" data-name="Gamma Retreat" data-status="Cancelled" style="border: none;">🖉</button>
+                                        <button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editreservation" data-id="3" data-name="Gamma Retreat" data-status="Cancelled" style="border: none;">🖉</button>
                                     </td>
-                                    <td><button class="btn btn-sm btn-outline-danger delete-btn" style="border: none;">🗑</button></td>
+                                    <td class="align-middle">
+                                        <div class="form-check mb-0">
+                                            <input class="form-check-input" type="checkbox" id="reservationCheck3" />
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="id">4</td>
                                     <td class="name">Delta Stay</td>
                                     <td class="status"><span class="badge bg-secondary">Pending</span></td>
                                     <td>
-                                        <button class="btn btn-sm btn-outline-primary edit-btn"
-                                            data-bs-toggle="modal" data-bs-target="#editreservation"
-                                            data-id="4" data-name="Delta Stay" data-status="Pending" style="border: none;">🖉</button>
+                                        <button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editreservation" data-id="4" data-name="Delta Stay" data-status="Pending" style="border: none;">🖉</button>
                                     </td>
-                                    <td><button class="btn btn-sm btn-outline-danger delete-btn" style="border: none;">🗑</button></td>
+                                    <td class="align-middle">
+                                        <div class="form-check mb-0">
+                                            <input class="form-check-input" type="checkbox" id="reservationCheck4" />
+                                        </div>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
+
 
                     <!-- Pagination -->
                     <div class="d-flex justify-content-end mt-3">

@@ -164,56 +164,38 @@
             }
         </script>
         <div class="content">
+
             <!-- view leads table  -->
             <div class="row g-0 justify-content-between align-items-center h-100">
+
                 <!-- Container for the Title -->
                 <div style="width: 100%; text-align: center; margin: 20px 0;">
                     <h3 style="margin: 0;">View/Manage Agencies</h3>
                 </div>
                 <hr>
+
                 <!-- button to add Agencies Name -->
                 <div>
+
                     <!-- ADD Button -->
+
                     <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#verticallyCentered">
                         ADD
                     </button>
+
                     <div class="modal fade" id="verticallyCentered" tabindex="-1"
                         aria-labelledby="verticallyCenteredModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="verticallyCenteredModalLabel">Add Agencies Name</h5>
+                                    <h5 class="modal-title" id="verticallyCenteredModalLabel">Add Agency</h5>
                                     <button class="btn btn-close p-1" type="button" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <form id="add_agency" method="post">
-                                        <!-- adding the data -->
-                                        <?php
-                                        include '../PhpFiles/connection.php';
 
-                                        if (isset($_POST['ADD'])) {
-                                            $agent_name = $_POST['name'];
-                                            $agencies_email = $_POST['email'];
-                                            $agencies_name = $_POST['company'];
 
-                                            $query = "INSERT INTO `tbl_manage_agencies` (`person_name`, `email`, `agencies_name`) 
-              VALUES ('$agent_name', '$agencies_email', '$agencies_name')";
-
-                                            $result = mysqli_query($conn, $query) or die("Query Unsuccessful: " . mysqli_error($conn));
-
-                                            if ($result) {
-                                                echo "<script>
-            alert('Agency added successfully');
-            window.location.href = 'view-manage-agencies.php';
-        </script>";
-                                            }
-                                        }
-                                        ?>
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="verticallyCenteredLabel">Add Agency</h5>
-                                            <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
 
                                         <div class="modal-body">
                                             <div class="mb-3">
@@ -222,6 +204,9 @@
 
                                                 <label for="email" class="form-label mt-3">Agency Email</label>
                                                 <input class="form-control" type="email" id="email" name="email" placeholder="Enter Agency Email" required>
+
+                                                <label for="contact" class="form-label mt-3">Agency Contact</label>
+                                                <input type="tel" class="form-control" id="contact" name="contact" placeholder="Enter Agency contact" pattern="[0-9]{10}" maxlength="10" oninput="validateMobile(this)" required>
 
                                                 <label for="company" class="form-label mt-3">Agency Name</label>
                                                 <input class="form-control" type="text" id="company" name="company" placeholder="Enter Agency Name" required>
@@ -241,20 +226,14 @@
 
 
                 </div>
+
                 <!-- Container for the Table -->
-                <div id="tableExample3"
-                    data-list="{&quot;valueNames&quot;:[&quot;id&quot;,&quot;name&quot;],&quot;page&quot;:5,&quot;pagination&quot;:true}"
-                    style="width: 100%; padding-top: 20px;">
+                <div id="tableExample3" data-list="{&quot;valueNames&quot;:[&quot;id&quot;,&quot;name&quot;],&quot;page&quot;:5,&quot;pagination&quot;:true}" style="width: 100%; padding-top: 20px;">
                     <div class="search-box mb-3 mx-auto">
                         <form class="position-relative">
-                            <input class="form-control search-input search form-control-sm" type="search" id="search-box"
-                                placeholder="Search" aria-label="Search">
-                            <svg class="svg-inline--fa fa-magnifying-glass search-box-icon" aria-hidden="true"
-                                focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img"
-                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
-                                <path fill="currentColor"
-                                    d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z">
-                                </path>
+                            <input class="form-control search-input search form-control-sm" type="search" id="search-box" placeholder="Search" aria-label="Search">
+                            <svg class="svg-inline--fa fa-magnifying-glass search-box-icon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+
                             </svg>
                         </form>
                     </div>
@@ -264,49 +243,53 @@
                                 <tr>
                                     <th class="sort border-top border-translucent ps-3" data-sort="id">Id</th>
                                     <th class="sort border-top" data-sort="name">Agencies Name</th>
-                                    <th class="sort border-top" data-sort="name">Contact Email</th>
+                                    <th class="sort border-top" data-sort="name">Email</th>
+                                    <th class="sort border-top" data-sort="name">contact</th>
                                     <th class="sort border-top" data-sort="name">Person name</th>
                                     <th class="sort border-top" data-sort="name">Edit</th>
-                                    <th class="sort border-top" data-sort="name">Remove</th>
+                                    <th class="sort border-top" data-sort="name">Action</th>
                                 </tr>
                             </thead>
                             <tbody class="list">
-                                <?php
-                                include '../PhpFiles/connection.php';
-
-                                $query = "SELECT * FROM tbl_manage_agencies";
-
-                                $result = mysqli_query($conn, $query) or die("Query Unsuccessful" . mysqli_error($conn));
-                                if ($result) {
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        echo '
-                                        <tr>
-                                    <td class="align-middle ps-3 id">' . $row['id'] . '</td>
-                                    <td class="align-middle company">' . $row['agencies_name'] . '</td>
-                                    <td class="align-middle email">' . $row['email'] . '</td>
-                                    <td class="align-middle name">' . $row['person_name'] . '</td>
-                                    <td class="align-middle">
-                                        <!-- Example edit button (populate these dynamically from PHP) -->
-<button class="btn btn-sm btn-outline-primary edit-btn"
-    data-bs-toggle="modal"
-    data-bs-target="#editAgency"
-    data-id="' . $row["id"] . '"
-    data-name="' . htmlspecialchars($row['person_name']) . '"
-    data-email="' . htmlspecialchars($row['email']) . '"
-    data-company="' . htmlspecialchars($row['agencies_name']) . '"
-    style="border: none;">
-    🖉
-</button>
-
+                                <tr>
+                                    <td class="id">1</td>
+                                    <td class="name">Skyline Services</td>
+                                    <td class="name">info@skyline.com</td>
+                                    <td class="name">9876543210</td>
+                                    <td class="name">Ankit Mehra</td>
+                                    <td class="name">
+                                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editAgency" style="border: none;">🖉</button>
                                     </td>
-                                    <td class="align-middle">
-                                        <button class="btn btn-sm btn-outline-danger" style="border: none;"><a href="view-manage-agencies.php?deleteid=' . $row['id'] . '" >🗑️</button>
+                                    <td class="name">
+                                        <input class="form-check-input" type="checkbox" checked>
                                     </td>
                                 </tr>
-                                ';
-                                    }
-                                }
-                                ?>
+                                <tr>
+                                    <td class="id">2</td>
+                                    <td class="name">Urban Connect</td>
+                                    <td class="name">contact@urbanconnect.in</td>
+                                    <td class="name">9123456789</td>
+                                    <td class="name">Priya Sharma</td>
+                                    <td class="name">
+                                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editAgency" style="border: none;">🖉</button>
+                                    </td>
+                                    <td class="name">
+                                        <input class="form-check-input" type="checkbox">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="id">3</td>
+                                    <td class="name">Vertex Solutions</td>
+                                    <td class="name">hello@vertex.com</td>
+                                    <td class="name">9988776655</td>
+                                    <td class="name">Rahul Verma</td>
+                                    <td class="name">
+                                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editAgency" style="border: none;">🖉</button>
+                                    </td>
+                                    <td class="name">
+                                        <input class="form-check-input" type="checkbox" checked>
+                                    </td>
+                                </tr>
 
 
 
@@ -315,6 +298,9 @@
 
                         </table>
                     </div>
+
+
+                    <!-- pagination -->
                     <div class="d-flex justify-content-end mt-3">
                         <div class="d-flex">
                             <button class="page-link" data-list-pagination="prev">
@@ -327,37 +313,13 @@
                         </div>
                     </div>
                 </div>
+
                 <!-- Edit Modal -->
                 <div class="modal fade" id="editAgency" tabindex="-1" aria-labelledby="editAgencyLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <form id="editAgencyForm" method="POST">
-                                <?php
-                                include '../PhpFiles/connection.php';
 
-                                if (isset($_POST['update_agency'])) {
-                                    $id = $_POST['edit_id'];
-                                    $name = $_POST['edit_name'];
-                                    $email = $_POST['edit_email'];
-                                    $company = $_POST['edit_company'];
-
-                                    $query = "UPDATE `tbl_manage_agencies` 
-              SET person_name = '$name', email = '$email', agencies_name = '$company' 
-              WHERE id = '$id'";
-
-                                    $result = mysqli_query($conn, $query);
-
-                                    if ($result) {
-                                        echo "<script>
-            alert('Agency updated successfully.');
-            window.location.href = 'view-manage-agencies.php';
-        </script>";
-                                    } else {
-                                        echo "<script>alert('Update failed: " . mysqli_error($conn) . "');</script>";
-                                    }
-                                }
-                                ?>
-                                ]/*
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="editAgencyLabel">Edit Agency</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -373,6 +335,12 @@
                                         <label for="edit_email" class="form-label mt-3">Agency Email</label>
                                         <input class="form-control" type="email" id="edit_email" name="edit_email" placeholder="Enter Agency Email" required>
 
+
+                                        <label for="edit_contact" class="form-label">Agency Contact</label>
+                                        <input type="tel" class="form-control" id="edit_contact" name="edit_contact" placeholder="Enter Agency contact" pattern="[0-9]{10}" maxlength="10" oninput="validateMobile(this)" required>
+
+
+
                                         <label for="edit_company" class="form-label mt-3">Agency Company Name</label>
                                         <input class="form-control" type="text" id="edit_company" name="edit_company" placeholder="Enter Company Name" required>
                                     </div>
@@ -387,29 +355,6 @@
                     </div>
                 </div>
 
-
-
-
-
-                <!-- delete operation -->
-                <?php
-                include '../PhpFiles/connection.php';
-
-                if (isset($_GET['deleteid'])) {
-                    $id = $_GET['deleteid'];
-                    $query = "DELETE FROM `tbl_manage_agencies` WHERE id = $id";
-                    $result = mysqli_query($conn, $query) or die("Query Unsuccessful" . mysqli_error($conn));
-                    if ($result) {
-                        echo "<script>
-                alert('data deleted successfully');
-                window.location.href = 'view-manage-agencies.php';
-              </script>";
-                    } else {
-                        // Error - show the error
-                        echo "Error: " . mysqli_error($conn);
-                    }
-                }
-                ?>
             </div>
             <footer>
                 <!-- Footer -->
@@ -511,8 +456,17 @@
         });
     </script>
 
-
-
+    <script>
+        function validateMobile(input) {
+            const value = input.value;
+            if (!/^\d*$/.test(value)) {
+                alert("Only numeric digits are allowed.");
+                input.value = value.replace(/\D/g, '');
+            } else if (value.length > 10) {
+                alert("Please enter a valid 10-digit mobile number.");
+                input.value = value.slice(0, 10);
+            }
+        }
     </script>
 
 

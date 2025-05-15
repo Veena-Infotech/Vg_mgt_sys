@@ -161,133 +161,188 @@
                 navbarVertical.setAttribute('data-navbar-appearance', 'darker');
             }
         </script>
-        <div class="content" id="heading-gsap">
-            <div class="row g-0 justify-content-between align-items-center">
-                <div class="container">
-                    <div style="width: 100%; text-align: center; margin: 20px 0;">
-                        <h3 style="margin: 0;">View/Manage Landlord</h3>
+        <div class="content">
+            <!-- view leads table  -->
+            <div class="row g-0 justify-content-between align-items-center h-100">
+                <!-- Container for the Title -->
+                <div style="width: 100%; text-align: center; margin: 20px 0;">
+                    <h3 style="margin: 0;">View/Manage Landlord</h3>
+                </div>
+                <hr>
+
+
+                <!-- Container for the Table -->
+                <div id="tableExample3"
+                    data-list='{"valueNames":["id","name","contact","email","company"],"page":5,"pagination":true}'
+                    style="width: 100%; padding-top: 20px;">
+
+                    <!-- Add Button -->
+                    <div class="d-flex  mb-3">
+                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addLandlordModal">Add Landlord</button>
+                    </div>
+
+                    <!-- Search Bar -->
+                    <div class="search-box mb-3 mx-auto">
+                        <form class="position-relative">
+                            <input class="form-control search-input search form-control-sm" type="search"
+                                placeholder="Search" aria-label="Search">
+                            <svg class="svg-inline--fa fa-magnifying-glass search-box-icon" aria-hidden="true"
+                                focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img"
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+                                <!-- <path fill="currentColor"
+                                    d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z">
+                                </path> -->
+                            </svg>
+                        </form>
                     </div>
 
 
-                    <div id="landlordTable"
-                        data-list='{"valueNames":["landlord","mobile"],"page":5,"pagination":{"innerWindow":2,"left":1,"right":1}}'>
 
-                        <div class="search-box mb-3 mx-auto">
-                            <form class="position-relative mb-4">
-                                <input class="form-control search-input form-control-sm" type="search"
-                                    placeholder="Search by name or phone" aria-label="Search" id="search-box" />
-                                <span class="fas fa-search search-box-icon position-absolute" style="right: 15px; top: 10px;"></span>
-                            </form>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table table-striped table-sm fs-9 mb-0" id="data-table">
-                                <thead>
-                                    <tr>
-                                        <th class="sort border-top border-translucent ps-3" data-sort="landlord">
-                                            Landlord Name</th>
-                                        <th class="sort border-top border-translucent ps-3" data-sort="mobile">Mobile
-                                            Number</th>
-                                        <th class="sort text-end align-middle pe-0 border-top" scope="col">ACTION</th>
-                                    </tr>
-                                </thead>
-                                <?php
-
-                                include '../PhpFiles/connection.php';
-
-                                $query = "SELECT * FROM tbl_manage_landlord";
-                                $result = mysqli_query($conn, $query) or die("Query Unsuccessfully" . mysqli_error($conn));
-
-                                if ($result) {
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        echo '
-                                                <tbody class="list">
-                                    <tr>
-                                                <td class="align-middle ps-3 landlord">' . $row['landlord_name'] . '</td>
-                                        <td class="align-middle mobile">' . $row['contact_number'] . '</td>
-                                        <td class="align-middle white-space-nowrap text-end pe-0">
-                                            <div class="btn-reveal-trigger position-static">
-                                                <button class="btn btn-sm btn-reveal fs-10 open-action-modal"
-                                                    data-id="1" data-bs-toggle="modal" data-bs-target="#actionModal">
-                                                    <span class="fas fa-ellipsis-h fs-10"></span>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-end py-2">
-                                                    <a class="dropdown-item"
-                                                        href="view-landlord.php?landlord_id=1">View</a>
-                                                    <a class="dropdown-item" href="edit-landlord.php?landlord_id=1">Edit
-                                                        Details</a>
-                                                    <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item text-danger" href="#!">Deactivate</a>
-                                                </div>
-                                            </div>
-                                        </td>';
-                                    }
-                                }
-                                ?>
+                    <!-- Table Section -->
+                    <div class="table-responsive">
+                        <table class="table table-striped table-sm fs-9 mb-0" id="LandlordTable">
+                            <thead>
+                                <tr>
+                                    <th class="sort name border-top" data-sort="name">Landlord Name</th>
+                                    <th class="sort contact border-top" data-sort="contact">Landlord Contact</th>
+                                    <th class="sort email border-top" data-sort="email">Landlord Email</th>
+                                    <th class="border-top">Edit</th>
+                                    <th class="border-top">Active</th>
                                 </tr>
-                                </tbody>
+                            </thead>
 
-                            </table>
-                            <!-- Common Action Modal -->
-                            <div class="modal fade" id="actionModal" tabindex="-1" aria-labelledby="actionModalLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog modal-sm">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="actionModalLabel">Select Action</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body d-flex flex-column gap-2">
-                                            <a id="viewLink" href="#" class="btn btn-outline-primary btn-sm">View</a>
-                                            <a id="editSocietyLink" href="#"
-                                                class="btn btn-outline-secondary btn-sm">Edit Society Details</a>
-                                            <a id="editMembersLink" href="#"
-                                                class="btn btn-outline-secondary btn-sm">Edit Members Directory</a>
-                                            <a id="editCommitteeLink" href="#"
-                                                class="btn btn-outline-secondary btn-sm">Edit Committee Details</a>
-                                            <hr>
-                                            <a href="#!" class="btn btn-outline-danger btn-sm">Inactive</a>
-                                        </div>
-                                    </div>
-                                </div>
+                            <tbody class="list" id="LandlordTableBody">
+                                <tr>
+                                    <td class="name">Ramesh Kumar</td>
+                                    <td class="contact">9876543210</td>
+                                    <td class="email">ramesh@example.com</td>
+                                    <td class="align-middle">
+                                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editLandlordModal" style="border: none;">🖉</button>
+                                    </td>
+                                    <td> <input class="form-check-input" type="checkbox" checked> </td>
+                                </tr>
+                                <tr>
+                                    <td class="name">Sunita Sharma</td>
+                                    <td class="contact">9123456789</td>
+                                    <td class="email">sunita@example.com</td>
+                                    <td class="align-middle">
+                                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editLandlordModal" style="border: none;">🖉</button>
+                                    </td>
+                                    <td> <input class="form-check-input" type="checkbox"> </td>
+                                </tr>
+                                <tr>
+                                    <td class="name">Ajay Mehta</td>
+                                    <td class="contact">9988776655</td>
+                                    <td class="email">ajay@example.com</td>
+                                    <td class="align-middle">
+                                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editLandlordModal" style="border: none;">🖉</button>
+                                    </td>
+                                    <td> <input class="form-check-input" type="checkbox" checked> </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- pagination -->
+                        <div class="d-flex justify-content-end mt-3">
+                            <div class="d-flex">
+                                <button class="page-link" data-list-pagination="prev">
+                                    <span class="fas fa-chevron-left"></span>
+                                </button>
+                                <ul class="mb-0 pagination"></ul>
+                                <button class="page-link pe-0" data-list-pagination="next">
+                                    <span class="fas fa-chevron-right"></span>
+                                </button>
                             </div>
-
-                        </div>
-
-                        <div class="d-flex justify-content-center mt-3">
-                            <button class="page-link disabled" data-list-pagination="prev" disabled="">
-                                <svg class="svg-inline--fa fa-chevron-left" aria-hidden="true" focusable="false"
-                                    data-prefix="fas" data-icon="chevron-left" role="img"
-                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                                    <path fill="currentColor"
-                                        d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z">
-                                    </path>
-                                </svg>
-                            </button>
-                            <ul class="mb-0 pagination">
-                                <li class="active"><button class="page" type="button" data-i="1"
-                                        data-page="5">1</button></li>
-                                <li><button class="page" type="button" data-i="2" data-page="5">2</button></li>
-                                <li><button class="page" type="button" data-i="3" data-page="5">3</button></li>
-                                <li class="disabled"><button class="page" type="button">...</button></li>
-                                <li><button class="page" type="button" data-i="9" data-page="5">9</button></li>
-                            </ul>
-                            <button class="page-link pe-0" data-list-pagination="next">
-                                <svg class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false"
-                                    data-prefix="fas" data-icon="chevron-right" role="img"
-                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                                    <path fill="currentColor"
-                                        d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z">
-                                    </path>
-                                </svg>
-                            </button>
                         </div>
                     </div>
+
+                    <!-- Add Landlord Modal -->
+                    <div class="modal fade" id="addLandlordModal" tabindex="-1" aria-labelledby="addLandlordModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <form id="addLandlordForm" method="POST">
+
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Add Landlord</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <label for="Landlord_name" class="form-label">Landlord Name</label>
+                                            <input type="text" class="form-control" id="Landlord_name" placeholder="Enter Landlord Name" name="Landlord_name" required >
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="Landlord_contact" class="form-label">Landlord Contact</label>
+                                            <input type="tel" class="form-control" id="Landlord_contact" name="Landlord_contact"
+                                                pattern="[0-9]{10}" maxlength="10" placeholder="Enter Landlord contact" oninput="validateMobile(this)" required>
+
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="Landlord_email" class="form-label">Landlord Email</label>
+                                            <input type="email" class="form-control" id="Landlord_email" placeholder="Enter Landlord Email" name="Landlord_email" required>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-success" type="submit" id="addLandlordBtn" name="add">Add</button>
+                                        <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Edit Landlord Modal -->
+                    <div class="modal fade" id="editLandlordModal" tabindex="-1" aria-labelledby="editLandlordModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <form id="editLandlordForm" method="POST">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="editLandlordModalLabel">Edit Landlord</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <input type="hidden" id="edit_id" name="edit_id">
+
+                                        <div class="mb-3">
+                                            <label for="edit_name" class="form-label">Landlord Name</label>
+                                            <input type="text" class="form-control" id="edit_name" placeholder="Enter Landlord Name" name="edit_name" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="edit_contact" class="form-label">Landlord Contact</label>
+                                            <input type="tel" class="form-control" id="edit_contact" placeholder="Enter Landlord contact" name="edit_contact" pattern="[0-9]{10}" maxlength="10" oninput="validateMobile(this)" required>
+
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="edit_email" class="form-label">Landlord Email</label>
+                                            <input type="email" class="form-control" id="edit_email" placeholder="Enter Landlord Email" name="edit_email" required>
+                                        </div>
+
+                                       
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary" name="edit_Landlord">Save Changes</button>
+                                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- delete operation -->
+
+
                 </div>
             </div>
-
-            <script src="https://cdn.jsdelivr.net/npm/list.js@2.3.1/dist/list.min.js"></script>
-            <?php include("../../Components/footer.php"); ?>
+            <footer>
+                <!-- Footer -->
+                <?php include("../../Components/footer.php"); ?>
+            </footer>
         </div>
 
 
@@ -345,23 +400,35 @@
         });
     </script>
 
-   <script>
-    document.getElementById('search-box').addEventListener('input', function () {
-        const searchValue = this.value.toLowerCase();
-        const rows = document.querySelectorAll('#data-table tbody tr');
+    <script>
+        document.getElementById('search-box').addEventListener('input', function() {
+            const searchValue = this.value.toLowerCase();
+            const rows = document.querySelectorAll('#data-table tbody tr');
 
-        rows.forEach(row => {
-            const name = row.querySelector('.landlord')?.textContent.toLowerCase() || '';
-            const phone = row.querySelector('.mobile')?.textContent.toLowerCase() || '';
+            rows.forEach(row => {
+                const name = row.querySelector('.landlord')?.textContent.toLowerCase() || '';
+                const phone = row.querySelector('.mobile')?.textContent.toLowerCase() || '';
 
-            if (name.includes(searchValue) || phone.includes(searchValue)) {
-                row.style.display = '';
-            } else {
-                row.style.display = 'none';
-            }
+                if (name.includes(searchValue) || phone.includes(searchValue)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
         });
-    });
-</script>
+    </script>
+    <script>
+        function validateMobile(input) {
+            const value = input.value;
+            if (!/^\d*$/.test(value)) {
+                alert("Only numeric digits are allowed.");
+                input.value = value.replace(/\D/g, '');
+            } else if (value.length > 10) {
+                alert("Please enter a valid 10-digit mobile number.");
+                input.value = value.slice(0, 10);
+            }
+        }
+    </script>
 
 
 

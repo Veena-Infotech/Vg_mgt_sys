@@ -226,58 +226,82 @@
                                     <th class="sort border-top border-translucent ps-3" data-sort="id">ID</th>
                                     <th class="sort border-top" data-sort="name">Reservation Name</th>
                                     <th class="border-top">Edit</th>
-                                    <th class="border-top">Remove</th>
+                                    <th class="border-top">Action</th>
                                 </tr>
                             </thead>
                             <tbody class="list" id="reservationTableBody">
                                 <!-- Sample Data -->
                                 <tr>
-                                    <td class="id">1</td>
+                                    <td class="id ps-3">1</td>
                                     <td class="name">Alpha Reservation</td>
-                                    <td><button class="btn btn-sm btn-outline-primary edit-btn"
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary edit-btn"
                                             data-bs-toggle="modal" data-bs-target="#editreservation"
-                                            data-id="1" data-name="Alpha Reservation" style="border: none;">🖉</button></td>
-                                    <td><button class="btn btn-sm btn-outline-danger delete-btn" style="border: none;">🗑</button></td>
+                                            data-id="1" data-name="Alpha Reservation" style="border: none;">🖉</button>
+                                    </td>
+                                    <td>
+                                        <input class="form-check-input" type="checkbox" checked>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td class="id">2</td>
+                                    <td class="id ps-3">2</td>
                                     <td class="name">Beta Booking</td>
-                                    <td><button class="btn btn-sm btn-outline-primary edit-btn"
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary edit-btn"
                                             data-bs-toggle="modal" data-bs-target="#editreservation"
-                                            data-id="2" data-name="Beta Booking" style="border: none;">🖉</button></td>
-                                    <td><button class="btn btn-sm btn-outline-danger delete-btn" style="border: none;">🗑</button></td>
+                                            data-id="2" data-name="Beta Booking" style="border: none;">🖉</button>
+                                    </td>
+                                    <td>
+                                        <input class="form-check-input" type="checkbox">
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td class="id">3</td>
+                                    <td class="id ps-3">3</td>
                                     <td class="name">Gamma Retreat</td>
-                                    <td><button class="btn btn-sm btn-outline-primary edit-btn"
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary edit-btn"
                                             data-bs-toggle="modal" data-bs-target="#editreservation"
-                                            data-id="3" data-name="Gamma Retreat" style="border: none;">🖉</button></td>
-                                    <td><button class="btn btn-sm btn-outline-danger delete-btn" style="border: none;">🗑</button></td>
+                                            data-id="3" data-name="Gamma Retreat" style="border: none;">🖉</button>
+                                    </td>
+                                    <td>
+                                        <input class="form-check-input" type="checkbox" checked>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td class="id">4</td>
+                                    <td class="id ps-3">4</td>
                                     <td class="name">Delta Stay</td>
-                                    <td><button class="btn btn-sm btn-outline-primary edit-btn"
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary edit-btn"
                                             data-bs-toggle="modal" data-bs-target="#editreservation"
-                                            data-id="4" data-name="Delta Stay" style="border: none;">🖉</button></td>
-                                    <td><button class="btn btn-sm btn-outline-danger delete-btn" style="border: none;">🗑</button></td>
+                                            data-id="4" data-name="Delta Stay" style="border: none;">🖉</button>
+                                    </td>
+                                    <td>
+                                        <input class="form-check-input" type="checkbox">
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td class="id">5</td>
+                                    <td class="id ps-3">5</td>
                                     <td class="name">Epsilon Lodge</td>
-                                    <td><button class="btn btn-sm btn-outline-primary edit-btn"
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary edit-btn"
                                             data-bs-toggle="modal" data-bs-target="#editreservation"
-                                            data-id="5" data-name="Epsilon Lodge" style="border: none;">🖉</button></td>
-                                    <td><button class="btn btn-sm btn-outline-danger delete-btn" style="border: none;">🗑</button></td>
+                                            data-id="5" data-name="Epsilon Lodge" style="border: none;">🖉</button>
+                                    </td>
+                                    <td>
+                                        <input class="form-check-input" type="checkbox" checked>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td class="id">6</td>
+                                    <td class="id ps-3">6</td>
                                     <td class="name">Zeta Room</td>
-                                    <td><button class="btn btn-sm btn-outline-primary edit-btn"
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary edit-btn"
                                             data-bs-toggle="modal" data-bs-target="#editreservation"
-                                            data-id="6" data-name="Zeta Room" style="border: none;">🖉</button></td>
-                                    <td><button class="btn btn-sm btn-outline-danger delete-btn" style="border: none;">🗑</button></td>
+                                            data-id="6" data-name="Zeta Room" style="border: none;">🖉</button>
+                                    </td>
+                                    <td>
+                                        <input class="form-check-input" type="checkbox">
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

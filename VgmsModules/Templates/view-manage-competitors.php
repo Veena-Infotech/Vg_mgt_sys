@@ -168,7 +168,7 @@
             <div class="row g-0 justify-content-between align-items-center h-100">
                 <!-- Container for the Title -->
                 <div style="width: 100%; text-align: center; margin: 20px 0;">
-                    <h3 style="margin: 0;">Manage Competitors</h3>
+                    <h3 style="margin: 0;">View/Manage Competitors</h3>
                 </div>
                 <hr>
 
@@ -191,7 +191,7 @@
                         <form class="position-relative">
                             <input class="form-control search-input search form-control-sm" type="search" placeholder="Search" aria-label="Search">
                             <svg class="svg-inline--fa fa-magnifying-glass search-box-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                <path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path>
+                                <!-- <path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path> -->
                             </svg>
                         </form>
                     </div>
@@ -208,50 +208,87 @@
                                     <th class="sort email border-top" data-sort="email">Email</th>
                                     <th class="sort company border-top" data-sort="company">Company</th>
                                     <th class="border-top">Edit</th>
-                                    <th class="border-top">Remove</th>
+                                    <th class="border-top">Action</th>
                                 </tr>
                             </thead>
                             <tbody class="list" id="competitorTableBody">
-                                <!-- Populated dynamically -->
-                                <?php
-                                include '../PhpFiles/connection.php';
-
-                                $query = "SELECT * FROM tbl_manage_competitors";
-                                $result = mysqli_query($conn, $query) or die("Query Unsuccessful" . mysqli_error($conn));
-                                if ($result) {
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        echo '<tr>
-                                    <td class="name">' . $row['competitor_name'] . '</td>
-                                    <td class="contact">' . $row['contact'] . '</td>
-                                    <td class="email">' . $row['email'] . '</td>
-                                    <td class="company">' . $row['company_name'] . '</td>
-                                    <td><button class="btn btn-sm btn-outline-primary edit-btn" 
-    data-bs-toggle="modal" 
-    data-bs-target="#editCompetitorModal" 
-    data-id="' . $row['id'] . '" 
-    data-name="' . $row['competitor_name'] . '" 
-    data-contact="' . $row['contact'] . '" 
-    data-email="' . $row['email'] . '" 
-    data-company="' . $row['company_name'] . '" 
-    style="border: none;">🖉</button></td>
+                                <tr>
+                                    <td class="name">Market Pulse</td>
+                                    <td class="contact">9876543210</td>
+                                    <td class="email">info@marketpulse.com</td>
+                                    <td class="company">MarketPulse Pvt Ltd</td>
                                     <td>
-    <button class="btn btn-sm btn-outline-danger delete-btn" 
-            style="border: none;"><a href = "view-manage-competitors.php?delete-id=' . $row['id'] . ' ">
-        🗑 </a>
-    </button>
-</td>
-                                </tr>';
-                                    }
-                                }
-                                ?>
+                                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editCompetitorModal" style="border: none;">
+                                            🖉
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <input class="form-check-input" type="checkbox" checked>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="name">TradeSmartly</td>
+                                    <td class="contact">9123456789</td>
+                                    <td class="email">support@tradesmartly.io</td>
+                                    <td class="company">TS Global</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editCompetitorModal" style="border: none;">
+                                            🖉
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <input class="form-check-input" type="checkbox">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="name">Algo Matrix</td>
+                                    <td class="contact">9988776655</td>
+                                    <td class="email">hello@algomatrix.ai</td>
+                                    <td class="company">AlgoMatrix Solutions</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editCompetitorModal" style="border: none;">
+                                            🖉
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <input class="form-check-input" type="checkbox" checked>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="name">StockBotics</td>
+                                    <td class="contact">9012345678</td>
+                                    <td class="email">contact@stockbotics.com</td>
+                                    <td class="company">StockBotics Inc.</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editCompetitorModal" style="border: none;">
+                                            🖉
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <input class="form-check-input" type="checkbox">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="name">QuantEdge</td>
+                                    <td class="contact">9845098450</td>
+                                    <td class="email">team@quantedge.co</td>
+                                    <td class="company">QuantEdge LLP</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editCompetitorModal" style="border: none;">
+                                            🖉
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <input class="form-check-input" type="checkbox" checked>
+                                    </td>
+                                </tr>
 
 
 
                             </tbody>
                         </table>
-                        <!-- <div class="pagination-container text-center">
-                            <ul class="pagination"></ul>
-                        </div> -->
+
+                        <!-- pagination -->
                         <div class="d-flex justify-content-end mt-3">
                             <div class="d-flex">
                                 <button class="page-link" data-list-pagination="prev">
@@ -270,30 +307,6 @@
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <form id="addCompetitorForm" method="post">
-                                    <?php
-                                    include '../PhpFiles/connection.php';
-
-                                    if (isset($_POST['add'])) {
-                                        $competitor_name = $_POST['competitor_name'];
-                                        $contact = $_POST['competitor_contact'];
-                                        $email = $_POST['competitor_email'];
-                                        $company_name = $_POST['company_name'];
-
-                                        $query = "INSERT INTO `tbl_manage_competitors` (`competitor_name`, `contact`, `email`, `company_name`) 
-                    VALUES ('$competitor_name', '$contact', '$email', '$company_name')";
-
-                                        $result = mysqli_query($conn, $query) or die("Query Unsuccessful" . mysqli_error($conn));
-                                        if ($result) {
-                                            echo '
-                        <script> alert("Data successfully added");
-                        window.location.href = "view-manage-competitors.php" 
-                        </script>';
-                                        } else {
-                                            echo "<script>alert('Update failed: " . mysqli_error($conn) . "');</script>";
-                                        }
-                                    }
-                                    ?>
-
                                     <div class="modal-header">
                                         <h5 class="modal-title">Add Competitor</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -301,24 +314,24 @@
                                     <div class="modal-body">
                                         <input type="hidden" name="action" value="add">
                                         <div class="mb-3">
-                                            <label for="competitor_name" class="form-label">Name</label>
-                                            <input type="text" class="form-control" id="competitor_name" name="competitor_name" required>
+                                            <label for="competitor_name" class="form-label">Competitor Name</label>
+                                            <input type="text" class="form-control" id="competitor_name" placeholder="Enter Competitor Name" name="competitor_name" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="competitor_contact" class="form-label">Contact</label>
-                                            <input type="text" class="form-control" id="competitor_contact" name="competitor_contact" required>
+                                            <label for="competitor_contact" class="form-label">Competitor Contact</label>
+                                            <input type="text" class="form-control" id="competitor_contact" placeholder="Enter Competitor Contact" name="competitor_contact" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="competitor_email" class="form-label">Email</label>
-                                            <input type="email" class="form-control" id="competitor_email" name="competitor_email" required>
+                                            <label for="competitor_email" class="form-label">Competitor Email</label>
+                                            <input type="email" class="form-control" id="competitor_email" placeholder="Enter Competitor Email" name="competitor_email" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="company_name" class="form-label">Company</label>
-                                            <input type="text" class="form-control" id="company_name" name="company_name" required>
+                                            <label for="company_name" class="form-label">Competitor Company</label>
+                                            <input type="text" class="form-control" id="company_name" placeholder="Enter Competitor Company" name="company_name" required>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button class="btn btn-success" type="submit" name="add">Add</button>
+                                        <button class="btn btn-primary" type="submit" name="add">Add</button>
                                         <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
                                     </div>
                                 </form>
@@ -338,20 +351,20 @@
                                     <div class="modal-body">
                                         <input type="hidden" id="edit_id" name="edit_id">
                                         <div class="mb-3">
-                                            <label for="edit_name" class="form-label">Name</label>
-                                            <input type="text" class="form-control" id="edit_name" name="edit_name" required>
+                                            <label for="edit_name" class="form-label">Competitor Name</label>
+                                            <input type="text" class="form-control" id="edit_name" placeholder="Enter Competitor Name" name="edit_name" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="edit_contact" class="form-label">Contact</label>
-                                            <input type="text" class="form-control" id="edit_contact" name="edit_contact" required>
+                                            <label for="edit_contact" class="form-label">Competitor Contact</label>
+                                            <input type="text" class="form-control" id="edit_contact" placeholder="Enter Competitor Contact" name="edit_contact" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="edit_email" class="form-label">Email</label>
-                                            <input type="email" class="form-control" id="edit_email" name="edit_email" required>
+                                            <label for="edit_email" class="form-label">Competitor Email</label>
+                                            <input type="email" class="form-control" id="edit_email" placeholder="Enter Competitor Email" name="edit_email" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="edit_company" class="form-label">Company</label>
-                                            <input type="text" class="form-control" id="edit_company" name="edit_company" required>
+                                            <label for="edit_company" class="form-label">Competitor Company</label>
+                                            <input type="text" class="form-control" id="edit_company" placeholder="Enter Competitor Company" name="edit_company" required>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -364,58 +377,11 @@
                     </div>
 
                 </div>
-                <!-- updating functionality -->
-                <?php
-                include '../PhpFiles/connection.php';
-
-                if (isset($_POST['edit'])) {
-                    $id = $_POST['edit_id'];
-                    $competitor_name = $_POST['edit_name'];
-                    $contact = $_POST['edit_contact'];
-                    $email = $_POST['edit_email'];
-                    $company_name = $_POST['edit_company'];
-
-                    $query = "UPDATE tbl_manage_competitors SET 
-                competitor_name = '$competitor_name', 
-                contact = '$contact', 
-                email = '$email', 
-                company_name = '$company_name' 
-              WHERE id = $id";
-
-                    $result = mysqli_query($conn, $query);
-
-                    if ($result) {
-                        echo '<script>
-                alert("Successfully Updated");
-                window.location.href = "view-manage-competitors.php";
-              </script>';
-                    } else {
-                        echo "<script>alert('Update failed: " . mysqli_error($conn) . "');</script>";
-                    }
-                }
-                ?>
 
 
 
-                <!-- delete -->
-                <?php
-                include '../PhpFiles/connection.php';
 
-                if (isset($_GET['delete-id'])) {
-                    $id = $_GET['delete-id'];
 
-                    $query = "DELETE FROM tbl_manage_competitors WHERE id = $id";
-                    $result = mysqli_query($conn, $query) or die("Query Unsuccessfull" . mysqli_error($conn));
-                    if ($result) {
-                        echo "<script>
-                alert('data deleted successfully');
-                window.location.href = 'view-manage-competitors.php';
-              </script>";
-                    } else {
-                        echo "<script>alert('Update failed: " . mysqli_error($conn) . "');</script>";
-                    }
-                }
-                ?>
 
 
 

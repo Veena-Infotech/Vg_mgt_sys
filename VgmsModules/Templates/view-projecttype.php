@@ -177,34 +177,7 @@
                 <div>
                     <button class="btn btn-primary" type="button" data-bs-toggle="modal"
                         data-bs-target="#verticallyCentered">ADD</button>
-                    <div class="modal fade" id="verticallyCentered" tabindex="-1"
-                        aria-labelledby="verticallyCenteredModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="verticallyCenteredModalLabel">Add Project Type</h5>
-                                    <button class="btn btn-close p-1" type="button" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form id="addsourceForm" method="post">
-                                        <div class="mb-3">
-                                            <label for="name" class="form-label">Project Type</label>
-                                            <input class="form-control" type="text" id="name" name="name"
-                                                placeholder="Enter Project Type" required>
-                                        </div>
-                                        <input type="hidden" name="action" value="add_source">
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button class="btn btn-primary" type="submit"
-                                        form="addsourceForm">ADD</button>
-                                    <button class="btn btn-outline-primary" type="button"
-                                        data-bs-dismiss="modal">Cancel</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
 
 
                 </div>
@@ -221,9 +194,9 @@
                             <svg class="svg-inline--fa fa-magnifying-glass search-box-icon" aria-hidden="true"
                                 focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img"
                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
-                                <path fill="currentColor"
+                                <!-- <path fill="currentColor"
                                     d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z">
-                                </path>
+                                </path> -->
                             </svg>
                         </form>
                     </div>
@@ -236,24 +209,64 @@
                                     <th class="sort border-top border-translucent ps-3" data-sort="id">Id</th>
                                     <th class="sort border-top" data-sort="name">Project Type</th>
                                     <th class="border-top">Edit</th>
-                                    <th class="border-top">Remove</th>
+                                    <th class="border-top">Action</th>
                                 </tr>
                             </thead>
                             <tbody class="list">
                                 <tr>
                                     <td class="align-middle ps-3 id">1</td>
-                                    <td class="align-middle name">Type 1</td>
+                                    <td class="align-middle name">Residential Complex</td>
                                     <td class="align-middle">
                                         <button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editSourceModal" style="border: none;">🖉</button>
                                     </td>
                                     <td class="align-middle">
-                                        <button class="btn btn-sm btn-outline-danger" style="border: none;">🗑️</button>
+                                        <input class="form-check-input" type="checkbox" checked>
                                     </td>
                                 </tr>
-                                <!-- Add more rows as needed -->
+                                <tr>
+                                    <td class="align-middle ps-3 id">2</td>
+                                    <td class="align-middle name">Commercial Office</td>
+                                    <td class="align-middle">
+                                        <button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editSourceModal" style="border: none;">🖉</button>
+                                    </td>
+                                    <td class="align-middle">
+                                        <input class="form-check-input" type="checkbox">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 id">3</td>
+                                    <td class="align-middle name">Hospitality Tower</td>
+                                    <td class="align-middle">
+                                        <button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editSourceModal" style="border: none;">🖉</button>
+                                    </td>
+                                    <td class="align-middle">
+                                        <input class="form-check-input" type="checkbox" checked>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 id">4</td>
+                                    <td class="align-middle name">Retail Plaza</td>
+                                    <td class="align-middle">
+                                        <button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editSourceModal" style="border: none;">🖉</button>
+                                    </td>
+                                    <td class="align-middle">
+                                        <input class="form-check-input" type="checkbox">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 id">5</td>
+                                    <td class="align-middle name">Mixed-Use Development</td>
+                                    <td class="align-middle">
+                                        <button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editSourceModal" style="border: none;">🖉</button>
+                                    </td>
+                                    <td class="align-middle">
+                                        <input class="form-check-input" type="checkbox" checked>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
+
 
                     <!-- Pagination -->
                     <div class="d-flex justify-content-end mt-3">
@@ -265,6 +278,37 @@
                             <button class="page-link pe-0" data-list-pagination="next">
                                 <span class="fas fa-chevron-right"></span>
                             </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- add modal -->
+
+                <div class="modal fade" id="verticallyCentered" tabindex="-1"
+                    aria-labelledby="verticallyCenteredModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="verticallyCenteredModalLabel">Add Project Type</h5>
+                                <button class="btn btn-close p-1" type="button" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="addsourceForm" method="post">
+                                    <div class="mb-3">
+                                        <label for="name" class="form-label">Project Type</label>
+                                        <input class="form-control" type="text" id="name" name="name"
+                                            placeholder="Enter Project Type" required>
+                                    </div>
+                                    <input type="hidden" name="action" value="add_source">
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="submit"
+                                    form="addsourceForm">ADD</button>
+                                <button class="btn btn-outline-primary" type="button"
+                                    data-bs-dismiss="modal">Cancel</button>
+                            </div>
                         </div>
                     </div>
                 </div>
