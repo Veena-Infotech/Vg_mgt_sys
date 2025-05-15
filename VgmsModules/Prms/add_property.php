@@ -98,6 +98,16 @@
             display: block;
             margin-bottom: 10px;
         }
+
+        @media (max-width: 767.98px) {
+            .row>[class*="col-"] {
+                margin-bottom: 15px !important;
+            }
+        }
+
+        
+
+        
     </style>
 </head>
 
