@@ -490,44 +490,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize List.js for table pagination & search
-            const builderList = new List('tableExample3', {
-                valueNames: ['name', 'contact', 'email', 'company'],
-                page: 5,
-                pagination: true
-            });
 
-            window.refreshBuilderList = function() {
-                builderList.reIndex();
-                builderList.update();
-            };
-
-            // Handle Bootstrap 5 Modal Show Event properly
-            const editModalEl = document.getElementById('editBuilderModal');
-            if (editModalEl) {
-                editModalEl.addEventListener('show.bs.modal', function(event) {
-                    const button = event.relatedTarget;
-                    if (!button) return;
-
-                    // Safely extract data attributes
-                    const id = button.getAttribute('data-id') || '';
-                    const name = button.getAttribute('data-name') || '';
-                    const contact = button.getAttribute('data-contact') || '';
-                    const email = button.getAttribute('data-email') || '';
-                    const company = button.getAttribute('data-company') || '';
-
-                    // Populate modal form fields
-                    editModalEl.querySelector('#edit_id').value = id;
-                    editModalEl.querySelector('#edit_name').value = name;
-                    editModalEl.querySelector('#edit_contact').value = contact;
-                    editModalEl.querySelector('#edit_email').value = email;
-                    editModalEl.querySelector('#edit_company').value = company;
-                });
-            }
-        });
-    </script>
 
     <script>
         function validateMobile(input) {
