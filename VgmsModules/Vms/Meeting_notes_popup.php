@@ -188,18 +188,10 @@
                                     id="fatherName" class="form-control" required></div>
                             <div class="col-md-6"><label class="form-label">Meeting Date & Time</label><input
                                     type="date" id="dob" class="form-control" required></div>
-                            <div class="col-md-6"><label class="form-label">Meeting Status</label>
-                                <select class="form-select" required>
-                                    <option value="">NA</option>
-                                    <option>Completed</option>
-                                    <option>Rescheduled</option>
-                                    <option>Canceled</option>
-                                </select>
-                            </div>
+                            
                             <div class="col-md-6"><label class="form-label">Discussion Summary</label><input type="text"
                                     id="motherName" class="form-control" required></div>
-                            <div class="col-md-6"><label class="form-label">Action Items</label><input type="text"
-                                    id="motherName" class="form-control" required></div>
+                           
                             <div class="col-md-6"><label class="form-label">Payment Amount (If applicable)</label><input
                                     type="text" id="motherName" class="form-control" required></div>
                             <div class="col-md-6"><label class="form-label">Additional Comments</label><input
