@@ -1,7 +1,10 @@
 <?php
 include('../PhpFiles/connection.php');
 session_start();
+
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr" data-navigation-type="default" data-navbar-horizontal-shape="default">
@@ -175,8 +178,8 @@ session_start();
             <h2 class="mb-2 lh-sm">Employee Side Meeting Queue </h2>
             <p class="mb-3 text-muted">A list of visitors scheduled for employee-side meetings</p>
             <hr class="hr" /><br>
-            
-             <div id="tableExample3"
+
+            <div id="tableExample3"
                 data-list='{"valueNames":["number", "name", "Empname","meeting","date","time"], "page":5, "pagination":true}'>
                 <div class="search-box mb-3 mx-auto">
                     <form class="position-relative"><input class="form-control search-input search form-control-sm"
@@ -208,19 +211,21 @@ session_start();
                             <?php
                             include '../PhpFiles/connection.php';
 
-                                $emp_id = $_SESSION['user_id']; // Assuming employee ID is stored in 'user_id'
+                            $emp_id = $_SESSION['user_id']; // Assuming employee ID is stored in 'user_id'
 
-// Filter by emp_id
-$sql = "SELECT m.id, v.f_name AS visitor_name, e.f_name AS emp_name, m.reason, m.time, m.date, m.meeting_status 
-        FROM tbl_meeting_history m 
-        JOIN tbl_visitor v ON m.visitor_id = v.id 
-        JOIN tbl_emp e ON m.emp_id = e.id 
-        WHERE m.emp_id = '$emp_id'
-        ORDER BY m.date DESC, m.time DESC";
+                            // Filter by emp_id
+                            $sql = "SELECT m.id, v.f_name AS visitor_name, e.f_name AS emp_name, m.reason, m.time, m.date, m.meeting_status 
+                                FROM tbl_meeting_history m 
+                                JOIN tbl_visitor v ON m.visitor_id = v.id 
+                                JOIN tbl_emp e ON m.emp_id = e.id 
+                                WHERE m.emp_id = '$emp_id' AND m.date = CURDATE()
+                                ORDER BY m.date DESC, m.time DESC";
 
-$count_query = "SELECT COUNT(*) AS total FROM tbl_meeting_history WHERE emp_id = '$emp_id'";
+                            $count_query = "SELECT COUNT(*) AS total FROM tbl_meeting_history 
+                                WHERE emp_id = '$emp_id' AND date = CURDATE()";
 
-                          
+
+
 
                             $count_result = mysqli_query($conn, $count_query);
                             $count_row = mysqli_fetch_assoc($count_result);
@@ -230,50 +235,69 @@ $count_query = "SELECT COUNT(*) AS total FROM tbl_meeting_history WHERE emp_id =
                             $result = mysqli_query($conn, $sql);
                             $counter = 1;
 
-                            while ($row = mysqli_fetch_assoc($result)) {
+                            $result = mysqli_query($conn, $sql);
+                            $counter = 1;
+
+                            if (mysqli_num_rows($result) > 0) {
+                                while ($row = mysqli_fetch_assoc($result)) {
                             ?>
-                                <tr>
-                                    <td class="align-middle ps-3 number"><?php echo $counter++; ?></td>
-                                    <td class="align-middle name"><?php echo htmlspecialchars($row['visitor_name']); ?></td>
-                                    <td class="align-middle Empname"><?php echo htmlspecialchars($row['emp_name']); ?></td>
-                                    <td class="align-middle meeting"><?php echo htmlspecialchars($row['reason']); ?></td>
-                                    <td class="align-middle date"><?php echo date("d M Y", strtotime($row['date'])); ?></td>
-                                    <td class="align-middle time"><?php echo date("h:i A", strtotime($row['time'])); ?></td>
-
-                                    <td class="align-middle status">
-                                        <?php
-                                        $status = $row['meeting_status'];
-                                        $badge_class = match ($status) {
-                                            'Completed' => 'badge-phoenix-success',
-                                            'Rescheduled' => 'badge-phoenix-info',
-                                            'InProgress' => 'badge-phoenix-primary',
-                                            default => 'badge-phoenix-warning'
-                                        };
-                                        ?>
-                                        <div class="badge badge-phoenix fs-10 <?php echo $badge_class; ?>">
-                                            <span class="fw-bold"><?php echo htmlspecialchars($status); ?></span>
-                                        </div>
-                                    </td>
-
-                                     <td class="align-middle text-end pe-0">
-                                        <div class="btn-reveal-trigger position-static">
-                                            <button class="btn btn-sm dropdown-toggle dropdown-caret-none btn-reveal fs-10"
-                                                type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="fas fa-ellipsis fs-10"></i>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-end py-2">
-                                                <a class="dropdown-item" href="Meeting_notes_popup.php?meeting_id=<?php echo $row['id']; ?>">Add-edit notes</a>
-                                                <a class="dropdown-item" href="CompleteMeeting.php?id=<?php echo $row['id']; ?>">Complete</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item text-danger" href="RescheduleMeeting.php?id=<?php echo $row['id']; ?>">Reschedule</a>
+                                    <tr>
+                                        <td class="align-middle ps-3 number"><?php echo $counter++; ?></td>
+                                        <td class="align-middle name"><?php echo htmlspecialchars($row['visitor_name']); ?></td>
+                                        <td class="align-middle Empname"><?php echo htmlspecialchars($row['emp_name']); ?></td>
+                                        <td class="align-middle meeting"><?php echo htmlspecialchars($row['reason']); ?></td>
+                                        <td class="align-middle date"><?php echo date("d M Y", strtotime($row['date'])); ?></td>
+                                        <td class="align-middle time"><?php echo date("h:i A", strtotime($row['time'])); ?></td>
+                                        <td class="align-middle status">
+                                            <?php
+                                            $status = $row['meeting_status'];
+                                            $badge_class = match ($status) {
+                                                'Completed' => 'badge-phoenix-success',
+                                                'Rescheduled' => 'badge-phoenix-info',
+                                                'InProgress' => 'badge-phoenix-primary',
+                                                default => 'badge-phoenix-warning'
+                                            };
+                                            ?>
+                                            <div class="badge badge-phoenix fs-10 <?php echo $badge_class; ?>">
+                                                <span class="fw-bold"><?php echo htmlspecialchars($status); ?></span>
                                             </div>
-                                        </div>
-                                    </td>
-
-                                <?php
+                                        </td>
+                                        <td class="align-middle text-end pe-0">
+                                            <div class="btn-reveal-trigger position-static">
+                                                <button class="btn btn-sm dropdown-toggle dropdown-caret-none btn-reveal fs-10"
+                                                    type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis fs-10"></i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-end py-2">
+                                                    <a class="dropdown-item" href="Meeting_notes_popup.php?meeting_id=<?php echo $row['id']; ?>">Add-edit notes</a>
+                                                    <a class="dropdown-item" href="../PhpFiles/CompleteMeeting.php?id=<?php echo $row['id']; ?>">Complete</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item text-danger" href="../PhpFiles/RescheduleMeeting.php?id=<?php echo $row['id']; ?>">Reschedule</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                            <?php
+                                }
+                            } else {
+                                echo '<tr><td class="text-center" colspan="8">No meetings for today</td></tr>';
                             }
-                                ?>
 
+                            ?>
+
+                            <?php if (isset($_GET['msg']) && $_GET['msg'] == 'completed_success'): ?>
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    Meeting marked as <strong>Completed</strong> successfully.
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            <?php endif; ?>
+
+                            <?php if (isset($_GET['msg']) && $_GET['msg'] == 'reschedule_success'): ?>
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    Meeting <strong>Rescheduled</strong> successfully.
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            <?php endif; ?>
                         </tbody>
                     </table>
                 </div>
@@ -305,9 +329,156 @@ $count_query = "SELECT COUNT(*) AS total FROM tbl_meeting_history WHERE emp_id =
                     </div>
                 </div>
             </div>
+
+            <hr>
+
+             <h2 class="mb-2 lh-sm">Meeting History </h2>
+            <p class="mb-3 text-muted">A list of visitors scheduled for employee-side meetings</p>
+            <hr class="hr" /><br>
+
+            <div id="tableExample3"
+                data-list='{"valueNames":["number", "name", "Empname","meeting","date","time"], "page":5, "pagination":true}'>
+                <div class="search-box mb-3 mx-auto">
+                    <form class="position-relative"><input class="form-control search-input search form-control-sm"
+                            type="search" placeholder="Search" aria-label="Search">
+                        <svg class="svg-inline--fa fa-magnifying-glass search-box-icon" aria-hidden="true"
+                            focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+                            <path fill="currentColor"
+                                d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z">
+                            </path>
+                        </svg><!-- <span class="fas fa-search search-box-icon"></span> Font Awesome fontawesome.com -->
+                    </form>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm fs-9 mb-0">
+                        <thead>
+                            <tr>
+                                <th class="sort border-top border-translucent ps-3" data-sort="number">#</th>
+                                <th class="sort border-top border-translucent ps-3" data-sort="name">Visitor</th>
+                                <th class="sort border-top" data-sort="Empname">Employee</th>
+                                <th class="sort border-top" data-sort="meeting">Meeting Purpose</th>
+                                <th class="sort border-top" data-sort="date">Date</th>
+                                <th class="sort border-top" data-sort="time">Time</th>
+                                <th class="sort border-top" data-sort="status">Status</th>
+                                <th class="sort text-end align-middle pe-0 border-top" scope="col">ACTION</th>
+                            </tr>
+                        </thead>
+                        <tbody class="list">
+                            <?php
+                            include '../PhpFiles/connection.php';
+
+                            $emp_id = $_SESSION['user_id']; // Assuming employee ID is stored in 'user_id'
+
+                            // Filter by emp_id
+                            $sql = "SELECT m.id, v.f_name AS visitor_name, e.f_name AS emp_name, m.reason, m.time, m.date, m.meeting_status 
+                                FROM tbl_meeting_history m 
+                                JOIN tbl_visitor v ON m.visitor_id = v.id 
+                                JOIN tbl_emp e ON m.emp_id = e.id 
+                                WHERE m.emp_id = '$emp_id'
+                                ORDER BY m.date DESC, m.time DESC";
+
+                            $count_query = "SELECT COUNT(*) AS total FROM tbl_meeting_history 
+                                WHERE emp_id = '$emp_id'";
+
+
+
+
+                            $count_result = mysqli_query($conn, $count_query);
+                            $count_row = mysqli_fetch_assoc($count_result);
+                            $total_items = $count_row['total'];
+
+
+                            $result = mysqli_query($conn, $sql);
+                            $counter = 1;
+
+                            $result = mysqli_query($conn, $sql);
+                            $counter = 1;
+
+                            if (mysqli_num_rows($result) > 0) {
+                                while ($row = mysqli_fetch_assoc($result)) {
+                            ?>
+                                    <tr>
+                                        <td class="align-middle ps-3 number"><?php echo $counter++; ?></td>
+                                        <td class="align-middle name"><?php echo htmlspecialchars($row['visitor_name']); ?></td>
+                                        <td class="align-middle Empname"><?php echo htmlspecialchars($row['emp_name']); ?></td>
+                                        <td class="align-middle meeting"><?php echo htmlspecialchars($row['reason']); ?></td>
+                                        <td class="align-middle date"><?php echo date("d M Y", strtotime($row['date'])); ?></td>
+                                        <td class="align-middle time"><?php echo date("h:i A", strtotime($row['time'])); ?></td>
+                                        <td class="align-middle status">
+                                            <?php
+                                            $status = $row['meeting_status'];
+                                            $badge_class = match ($status) {
+                                                'Completed' => 'badge-phoenix-success',
+                                                'Rescheduled' => 'badge-phoenix-info',
+                                                'InProgress' => 'badge-phoenix-primary',
+                                                default => 'badge-phoenix-warning'
+                                            };
+                                            ?>
+                                            <div class="badge badge-phoenix fs-10 <?php echo $badge_class; ?>">
+                                                <span class="fw-bold"><?php echo htmlspecialchars($status); ?></span>
+                                            </div>
+                                        </td>
+                                        <td class="align-middle text-end pe-0">
+                                            <div class="btn-reveal-trigger position-static">
+                                                <button class="btn btn-sm dropdown-toggle dropdown-caret-none btn-reveal fs-10"
+                                                    type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis fs-10"></i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-end py-2">
+                                                    <a class="dropdown-item" href="Meeting_notes_popup.php?meeting_id=<?php echo $row['id']; ?>">Add-edit notes</a>
+                                                    <a class="dropdown-item" href="../PhpFiles/CompleteMeeting.php?id=<?php echo $row['id']; ?>">Complete</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item text-danger" href="RescheduleMeeting.php?id=<?php echo $row['id']; ?>">Reschedule</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                            <?php
+                                }
+                            } else {
+                                echo '<tr><td class="text-center" colspan="8">No meetings for today</td></tr>';
+                            }
+
+                            ?>
+
+                          
+                        </tbody>
+                    </table>
+                </div>
+                <div class="d-flex justify-content-between mt-3"><span class="d-none d-sm-inline-block"
+                        data-list-info="data-list-info">1 to 5 <span class="text-body-tertiary"> Items of
+                        </span>43</span>
+                    <div class="d-flex"><button class="page-link disabled" data-list-pagination="prev" disabled=""><svg
+                                class="svg-inline--fa fa-chevron-left" aria-hidden="true" focusable="false"
+                                data-prefix="fas" data-icon="chevron-left" role="img" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 320 512" data-fa-i2svg="">
+                                <path fill="currentColor"
+                                    d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z">
+                                </path>
+                            </svg><!-- <span class="fas fa-chevron-left"></span> Font Awesome fontawesome.com --></button>
+                        <ul class="mb-0 pagination">
+                            <li class="active"><button class="page" type="button" data-i="1" data-page="5">1</button>
+                            </li>
+                            <li><button class="page" type="button" data-i="2" data-page="5">2</button></li>
+                            <li><button class="page" type="button" data-i="3" data-page="5">3</button></li>
+                            <li class="disabled"><button class="page" type="button">...</button></li>
+                        </ul><button class="page-link pe-0" data-list-pagination="next"><svg
+                                class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false"
+                                data-prefix="fas" data-icon="chevron-right" role="img"
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
+                                <path fill="currentColor"
+                                    d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z">
+                                </path>
+                            </svg><!-- <span class="fas fa-chevron-right"></span> Font Awesome fontawesome.com --></button>
+                    </div>
+                </div>
+            </div>
+
             <!-- Footer -->
             <?php include("../../Components/footer.php"); ?>
         </div>
+
 
 
 
