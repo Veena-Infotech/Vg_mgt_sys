@@ -57,6 +57,84 @@
     <link href="../../vendors/leaflet/leaflet.css" rel="stylesheet">
     <link href="../../vendors/leaflet.markercluster/MarkerCluster.css" rel="stylesheet">
     <link href="../../vendors/leaflet.markercluster/MarkerCluster.Default.css" rel="stylesheet">
+    <link href="../../vendors/flatpickr/flatpickr.min.css" rel="stylesheet" />
+    <link href="../../vendors/dropzone/dropzone.css" rel="stylesheet" />
+
+
+    <style>
+        /* Style for the file upload drop area */
+        .file-drop-area {
+            border: 2px dashed rgb(97, 107, 117);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            /* background-color: #f8f9fa; */
+            transition: background-color 0.3s ease;
+        }
+
+        .file-item img {
+            object-fit: cover;
+        }
+
+        /* .file-drop-area:hover {
+            background-color: #e9ecef;
+        } */
+
+        /* Hidden file input */
+        .file-drop-area input[type="file"] {
+            display: none;
+        }
+
+        /* Style for the message within the drop area */
+        .file-drop-message p {
+            margin: 0;
+            font-size: 14px;
+            color: rgb(98, 111, 125);
+        }
+
+        /* Preview of uploaded files */
+        #filePreview {
+            display: flex;
+            flex-direction: column;
+            margin-top: 10px;
+        }
+
+        #filePreview .file-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        #filePreview .file-item img {
+            width: 30px;
+            margin-right: 10px;
+        }
+
+        #photoMessage {
+            display: none;
+            background-color: #e0f2fe;
+            border: 1px solid #0284c7;
+            color: #0369a1;
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-top: 12px;
+            font-size: 14px;
+        }
+
+        #customMessage {
+            display: none;
+            background-color: #e0f2fe;
+            border: 1px solid #0284c7;
+            color: #0369a1;
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-top: 12px;
+            font-size: 14px;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -165,60 +243,94 @@
             }
         </script>
         <div class="content">
-            <div class="container shadow-lg rounded-4 p-4 mt-4 mb-2">
-                <h2 class="mb-1 fw-bold text-primary">Meeting Notes</h2>
+            <!-- <div class="container shadow-lg rounded-4 p-4 mt-4 mb-2 "> -->
+            <h2 class="mb-1 fw-bold ">Meeting Notes</h2>
+<hr>
+            <!-- <div class="progress mb-4 rounded-pill" style="margin-top: 1%;">
+                <div id="progress-bar" class="progress-bar bg-primary rounded-pill" role="progressbar"
+                    style="width: 0%">
+                </div>
+            </div> -->
 
-                <div class="progress mb-4 rounded-pill">
-                    <div id="progress-bar" class="progress-bar bg-primary rounded-pill" role="progressbar"
-                        style="width: 0%">
+            <form id="onboardingForm" enctype="multipart/form-data" class="dropzone dropzone-multiple p-0" id="dropzone-multiple" data-dropzone="data-dropzone" action="#!">
+
+                <!-- STEP TEMPLATE START -->
+                <!-- Repeat this template per section with unique content -->
+                <div class="step">
+                    <div class="row g-3">
+
+                        <div class="col-md-6">
+                            <label class="form-label">Meeting ID</label>
+                            <input class="form-control" type="text" name="name" placeholder="101203" id="bootstrap-vertical-wizard-wizard-name" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Visitor Name</label>
+                            <input class="form-control" type="text" name="name" placeholder="John Smith" id="bootstrap-vertical-wizard-wizard-name" />
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="mb-2">
+                                <label class="form-label">Employe's Name</label>
+                                <input class="form-control" type="text" name="name" placeholder="John Smith" id="bootstrap-vertical-wizard-wizard-name" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label" for="datetimepicker">Meeting Date & Time</label>
+                            <input class="form-control datetimepicker flatpickr-input" id="datetimepicker" type="text" placeholder="dd/mm/yyyy hour : minute" data-options="{&quot;enableTime&quot;:true,&quot;dateFormat&quot;:&quot;d/m/y H:i&quot;,&quot;disableMobile&quot;:true}" readonly="readonly">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="uploadFile" class="form-label">Upload File</label>
+                            <!-- File Drop HTML -->
+                                <!-- <div class="file-drop-area" id="fileDropArea">
+                                    <input type="file" class="form-control d-none" name="file[]" id="fileInput" multiple>
+
+                                    <div class="file-drop-message text-center">
+                                        <img class="me-2" src="../../assets/img/icons/cloud-upload.svg" width="25" alt="" />
+                                        <p>Drag & Drop your files here or <strong>browse</strong></p>
+                                    </div>
+                                    <div id="filePreview" class="mt-3"></div>
+                                </div> -->
+                                <input class="form-control" id="formFileMultiple" type="file" multiple="multiple" />
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Payment Amount (If applicable)</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">₹</span>
+                                <input class="form-control" type="text" aria-label="Amount (to the nearest dollar)" />
+                                <span class="input-group-text">.00</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Additional Comments</label>
+                             <textarea class="form-control" id="exampleTextarea" rows="3"> </textarea>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Discussion Summary</label>
+                             <textarea class="form-control" id="exampleTextarea" rows="3"> </textarea>
+                        </div>
+
+
+
                     </div>
+                    <div class="d-flex justify-content-end mt-4 gap-2">
+                        <button type="reset" class="btn btn-outline-secondary">Reset</button>
+                        <button type="button" class="btn btn-outline-primary next">Submit</button>
+                    </div>
+
                 </div>
 
-                <form id="onboardingForm" enctype="multipart/form-data">
-
-                    <!-- STEP TEMPLATE START -->
-                    <!-- Repeat this template per section with unique content -->
-                    <div class="step">
-                        <div class="row g-3">
-                            <div class="col-md-6"><label class="form-label">Meeting ID</label><input type="text"
-                                    id="fullName" class="form-control" required></div>
-                            <div class="col-md-6"><label class="form-label">Visotr Name</label><input type="text"
-                                    id="fullName" class="form-control" required></div>
-                            <div class="col-md-6"><label class="form-label">Employe's Name</label><input type="text"
-                                    id="fatherName" class="form-control" required></div>
-                            <div class="col-md-6"><label class="form-label">Meeting Date & Time</label><input
-                                    type="date" id="dob" class="form-control" required></div>
-                            
-                            <div class="col-md-6"><label class="form-label">Discussion Summary</label><input type="text"
-                                    id="motherName" class="form-control" required></div>
-                           
-                            <div class="col-md-6"><label class="form-label">Payment Amount (If applicable)</label><input
-                                    type="text" id="motherName" class="form-control" required></div>
-                            <div class="col-md-6"><label class="form-label">Additional Comments</label><input
-                                    type="text" id="motherName" class="form-control" required></div>
-                           
-                            <div class="col-md-6">
-                                <label for="uploadFile" class="form-label">Upload File</label>
-                                <input type="file" id="uploadFile" name="uploadFile" class="form-control">
-                            </div>
+                <!-- 2. Contact Details -->
 
 
+                <!-- 3. Identity and Banking Details -->
 
-                        </div>
-                        <div class="d-flex justify-content-end mt-4 gap-2">
-  <button type="reset" class="btn btn-outline-secondary">Reset</button>
-  <button type="button" class="btn btn-outline-primary next">Submit</button>
-</div>
-
-                    </div>
-
-                    <!-- 2. Contact Details -->
-
-
-                    <!-- 3. Identity and Banking Details -->
-
-                    <!-- 4. Emergency & Nominee Details -->
-            </div>
+                <!-- 4. Emergency & Nominee Details -->
+                <!-- </div> -->
+            </form>
 
             <!-- Footer -->
             <?php include("../../Components/footer.php"); ?>
@@ -252,6 +364,9 @@
     <script src="../../assets/js/phoenix.js"></script>
     <script src="../../vendors/echarts/echarts.min.js"></script>
     <script src="../../assets/js/ecommerce-dashboard.js"></script>
+    <script src="../../vendors/flatpickr/flatpickr.min.js"></script>
+    <script src="../../vendors/dropzone/dropzone-min.js"></script>
+
     <script>
         const steps = document.querySelectorAll('.step');
         const nextBtns = document.querySelectorAll('.next');
@@ -275,7 +390,7 @@
 
         // Next button click
         nextBtns.forEach(btn => {
-            btn.addEventListener('click', function () {
+            btn.addEventListener('click', function() {
                 if (validateStep(currentStep)) {
                     currentStep++;
                     if (currentStep < steps.length) {
@@ -309,10 +424,82 @@
         }));
 
         showStep(current);
-
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        // File preview and drag-and-drop functionality
+        document.getElementById('fileDropArea').addEventListener('click', function() {
+            document.getElementById('fileInput').click();
+        });
+
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const filePreview = document.getElementById('filePreview');
+            filePreview.innerHTML = ''; // Clear existing preview
+
+            Array.from(e.target.files).forEach(file => {
+                const fileElement = document.createElement('div');
+                fileElement.classList.add('file-item');
+
+                const fileIcon = document.createElement('img');
+                fileIcon.src = '../../../assets/img/icons/file.png'; // Your file icon path
+                fileIcon.alt = file.name;
+
+                const fileName = document.createElement('span');
+                fileName.textContent = file.name;
+
+                fileElement.appendChild(fileIcon);
+                fileElement.appendChild(fileName);
+                filePreview.appendChild(fileElement);
+            });
+        });
+
+        // Drag & Drop handling
+        document.getElementById('fileDropArea').addEventListener('dragover', function(e) {
+            e.preventDefault();
+            this.style.backgroundColor = '#e9ecef'; // Change background color on drag
+        });
+
+        document.getElementById('fileDropArea').addEventListener('dragleave', function() {
+            this.style.backgroundColor = ''; // Reset background color when drag leaves
+        });
+
+        document.getElementById('fileDropArea').addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.style.backgroundColor = ''; // Reset background color when file is dropped
+
+            const fileInput = document.getElementById('fileInput');
+            const files = e.dataTransfer.files;
+
+            // Simulate file selection in the file input
+            fileInput.files = files;
+
+            // Update preview
+            const filePreview = document.getElementById('filePreview');
+            filePreview.innerHTML = ''; // Clear existing preview
+
+            Array.from(files).forEach(file => {
+                const fileElement = document.createElement('div');
+                fileElement.classList.add('file-item');
+
+                const fileIcon = document.createElement('img');
+                fileIcon.src = '../../../assets/img/icons/file.png'; // Your file icon path
+                fileIcon.alt = file.name;
+
+                const fileName = document.createElement('span');
+                fileName.textContent = file.name;
+
+                fileElement.appendChild(fileIcon);
+                fileElement.appendChild(fileName);
+                filePreview.appendChild(fileElement);
+            });
+        });
+    </script>
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
             const form = document.getElementById('onboardingForm');
             const steps = document.querySelectorAll('.step');
             const nextBtns = document.querySelectorAll('.next');
@@ -406,7 +593,7 @@
 
             // Next button click
             nextBtns.forEach(btn => {
-                btn.addEventListener('click', function () {
+                btn.addEventListener('click', function() {
                     if (validateStep(currentStep)) {
                         currentStep++;
                         if (currentStep < steps.length) {
@@ -420,7 +607,7 @@
 
             // Previous button click
             prevBtns.forEach(btn => {
-                btn.addEventListener('click', function () {
+                btn.addEventListener('click', function() {
                     currentStep--;
                     if (currentStep >= 0) {
                         showStep(currentStep);
@@ -429,7 +616,7 @@
             });
 
             // Final form submit
-            form.addEventListener('submit', function (e) {
+            form.addEventListener('submit', function(e) {
                 if (!validateStep(currentStep)) {
                     e.preventDefault();
                     alert('Please complete all required fields correctly before submitting.');
