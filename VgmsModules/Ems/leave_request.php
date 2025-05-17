@@ -182,7 +182,7 @@
         <div class="row justify-content-center mt-4">
           <div class="col-md-10 col-lg-8">
             <div class="border rounded shadow-sm p-4" id="formCard">
-              <form id="leaveForm" method="post">
+              <form id="leaveForm" method="post" action="../PhpFiles/apply_leave.php" enctype="multipart/form-data">
                 <div class="row g-3">
                   <!-- Leave Type -->
                   <div class="col-md-6">
