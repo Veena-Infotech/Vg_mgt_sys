@@ -212,33 +212,39 @@
                             </thead>
 
                             <tbody class="list" id="LandlordTableBody">
-                                <tr>
-                                    <td class="name">Ramesh Kumar</td>
-                                    <td class="contact">9876543210</td>
-                                    <td class="email">ramesh@example.com</td>
+                                
+                                    <?php
+                                    include '../PhpFiles/connection.php';
+
+                                    $query = "SELECT * FROM tbl_manage_landlord";
+                                    $result = mysqli_query($conn, $query) or die("Query Unsuccessful".mysqli_error($conn));
+                                    if($result){
+                                        while($row = mysqli_fetch_assoc($result)){
+                                            echo '
+                                            <tr>
+                                            <td class="name">'.$row['landlord_name'].'</td>
+                                    <td class="contact">'.$row['contact_number'].'</td>
+                                    <td class="email">'.$row['email'].'</td>
                                     <td class="align-middle">
-                                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editLandlordModal" style="border: none;">🖉</button>
+                                      <button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editLandlordModal" 
+        data-id="' . $row['id'] . '"
+        data-name="' . htmlspecialchars($row['landlord_name'], ENT_QUOTES) . '"
+        data-contact="' . htmlspecialchars($row['contact_number'], ENT_QUOTES) . '"
+        data-email="' . htmlspecialchars($row['email'], ENT_QUOTES) . '"
+        style="border: none;">
+        🖉
+      </button>
+
                                     </td>
-                                    <td> <input class="form-check-input" type="checkbox" checked> </td>
+                                    <td>
+  <input type="checkbox" class="form-check-input active-checkbox"
+         data-id="' . $row['id'] . '" ' . ($row['is_active'] === 'Yes' ? 'checked' : '') . '>
+</td>
                                 </tr>
-                                <tr>
-                                    <td class="name">Sunita Sharma</td>
-                                    <td class="contact">9123456789</td>
-                                    <td class="email">sunita@example.com</td>
-                                    <td class="align-middle">
-                                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editLandlordModal" style="border: none;">🖉</button>
-                                    </td>
-                                    <td> <input class="form-check-input" type="checkbox"> </td>
-                                </tr>
-                                <tr>
-                                    <td class="name">Ajay Mehta</td>
-                                    <td class="contact">9988776655</td>
-                                    <td class="email">ajay@example.com</td>
-                                    <td class="align-middle">
-                                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editLandlordModal" style="border: none;">🖉</button>
-                                    </td>
-                                    <td> <input class="form-check-input" type="checkbox" checked> </td>
-                                </tr>
+                                ';
+                                        }
+                                    }
+                                    ?>
                             </tbody>
                         </table>
 
@@ -284,7 +290,7 @@
                                         
                                     </div>
                                     <div class="modal-footer">
-                                        <button class="btn btn-success" type="submit" id="addLandlordBtn" name="add">Add</button>
+                                        <button class="btn btn-success" type="submit" id="addLandlordBtn" name="add-landlord">Add</button>
                                         <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
                                     </div>
                                 </form>
@@ -292,6 +298,31 @@
                         </div>
                     </div>
 
+<?php
+include '../PhpFiles/connection.php';
+
+if (isset($_POST['add-landlord'])) {
+    // Sanitize input
+    $name = mysqli_real_escape_string($conn, $_POST['Landlord_name']);
+    $contact = mysqli_real_escape_string($conn, $_POST['Landlord_contact']);
+    $email = mysqli_real_escape_string($conn, $_POST['Landlord_email']);
+
+    // Get next UID
+    $res = mysqli_query($conn, "SELECT MAX(uid) AS max_uid FROM tbl_manage_landlord");
+    $row = mysqli_fetch_assoc($res);
+    $next_uid = isset($row['max_uid']) ? $row['max_uid'] + 1 : 1;
+
+    // Insert query
+    $query = "INSERT INTO `tbl_manage_landlord` (`id`, `landlord_name`, `contact_number`, `email`) 
+              VALUES ('$next_uid', '$name', '$contact', '$email')";
+
+    if (mysqli_query($conn, $query)) {
+        echo "<script>alert('Added successfully'); window.location.href = 'view_manage_landlord.php';</script>";
+    } else {
+        echo "<script>alert('Error: " . mysqli_error($conn) . "');</script>";
+    }
+}
+?>
 
                     <!-- Edit Landlord Modal -->
                     <div class="modal fade" id="editLandlordModal" tabindex="-1" aria-labelledby="editLandlordModalLabel" aria-hidden="true">
@@ -329,14 +360,58 @@
                                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
                                     </div>
                                 </form>
+<!-- update operation -->
+<?php
+include '../PhpFiles/connection.php';
+
+if (isset($_POST['edit_Landlord'])) {
+    $id = intval($_POST['edit_id']); // Ensure ID is integer
+    $name = mysqli_real_escape_string($conn, $_POST['edit_name']);
+    $contact = mysqli_real_escape_string($conn, $_POST['edit_contact']);
+    $email = mysqli_real_escape_string($conn, $_POST['edit_email']);
+
+    $query = "UPDATE `tbl_manage_landlord` 
+              SET `landlord_name` = '$name', 
+                  `contact_number` = '$contact', 
+                  `email` = '$email' 
+              WHERE `id` = $id";
+
+    $result = mysqli_query($conn, $query);
+
+    if ($result) {
+        echo "<script>alert('Updated successfully'); window.location.href = 'view_manage_landlord.php';</script>";
+    } else {
+        echo "<script>alert('Update failed: " . mysqli_error($conn) . "'); window.location.href = 'view_manage_landlord.php';</script>";
+    }
+}
+?>
 
                             </div>
                         </div>
                     </div>
 
-                    <!-- delete operation -->
+                     <!-- checkbox -->
+                                 <?php
+                        include '../PhpFiles/connection.php';
 
+                        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'], $_POST['is_active'])) {
+                            $id = $_POST['id'];
+                            $is_active = ($_POST['is_active'] === 'Yes') ? 'Yes' : 'No';
 
+                            $stmt = $conn->prepare("UPDATE tbl_manage_landlord SET is_active = ? WHERE id = ?");
+                            $stmt->bind_param("si", $is_active, $id);
+
+                            if ($stmt->execute()) {
+                                echo "success";
+                            } else {
+                                echo "error: " . $stmt->error;
+                            }
+
+                            $stmt->close();
+                            $conn->close();
+                            exit(); // prevent rest of page from being echoed
+                        }
+                        ?>
                 </div>
             </div>
             <footer>
@@ -380,12 +455,8 @@
     <script src="../../assets/js/phoenix.js"></script>
     <script src="../../vendors/echarts/echarts.min.js"></script>
     <script src="../../assets/js/ecommerce-dashboard.js"></script>
-
-
-
-
-
     </script>
+    
     <script>
         document.querySelectorAll('.open-action-modal').forEach(button => {
             button.addEventListener('click', () => {
@@ -430,11 +501,46 @@
         }
     </script>
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.edit-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            document.getElementById('edit_id').value = button.getAttribute('data-id');
+            document.getElementById('edit_name').value = button.getAttribute('data-name');
+            document.getElementById('edit_contact').value = button.getAttribute('data-contact');
+            document.getElementById('edit_email').value = button.getAttribute('data-email');
+        });
+    });
+});
+</script>
 
 
+<!-- checkbox -->
+                                <script>
+                                    document.addEventListener('DOMContentLoaded', function() {
+                                        document.querySelectorAll('.active-checkbox').forEach(checkbox => {
+                                            checkbox.addEventListener('change', function() {
+                                                const LandlordId = this.getAttribute('data-id');
+                                                const isActive = this.checked ? 'Yes' : 'No';
 
-
-
+                                                fetch('view_manage_landlord.php', {
+                                                        method: 'POST',
+                                                        headers: {
+                                                            'Content-Type': 'application/x-www-form-urlencoded'
+                                                        },
+                                                        body: `id=${LandlordId}&is_active=${isActive}`
+                                                    })
+                                                    .then(response => response.text())
+                                                    .then(data => {
+                                                        console.log('Update response:', data);
+                                                    })
+                                                    .catch(error => {
+                                                        console.error('Error updating status:', error);
+                                                    });
+                                            });
+                                        });
+                                    });
+                                </script>
 </body>
 
 
