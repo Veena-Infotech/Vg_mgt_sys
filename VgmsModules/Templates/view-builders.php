@@ -279,6 +279,7 @@
 
                             </tbody>
                         </table>
+                        <!-- checkbox -->
                         <?php
                         include '../PhpFiles/connection.php';
 
@@ -501,7 +502,7 @@
             }
         }
     </script>
-    
+
     <script>
         document.querySelectorAll('.edit-btn').forEach(button => {
             button.addEventListener('click', () => {

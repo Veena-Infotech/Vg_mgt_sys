@@ -455,8 +455,8 @@ if (isset($_POST['edit_Landlord'])) {
     <script src="../../assets/js/phoenix.js"></script>
     <script src="../../vendors/echarts/echarts.min.js"></script>
     <script src="../../assets/js/ecommerce-dashboard.js"></script>
+
     </script>
-    
     <script>
         document.querySelectorAll('.open-action-modal').forEach(button => {
             button.addEventListener('click', () => {
