@@ -279,6 +279,7 @@
 
                             </tbody>
                         </table>
+                        <!-- checkbox -->
                         <?php
                         include '../PhpFiles/connection.php';
 
@@ -489,9 +490,6 @@
     <!-- Bootstrap Bundle with Popper (REQUIRED) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-
-
-
     <script>
         function validateMobile(input) {
             const value = input.value;
@@ -504,17 +502,6 @@
             }
         }
     </script>
-
-    <!-- <script>
-function fillEditForm(id, name, contact, email, company) {
-    document.getElementById('edit_id').value = id;
-    document.getElementById('edit_name').value = name;
-    document.getElementById('edit_contact').value = contact;
-    document.getElementById('edit_email').value = email;
-    document.getElementById('edit_company').value = company;
-}
-</script> -->
-
 
     <script>
         document.querySelectorAll('.edit-btn').forEach(button => {
