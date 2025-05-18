@@ -289,6 +289,150 @@
                 </ul>
               </div>
             </div>
+
+            <!---Template Pages-->
+
+            <div class="nav-item-wrapper">
+              <a class="nav-link dropdown-indicator label-1" href="#nv-template" role="button"
+                data-bs-toggle="collapse" aria-expanded="true" aria-controls="nv-template">
+                <div class="d-flex align-items-center">
+                  <div class="dropdown-indicator-icon-wrapper">
+                    <span class="fas fa-caret-right dropdown-indicator-icon"></span>
+                  </div>
+                  <span class="nav-link-icon"><span class="fas fa-user-tie"></span></span>
+                  <span class="nav-link-text">Template Pages</span>
+                  <span class="fa-solid text-info ms-1" style="font-size: 6px"></span>
+                </div>
+              </a>
+
+              <div class="parent-wrapper label-1">
+                <ul class="nav collapse parent " data-bs-parent="#navbarVerticalCollapse" id="nv-template">
+                  <li class="collapsed-nav-item-title d-none">Template Pages</li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/Templates/view_manage_landlord.php?tag=view-landlord" id="view-landlord">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fas fa-tasks"></i></span>
+                        <span class="nav-link-text">View Manage Landlord</span>
+                      </div>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/Templates/view_proposal.php?tag=view-proposal" id="view-proposal">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fas fa-tasks"></i></span>
+                        <span class="nav-link-text">View Proposal</span>
+                      </div>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/Templates/view_society.php?tag=view-society" id="view-society">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fas fa-tasks"></i></span>
+                        <span class="nav-link-text">View Society</span>
+                      </div>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/Templates/view-builders.php?tag=view-builders" id="view-builders">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fas fa-tasks"></i></span>
+                        <span class="nav-link-text">View Builders</span>
+                      </div>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/Templates/view-manage-agencies.php?tag=view-agencies" id="view-agencies">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fas fa-tasks"></i></span>
+                        <span class="nav-link-text">View / Manage Agencies</span>
+                      </div>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/Templates/view-manage-competitors.php?tag=view-competitors" id="view-competitors">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fas fa-tasks"></i></span>
+                        <span class="nav-link-text">View / Manage Competition</span>
+                      </div>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/Templates/view-manage-propertytypes.php?tag=view-propertytypes" id="view-propertytypes">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fas fa-tasks"></i></span>
+                        <span class="nav-link-text">View / Manage property Types</span>
+                      </div>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/Templates/view-manage-reservation.php?tag=view-reservation" id="view-reservation">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fas fa-tasks"></i></span>
+                        <span class="nav-link-text">View / Manage Reservation </span>
+                      </div>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/Templates/view-manage-service.php?tag=view-services" id="view-services">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fas fa-tasks"></i></span>
+                        <span class="nav-link-text">View / Manage Service </span>
+                      </div>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/Templates/view-manage-sources.php?tag=view-sources" id="view-sources">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fas fa-tasks"></i></span>
+                        <span class="nav-link-text">View / Manage sources </span>
+                      </div>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/Templates/view-manage-status.php?tag=view-status" id="view-status">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fas fa-tasks"></i></span>
+                        <span class="nav-link-text">View / Manage Status </span>
+                      </div>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/Templates/view-manage-ward.php?tag=view-ward" id="view-ward">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fas fa-tasks"></i></span>
+                        <span class="nav-link-text">View / Manage wardward </span>
+                      </div>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/Templates/view-projecttype.php?tag=view-projecttype" id="view-projecttype">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fas fa-tasks"></i></span>
+                        <span class="nav-link-text">View Project Type </span>
+                      </div>
+                    </a>
+                  </li>
+
+
+                  <!---Template pages ends--->
+
+
+                </ul>
+              </div>
+            </div>
           </li>
         </ul>
       </div>
