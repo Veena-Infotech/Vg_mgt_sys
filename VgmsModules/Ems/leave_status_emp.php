@@ -1,3 +1,10 @@
+<?php
+include('../PhpFiles/connection.php');
+session_start();
+$emp_id = $_SESSION['user_id'];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr" data-navigation-type="default" data-navbar-horizontal-shape="default">
 
@@ -168,7 +175,7 @@
         </script>
         <div class="content">
 
-            <div class="container py-5">
+            <div class="container py-5 px-10">
                 <!-- Header -->
                 <div class="d-flex align-items-center mb-2" id="header">
                     <!-- <i class="bi bi-calendar-check text-primary fs-2 me-2"></i> -->
@@ -187,162 +194,99 @@
                             <h5 class="mb-0">Leave Status Summary</h5>
                         </div>
                         <!-- Filter and Search (smaller width) -->
-                        <div class="d-flex flex-wrap gap-2 mt-2 mt-sm-0">
 
-                            <!-- Search -->
-                            <!-- Search -->
-                            <input type="text" id="searchBox" name="searchQuery" class="form-control form-control-sm w-auto"
-                                placeholder="Search..." style="min-width: 160px;" />
-
-
-                            <!-- Apply Button -->
-                            <button class="btn btn-outline-primary btn-sm">
-                                <i class="bi bi-plus-circle me-1"></i> Apply for Leave
-                            </button>
-                        </div>
                     </div>
-                    <div id="tableExample4"
-                        data-list='{"valueNames":["date-from","date-to","reason","approval-by","status"],"page":5,"pagination":true,"filter":{"key":"payment"}}'>
-                        <div class="row justify-content-end g-0">
+                    <!-- Rest of the table code (unchanged logic) -->
+                    <div id="tableExample3" data-list="{&quot;valueNames&quot;:[&quot;apply&quot;,&quot;from&quot;,&quot;to&quot;,&quot;type&quot;,&quot;proof&quot;,&quot;status&quot;],&quot;page&quot;:5,&quot;pagination&quot;:true}">
+                        <!-- Dropdown and Search aligned horizontally -->
+                        <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-3 px-10 pt-5">
 
-                            <div class="table-responsive">
-                                <table class="table table-sm fs-9 mb-0">
-                                    <thead>
-                                        <tr class="bg-body-highlight">
 
-                                            <th class="sort border-top border-translucent" data-sort="date-from">From
-                                            </th>
-                                            <th class="sort border-top border-translucent" data-sort="date-to">To</th>
-                                            <th class="sort border-top border-translucent" data-sort="reason">Reason
-                                            </th>
-                                            <th class="sort border-top border-translucent" data-sort="approval-by">
-                                                Approval By</th>
-                                            <th class="sort border-top border-translucent text-end pe-3"
-                                                data-sort="status">Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="list">
-                                        <tr>
-                                            <td class="align-middle date-from">2025-05-01</td>
-                                            <td class="align-middle date-to">2025-07-01</td>
-                                            <td class="align-middle reason">Aryan</td>
-                                            <td class="align-middle approval-by">HR Manager</td>
-                                            <td class="align-middle payment text-end py-3 pe-3">
-                                                <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span
-                                                        class="fw-bold">Success</span><span
-                                                        class="ms-1 fas fa-check"></span></div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="align-middle date-from">2025-05-01</td>
-                                            <td class="align-middle date-to">2025-07-01</td>
-                                            <td class="align-middle reason">Family Function</td>
-                                            <td class="align-middle approval-by">HR Manager</td>
-                                            <td class="align-middle payment text-end py-3 pe-3">
-                                                <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span
-                                                        class="fw-bold">Success</span><span
-                                                        class="ms-1 fas fa-check"></span></div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="align-middle date-from">2025-05-01</td>
-                                            <td class="align-middle date-to">2025-07-01</td>
-                                            <td class="align-middle reason">Family Function</td>
-                                            <td class="align-middle approval-by">HR Manager</td>
-                                            <td class="align-middle payment text-end py-3 pe-3">
-                                                <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span
-                                                        class="fw-bold">Success</span><span
-                                                        class="ms-1 fas fa-check"></span></div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="align-middle date-from">2025-05-01</td>
-                                            <td class="align-middle date-to">2025-07-01</td>
-                                            <td class="align-middle reason">Family Function</td>
-                                            <td class="align-middle approval-by">HR Manager</td>
-                                            <td class="align-middle payment text-end py-3 pe-3">
-                                                <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span
-                                                        class="fw-bold">Success</span><span
-                                                        class="ms-1 fas fa-check"></span></div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="align-middle date-from">2025-05-01</td>
-                                            <td class="align-middle date-to">2025-07-01</td>
-                                            <td class="align-middle reason">Family Function</td>
-                                            <td class="align-middle approval-by">HR Manager</td>
-                                            <td class="align-middle payment text-end py-3 pe-3">
-                                                <div class="badge badge-phoenix fs-10 badge-phoenix-warning"><span
-                                                        class="fw-bold">Pending</span><span
-                                                        class="ms-1 fas fa-stream"></span></div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="align-middle date-from">2025-05-01</td>
-                                            <td class="align-middle date-to">2025-07-01</td>
-                                            <td class="align-middle reason">Family Function</td>
-                                            <td class="align-middle approval-by">HR Manager</td>
-                                            <td class="align-middle payment text-end py-3 pe-3">
-                                                <div class="badge badge-phoenix fs-10 badge-phoenix-secondary"><span
-                                                        class="fw-bold">Blocked</span><span
-                                                        class="ms-1 fas fa-ban"></span></div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="align-middle date-from">2025-05-01</td>
-                                            <td class="align-middle date-to">2025-07-01</td>
-                                            <td class="align-middle reason">Family Function</td>
-                                            <td class="align-middle approval-by">HR Manager</td>
-                                            <td class="align-middle payment text-end py-3 pe-3">
-                                                <div class="badge badge-phoenix fs-10 badge-phoenix-warning"><span
-                                                        class="fw-bold">Pending</span><span
-                                                        class="ms-1 fas fa-stream"></span></div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="align-middle date-from">2025-05-01</td>
-                                            <td class="align-middle date-to">2025-07-01</td>
-                                            <td class="align-middle reason">Family Function</td>
-                                            <td class="align-middle approval-by">HR Manager</td>
-                                            <td class="align-middle payment text-end py-3 pe-3">
-                                                <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span
-                                                        class="fw-bold">Success</span><span
-                                                        class="ms-1 fas fa-check"></span></div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="align-middle date-from">2025-05-01</td>
-                                            <td class="align-middle date-to">2025-07-01</td>
-                                            <td class="align-middle reason">Family Function</td>
-                                            <td class="align-middle approval-by">HR Manager</td>
-                                            <td class="align-middle payment text-end py-3 pe-3">
-                                                <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span
-                                                        class="fw-bold">Success</span><span
-                                                        class="ms-1 fas fa-check"></span></div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="align-middle date-from">2025-05-01</td>
-                                            <td class="align-middle date-to">2025-07-01</td>
-                                            <td class="align-middle reason">Family Function</td>
-                                            <td class="align-middle approval-by">HR Manager</td>
-                                            <td class="align-middle payment text-end py-3 pe-3">
-                                                <div class="badge badge-phoenix fs-10 badge-phoenix-warning"><span
-                                                        class="fw-bold">Pending</span><span
-                                                        class="ms-1 fas fa-stream"></span></div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <!-- Search Box -->
+                            <div class="search-box" style="width: 250px;">
+                                <form class="position-relative">
+                                    <input class="form-control search-input search form-control-sm" type="search" placeholder="Search" aria-label="Search">
+                                    <svg class="svg-inline--fa fa-magnifying-glass search-box-icon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+                                        <path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path>
+                                    </svg>
+                                </form>
                             </div>
-                            <div class="d-flex justify-content-between mt-3"><span class="d-none d-sm-inline-block" data-list-info="data-list-info"></span>
-                                <div class="d-flex"><button class="page-link" data-list-pagination="prev"><span class="fas fa-chevron-left"></span></button>
-                                    <ul class="mb-0 pagination"></ul><button class="page-link pe-0" data-list-pagination="next"><span class="fas fa-chevron-right"></span></button>
-                                </div>
+
+                            <div class="d-flex flex-wrap gap-2 mt-2 mt-sm-0">
+                                <!-- Apply Button -->
+                                <button class="btn btn-outline-primary btn-sm" onclick="window.location.href='leave_request.php'">
+                                    <i class="bi bi-plus-circle me-1"></i> Apply for Leave
+                                </button>
+
                             </div>
                         </div>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-sm fs-9 mb-0">
+                                <thead>
+                                    <tr>
+                                        <th class="sort border-top border-translucent ps-3" data-sort="apply">Applied On</th>
+                                        <th class="sort border-top" data-sort="from">From</th>
+                                        <th class="sort border-top" data-sort="to">To</th>
+                                        <th class="sort border-top" data-sort="type">Type</th>
+                                        <th class="sort border-top" data-sort="proof">Proof</th>
+                                        <th class="sort text-end align-middle pe-10 border-top" data-sort="status">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="leaveTableBody" class="list">
+                                    <?php
 
 
+                                    // Fetch leaves for specific employee
+                                    $sql = "SELECT applied_on, from_date, to_date, leave_type, document_name, status 
+                                         FROM tbl_leaves WHERE applied_by = $emp_id ORDER BY applied_on DESC";
+
+                                    $result = mysqli_query($conn, $sql);
+                                    if (mysqli_num_rows($result) > 0) {
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            echo "<tr>
+        <td class='apply align-middle ps-3'>" . htmlspecialchars($row['applied_on']) . "</td>
+        <td class='from align-middle'>" . htmlspecialchars($row['from_date']) . "</td>
+        <td class='to align-middle'>" . htmlspecialchars($row['to_date']) . "</td>
+        <td class='type align-middle'>" . htmlspecialchars($row['leave_type']) . "</td>
+        <td class='proof align-middle'>" .
+                                                (!empty($row['document_name'])
+                                                    ? "<a href='../uploads/leavesProof/" . htmlspecialchars($row['document_name']) . "' target='_blank'>Proof</a> (" . htmlspecialchars($row['document_name']) . ")"
+                                                    : "NA") .
+                                                "</td>
+        <td class='status align-middle text-end py-3 pe-10'>" . htmlspecialchars($row['status']) . "</td>
+      </tr>";
+                                        }
+                                    } else {
+                                        echo "<tr><td colspan='6' class='text-center'>No leave history found.</td></tr>";
+                                    }
+                                    ?>
+                                </tbody>
+
+
+
+                            </table>
+                        </div>
+                        <div class="d-flex justify-content-between mt-3 px-10 pb-2">
+                            <span class="d-none d-sm-inline-block" data-list-info="data-list-info">1 to 5 <span class="text-body-tertiary"> Items of </span>43</span>
+                            <div class="d-flex">
+                                <button class="page-link disabled" data-list-pagination="prev" disabled="">
+                                    <svg class="svg-inline--fa fa-chevron-left" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                        <path fill="currentColor" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"></path>
+                                    </svg>
+                                </button>
+                                <ul class="mb-0 pagination">
+                                    <li class="active"><button class="page" type="button" data-i="1" data-page="5">1</button></li>
+                                    <li><button class="page" type="button" data-i="2" data-page="5">2</button></li>
+                                    <li><button class="page" type="button" data-i="3" data-page="5">3</button></li>
+                                    <li class="disabled"><button class="page" type="button">...</button></li>
+                                </ul>
+                                <button class="page-link pe-0" data-list-pagination="next">
+                                    <svg class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                        <path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

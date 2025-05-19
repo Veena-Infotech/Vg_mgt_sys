@@ -270,16 +270,17 @@ $result = mysqli_query($conn, $sql);
               if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
                   echo "<tr>
-                <td class='apply align-middle ps-3'>" . htmlspecialchars($row['applied_on']) . "</td>
-                <td class='from align-middle'>" . htmlspecialchars($row['from_date']) . "</td>
-                <td class='to align-middle'>" . htmlspecialchars($row['to_date']) . "</td>
-                <td class='type align-middle'>" . htmlspecialchars($row['leave_type']) . "</td>
-                <td class='proof align-middle'>
-                  <a href='../uploads/leavesProof/" . htmlspecialchars($row['document_name']) . "' target='_blank'>Proof</a>
-                  (" . htmlspecialchars($row['document_name']) . ")
-                </td>
-                <td class='status align-middle text-end py-3 pe-3'>" . htmlspecialchars($row['status']) . "</td>
-              </tr>";
+        <td class='apply align-middle ps-3'>" . htmlspecialchars($row['applied_on']) . "</td>
+        <td class='from align-middle'>" . htmlspecialchars($row['from_date']) . "</td>
+        <td class='to align-middle'>" . htmlspecialchars($row['to_date']) . "</td>
+        <td class='type align-middle'>" . htmlspecialchars($row['leave_type']) . "</td>
+        <td class='proof align-middle'>" .
+                    (!empty($row['document_name'])
+                      ? "<a href='../uploads/leavesProof/" . htmlspecialchars($row['document_name']) . "' target='_blank'>Proof</a> (" . htmlspecialchars($row['document_name']) . ")"
+                      : "NA") .
+                    "</td>
+        <td class='status align-middle text-end py-3 pe-10'>" . htmlspecialchars($row['status']) . "</td>
+      </tr>";
                 }
               } else {
                 echo "<tr><td colspan='6' class='text-center'>No leave history found.</td></tr>";
@@ -381,20 +382,20 @@ $result = mysqli_query($conn, $sql);
 
 
 
-<script>
-  document.getElementById('employeeSelect').addEventListener('change', function() {
-    const empId = this.value;
-    if(empId) {
-      // Reload page with ?emp_id=empId
-      window.location.href = window.location.pathname + '?emp_id=' + empId;
-    }
-  });
+  <script>
+    document.getElementById('employeeSelect').addEventListener('change', function() {
+      const empId = this.value;
+      if (empId) {
+        // Reload page with ?emp_id=empId
+        window.location.href = window.location.pathname + '?emp_id=' + empId;
+      }
+    });
 
-  // Optionally pre-select dropdown based on $emp_id from PHP
-  <?php if ($emp_id): ?>
-    document.getElementById('employeeSelect').value = <?= json_encode($emp_id) ?>;
-  <?php endif; ?>
-</script>
+    // Optionally pre-select dropdown based on $emp_id from PHP
+    <?php if ($emp_id): ?>
+      document.getElementById('employeeSelect').value = <?= json_encode($emp_id) ?>;
+    <?php endif; ?>
+  </script>
 
 
 </body>
