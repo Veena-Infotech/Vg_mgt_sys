@@ -225,7 +225,7 @@
                                         <tr>
                                             <td class="align-middle date-from">2025-05-01</td>
                                             <td class="align-middle date-to">2025-07-01</td>
-                                            <td class="align-middle reason">Family Function</td>
+                                            <td class="align-middle reason">Aryan</td>
                                             <td class="align-middle approval-by">HR Manager</td>
                                             <td class="align-middle payment text-end py-3 pe-3">
                                                 <div class="badge badge-phoenix fs-10 badge-phoenix-success"><span
