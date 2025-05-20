@@ -216,14 +216,36 @@
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button class="btn btn-primary" type="submit" form="add_agency" name="ADD">ADD</button>
+                                    <button class="btn btn-primary" type="submit" form="add_agency" name="add_agency">ADD</button>
                                     <button class="btn btn-outline-primary" type="button"
                                         data-bs-dismiss="modal">Cancel</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!-- add operation  -->
+                    <?php
+include '../PhpFiles/connection.php';
 
+if (isset($_POST['add_agency'])) {
+    $agency_name = mysqli_real_escape_string($conn, $_POST['name']);
+    $agency_email = mysqli_real_escape_string($conn, $_POST['email']);
+    $agency_contact = mysqli_real_escape_string($conn, $_POST['contact']);
+    $company = mysqli_real_escape_string($conn, $_POST['company']);
+
+    // Generate a unique alphanumeric UID
+    $uid = uniqid('agencies_', true); // e.g. agencies_662022fb7855e.48901684
+
+    $query = "INSERT INTO tbl_manage_agencies (uid, agencies_name, email, person_name, contact, is_active) 
+              VALUES ('$uid', '$agency_name', '$agency_email', '$company', '$agency_contact', '1')";
+
+    if (mysqli_query($conn, $query)) {
+        echo "<script>alert('Agency added successfully'); window.location.href='view-manage-agencies.php';</script>";
+    } else {
+        echo "<script>alert('Error: " . mysqli_error($conn) . "');</script>";
+    }
+}
+?>
 
                 </div>
 
@@ -251,50 +273,65 @@
                                 </tr>
                             </thead>
                             <tbody class="list">
-                                <tr>
-                                    <td class="id">1</td>
-                                    <td class="name">Skyline Services</td>
-                                    <td class="name">info@skyline.com</td>
-                                    <td class="name">9876543210</td>
-                                    <td class="name">Ankit Mehra</td>
+                                <?php
+                                include '../PhpFiles/connection.php';
+
+                                $query = "SELECT * FROM tbl_manage_agencies";
+                                $result = mysqli_query($conn, $query) or die("Query Unsuccessful".mysqli_error($conn));
+                                if($result){
+                                    while($row = mysqli_fetch_assoc($result)){
+                                        echo '
+                                        <tr>
+                                    <td class="id">'.$row['id'].'</td>
+                                    <td class="agencies_name">'.$row['agencies_name'].'</td>
+                                    <td class="email">'.$row['email'].'</td>
+                                    <td class="contact">'.$row['contact'].'</td>
+                                    <td class="person_name">'.$row['person_name'].' </td>
                                     <td class="name">
-                                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editAgency" style="border: none;">🖉</button>
+                                        <button class="btn btn-sm btn-outline-primary edit-btn"
+    data-bs-toggle="modal"
+    data-bs-target="#editAgency"
+    data-id="' . htmlspecialchars($row['id'], ENT_QUOTES) . '"
+    data-person-name="' . htmlspecialchars($row['person_name'], ENT_QUOTES) . '"
+    data-email="' . htmlspecialchars($row['email'], ENT_QUOTES) . '"
+    data-contact="' . htmlspecialchars($row['contact'], ENT_QUOTES) . '"
+    data-agencies-name="' . htmlspecialchars($row['agencies_name'], ENT_QUOTES) . '"
+    style="border: none;">
+    🖉
+</button>
                                     </td>
                                     <td class="name">
-                                        <input class="form-check-input" type="checkbox" checked>
+                                         <input type="checkbox" class="form-check-input active-checkbox"
+         data-id="' . $row['id'] . '" ' . ($row['is_active'] === 'Yes' ? 'checked' : '') . '>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td class="id">2</td>
-                                    <td class="name">Urban Connect</td>
-                                    <td class="name">contact@urbanconnect.in</td>
-                                    <td class="name">9123456789</td>
-                                    <td class="name">Priya Sharma</td>
-                                    <td class="name">
-                                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editAgency" style="border: none;">🖉</button>
-                                    </td>
-                                    <td class="name">
-                                        <input class="form-check-input" type="checkbox">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="id">3</td>
-                                    <td class="name">Vertex Solutions</td>
-                                    <td class="name">hello@vertex.com</td>
-                                    <td class="name">9988776655</td>
-                                    <td class="name">Rahul Verma</td>
-                                    <td class="name">
-                                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editAgency" style="border: none;">🖉</button>
-                                    </td>
-                                    <td class="name">
-                                        <input class="form-check-input" type="checkbox" checked>
-                                    </td>
-                                </tr>
-
-
-
+                                ';
+                                    }
+                                }
+                                ?>
                             </tbody>
+                            <!-- checkbox -->
+                    <?php
+                        include '../PhpFiles/connection.php';
 
+                        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'], $_POST['is_active'])) {
+                            $id = $_POST['id'];
+                            $is_active = ($_POST['is_active'] === 'Yes') ? 'Yes' : 'No';
+
+                            $stmt = $conn->prepare("UPDATE tbl_manage_agencies SET is_active = ? WHERE id = ?");
+                            $stmt->bind_param("si", $is_active, $id);
+
+                            if ($stmt->execute()) {
+                                echo "success";
+                            } else {
+                                echo "error: " . $stmt->error;
+                            }
+
+                            $stmt->close();
+                            $conn->close();
+                            exit(); // prevent rest of page from being echoed
+                        }
+                    ?>
 
                         </table>
                     </div>
@@ -342,7 +379,7 @@
 
 
                                         <label for="edit_company" class="form-label mt-3">Agency Company Name</label>
-                                        <input class="form-control" type="text" id="edit_company" name="edit_company" placeholder="Enter Company Name" required>
+                                        <input class="form-control" type="text" id="edit_agencies_name" name="edit_agencies_name" placeholder="Enter Agency Name" required>
                                     </div>
                                 </div>
 
@@ -354,6 +391,37 @@
                         </div>
                     </div>
                 </div>
+<!-- Update operation -->
+<?php
+                    include '../PhpFiles/connection.php';
+
+                    if (isset($_POST['update_agency'])) {
+                        $id = intval($_POST['edit_id']);
+                        $person_name = mysqli_real_escape_string($conn, $_POST['edit_name']);
+                        $contact = mysqli_real_escape_string($conn, $_POST['edit_contact']);
+                        $email = mysqli_real_escape_string($conn, $_POST['edit_email']);
+                        $company = mysqli_real_escape_string($conn, $_POST['edit_company']);
+
+                        if ($id > 0) {
+                            $query = "UPDATE tbl_manage_agencies SET 
+            agencies_name = '$company', 
+            contact = '$contact', 
+            email = '$email', 
+            person_name = '$person_name'
+            WHERE id = $id";
+
+                            if (mysqli_query($conn, $query)) {
+                                echo "<script>alert('Builder updated successfully'); window.location.href='view-manage-agencies.php';</script>";
+                            } else {
+                                echo "<script>alert('Error: " . mysqli_error($conn) . "'); window.location.href='view-manage-agencies.php';</script>";
+                            }
+                        } else {
+                            echo "<script>alert('Invalid ID provided'); window.location.href='view-manage-agencies.php';</script>";
+                        }
+                    }
+                    ?>
+
+
 
             </div>
             <footer>
@@ -402,9 +470,9 @@
                 btn.addEventListener("click", function() {
                     const row = btn.closest("tr");
                     const id = row.querySelector(".id").textContent.trim();
-                    const name = row.querySelector(".name").textContent.trim();
+                    const name = row.querySelector(".person-name").textContent.trim();
                     const email = row.querySelector(".email").textContent.trim();
-                    const company = row.querySelector(".company").textContent.trim();
+                    const company = row.querySelector(".agencies").textContent.trim();
 
                     document.getElementById("edit_id").value = id;
                     document.getElementById("edit_name").value = name;
@@ -415,7 +483,7 @@
         });
     </script>
 
-
+<!-- search -->
     <script>
         document.getElementById('search-box').addEventListener('input', function() {
             const searchValue = this.value.toLowerCase().trim();
@@ -444,9 +512,10 @@
         document.querySelectorAll('.edit-btn').forEach(button => {
             button.addEventListener('click', () => {
                 const id = button.getAttribute('data-id');
-                const name = button.getAttribute('data-name');
+                const name = button.getAttribute('data-agencies-name');
                 const email = button.getAttribute('data-email');
                 const company = button.getAttribute('data-company');
+                const person_name = button.getAttribute('data-person-name');
 
                 document.getElementById('edit_id').value = id;
                 document.getElementById('edit_name').value = name;
@@ -470,6 +539,50 @@
     </script>
 
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.edit-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            document.getElementById('edit_id').value = button.getAttribute('data-id');
+            document.getElementById('edit_name').value = button.getAttribute('data-person-name');
+            document.getElementById('edit_email').value = button.getAttribute('data-email');
+            document.getElementById('edit_contact').value = button.getAttribute('data-contact');
+            document.getElementById('edit_agencies_name').value = button.getAttribute('data-agencies-name');
+            console.log("AGENCY NAME:", button.getAttribute('data-agencies-name')); // Debug
+        });
+    });
+});
+</script>
+
+
+
+
+<!-- checkbox -->
+ <script>
+                                    document.addEventListener('DOMContentLoaded', function() {
+                                        document.querySelectorAll('.active-checkbox').forEach(checkbox => {
+                                            checkbox.addEventListener('change', function() {
+                                                const agencyId = this.getAttribute('data-id');
+                                                const isActive = this.checked ? 'Yes' : 'No';
+
+                                                fetch('view-manage-agencies.php', {
+                                                        method: 'POST',
+                                                        headers: {
+                                                            'Content-Type': 'application/x-www-form-urlencoded'
+                                                        },
+                                                        body: `id=${agencyId}&is_active=${isActive}`
+                                                    })
+                                                    .then(response => response.text())
+                                                    .then(data => {
+                                                        console.log('Update response:', data);
+                                                    })
+                                                    .catch(error => {
+                                                        console.error('Error updating status:', error);
+                                                    });
+                                            });
+                                        });
+                                    });
+</script>
 
 </body>
 

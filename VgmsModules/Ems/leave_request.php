@@ -182,38 +182,52 @@
         <div class="row justify-content-center mt-4">
           <div class="col-md-10 col-lg-8">
             <div class="border rounded shadow-sm p-4" id="formCard">
-              <form id="leaveForm">
+              <form id="leaveForm" method="post" action="../PhpFiles/apply_leave.php" enctype="multipart/form-data">
                 <div class="row g-3">
-                  <div class="col-md-6">
-                    <label class="form-label"><i class="bi bi-person-fill me-1"></i>Employee Name</label>
-                    <input type="text" class="form-control" name="employeeName" placeholder="Please enter your name" required>
-                  </div>
-
+                  <!-- Leave Type -->
                   <div class="col-md-6">
                     <label class="form-label"><i class="bi bi-card-list me-1"></i>Leave Type</label>
-                    <select class="form-select" name="leaveType" required>
+                    <select class="form-select" name="leaveType" id="leaveType" required>
                       <option selected disabled value="">Select type</option>
-                      <option value="Casual Leave"><i class="bi bi-airplane"></i> Casual Leave</option>
-                      <option value="Sick Leave"><i class="bi bi-thermometer-half"></i> Sick Leave</option>
-                      <option value="Earned Leave"><i class="bi bi-wallet2"></i> Earned Leave</option>
+                      <option value="casual">Casual Leave</option>
+                      <option value="sick">Sick Leave</option>
+                      <option value="emergency">Emergency Leave</option>
+                      <option value="earned">Earned Leave</option>
                     </select>
                   </div>
 
+                  <!-- From Date -->
                   <div class="col-md-6">
                     <label class="form-label"><i class="bi bi-calendar-event me-1"></i>From Date</label>
-                    <input type="date" class="form-control" name="fromDate" required>
+                    <input type="date" class="form-control" name="fromDate" id="fromDate" required>
                   </div>
 
+                  <!-- To Date -->
                   <div class="col-md-6">
                     <label class="form-label"><i class="bi bi-calendar-check me-1"></i>To Date</label>
-                    <input type="date" class="form-control" name="toDate" required>
+                    <input type="date" class="form-control" name="toDate" id="toDate" required>
                   </div>
 
+                  <!-- Earned Leave Specific Date -->
+                  <div class="col-md-6 d-none" id="earnedDateWrapper">
+                    <label class="form-label"><i class="bi bi-calendar-week me-1"></i>Earned For Which Date</label>
+                    <input type="date" class="form-control" name="earnedForDate" id="earnedForDate">
+                  </div>
+
+                  <!-- Reason -->
                   <div class="col-12">
                     <label class="form-label"><i class="bi bi-pencil-square me-1"></i>Reason</label>
                     <textarea class="form-control" name="leaveReason" rows="3" placeholder="Write your reason here..." required></textarea>
                   </div>
 
+                  <div class="col-12 d-none" id="documentWrapper">
+                    <label class="form-label"><i class="bi bi-file-earmark-arrow-up me-1"></i> Upload Supporting Document</label>
+                    <input type="file" class="form-control" name="supportingDocument" id="supportingDocument">
+                    <small class="text-muted">Required if leave date is in the past</small>
+                  </div>
+
+
+                  <!-- Submit -->
                   <div class="col-12 mt-3">
                     <button type="submit" class="btn btn-outline-primary w-100">
                       <i class="bi bi-send-check me-1"></i>Submit Request
@@ -221,6 +235,94 @@
                   </div>
                 </div>
               </form>
+
+              <!-- Script for conditional behavior -->
+              <script>
+                const leaveType = document.getElementById('leaveType');
+                const fromDate = document.getElementById('fromDate');
+                const toDate = document.getElementById('toDate');
+                const earnedWrapper = document.getElementById('earnedDateWrapper'); // ✅ Fixed here
+                const earnedForDate = document.getElementById('earnedForDate');
+                const documentWrapper = document.getElementById('documentWrapper');
+                const supportingDocument = document.getElementById('supportingDocument');
+
+
+                function setEarnedDateMax() {
+                  const today = new Date();
+                  today.setDate(today.getDate() - 1);
+                  earnedForDate.max = today.toISOString().split('T')[0];
+                  earnedForDate.removeAttribute('min');
+                }
+
+                function checkDocumentRequired() {
+                  const selectedDate = new Date(fromDate.value);
+                  const today = new Date();
+                  today.setHours(0, 0, 0, 0);
+
+                  if ((leaveType.value === 'sick' || leaveType.value === 'emergency') && selectedDate < today) {
+                    supportingDocument.required = true;
+                  } else {
+                    supportingDocument.required = false;
+                  }
+                }
+
+                function updateDateConstraints() {
+                  const today = new Date();
+                  today.setHours(0, 0, 0, 0);
+                  const leave = leaveType.value;
+
+                  // Handle earned leave
+                  if (leave === 'earned') {
+                    earnedWrapper.classList.remove('d-none');
+                    setEarnedDateMax();
+                    toDate.readOnly = true;
+                    if (fromDate.value) {
+                      toDate.value = fromDate.value;
+                    }
+                  } else {
+                    earnedWrapper.classList.add('d-none');
+                    earnedForDate.value = '';
+                    toDate.readOnly = false;
+                    toDate.value = '';
+                  }
+
+                  // Set fromDate constraints
+                  if (leave === 'casual') {
+                    const casualMin = new Date(today);
+                    casualMin.setDate(casualMin.getDate() + 7);
+                    fromDate.min = casualMin.toISOString().split('T')[0];
+                  } else if (leave === 'sick' || leave === 'emergency') {
+                    fromDate.removeAttribute('min');
+                  } else {
+                    fromDate.min = today.toISOString().split('T')[0];
+                  }
+
+                  // Show/hide document field
+                  if (leave === 'sick' || leave === 'emergency') {
+                    documentWrapper.classList.remove('d-none');
+                    checkDocumentRequired();
+                  } else {
+                    documentWrapper.classList.add('d-none');
+                    supportingDocument.required = false;
+                  }
+                }
+
+                // On leave type change
+                leaveType.addEventListener('change', updateDateConstraints);
+
+                // On from date change
+                fromDate.addEventListener('change', () => {
+                  if (leaveType.value === 'earned') {
+                    toDate.value = fromDate.value;
+                  } else {
+                    toDate.min = fromDate.value;
+                  }
+                  checkDocumentRequired();
+                });
+              </script>
+
+
+
             </div>
           </div>
         </div>

@@ -1,10 +1,3 @@
-<?php
-include('../PhpFiles/connection.php');
-session_start();
-$emp_id = $_SESSION['user_id'];
-
-?>
-
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr" data-navigation-type="default" data-navbar-horizontal-shape="default">
 
@@ -20,7 +13,7 @@ $emp_id = $_SESSION['user_id'];
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>Loan Management</title>
+    <title>Starter code</title>
 
     <!-- ===============================================-->
     <!--    Favicons-->
@@ -46,8 +39,7 @@ $emp_id = $_SESSION['user_id'];
     <link href="../../assets/css/theme.min.css" type="text/css" rel="stylesheet" id="style-default">
     <link href="../../assets/css/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
     <link href="../../assets/css/user.min.css" type="text/css" rel="stylesheet" id="user-style-default">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script>
         var phoenixIsRTL = window.config.config.phoenixIsRTL;
         if (phoenixIsRTL) {
@@ -174,124 +166,120 @@ $emp_id = $_SESSION['user_id'];
             }
         </script>
         <div class="content">
-
-            <div class="container py-5 px-10">
-                <!-- Header -->
-                <div class="d-flex align-items-center mb-2" id="header">
-                    <!-- <i class="bi bi-calendar-check text-primary fs-2 me-2"></i> -->
-                    <h2 class="fw-bold mb-0">My Leave Requests</h2>
-                </div>
-
-                <!-- Subtitle and line -->
-                <p class="mb-1">Track all your submitted leave requests and check their approval status.</p>
-                <hr class="mb-4 mt-1" />
-
-                <!-- Leave Requests Card -->
-                <div class="card border-0 shadow-lg" id="cardBox">
-                    <div class="card-header d-flex flex-wrap justify-content-between align-items-center">
-                        <div class="d-flex align-items-center">
-                            <i class="bi bi-person-lines-fill text-success fs-4 me-2"></i>
-                            <h5 class="mb-0">Leave Status Summary</h5>
-                        </div>
-                        <!-- Filter and Search (smaller width) -->
-
+            <h2 class="mb-1 lh-sm">Training Program Management</h2>
+      <p class="text-muted mb-4">Enter comprehensive details to create, update, and manage employee training programs efficiently, ensuring effective learning and development</p>
+      <hr class="hr" /><br>
+            <h3 class="text-center mb-4 text-primary fw-bold">
+                Training Program Details</h3>
+            <form class="row g-3 needs-validation" novalidate="">
+                <div class="col-md-6 d-flex flex-column">
+                    <!-- City Field -->
+                    <div class="mb-1">
+                        <label class="form-label" for="validationCustom03">PROGRAM NAME</label>
+                        <input class="form-control" id="validationCustom03" type="text" required>
+                        <div class="invalid-feedback">Please provide a valid city.</div>
                     </div>
-                    <!-- Rest of the table code (unchanged logic) -->
-                    <div id="tableExample3" data-list="{&quot;valueNames&quot;:[&quot;apply&quot;,&quot;from&quot;,&quot;to&quot;,&quot;type&quot;,&quot;proof&quot;,&quot;status&quot;],&quot;page&quot;:5,&quot;pagination&quot;:true}">
-                        <!-- Dropdown and Search aligned horizontally -->
-                        <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-3 px-10 pt-5">
 
-
-                            <!-- Search Box -->
-                            <div class="search-box" style="width: 250px;">
-                                <form class="position-relative">
-                                    <input class="form-control search-input search form-control-sm" type="search" placeholder="Search" aria-label="Search">
-                                    <svg class="svg-inline--fa fa-magnifying-glass search-box-icon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
-                                        <path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path>
-                                    </svg>
-                                </form>
-                            </div>
-
-                            <div class="d-flex flex-wrap gap-2 mt-2 mt-sm-0">
-                                <!-- Apply Button -->
-                                <button class="btn btn-outline-primary btn-sm" onclick="window.location.href='leave_request.php'">
-                                    <i class="bi bi-plus-circle me-1"></i> Apply for Leave
-                                </button>
-
-                            </div>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table table-striped table-sm fs-9 mb-0">
-                                <thead>
-                                    <tr>
-                                        <th class="sort border-top border-translucent ps-3" data-sort="apply">Applied On</th>
-                                        <th class="sort border-top" data-sort="from">From</th>
-                                        <th class="sort border-top" data-sort="to">To</th>
-                                        <th class="sort border-top" data-sort="type">Type</th>
-                                        <th class="sort border-top" data-sort="proof">Proof</th>
-                                        <th class="sort text-end align-middle pe-10 border-top" data-sort="status">Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="leaveTableBody" class="list">
-                                    <?php
-
-
-                                    // Fetch leaves for specific employee
-                                    $sql = "SELECT applied_on, from_date, to_date, leave_type, document_name, status 
-                                         FROM tbl_leaves WHERE applied_by = $emp_id ORDER BY applied_on DESC";
-
-                                    $result = mysqli_query($conn, $sql);
-                                    if (mysqli_num_rows($result) > 0) {
-                                        while ($row = mysqli_fetch_assoc($result)) {
-                                            echo "<tr>
-        <td class='apply align-middle ps-3'>" . htmlspecialchars($row['applied_on']) . "</td>
-        <td class='from align-middle'>" . htmlspecialchars($row['from_date']) . "</td>
-        <td class='to align-middle'>" . htmlspecialchars($row['to_date']) . "</td>
-        <td class='type align-middle'>" . htmlspecialchars($row['leave_type']) . "</td>
-        <td class='proof align-middle'>" .
-                                                (!empty($row['document_name'])
-                                                    ? "<a href='../uploads/leavesProof/" . htmlspecialchars($row['document_name']) . "' target='_blank'>Proof</a> (" . htmlspecialchars($row['document_name']) . ")"
-                                                    : "NA") .
-                                                "</td>
-        <td class='status align-middle text-end py-3 pe-10'>" . htmlspecialchars($row['status']) . "</td>
-      </tr>";
-                                        }
-                                    } else {
-                                        echo "<tr><td colspan='6' class='text-center'>No leave history found.</td></tr>";
-                                    }
-                                    ?>
-                                </tbody>
-
-
-
-                            </table>
-                        </div>
-                        <div class="d-flex justify-content-between mt-3 px-10 pb-2">
-                            <span class="d-none d-sm-inline-block" data-list-info="data-list-info">1 to 5 <span class="text-body-tertiary"> Items of </span>43</span>
-                            <div class="d-flex">
-                                <button class="page-link disabled" data-list-pagination="prev" disabled="">
-                                    <svg class="svg-inline--fa fa-chevron-left" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                                        <path fill="currentColor" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"></path>
-                                    </svg>
-                                </button>
-                                <ul class="mb-0 pagination">
-                                    <li class="active"><button class="page" type="button" data-i="1" data-page="5">1</button></li>
-                                    <li><button class="page" type="button" data-i="2" data-page="5">2</button></li>
-                                    <li><button class="page" type="button" data-i="3" data-page="5">3</button></li>
-                                    <li class="disabled"><button class="page" type="button">...</button></li>
-                                </ul>
-                                <button class="page-link pe-0" data-list-pagination="next">
-                                    <svg class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                                        <path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
+                    <!-- Salutation Field with padding adjustment -->
+                    <div style="margin-top: 15px;">
+                        <label class="form-label">CATEGORY</label>
+                        <select class="form-select" name="category" required>
+                            <option value="">Select</option>
+                            <option value="technical">Technical</option>
+                            <option value="soft_skills">Soft Skills</option>
+                            <option value="compliance">Compliance</option>
+                        </select>
                     </div>
                 </div>
-            </div>
+
+                <!-- Right Column (Program Description) -->
+                <div class="col-md-6 d-flex flex-column" style="margin-top: 23px;">
+                    <label class="form-label mb-1" for="programDescription">Program Description</label>
+                    <textarea class="form-control flex-grow-1" id="programDescription" required
+                        style="min-height: 115px;"></textarea>
+                    <div class="valid-feedback">Looks good!</div>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="datepicker">Start Date</label>
+                    <input class="form-control datetimepicker flatpickr-input" id="datepicker" type="text"
+                        placeholder="dd/mm/yyyy"
+                        data-options="{&quot;disableMobile&quot;:true,&quot;dateFormat&quot;:&quot;d/m/Y&quot;}"
+                        readonly="readonly">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="datepicker">END DATE</label>
+                    <input class="form-control datetimepicker flatpickr-input" id="datepicker" type="text"
+                        placeholder="dd/mm/yyyy"
+                        data-options="{&quot;disableMobile&quot;:true,&quot;dateFormat&quot;:&quot;d/m/Y&quot;}"
+                        readonly="readonly">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="validationCustom03">TRAINER NAME</label>
+                    <input class="form-control" id="validationCustom03" type="text" required>
+                    <div class="invalid-feedback">Please provide a valid city.</div>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">TRAINER</label>
+                    <select class="form-select" name="trainer_type" required>
+                        <option value="">Select</option>
+                        <option value="Mr.Aakash">Mr.Aakash</option>
+                        <option value="Mr.Aryan">Mr.Aryan</option>
+                        <option value="Mr.Om">Mr.Om</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Location</label>
+                    <select class="form-select" name="location" required>
+                        <option value="">Select</option>
+                        <option value="online">Online</option>
+                        <option value="offline">Offline</option>
+                    </select>
+                </div>
+
+
+                <!-- Material Type Section -->
+                <div class="col-md-6">
+                    <label class="form-label">Material Type</label>
+                    <div class="d-flex align-items-center border rounded px-3" style="height: 38px;">
+                        <!-- Checkbox 1: Online Video -->
+                        <div class="form-check mb-0">
+                            <input class="form-check-input" type="checkbox" id="materialVideo" name="material_type[]"
+                                value="online_video" onchange="toggleTextBox()">
+                            <label class="form-check-label" for="materialVideo">Online Video</label>
+                        </div>
+
+                        <!-- Checkbox 2: Google Drive -->
+                        <div class="form-check mb-0 mx-10">
+                            <input class="form-check-input" type="checkbox" id="materialDrive" name="material_type[]"
+                                value="google_drive" onchange="toggleTextBox()">
+                            <label class="form-check-label" for="materialDrive">Google Drive</label>
+                        </div>
+
+                        <!-- Checkbox 3: Presentation (unchanged) -->
+                        <div class="form-check mb-0 mx-3">
+                            <input class="form-check-input" type="checkbox" id="materialPres" name="material_type[]"
+                                value="presentation" onchange="toggleTextBox()">
+                            <label class="form-check-label" for="materialPres">Presentation</label>
+                        </div>
+                    </div>
+                    <div id="materialLinkBox" class="mt-3" style="display: none;">
+                        <label class="form-label">Provide Link</label>
+                        <input type="text" class="form-control" placeholder="Enter link or drive URL">
+                    </div>
+                </div>
+            </form>
+
             <!-- Footer -->
             <?php include("../../Components/footer.php"); ?>
+        </div>
+
+
+
+
+
+
     </main>
 
     <!-- ===============================================-->
@@ -321,49 +309,18 @@ $emp_id = $_SESSION['user_id'];
     <script src="../../assets/js/phoenix.js"></script>
     <script src="../../vendors/echarts/echarts.min.js"></script>
     <script src="../../assets/js/ecommerce-dashboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 
-    <!-- GSAP Animations -->
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
     <script>
-        window.addEventListener("DOMContentLoaded", () => {
-            gsap.from("#header", {
-                opacity: 0,
-                y: -30,
-                duration: 0.6,
-                ease: "power2.out"
-            });
-            gsap.from("#cardBox", {
-                opacity: 0,
-                y: 40,
-                duration: 0.8,
-                delay: 0.2,
-                ease: "power2.out"
-            });
-        });
+        function toggleTextBox() {
+            const checkboxes = document.querySelectorAll('input[name="material_type[]"]');
+            const isAnyChecked = Array.from(checkboxes).some(cb => cb.checked);
+            const textbox = document.getElementById('materialLinkBox');
 
-
-        const filterSelect = document.getElementById("leaveFilter");
-        const searchBox = document.getElementById("searchBox");
-        const tableRows = document.querySelectorAll("#leaveTableBody tr");
-
-        function filterAndSearch() {
-            const status = filterSelect.value.toLowerCase();
-            const query = searchBox.value.toLowerCase();
-
-            tableRows.forEach(row => {
-                const reason = row.cells[3].textContent.toLowerCase();
-                const statBadge = row.cells[4].textContent.toLowerCase();
-
-                const matchesStatus = status === "all" || statBadge.includes(status);
-                const matchesSearch = reason.includes(query);
-
-                row.style.display = matchesStatus && matchesSearch ? "" : "none";
-            });
+            textbox.style.display = isAnyChecked ? 'block' : 'none';
         }
-
-        filterSelect.addEventListener("change", filterAndSearch);
-        searchBox.addEventListener("input", filterAndSearch);
+    </script>
     </script>
 
 

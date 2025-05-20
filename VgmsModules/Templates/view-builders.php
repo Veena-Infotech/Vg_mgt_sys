@@ -180,7 +180,7 @@
 
                     <!-- Add Button -->
                     <div class="d-flex  mb-3">
-                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addBuilderModal">Add Builder</button>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBuilderModal">Add Builder</button>
                     </div>
 
                     <!-- Search Bar -->
@@ -198,8 +198,6 @@
                         </form>
                     </div>
 
-
-
                     <!-- Table Section -->
                     <div class="table-responsive">
                         <table class="table table-striped table-sm fs-9 mb-0" id="builderTable">
@@ -214,39 +212,99 @@
                                 </tr>
                             </thead>
                             <tbody class="list" id="builderTableBody">
-                                <tr>
-                                    <td class="name">Ramesh Kumar</td>
-                                    <td class="contact">9876543210</td>
-                                    <td class="email">ramesh@example.com</td>
-                                    <td class="company">Kumar Constructions</td>
+                                <?php
+                                // database connection
+                                include '../PhpFiles/connection.php';
+
+                                $query = "SELECT * FROM tbl_manage_builders";
+
+                                $result = mysqli_query($conn, $query) or die("Query Unsuccessful" . mysqli_error($conn));
+                                if ($result) {
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        echo '
+                                        <tr>
+                                    <td class="name">' . $row['builder_name'] . '</td>
+                                    <td class="contact">' . $row['builder_contact'] . '</td>
+                                    <td class="email">' . $row['builder_email'] . '</td>
+                                    <td class="company">' . $row['company_name'] . '</td>
                                     <td class="align-middle">
-                                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editBuilderModal" style="border: none;">🖉</button>
+                                    <button class="btn btn-sm btn-outline-primary edit-btn"
+    data-bs-toggle="modal"
+    data-bs-target="#editBuilderModal"
+    data-id=" ' . $row['id'] . '"
+    data-name=" ' . htmlspecialchars($row['builder_name']) . '"
+    data-contact=" ' . htmlspecialchars($row['builder_contact']) . '"
+    data-email=" ' . htmlspecialchars($row['builder_email']) . '"
+    data-company=" ' . htmlspecialchars($row['company_name']) . ' "
+    style = "border:none;" >
+    🖉
+</button>
+
                                     </td>
-                                    <td><input class="form-check-input" type="checkbox" checked></td>
-                                </tr>
-                                <tr>
-                                    <td class="name">Sunita Sharma</td>
-                                    <td class="contact">9123456789</td>
-                                    <td class="email">sunita@example.com</td>
-                                    <td class="company">Sharma Developers</td>
-                                    <td class="align-middle">
-                                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editBuilderModal" style="border: none;">🖉</button>
-                                    </td>
-                                    <td><input class="form-check-input" type="checkbox"></td>
-                                </tr>
-                                <tr>
-                                    <td class="name">Ajay Mehta</td>
-                                    <td class="contact">9988776655</td>
-                                    <td class="email">ajay@example.com</td>
-                                    <td class="company">Mehta Infra</td>
-                                    <td class="align-middle">
-                                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editBuilderModal" style="border: none;">🖉</button>
-                                    </td>
-                                    <td><input class="form-check-input" type="checkbox" checked></td>
-                                </tr>
+                                   <td>
+  <input type="checkbox" class="form-check-input active-checkbox"
+         data-id="' . $row['id'] . '" ' . ($row['is_active'] === 'Yes' ? 'checked' : '') . '>
+</td>
+                                </tr>';
+                                    }
+                                }
+                                ?>
+                                <!-- checkbox -->
+                                <script>
+                                    document.addEventListener('DOMContentLoaded', function() {
+                                        document.querySelectorAll('.active-checkbox').forEach(checkbox => {
+                                            checkbox.addEventListener('change', function() {
+                                                const builderId = this.getAttribute('data-id');
+                                                const isActive = this.checked ? 'Yes' : 'No';
+
+                                                fetch('view-builders.php', {
+                                                        method: 'POST',
+                                                        headers: {
+                                                            'Content-Type': 'application/x-www-form-urlencoded'
+                                                        },
+                                                        body: `id=${builderId}&is_active=${isActive}`
+                                                    })
+                                                    .then(response => response.text())
+                                                    .then(data => {
+                                                        console.log('Update response:', data);
+                                                    })
+                                                    .catch(error => {
+                                                        console.error('Error updating status:', error);
+                                                    });
+                                            });
+                                        });
+                                    });
+                                </script>
+
+
                             </tbody>
                         </table>
+                        <?php
+                        include '../PhpFiles/connection.php';
 
+                        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'], $_POST['is_active'])) {
+                            $id = $_POST['id'];
+                            $is_active = ($_POST['is_active'] === 'Yes') ? 'Yes' : 'No';
+
+                            $stmt = $conn->prepare("UPDATE tbl_manage_builders SET is_active = ? WHERE id = ?");
+                            $stmt->bind_param("si", $is_active, $id);
+
+                            if ($stmt->execute()) {
+                                echo "success";
+                            } else {
+                                echo "error: " . $stmt->error;
+                            }
+
+                            $stmt->close();
+                            $conn->close();
+                            exit(); // prevent rest of page from being echoed
+                        }
+                        ?>
+
+
+                        <!-- <input class="form-check-input" type="checkbox" checked name="builder_active" 
+                                    value="Yes" data-id=" '.$row['id'] .'   '.$row['is_active'] === 'Yes' .'
+                                    "> -->
                         <!-- pagination -->
                         <div class="d-flex justify-content-end mt-3">
                             <div class="d-flex">
@@ -279,7 +337,6 @@
                                             <label for="builder_contact" class="form-label">Builder Contact</label>
                                             <input type="tel" class="form-control" id="builder_contact" placeholder="Enter Builder Contact" name="builder_contact"
                                                 pattern="[0-9]{10}" maxlength="10" oninput="validateMobile(this)" required>
-
                                         </div>
                                         <div class="mb-3">
                                             <label for="builder_email" class="form-label">Builder Email</label>
@@ -291,70 +348,112 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button class="btn btn-success" type="submit" id="addBuilderBtn" name="add">Add</button>
+                                        <button class="btn btn-success" type="submit" id="addBuilderBtn" name="add_builder">Add</button>
                                         <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
+                    <!-- add-btn -->
+                    <?php
+                    include '../PhpFiles/connection.php';
 
+                    if (isset($_POST['add_builder'])) {
+                        $builder_name = mysqli_real_escape_string($conn, $_POST['builder_name']);
+                        $builder_contact = mysqli_real_escape_string($conn, $_POST['builder_contact']);
+                        $builder_email = mysqli_real_escape_string($conn, $_POST['builder_email']);
+                        $company_name = mysqli_real_escape_string($conn, $_POST['company_name']);
 
+                        // Manually calculate next uid
+                        $res = mysqli_query($conn, "SELECT MAX(uid) AS max_uid FROM tbl_manage_builders");
+                        $row = mysqli_fetch_assoc($res);
+                        $next_uid = $row['max_uid'] + 1;
+                        if (!$next_uid) $next_uid = 1; // handle empty table
+
+                        $query = "INSERT INTO tbl_manage_builders (uid, builder_name, builder_contact, builder_email, company_name)
+              VALUES ($next_uid, '$builder_name', '$builder_contact', '$builder_email', '$company_name')";
+
+                        if (mysqli_query($conn, $query)) {
+                            echo "<script>alert('Builder added successfully'); window.location.href='view-builders.php';</script>";
+                        } else {
+                            echo "<script>alert('Error: " . mysqli_error($conn) . "');</script>";
+                        }
+                    }
+                    ?>
                     <!-- Edit Builder Modal -->
                     <div class="modal fade" id="editBuilderModal" tabindex="-1" aria-labelledby="editBuilderModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <form id="editBuilderForm" method="POST">
-
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="editBuilderModalLabel">Edit Builder</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                     </div>
                                     <div class="modal-body">
                                         <input type="hidden" id="edit_id" name="edit_id">
-
                                         <div class="mb-3">
                                             <label for="edit_name" class="form-label">Builder Name</label>
-                                            <input type="text" class="form-control" id="edit_name" placeholder="Enter Builder Name" name="edit_name" required>
+                                            <input type="text" class="form-control" id="edit_name" name="edit_name" required>
                                         </div>
-
                                         <div class="mb-3">
                                             <label for="edit_contact" class="form-label">Builder Contact</label>
-                                            <input type="tel" class="form-control" id="edit_contact" placeholder="Enter Builder Contact" name="edit_contact"
-                                                pattern="[0-9]{10}" maxlength="10" oninput="validateMobile(this)" required>
-
+                                            <input type="tel" class="form-control" id="edit_contact" name="edit_contact" required>
                                         </div>
-
                                         <div class="mb-3">
                                             <label for="edit_email" class="form-label">Builder Email</label>
-                                            <input type="email" class="form-control" id="edit_email" placeholder="Enter Builder Email" name="edit_email" required>
+                                            <input type="email" class="form-control" id="edit_email" name="edit_email" required>
                                         </div>
-
                                         <div class="mb-3">
                                             <label for="edit_company" class="form-label">Company Name</label>
-                                            <input type="text" class="form-control" id="edit_company" placeholder="Enter Builder Company Name" name="edit_company" required>
+                                            <input type="text" class="form-control" id="edit_company" name="edit_company" required>
                                         </div>
                                     </div>
-
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary" name="edit_builder">Save Changes</button>
+                                        <button type="submit" name="edit_builder" class="btn btn-primary">Save Changes</button>
                                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
                                     </div>
                                 </form>
-
                             </div>
                         </div>
                     </div>
 
+                    <!-- edit -->
+                    <?php
+                    include '../PhpFiles/connection.php';
 
+                    if (isset($_POST['edit_builder'])) {
+                        $id = intval($_POST['edit_id']);
+                        $name = mysqli_real_escape_string($conn, $_POST['edit_name']);
+                        $contact = mysqli_real_escape_string($conn, $_POST['edit_contact']);
+                        $email = mysqli_real_escape_string($conn, $_POST['edit_email']);
+                        $company = mysqli_real_escape_string($conn, $_POST['edit_company']);
+
+                        if ($id > 0) {
+                            $query = "UPDATE tbl_manage_builders SET 
+            builder_name = '$name', 
+            builder_contact = '$contact', 
+            builder_email = '$email', 
+            company_name = '$company'
+            WHERE id = $id";
+
+                            if (mysqli_query($conn, $query)) {
+                                echo "<script>alert('Builder updated successfully'); window.location.href='view-builders.php';</script>";
+                            } else {
+                                echo "<script>alert('Error: " . mysqli_error($conn) . "'); window.location.href='view-builders.php';</script>";
+                            }
+                        } else {
+                            echo "<script>alert('Invalid ID provided'); window.location.href='view-builders.php';</script>";
+                        }
+                    }
+                    ?>
+
+                    <footer>
+                        <!-- Footer -->
+                        <?php include("../../Components/footer.php"); ?>
+                    </footer>
 
                 </div>
-            </div>
-            <footer>
-                <!-- Footer -->
-                <?php include("../../Components/footer.php"); ?>
-            </footer>
-        </div>
     </main>
 
     <!-- ===============================================-->
@@ -391,44 +490,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize List.js for table pagination & search
-            const builderList = new List('tableExample3', {
-                valueNames: ['name', 'contact', 'email', 'company'],
-                page: 5,
-                pagination: true
-            });
 
-            window.refreshBuilderList = function() {
-                builderList.reIndex();
-                builderList.update();
-            };
-
-            // Handle Bootstrap 5 Modal Show Event properly
-            const editModalEl = document.getElementById('editBuilderModal');
-            if (editModalEl) {
-                editModalEl.addEventListener('show.bs.modal', function(event) {
-                    const button = event.relatedTarget;
-                    if (!button) return;
-
-                    // Safely extract data attributes
-                    const id = button.getAttribute('data-id') || '';
-                    const name = button.getAttribute('data-name') || '';
-                    const contact = button.getAttribute('data-contact') || '';
-                    const email = button.getAttribute('data-email') || '';
-                    const company = button.getAttribute('data-company') || '';
-
-                    // Populate modal form fields
-                    editModalEl.querySelector('#edit_id').value = id;
-                    editModalEl.querySelector('#edit_name').value = name;
-                    editModalEl.querySelector('#edit_contact').value = contact;
-                    editModalEl.querySelector('#edit_email').value = email;
-                    editModalEl.querySelector('#edit_company').value = company;
-                });
-            }
-        });
-    </script>
 
     <script>
         function validateMobile(input) {
@@ -443,23 +505,29 @@
         }
     </script>
 
+    <!-- <script>
+function fillEditForm(id, name, contact, email, company) {
+    document.getElementById('edit_id').value = id;
+    document.getElementById('edit_name').value = name;
+    document.getElementById('edit_contact').value = contact;
+    document.getElementById('edit_email').value = email;
+    document.getElementById('edit_company').value = company;
+}
+</script> -->
+
 
     <script>
         document.querySelectorAll('.edit-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                document.getElementById('edit_id').value = this.dataset.id;
-                document.getElementById('edit_name').value = this.dataset.name;
-                document.getElementById('edit_contact').value = this.dataset.contact;
-                document.getElementById('edit_email').value = this.dataset.email;
-                document.getElementById('edit_company').value = this.dataset.company;
+            button.addEventListener('click', () => {
+                document.getElementById('edit_id').value = button.getAttribute('data-id');
+                document.getElementById('edit_name').value = button.getAttribute('data-name');
+                document.getElementById('edit_contact').value = button.getAttribute('data-contact');
+                document.getElementById('edit_email').value = button.getAttribute('data-email');
+                document.getElementById('edit_company').value = button.getAttribute('data-company');
 
-                const url = new URL(window.location);
-                url.searchParams.set('update_id', this.dataset.id);
-                window.history.pushState({}, '', url);
             });
         });
     </script>
-
 
 
 
