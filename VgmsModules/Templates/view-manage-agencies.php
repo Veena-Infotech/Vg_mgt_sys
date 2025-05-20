@@ -311,6 +311,32 @@ if (isset($_POST['add_agency'])) {
                                 ?>
                             </tbody>
                             <!-- checkbox -->
+ <script>
+                                    document.addEventListener('DOMContentLoaded', function() {
+                                        document.querySelectorAll('.active-checkbox').forEach(checkbox => {
+                                            checkbox.addEventListener('change', function() {
+                                                const agencyId = this.getAttribute('data-id');
+                                                const isActive = this.checked ? 'Yes' : 'No';
+
+                                                fetch('view-manage-agencies.php', {
+                                                        method: 'POST',
+                                                        headers: {
+                                                            'Content-Type': 'application/x-www-form-urlencoded'
+                                                        },
+                                                        body: `id=${agencyId}&is_active=${isActive}`
+                                                    })
+                                                    .then(response => response.text())
+                                                    .then(data => {
+                                                        console.log('Update response:', data);
+                                                    })
+                                                    .catch(error => {
+                                                        console.error('Error updating status:', error);
+                                                    });
+                                            });
+                                        });
+                                    });
+</script>
+                            <!-- checkbox -->
                     <?php
                         include '../PhpFiles/connection.php';
 
@@ -557,32 +583,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-<!-- checkbox -->
- <script>
-                                    document.addEventListener('DOMContentLoaded', function() {
-                                        document.querySelectorAll('.active-checkbox').forEach(checkbox => {
-                                            checkbox.addEventListener('change', function() {
-                                                const agencyId = this.getAttribute('data-id');
-                                                const isActive = this.checked ? 'Yes' : 'No';
 
-                                                fetch('view-manage-agencies.php', {
-                                                        method: 'POST',
-                                                        headers: {
-                                                            'Content-Type': 'application/x-www-form-urlencoded'
-                                                        },
-                                                        body: `id=${agencyId}&is_active=${isActive}`
-                                                    })
-                                                    .then(response => response.text())
-                                                    .then(data => {
-                                                        console.log('Update response:', data);
-                                                    })
-                                                    .catch(error => {
-                                                        console.error('Error updating status:', error);
-                                                    });
-                                            });
-                                        });
-                                    });
-</script>
 
 </body>
 
