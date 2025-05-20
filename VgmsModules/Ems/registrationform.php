@@ -32,8 +32,7 @@
   <!-- ===============================================-->
   <link rel="preconnect" href="https://fonts.googleapis.com/">
   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
-  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet">
   <link href="../../vendors/simplebar/simplebar.min.css" rel="stylesheet">
   <!-- <link rel="stylesheet" href="../../unicons.iconscout.com/release/v4.0.8/css/line.css"> -->
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
@@ -175,7 +174,8 @@
           </div>
         </div>
 
-        <form id="onboardingForm" enctype="multipart/form-data" action="submit_onboarding.php" method="POST">
+        <!-- //id="onboardingForm"; -->
+        <form id="registerForm" onsubmit="return validate(event)">
 
           <!-- STEP TEMPLATE START -->
           <div class="step">
@@ -255,11 +255,11 @@
             <div class="mb-3">
               <label class="form-label">Primary Contact Number</label>
               <input type="text" id="primary_phone_no" class="form-control" name="primary_phone_no" required
-                pattern="^\d{10}$" title="Please enter a valid 10-digit phone number.">
+                title="Please enter a valid 10-digit phone number.">
             </div>
             <div class="mb-3">
               <label class="form-label">Alternative Contact Number</label>
-              <input type="text" id="alternative_phone_no" class="form-control" name="alternative_phone_no" required pattern="^\d{10}$"
+              <input type="text" id="alternative_phone_no" class="form-control" name="alternative_phone_no" required
                 title="Please enter a valid 10-digit phone number.">
             </div>
             <div class="mb-3">
@@ -280,9 +280,13 @@
             </div>
             <div class="d-flex justify-content-between mt-4">
               <button type="button" class="btn btn-outline-primary prev">Back</button>
-              <button type="button" class="btn btn-outline-primary next">Next</button>
+              <!-- <button type="button" class="btn btn-outline-primary next" onclick="if(step2()) goToStep3();">Next</button> -->
+              <!-- <button type="button" class="btn btn-outline-primary next" onclick="if (step2()) showStep(3)">Next</button> -->
+              <button type="button" class="btn btn-outline-primary next" onclick="step2()">Next</button>
+
             </div>
           </div>
+
 
 
           <!-- 3. Identity and Banking Details -->
@@ -291,13 +295,13 @@
             <div class="row g-3">
               <div class="col-md-6">
                 <label class="form-label">Aadhar Card Number</label>
-                <input type="text" id="aadharcard_no" class="form-control" name="aadharcard_no" required pattern="^\d{12}$"
-                  title="Please enter a valid 12-digit Aadhar card number.">
+                <input type="text" id="aadharcard_no" class="form-control" name="aadharcard_no" required
+                  >
               </div>
               <div class="col-md-6">
                 <label class="form-label">PAN Card Number</label>
                 <input type="text" id="panCard" class="form-control" name="panCard" required
-                  pattern="^[A-Za-z]{5}\d{4}[A-Za-z]{1}$" title="Please enter a valid PAN card number.">
+                   >
               </div>
               <div class="col-md-6">
                 <label class="form-label">Bank Name</label>
@@ -305,13 +309,13 @@
               </div>
               <div class="col-md-6">
                 <label class="form-label">Bank Account Number</label>
-                <input type="text" id="bank_acc_no" class="form-control" name="bank_acc_no" required pattern="^\d+$"
-                  title="Please enter a valid bank account number.">
+                <input type="text" id="bank_acc_no" class="form-control" name="bank_acc_no" required
+                  >
               </div>
               <div class="col-md-6">
                 <label class="form-label">IFSC Code</label>
                 <input type="text" id="ifsc_code" class="form-control" name="ifsc_code" required
-                  pattern="^[A-Za-z]{4}\d{7}$" title="Please enter a valid IFSC code.">
+                  >
               </div>
               <div class="col-md-6">
                 <label class="form-label">Branch Name</label>
@@ -331,8 +335,7 @@
               </div>
               <div class="col-md-6">
                 <label class="form-label">If Yes, Enter UPI ID</label>
-                <input type="text" id="upiId" class="form-control" name="upiId"
-                  pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+$" title="Please enter a valid UPI ID.">
+                <input type="text" id="upiId" class="form-control" name="upiId"s>
               </div>
             </div>
             <div class="d-flex justify-content-between mt-4">
@@ -362,8 +365,7 @@
               </div>
               <div class="col-md-6">
                 <label class="form-label">Emergency Contact Number</label>
-                <input type="text" id="emergency_phone_no" class="form-control" name="emergency_phone_no" required
-                  pattern="^\d{10}$" title="Please enter a valid 10-digit phone number.">
+                <input type="text" id="emergency_phone_no" class="form-control" name="emergency_phone_no" required>
               </div>
               <div class="col-md-6">
                 <label class="form-label">Nominee Name</label>
@@ -601,7 +603,154 @@
   <script src="../../assets/js/phoenix.js"></script>
   <script src="../../vendors/echarts/echarts.min.js"></script>
   <script src="../../assets/js/ecommerce-dashboard.js"></script>
+  <!-- <script src="/Backend/validation.js"></script> -->
+
   <script>
+    // function validate() {
+    //   const primary_phone_no = document.forms["registerForm"]["primary_phone_no"].value.trim();
+    //   const alternative_phone_no = document.forms["registerForm"]["alternative_phone_no"].value.trim();
+    //   const personalEmail = document.forms["registerForm"]["personalEmail"].value.trim();
+    //   const officialEmail = document.forms["registerForm"]["officialEmail"].value.trim();
+    //   const aadharcard_no = document.forms["registerForm"]["aadharcard_no"].value.trim();
+    //   const panCard = document.forms["registerForm"]["panCard"].value.trim();
+    //   const bank_acc_no = document.forms["registerForm"]["bank_acc_no"].value.trim();
+    //   const ifsc_code = document.forms["registerForm"]["ifsc_code"].value.trim();
+    //   const upiId = document.forms["registerForm"]["upiId"].value.trim();
+    //   const emergency_phone_no = document.forms["registerForm"]["emergency_phone_no"].value.trim();
+
+    //   const primPhoneRegex = /^\d{10}$/;
+    //   const altPhoneRegex = /^\d{10}$/;
+    //   const persEmailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    //   const offEmailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    //   const aadharRegex = /^\d{12}$/;
+    //   const panRegex = /^[A-Za-z]{5}\d{4}[A-Za-z]{1}$/;
+    //   const bankAccRegex = /^\d+$/;
+    //   const ifscRegex = /^[A-Za-z]{4}\d{7}$/;
+    //   const upiRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+$/;
+    //   const emergPhoneRegex = /^\d{10}$/;
+
+    //   if (!primPhoneRegex.test(primary_phone_no)) {
+    //     alert("Invalid input on Step 2. Please enter valid Phone Number.")
+    //   }
+
+    //   if (!altPhoneRegex.test(alternative_phone_no)) {
+    //     alert("Invalid input on Step 2. Please enter valid Phone Number.")
+    //   }
+
+    //   if (!persEmailRegex.test(personalEmail)) {
+    //     alert("Invalid input on Step 2. Please enter valid Email Id.")
+    //   }
+
+    //   if (!offEmailRegex.test(officialEmail)) {
+    //     alert("Invalid input on Step 2. Please enter valid Email Id.")
+    //   }
+
+    //   if (!aadharRegex.test(aadharcard_no)) {
+    //     alert("Invalid input on Step 2. Please enter valid Aadhar card number.")
+    //   }
+
+    //   if (!panRegex.test(panCard)) {
+    //     alert("Invalid input on Step 2. Please enter valid Pan card number.")
+    //   }
+
+    //   if (!bankAccRegex.test(bank_acc_no)) {
+    //     alert("Invalid input on Step 2. Please enter valid Bank Account number.")
+    //   }
+
+    //   if (!ifscRegex.test(ifsc_code)) {
+    //     alert("Invalid input on Step 2. Please enter valid IFSC code.")
+    //   }
+    //   if (!upiRegex.test(upiId)) {
+    //     alert("Invalid input on Step 2. Please enter valid UPI Id.")
+    //   }
+    //   if (!emergPhoneRegex.test(emergency_phone_no)) {
+    //     alert("Invalid input on Step 2. Please enter valid Phone number.")
+    //   }
+
+    // }
+
+    function validate(event) {
+      event.preventDefault();
+
+      const primary_phone_no = document.forms["registerForm"]["primary_phone_no"].value.trim();
+      const alternative_phone_no = document.forms["registerForm"]["alternative_phone_no"].value.trim();
+      const personalEmail = document.forms["registerForm"]["personalEmail"].value.trim();
+      const officialEmail = document.forms["registerForm"]["officialEmail"].value.trim();
+      const aadharcard_no = document.forms["registerForm"]["aadharcard_no"].value.trim();
+      const panCard = document.forms["registerForm"]["panCard"].value.trim();
+      const bank_acc_no = document.forms["registerForm"]["bank_acc_no"].value.trim();
+      const ifsc_code = document.forms["registerForm"]["ifsc_code"].value.trim();
+      const upiId = document.forms["registerForm"]["upiId"].value.trim();
+      const emergency_phone_no = document.forms["registerForm"]["emergency_phone_no"].value.trim();
+
+      const primPhoneRegex = /^\d{10}$/;
+      const altPhoneRegex = /^\d{10}$/;
+      const persEmailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const offEmailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const aadharRegex = /^\d{12}$/;
+      const panRegex = /^[A-Za-z]{5}\d{4}[A-Za-z]{1}$/;
+      const bankAccRegex = /^\d+$/;
+      const ifscRegex = /^[A-Za-z]{4}\d{7}$/;
+      const upiRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+$/;
+      const emergPhoneRegex = /^\d{10}$/;
+
+      if (!primPhoneRegex.test(primary_phone_no)) {
+        alert("Invalid input on Step 2. Please enter valid Phone Number.");
+        return false;
+      }
+
+      if (!altPhoneRegex.test(alternative_phone_no)) {
+        alert("Invalid input on Step 2. Please enter valid Phone Number.");
+        return false;
+      }
+
+      if (!persEmailRegex.test(personalEmail)) {
+        alert("Invalid input on Step 2. Please enter valid Email Id.");
+        return false;
+      }
+
+      if (!offEmailRegex.test(officialEmail)) {
+        alert("Invalid input on Step 2. Please enter valid Email Id.");
+        return false;
+      }
+
+      if (!aadharRegex.test(aadharcard_no)) {
+        alert("Invalid input on Step 2. Please enter valid Aadhar card number.");
+        return false;
+      }
+
+      if (!panRegex.test(panCard)) {
+        alert("Invalid input on Step 2. Please enter valid Pan card number.");
+        return false;
+      }
+
+      if (!bankAccRegex.test(bank_acc_no)) {
+        alert("Invalid input on Step 2. Please enter valid Bank Account number.");
+        return false;
+      }
+
+      if (!ifscRegex.test(ifsc_code)) {
+        alert("Invalid input on Step 2. Please enter valid IFSC code.");
+        return false;
+      }
+
+      if (!upiRegex.test(upiId)) {
+        alert("Invalid input on Step 2. Please enter valid UPI Id.");
+        return false;
+      }
+
+      if (!emergPhoneRegex.test(emergency_phone_no)) {
+        alert("Invalid input on Step 2. Please enter valid Phone number.");
+        return false;
+      }
+
+      // If all validations pass, allow the form to submit
+      return true;
+    }
+
+
+
+
     const steps = document.querySelectorAll('.step');
     const nextBtns = document.querySelectorAll('.next');
     const prevBtns = document.querySelectorAll('.prev');
@@ -624,7 +773,7 @@
 
     // Next button click
     nextBtns.forEach(btn => {
-      btn.addEventListener('click', function () {
+      btn.addEventListener('click', function() {
         if (validateStep(currentStep)) {
           currentStep++;
           if (currentStep < steps.length) {
@@ -658,10 +807,10 @@
     }));
 
     showStep(current);
-
   </script>
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
+
+    document.addEventListener('DOMContentLoaded', function() {
       const form = document.getElementById('onboardingForm');
       const steps = document.querySelectorAll('.step');
       const nextBtns = document.querySelectorAll('.next');
@@ -755,7 +904,7 @@
 
       // Next button click
       nextBtns.forEach(btn => {
-        btn.addEventListener('click', function () {
+        btn.addEventListener('click', function() {
           if (validateStep(currentStep)) {
             currentStep++;
             if (currentStep < steps.length) {
@@ -769,7 +918,7 @@
 
       // Previous button click
       prevBtns.forEach(btn => {
-        btn.addEventListener('click', function () {
+        btn.addEventListener('click', function() {
           currentStep--;
           if (currentStep >= 0) {
             showStep(currentStep);
@@ -778,7 +927,7 @@
       });
 
       // Final form submit
-      form.addEventListener('submit', function (e) {
+      form.addEventListener('submit', function(e) {
         if (!validateStep(currentStep)) {
           e.preventDefault();
           alert('Please complete all required fields correctly before submitting.');
