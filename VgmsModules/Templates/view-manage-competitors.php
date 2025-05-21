@@ -174,9 +174,9 @@
 
 
                 <!-- Container for the Table -->
-                <!-- Main Container -->
+                <!-- Main Container(search) -->
                 <div id="tableExample3"
-                    data-list='{"valueNames":["name","contact","email","company"],"page":5,"pagination":true}'
+                    data-list='{"valueNames":["name","contact","email","company_name"],"page":5,"pagination":true}'
                     style="width: 100%; padding-top: 20px;">
 
                     <!-- Add Button -->
@@ -184,19 +184,15 @@
                         <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addCompetitorModal" name="add_competitor">Add Competitor</button>
                     </div>
 
-
-
                     <!-- Search Box -->
                     <div class="search-box mb-3 mx-auto">
                         <form class="position-relative">
-                            <input class="form-control search-input search form-control-sm" type="search" placeholder="Search" aria-label="Search">
+                            <input class="form-control search-input search form-control-sm" type="search" placeholder="Search" aria-label="Search"> 
                             <svg class="svg-inline--fa fa-magnifying-glass search-box-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                 <!-- <path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path> -->
                             </svg>
                         </form>
                     </div>
-
-
 
                     <!-- Table -->
                     <div class="table-responsive">
@@ -212,81 +208,90 @@
                                 </tr>
                             </thead>
                             <tbody class="list" id="competitorTableBody">
-                                <tr>
-                                    <td class="name">Market Pulse</td>
-                                    <td class="contact">9876543210</td>
-                                    <td class="email">info@marketpulse.com</td>
-                                    <td class="company">MarketPulse Pvt Ltd</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editCompetitorModal" style="border: none;">
-                                            🖉
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <input class="form-check-input" type="checkbox" checked>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="name">TradeSmartly</td>
-                                    <td class="contact">9123456789</td>
-                                    <td class="email">support@tradesmartly.io</td>
-                                    <td class="company">TS Global</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editCompetitorModal" style="border: none;">
-                                            🖉
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <input class="form-check-input" type="checkbox">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="name">Algo Matrix</td>
-                                    <td class="contact">9988776655</td>
-                                    <td class="email">hello@algomatrix.ai</td>
-                                    <td class="company">AlgoMatrix Solutions</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editCompetitorModal" style="border: none;">
-                                            🖉
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <input class="form-check-input" type="checkbox" checked>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="name">StockBotics</td>
-                                    <td class="contact">9012345678</td>
-                                    <td class="email">contact@stockbotics.com</td>
-                                    <td class="company">StockBotics Inc.</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editCompetitorModal" style="border: none;">
-                                            🖉
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <input class="form-check-input" type="checkbox">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="name">QuantEdge</td>
-                                    <td class="contact">9845098450</td>
-                                    <td class="email">team@quantedge.co</td>
-                                    <td class="company">QuantEdge LLP</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editCompetitorModal" style="border: none;">
-                                            🖉
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <input class="form-check-input" type="checkbox" checked>
-                                    </td>
-                                </tr>
+                                <?php
+                                include '../PhpFiles/connection.php';
 
-
-
+                                $query = "SELECT * FROM tbl_manage_competitors";
+                                $result = mysqli_query($conn, $query) or die("Query Unsuccessful".mysqli_error($conn));
+                                if($result){
+                                    while($row = mysqli_fetch_assoc($result)){
+                                    echo '<tr>
+                                    <td class="name">'.$row['competitor_name'].'</td>
+                                    <td class="contact">'.$row['contact'].'</td>
+                                    <td class="email">'.$row['email'].'</td>
+                                    <td class="company_name">'.$row['company_name'].'</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary edit_competitors"
+    data-bs-toggle="modal"
+    data-bs-target="#editCompetitorModal"
+    data-id=" '.$row['id'].' "
+    data-competitor_name=" '.htmlspecialchars($row['competitor_name']).' "
+    data-contact=" '. htmlspecialchars($row['contact']).' "
+    data-email=" '.htmlspecialchars($row['email']).' "
+    data-company_name=" '.htmlspecialchars($row['company_name']).' "
+                                        style="border: none;">
+                                            🖉
+                                        </button>
+                                    </td>
+                                    <td>
+                                         <input type="checkbox" class="form-check-input active-checkbox"
+         data-id="' . $row['id'] . '" ' . ($row['is_active'] === 'Yes' ? 'checked' : '') . '>
+                                    </td>
+                                </tr>
+                                ';
+                                    }
+                                }
+                                ?>
                             </tbody>
                         </table>
+                         <!-- checkbox -->
+                                <script>
+                                    document.addEventListener('DOMContentLoaded', function() {
+                                        document.querySelectorAll('.active-checkbox').forEach(checkbox => {
+                                            checkbox.addEventListener('change', function() {
+                                                const builderId = this.getAttribute('data-id');
+                                                const isActive = this.checked ? 'Yes' : 'No';
+
+                                                fetch('view-manage-competitors.php', {
+                                                        method: 'POST',
+                                                        headers: {
+                                                            'Content-Type': 'application/x-www-form-urlencoded'
+                                                        },
+                                                        body: `id=${builderId}&is_active=${isActive}`
+                                                    })
+                                                    .then(response => response.text())
+                                                    .then(data => {
+                                                        console.log('Update response:', data);
+                                                    })
+                                                    .catch(error => {
+                                                        console.error('Error updating status:', error);
+                                                    });
+                                            });
+                                        });
+                                    });
+                                </script>
+                                <!-- checkbox -->
+                        <?php
+                        include '../PhpFiles/connection.php';
+
+                        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'], $_POST['is_active'])) {
+                            $id = $_POST['id'];
+                            $is_active = ($_POST['is_active'] === 'Yes') ? 'Yes' : 'No';
+
+                            $stmt = $conn->prepare("UPDATE tbl_manage_competitors SET is_active = ? WHERE id = ?");
+                            $stmt->bind_param("si", $is_active, $id);
+
+                            if ($stmt->execute()) {
+                                echo "success";
+                            } else {
+                                echo "error: " . $stmt->error;
+                            }
+
+                            $stmt->close();
+                            $conn->close();
+                            exit(); // prevent rest of page from being echoed
+                        }
+                        ?>
 
                         <!-- pagination -->
                         <div class="d-flex justify-content-end mt-3">
@@ -331,10 +336,39 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button class="btn btn-primary" type="submit" name="add">Add</button>
+                                        <button class="btn btn-primary" type="submit" name="add_competitors">Add</button>
                                         <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
                                     </div>
                                 </form>
+                                <?php
+include '../PhpFiles/connection.php';
+
+if (isset($_POST['add_competitors'])) {
+    // Sanitize input
+    $competitor_name = mysqli_real_escape_string($conn, $_POST['competitor_name']);
+    $contact = mysqli_real_escape_string($conn, $_POST['competitor_contact']);
+    $email = mysqli_real_escape_string($conn, $_POST['competitor_email']);
+    $company_name = mysqli_real_escape_string($conn, $_POST['company_name']);
+
+    // Generate a unique ID
+    $uid = uniqid('competitor_', true);
+
+    // SQL query (assuming your table has a column `is_active`)
+    $query = "INSERT INTO `tbl_manage_competitors` 
+              (`uid`, `competitor_name`, `contact`, `email`, `company_name`, `is_active`) 
+              VALUES 
+              ('$uid', '$competitor_name', '$contact', '$email', '$company_name', '1')";
+
+    $result = mysqli_query($conn, $query);
+
+    if ($result) {
+        echo '<script>alert("Added Successfully"); window.location.href = "view-manage-competitors.php";</script>';
+    } else {
+        echo '<script>alert("Failed: ' . mysqli_error($conn) . '"); window.location.href = "view-manage-competitors.php";</script>';
+    }
+}
+?>
+
                             </div>
                         </div>
                     </div>
@@ -363,28 +397,43 @@
                                             <input type="email" class="form-control" id="edit_email" placeholder="Enter Competitor Email" name="edit_email" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="edit_company" class="form-label">Competitor Company</label>
-                                            <input type="text" class="form-control" id="edit_company" placeholder="Enter Competitor Company" name="edit_company" required>
-                                        </div>
+    <label for="edit_company" class="form-label">Competitor Company</label>
+    <input type="text" class="form-control" id="edit_company" name="edit_company" required>
+</div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button class="btn btn-primary" type="submit" name="edit">Save Changes</button>
+                                        <button class="btn btn-primary" type="submit" name="edit_competitors">Save Changes</button>
                                         <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
                                     </div>
                                 </form>
+                               <?php
+include '../PhpFiles/connection.php';
+
+if (isset($_POST['edit_competitors'])) {
+    $id = mysqli_real_escape_string($conn, $_POST['edit_id']);
+    $competitor_name = mysqli_real_escape_string($conn, $_POST['edit_name']);
+    $email = mysqli_real_escape_string($conn, $_POST['edit_email']);
+    $contact = mysqli_real_escape_string($conn, $_POST['edit_contact']);
+    $company_name = mysqli_real_escape_string($conn, $_POST['edit_company']); // ✅ MATCHES name="edit_company"
+
+    $query = "UPDATE `tbl_manage_competitors` 
+              SET `competitor_name` = '$competitor_name',
+                  `company_name` = '$company_name',
+                  `email` = '$email',
+                  `contact` = '$contact'
+              WHERE `id` = '$id'";
+
+    if (mysqli_query($conn, $query)) {
+        echo '<script>alert("Updated Successfully"); window.location.href = "view-manage-competitors.php";</script>';
+    } else {
+        echo '<script>alert("Update failed: ' . mysqli_error($conn) . '"); window.location.href = "view-manage-competitors.php";</script>';
+    }
+}
+?>
                             </div>
                         </div>
                     </div>
-
                 </div>
-
-
-
-
-
-
-
-
 
             </div>
             <footer>
@@ -440,7 +489,7 @@
                 var name = button.data('name');
                 var contact = button.data('contact');
                 var email = button.data('email');
-                var company = button.data('company');
+                var company = button.data('company_name');
 
                 // Populate the modal fields with the data
                 $('#edit_id').val(id);
@@ -454,24 +503,33 @@
 
     <!-- edit functionally  -->
     <script>
-        document.querySelectorAll('.edit-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                document.getElementById('edit_id').value = button.getAttribute('data-id');
-                document.getElementById('edit_name').value = button.getAttribute('data-name');
-                document.getElementById('edit_contact').value = button.getAttribute('data-contact');
-                document.getElementById('edit_email').value = button.getAttribute('data-email');
-                document.getElementById('edit_company').value = button.getAttribute('data-company');
-            });
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.edit_competitors').forEach(button => {
+        button.addEventListener('click', () => {
+            document.getElementById('edit_id').value = button.getAttribute('data-id');
+            document.getElementById('edit_name').value = button.getAttribute('data-competitor_name');
+            document.getElementById('edit_contact').value = button.getAttribute('data-contact');
+            document.getElementById('edit_email').value = button.getAttribute('data-email');
+            document.getElementById('edit_company').value = button.getAttribute('data-company_name');
         });
+    });
+});
+</script>
     </script>
 
-
-
-
-
-
-    </script>
-
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.edit_competitors').forEach(button => {
+        button.addEventListener('click', () => {
+            document.getElementById('edit_id').value = button.getAttribute('data-id');
+            document.getElementById('edit_name').value = button.getAttribute('data-competitor_name');
+            document.getElementById('edit_contact').value = button.getAttribute('data-contact');
+            document.getElementById('edit_email').value = button.getAttribute('data-email');
+            document.getElementById('edit_company').value = button.getAttribute('data-company_name');
+        });
+    });
+});
+</script>
 
 
 </body>

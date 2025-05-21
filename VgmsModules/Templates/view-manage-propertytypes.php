@@ -192,16 +192,15 @@
                                                 placeholder="Enter Property Type" required>
                                             <label for="edit_type" class="form-label">Type of client</label>
                                             <select name="edit_type" id="edit_type" class="form-select">
-                                                <option value="society">Society</option>
-                                                <option value="landlord">LandLord</option>
-                                                <option value="both">Both</option>
+                                                <option value="buyer">Buyer</option>
+                                                <option value="seller">Seller</option>
                                             </select>
                                         </div>
                                         <input type="hidden" name="action" value="add_property_type">
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button class="btn btn-primary" type="submit"
+                                    <button class="btn btn-primary" type="submit" name="add_property_type"
                                         form="addPropertyTypeForm">ADD</button>
                                     <button class="btn btn-outline-primary" type="button"
                                         data-bs-dismiss="modal">Cancel</button>
@@ -209,7 +208,28 @@
                             </div>
                         </div>
                     </div>
+                    <!-- add data -->
+                    <?php
+                    // Process form data when submitted
+                    include '../PhpFiles/connection.php';
+                    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']) && $_POST['action'] === 'add_property_type') {
+                        $property_type = mysqli_real_escape_string($conn, $_POST['name']);
+                        $client_type = mysqli_real_escape_string($conn, $_POST['edit_type']);
 
+                        //  generate unique id
+                        $uid = uniqid('propertytype', true);
+                        $query = "INSERT INTO tbl_manage_property_type (uid,property_type_name, client_type) VALUES ('$uid','$property_type', '$client_type')";
+                        $result = mysqli_query($conn, $query);
+
+                        if ($result) {
+                            echo '<script>alert("Data inserted successfully."); window.location.href = "view-manage-propertytypes.php";</script>';
+                            exit;
+                        } else {
+                            echo '<script>alert("Failed: ' . mysqli_error($conn) . '"); window.location.href = "view-manage-propertytypes.php";</script>';
+                            exit;
+                        }
+                    }
+                    ?>
 
                 </div>
                 <!-- Container for the Table -->
@@ -245,64 +265,85 @@
                                 </tr>
                             </thead>
                             <tbody class="list">
-                                <tr>
-                                    <td class="align-middle ps-3 id">1</td>
-                                    <td class="align-middle type">Commercial</td>
-                                    <td class="align-middle client">Buyer</td>
+                                <?php
+                                include '../PhpFiles/connection.php';
+
+                                $query = "SELECT * FROM tbl_manage_property_type";
+                                $result = mysqli_query($conn, $query) or die("Query Unsuccessful" . mysqli_error($conn));
+                                if ($result) {
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        echo '<tr>
+                                    <td class="align-middle ps-3 id">' . $row['id'] . '</td>
+                                    <td class="align-middle type">' . $row['property_type_name'] . '</td>
+                                    <td class="align-middle client">' . $row['client_type'] . '</td>
                                     <td class="align-middle">
-                                        <button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editPropertyModal" style="border: none;">🖉</button>
+                                        <button class="btn btn-sm btn-outline-primary edit-btn" 
+    data-bs-toggle="modal" 
+    data-bs-target="#editPropertyModal"
+                                        data-id = ' . $row['id'] . '
+                                        data-property_type = ' . $row['property_type_name'] . '
+                                        data-client_type = ' . $row['client_type'] . '
+                                         style="border: none;">🖉</button>
                                     </td>
                                     <td class="align-middle">
-                                        <input class="form-check-input" type="checkbox" checked>
+                                     <input type="checkbox" class="form-check-input active-checkbox"
+         data-id="' . $row['id'] . '" ' . ($row['is_active'] === 'Yes' ? 'checked' : '') . '>
                                     </td>
-                                </tr>
-                                <tr>
-                                    <td class="align-middle ps-3 id">2</td>
-                                    <td class="align-middle type">Residential</td>
-                                    <td class="align-middle client">Seller</td>
-                                    <td class="align-middle">
-                                        <button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editPropertyModal" style="border: none;">🖉</button>
-                                    </td>
-                                    <td class="align-middle">
-                                        <input class="form-check-input" type="checkbox">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="align-middle ps-3 id">3</td>
-                                    <td class="align-middle type">Industrial</td>
-                                    <td class="align-middle client">Buyer</td>
-                                    <td class="align-middle">
-                                        <button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editPropertyModal" style="border: none;">🖉</button>
-                                    </td>
-                                    <td class="align-middle">
-                                        <input class="form-check-input" type="checkbox" checked>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="align-middle ps-3 id">4</td>
-                                    <td class="align-middle type">Retail</td>
-                                    <td class="align-middle client">Seller</td>
-                                    <td class="align-middle">
-                                        <button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editPropertyModal" style="border: none;">🖉</button>
-                                    </td>
-                                    <td class="align-middle">
-                                        <input class="form-check-input" type="checkbox">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="align-middle ps-3 id">5</td>
-                                    <td class="align-middle type">Mixed Use</td>
-                                    <td class="align-middle client">Buyer</td>
-                                    <td class="align-middle">
-                                        <button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editPropertyModal" style="border: none;">🖉</button>
-                                    </td>
-                                    <td class="align-middle">
-                                        <input class="form-check-input" type="checkbox" checked>
-                                    </td>
-                                </tr>
+                                </tr>';
+                                    }
+                                }
+                                ?>
                             </tbody>
                         </table>
                     </div>
+                        <!-- checkbox -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.active-checkbox').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const agencyId = this.getAttribute('data-id');
+                    const isActive = this.checked ? 'Yes' : 'No';
+
+                    fetch('view-manage-propertytypes.php', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded'
+                            },
+                            body: `id=${agencyId}&is_active=${isActive}`
+                        })
+                        .then(response => response.text())
+                        .then(data => {
+                            console.log('Update response:', data);
+                        })
+                        .catch(error => {
+                            console.error('Error updating status:', error);
+                        });
+                });
+            });
+        });
+    </script>
+                    <!-- checked -->
+                    <?php
+                    include '../PhpFiles/connection.php';
+
+                    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'], $_POST['is_active'])) {
+                        $id = $_POST['id'];
+                        $is_active = ($_POST['is_active'] === 'Yes') ? 'Yes' : 'No';
+
+                        $stmt = $conn->prepare("UPDATE tbl_manage_property_type SET is_active = ? WHERE id = ?");
+                        $stmt->bind_param("si", $is_active, $id);
+
+                        if ($stmt->execute()) {
+                            echo "success";
+                        } else {
+                            echo "error: " . $stmt->error;
+                        }
+
+                        $stmt->close();
+                        $conn->close();
+                        exit(); // prevent rest of page from being echoed
+                    }
+                    ?>
 
 
                     <!-- Pagination -->
@@ -320,7 +361,7 @@
                 </div>
 
                 <!-- Edit Modal -->
-                <div class="modal fade" id="editPropertyModal" tabindex="-1" aria-labelledby="editPropertyModalLabel" aria-hidden="true">
+                <!-- <div class="modal fade" id="editPropertyModal" tabindex="-1" aria-labelledby="editPropertyModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
 
@@ -350,9 +391,11 @@
 
                         </div>
                     </div>
-                </div>
-                <div class="modal fade" id="editPropertyTypeModal" tabindex="-1"
+                </div> -->
+
+                <div class="modal fade" id="editPropertyModal" tabindex="-1"
                     aria-labelledby="editPropertyTypeModalLabel" aria-hidden="true">
+                    <!-- id = "editPropertyTypeModal" to "editPropertyModal" -->
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -361,30 +404,53 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form id="editPropertyTypeForm" method="post">
+                                <!-- id = "editPropertyTypeForm" to "editPropertyForm" -->
+                                <form id="editPropertyForm" method="post">
                                     <div class="mb-3">
                                         <label for="edit_name" class="form-label">Name Of the Property Type</label>
-                                        <input class="form-control" type="text" id="edit_name" name="edit_name"
+                                        <input class="form-control" type="text" id="edit_name" name="edit_property_type"
                                             placeholder="Enter Property Type" required>
 
                                         <label for="edit_type" class="form-label">Type of client</label>
-                                        <select name="edit_type" id="edit_type" class="form-select">
-                                            <option value="society">Society</option>
-                                            <option value="landlord">LandLord</option>
-                                            <option value="both">Both</option>
+                                        <select name="edit_client_type" id="edit_type" class="form-select">
+                                            <option value="buyer">Buyer</option>
+                                            <option value="seller">Seller</option>
                                         </select>
                                     </div>
                                     <input type="hidden" id="edit_id" name="edit_id">
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <button class="btn btn-primary" type="submit" form="editPropertyTypeForm">EDIT</button>
+                                <!-- form = "editPropertyTypeForm to editPropertyForm" -->
+                                <button class="btn btn-primary" name="editPropertyTypeForm" type="submit" form="editPropertyForm">EDIT</button>
                                 <button class="btn btn-outline-primary" type="button"
                                     data-bs-dismiss="modal">Cancel</button>
                             </div>
                         </div>
                     </div>
                 </div>
+                <?php
+                include '../PhpFiles/connection.php';
+
+                if (isset($_POST['editPropertyTypeForm'])) {
+                    $id = $_POST['edit_id'];
+                    $property_type = $_POST['edit_property_type'];
+                    $client_type = $_POST['edit_client_type'];
+
+                    $query = "UPDATE tbl_manage_property_type 
+              SET property_type_name = '$property_type', client_type = '$client_type' 
+              WHERE id = '$id'";
+
+                    $result = mysqli_query($conn, $query);
+
+                    if ($result) {
+                        echo '<script>alert("Data Updated"); window.location.href = "view-manage-propertytypes.php";</script>';
+                    } else {
+                        echo '<script>alert("Failed: ' . mysqli_error($conn) . '"); window.location.href = "view-manage-propertytypes.php";</script>';
+                    }
+                }
+                ?>
+
 
             </div>
             <footer>
@@ -444,10 +510,20 @@
             });
         });
     </script>
+    </script>
 
+    <script>
+        document.querySelectorAll('.edit-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const id = this.getAttribute('data-id');
+                const propertyType = this.getAttribute('data-property_type');
+                const clientType = this.getAttribute('data-client_type');
 
-
-
+                document.getElementById('edit_id').value = id;
+                document.getElementById('edit_name').value = propertyType;
+                document.getElementById('edit_type').value = clientType;
+            });
+        });
     </script>
 
 
