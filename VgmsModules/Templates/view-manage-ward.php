@@ -199,7 +199,7 @@
                 </div>
 
                 <div class="modal-footer">
-                  <button class="btn btn-primary" type="submit" form="addWardForm">ADD</button>
+                  <button class="btn btn-primary" name="add_btn" type="submit" form="addWardForm">ADD</button>
                   <button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">Cancel</button>
                 </div>
 
@@ -207,6 +207,26 @@
             </div>
           </div>
         </div>
+
+        <!-- add data operation -->
+                     <?php
+                     include '../PhpFiles/connection.php';
+
+                     if(isset($_POST['add_btn'])){
+                     $ward_name = $_POST['ward_name'];
+
+                    //  Generate unique id
+                    $uid = uniqid('ward',true);
+
+                     $query = "INSERT INTO `tbl_ward_details` (`uid`, `ward_name`, `is_active`) VALUES ('$uid', '$ward_name', 'Yes')";
+                     $result = mysqli_query($conn, $query) or die("Query Unsuccesssful".mysqli_error($conn));
+                     if($result){
+                        echo '<script> alert("Data added successfully"); window.location.href = "view-manage-ward.php" </script>';
+                     }else{
+                        echo '<script> alert("Failed : '.mysqli_error($conn).'"); window.locaion.href = "view-manage-ward.php" </script>';
+                     }
+                    }
+                     ?>
 
         <!-- Table Section -->
         <div id="tableWrapper" style="width: 100%; padding-top: 20px;"
@@ -237,59 +257,83 @@
                 </tr>
               </thead>
               <tbody class="list">
-                <tr>
-                  <td class="align-middle ps-3 id">1</td>
-                  <td class="align-middle name">Public</td>
-                  <td class="align-middle">
-                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editWardModal" style="border: none;">🖉</button>
-                  </td>
-                  <td class="align-middle">
-                    <input class="form-check-input" type="checkbox" checked>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="align-middle ps-3 id">2</td>
-                  <td class="align-middle name">Private</td>
-                  <td class="align-middle">
-                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editWardModal" style="border: none;">🖉</button>
-                  </td>
-                  <td class="align-middle">
-                    <input class="form-check-input" type="checkbox">
-                  </td>
-                </tr>
-                <tr>
-                  <td class="align-middle ps-3 id">3</td>
-                  <td class="align-middle name">ICU</td>
-                  <td class="align-middle">
-                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editWardModal" style="border: none;">🖉</button>
-                  </td>
-                  <td class="align-middle">
-                    <input class="form-check-input" type="checkbox" checked>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="align-middle ps-3 id">4</td>
-                  <td class="align-middle name">Maternity</td>
-                  <td class="align-middle">
-                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editWardModal" style="border: none;">🖉</button>
-                  </td>
-                  <td class="align-middle">
-                    <input class="form-check-input" type="checkbox">
-                  </td>
-                </tr>
-                <tr>
-                  <td class="align-middle ps-3 id">5</td>
-                  <td class="align-middle name">Emergency</td>
-                  <td class="align-middle">
-                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editWardModal" style="border: none;">🖉</button>
-                  </td>
-                  <td class="align-middle">
-                    <input class="form-check-input" type="checkbox" checked>
-                  </td>
-                </tr>
+                <?php
+                                include '../PhpFiles/connection.php';
+                                $query = "SELECT * FROM tbl_ward_details";
+                                $result = mysqli_query($conn, $query) or die("Query Unsuccessful".mysqli_error($conn));
+                                if($result){
+                                    while($row = mysqli_fetch_assoc($result)){
+                                        echo '<tr>
+                                    <td class="align-middle ps-3 id">'.$row['id'].'</td>
+                                    <td class="align-middle name">'.$row['ward_name'].'</td>
+                                    <td class="align-middle">
+                                        <button class="btn btn-sm btn-outline-primary editWardBtn"
+        data-bs-toggle="modal"
+        data-bs-target="#editWardModal"
+        data-id='.$row['id'].'
+        data-ward_name="'.htmlspecialchars($row['ward_name'], ENT_QUOTES).'"
+        style="border: none;">🖉</button>
+                                    </td>
+                                    <td class="align-middle">
+                                         <input type="checkbox" class="form-check-input active-checkbox"
+         data-id="' . $row['id'] . '" ' . ($row['is_active'] === 'Yes' ? 'checked' : '') . '>
+                                    </td>
+                                </tr>';
+                                    }
+                                }
+                                ?>
               </tbody>
             </table>
           </div>
+          <!-- checkbox -->
+                                <script>
+                                    document.addEventListener('DOMContentLoaded', function() {
+                                        document.querySelectorAll('.active-checkbox').forEach(checkbox => {
+                                            checkbox.addEventListener('change', function() {
+                                                const builderId = this.getAttribute('data-id');
+                                                const isActive = this.checked ? 'Yes' : 'No';
+
+                                                fetch('view-manage-ward.php', {
+                                                        method: 'POST',
+                                                        headers: {
+                                                            'Content-Type': 'application/x-www-form-urlencoded'
+                                                        },
+                                                        body: `id=${builderId}&is_active=${isActive}`
+                                                    })
+                                                    .then(response => response.text())
+                                                    .then(data => {
+                                                        console.log('Update response:', data);
+                                                    })
+                                                    .catch(error => {
+                                                        console.error('Error updating status:', error);
+                                                    });
+                                            });
+                                        });
+                                    });
+                                </script>
+
+                         <!-- checkbox -->
+                        <?php
+                        include '../PhpFiles/connection.php';
+
+                        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'], $_POST['is_active'])) {
+                            $id = $_POST['id'];
+                            $is_active = ($_POST['is_active'] === 'Yes') ? 'Yes' : 'No';
+
+                            $stmt = $conn->prepare("UPDATE tbl_ward_details SET is_active = ? WHERE id = ?");
+                            $stmt->bind_param("si", $is_active, $id);
+
+                            if ($stmt->execute()) {
+                                echo "success";
+                            } else {
+                                echo "error: " . $stmt->error;
+                            }
+
+                            $stmt->close();
+                            $conn->close();
+                            exit(); // prevent rest of page from being echoed
+                        }
+                        ?>
 
 
           <!-- Pagination -->
@@ -328,7 +372,7 @@
               </div>
 
               <div class="modal-footer">
-                <button class="btn btn-primary" type="submit" form="editWardForm">EDIT</button>
+                <button class="btn btn-primary" name="edit_ward_btn" type="submit" form="editWardForm">EDIT</button>
                 <button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">Cancel</button>
               </div>
 
@@ -336,7 +380,41 @@
           </div>
         </div>
       </div>
+      <!-- edit -->
+                <?php
+include '../PhpFiles/connection.php';
 
+if (isset($_POST['edit_ward_btn'])) {
+    $id = mysqli_real_escape_string($conn, $_POST['edit_id']);
+    $ward_name = mysqli_real_escape_string($conn, $_POST['edit_ward_name']);
+
+    $query = "UPDATE tbl_ward_details SET ward_name = '$ward_name' WHERE id = '$id'";
+    $result = mysqli_query($conn, $query);
+
+    if ($result) {
+        echo "<script>alert('Ward updated successfully'); window.location.href = 'view-manage-ward.php';</script>";
+    } else {
+        echo "<script>alert('Update failed: " . mysqli_error($conn) . "'); window.location.href = 'view-manage-ward.php' </script>";
+    }
+}
+?>
+<!-- edit form data display-->
+ <script>
+ document.addEventListener('DOMContentLoaded', function () {
+  const editButtons = document.querySelectorAll('.editWardBtn');
+
+  editButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const id = button.getAttribute('data-id');
+      const wardName = button.getAttribute('data-ward_name');
+
+      document.getElementById('edit_id').value = id;
+      document.getElementById('edit_ward_name').value = wardName;
+    });
+  });
+});
+
+ </script>
       <br>
 
       <!-- Footer -->
