@@ -193,23 +193,44 @@
                                         <div class="mb-3">
                                             <label for="status" class="form-label">Status</label>
                                             <select class="form-select" id="status" name="status" required>
-                                                <option value="" disabled selected>Select status</option>
-                                                <option value="Completed">Completed</option>
-                                                <option value="Ongoing">Ongoing</option>
-                                                <option value="Cancelled">Cancelled</option>
-                                                <option value="Pending">Pending</option>
-                                            </select>
+    <option value="" disabled selected>Select status</option>
+    <option value="Completed">Completed</option>
+    <option value="On-going">On-going</option> <!-- updated here -->
+    <option value="Cancelled">Cancelled</option>
+    <option value="Pending">Pending</option>
+</select>
+
                                         </div>
                                         <input type="hidden" name="action" value="add_reservation">
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button class="btn btn-primary" type="submit" form="addreservationForm">ADD</button>
+                                    <button class="btn btn-primary" name="addReservation" type="submit" form="addreservationForm">ADD</button>
                                     <button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">Cancel</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!-- add data -->
+                      <?php
+                    include '../PhpFiles/connection.php';
+
+                    if(isset($_POST['addReservation'])){
+                        $reservation_name = $_POST['name'];
+                        $status = $_POST['status'];
+                        
+                        // generate unique id
+                        $uid = uniqid('reservation',true);
+                        $query = "INSERT INTO `tbl_manage_reservation` (`uid`, `reservation_name`, `status`, `is_active`) VALUES ('$uid', '$reservation_name', '$status', 'Yes')";
+
+                        $result = mysqli_query($conn, $query) or die('Query Unsuccessful'.mysqli_error($conn));
+                        if($result){
+                            echo '<script> alert("Data added successfully"); window.location.href = "view-manage-status.php" </script>';
+                        }else{
+                            echo '<script> alert("Failed : '.mysqli_error($conn).'"); window.location.href = "view-manage-status.php" </script>';
+                        }
+                    }
+                    ?>
 
 
 
@@ -240,61 +261,109 @@
                                 </tr>
                             </thead>
                             <tbody class="list" id="reservationTableBody">
-                                <tr>
-                                    <td class="id">1</td>
-                                    <td class="name">Alpha Reservation</td>
-                                    <td class="status"><span class="badge bg-success">Completed</span></td>
+                                <?php
+                                include '../PhpFiles/connection.php';
+
+                                $query = "SELECT * FROM tbl_manage_reservation";
+                                $result = mysqli_query($conn, $query) or die("Query Unsuccessful".mysqli_error($conn));
+                                if($result){
+                                    while($row = mysqli_fetch_assoc($result)){
+$status = strtolower(trim($row['status'])); // Normalize case and trim spaces
+$badgeClass = '';
+
+switch ($status) {
+    case 'completed':
+        $badgeClass = 'text-success border border-success';
+        break;
+    case 'pending':
+        $badgeClass = 'text-grey border border-grey';
+        break;
+    case 'on-going':
+    case 'ongoing': // Just in case you store it without a hyphen
+        $badgeClass = 'text-warning border border-warning';
+        break;
+    case 'cancelled':
+        $badgeClass = 'text-danger border border-danger';
+        break;
+    default:
+        $badgeClass = 'text-dark border border-dark';
+        break;
+}
+
+                                        echo '<tr>
+                                    <td class="id">'.$row['id'].'</td>
+                                    <td class="name">'.$row['reservation_name'].'</td>
+                                    <td class="status"><span class="badge bg-transparent ' . $badgeClass . '">' .$row['status']. '</span></td>
                                     <td>
-                                        <button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editreservation" data-id="1" data-name="Alpha Reservation" data-status="Completed" style="border: none;">🖉</button>
+                                        <button class="btn btn-sm btn-outline-primary edit-btn"
+                                            data-bs-toggle="modal" data-bs-target="#editreservation"
+                                            data-id="'.$row['id'].'" data-name="'.$row['reservation_name'].'" 
+                                            data-status = "'.$row['status'].'" 
+                                            style="border: none;">🖉</button>
                                     </td>
                                     <td class="align-middle">
                                         <div class="form-check mb-0">
-                                            <input class="form-check-input" type="checkbox" id="reservationCheck1" />
+                                           <input type="checkbox" class="form-check-input active-checkbox"
+         data-id="' . $row['id'] . '" ' . ($row['is_active'] === 'Yes' ? 'checked' : '') . '>
                                         </div>
                                     </td>
-                                </tr>
-                                <tr>
-                                    <td class="id">2</td>
-                                    <td class="name">Beta Booking</td>
-                                    <td class="status"><span class="badge bg-warning text-dark">Ongoing</span></td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editreservation" data-id="2" data-name="Beta Booking" data-status="Ongoing" style="border: none;">🖉</button>
-                                    </td>
-                                    <td class="align-middle">
-                                        <div class="form-check mb-0">
-                                            <input class="form-check-input" type="checkbox" id="reservationCheck2" />
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="id">3</td>
-                                    <td class="name">Gamma Retreat</td>
-                                    <td class="status"><span class="badge bg-danger">Cancelled</span></td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editreservation" data-id="3" data-name="Gamma Retreat" data-status="Cancelled" style="border: none;">🖉</button>
-                                    </td>
-                                    <td class="align-middle">
-                                        <div class="form-check mb-0">
-                                            <input class="form-check-input" type="checkbox" id="reservationCheck3" />
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="id">4</td>
-                                    <td class="name">Delta Stay</td>
-                                    <td class="status"><span class="badge bg-secondary">Pending</span></td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editreservation" data-id="4" data-name="Delta Stay" data-status="Pending" style="border: none;">🖉</button>
-                                    </td>
-                                    <td class="align-middle">
-                                        <div class="form-check mb-0">
-                                            <input class="form-check-input" type="checkbox" id="reservationCheck4" />
-                                        </div>
-                                    </td>
-                                </tr>
+                                </tr>';
+                                    }
+                                }
+                                ?>
                             </tbody>
                         </table>
                     </div>
+                    <!-- checkbox -->
+                                <script>
+                                    document.addEventListener('DOMContentLoaded', function() {
+                                        document.querySelectorAll('.active-checkbox').forEach(checkbox => {
+                                            checkbox.addEventListener('change', function() {
+                                                const builderId = this.getAttribute('data-id');
+                                                const isActive = this.checked ? 'Yes' : 'No';
+
+                                                fetch('view-manage-status.php', {
+                                                        method: 'POST',
+                                                        headers: {
+                                                            'Content-Type': 'application/x-www-form-urlencoded'
+                                                        },
+                                                        body: `id=${builderId}&is_active=${isActive}`
+                                                    })
+                                                    .then(response => response.text())
+                                                    .then(data => {
+                                                        console.log('Update response:', data);
+                                                    })
+                                                    .catch(error => {
+                                                        console.error('Error updating status:', error);
+                                                    });
+                                            });
+                                        });
+                                    });
+                                </script>
+
+                         <!-- checkbox -->
+                        <?php
+                        include '../PhpFiles/connection.php';
+
+                        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'], $_POST['is_active'])) {
+                            $id = $_POST['id'];
+                            $is_active = ($_POST['is_active'] === 'Yes') ? 'Yes' : 'No';
+
+                            $stmt = $conn->prepare("UPDATE tbl_manage_reservation SET is_active = ? WHERE id = ?");
+                            $stmt->bind_param("si", $is_active, $id);
+
+                            if ($stmt->execute()) {
+                                echo "success";
+                            } else {
+                                echo "error: " . $stmt->error;
+                            }
+
+                            $stmt->close();
+                            $conn->close();
+                            exit(); // prevent rest of page from being echoed
+                        }
+                        ?>
+
 
 
                     <!-- Pagination -->
@@ -320,7 +389,7 @@
                                 <button class="btn btn-close p-1" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form id="editreservationform">
+                                <form id="editreservationform" method="POST">
                                     <div class="mb-3">
                                         <label for="edit_name" class="form-label">Name of Reservation</label>
                                         <input class="form-control" type="text" id="edit_name" name="edit_name" required>
@@ -328,23 +397,44 @@
                                     <div class="mb-3">
                                         <label for="edit_status" class="form-label">Status</label>
                                         <select class="form-control" id="edit_status" name="edit_status" required>
-                                            <option value="Completed">Completed</option>
-                                            <option value="Ongoing">Ongoing</option>
-                                            <option value="Cancelled">Cancelled</option>
-                                            <option value="Pending">Pending</option>
+                                             <option value="" disabled selected>Select status</option>
+    <option value="Completed">Completed</option>
+    <option value="On-going">On-going</option> <!-- updated here -->
+    <option value="Cancelled">Cancelled</option>
+    <option value="Pending">Pending</option>
                                         </select>
                                     </div>
                                     <input type="hidden" id="edit_id" name="edit_id">
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <button class="btn btn-primary" type="submit" form="editreservationform">Edit</button>
+                                <button class="btn btn-primary" name="editReservation" type="submit" form="editreservationform">Edit</button>
                                 <button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">Cancel</button>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- edit -->
+                 <?php
+include '../PhpFiles/connection.php';
 
+if (isset($_POST['editReservation'])) {
+    $id = mysqli_real_escape_string($conn, $_POST['edit_id']);
+    $reservation_name = mysqli_real_escape_string($conn, $_POST['edit_name']);
+    $status = mysqli_real_escape_string($conn, $_POST['edit_status']);
+
+    $query = "UPDATE `tbl_manage_reservation` 
+              SET `reservation_name` = '$reservation_name', `status` = '$status'
+              WHERE `id` = '$id'";
+
+    $result = mysqli_query($conn, $query);
+    if ($result) {
+        echo '<script>alert("Data updated successfully"); window.location.href = "view-manage-status.php";</script>';
+    } else {
+        echo '<script>alert("Failed: ' . mysqli_error($conn) . '"); window.location.href = "view-manage-status.php";</script>';
+    }
+}
+?>
 
 
             </div>
@@ -401,7 +491,25 @@
             });
         });
     </script>
+   <!-- edit operation -->
+    <script>
+        // Edit button handler
+        document.querySelectorAll('.edit-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                document.getElementById('edit_name').value = button.getAttribute('data-name');
+                document.getElementById('edit_status').value = button.getAttribute('data-status');
+                document.getElementById('edit_id').value = button.getAttribute('data-id');
+            });
+        });
 
+        // Delete button handler
+        document.querySelectorAll('.delete-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const row = button.closest('tr');
+                row.remove(); // delete row
+            });
+        });
+    </script>
 
 
 

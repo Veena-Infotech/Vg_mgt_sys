@@ -197,7 +197,7 @@
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button class="btn btn-primary" type="submit"
+                                    <button class="btn btn-primary" type="submit" name="add_btn"
                                         form="addsourceForm">ADD</button>
                                     <button class="btn btn-outline-primary" type="button"
                                         data-bs-dismiss="modal">Cancel</button>
@@ -205,6 +205,25 @@
                             </div>
                         </div>
                     </div>
+<!-- add data operation -->
+                     <?php
+                     include '../PhpFiles/connection.php';
+
+                     if(isset($_POST['add_btn'])){
+                     $source_name = $_POST['name'];
+
+                    //  Generate unique id
+                    $uid = uniqid('ward',true);
+
+                     $query = "INSERT INTO `tbl_source_details` (`uid`, `source_name`, `is_active`) VALUES ('$uid', '$source_name', 'Yes')";
+                     $result = mysqli_query($conn, $query) or die("Query Unsuccesssful".mysqli_error($conn));
+                     if($result){
+                        echo '<script> alert("Data added successfully"); window.location.href = "view-manage-sources.php" </script>';
+                     }else{
+                        echo '<script> alert("Failed : '.mysqli_error($conn).'"); window.locaion.href = "view-manage-sources.php" </script>';
+                     }
+                    }
+                     ?>
 
 
                 </div>
@@ -238,60 +257,81 @@
                                 </tr>
                             </thead>
                             <tbody class="list">
-                                <tr>
-                                    <td class="align-middle ps-3 id">1</td>
-                                    <td class="align-middle name">Source A</td>
+                                 <?php
+                                include '../PhpFiles/connection.php';
+                                $query = "SELECT * FROM tbl_source_details";
+                                $result = mysqli_query($conn, $query) or die("Query Unsuccessful".mysqli_error($conn));
+                                if($result){
+                                    while($row = mysqli_fetch_assoc($result)){
+                                        echo '<tr>
+                                    <td class="align-middle ps-3 id">'.$row['id'].'</td>
+                                    <td class="align-middle name">'.$row['source_name'].'</td>
                                     <td class="align-middle">
-                                        <button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editSourceModal" style="border: none;">🖉</button>
+                                        <button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editSourceModal" 
+                                         data-id='.$row['id'].'
+        data-source_name="'.htmlspecialchars($row['source_name'], ENT_QUOTES).'"
+        style="border: none;">🖉</button>
                                     </td>
                                     <td class="align-middle">
-                                        <input class="form-check-input" type="checkbox" checked>
+                                        <input type="checkbox" class="form-check-input active-checkbox"
+         data-id="' . $row['id'] . '" ' . ($row['is_active'] === 'Yes' ? 'checked' : '') . '>
                                     </td>
-                                </tr>
-                                <tr>
-                                    <td class="align-middle ps-3 id">2</td>
-                                    <td class="align-middle name">Source B</td>
-                                    <td class="align-middle">
-                                        <button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editSourceModal" style="border: none;">🖉</button>
-                                    </td>
-                                    <td class="align-middle">
-                                        <input class="form-check-input" type="checkbox">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="align-middle ps-3 id">3</td>
-                                    <td class="align-middle name">Source C</td>
-                                    <td class="align-middle">
-                                        <button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editSourceModal" style="border: none;">🖉</button>
-                                    </td>
-                                    <td class="align-middle">
-                                        <input class="form-check-input" type="checkbox" checked>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="align-middle ps-3 id">4</td>
-                                    <td class="align-middle name">Source D</td>
-                                    <td class="align-middle">
-                                        <button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editSourceModal" style="border: none;">🖉</button>
-                                    </td>
-                                    <td class="align-middle">
-                                        <input class="form-check-input" type="checkbox">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="align-middle ps-3 id">5</td>
-                                    <td class="align-middle name">Source E</td>
-                                    <td class="align-middle">
-                                        <button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editSourceModal" style="border: none;">🖉</button>
-                                    </td>
-                                    <td class="align-middle">
-                                        <input class="form-check-input" type="checkbox" checked>
-                                    </td>
-                                </tr>
+                                </tr>';
+                                    }
+                                }
+                                ?>
                             </tbody>
                         </table>
                     </div>
+                    <!-- checkbox -->
+                                <script>
+                                    document.addEventListener('DOMContentLoaded', function() {
+                                        document.querySelectorAll('.active-checkbox').forEach(checkbox => {
+                                            checkbox.addEventListener('change', function() {
+                                                const builderId = this.getAttribute('data-id');
+                                                const isActive = this.checked ? 'Yes' : 'No';
 
+                                                fetch('view-manage-sources.php', {
+                                                        method: 'POST',
+                                                        headers: {
+                                                            'Content-Type': 'application/x-www-form-urlencoded'
+                                                        },
+                                                        body: `id=${builderId}&is_active=${isActive}`
+                                                    })
+                                                    .then(response => response.text())
+                                                    .then(data => {
+                                                        console.log('Update response:', data);
+                                                    })
+                                                    .catch(error => {
+                                                        console.error('Error updating status:', error);
+                                                    });
+                                            });
+                                        });
+                                    });
+                                </script>
+
+                         <!-- checkbox -->
+                        <?php
+                        include '../PhpFiles/connection.php';
+
+                        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'], $_POST['is_active'])) {
+                            $id = $_POST['id'];
+                            $is_active = ($_POST['is_active'] === 'Yes') ? 'Yes' : 'No';
+
+                            $stmt = $conn->prepare("UPDATE tbl_source_details SET is_active = ? WHERE id = ?");
+                            $stmt->bind_param("si", $is_active, $id);
+
+                            if ($stmt->execute()) {
+                                echo "success";
+                            } else {
+                                echo "error: " . $stmt->error;
+                            }
+
+                            $stmt->close();
+                            $conn->close();
+                            exit(); // prevent rest of page from being echoed
+                        }
+                        ?>
 
                     <!-- Pagination -->
                     <div class="d-flex justify-content-end mt-3">
@@ -328,13 +368,31 @@
                             </div>
 
                             <div class="modal-footer">
-                                <button class="btn btn-primary" type="submit" form="editSourceForm">EDIT</button>
+                                <button class="btn btn-primary" name="edit_btn" type="submit" form="editSourceForm">EDIT</button>
                                 <button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">Cancel</button>
                             </div>
 
                         </div>
                     </div>
                 </div>
+                <!-- edit -->
+                <?php
+include '../PhpFiles/connection.php';
+
+if (isset($_POST['edit_btn'])) {
+    $id = mysqli_real_escape_string($conn, $_POST['edit_source_id']);
+    $source_name = mysqli_real_escape_string($conn, $_POST['edit_source_name']);
+
+    $query = "UPDATE tbl_source_details SET source_name = '$source_name' WHERE id = '$id'";
+    $result = mysqli_query($conn, $query);
+
+    if ($result) {
+        echo "<script>alert('Ward updated successfully'); window.location.href = 'view-manage-sources.php';</script>";
+    } else {
+        echo "<script>alert('Update failed: " . mysqli_error($conn) . "'); window.location.href = 'view-manage-sources.php' </script>";
+    }
+}
+?>
 
                 <!-- <div class="modal fade" id="editservices" tabindex="-1" aria-labelledby="editregionLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">

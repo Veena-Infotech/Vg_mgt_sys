@@ -247,7 +247,34 @@
                                     ?>
                             </tbody>
                         </table>
+                        <!-- checkbox -->
+                                <script>
+                                    document.addEventListener('DOMContentLoaded', function() {
+                                        document.querySelectorAll('.active-checkbox').forEach(checkbox => {
+                                            checkbox.addEventListener('change', function() {
+                                                const LandlordId = this.getAttribute('data-id');
+                                                const isActive = this.checked ? 'Yes' : 'No';
 
+                                                fetch('view_manage_landlord.php', {
+                                                        method: 'POST',
+                                                        headers: {
+                                                            'Content-Type': 'application/x-www-form-urlencoded'
+                                                        },
+                                                        body: `id=${LandlordId}&is_active=${isActive}`
+                                                    })
+                                                    .then(response => response.text())
+                                                    .then(data => {
+                                                        console.log('Update response:', data);
+                                                    })
+                                                    .catch(error => {
+                                                        console.error('Error updating status:', error);
+                                                    });
+                                            });
+                                        });
+                                    });
+                                </script>
+
+                                
                         <!-- pagination -->
                         <div class="d-flex justify-content-end mt-3">
                             <div class="d-flex">
@@ -515,32 +542,7 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 
 
-<!-- checkbox -->
-                                <script>
-                                    document.addEventListener('DOMContentLoaded', function() {
-                                        document.querySelectorAll('.active-checkbox').forEach(checkbox => {
-                                            checkbox.addEventListener('change', function() {
-                                                const LandlordId = this.getAttribute('data-id');
-                                                const isActive = this.checked ? 'Yes' : 'No';
 
-                                                fetch('view_manage_landlord.php', {
-                                                        method: 'POST',
-                                                        headers: {
-                                                            'Content-Type': 'application/x-www-form-urlencoded'
-                                                        },
-                                                        body: `id=${LandlordId}&is_active=${isActive}`
-                                                    })
-                                                    .then(response => response.text())
-                                                    .then(data => {
-                                                        console.log('Update response:', data);
-                                                    })
-                                                    .catch(error => {
-                                                        console.error('Error updating status:', error);
-                                                    });
-                                            });
-                                        });
-                                    });
-                                </script>
 </body>
 
 

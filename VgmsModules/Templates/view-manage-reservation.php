@@ -195,13 +195,32 @@
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button class="btn btn-primary" type="submit" form="addreservationForm">ADD</button>
+                                    <button class="btn btn-primary" name="addReservation" type="submit" form="addreservationForm">ADD</button>
                                     <button class="btn btn-outline-primary" type="button"
                                         data-bs-dismiss="modal">Cancel</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!-- add data -->
+                    <?php
+                    include '../PhpFiles/connection.php';
+
+                    if(isset($_POST['addReservation'])){
+                        $reservation_name = $_POST['name'];
+                        
+                        // generate unique id
+                        $uid = uniqid('reservation',true);
+                        $query = "INSERT INTO `tbl_manage_reservation` (`uid`, `reservation_name`, `is_active`) VALUES ('$uid', '$reservation_name', 'Yes')";
+
+                        $result = mysqli_query($conn, $query) or die('Query Unsuccessful'.mysqli_error($conn));
+                        if($result){
+                            echo '<script> alert("Data added successfully"); window.location.href = "view-manage-reservation.php" </script>';
+                        }else{
+                            echo '<script> alert("Failed : '.mysqli_error($conn).'"); window.location.href = "view-manage-reservation.php" </script>';
+                        }
+                    }
+                    ?>
 
 
                 </div>
@@ -231,81 +250,81 @@
                             </thead>
                             <tbody class="list" id="reservationTableBody">
                                 <!-- Sample Data -->
-                                <tr>
-                                    <td class="id ps-3">1</td>
-                                    <td class="name">Alpha Reservation</td>
+                                 <?php
+                                include '../PhpFiles/connection.php';
+
+                                $query = "SELECT * FROM tbl_manage_reservation";
+                                $result = mysqli_query($conn, $query) or die("Query Unsuccessful".mysqli_error($conn));
+                                if($result){
+                                    while($row = mysqli_fetch_assoc($result)){
+                                        echo '<tr>
+                                    <td class="id ps-3">'.$row['id'].'</td>
+                                    <td class="name">'.$row['reservation_name'].'</td>
                                     <td>
                                         <button class="btn btn-sm btn-outline-primary edit-btn"
                                             data-bs-toggle="modal" data-bs-target="#editreservation"
-                                            data-id="1" data-name="Alpha Reservation" style="border: none;">🖉</button>
+                                            data-id="'.$row['id'].'" data-name="'.$row['reservation_name'].'" style="border: none;">🖉</button>
                                     </td>
                                     <td>
-                                        <input class="form-check-input" type="checkbox" checked>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="id ps-3">2</td>
-                                    <td class="name">Beta Booking</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-primary edit-btn"
-                                            data-bs-toggle="modal" data-bs-target="#editreservation"
-                                            data-id="2" data-name="Beta Booking" style="border: none;">🖉</button>
-                                    </td>
-                                    <td>
-                                        <input class="form-check-input" type="checkbox">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="id ps-3">3</td>
-                                    <td class="name">Gamma Retreat</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-primary edit-btn"
-                                            data-bs-toggle="modal" data-bs-target="#editreservation"
-                                            data-id="3" data-name="Gamma Retreat" style="border: none;">🖉</button>
-                                    </td>
-                                    <td>
-                                        <input class="form-check-input" type="checkbox" checked>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="id ps-3">4</td>
-                                    <td class="name">Delta Stay</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-primary edit-btn"
-                                            data-bs-toggle="modal" data-bs-target="#editreservation"
-                                            data-id="4" data-name="Delta Stay" style="border: none;">🖉</button>
-                                    </td>
-                                    <td>
-                                        <input class="form-check-input" type="checkbox">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="id ps-3">5</td>
-                                    <td class="name">Epsilon Lodge</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-primary edit-btn"
-                                            data-bs-toggle="modal" data-bs-target="#editreservation"
-                                            data-id="5" data-name="Epsilon Lodge" style="border: none;">🖉</button>
-                                    </td>
-                                    <td>
-                                        <input class="form-check-input" type="checkbox" checked>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="id ps-3">6</td>
-                                    <td class="name">Zeta Room</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-primary edit-btn"
-                                            data-bs-toggle="modal" data-bs-target="#editreservation"
-                                            data-id="6" data-name="Zeta Room" style="border: none;">🖉</button>
-                                    </td>
-                                    <td>
-                                        <input class="form-check-input" type="checkbox">
-                                    </td>
-                                </tr>
+                                         <input type="checkbox" class="form-check-input active-checkbox"
+         data-id="' . $row['id'] . '" ' . ($row['is_active'] === 'Yes' ? 'checked' : '') . '>
+                                </tr>';
+                                    }
+                                }
+                                ?>
                             </tbody>
                         </table>
                     </div>
+                    <!-- checkbox -->
+                                <script>
+                                    document.addEventListener('DOMContentLoaded', function() {
+                                        document.querySelectorAll('.active-checkbox').forEach(checkbox => {
+                                            checkbox.addEventListener('change', function() {
+                                                const builderId = this.getAttribute('data-id');
+                                                const isActive = this.checked ? 'Yes' : 'No';
+
+                                                fetch('view-manage-reservation.php', {
+                                                        method: 'POST',
+                                                        headers: {
+                                                            'Content-Type': 'application/x-www-form-urlencoded'
+                                                        },
+                                                        body: `id=${builderId}&is_active=${isActive}`
+                                                    })
+                                                    .then(response => response.text())
+                                                    .then(data => {
+                                                        console.log('Update response:', data);
+                                                    })
+                                                    .catch(error => {
+                                                        console.error('Error updating status:', error);
+                                                    });
+                                            });
+                                        });
+                                    });
+                                </script>
+
+                         <!-- checkbox -->
+                        <?php
+                        include '../PhpFiles/connection.php';
+
+                        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'], $_POST['is_active'])) {
+                            $id = $_POST['id'];
+                            $is_active = ($_POST['is_active'] === 'Yes') ? 'Yes' : 'No';
+
+                            $stmt = $conn->prepare("UPDATE tbl_manage_reservation SET is_active = ? WHERE id = ?");
+                            $stmt->bind_param("si", $is_active, $id);
+
+                            if ($stmt->execute()) {
+                                echo "success";
+                            } else {
+                                echo "error: " . $stmt->error;
+                            }
+
+                            $stmt->close();
+                            $conn->close();
+                            exit(); // prevent rest of page from being echoed
+                        }
+                        ?>
+
 
                     <!-- Pagination -->
                     <div class="d-flex justify-content-end mt-3">
@@ -330,7 +349,7 @@
                                 <button class="btn btn-close p-1" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form id="editreservationform">
+                                <form id="editreservationform" method="POST">
                                     <div class="mb-3">
                                         <label for="edit_name" class="form-label">Name of Reservation</label>
                                         <input class="form-control" type="text" id="edit_name" name="edit_name" required>
@@ -339,13 +358,31 @@
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <button class="btn btn-primary" type="submit" form="editreservationform">Edit</button>
+                                <button class="btn btn-primary" name="editReservation" type="submit" form="editreservationform">Edit</button>
                                 <button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">Cancel</button>
                             </div>
                         </div>
                     </div>
                 </div>
+                <?php
+include '../PhpFiles/connection.php';
 
+if (isset($_POST['editReservation'])) {
+    $id = mysqli_real_escape_string($conn, $_POST['edit_id']);
+    $reservation_name = mysqli_real_escape_string($conn, $_POST['edit_name']);
+
+    $query = "UPDATE `tbl_manage_reservation` 
+              SET reservation_name = '$reservation_name' 
+              WHERE `id` = '$id'";
+
+    $result = mysqli_query($conn, $query);
+    if ($result) {
+        echo '<script>alert("Data updated successfully"); window.location.href = "view-manage-reservation.php";</script>';
+    } else {
+        echo '<script>alert("Failed: ' . mysqli_error($conn) . '"); window.location.href = "view-manage-reservation.php";</script>';
+    }
+}
+?>
 
             </div>
             <footer>
@@ -402,6 +439,8 @@
             });
         });
     </script>
+
+    <!-- edit operation -->
     <script>
         // Edit button handler
         document.querySelectorAll('.edit-btn').forEach(button => {
@@ -420,11 +459,35 @@
         });
     </script>
 
+       <!-- checkbox -->
+ <script>
+                                    document.addEventListener('DOMContentLoaded', function() {
+                                        document.querySelectorAll('.active-checkbox').forEach(checkbox => {
+                                            checkbox.addEventListener('change', function() {
+                                                const agencyId = this.getAttribute('data-id');
+                                                const isActive = this.checked ? 'Yes' : 'No';
 
-
-
+                                                fetch('view-manage-reservation.php', {
+                                                        method: 'POST',
+                                                        headers: {
+                                                            'Content-Type': 'application/x-www-form-urlencoded'
+                                                        },
+                                                        body: `id=${agencyId}&is_active=${isActive}`
+                                                    })
+                                                    .then(response => response.text())
+                                                    .then(data => {
+                                                        console.log('Update response:', data);
+                                                    })
+                                                    .catch(error => {
+                                                        console.error('Error updating status:', error);
+                                                    });
+                                            });
+                                        });
+                                    });
+</script>
 
     </script>
+ 
 
 
 
