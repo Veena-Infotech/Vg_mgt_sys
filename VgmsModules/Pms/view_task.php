@@ -383,10 +383,68 @@
                 data-fa-transform="grow-4 down-1"></span></button><input
               class="form-control search-input rounded-3 px-3" placeholder="Add new task" /></div>
         </div> -->
+        <?php
+include '../PhpFiles/connection.php';
+
+$project_id = isset($_GET['project_id']) ? intval($_GET['project_id']) : 0;
+
+$sql = "
+  SELECT 
+    t.id,
+    t.title,
+    t.description,
+    t.project_name,
+    s.name AS status_name,
+    c.category_name AS category_name,
+    p.priority AS priority_name
+  FROM tbl_tasks t
+  LEFT JOIN tbl_task_status s ON t.status_id = s.id
+  LEFT JOIN tbl_category c ON t.task_category = c.id
+  LEFT JOIN tbl_priority p ON t.priority = p.id
+  WHERE t.project_id = $project_id
+";
+
+$result = $conn->query($sql);
+$tasks = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
+
+foreach ($tasks as $task) {
+    if (empty($task['status_name'])) {
+        echo "Missing status for task ID: {$task['id']}<br>";
+    }
+}
+// 🧩 Group by status name
+$groupedTasks = [];
+foreach ($tasks as $task) {
+  $status = $task['status_name'] ?: 'Unassigned';
+  if (!isset($groupedTasks[$status])) {
+    $groupedTasks[$status] = [];
+  }
+  $groupedTasks[$status][] = $task;
+}
+
+
+?>
+
+        <?php
+          $groupedTasks = [];
+          foreach ($tasks as $task) {
+          $status = $task['status_name'];
+          if (!isset($groupedTasks[$status])) {
+            $groupedTasks[$status] = [];
+          }
+          $groupedTasks[$status][] = $task;
+          } 
+        ?>
+        <?php foreach ($groupedTasks as $status => $tasksInStatus): ?>
         <div class="kanban-column scrollbar">
           <div class="kanban-column-header px-4 hover-actions-trigger">
             <div class="d-flex align-items-center border-bottom border-3 py-3 border-300">
-              <h5 class="mb-0 kanban-column-title">To do<span class="kanban-title-badge">2</span></h5>
+              <h5 class="mb-0 kanban-column-title">
+                <?= htmlspecialchars($status) ?>
+                <span class="kanban-title-badge">
+                  <?= count($tasksInStatus) ?>
+                </span>
+              </h5>
               <div class="hover-actions-trigger"><button
                   class="btn btn-sm btn-phoenix-default kanban-header-dropdown-btn hover-actions" type="button"
                   data-boundary="viewport" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span
@@ -420,13 +478,14 @@
                     class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
                     href="#!"><span>Edit colour</span><span class="fas fa-angle-right fs-10"></span></a>
                 </div>
-              </div><span class="uil uil-left-arrow-to-left fs-8 ms-auto kanban-collapse-icon"
+                </div><span class="uil uil-left-arrow-to-left fs-8 ms-auto kanban-collapse-icon"
                 data-kanban-collapse="data-kanban-collapse"></span><span
                 class="uil uil-arrow-from-right fs-8 ms-auto kanban-collapse-icon"
                 data-kanban-collapse="data-kanban-collapse"></span>
             </div>
           </div>
           <div class="kanban-items-container" data-sortable="data-sortable">
+            <?php foreach ($tasksInStatus as $task): ?>
             <div class="sortable-item-wrapper border-bottom border-translucent px-2 py-2">
               <div class="card sortable-item hover-actions-trigger">
                 <div class="card-body py-3 px-3">
@@ -437,7 +496,10 @@
                   <div class="kanban-status mb-1 position-relative lh-1"><span
                       class="fa fa-circle me-2 d-inline-block text-danger" style="min-width:1rem"
                       data-fa-transform="shrink-1 down-3"></span><span
-                      class="badge badge-phoenix fs-10 badge-phoenix-danger"><span>Bug</span><span
+                      class="badge badge-phoenix fs-10 badge-phoenix-danger">
+                      <span>
+                        <?= htmlspecialchars($task['category_name']) ?>
+                      </span><span
                         class="ms-1 d-inline-block fas fa-bug" data-fa-transform="up-2"
                         style="height:7.8px;width:7.8px;"></span></span><button
                       class="btn btn-sm btn-phoenix-default kanban-item-dropdown-btn hover-actions" type="button"
@@ -465,8 +527,18 @@
                         href="#!"><span>Delete</span></a>
                     </div>
                   </div>
-                  <p class="mb-0 stretched-link" data-bs-toggle="modal" data-bs-target="#KanbanItemDetailsModal">Test
-                    and debug code for the e-commerce website checkout process</p>
+                  <p class="mb-0 stretched-link"
+   data-bs-toggle="modal"
+   data-bs-target="#KanbanItemDetailsModal"
+   data-title="<?= htmlspecialchars($task['title']) ?>"
+   data-description="<?= htmlspecialchars($task['description']) ?>"
+   data-project="<?= htmlspecialchars($task['project_name']) ?>"
+   data-status="<?= htmlspecialchars($task['status_name']) ?>"
+   data-priority="<?= htmlspecialchars($task['priority_name']) ?>"
+   data-category="<?= htmlspecialchars($task['category_name']) ?>">
+   <?= htmlspecialchars($task['title']) ?>
+</p>
+
                   <div class="d-flex mt-2 align-items-center">
                     <p class="mb-0 text-body-tertiary text-opacity-85 fs-9 lh-1"><span
                         class="fa-solid fa-paperclip fs-9 me-2 d-inline-block" style="min-width: 1rem;"></span>15</p>
@@ -483,61 +555,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div class="sortable-item-wrapper border-bottom border-translucent px-2 py-2">
-              <div class="card sortable-item hover-actions-trigger">
-                <div class="card-body py-3 px-3">
-                  <div class="kanban-status mb-1 position-relative lh-1"><span
-                      class="fa fa-circle me-2 d-inline-block text-warning" style="min-width:1rem"
-                      data-fa-transform="shrink-1 down-3"></span><span
-                      class="badge badge-phoenix fs-10 badge-phoenix-warning"><span>Issue</span><span
-                        class="ms-1 d-inline-block fa-solid fa-triangle-exclamation" data-fa-transform="up-2"
-                        style="height:7.8px;width:7.8px;"></span></span><button
-                      class="btn btn-sm btn-phoenix-default kanban-item-dropdown-btn hover-actions" type="button"
-                      data-boundary="viewport" data-bs-toggle="dropdown" aria-haspopup="true"
-                      aria-expanded="false"><span class="fas fa-ellipsis-h fa-rotate-90"
-                        data-fa-transform="shrink-2"></span></button>
-                    <div class="dropdown-menu dropdown-menu-end py-2" style="width: 15rem;"><a
-                        class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
-                        href="#!"><span>Move</span><span class="fas fa-angle-right fs-10"></span></a><a
-                        class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
-                        href="#!"><span>Duplicate</span></a><a
-                        class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
-                        href="#!"><span>Jump to top</span></a><a
-                        class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
-                        href="#!"><span>Jump to bottom</span></a>
-                      <hr class="my-2" /><a
-                        class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
-                        href="#!"><span>Print/Download</span></a><a
-                        class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
-                        href="#!"><span>Share</span><span class="fas fa-angle-right fs-10"></span></a>
-                      <hr class="my-2" /><a
-                        class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
-                        href="#!"><span>Move to archive</span><span class="fas fa-angle-right fs-10"></span></a><a
-                        class="dropdown-item d-flex flex-between-center border-1 border-translucent text-danger"
-                        href="#!"><span>Delete</span></a>
-                    </div>
-                  </div>
-                  <p class="mb-0 stretched-link" data-bs-toggle="modal" data-bs-target="#KanbanItemDetailsModal">Write a
-                    blog post on industry trends and best practices</p>
-                  <div class="d-flex mt-2 align-items-center">
-                    <p class="mb-0 text-body-tertiary text-opacity-85 fs-9 lh-1 me-3 white-space-nowrap"><span
-                        class="fa-solid fa-calendar-xmark fs-9 me-2 d-inline-block" style="min-width: 1rem;"></span>Jan
-                      25</p>
-                    <div class="avatar-group ms-auto">
-                      <div class="avatar avatar-s  border border-light-subtle rounded-pill">
-                        <img class="rounded-circle " src="../../assets/img/team/30.webp" alt="" />
-                      </div>
-                      <div class="avatar avatar-s  border border-light-subtle rounded-pill">
-                        <img class="rounded-circle " src="../../assets/img/team/57.webp" alt="" />
-                      </div>
-                      <div class="avatar avatar-s  border border-light-subtle rounded-pill">
-                        <img class="rounded-circle " src="../../assets/img/team/25.webp" alt="" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <?php endforeach; ?>
               </div>
             </div>
           </div>
@@ -547,7 +565,8 @@
                 data-fa-transform="grow-4 down-1"></span></button><input
               class="form-control search-input rounded-3 px-3" placeholder="Add new task" /></div>
         </div>
-        <div class="kanban-column scrollbar">
+        <?php endforeach; ?>
+        <!--div class="kanban-column scrollbar">
           <div class="kanban-column-header px-4 hover-actions-trigger">
             <div class="d-flex align-items-center border-bottom border-3 py-3 border-primary">
               <h5 class="mb-0 kanban-column-title">Doing<span class="kanban-title-badge">4</span></h5>
@@ -742,7 +761,7 @@
                 <div class="card-body py-3 px-3">
                   <div class="position-relative mb-2 overflow-hidden rounded" style="height:200px; width:100%">
                     <div class="bg-holder" style="background-image:url(../../assets/img/kanban/glass.jpg);"></div>
-                    <!--/.bg-holder-->
+                    </.bg-holder>
                   </div>
                   <div class="kanban-status mb-1 position-relative lh-1"><span
                       class="fa fa-circle me-2 d-inline-block text-warning" style="min-width:1rem"
@@ -793,8 +812,8 @@
                 class="fas fa-plus text-white dark__text-gray-400"
                 data-fa-transform="grow-4 down-1"></span></button><input
               class="form-control search-input rounded-3 px-3" placeholder="Add new task" /></div>
-        </div>
-        <div class="kanban-column scrollbar">
+        </div-->
+        <!--div class="kanban-column scrollbar">
           <div class="kanban-column-header px-4 hover-actions-trigger">
             <div class="d-flex align-items-center border-bottom border-3 py-3 border-info">
               <h5 class="mb-0 kanban-column-title">Review<span class="kanban-title-badge">4</span></h5>
@@ -995,7 +1014,7 @@
                 <div class="card-body py-3 px-3">
                   <div class="position-relative mb-2 overflow-hidden rounded" style="height:200px; width:100%">
                     <div class="bg-holder" style="background-image:url(../../assets/img/kanban/wall.jpg);"></div>
-                    <!--/.bg-holder-->
+                    </.bg-holder>
                   </div>
                   <div class="kanban-status mb-1 position-relative lh-1"><span
                       class="fa fa-circle me-2 d-inline-block text-primary" style="min-width:1rem"
@@ -1043,8 +1062,8 @@
                 class="fas fa-plus text-white dark__text-gray-400"
                 data-fa-transform="grow-4 down-1"></span></button><input
               class="form-control search-input rounded-3 px-3" placeholder="Add new task" /></div>
-        </div>
-        <div class="kanban-column scrollbar">
+        </div-->
+        <!--div class="kanban-column scrollbar">
           <div class="kanban-column-header px-4 hover-actions-trigger">
             <div class="d-flex align-items-center border-bottom border-3 py-3 border-success">
               <h5 class="mb-0 kanban-column-title">Release<span class="kanban-title-badge">3</span></h5>
@@ -1141,7 +1160,7 @@
                 <div class="card-body py-3 px-3">
                   <div class="position-relative mb-2 overflow-hidden rounded" style="height:200px; width:100%">
                     <div class="bg-holder" style="background-image:url(../../assets/img/kanban/home.jpg);"></div>
-                    <!--/.bg-holder-->
+                    </.bg-holder>
                   </div>
                   <div class="kanban-status mb-1 position-relative lh-1"><span
                       class="fa fa-circle me-2 d-inline-block text-danger" style="min-width:1rem"
@@ -1251,7 +1270,7 @@
                 class="fas fa-plus text-white dark__text-gray-400"
                 data-fa-transform="grow-4 down-1"></span></button><input
               class="form-control search-input rounded-3 px-3" placeholder="Add new task" /></div>
-        </div>
+        </div-->
         <div class="kanban-column scrollbar position-relative bg-transparent">
           <div class="d-flex h-100 flex-center fw-bold bg-body-hover"><a
               class="text-decoration-none stretched-link text-body-secondary" href="#!">
@@ -2142,7 +2161,8 @@
           class="fa-solid fa-headset text-primary fs-8 d-sm-none"></span><span
           class="fa-solid fa-chevron-down text-primary fs-7"></span></button>
     </div> -->
-  </main><!-- ===============================================-->
+  </main>
+  <!-- ===============================================-->
   <!--    End of Main Content-->
   <!-- ===============================================-->
 
@@ -2304,17 +2324,18 @@
     </div> -->
   </a>
   <?php
-if (isset($_GET['id']) && is_numeric($_GET['id'])) {
-    $project_id = (int) $_GET['id'];
+if (isset($_GET['project_id']) && is_numeric($_GET['project_id'])) {
+    $project_id = (int) $_GET['project_id'];
 } else {
     echo "Invalid project ID.";
     exit;
 }
 ?>
+
   <div class="modal fade" id="kanbanAddTask" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen-sm-down modal-xl modal-dialog-centered">
       <div class="modal-content">
-        <!-- added by me -->
+        <!-- added the from tag and name attribute -->
         <form action="../../VgmsModules/PhpFiles/handle_add_task.php" method="post" enctype="multipart/form-data" class="needs-validation" novalidate="novalidate" class="dropzone dropzone-multiple p-0" id="dropzone-multiple" data-dropzone="data-dropzone">
           <div class="modal-body">
             <h3>Edit Task</h3>
@@ -2494,6 +2515,8 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
       </div>
     </div>
   </div>
+  
+
   <div class="modal fade" id="KanbanItemDetailsModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen-md-down modal-md modal-dialog-centered">
       <div class="modal-content overflow-hidden">
@@ -2503,34 +2526,31 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
             <!--/.bg-holder-->
           </div>
           <div class="row gy-4 py-0 gx-0">
-            <div class="col-lg-8 col-12">
+          <div class="col-lg-8 col-12">
               <div class="row mt-0 gy-4 pb-3 gx-0 px-3">
                 <div class="col-4 col-sm-3">
                   <h6 class="text-body-tertiary fw-bolder lh-sm mt-1">TITLE </h6>
                 </div>
                 <div class="col-8 col-sm-9">
-                  <h4 class="mb-0 text-body-emphasis lh-sm">Reproduced below for those interested</h4>
+                  <h4 class="mb-0 text-body-emphasis lh-sm" id="modal-title"></h4>
                 </div>
                 <div class="col-4 col-sm-3">
                   <h6 class="text-body-tertiary fw-bolder lh-sm mt-1">DESCRIPTION </h6>
                 </div>
                 <div class="col-8 col-sm-9">
-                  <P class="fs-9 mb-0">Reproduced below for those interested" is a phrase used to provide additional
-                    content or details for individuals who have expressed interest in a particular topic. It signals
-                    that what follows is optional and caters specifically to those who want to delve deeper into the
-                    subject matter.</P>
+                  <P class="fs-9 mb-0" id="modal-description"></P>
                 </div>
                 <div class="col-4 col-sm-3">
                   <h6 class="text-body-tertiary fw-bolder lh-sm mt-1">PROJECT NAME </h6>
                 </div>
                 <div class="col-8 col-sm-9">
-                  <P class="mb-0 text-body-emphasis fw-semibold">Phoenix</P>
+                  <P class="mb-0 text-body-emphasis fw-semibold" id="modal-project"></P>
                 </div>
                 <div class="col-4 col-sm-3">
                   <h6 class="text-body-tertiary fw-bolder lh-sm mt-1">STATUS</h6>
                 </div>
                 <div class="col-8 col-sm-9">
-                  <P class="mb-0 text-body-emphasis fw-semibold d-inline-block kanban-column-underline-warning">Doing
+                  <P class="mb-0 text-body-emphasis fw-semibold d-inline-block kanban-column-underline-warning" id="modal-status">
                   </P>
                 </div>
                 <div class="col-4 col-sm-3">
@@ -2726,13 +2746,15 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                 </div>
                 <div class="col-8 col-sm-9">
                   <P class="mb-0 text-body-emphasis fw-semibold"><span class="fa fa-circle m text-warning"
-                      data-fa-transform="shrink-6 down-1"></span>High</P>
+                      data-fa-transform="shrink-6 down-1" id="modal-priority"></span>
+                  </P>
                 </div>
                 <div class="col-4 col-sm-3">
                   <h6 class="text-body-tertiary fw-bolder lh-sm mt-1">CATEGORY </h6>
                 </div>
                 <div class="col-8 col-sm-9"><span
-                    class="badge badge-phoenix fs-10 badge-phoenix-danger"><span>Bug</span><span
+                    class="badge badge-phoenix fs-10 badge-phoenix-danger" id="modal-category"><span>
+                   </span><span
                       class="ms-1 fas fa-bug item.icon" data-fa-transform="up-2"
                       style="height:7.8px;width:7.8px;"></span></span></div>
                 <div class="col-4 col-sm-3">
@@ -2864,8 +2886,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
               </div>
             </div>
           </div>
-        </div>
-        <div class="modal-footer justify-content-between"><button class="btn p-1" type="button" data-bs-dismiss="modal"
+          <div class="modal-footer justify-content-between"><button class="btn p-1" type="button" data-bs-dismiss="modal"
             aria-label="Close"><span class="fas fa-times fs-10 me-1"
               data-fa-transform="up-1"></span>Close</button><button class="btn btn-phoenix-primary px-6" type="button"
             data-bs-target="#kanbanAddTask" data-bs-toggle="modal">Edit<span class="fas fa-edit ms-2"
@@ -2873,6 +2894,22 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
       </div>
     </div>
   </div>
+  
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const modal = document.getElementById('KanbanItemDetailsModal');
+    modal.addEventListener('show.bs.modal', function (event) {
+      const trigger = event.relatedTarget;
+
+      document.getElementById('modal-title').textContent = trigger.getAttribute('data-title');
+      document.getElementById('modal-description').textContent = trigger.getAttribute('data-description');
+      document.getElementById('modal-project').textContent = trigger.getAttribute('data-project');
+      document.getElementById('modal-status').textContent = trigger.getAttribute('data-status');
+      document.getElementById('modal-priority').textContent = trigger.getAttribute('data-priority');
+      document.getElementById('modal-category').textContent = trigger.getAttribute('data-category');
+    });
+  });
+</script>
 
   <!-- ===============================================-->
   <!--    JavaScripts-->
