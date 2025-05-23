@@ -265,15 +265,25 @@
                                     </tr>
                                 </thead>
                                 <tbody class="list">
-                                    <tr>
-                                        <td class="align-middle ps-3 name society_name">Sunshine Apartments</td>
-                                        <td class="align-middle cts ward">Ward 5</td>
-                                        <td class="align-middle address unit">12B</td>
-                                        <td class="align-middle address">123 Sunny Street, Mumbai</td>
+                                    <?php
+                                    include '../PhpFiles/connection.php';
+
+                                    $query = "SELECT s.*, ward_name
+FROM tbl_society_details AS s
+INNER JOIN tbl_ward_details AS w ON s.ward = w.id";
+// $query = "SELECT * FROM tbl_society_details";
+                                    $result = mysqli_query($conn, $query) or die("Query unsuccessful".mysqli_error($conn));
+                                    if($result){
+                                        while($row = mysqli_fetch_assoc($result)){
+                                            echo '<tr>
+                                        <td class="align-middle ps-3 name society_name">'.$row['society_name'].'</td>
+                                        <td class="align-middle cts ward">'.$row['ward_name'].'</td>
+                                        <td class="align-middle address unit">'.$row['unit'].'</td>
+                                        <td class="align-middle address">'.$row['address'].'</td>
                                         <td class="align-middle white-space-nowrap text-end pe-0">
                                             <div class="btn-reveal-trigger position-static">
                                                 <button class="btn btn-sm btn-reveal fs-10 open-action-modal"
-                                                    data-id="1" data-bs-toggle="modal" data-bs-target="#actionModal">
+                                                    data-id="'.$row['id'].'" data-bs-toggle="modal" data-bs-target="#actionModal">
                                                     <span class="fas fa-ellipsis-h fs-10"></span>
                                                 </button>
 
@@ -293,7 +303,11 @@
                                                 </div>
                                             </div>
                                         </td>
-                                    </tr>
+                                    </tr>';
+                                        }
+                                    }
+                                    ?>
+                                    
 
                                     <tr>
                                         <td class="align-middle ps-3 name society_name">Greenwood Residency</td>
