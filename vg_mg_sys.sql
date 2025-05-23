@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 23, 2025 at 09:22 AM
+-- Generation Time: May 23, 2025 at 09:49 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -732,6 +732,28 @@ INSERT INTO `tbl_project_status` (`id`, `status_name`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_project_task_status`
+--
+
+CREATE TABLE `tbl_project_task_status` (
+  `id` int(100) NOT NULL,
+  `project_id` int(100) DEFAULT NULL,
+  `task_status_id` int(100) DEFAULT NULL,
+  `creation_date` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_project_task_status`
+--
+
+INSERT INTO `tbl_project_task_status` (`id`, `project_id`, `task_status_id`, `creation_date`) VALUES
+(1, 21, 1, '2025-05-14'),
+(2, 21, 2, '2025-05-14'),
+(3, 24, 3, '2025-05-14');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_rooms`
 --
 
@@ -823,11 +845,13 @@ CREATE TABLE `tbl_tasks` (
   `uid` varchar(256) DEFAULT NULL,
   `title` varchar(256) DEFAULT NULL,
   `description` text DEFAULT NULL,
-  `project_id` int(255) DEFAULT NULL,
+  `project_id` int(11) DEFAULT NULL,
+  `project_name` varchar(256) DEFAULT NULL,
   `start_date` date DEFAULT NULL,
   `end_date` date DEFAULT NULL,
   `assigned_employee` varchar(256) DEFAULT NULL,
   `task_category` int(11) DEFAULT NULL,
+  `status_id` int(100) DEFAULT NULL,
   `priority` int(11) DEFAULT NULL,
   `tags` int(11) DEFAULT NULL,
   `image_path` varchar(256) DEFAULT NULL,
@@ -846,6 +870,28 @@ CREATE TABLE `tbl_task_emp` (
   `task_id` int(11) DEFAULT NULL,
   `timestamp` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_task_status`
+--
+
+CREATE TABLE `tbl_task_status` (
+  `id` int(100) NOT NULL,
+  `name` varchar(256) DEFAULT NULL,
+  `creation_date` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_task_status`
+--
+
+INSERT INTO `tbl_task_status` (`id`, `name`, `creation_date`) VALUES
+(1, 'Todo', '2025-05-14'),
+(2, 'Progress', '2025-05-14'),
+(3, 'Waiting', '2025-05-14'),
+(4, 'Complete', '2025-05-14');
 
 -- --------------------------------------------------------
 
@@ -1096,6 +1142,14 @@ ALTER TABLE `tbl_project_status`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tbl_project_task_status`
+--
+ALTER TABLE `tbl_project_task_status`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_project_id` (`project_id`),
+  ADD KEY `fk_task_status_id` (`task_status_id`);
+
+--
 -- Indexes for table `tbl_rooms`
 --
 ALTER TABLE `tbl_rooms`
@@ -1125,8 +1179,9 @@ ALTER TABLE `tbl_tags`
 --
 ALTER TABLE `tbl_tasks`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_category` (`task_category`),
-  ADD KEY `fk_priority` (`priority`);
+  ADD KEY `project_id` (`project_id`),
+  ADD KEY `task_category` (`task_category`),
+  ADD KEY `priority` (`priority`);
 
 --
 -- Indexes for table `tbl_task_emp`
@@ -1135,6 +1190,12 @@ ALTER TABLE `tbl_task_emp`
   ADD PRIMARY KEY (`id`),
   ADD KEY `tbl_task_emp_fk_emp` (`emp_id`),
   ADD KEY `tbl_task_emp_fk_task` (`task_id`);
+
+--
+-- Indexes for table `tbl_task_status`
+--
+ALTER TABLE `tbl_task_status`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tbl_task_tag`
@@ -1314,6 +1375,12 @@ ALTER TABLE `tbl_project_status`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `tbl_project_task_status`
+--
+ALTER TABLE `tbl_project_task_status`
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `tbl_rooms`
 --
 ALTER TABLE `tbl_rooms`
@@ -1348,6 +1415,12 @@ ALTER TABLE `tbl_tasks`
 --
 ALTER TABLE `tbl_task_emp`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_task_status`
+--
+ALTER TABLE `tbl_task_status`
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_task_tag`
@@ -1444,11 +1517,11 @@ ALTER TABLE `tbl_project_emp`
   ADD CONSTRAINT `tbl_project_emp_fk_project` FOREIGN KEY (`project_id`) REFERENCES `tbl_project` (`id`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `tbl_tasks`
+-- Constraints for table `tbl_project_task_status`
 --
-ALTER TABLE `tbl_tasks`
-  ADD CONSTRAINT `fk_category` FOREIGN KEY (`task_category`) REFERENCES `tbl_category` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_priority` FOREIGN KEY (`priority`) REFERENCES `tbl_priority` (`id`) ON UPDATE CASCADE;
+ALTER TABLE `tbl_project_task_status`
+  ADD CONSTRAINT `fk_project_id` FOREIGN KEY (`project_id`) REFERENCES `tbl_project` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_task_status_id` FOREIGN KEY (`task_status_id`) REFERENCES `tbl_task_status` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_task_emp`
