@@ -2526,39 +2526,31 @@ if (isset($_GET['project_id']) && is_numeric($_GET['project_id'])) {
             <!--/.bg-holder-->
           </div>
           <div class="row gy-4 py-0 gx-0">
-          
-            <div class="col-lg-8 col-12">
+          <div class="col-lg-8 col-12">
               <div class="row mt-0 gy-4 pb-3 gx-0 px-3">
                 <div class="col-4 col-sm-3">
                   <h6 class="text-body-tertiary fw-bolder lh-sm mt-1">TITLE </h6>
                 </div>
                 <div class="col-8 col-sm-9">
-                  <h4 class="mb-0 text-body-emphasis lh-sm" id="modal-title">
-                    
-                  </h4>
+                  <h4 class="mb-0 text-body-emphasis lh-sm" id="modal-title"></h4>
                 </div>
                 <div class="col-4 col-sm-3">
                   <h6 class="text-body-tertiary fw-bolder lh-sm mt-1">DESCRIPTION </h6>
                 </div>
                 <div class="col-8 col-sm-9">
-                  <P class="fs-9 mb-0" id="modal-description">
-                    
-                  </P>
+                  <P class="fs-9 mb-0" id="modal-description"></P>
                 </div>
                 <div class="col-4 col-sm-3">
                   <h6 class="text-body-tertiary fw-bolder lh-sm mt-1">PROJECT NAME </h6>
                 </div>
                 <div class="col-8 col-sm-9">
-                  <P class="mb-0 text-body-emphasis fw-semibold" id="modal-project">
-                    
-                  </P>
+                  <P class="mb-0 text-body-emphasis fw-semibold" id="modal-project"></P>
                 </div>
                 <div class="col-4 col-sm-3">
                   <h6 class="text-body-tertiary fw-bolder lh-sm mt-1">STATUS</h6>
                 </div>
                 <div class="col-8 col-sm-9">
                   <P class="mb-0 text-body-emphasis fw-semibold d-inline-block kanban-column-underline-warning" id="modal-status">
-                
                   </P>
                 </div>
                 <div class="col-4 col-sm-3">
@@ -2755,16 +2747,14 @@ if (isset($_GET['project_id']) && is_numeric($_GET['project_id'])) {
                 <div class="col-8 col-sm-9">
                   <P class="mb-0 text-body-emphasis fw-semibold"><span class="fa fa-circle m text-warning"
                       data-fa-transform="shrink-6 down-1" id="modal-priority"></span>
-                       
-                    </P>
+                  </P>
                 </div>
                 <div class="col-4 col-sm-3">
                   <h6 class="text-body-tertiary fw-bolder lh-sm mt-1">CATEGORY </h6>
                 </div>
                 <div class="col-8 col-sm-9"><span
                     class="badge badge-phoenix fs-10 badge-phoenix-danger" id="modal-category"><span>
-                   
-                    </span><span
+                   </span><span
                       class="ms-1 fas fa-bug item.icon" data-fa-transform="up-2"
                       style="height:7.8px;width:7.8px;"></span></span></div>
                 <div class="col-4 col-sm-3">
@@ -2896,9 +2886,7 @@ if (isset($_GET['project_id']) && is_numeric($_GET['project_id'])) {
               </div>
             </div>
           </div>
-            
-        
-        <div class="modal-footer justify-content-between"><button class="btn p-1" type="button" data-bs-dismiss="modal"
+          <div class="modal-footer justify-content-between"><button class="btn p-1" type="button" data-bs-dismiss="modal"
             aria-label="Close"><span class="fas fa-times fs-10 me-1"
               data-fa-transform="up-1"></span>Close</button><button class="btn btn-phoenix-primary px-6" type="button"
             data-bs-target="#kanbanAddTask" data-bs-toggle="modal">Edit<span class="fas fa-edit ms-2"
