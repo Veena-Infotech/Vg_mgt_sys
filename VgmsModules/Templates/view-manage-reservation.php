@@ -302,7 +302,6 @@
                                     });
                                 </script>
 
-                    <!-- checked -->
                          <!-- checkbox -->
                         <?php
                         include '../PhpFiles/connection.php';
@@ -440,6 +439,8 @@ if (isset($_POST['editReservation'])) {
             });
         });
     </script>
+
+    <!-- edit operation -->
     <script>
         // Edit button handler
         document.querySelectorAll('.edit-btn').forEach(button => {
@@ -457,8 +458,8 @@ if (isset($_POST['editReservation'])) {
             });
         });
     </script>
-    </script>
-    <!-- checkbox -->
+
+       <!-- checkbox -->
  <script>
                                     document.addEventListener('DOMContentLoaded', function() {
                                         document.querySelectorAll('.active-checkbox').forEach(checkbox => {
@@ -484,6 +485,9 @@ if (isset($_POST['editReservation'])) {
                                         });
                                     });
 </script>
+
+    </script>
+ 
 
 
 

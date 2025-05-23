@@ -1,6 +1,6 @@
 <?php
 
-include "../PhpFiles/connection.php";
+include "../../PhpFiles/connection.php";
 
 // Collect form data using POST
 $salutation = $_POST['salutation'];
