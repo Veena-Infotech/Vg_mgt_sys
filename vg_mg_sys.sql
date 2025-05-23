@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 11, 2025 at 08:43 PM
+-- Generation Time: May 23, 2025 at 09:22 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -234,6 +234,41 @@ INSERT INTO `tbl_folders` (`id`, `name`, `parent_id`, `is_archived`, `created_at
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_leaves`
+--
+
+CREATE TABLE `tbl_leaves` (
+  `id` int(11) NOT NULL,
+  `uid` varchar(255) NOT NULL,
+  `applied_by` int(11) NOT NULL,
+  `leave_type` enum('casual','sick','emergency','earned') NOT NULL,
+  `earned_for` date DEFAULT NULL,
+  `from_date` date NOT NULL,
+  `to_date` date NOT NULL,
+  `reason` varchar(255) NOT NULL,
+  `document_name` varchar(255) NOT NULL,
+  `applied_on` timestamp NOT NULL DEFAULT current_timestamp(),
+  `status` enum('approved','rejected','in_review') NOT NULL,
+  `reject_reason` varchar(255) NOT NULL,
+  `action_date` date NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_leaves`
+--
+
+INSERT INTO `tbl_leaves` (`id`, `uid`, `applied_by`, `leave_type`, `earned_for`, `from_date`, `to_date`, `reason`, `document_name`, `applied_on`, `status`, `reject_reason`, `action_date`, `timestamp`) VALUES
+(1, 'leave_68284d475f8e67.22527171', 1, 'casual', NULL, '2025-05-24', '0000-00-00', 'Testing', '', '2025-05-17 08:48:07', 'in_review', '', '0000-00-00', '2025-05-17 08:48:07'),
+(2, 'leave_68284def6aadd4.88937778', 3, 'casual', NULL, '2025-05-23', '0000-00-00', 'test for date', '', '2025-05-17 08:50:55', 'in_review', '', '0000-00-00', '2025-05-17 08:50:55'),
+(3, 'leave_68284e6cd22325.90289893', 1, 'sick', NULL, '2025-05-16', '2025-05-16', 'not well', '', '2025-05-17 08:53:00', 'in_review', '', '0000-00-00', '2025-05-17 08:53:00'),
+(4, 'leave_68284f62f04357.13712869', 1, 'emergency', NULL, '2025-05-01', '2025-05-03', 'test for  files uplaod', '20250517_1_Unit-12.pdf', '2025-05-17 08:57:06', 'in_review', '', '0000-00-00', '2025-05-17 08:57:06'),
+(6, 'leave_68284f62f04357.1371268', 1, 'emergency', NULL, '2025-05-01', '2025-05-03', 'test for  files uplaod', '20250517_1_Unit-12.pdf', '2025-05-17 08:57:06', 'in_review', '', '0000-00-00', '2025-05-17 08:57:06'),
+(7, 'leave_68284f62f04357.137268', 1, 'emergency', NULL, '2025-05-01', '2025-05-03', 'test for  files uplaod', '20250517_1_Unit-12.pdf', '2025-05-17 08:57:06', 'in_review', '', '0000-00-00', '2025-05-17 08:57:06');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_loans`
 --
 
@@ -305,7 +340,178 @@ INSERT INTO `tbl_logs` (`id`, `emp_id`, `action`, `status`, `timestamp`, `ip_add
 (26, 3, 'login_request', 'failed', '2025-05-03 07:55:21', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36'),
 (27, 1, 'login_request', 'completed', '2025-05-03 07:55:51', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36'),
 (28, 1, 'login_request', 'completed', '2025-05-03 10:35:39', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36'),
-(29, 1, 'login_request', 'completed', '2025-05-04 09:10:46', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36');
+(29, 1, 'login_request', 'completed', '2025-05-04 09:10:46', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36'),
+(30, 1, 'login_request', 'completed', '2025-05-14 11:58:24', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_manage_agencies`
+--
+
+CREATE TABLE `tbl_manage_agencies` (
+  `id` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `agencies_name` text NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `person_name` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_manage_agencies`
+--
+
+INSERT INTO `tbl_manage_agencies` (`id`, `uid`, `created_at`, `agencies_name`, `email`, `person_name`) VALUES
+(2, 123, '2025-05-14 11:27:51', 'abc123', 'abc@gmail.com', 'abcname1'),
+(4, 123, '2025-05-14 09:30:57', 'abc3', 'abc@gmail.com', 'abcname3'),
+(5, 123, '2025-05-14 09:30:57', 'abc4', 'abc@gmail.com', 'abcname'),
+(6, 132, '2025-05-14 10:55:26', 'abct', 'sffwfe', 'sfdg'),
+(12, 0, '2025-05-14 11:12:52', 'lglbgg', 'jkbfb@gmail.com', 'ksbf'),
+(15, 0, '2025-05-15 07:15:48', 'ans', 'admin@gmail.com', 'ans');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_manage_builders`
+--
+
+CREATE TABLE `tbl_manage_builders` (
+  `id` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `builder_name` varchar(255) NOT NULL,
+  `builder_contact` int(11) NOT NULL,
+  `builder_email` varchar(255) NOT NULL,
+  `company_name` varchar(255) NOT NULL,
+  `is_active` enum('Yes','No') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_manage_builders`
+--
+
+INSERT INTO `tbl_manage_builders` (`id`, `uid`, `created_at`, `builder_name`, `builder_contact`, `builder_email`, `company_name`, `is_active`) VALUES
+(1, 0, '2025-05-16 14:03:56', '    avc25', 1234567890, 'abc@gmail.com', '    vvcs3455    ', 'Yes'),
+(19, 14, '2025-05-16 15:10:05', 'abc23', 1234567098, 'abc@gmail.com', 'vvcs3455', 'Yes'),
+(43, 15, '2025-05-16 13:59:42', 'jbjfkbjf', 1234567096, 'abc@gmail.com', 'vvcs3455', 'Yes'),
+(44, 16, '2025-05-16 12:29:56', 'jfjfwdf', 1234567096, 'abc@gmail.com', 'vvcs3455', 'Yes'),
+(45, 17, '2025-05-16 14:02:33', 'hjfc', 1234567096, 'abctwdf@gmail.com', 'avcv', 'Yes'),
+(46, 18, '2025-05-20 15:00:44', 'abc', 1234567096, 'abctwdf@gmail.com', 'avcv', 'No');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_manage_competitors`
+--
+
+CREATE TABLE `tbl_manage_competitors` (
+  `id` int(11) NOT NULL,
+  `uid` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `competitor_name` text NOT NULL,
+  `contact` int(10) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `company_name` varchar(255) NOT NULL,
+  `is_active` enum('Yes','No') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_manage_competitors`
+--
+
+INSERT INTO `tbl_manage_competitors` (`id`, `uid`, `created_at`, `competitor_name`, `contact`, `email`, `company_name`, `is_active`) VALUES
+(1, NULL, '2025-05-18 10:39:35', ' abc', 1234567891, 'abc@gmail.com', ' xyz', 'Yes'),
+(3, 'competitor_6829a2727de0b1.68044309', '2025-05-18 10:27:44', '   abc2 ', 1234567892, 'abc2@gmail.com', '   xyz2 ', 'No'),
+(4, 'competitor_6829b0948246b9.02878487', '2025-05-18 10:28:06', '  abc3', 1234567893, 'abc3@gmail.com', '  xyz3', 'No'),
+(5, 'competitor_6829b88b44a142.76906855', '2025-05-18 10:39:17', 'abc4', 1234567894, 'abc4@gmail.com', 'xyz4', 'No'),
+(6, 'competitor_6829b89e0832f0.06704787', '2025-05-18 10:38:22', 'abc4', 1234567894, 'abc4@gmail.com', 'xyz4', 'Yes'),
+(7, 'competitor_6829b8caf06bd5.96056545', '2025-05-18 10:39:06', 'abc5', 1234567895, 'abc45@gmail.com', 'xyz5', 'Yes');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_manage_landlord`
+--
+
+CREATE TABLE `tbl_manage_landlord` (
+  `id` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `landlord_name` text NOT NULL,
+  `contact_number` int(10) NOT NULL,
+  `is_active` enum('Yes','No') NOT NULL,
+  `email` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_manage_landlord`
+--
+
+INSERT INTO `tbl_manage_landlord` (`id`, `uid`, `created_at`, `landlord_name`, `contact_number`, `is_active`, `email`) VALUES
+(5, 5, '2025-05-17 08:53:27', 'angel', 1234567890, 'Yes', 'ghhr@gmail.com'),
+(6, 19, '2025-05-17 08:57:31', 'abc', 2147483647, 'Yes', 'abc1@gmail.com'),
+(20, 20, '2025-05-20 15:09:34', 'abc3', 2147483647, 'No', 'abc1@gmail.com'),
+(21, 21, '2025-05-17 09:14:37', 'abc1', 2147483647, 'Yes', 'abc1@gmail.com'),
+(22, 22, '2025-05-17 09:14:45', 'abc2', 2147483647, 'Yes', 'abc1@gmail.com'),
+(23, 23, '2025-05-17 09:14:54', 'abc4', 2147483647, 'Yes', 'abc1@gmail.com'),
+(24, 24, '2025-05-20 15:09:10', 'abc', 2147483647, 'Yes', 'aryanshirodkar@gmail.com');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_manage_property_type`
+--
+
+CREATE TABLE `tbl_manage_property_type` (
+  `id` int(11) NOT NULL,
+  `uid` varchar(255) CHARACTER SET utf16 COLLATE utf16_general_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `property_type_name` varchar(255) NOT NULL,
+  `client_type` enum('Buyer','Seller') NOT NULL,
+  `is_active` enum('Yes','No') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_manage_property_type`
+--
+
+INSERT INTO `tbl_manage_property_type` (`id`, `uid`, `created_at`, `property_type_name`, `client_type`, `is_active`) VALUES
+(1, NULL, '2025-05-20 10:02:54', 'Residential', 'Buyer', 'Yes'),
+(2, NULL, '2025-05-20 11:46:17', 'Industrial', 'Buyer', 'Yes'),
+(3, NULL, '2025-05-20 11:46:10', 'Retail', 'Seller', 'Yes'),
+(4, NULL, '2025-05-20 11:45:57', 'Mixed Use', 'Buyer', 'Yes'),
+(7, NULL, '2025-05-20 11:46:19', 'Residential', 'Buyer', 'Yes'),
+(8, NULL, '2025-05-20 11:36:18', 'abc', 'Buyer', 'Yes'),
+(9, NULL, '2025-05-20 11:45:06', 'abc567', 'Seller', 'Yes'),
+(10, 'propertytype682c6c91e13440.36834095', '2025-05-20 11:50:41', 'abc123', 'Buyer', 'Yes');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_manage_reservation`
+--
+
+CREATE TABLE `tbl_manage_reservation` (
+  `id` int(11) NOT NULL,
+  `uid` varchar(255) CHARACTER SET utf16 COLLATE utf16_general_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `reservation_name` text DEFAULT NULL,
+  `status` enum('Pending','Cancelled','On-going','Completed') DEFAULT NULL,
+  `is_active` enum('Yes','No') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_manage_reservation`
+--
+
+INSERT INTO `tbl_manage_reservation` (`id`, `uid`, `created_at`, `reservation_name`, `status`, `is_active`) VALUES
+(8, 'reservation682da8af6f05a5.39961794', '2025-05-21 10:46:21', 'abc123', 'Pending', 'Yes'),
+(9, 'reservation682da8d80f5a11.57565972', '2025-05-21 10:29:40', 'abc123', 'Completed', 'No'),
+(10, 'reservation682dabd3c7d041.36252890', '2025-05-21 11:12:36', 'abc098', 'Cancelled', 'Yes'),
+(15, 'reservation682db9f28d9d48.90657206', '2025-05-21 11:37:51', 'abc123', 'Pending', 'Yes'),
+(16, 'reservation682dbbe267f3a8.72516256', '2025-05-21 11:41:45', 'ab', 'Completed', 'No'),
+(17, 'reservation682dd3ddbb8545.66430662', '2025-05-21 13:23:41', 'abc10987', 'On-going', 'Yes');
 
 -- --------------------------------------------------------
 
@@ -336,10 +542,8 @@ CREATE TABLE `tbl_meeting_history` (
 --
 
 INSERT INTO `tbl_meeting_history` (`id`, `uid`, `date`, `time`, `visitor_id`, `emp_id`, `reason`, `location`, `in_time`, `out_time`, `payment_status`, `payment_mode`, `amount`, `meeting_status`, `timestamp`) VALUES
-(2, 'meet_6814e4b88a182', '2025-05-02', '17:28:56', 1, 1, 'testing for images', NULL, NULL, NULL, NULL, NULL, NULL, 'Completed', '2025-05-03 10:39:31'),
-(3, 'meet_6814e813400eb', '2025-05-02', '17:43:15', 2, 1, 'testing with redirection ', NULL, NULL, NULL, NULL, NULL, NULL, 'Rescheduled', '2025-05-04 09:21:16'),
-(4, 'meet_6815f2052ed34', '2025-05-03', '12:37:57', 2, 3, 'Aaron and ', NULL, NULL, NULL, NULL, NULL, NULL, 'InProgress', '2025-05-03 10:38:11'),
-(5, 'meet_681731fa35c7b', '2025-05-04', '11:23:06', 2, 1, 'testing for today date query', NULL, NULL, NULL, NULL, NULL, NULL, 'Scheduled', '2025-05-04 09:23:06');
+(6, 'meet_68270285e42c8', '2025-05-16', '11:16:53', 3, 1, 'Testing for table', NULL, NULL, NULL, NULL, NULL, NULL, 'Rescheduled', '2025-05-16 10:29:42'),
+(7, 'meet_68270285e42c8', '2025-05-14', '11:16:53', 3, 1, 'Testing for table', NULL, NULL, NULL, NULL, NULL, NULL, 'Completed', '2025-05-16 09:27:10');
 
 -- --------------------------------------------------------
 
@@ -467,11 +671,11 @@ CREATE TABLE `tbl_project` (
 
 INSERT INTO `tbl_project` (`id`, `uid`, `project_title`, `project_type`, `project_manager`, `project_client`, `project_status`, `project_description`, `project_start_date`, `project_end_date`, `project_created_by`, `timestamp`) VALUES
 (21, 'prj_680f77ed89734', 'infotech', 2, 0, 2, 1, 'test', '2020-04-20', '2020-05-20', 'admin', '2025-04-28'),
-(22, 'prj_680f780d1cc70', 'infotech2', 1, 1, 1, 2, 'm, ff msd fk', '2025-04-28', '2025-05-11', 'admin', '2025-04-28'),
-(24, 'prj_68113dc2705e7', 'test 2', 2, 1, 2, 3, 'sdfgsfdgsdg', '2025-04-30', '2025-05-11', 'admin', '2025-04-30'),
-(25, 'prj_68113ed38894b', 'test 3', 1, 0, 1, 2, 'asdcasdc', '2025-04-30', '2025-05-11', 'admin', '2025-04-30'),
-(26, 'prj_6816093886f8f', 'Maitri Park', 1, 3, 2, 3, 'hdivdocaspovmsd', '2025-05-03', '2025-06-08', 'admin', '2025-05-03'),
-(27, 'prj_68170d04d7144', 'New Project Dims', 1, 0, 1, 1, 'testing for new location in dims', '2025-05-04', '2025-05-11', 'admin', '2025-05-04'),
+(22, 'prj_680f780d1cc70', 'infotech2', 1, 1, 1, 1, 'm, ff msd fk', '2025-04-28', '2025-05-11', 'admin', '2025-04-28'),
+(24, 'prj_68113dc2705e7', 'test 2', 2, 1, 2, 1, 'sdfgsfdgsdg', '2025-04-30', '2025-05-11', 'admin', '2025-04-30'),
+(25, 'prj_68113ed38894b', 'test 3', 1, 0, 1, 1, 'asdcasdc', '2025-04-30', '2025-05-11', 'admin', '2025-04-30'),
+(26, 'prj_6816093886f8f', 'Maitri Park', 1, 3, 2, 1, 'hdivdocaspovmsd', '2025-05-03', '2025-06-08', 'admin', '2025-05-03'),
+(27, 'prj_68170d04d7144', 'New Project Dims', 1, 0, 1, 2, 'testing for new location in dims', '2025-05-04', '2025-05-11', 'admin', '2025-05-04'),
 (28, 'prj_68170ec7c809e', 'dims x pms', 1, 3, 2, 1, 'lknscjksdno', '2025-05-04', '2025-05-11', 'admin', '2025-05-04');
 
 -- --------------------------------------------------------
@@ -513,39 +717,17 @@ INSERT INTO `tbl_project_emp` (`id`, `emp_id`, `project_id`, `timestamp`) VALUES
 CREATE TABLE `tbl_project_status` (
   `id` int(11) NOT NULL,
   `status_name` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `bagde_color` enum('blue','black','yellow','green','red') DEFAULT NULL
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_project_status`
 --
 
-INSERT INTO `tbl_project_status` (`id`, `status_name`, `created_at`, `bagde_color`) VALUES
-(1, 'On-Going', '2025-04-28 21:15:30', 'yellow'),
-(2, 'Waiting', '2025-04-28 21:15:41', 'red'),
-(3, 'Completed', '2025-04-28 21:15:51', 'green');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_project_type`
---
-
-CREATE TABLE `tbl_project_type` (
-  `id` int(11) NOT NULL,
-  `type` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tbl_project_type`
---
-
-INSERT INTO `tbl_project_type` (`id`, `type`, `created_at`) VALUES
-(1, 'Society', '2025-04-28 20:52:05'),
-(2, 'In-House', '2025-04-28 20:52:20'),
-(3, 'Lottery', '2025-04-28 20:52:41');
+INSERT INTO `tbl_project_status` (`id`, `status_name`, `created_at`) VALUES
+(1, 'On-Going', '2025-04-28 21:15:30'),
+(2, 'Waiting', '2025-04-28 21:15:41'),
+(3, 'Completed', '2025-04-28 21:15:51');
 
 -- --------------------------------------------------------
 
@@ -565,6 +747,58 @@ CREATE TABLE `tbl_rooms` (
 INSERT INTO `tbl_rooms` (`id`, `room_name`) VALUES
 (1, 'Conference room'),
 (2, 'Private Cabin 1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_society_details`
+--
+
+CREATE TABLE `tbl_society_details` (
+  `id` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `society_name` varchar(255) NOT NULL,
+  `ward` varchar(255) NOT NULL,
+  `unit` int(11) NOT NULL,
+  `address` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_society_details`
+--
+
+INSERT INTO `tbl_society_details` (`id`, `uid`, `created_at`, `society_name`, `ward`, `unit`, `address`) VALUES
+(1, 23, '2025-05-14 09:05:18', 'abc', '1', 123, '123'),
+(2, 23, '2025-05-14 09:05:48', 'abc1', '1', 123, '123'),
+(3, 23, '2025-05-14 09:05:48', 'abc2', '1', 123, '123'),
+(4, 23, '2025-05-14 09:05:48', 'abc3', '1', 123, '123'),
+(5, 23, '2025-05-14 09:05:48', 'abc4', '1', 123, '123'),
+(6, 23, '2025-05-14 09:05:48', 'abc5', '1', 123, '123');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_source_details`
+--
+
+CREATE TABLE `tbl_source_details` (
+  `id` int(11) NOT NULL,
+  `uid` varchar(255) CHARACTER SET utf16 COLLATE utf16_general_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `source_name` varchar(255) NOT NULL,
+  `is_active` enum('Yes','No') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_source_details`
+--
+
+INSERT INTO `tbl_source_details` (`id`, `uid`, `created_at`, `source_name`, `is_active`) VALUES
+(1, '12', '2025-05-21 13:43:36', 'abc', 'Yes'),
+(2, '13', '2025-05-21 14:32:56', 'abc1ddg', 'Yes'),
+(3, 'ward682dd8dcb64527.88729695', '2025-05-21 14:32:59', 'abc1', 'Yes'),
+(4, 'ward682dd9aeb60d99.68008231', '2025-05-21 13:48:44', 'ererre', 'No');
 
 -- --------------------------------------------------------
 
@@ -589,8 +823,7 @@ CREATE TABLE `tbl_tasks` (
   `uid` varchar(256) DEFAULT NULL,
   `title` varchar(256) DEFAULT NULL,
   `description` text DEFAULT NULL,
-  `project_id` int(11) DEFAULT NULL,
-  `project_name` varchar(256) DEFAULT NULL,
+  `project_id` int(255) DEFAULT NULL,
   `start_date` date DEFAULT NULL,
   `end_date` date DEFAULT NULL,
   `assigned_employee` varchar(256) DEFAULT NULL,
@@ -671,7 +904,8 @@ CREATE TABLE `tbl_visitor` (
 
 INSERT INTO `tbl_visitor` (`id`, `uid`, `f_name`, `m_name`, `l_name`, `phone_no`, `email`, `address`, `img`, `registered_date`, `timestamp`) VALUES
 (1, 'visitor_6814e4b888426', 'Aryan', 'Nitin', 'Shirodkar', '7304680494', 'ans@gmail.com', '', 'visitor_1.jpg', '2025-05-02', '2025-05-02 15:28:56'),
-(2, 'visitor_6815f2052cdfb', 'om', '', '', '9321871957', 'om@gmail.com', '', 'visitor_2.jpg', '2025-05-03', '2025-05-03 10:37:57');
+(2, 'visitor_6815f2052cdfb', 'om', 'Pandey', 'Pandey', '9321871957', 'om@gmail.com', '', 'visitor_2.jpg', '2025-05-03', '2025-05-14 13:02:35'),
+(3, 'visitor_68270285e0a88', 'Aryan', 'Nitin', 'Shirodkar', '7304680494', 'aryanshirodkar03@gmail.com', '', 'visitor_3.jpg', '2025-05-16', '2025-05-16 09:16:53');
 
 --
 -- Indexes for dumped tables
@@ -724,6 +958,14 @@ ALTER TABLE `tbl_folders`
   ADD KEY `tbl_folders_ibfk_1` (`parent_id`);
 
 --
+-- Indexes for table `tbl_leaves`
+--
+ALTER TABLE `tbl_leaves`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `uid` (`uid`),
+  ADD KEY `tbl_leaves_emp_ref` (`applied_by`);
+
+--
 -- Indexes for table `tbl_loans`
 --
 ALTER TABLE `tbl_loans`
@@ -745,6 +987,45 @@ ALTER TABLE `tbl_loan_status`
 ALTER TABLE `tbl_logs`
   ADD PRIMARY KEY (`id`),
   ADD KEY `emp_id` (`emp_id`);
+
+--
+-- Indexes for table `tbl_manage_agencies`
+--
+ALTER TABLE `tbl_manage_agencies`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_manage_builders`
+--
+ALTER TABLE `tbl_manage_builders`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `uid` (`uid`);
+
+--
+-- Indexes for table `tbl_manage_competitors`
+--
+ALTER TABLE `tbl_manage_competitors`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `uid` (`uid`);
+
+--
+-- Indexes for table `tbl_manage_landlord`
+--
+ALTER TABLE `tbl_manage_landlord`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `uid` (`uid`);
+
+--
+-- Indexes for table `tbl_manage_property_type`
+--
+ALTER TABLE `tbl_manage_property_type`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_manage_reservation`
+--
+ALTER TABLE `tbl_manage_reservation`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tbl_meeting_history`
@@ -815,16 +1096,23 @@ ALTER TABLE `tbl_project_status`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tbl_project_type`
---
-ALTER TABLE `tbl_project_type`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `tbl_rooms`
 --
 ALTER TABLE `tbl_rooms`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_society_details`
+--
+ALTER TABLE `tbl_society_details`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_source_details`
+--
+ALTER TABLE `tbl_source_details`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `uid` (`uid`);
 
 --
 -- Indexes for table `tbl_tags`
@@ -838,8 +1126,7 @@ ALTER TABLE `tbl_tags`
 ALTER TABLE `tbl_tasks`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_category` (`task_category`),
-  ADD KEY `fk_priority` (`priority`),
-  ADD KEY `fk_tasks_project` (`project_id`);
+  ADD KEY `fk_priority` (`priority`);
 
 --
 -- Indexes for table `tbl_task_emp`
@@ -919,6 +1206,12 @@ ALTER TABLE `tbl_folders`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `tbl_leaves`
+--
+ALTER TABLE `tbl_leaves`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT for table `tbl_loans`
 --
 ALTER TABLE `tbl_loans`
@@ -934,13 +1227,49 @@ ALTER TABLE `tbl_loan_status`
 -- AUTO_INCREMENT for table `tbl_logs`
 --
 ALTER TABLE `tbl_logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- AUTO_INCREMENT for table `tbl_manage_agencies`
+--
+ALTER TABLE `tbl_manage_agencies`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `tbl_manage_builders`
+--
+ALTER TABLE `tbl_manage_builders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+
+--
+-- AUTO_INCREMENT for table `tbl_manage_competitors`
+--
+ALTER TABLE `tbl_manage_competitors`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `tbl_manage_landlord`
+--
+ALTER TABLE `tbl_manage_landlord`
+  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT for table `tbl_manage_property_type`
+--
+ALTER TABLE `tbl_manage_property_type`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `tbl_manage_reservation`
+--
+ALTER TABLE `tbl_manage_reservation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `tbl_meeting_history`
 --
 ALTER TABLE `tbl_meeting_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tbl_meeting_notes`
@@ -982,12 +1311,6 @@ ALTER TABLE `tbl_project_emp`
 -- AUTO_INCREMENT for table `tbl_project_status`
 --
 ALTER TABLE `tbl_project_status`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `tbl_project_type`
---
-ALTER TABLE `tbl_project_type`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
@@ -995,6 +1318,18 @@ ALTER TABLE `tbl_project_type`
 --
 ALTER TABLE `tbl_rooms`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tbl_society_details`
+--
+ALTER TABLE `tbl_society_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `tbl_source_details`
+--
+ALTER TABLE `tbl_source_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_tags`
@@ -1030,7 +1365,7 @@ ALTER TABLE `tbl_todo`
 -- AUTO_INCREMENT for table `tbl_visitor`
 --
 ALTER TABLE `tbl_visitor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
@@ -1041,6 +1376,12 @@ ALTER TABLE `tbl_visitor`
 --
 ALTER TABLE `tbl_files`
   ADD CONSTRAINT `tbl_files_ibfk_1` FOREIGN KEY (`folder_id`) REFERENCES `tbl_folders` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `tbl_leaves`
+--
+ALTER TABLE `tbl_leaves`
+  ADD CONSTRAINT `tbl_leaves_emp_ref` FOREIGN KEY (`applied_by`) REFERENCES `tbl_emp` (`id`);
 
 --
 -- Constraints for table `tbl_loans`
@@ -1107,8 +1448,7 @@ ALTER TABLE `tbl_project_emp`
 --
 ALTER TABLE `tbl_tasks`
   ADD CONSTRAINT `fk_category` FOREIGN KEY (`task_category`) REFERENCES `tbl_category` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_priority` FOREIGN KEY (`priority`) REFERENCES `tbl_priority` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_tasks_project` FOREIGN KEY (`project_id`) REFERENCES `tbl_project` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `fk_priority` FOREIGN KEY (`priority`) REFERENCES `tbl_priority` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_task_emp`
