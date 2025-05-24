@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 24, 2025 at 12:52 PM
+-- Generation Time: May 24, 2025 at 01:18 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -264,6 +264,47 @@ INSERT INTO `tbl_landlord` (`id`, `landlord_name`, `landlord_email`, `landlord_p
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_leads`
+--
+
+CREATE TABLE `tbl_leads` (
+  `id` int(11) NOT NULL,
+  `lead_id` varchar(20) NOT NULL,
+  `salutation` varchar(10) DEFAULT NULL,
+  `first_name` varchar(100) DEFAULT NULL,
+  `last_name` varchar(100) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `phone` varchar(15) DEFAULT NULL,
+  `current_lead_profile` varchar(50) DEFAULT NULL,
+  `pmc_name` varchar(100) DEFAULT NULL,
+  `agent_name` varchar(100) DEFAULT NULL,
+  `agency_name` varchar(100) DEFAULT NULL,
+  `developer_name` varchar(100) DEFAULT NULL,
+  `developer_company` varchar(100) DEFAULT NULL,
+  `society_name` varchar(100) DEFAULT NULL,
+  `is_contacted` enum('yes','no') DEFAULT 'no',
+  `reference_source_id` int(11) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_leads`
+--
+
+INSERT INTO `tbl_leads` (`id`, `lead_id`, `salutation`, `first_name`, `last_name`, `email`, `phone`, `current_lead_profile`, `pmc_name`, `agent_name`, `agency_name`, `developer_name`, `developer_company`, `society_name`, `is_contacted`, `reference_source_id`, `created_at`) VALUES
+(1, 'PMSL_1', 'Miss.', 'Aryannnnnn', 'Shirodkar', 'aryanshirodkar03@gmail.com', '07304680494', 'pmc', 'ans4', NULL, NULL, NULL, NULL, '', 'yes', 1, '2025-01-09 14:47:50'),
+(2, 'PMSL_2', 'Mr.', 'Aryan', 'Shirodkar', 'aryanshirodkar03@gmail.com', '07304680494', '', '', 'Dex', 'dexshot', '', '', '', 'yes', 1, '2025-01-09 14:48:47'),
+(3, 'PMSL_3', '', 'des', 'kjandndck', 'lksmdc@lksdf', '07304680494', '', '', '', '', '', '', 'sclkcsldkmc dw', 'no', 0, '2025-01-09 14:50:52'),
+(4, 'PMSL_4', 'Miss', 'kdjfbjkwed', 'm,d ', 'aryanshirodkar03@gmail.com', '07304680494', 'developer', '', '', '', 'dfwecacdae', 'dcqwdweq', '', 'no', 0, '2025-01-09 14:52:15'),
+(5, 'PMSL_5', 'Mr.', 'ksjd cnkd c', 'sm,c ksnd c', 'aryanshirodkar03@gmail.com', '07304680494', 'pmc', 'scmlsdlkc kdc', '', '', '', '', '', 'no', 0, '2025-01-09 14:54:57'),
+(6, 'PMSL_6', 'Mr.', 'rnrn', 'anan', 'aryanshirodkar03@gmail.com', '07304680494', 'pmc', '', '', '', '', '', '', 'yes', 2, '2025-01-10 13:57:20'),
+(7, 'PMSL_7', 'Mr.', 'ans2', 'asn2', 'aryanshirodkar03@gmail.com', '7304680494', 'society', NULL, NULL, NULL, NULL, NULL, 'ans bldg', 'no', 0, '2025-01-22 07:51:44'),
+(8, 'PMSL_8', 'Mr.', 'Aryan', 'Shirodkar', 'aryanshirodkar03@gmail.com', '07304680494', 'society', '', '', '', '', '', 'ans soc', 'no', 0, '2025-01-22 08:08:37'),
+(9, 'PMSL_9', 'Mr.', 'Aryan', 'Shirodkar', 'ans@gmail.com', '7304680494', 'society', '', '', '', '', '', 'Ans Blddg', 'no', 0, '2025-05-05 07:15:33');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_leaves`
 --
 
@@ -422,7 +463,7 @@ CREATE TABLE `tbl_manage_builders` (
 --
 
 INSERT INTO `tbl_manage_builders` (`id`, `uid`, `created_at`, `builder_name`, `builder_contact`, `builder_email`, `company_name`, `is_active`) VALUES
-(1, 0, '2025-05-16 14:03:56', '    avc25', 1234567890, 'abc@gmail.com', '    vvcs3455    ', 'Yes'),
+(1, 0, '2025-05-24 11:09:41', '    avc25', 1234567890, 'abc@gmail.com', '    vvcs3455    ', 'Yes'),
 (19, 14, '2025-05-16 15:10:05', 'abc23', 1234567098, 'abc@gmail.com', 'vvcs3455', 'Yes'),
 (43, 15, '2025-05-16 13:59:42', 'jbjfkbjf', 1234567096, 'abc@gmail.com', 'vvcs3455', 'Yes'),
 (44, 16, '2025-05-16 12:29:56', 'jfjfwdf', 1234567096, 'abc@gmail.com', 'vvcs3455', 'Yes'),
@@ -1079,6 +1120,35 @@ INSERT INTO `tbl_visitor` (`id`, `uid`, `f_name`, `m_name`, `l_name`, `phone_no`
 (2, 'visitor_6815f2052cdfb', 'om', 'Pandey', 'Pandey', '9321871957', 'om@gmail.com', '', 'visitor_2.jpg', '2025-05-03', '2025-05-14 13:02:35'),
 (3, 'visitor_68270285e0a88', 'Aryan', 'Nitin', 'Shirodkar', '7304680494', 'aryanshirodkar03@gmail.com', '', 'visitor_3.jpg', '2025-05-16', '2025-05-16 09:16:53');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_ward_details`
+--
+
+CREATE TABLE `tbl_ward_details` (
+  `id` int(11) NOT NULL,
+  `uid` varchar(255) CHARACTER SET utf16 COLLATE utf16_general_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `ward_name` varchar(255) NOT NULL,
+  `is_active` enum('Yes','No') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_ward_details`
+--
+
+INSERT INTO `tbl_ward_details` (`id`, `uid`, `created_at`, `ward_name`, `is_active`) VALUES
+(11, 'ward682dccb8c20e04.98813824', '2025-05-21 12:56:37', 'abc456', 'Yes'),
+(12, 'ward682dcd2fce5817.20579138', '2025-05-21 12:55:11', 'dbfbf', 'Yes'),
+(13, 'ward682dcf03c023e5.03904259', '2025-05-21 13:07:00', 'jdjd', 'Yes'),
+(14, 'ward682dd002cfd443.90485536', '2025-05-21 13:07:58', 'dddd', 'No'),
+(15, 'ward682dd01c13b368.54016824', '2025-05-21 13:08:02', 'dfdfd', 'No'),
+(16, 'ward682dd08d3d68d9.28000368', '2025-05-21 13:09:46', 'seses', 'Yes'),
+(17, 'ward682dd0c72e5f35.09899529', '2025-05-21 13:12:31', 'dafa', 'Yes'),
+(18, 'ward682dd135842da6.33886565', '2025-05-21 13:12:21', 'swsws', 'Yes'),
+(19, 'ward682dd175a43059.06693459', '2025-05-21 13:13:42', 'hjhjjhj2356', 'No');
+
 --
 -- Indexes for dumped tables
 --
@@ -1134,6 +1204,13 @@ ALTER TABLE `tbl_folders`
 --
 ALTER TABLE `tbl_landlord`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_leads`
+--
+ALTER TABLE `tbl_leads`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `lead_id` (`lead_id`);
 
 --
 -- Indexes for table `tbl_leaves`
@@ -1374,6 +1451,13 @@ ALTER TABLE `tbl_visitor`
   ADD UNIQUE KEY `uid` (`uid`);
 
 --
+-- Indexes for table `tbl_ward_details`
+--
+ALTER TABLE `tbl_ward_details`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `uid` (`uid`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -1424,6 +1508,12 @@ ALTER TABLE `tbl_folders`
 --
 ALTER TABLE `tbl_landlord`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tbl_leads`
+--
+ALTER TABLE `tbl_leads`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tbl_leaves`
@@ -1616,6 +1706,12 @@ ALTER TABLE `tbl_todo`
 --
 ALTER TABLE `tbl_visitor`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tbl_ward_details`
+--
+ALTER TABLE `tbl_ward_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Constraints for dumped tables
