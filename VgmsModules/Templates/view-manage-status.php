@@ -521,6 +521,6 @@ if (isset($_POST['editReservation'])) {
 </body>
 
 
-<!-- Mirrored from 3.x [XR&CO'2014], Tue, 03 Sep 2024 13:37:21 GMT -->
+
 
 </html>
