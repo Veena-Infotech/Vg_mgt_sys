@@ -308,7 +308,7 @@
                                                         <div class="col-12 col-md-4">
                                                             <label class="form-label" for="district">District</label>
                                                             <input list="districts" id="district" name="district"
-                                                                class="form-control" value="district" />
+                                                                class="form-control" placeholder="district"/>
                                                             <datalist id="districts">
                                                                 <!-- <select class="form-select" id="district" name="district" required> -->
 
@@ -1575,29 +1575,7 @@
                                                                     PimpriChinchwadCity: ["Bhosari", "Pimpri", "Chinchwad", "Wakad", "Nigdi", "Akurdi"]
                                                                 }
                                                             }
-
-
-
-
-
-
-
-
                                                         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                                                         const districtSelect = document.getElementById('district');
                                                         const talukaSelect = document.getElementById('taluka');
@@ -1657,14 +1635,30 @@
 
                                                     <!-- Ward Dropdown -->
                                                     <div class="row mb-3">
-                                                        <div class="col-12 col-md-6">
+                                                    <div class="col-12 col-md-6">
                                                             <label class="form-label" for="ward">Ward</label>
-                                                            <select class="form-select" id="ward" name="ward"
-                                                                value="ward">
-                                                                <option value="" disabled selected>Select Ward</option>
+                                                            <select class="form-select" id="ward" name="ward" required>
+            <option value="" disabled selected>Select Ward</option>
+            <?php
+            include '../PhpFiles/connection.php';
+            $query = "SELECT * FROM tbl_ward_details";
+            $result = mysqli_query($conn, $query) or die("Query Unsuccessful: " . mysqli_error($conn));
+            if ($result) {
+                while ($row = mysqli_fetch_assoc($result)) {
+// echo '<option value="'.$row['id'].'">'.$row['ward_name'].'</option>';
+echo '
+  <option value="'.$row['id'].'">'.$row['ward_name'].'</option>';
 
-                                                            </select>
+  $ward = $_POST['ward'];
+echo "Submitted ward: " . $ward; // Debug
+
+
+                }
+            }
+            ?>
+        </select>
                                                         </div>
+                                                        
                                                         <div class="col-12 col-md-6">
                                                             <label class="form-label" for="society-address">Society
                                                                 Address</label>
@@ -1677,9 +1671,6 @@
                                                         </div>
 
                                                     </div>
-
-
-
 
                                                     <!-- Plot Holding dtype Dropdown -->
                                                     <div class="row mb-3">
@@ -1703,13 +1694,20 @@
                                                             <label for="select-lead" class="form-label">Select Lead
                                                             </label>
                                                             <select class="form-select" id="select-lead"
-                                                                name="plot-holding-type" required>
-                                                                <option value="" disabled selected>Select Lead</option>
-                                                                <option value="lead1">Lead 1</option>
-                                                                <option value="lead2">Lead 2</option>
-                                                                <option value="lead3">Lead 3</option>
+                                                                name="lead" required>
+                                                                <!-- name = "plot-holding-type" -->
+                                                                 <option value="" disabled selected>Select Lead</option>
+                                                                 <?php
+                                                                 include '../PhpFiles/connection.php';
 
-
+                                                                 $query = "SELECT * FROM tbl_leads";
+                                                                 $result = mysqli_query($conn, $query) or die("Query unsuccessful".mysqli_error($conn));
+                                                                 if($result > 0){
+                                                                    while($row = mysqli_fetch_assoc($result)){
+                                                                        echo '<option value="'.$row['id'].'">'.$row['first_name'].' '.$row['last_name'].'</option>';
+                                                                    }
+                                                                 }
+                                                                 ?>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -1797,25 +1795,83 @@
                                                             <button type="submit" name="add-society-button"
                                                                 class="btn btn-primary w-100">Submit</button>
                                                         </div>
-                                                        <div class="col-12 col-md-4">
-                                                            <button type="reset"
-                                                                class="btn btn-secondary w-100">Reset</button>
-                                                        </div>
-                                                        <div class="col-12 col-md-4">
-                                                            <button type="button" class="btn btn-primary w-100"
-                                                                id="next-tab-btn">Next</button>
-                                                        </div>
                                                     </div>
 
                                                 </div>
                                             </form>
-
-
                                         </div>
-
-
                                     </div>
                                 </div>
+                                <!-- add society -->
+                                <?php
+                                include '../PhpFiles/connection.php';
+                                // if(isset($_POST['add-society-button'])){
+                                //     $society_name = $_POST['society-name'];
+                                //     $cts_number = $_POST['cts-number'];
+                                //     $district = $_POST['district'];
+                                //     $taluka = $_POST['taluka'];
+                                //     $village = $_POST['village'];
+                                //     $ward = $_POST['ward'];
+                                //     $society_address = $_POST['society-address'];
+                                //     $plot_holding_type = $_POST['plot-holding-type'];
+                                //     $lead = $_POST['lead'];
+                                //     $unit_number = $_POST['number-of-units'];
+                                //     $tenant_number = $_POST['number-of-tenants'];
+                                //     $as_per_physical = $_POST['physical-area'];
+                                //     $as_per_card = $_POST['pr-card-area'];
+                                //     $units = $_POST['unit-selection'];
+                                //     $scheme = $_POST['plot-holding-scheme'];
+                                //     $reservation = $_POST['plot-holding-reservation'];
+
+                                //     // generate unique id
+                                //     $uid = uniqid('society', true);
+
+                                //     $query = "INSERT INTO `tbl_add_society` (`uid`,`society_name`, `cts_number`, `district`, `society_address`, `units_number`, `tenants_number`, `physical`, `card`, `taluka`, `village`, `plot_holding_type`, `units`, `scheme`, `reservation`, `ward_id`, `lead_id`) VALUES ('$uid', '$society_name', '$cts_number', '$district', '$society_address', '$unit_number', '$tenant_number', '$as_per_physical', '$as_per_card', '$taluka', '$village', '$plot_holding_type', '$units', '$scheme', '$reservation', '$ward', '$lead') ";
+
+                                //     $result = mysqli_query($conn, $query) or die("Query Unsuccessful".mysqli_error($conn));
+
+                                //     if($result){
+                                //         echo '<script> alert("Data added successfully"); window.location.href = "add_property.php" </script>';
+                                //     }else{
+                                //         echo '<script> alert("Failed : " '.mysqli_error($conn).'); window.location.href = "add_property.php" </script>';
+                                //     }
+                                // }
+include '../PhpFiles/connection.php';
+
+if(isset($_POST['add-society-button'])) {
+    $society_name = $_POST['society-name'];
+    $cts_number = $_POST['cts-number'];
+    $district = $_POST['district'];
+    $taluka = $_POST['taluka'];
+    $village = $_POST['village'];
+    $ward = $_POST['ward'];  // Ensure this exists and is posted correctly
+    $society_address = $_POST['society-address'];
+    $plot_holding_type = $_POST['plot-holding-type'];
+    $lead = $_POST['lead'];
+    $unit_number = $_POST['number-of-units'];
+    $tenant_number = $_POST['number-of-tenants'];
+    $as_per_physical = $_POST['physical-area'];
+    $as_per_card = $_POST['pr-card-area'];
+    $units = $_POST['unit-selection'];
+    $scheme = $_POST['plot-holding-scheme'];
+    $reservation = $_POST['plot-holding-reservation'];
+
+    // manually generate unique id
+    $uid = uniqid('society', true);
+
+    $query = "INSERT INTO `tbl_society` (`soc_name`, `cts_no`, `district`, `taluka`, `village`, `ward`, `address`, `total_units`, `total_tenants`, `as_per_physical`, `as_per_card`, `unit`, `scheme`, `plot_holding_type`, `reservation`, `uid`, `lead_id`) VALUES ('$society_name', '$cts_number', '$district', '$taluka', '$village', '$ward', '$society_address', '$unit_number', '$tenant_number', '$as_per_physical', '$as_per_card', '$units', '$scheme', 'plot_holding_ype', '$reservation', '$uid', '$lead');";
+
+    $result = mysqli_query($conn, $query);
+
+    if($result) {
+        echo '<script>alert("Data added successfully"); window.location.href = "add_property.php"</script>';
+    } else {
+        echo '<script>alert("Failed: '.mysqli_error($conn).'"); window.location.href = "add_property.php"</script>';
+    }
+}
+?>
+
+                                <!-- Members Directory -->
                                 <div class="tab-pane fade" id="tab-reviews" role="tabpanel"
                                     aria-labelledby="reviews-tab">
                                     <div class="border-y" id="profileRatingTable"
