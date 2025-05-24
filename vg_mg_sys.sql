@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 23, 2025 at 09:49 AM
+-- Generation Time: May 24, 2025 at 12:52 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -60,8 +60,8 @@ CREATE TABLE `tbl_category` (
 --
 
 INSERT INTO `tbl_category` (`id`, `category_name`, `created_at`) VALUES
-(1, 'Massachusetts Institute of Technology', '2025-04-29'),
-(2, 'University of Chicago', '2025-04-29'),
+(1, 'Bugs', '2025-04-29'),
+(2, 'Changes', '2025-04-29'),
 (3, 'GSAS Open Labs At Harvard', '2025-04-29'),
 (4, 'California Institute of Technology', '2025-04-29');
 
@@ -230,6 +230,36 @@ CREATE TABLE `tbl_folders` (
 
 INSERT INTO `tbl_folders` (`id`, `name`, `parent_id`, `is_archived`, `created_at`, `updated_at`) VALUES
 (4, 'sdcsdc', 1, 0, '2025-05-01 00:47:19', '2025-05-01 00:49:03');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_landlord`
+--
+
+CREATE TABLE `tbl_landlord` (
+  `id` int(11) NOT NULL,
+  `landlord_name` varchar(255) NOT NULL,
+  `landlord_email` varchar(255) NOT NULL,
+  `landlord_phone` varchar(20) NOT NULL,
+  `district` varchar(255) NOT NULL,
+  `taluka` varchar(255) NOT NULL,
+  `village` varchar(255) NOT NULL,
+  `property_type` varchar(100) NOT NULL,
+  `structure_type` varchar(100) NOT NULL,
+  `private_floors` int(11) NOT NULL,
+  `private_units` int(11) NOT NULL,
+  `public_wings` int(11) NOT NULL,
+  `public_floors` int(11) NOT NULL,
+  `society_units` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_landlord`
+--
+
+INSERT INTO `tbl_landlord` (`id`, `landlord_name`, `landlord_email`, `landlord_phone`, `district`, `taluka`, `village`, `property_type`, `structure_type`, `private_floors`, `private_units`, `public_wings`, `public_floors`, `society_units`) VALUES
+(1, 'Aryan', 'aryanshirodkar03@gmail.com', '07304680494', 'Aurangabad', 'Kannad', 'Hadiwara', 'structure', 'private', 5, 25, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -773,6 +803,44 @@ INSERT INTO `tbl_rooms` (`id`, `room_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_society`
+--
+
+CREATE TABLE `tbl_society` (
+  `soc_id` int(11) NOT NULL,
+  `soc_name` varchar(255) DEFAULT NULL,
+  `cts_no` varchar(255) NOT NULL,
+  `district` varchar(255) DEFAULT NULL,
+  `taluka` varchar(255) DEFAULT NULL,
+  `village` varchar(255) DEFAULT NULL,
+  `ward` int(11) DEFAULT NULL,
+  `address` varchar(255) NOT NULL,
+  `holding_type` varchar(255) NOT NULL,
+  `total_units` int(11) NOT NULL,
+  `total_tenants` int(11) NOT NULL,
+  `as_per_physical` int(11) NOT NULL,
+  `as_per_card` int(11) NOT NULL,
+  `unit` varchar(255) NOT NULL,
+  `scheme` varchar(255) NOT NULL,
+  `plot_holding_type` varchar(255) DEFAULT NULL,
+  `reservation` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_society`
+--
+
+INSERT INTO `tbl_society` (`soc_id`, `soc_name`, `cts_no`, `district`, `taluka`, `village`, `ward`, `address`, `holding_type`, `total_units`, `total_tenants`, `as_per_physical`, `as_per_card`, `unit`, `scheme`, `plot_holding_type`, `reservation`) VALUES
+(1, 'Ram Baugh', '23/55e', 'Chandrapur', 'Saoli', 'Village 20', 2, 'waefrtghuyjyjyewqsaswdrtg', 'Mhada', 254, 23, 23, 267, 'sq-feet', '33(7)B', NULL, NULL),
+(18, 'arjun vilas', '2323232', 'Gadchiroli', 'Dhanora', 'Village 3', 2, 'dkkfnclkwdsclkamcp]oqwskdqwd', 'MCGM', 123, 12312321, 12312321, 2123, 'sq-meter', '33(7)B', NULL, NULL),
+(19, 'Aakash Ganga', '4545445', 'Chandrapur', 'Chandrapur', 'Village 1', 2, 'kjwdnkjnewwkn', 'Mhada', 2342, 234234324, 234234324, 32423432, 'sq-feet', '33(7)B', NULL, NULL),
+(23, 'Roshan Heights', '', '', '', '', 0, '', '', 0, 0, 0, 0, 'sq-feet', '33(7)B', 'Collector', 'mahada'),
+(25, 'abc', '12345', '', '', '', 0, '', '', 0, 0, 0, 0, 'sq-feet', '33(7)B', '', ''),
+(26, 'raj bldg', '12kj', 'Mumbai', 'MumbaiCity', 'Vile Parle', 2, '', '', 0, 0, 0, 0, 'sq-feet', '33(7)B', '', '');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_society_details`
 --
 
@@ -797,6 +865,57 @@ INSERT INTO `tbl_society_details` (`id`, `uid`, `created_at`, `society_name`, `w
 (4, 23, '2025-05-14 09:05:48', 'abc3', '1', 123, '123'),
 (5, 23, '2025-05-14 09:05:48', 'abc4', '1', 123, '123'),
 (6, 23, '2025-05-14 09:05:48', 'abc5', '1', 123, '123');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_soc_committee_details`
+--
+
+CREATE TABLE `tbl_soc_committee_details` (
+  `committee_member_id` int(11) NOT NULL,
+  `soc_id` int(11) NOT NULL,
+  `committee_member_name` varchar(255) NOT NULL,
+  `committee_memeber_role` varchar(255) NOT NULL,
+  `committee_member_phone` varchar(255) NOT NULL,
+  `committee_member_email` varchar(255) NOT NULL,
+  `term_start_date` date NOT NULL,
+  `term_end_date` date NOT NULL,
+  `reminder` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_soc_committee_details`
+--
+
+INSERT INTO `tbl_soc_committee_details` (`committee_member_id`, `soc_id`, `committee_member_name`, `committee_memeber_role`, `committee_member_phone`, `committee_member_email`, `term_start_date`, `term_end_date`, `reminder`) VALUES
+(1, 18, 'aryan shirodkar 231000', 'chairperson', '123456789', 'ans@gmail.com', '2025-01-23', '2025-01-04', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_soc_members`
+--
+
+CREATE TABLE `tbl_soc_members` (
+  `id` int(11) NOT NULL,
+  `soc_id` int(11) NOT NULL,
+  `owner_name` varchar(255) NOT NULL,
+  `flat_no` varchar(255) NOT NULL,
+  `contact_no` varchar(11) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `tag` varchar(255) NOT NULL,
+  `freehold` varchar(255) NOT NULL,
+  `leasehold` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_soc_members`
+--
+
+INSERT INTO `tbl_soc_members` (`id`, `soc_id`, `owner_name`, `flat_no`, `contact_no`, `email`, `tag`, `freehold`, `leasehold`) VALUES
+(1, 18, 'Aryan Shirodkar', '23', '7304680494', 'aryanshirodkar03@gmail.com', 'tenant', '', ''),
+(2, 18, 'Aakash Verma', '450', '7304680494', 'aryanshirodkar03@gmail.com', 'committee_member', 'yes', 'no');
 
 -- --------------------------------------------------------
 
@@ -857,6 +976,13 @@ CREATE TABLE `tbl_tasks` (
   `image_path` varchar(256) DEFAULT NULL,
   `file_path` varchar(256) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_tasks`
+--
+
+INSERT INTO `tbl_tasks` (`id`, `uid`, `title`, `description`, `project_id`, `project_name`, `start_date`, `end_date`, `assigned_employee`, `task_category`, `status_id`, `priority`, `tags`, `image_path`, `file_path`) VALUES
+(1, NULL, 'Checking for task 1', 'this is a test task', 21, NULL, '2025-05-01', '2025-05-23', '1', 1, 1, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1002,6 +1128,12 @@ ALTER TABLE `tbl_fms`
 ALTER TABLE `tbl_folders`
   ADD PRIMARY KEY (`id`),
   ADD KEY `tbl_folders_ibfk_1` (`parent_id`);
+
+--
+-- Indexes for table `tbl_landlord`
+--
+ALTER TABLE `tbl_landlord`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tbl_leaves`
@@ -1156,9 +1288,30 @@ ALTER TABLE `tbl_rooms`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tbl_society`
+--
+ALTER TABLE `tbl_society`
+  ADD PRIMARY KEY (`soc_id`,`cts_no`),
+  ADD UNIQUE KEY `cts_no` (`cts_no`),
+  ADD KEY `tbl_society_ibfk_1` (`ward`);
+
+--
 -- Indexes for table `tbl_society_details`
 --
 ALTER TABLE `tbl_society_details`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_soc_committee_details`
+--
+ALTER TABLE `tbl_soc_committee_details`
+  ADD PRIMARY KEY (`committee_member_id`),
+  ADD KEY `soc_id` (`soc_id`);
+
+--
+-- Indexes for table `tbl_soc_members`
+--
+ALTER TABLE `tbl_soc_members`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1265,6 +1418,12 @@ ALTER TABLE `tbl_fms`
 --
 ALTER TABLE `tbl_folders`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `tbl_landlord`
+--
+ALTER TABLE `tbl_landlord`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_leaves`
@@ -1387,10 +1546,28 @@ ALTER TABLE `tbl_rooms`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `tbl_society`
+--
+ALTER TABLE `tbl_society`
+  MODIFY `soc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
 -- AUTO_INCREMENT for table `tbl_society_details`
 --
 ALTER TABLE `tbl_society_details`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `tbl_soc_committee_details`
+--
+ALTER TABLE `tbl_soc_committee_details`
+  MODIFY `committee_member_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tbl_soc_members`
+--
+ALTER TABLE `tbl_soc_members`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_source_details`
@@ -1408,7 +1585,7 @@ ALTER TABLE `tbl_tags`
 -- AUTO_INCREMENT for table `tbl_tasks`
 --
 ALTER TABLE `tbl_tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_task_emp`
@@ -1522,6 +1699,12 @@ ALTER TABLE `tbl_project_emp`
 ALTER TABLE `tbl_project_task_status`
   ADD CONSTRAINT `fk_project_id` FOREIGN KEY (`project_id`) REFERENCES `tbl_project` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_task_status_id` FOREIGN KEY (`task_status_id`) REFERENCES `tbl_task_status` (`id`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tbl_soc_committee_details`
+--
+ALTER TABLE `tbl_soc_committee_details`
+  ADD CONSTRAINT `tbl_soc_committee_details_ibfk_1` FOREIGN KEY (`soc_id`) REFERENCES `tbl_society` (`soc_id`);
 
 --
 -- Constraints for table `tbl_task_emp`
