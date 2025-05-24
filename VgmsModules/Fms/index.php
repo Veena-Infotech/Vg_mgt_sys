@@ -164,138 +164,44 @@
                 navbarVertical.setAttribute('data-navbar-appearance', 'darker');
             }
         </script>
-        <div class="content">
-            <!-- Main Content -->
-            <div class="flex-grow-1 d-flex flex-column">
+      <div class="content">
+      <div class="flex-grow-1 d-flex flex-column">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-start p-3 border-bottom">
+          <div>
+            <h4 class="mb-0">Offices</h4>
+            <small>Select an office to view rooms</small>
+          </div>
+        </div>
 
-                <!-- Header -->
-                <div class="d-flex justify-content-between align-items-start p-3 border-bottom">
-                    <div>
-                        <h4 class="mb-0">File Manager</h4>
-                        <small>Organize and access your files easily</small>
-                    </div>
-                    <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#locationModal">+
-                        Location</button>
-                </div>
-
-
-                <div class="container mt-4">
-                    <!-- Filter and View Icons -->
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <select id="roomFilter" class="form-select w-auto">
-                            <option value="all">All Rooms</option>
-                            <!-- <option value="living room">Living Room</option>
-                            <option value="kitchen">Kitchen</option>
-                            <option value="bedroom">Bedroom</option> -->
-                            <?php
-                            // Fetch and display additional rooms from the database
-                            include '../Phpfiles/connection.php';
-                            $sql = "SELECT room_name FROM tbl_rooms";
-                            $result = $conn->query($sql);
-                            if ($result->num_rows > 0) {
-                                while ($row = $result->fetch_assoc()) {
-                                    echo '<option value="' . htmlspecialchars($row['room_name']) . '">' . htmlspecialchars($row['room_name']) . '</option>';
-                                }
-                            } else {
-                                echo '<option value="">No rooms available</option>';
-                            }
-                            ?>
-                        </select>
-                        <div class="d-flex gap-3">
-                            <a href="index.php"><i class="bi bi-grid-fill fs-6" id="cardView" data-bs-toggle="tooltip"
-                            title="Bifurcated View" style="cursor:pointer;"></i></a>
-                            <a href="list_view.php"><i class="bi bi-list-ul fs-6" id="listView" data-bs-toggle="tooltip" title="All-in-One View"
-                            style="cursor:pointer;"></i></a>
+        <div class="container mt-4">
+          <div id="officeList" class="row g-3">
+            <?php
+            include '../Phpfiles/connection.php';
+            $sql = "SELECT * FROM tbl_offices";
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+              while ($row = $result->fetch_assoc()) {
+                echo '<div class="col-md-4 location-card">
+                        <div class="card text-center h-100">
+                          <div class="card-body d-flex flex-column justify-content-center">
+                            <i class="bi bi-building display-4 text-primary"></i>
+                            <h5 class="card-title mt-2">' . htmlspecialchars($row['office_name']) . '</h5>
+                            <a href="rooms.php?office_id=' . $row['id'] . '"><button class="btn btn-outline-primary btn-sm mt-2">Open</button></a>
+                          </div>
                         </div>
-                    </div>
+                      </div>';
+              }
+            } else {
+              echo '<div class="col-12 text-center">No offices available</div>';
+            }
+            ?>
+          </div>
+        </div>
 
-                    <!-- Location Cards -->
-                    <div id="locationList" class="row g-3">
-                        <?php
-                        // Fetch and display additional rooms from the database
-                        include '../Phpfiles/connection.php';
-                        $sql = "SELECT * FROM tbl_rooms";
-                        $result = $conn->query($sql);
-                        if ($result->num_rows > 0) {
-                            while ($row = $result->fetch_assoc()) {
-                                echo '<div class="col-md-4 location-card" data-room="' . htmlspecialchars($row['room_name']) . '">
-                            <div class="card text-center h-100">
-                                <div class="card-body d-flex flex-column justify-content-center">
-                                    <i class="bi bi-folder-fill display-4 text-secondary"></i>
-                                    <h5 class="card-title mt-2">'.htmlspecialchars($row['room_name']) .'</h5>
-                                    <a href="index_table.php?id='.$row['id'].'"><button
-                                            class="btn btn-outline-secondary btn-sm mt-2">Open</button></a>
-                                </div>
-                            </div>
-                        </div>';
-                            }
-                        } else {
-                            echo '<option value="">No rooms available</option>';
-                        }
-                        ?>
-                        <!-- <div class="col-md-4 location-card" data-room="living room">
-                            <div class="card text-center h-100">
-                                <div class="card-body d-flex flex-column justify-content-center">
-                                    <i class="bi bi-folder-fill display-4 text-secondary"></i>
-                                    <h5 class="card-title mt-2">Living Room</h5>
-                                    <a href="index_table.php"><button
-                                            class="btn btn-outline-secondary btn-sm mt-2">Open</button></a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 location-card" data-room="kitchen">
-                            <div class="card text-center h-100">
-                                <div class="card-body d-flex flex-column justify-content-center">
-                                    <i class="bi bi-folder-fill display-4 text-secondary"></i>
-                                    <h5 class="card-title mt-2">Kitchen</h5>
-                                    <a href="index_table.php"><button
-                                            class="btn btn-outline-secondary btn-sm mt-2">Open</button></a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 location-card" data-room="bedroom">
-                            <div class="card text-center h-100">
-                                <div class="card-body d-flex flex-column justify-content-center">
-                                    <i class="bi bi-folder-fill display-4 text-secondary"></i>
-                                    <h5 class="card-title mt-2">Bedroom</h5>
-                                    <a href="index_table.php"><button
-                                            class="btn btn-outline-secondary btn-sm mt-2">Open</button></a>
-                                </div>
-                            </div>
-                        </div> -->
-                    </div>
-                </div>
-
-                <!-- Add Location Modal -->
-                <div class="modal fade mt-2" id="locationModal" tabindex="-1" aria-labelledby="locationModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content border-0">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="locationModalLabel">Add Location</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                            </div>
-                            <form id="addLocationForm">
-                                <div class="modal-body">
-                                    <input type="text" id="locationInput" class="form-control"
-                                        placeholder="Enter location name" required>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-outline-success">Submit</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-
-                <!-- Footer -->
-                <?php include("../../Components/footer.php"); ?>
-            </div>
-
-
+        <?php include("../../Components/footer.php"); ?>
+      </div>
+    </div>
 
 
 
@@ -430,38 +336,15 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
 
     <script>
-        // Tooltip init
-        const tooltipTriggerList = Array.from(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-        tooltipTriggerList.forEach(el => new bootstrap.Tooltip(el));
-
-        // Room filter logic
-        const filterSelect = document.getElementById('roomFilter');
-        const cards = document.querySelectorAll('.location-card');
-
-        filterSelect.addEventListener('change', () => {
-            const selectedRoom = filterSelect.value;
-
-            cards.forEach(card => {
-                const room = card.dataset.room;
-                const match = selectedRoom === 'all' || room === selectedRoom;
-
-                if (match) {
-                    card.classList.remove('d-none');
-                    gsap.fromTo(card, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5 });
-                } else {
-                    card.classList.add('d-none');
-                }
-            });
-        });
-
-        // GSAP on initial load
-        gsap.from(".location-card", {
-            opacity: 0,
-            y: 20,
-            duration: 0.6,
-            stagger: 0.1
-        });
-    </script>
+    document.addEventListener("DOMContentLoaded", function () {
+      gsap.from(".location-card", {
+        opacity: 0,
+        y: 20,
+        duration: 0.6,
+        stagger: 0.1
+      });
+    });
+  </script>
 
 
 

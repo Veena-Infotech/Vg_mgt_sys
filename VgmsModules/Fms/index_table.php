@@ -19,7 +19,7 @@ $stmt->fetch(); // Fetch the result from bind_result
 $stmt->close(); // Always close the prepared statement
 
 // Step 2: Get cupboards for this room
-$cubboards = mysqli_query($conn, "SELECT * FROM shelfs_cubboards WHERE room_name = '$room'");
+$cubboards = mysqli_query($conn, "SELECT * FROM shelves_cupboards WHERE room_name = '$room'");
 if (!$cubboards) {
     die("Query failed: " . mysqli_error($conn));
 }
@@ -315,8 +315,8 @@ if (!$cubboards) {
                                              <tr>
                                 <td class="align-middle ps-3">'.$srno.'</td>
                                 <td class="align-middle ps-3 room_name">' . $row['room_name'] . '</td>
-                                <td class="align-middle cubboard_name">' . $row['cubboard_name'] . '</td>
-                                <td class="align-middle file_name">' . $row['file_name'] . '</td>
+                                <td class="align-middle cupboard_name">' . $row['cupboard_name'] . '</td>
+                                <td class="align-middle filename">' . $row['filename'] . '</td>
                                 <td class="align-middle Added_On">' . $row['time'] . '</td>
                                 <td class="align-middle Added_By">' . $row['added_by'] . '</td>
                                 <td class="align-middle white-space-nowrap text-end pe-0">

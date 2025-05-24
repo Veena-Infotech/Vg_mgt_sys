@@ -26,7 +26,7 @@ if (empty($cupboardName) || empty($roomname)) {
 }
 
 // Prepare and insert
-$stmt = $conn->prepare("INSERT INTO shelfs_cubboards (name, room_name) VALUES (?, ?)");
+$stmt = $conn->prepare("INSERT INTO shelves_cupboards (name, room_name) VALUES (?, ?)");
 if (!$stmt) {
     http_response_code(500);
     echo json_encode([
