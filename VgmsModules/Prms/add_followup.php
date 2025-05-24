@@ -169,7 +169,7 @@
             <h3 style="margin: 0;" class="mb-4">Add Follow ups</h3>
 
 
-            <div id="tableExample3" data-list='{"valueNames":["name","email","age"],"page":5,"pagination":true}'>
+            <div id="tableExample3" data-list='{"valueNames":["type","details","startdate","time","contact","status","document"],"page":5,"pagination":true}'>
                 <div class="search-box mb-3 mx-auto">
                     <form class="position-relative"><input class="form-control search-input search form-control-sm" type="search" placeholder="Search" aria-label="Search" />
                         <span class="fas fa-search search-box-icon"></span>
@@ -180,13 +180,13 @@
                         <thead>
                             <tr>
                                 <th class="sort border-top border-translucent ps-3" data-sort="name">Title</th>
-                                <th class="sort border-top" data-sort="email">Type</th>
-                                <th class="sort border-top" data-sort="age">Details</th>
-                                <th class="sort border-top" data-sort="age">Start Date</th>
-                                <th class="sort border-top" data-sort="age">Time</th>
-                                <th class="sort border-top" data-sort="age">Contact</th>
-                                <th class="sort border-top" data-sort="age">Status</th>
-                                <th class="sort border-top" data-sort="age">Document</th>
+                                <th class="sort border-top" data-sort="type">Type</th>
+                                <th class="sort border-top" data-sort="details">Details</th>
+                                <th class="sort border-top" data-sort="startdate">Start Date</th>
+                                <th class="sort border-top" data-sort="time">Time</th>
+                                <th class="sort border-top" data-sort="contact">Contact</th>
+                                <th class="sort border-top" data-sort="status">Status</th>
+                                <th class="sort border-top" data-sort="document">Document</th>
                                 <th class="sort text-end align-middle pe-0 border-top" scope="col">ACTION</th>
                             </tr>
                         </thead>
