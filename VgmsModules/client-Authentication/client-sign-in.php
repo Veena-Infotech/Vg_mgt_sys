@@ -109,11 +109,7 @@
                                             <p class="text-body-tertiary">Get access to your account</p>
                                             <hr class="hr" />
                                             <br>
-                                            <!-- </div><button class="btn btn-phoenix-secondary w-100 mb-3"><span class="fab fa-google text-danger me-2 fs-9"></span>Sign in with google</button><button class="btn btn-phoenix-secondary w-100"><span class="fab fa-facebook text-primary me-2 fs-9"></span>Sign in with facebook</button>
-                      <div class="position-relative">
-                        <hr class="bg-body-secondary mt-5 mb-4" />
-                        <div class="divider-content-center bg-body-emphasis">or use email</div>
-                      </div> -->
+                                            
                                             <form action="../PhpFiles/verify_users.php" method="post">
                                                 <div class="mb-3 text-start"><label class="form-label" for="email">Email address</label>
                                                     <div class="form-icon-container"><input class="form-control form-icon-input" id="email"
@@ -124,16 +120,22 @@
                                                     <div class="form-icon-container" data-password="data-password"><input
                                                             class="form-control form-icon-input pe-6" id="password" name="password" type="password"
                                                             placeholder="Password" data-password-input="data-password-input" /><span
-                                                            class="fas fa-key text-body fs-9 form-icon"></span><button
+                                                            class="fas fa-key text-body fs-9 form-icon"></span>
+                                                            <button
                                                             class="btn px-3 py-0 h-100 position-absolute top-0 end-0 fs-7 text-body-tertiary"
                                                             data-password-toggle="data-password-toggle"><span class="uil uil-eye show"></span><span
-                                                                class="uil uil-eye-slash hide"></span></button></div>
-                                                </div>
-                                                <div class="row flex-between-center mb-7">
-                                                    <div class="col-auto">
-                                                        <!-- <div class="form-check mb-0"><input class="form-check-input" id="basic-checkbox" type="checkbox" checked="checked" /><label class="form-check-label mb-0" for="basic-checkbox">Remember me</label></div> -->
+                                                                class="uil uil-eye-slash hide"></span></button>
                                                     </div>
-                                                </div><button class="btn btn-primary w-100 mb-3">Sign In</button>
+
+                                                </div>
+                                                <!-- <div class="form-check mb-0"><input class="form-check-input" id="basic-checkbox" type="checkbox" checked="checked" /><label class="form-check-label mb-0" for="basic-checkbox">Remember me</label></div> -->
+                                                    
+                                                <!-- <div class="row flex-between-center mb-7">
+                                                    <div class="col-auto">
+                                                        </div>
+                                                </div> -->
+                                                <button type="button" class="btn btn-primary w-100 mb-3" onclick="window.location.href='#'">Sign In</button>
+
                                             </form>
                                             <div class="col-auto"><a class="fs-9 fw-semibold" href="/vg_mgt_sys/VgmsModules/client-Authentication/client-forgot-password.php">Forgot
                                                     Password?</a></div>
