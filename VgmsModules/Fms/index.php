@@ -1,3 +1,12 @@
+<?php
+include '../PhpFiles/connection.php';
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../../index.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr" data-navigation-type="default" data-navbar-horizontal-shape="default">
 
@@ -164,25 +173,30 @@
                 navbarVertical.setAttribute('data-navbar-appearance', 'darker');
             }
         </script>
-      <div class="content">
-      <div class="flex-grow-1 d-flex flex-column">
-        <!-- Header -->
-        <div class="d-flex justify-content-between align-items-start p-3 border-bottom">
-          <div>
-            <h4 class="mb-0">Offices</h4>
-            <small>Select an office to view rooms</small>
-          </div>
-        </div>
+        <div class="content">
+            <div class="flex-grow-1 d-flex flex-column">
+                <!-- Header -->
+                <div class="d-flex justify-content-between align-items-start p-3 border-bottom">
+                    <div>
+                        <h4 class="mb-0">Offices</h4>
+                        <small>Select an office to view rooms</small>
+                    </div>
+                    <div class="d-flex justify-content-end mb-3 px-3">
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addOfficeModal">
+                            <i class="bi bi-plus-lg me-1"></i> Add Office
+                        </button>
+                    </div>
+                </div>
 
-        <div class="container mt-4">
-          <div id="officeList" class="row g-3">
-            <?php
-            include '../Phpfiles/connection.php';
-            $sql = "SELECT * FROM tbl_offices";
-            $result = $conn->query($sql);
-            if ($result->num_rows > 0) {
-              while ($row = $result->fetch_assoc()) {
-                echo '<div class="col-md-4 location-card">
+                <div class="container mt-4">
+                    <div id="officeList" class="row g-3">
+                        <?php
+                        include '../Phpfiles/connection.php';
+                        $sql = "SELECT * FROM tbl_offices";
+                        $result = $conn->query($sql);
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo '<div class="col-md-4 location-card">
                         <div class="card text-center h-100">
                           <div class="card-body d-flex flex-column justify-content-center">
                             <i class="bi bi-building display-4 text-primary"></i>
@@ -191,19 +205,40 @@
                           </div>
                         </div>
                       </div>';
-              }
-            } else {
-              echo '<div class="col-12 text-center">No offices available</div>';
-            }
-            ?>
-          </div>
+                            }
+                        } else {
+                            echo '<div class="col-12 text-center">No offices available</div>';
+                        }
+                        ?>
+                    </div>
+                </div>
+
+                <?php include("../../Components/footer.php"); ?>
+            </div>
         </div>
 
-        <?php include("../../Components/footer.php"); ?>
-      </div>
-    </div>
-
-
+        <!-- Add Office Modal -->
+        <div class="modal fade" id="addOfficeModal" tabindex="-1" aria-labelledby="addOfficeLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form id="addOfficeForm">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addOfficeLabel">Add New Office</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="officeName" class="form-label">Office Name</label>
+                                <input type="text" class="form-control" id="officeName" name="office_name" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Save Office</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
 
     </main>
@@ -336,21 +371,47 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
 
     <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      gsap.from(".location-card", {
-        opacity: 0,
-        y: 20,
-        duration: 0.6,
-        stagger: 0.1
-      });
-    });
-  </script>
+        document.addEventListener("DOMContentLoaded", function () {
+            gsap.from(".location-card", {
+                opacity: 0,
+                y: 20,
+                duration: 0.6,
+                stagger: 0.1
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const addOfficeForm = document.getElementById('addOfficeForm');
+            const officeNameInput = document.getElementById('officeName');
+            const officeList = document.getElementById('officeList');
+            const addOfficeModal = new bootstrap.Modal(document.getElementById('addOfficeModal'));
 
+            addOfficeForm.addEventListener('submit', function (e) {
+                e.preventDefault();
 
+                const formData = new FormData(addOfficeForm);
+
+                fetch('../Phpfiles/add_office.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            window.location.reload(); // Reload to show the new office
+                            alert("Office added successfully!");
+                        } else {
+                            alert(data.message || "Failed to add office.");
+                        }
+                    })
+                    .catch(err => {
+                        alert("Error: " + err);
+                    });
+            });
+        });
+    </script>
 
 </body>
-
-
-
 
 </html>

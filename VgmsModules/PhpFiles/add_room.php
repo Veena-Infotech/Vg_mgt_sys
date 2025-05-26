@@ -1,35 +1,38 @@
 <?php
-header("Content-Type: application/json");
+include '../Phpfiles/connection.php';
+include '../Phpfiles/logging_function.php';
+session_start();
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405);
-    echo json_encode(["status" => "error", "message" => "Invalid request method."]);
-    exit;
+$room_name = $_POST['room_name'] ?? '';
+$office_id = intval($_POST['office_id'] ?? 0);
+
+// Get user
+$userId = $_SESSION['user_id'] ?? null;
+$userName = 'Unknown';
+
+if ($userId) {
+    $userStmt = $conn->prepare("SELECT f_name FROM tbl_emp WHERE id = ?");
+    $userStmt->bind_param("i", $userId);
+    $userStmt->execute();
+    $userStmt->bind_result($userName);
+    $userStmt->fetch();
+    $userStmt->close();
 }
 
-include 'connection.php';
+if (!empty($room_name) && $office_id > 0) {
+    $stmt = $conn->prepare("INSERT INTO tbl_rooms (room_name, office_id) VALUES (?, ?)");
+    $stmt->bind_param("si", $room_name, $office_id);
+    $newroom_id = $stmt->insert_id; // Get the new room ID
+    if ($stmt->execute()) {
+        // Log creation (room_id is not file ID, so we pass 0)
+        logFileHistory($conn, $newroom_id, "Room Created: $room_name in Office ID $office_id", $userName);
+        echo "success";
+    } else {
+        echo "DB error: " . $stmt->error;
+    }
 
-$data = json_decode(file_get_contents("php://input"), true);
-
-if (!isset($data['room_name'], $data['office_id']) || empty(trim($data['room_name'])) || !is_numeric($data['office_id'])) {
-    http_response_code(400);
-    echo json_encode(["status" => "error", "message" => "Invalid input."]);
-    exit;
-}
-
-$roomName = trim($data['room_name']);
-$officeId = (int) $data['office_id'];
-
-$stmt = $conn->prepare("INSERT INTO tbl_rooms (room_name, office_id) VALUES (?, ?)");
-$stmt->bind_param("si", $roomName, $officeId);
-
-if ($stmt->execute()) {
-    echo json_encode(["status" => "success", "room_id" => $stmt->insert_id]);
+    $stmt->close();
 } else {
-    http_response_code(500);
-    echo json_encode(["status" => "error", "message" => "Insert failed: " . $stmt->error]);
+    echo "Invalid input";
 }
-
-$stmt->close();
-$conn->close();
 ?>
