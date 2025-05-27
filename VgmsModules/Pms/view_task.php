@@ -556,6 +556,14 @@ foreach ($tasks as $task) {
               class="form-control search-input rounded-3 px-3" placeholder="Add new task" /></div>
         </div>
         <?php endforeach; ?>
+        <div class="kanban-column scrollbar position-relative bg-transparent">
+          <div class="d-flex h-100 flex-center fw-bold bg-body-hover"><a
+              class="text-decoration-none stretched-link text-body-secondary" href="#!">
+              <div class="circle-btn bg-body-secondary mx-auto"><span class="fas fa-plus"
+                  data-fa-transform="shrink-2"></span></div><span>Add another list</span>
+            </a></div>
+        </div>
+      </div>
         <!--div class="kanban-column scrollbar">
           <div class="kanban-column-header px-4 hover-actions-trigger">
             <div class="d-flex align-items-center border-bottom border-3 py-3 border-primary">
@@ -1261,14 +1269,7 @@ foreach ($tasks as $task) {
                 data-fa-transform="grow-4 down-1"></span></button><input
               class="form-control search-input rounded-3 px-3" placeholder="Add new task" /></div>
         </div-->
-        <div class="kanban-column scrollbar position-relative bg-transparent">
-          <div class="d-flex h-100 flex-center fw-bold bg-body-hover"><a
-              class="text-decoration-none stretched-link text-body-secondary" href="#!">
-              <div class="circle-btn bg-body-secondary mx-auto"><span class="fas fa-plus"
-                  data-fa-transform="shrink-2"></span></div><span>Add another list</span>
-            </a></div>
-        </div>
-      </div>
+        
       
       <div class="phoenix-offcanvas phoenix-offcanvas-end bg-body-highlight position-fixed outline-none" tabindex="-1"
         id="offcanvasKanban" style="max-width: 445px">
