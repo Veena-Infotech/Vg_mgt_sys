@@ -2160,18 +2160,7 @@ function hideNotificationWarning() {
                                                 include '../PhpFiles/connection.php';
                                                 
                                                 if(isset($_POST['committee-btn'])){
-
-    //                                                   if (!isset($_POST['notifications'])) {
-    //     // Show message or handle error
-    //     echo '<script>
-    //             document.addEventListener("DOMContentLoaded", function() {
-    //                 document.getElementById("notification-warning").style.display = "block";
-    //             });
-    //           </script>';
-    //     exit;
-    // }
-
-    // Continue to save data
+                                                    if(!isset($_POST['$notifications']))
     $notifications = '1';
                                                       $from = $_POST['fromDate'];
     $to = $_POST['toDate'];
