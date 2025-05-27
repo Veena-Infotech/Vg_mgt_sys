@@ -42,6 +42,7 @@
   <link href="../../assets/css/theme.min.css" type="text/css" rel="stylesheet" id="style-default">
   <link href="../../assets/css/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
   <link href="../../assets/css/user.min.css" type="text/css" rel="stylesheet" id="user-style-default">
+
   <script>
     var phoenixIsRTL = window.config.config.phoenixIsRTL;
     if (phoenixIsRTL) {
@@ -394,15 +395,20 @@ $sql = "
     t.title,
     t.description,
     t.project_name,
+    t.status_id,
     s.name AS status_name,
     c.category_name AS category_name,
-    p.priority AS priority_name
+    p.priority AS priority_name,
+    CONCAT(e.f_name, ' ', e.m_name, ' ', e.l_name) AS employee_name
   FROM tbl_tasks t
   LEFT JOIN tbl_task_status s ON t.status_id = s.id
   LEFT JOIN tbl_category c ON t.task_category = c.id
   LEFT JOIN tbl_priority p ON t.priority = p.id
+  LEFT JOIN tbl_emp e ON t.assigned_employee = e.id
   WHERE t.project_id = $project_id
 ";
+
+
 
 $result = $conn->query($sql);
 $tasks = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
@@ -425,16 +431,7 @@ foreach ($tasks as $task) {
 
 ?>
 
-        <?php
-          $groupedTasks = [];
-          foreach ($tasks as $task) {
-          $status = $task['status_name'];
-          if (!isset($groupedTasks[$status])) {
-            $groupedTasks[$status] = [];
-          }
-          $groupedTasks[$status][] = $task;
-          } 
-        ?>
+        
         <?php foreach ($groupedTasks as $status => $tasksInStatus): ?>
         <div class="kanban-column scrollbar">
           <div class="kanban-column-header px-4 hover-actions-trigger">
@@ -527,32 +524,25 @@ foreach ($tasks as $task) {
                         href="#!"><span>Delete</span></a>
                     </div>
                   </div>
-                  <p class="mb-0 stretched-link"
-   data-bs-toggle="modal"
-   data-bs-target="#KanbanItemDetailsModal"
-   data-title="<?= htmlspecialchars($task['title']) ?>"
-   data-description="<?= htmlspecialchars($task['description']) ?>"
-   data-project="<?= htmlspecialchars($task['project_name']) ?>"
-   data-status="<?= htmlspecialchars($task['status_name']) ?>"
-   data-priority="<?= htmlspecialchars($task['priority_name']) ?>"
-   data-category="<?= htmlspecialchars($task['category_name']) ?>">
-   <?= htmlspecialchars($task['title']) ?>
-</p>
-
+                  <p
+                    class="mb-0 stretched-link"
+                    data-bs-toggle="modal"
+                    data-bs-target="#KanbanItemDetailsModal"
+                    data-id="<?= $task['id'] ?>"
+                    data-title="<?= htmlspecialchars($task['title']) ?>"
+                    data-description="<?= htmlspecialchars($task['description']) ?>"
+                    data-project="<?= htmlspecialchars($task['project_name']) ?>"
+                    data-status="<?= htmlspecialchars($task['status_name']) ?>"
+                    data-priority="<?= htmlspecialchars($task['priority_name']) ?>"
+                    data-category="<?= htmlspecialchars($task['category_name']) ?>"
+                    data-employee="<?= htmlspecialchars($task['employee_name']) ?>"
+                    >
+                    <?= htmlspecialchars($task['title']) ?>
+                  </p>
                   <div class="d-flex mt-2 align-items-center">
-                    <p class="mb-0 text-body-tertiary text-opacity-85 fs-9 lh-1"><span
-                        class="fa-solid fa-paperclip fs-9 me-2 d-inline-block" style="min-width: 1rem;"></span>15</p>
-                    <div class="avatar-group ms-auto">
-                      <div class="avatar avatar-s  border border-light-subtle rounded-pill">
-                        <img class="rounded-circle " src="../../assets/img/team/30.webp" alt="" />
-                      </div>
-                      <div class="avatar avatar-s  border border-light-subtle rounded-pill">
-                        <img class="rounded-circle " src="../../assets/img/team/57.webp" alt="" />
-                      </div>
-                      <div class="avatar avatar-s  border border-light-subtle rounded-pill">
-                        <img class="rounded-circle " src="../../assets/img/team/25.webp" alt="" />
-                      </div>
-                    </div>
+                    <P class="fs-9 mb-0">
+                      <?= htmlspecialchars($task['description']) ?>
+                    </P>
                   </div>
                 </div>
                 <?php endforeach; ?>
@@ -1279,6 +1269,7 @@ foreach ($tasks as $task) {
             </a></div>
         </div>
       </div>
+      
       <div class="phoenix-offcanvas phoenix-offcanvas-end bg-body-highlight position-fixed outline-none" tabindex="-1"
         id="offcanvasKanban" style="max-width: 445px">
         <div class="offcanvas-header justify-content-between">
@@ -2165,7 +2156,7 @@ foreach ($tasks as $task) {
   <!-- ===============================================-->
   <!--    End of Main Content-->
   <!-- ===============================================-->
-
+  
   <div class="offcanvas offcanvas-end settings-panel border-0" id="settings-offcanvas" tabindex="-1"
     aria-labelledby="settings-offcanvas">
     <div class="offcanvas-header align-items-start border-bottom flex-column border-translucent">
@@ -2309,7 +2300,8 @@ foreach ($tasks as $task) {
         href="https://themes.getbootstrap.com/product/phoenix-admin-dashboard-webapp-template/" target="_blank">Purchase
         template</a>
     </div>
-  </div><a class="card setting-toggle" href="#settings-offcanvas" data-bs-toggle="offcanvas">
+  </div>
+  <a class="card setting-toggle" href="#settings-offcanvas" data-bs-toggle="offcanvas">
     <!-- <div class="card-body d-flex align-items-center px-2 py-1">
       <div class="position-relative rounded-start" style="height:34px;width:28px">
         <div class="settings-popover"><span class="ripple"><span
@@ -2324,13 +2316,13 @@ foreach ($tasks as $task) {
     </div> -->
   </a>
   <?php
-if (isset($_GET['project_id']) && is_numeric($_GET['project_id'])) {
-    $project_id = (int) $_GET['project_id'];
-} else {
-    echo "Invalid project ID.";
-    exit;
-}
-?>
+      if (isset($_GET['project_id']) && is_numeric($_GET['project_id'])) {
+        $project_id = (int) $_GET['project_id'];
+      } else {
+          echo "Invalid project ID.";
+          exit;
+        }
+  ?>
 
   <div class="modal fade" id="kanbanAddTask" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen-sm-down modal-xl modal-dialog-centered">
@@ -2516,7 +2508,6 @@ if (isset($_GET['project_id']) && is_numeric($_GET['project_id'])) {
     </div>
   </div>
   
-
   <div class="modal fade" id="KanbanItemDetailsModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen-md-down modal-md modal-dialog-centered">
       <div class="modal-content overflow-hidden">
@@ -2526,7 +2517,7 @@ if (isset($_GET['project_id']) && is_numeric($_GET['project_id'])) {
             <!--/.bg-holder-->
           </div>
           <div class="row gy-4 py-0 gx-0">
-          <div class="col-lg-8 col-12">
+            <div class="col-lg-8 col-12">
               <div class="row mt-0 gy-4 pb-3 gx-0 px-3">
                 <div class="col-4 col-sm-3">
                   <h6 class="text-body-tertiary fw-bolder lh-sm mt-1">TITLE </h6>
@@ -2557,196 +2548,14 @@ if (isset($_GET['project_id']) && is_numeric($_GET['project_id'])) {
                   <h6 class="text-body-tertiary fw-bolder lh-sm mt-1">ASSAIGNED TO </h6>
                 </div>
                 <div class="col-8 col-sm-9">
-                  <div class="d-flex align-items-center"><a class="dropdown-toggle dropdown-caret-none d-inline-block"
-                      href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
-                      data-bs-auto-close="outside">
-                      <div class="avatar avatar-s  me-1">
-                        <img class="rounded-circle " src="../../assets/img/team/30.webp" alt="" />
-                      </div>
-                    </a>
-                    <div class="dropdown-menu avatar-dropdown-menu p-0 overflow-hidden" style="width: 320px;">
-                      <div class="position-relative">
-                        <div class="bg-holder z-n1"
-                          style="background-image:url(../../assets/img/bg/bg-32.png);background-size: auto;"></div>
-                        <!--/.bg-holder-->
-                        <div class="p-3">
-                          <div class="text-end"><button class="btn p-0 me-2"><span
-                                class="fa-solid fa-user-plus text-white"></span></button><button class="btn p-0"><span
-                                class="fa-solid fa-ellipsis text-white"></span></button></div>
-                          <div class="text-center">
-                            <div class="avatar avatar-xl status-online position-relative me-2 me-sm-0 me-xl-2 mb-2"><img
-                                class="rounded-circle border border-light-subtle" src="../../assets/img/team/30.webp"
-                                alt="" /></div>
-                            <h6 class="text-white">Stanly Drinkwater</h6>
-                            <p class="text-light text-opacity-50 fw-semibold fs-10 mb-2">@tyrion222</p>
-                            <div class="d-flex flex-center mb-3">
-                              <h6 class="text-white mb-0">224 <span
-                                  class="fw-normal text-light text-opacity-75">connections</span></h6><span
-                                class="fa-solid fa-circle text-body-tertiary mx-1"
-                                data-fa-transform="shrink-10 up-2"></span>
-                              <h6 class="text-white mb-0">23 <span
-                                  class="fw-normal text-light text-opacity-75">mutual</span></h6>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="bg-body-emphasis">
-                        <div class="p-3 border-bottom border-translucent">
-                          <div class="d-flex justify-content-between">
-                            <div class="d-flex"><button
-                                class="btn btn-phoenix-secondary btn-icon btn-icon-lg me-2"><span
-                                  class="fa-solid fa-phone"></span></button><button
-                                class="btn btn-phoenix-secondary btn-icon btn-icon-lg me-2"><span
-                                  class="fa-solid fa-message"></span></button><button
-                                class="btn btn-phoenix-secondary btn-icon btn-icon-lg"><span
-                                  class="fa-solid fa-video"></span></button></div><button
-                              class="btn btn-phoenix-primary"><span class="fa-solid fa-envelope me-2"></span>Send
-                              Email</button>
-                          </div>
-                        </div>
-                        <ul class="nav d-flex flex-column py-3 border-bottom">
-                          <li class="nav-item"><a class="nav-link px-3 d-flex flex-between-center" href="#!"> <span
-                                class="me-2 text-body d-inline-block" data-feather="clipboard"></span><span
-                                class="text-body-highlight flex-1">Assigned Projects</span><span
-                                class="fa-solid fa-chevron-right fs-11"></span></a></li>
-                          <li class="nav-item"><a class="nav-link px-3 d-flex flex-between-center" href="#!"> <span
-                                class="me-2 text-body" data-feather="pie-chart"></span><span
-                                class="text-body-highlight flex-1">View activiy</span><span
-                                class="fa-solid fa-chevron-right fs-11"></span></a></li>
-                        </ul>
-                      </div>
-                      <div class="p-3 d-flex justify-content-between"><a class="btn btn-link p-0 text-decoration-none"
-                          href="#!">Details </a><a class="btn btn-link p-0 text-decoration-none text-danger"
-                          href="#!">Unassign </a></div>
-                    </div><a class="dropdown-toggle dropdown-caret-none d-inline-block" href="#" role="button"
-                      data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
-                      <div class="avatar avatar-s  me-1">
-                        <img class="rounded-circle " src="../../assets/img/team/60.webp" alt="" />
-                      </div>
-                    </a>
-                    <div class="dropdown-menu avatar-dropdown-menu p-0 overflow-hidden" style="width: 320px;">
-                      <div class="position-relative">
-                        <div class="bg-holder z-n1"
-                          style="background-image:url(../../assets/img/bg/bg-32.png);background-size: auto;"></div>
-                        <!--/.bg-holder-->
-                        <div class="p-3">
-                          <div class="text-end"><button class="btn p-0 me-2"><span
-                                class="fa-solid fa-user-plus text-white"></span></button><button class="btn p-0"><span
-                                class="fa-solid fa-ellipsis text-white"></span></button></div>
-                          <div class="text-center">
-                            <div class="avatar avatar-xl status-online position-relative me-2 me-sm-0 me-xl-2 mb-2"><img
-                                class="rounded-circle border border-light-subtle" src="../../assets/img/team/60.webp"
-                                alt="" /></div>
-                            <h6 class="text-white">Emma Watson</h6>
-                            <p class="text-light text-opacity-50 fw-semibold fs-10 mb-2">@tyrion222</p>
-                            <div class="d-flex flex-center mb-3">
-                              <h6 class="text-white mb-0">224 <span
-                                  class="fw-normal text-light text-opacity-75">connections</span></h6><span
-                                class="fa-solid fa-circle text-body-tertiary mx-1"
-                                data-fa-transform="shrink-10 up-2"></span>
-                              <h6 class="text-white mb-0">23 <span
-                                  class="fw-normal text-light text-opacity-75">mutual</span></h6>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="bg-body-emphasis">
-                        <div class="p-3 border-bottom border-translucent">
-                          <div class="d-flex justify-content-between">
-                            <div class="d-flex"><button
-                                class="btn btn-phoenix-secondary btn-icon btn-icon-lg me-2"><span
-                                  class="fa-solid fa-phone"></span></button><button
-                                class="btn btn-phoenix-secondary btn-icon btn-icon-lg me-2"><span
-                                  class="fa-solid fa-message"></span></button><button
-                                class="btn btn-phoenix-secondary btn-icon btn-icon-lg"><span
-                                  class="fa-solid fa-video"></span></button></div><button
-                              class="btn btn-phoenix-primary"><span class="fa-solid fa-envelope me-2"></span>Send
-                              Email</button>
-                          </div>
-                        </div>
-                        <ul class="nav d-flex flex-column py-3 border-bottom">
-                          <li class="nav-item"><a class="nav-link px-3 d-flex flex-between-center" href="#!"> <span
-                                class="me-2 text-body d-inline-block" data-feather="clipboard"></span><span
-                                class="text-body-highlight flex-1">Assigned Projects</span><span
-                                class="fa-solid fa-chevron-right fs-11"></span></a></li>
-                          <li class="nav-item"><a class="nav-link px-3 d-flex flex-between-center" href="#!"> <span
-                                class="me-2 text-body" data-feather="pie-chart"></span><span
-                                class="text-body-highlight flex-1">View activiy</span><span
-                                class="fa-solid fa-chevron-right fs-11"></span></a></li>
-                        </ul>
-                      </div>
-                      <div class="p-3 d-flex justify-content-between"><a class="btn btn-link p-0 text-decoration-none"
-                          href="#!">Details </a><a class="btn btn-link p-0 text-decoration-none text-danger"
-                          href="#!">Unassign </a></div>
-                    </div><a class="dropdown-toggle dropdown-caret-none d-inline-block" href="#" role="button"
-                      data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
-                      <div class="avatar avatar-s  me-1">
-                        <img class="rounded-circle " src="../../assets/img/team/25.webp" alt="" />
-                      </div>
-                    </a>
-                    <div class="dropdown-menu avatar-dropdown-menu p-0 overflow-hidden" style="width: 320px;">
-                      <div class="position-relative">
-                        <div class="bg-holder z-n1"
-                          style="background-image:url(../../assets/img/bg/bg-32.png);background-size: auto;"></div>
-                        <!--/.bg-holder-->
-                        <div class="p-3">
-                          <div class="text-end"><button class="btn p-0 me-2"><span
-                                class="fa-solid fa-user-plus text-white"></span></button><button class="btn p-0"><span
-                                class="fa-solid fa-ellipsis text-white"></span></button></div>
-                          <div class="text-center">
-                            <div class="avatar avatar-xl status-online position-relative me-2 me-sm-0 me-xl-2 mb-2"><img
-                                class="rounded-circle border border-light-subtle" src="../../assets/img/team/25.webp"
-                                alt="" /></div>
-                            <h6 class="text-white">Igor Borvibson</h6>
-                            <p class="text-light text-opacity-50 fw-semibold fs-10 mb-2">@tyrion222</p>
-                            <div class="d-flex flex-center mb-3">
-                              <h6 class="text-white mb-0">224 <span
-                                  class="fw-normal text-light text-opacity-75">connections</span></h6><span
-                                class="fa-solid fa-circle text-body-tertiary mx-1"
-                                data-fa-transform="shrink-10 up-2"></span>
-                              <h6 class="text-white mb-0">23 <span
-                                  class="fw-normal text-light text-opacity-75">mutual</span></h6>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="bg-body-emphasis">
-                        <div class="p-3 border-bottom border-translucent">
-                          <div class="d-flex justify-content-between">
-                            <div class="d-flex"><button
-                                class="btn btn-phoenix-secondary btn-icon btn-icon-lg me-2"><span
-                                  class="fa-solid fa-phone"></span></button><button
-                                class="btn btn-phoenix-secondary btn-icon btn-icon-lg me-2"><span
-                                  class="fa-solid fa-message"></span></button><button
-                                class="btn btn-phoenix-secondary btn-icon btn-icon-lg"><span
-                                  class="fa-solid fa-video"></span></button></div><button
-                              class="btn btn-phoenix-primary"><span class="fa-solid fa-envelope me-2"></span>Send
-                              Email</button>
-                          </div>
-                        </div>
-                        <ul class="nav d-flex flex-column py-3 border-bottom">
-                          <li class="nav-item"><a class="nav-link px-3 d-flex flex-between-center" href="#!"> <span
-                                class="me-2 text-body d-inline-block" data-feather="clipboard"></span><span
-                                class="text-body-highlight flex-1">Assigned Projects</span><span
-                                class="fa-solid fa-chevron-right fs-11"></span></a></li>
-                          <li class="nav-item"><a class="nav-link px-3 d-flex flex-between-center" href="#!"> <span
-                                class="me-2 text-body" data-feather="pie-chart"></span><span
-                                class="text-body-highlight flex-1">View activiy</span><span
-                                class="fa-solid fa-chevron-right fs-11"></span></a></li>
-                        </ul>
-                      </div>
-                      <div class="p-3 d-flex justify-content-between"><a class="btn btn-link p-0 text-decoration-none"
-                          href="#!">Details </a><a class="btn btn-link p-0 text-decoration-none text-danger"
-                          href="#!">Unassign </a></div>
-                    </div>
-                  </div>
+                  <P class="mb-0 text-body-emphasis fw-semibold" id="modal-employee"></P>
                 </div>
                 <div class="col-4 col-sm-3">
                   <h6 class="text-body-tertiary fw-bolder lh-sm mt-1">PRIORITY </h6>
                 </div>
                 <div class="col-8 col-sm-9">
-                  <P class="mb-0 text-body-emphasis fw-semibold"><span class="fa fa-circle m text-warning"
-                      data-fa-transform="shrink-6 down-1" id="modal-priority"></span>
+                  <P class="mb-0 text-body-emphasis fw-semibold" id="modal-priority"><span class="fa fa-circle m text-warning"
+                      data-fa-transform="shrink-6 down-1" ></span>
                   </P>
                 </div>
                 <div class="col-4 col-sm-3">
@@ -2796,14 +2605,25 @@ if (isset($_GET['project_id']) && is_numeric($_GET['project_id'])) {
                 </div>
               </div>
             </div>
+            
+
             <div class="col-lg-4 border-start-lg">
               <div class="scrollbar" style="max-height: 667px;">
                 <div class="px-3">
                   <h5 class="mb-3 mt-4">Actions</h5>
                   <ul class="nav flex-column flex-sm-row flex-lg-column list-unstyled">
-                    <li class="kanban-action-item lh-sm nav-item me-2"><a
-                        class="nav-link text-body-emphasis fw-semibold fs-9 stretched-link" href="#!"><span
-                          class="me-2 fa-solid fa-file-export"></span>Change status</a></li>
+                    <li class="kanban-action-item lh-sm nav-item me-2">
+                      <a
+                        class="nav-link text-body-emphasis fw-semibold fs-9 stretched-link"
+                        href="#"
+                        id="changeStatusTrigger"
+                        data-task-id=""
+                        data-current-status=""
+                        >
+                        <span class="me-2 fa-solid fa-file-export"></span>Change status
+                      </a>
+                   </li>
+
                     <li class="kanban-action-item lh-sm nav-item me-2"><a
                         class="nav-link text-body-emphasis fw-semibold fs-9 stretched-link" href="#!"><span
                           class="me-2 fa-solid fa-clone"></span>Duplicate</a></li>
@@ -2895,21 +2715,112 @@ if (isset($_GET['project_id']) && is_numeric($_GET['project_id'])) {
     </div>
   </div>
   
-  <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const modal = document.getElementById('KanbanItemDetailsModal');
-    modal.addEventListener('show.bs.modal', function (event) {
-      const trigger = event.relatedTarget;
+  
 
-      document.getElementById('modal-title').textContent = trigger.getAttribute('data-title');
-      document.getElementById('modal-description').textContent = trigger.getAttribute('data-description');
-      document.getElementById('modal-project').textContent = trigger.getAttribute('data-project');
-      document.getElementById('modal-status').textContent = trigger.getAttribute('data-status');
-      document.getElementById('modal-priority').textContent = trigger.getAttribute('data-priority');
-      document.getElementById('modal-category').textContent = trigger.getAttribute('data-category');
+  <!--Fetching the task status from the database-->
+  <?php
+    $statusQuery = "SELECT id, name FROM tbl_task_status";
+    $statusResult = $conn->query($statusQuery);
+    $statuses = $statusResult ? $statusResult->fetch_all(MYSQLI_ASSOC) : [];
+  ?>
+
+  
+  <script>
+    /**
+    * Script to manage task status changes from the Kanban Task Detail Modal.
+    *
+    * Features:
+    * - Dynamically fills task details in the modal when opened.
+    * - Updates the "Change Status" button with the correct task ID and current status.
+    * - Opens a second modal with a dropdown of available statuses when "Change Status" is clicked.
+    * - Sends an AJAX POST request to update the task's status in the database via PHP.
+    * - Reloads the page on successful update to reflect the status change.
+    *
+    * Dependencies:
+    * - Bootstrap 5 (for modals)
+    * - PHP backend: update_task_status.php
+    */
+
+   const allStatuses = <?= json_encode($statuses) ?>;
+
+   document.addEventListener('DOMContentLoaded', function () {
+    const detailsModal = document.getElementById('KanbanItemDetailsModal');
+    const statusSelect = document.getElementById('statusSelect');
+    const updateBtn = document.getElementById('confirmChangeStatusBtn');
+    let currentTaskId = null;
+
+   detailsModal.addEventListener('show.bs.modal', function (event) {
+    const trigger = event.relatedTarget;
+
+    // Set modal content
+    document.getElementById('modal-title').textContent = trigger.getAttribute('data-title');
+    document.getElementById('modal-description').textContent = trigger.getAttribute('data-description');
+    document.getElementById('modal-project').textContent = trigger.getAttribute('data-project');
+    document.getElementById('modal-status').textContent = trigger.getAttribute('data-status');
+    document.getElementById('modal-priority').textContent = trigger.getAttribute('data-priority');
+    document.getElementById('modal-category').textContent = trigger.getAttribute('data-category');
+    document.getElementById('modal-employee').textContent = trigger.getAttribute('data-employee');
+
+    // Update global taskId
+    currentTaskId = trigger.getAttribute('data-id');
+    const currentStatus = trigger.getAttribute('data-status');
+
+    // Update Change Status button in sidebar
+    const changeBtn = document.getElementById('changeStatusTrigger');
+    if (changeBtn) {
+      changeBtn.setAttribute('data-task-id', currentTaskId);
+      changeBtn.setAttribute('data-current-status', currentStatus);
+
+      // Remove previous click listeners to avoid duplicates
+      const newBtn = changeBtn.cloneNode(true);
+      changeBtn.parentNode.replaceChild(newBtn, changeBtn);
+
+      // Add click event to trigger status modal
+      newBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const selectedStatus = this.getAttribute('data-current-status');
+        statusSelect.innerHTML = '';
+
+        allStatuses.forEach(status => {
+          const opt = document.createElement('option');
+          opt.value = status.id;
+          opt.textContent = status.name;
+          if (status.name === selectedStatus) opt.selected = true;
+          statusSelect.appendChild(opt);
+        });
+
+        new bootstrap.Modal(document.getElementById('changeStatusModal')).show();
+      });
+    }
+   });
+   function switchTheme(mode) {
+    // mode should be "light" or "dark"
+    document.body.setAttribute("data-bs-theme", mode);
+    localStorage.setItem("theme", mode); // store preference
+  }
+   updateBtn.addEventListener('click', function () {
+    const selectedStatusId = statusSelect.value;
+    if (!currentTaskId || !selectedStatusId) return;
+
+    fetch('../PhpFiles/update_task_status.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `task_id=${currentTaskId}&status_id=${selectedStatusId}`
+    })
+      .then(res => res.text())
+      .then(response => {
+        if (response.trim() === 'success') {
+          //alert('Status updated!');
+          location.reload();
+        } else {
+          alert('Error updating: ' + response);
+        }
+      });
     });
-  });
-</script>
+   });
+  </script>
+
 
   <!-- ===============================================-->
   <!--    JavaScripts-->
@@ -2929,8 +2840,32 @@ if (isset($_GET['project_id']) && is_numeric($_GET['project_id'])) {
   <script src="../../assets/js/phoenix.js"></script>
   <script src="../../vendors/choices/choices.min.js"></script>
   <script src="../../vendors/flatpickr/flatpickr.min.js"></script>
+  <!-- Bootstrap 5.3 JS Bundle (includes Popper for tooltips, modals, etc.) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+ <!-- Modal to select and update task status -->
+<div class="modal fade" id="changeStatusModal" tabindex="-1" aria-labelledby="changeStatusModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-4 shadow-sm">
+      <div class="modal-header">
+        <h5 class="modal-title fw-semibold" id="changeStatusModalLabel">Update Task Status</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body px-4 pb-0">
+        <div class="mb-3">
+          <label for="statusSelect" class="form-label fw-bold small text-uppercase">Select New Status</label>
+          <select class="form-select rounded-3 py-2" id="statusSelect"></select>
+        </div>
+      </div>
+      <div class="modal-footer border-0 px-4 pb-4 pt-0">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary px-4" id="confirmChangeStatusBtn">Save Changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 </body>
-
-
-
 </html>
