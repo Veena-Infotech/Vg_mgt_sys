@@ -7,6 +7,21 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 ?>
+<?php
+
+$room_id = $_GET['id'];
+// Get cupboard list for this room
+$cupboards = [];
+$stmt = $conn->prepare("SELECT id, name FROM shelves_cupboards WHERE room_name = ?");
+$stmt->bind_param("i", $room_id);
+$stmt->execute();
+$result = $stmt->get_result();
+while ($row = $result->fetch_assoc()) {
+    $cupboards[] = $row;
+}
+$stmt->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr" data-navigation-type="default" data-navbar-horizontal-shape="default">
 
@@ -182,49 +197,82 @@ if (!isset($_SESSION['user_id'])) {
                         <small>Organize and access your files easily</small>
                     </div>
                     <div class="d-flex justify-content-end mb-3 px-3">
-                        <button class="btn btn-primary me-2" type="button" data-bs-toggle="modal"
-                            data-bs-target="#ASC">+ Add Shelves/Cubboards</button>
+                        <button class="btn btn-primary me-2" type="button" data-bs-toggle="modal" data-bs-target="#ASC">
+                            + Add Shelves/Cupboards
+                        </button>
+
                         <div class="modal fade" id="ASC" tabindex="-1" aria-labelledby="ASCModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="ASCModalLabel">Add Shelves/Cubboards</h5>
-                                        <button class="btn btn-close p-1" type="button" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p class="text-body-tertiary lh-lg mb-0">This is a static modal example (meaning
-                                            its position and display have been overridden). Included are the modal
-                                            header, modal body (required for padding), and modal footer (optional). </p>
-                                    </div>
-                                    <div class="modal-footer"><button class="btn btn-primary"
-                                            type="button">Okay</button><button class="btn btn-outline-primary"
-                                            type="button" data-bs-dismiss="modal">Cancel</button></div>
+                                    <form method="POST" action="../PhpFiles/add_shelves_cupboards.php">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="ASCModalLabel">Add Shelves/Cupboards</h5>
+                                            <button class="btn btn-close p-1" type="button" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <input type="hidden" name="room_id" value="<?php echo $_GET['id']; ?>">
+
+                                            <div class="mb-3">
+                                                <label for="name" class="form-label">Shelf/Cupboard Name</label>
+                                                <input type="text" class="form-control" name="name" id="name" required>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-primary" type="submit">Add</button>
+                                            <button class="btn btn-outline-primary" type="button"
+                                                data-bs-dismiss="modal">Cancel</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
+
                         <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#AF">+ Add
                             File</button>
+
                         <div class="modal fade" id="AF" tabindex="-1" aria-labelledby="AFModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="AFModalLabel">Add File</h5>
-                                        <button class="btn btn-close p-1" type="button" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p class="text-body-tertiary lh-lg mb-0">This is a static modal example (meaning
-                                            its position and display have been overridden). Included are the modal
-                                            header, modal body (required for padding), and modal footer (optional). </p>
-                                    </div>
-                                    <div class="modal-footer"><button class="btn btn-primary"
-                                            type="button">Okay</button><button class="btn btn-outline-primary"
-                                            type="button" data-bs-dismiss="modal">Cancel</button></div>
+                                    <form method="POST" action="../PhpFiles/add_files.php">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="AFModalLabel">Add File</h5>
+                                            <button class="btn btn-close p-1" type="button" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <input type="hidden" name="room_id" value="<?php echo $room_id; ?>">
+
+                                            <div class="mb-3">
+                                                <label for="cupboard_id" class="form-label">Cupboard</label>
+                                                <select class="form-select" name="cupboard_id" id="cupboard_id"
+                                                    required>
+                                                    <option value="">Select</option>
+                                                    <?php foreach ($cupboards as $cupboard): ?>
+                                                        <option value="<?= $cupboard['id'] ?>">
+                                                            <?= htmlspecialchars($cupboard['name']) ?>
+                                                        </option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="filename" class="form-label">File Name</label>
+                                                <input type="text" class="form-control" name="filename" id="filename"
+                                                    required>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-primary" type="submit">Add</button>
+                                            <button class="btn btn-outline-primary" type="button"
+                                                data-bs-dismiss="modal">Cancel</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
 
@@ -249,148 +297,85 @@ if (!isset($_SESSION['user_id'])) {
                             <table class="table table-striped table-sm fs-9 mb-0">
                                 <thead>
                                     <tr>
-                                        <th class="sort border-top border-translucent ps-3" data-sort="name">Name</th>
-                                        <th class="sort border-top" data-sort="email">Email</th>
-                                        <th class="sort border-top" data-sort="age">Age</th>
-                                        <th class="sort text-end align-middle pe-0 border-top" scope="col">ACTION</th>
+                                        <th class="sort border-top border-translucent ps-3" data-sort="filename">File
+                                            Name</th>
+                                        <th class="sort border-top" data-sort="officename">Office</th>
+                                        <th class="sort border-top" data-sort="room">Room</th>
+                                        <th class="sort border-top" data-sort="cupboard">Cupboard</th>
+                                        <th class="sort border-top" data-sort="status">Status</th>
+                                        <th class="sort border-top" data-sort="taken_by">Taken By</th>
+                                        <th class="sort border-top" data-sort="taken_time">Taken Time</th>
+                                        <th class="sort border-top" data-sort="returned_by">Returned By</th>
+                                        <th class="sort border-top" data-sort="returned_time">Returned Time</th>
+                                        <th class="sort border-top" data-sort="added_by">Added By</th>
+                                        <th class="sort border-top" data-sort="added_time">Added Time</th>
+                                        <th class="border-top text-center">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody class="list">
-                                    <tr>
-                                        <td class="align-middle ps-3 name">Anna</td>
-                                        <td class="align-middle email">anna@example.com</td>
-                                        <td class="align-middle age">18</td>
-                                        <td class="align-middle white-space-nowrap text-end pe-0">
-                                            <div class="btn-reveal-trigger position-static"><button
-                                                    class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
-                                                    type="button" data-bs-toggle="dropdown" data-boundary="window"
-                                                    aria-haspopup="true" aria-expanded="false"
-                                                    data-bs-reference="parent"><svg
-                                                        class="svg-inline--fa fa-ellipsis fs-10" aria-hidden="true"
-                                                        focusable="false" data-prefix="fas" data-icon="ellipsis"
-                                                        role="img" xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 448 512" data-fa-i2svg="">
-                                                        <path fill="currentColor"
-                                                            d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z">
-                                                        </path>
-                                                    </svg><!-- <span class="fas fa-ellipsis-h fs-10"></span> Font Awesome fontawesome.com --></button>
-                                                <div class="dropdown-menu dropdown-menu-end py-2"><a
-                                                        class="dropdown-item" href="#!">View</a><a class="dropdown-item"
-                                                        href="#!">Export</a>
-                                                    <!-- <div class="dropdown-divider"></div><a
-                                                        class="dropdown-item text-danger" href="#!">Remove</a> -->
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="align-middle ps-3 name">Homer</td>
-                                        <td class="align-middle email">homer@example.com</td>
-                                        <td class="align-middle age">35</td>
-                                        <td class="align-middle white-space-nowrap text-end pe-0">
-                                            <div class="btn-reveal-trigger position-static"><button
-                                                    class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
-                                                    type="button" data-bs-toggle="dropdown" data-boundary="window"
-                                                    aria-haspopup="true" aria-expanded="false"
-                                                    data-bs-reference="parent"><svg
-                                                        class="svg-inline--fa fa-ellipsis fs-10" aria-hidden="true"
-                                                        focusable="false" data-prefix="fas" data-icon="ellipsis"
-                                                        role="img" xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 448 512" data-fa-i2svg="">
-                                                        <path fill="currentColor"
-                                                            d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z">
-                                                        </path>
-                                                    </svg><!-- <span class="fas fa-ellipsis-h fs-10"></span> Font Awesome fontawesome.com --></button>
-                                                <div class="dropdown-menu dropdown-menu-end py-2"><a
-                                                        class="dropdown-item" href="#!">View</a><a class="dropdown-item"
-                                                        href="#!">Export</a>
-                                                    <!-- <div class="dropdown-divider"></div><a
-                                                        class="dropdown-item text-danger" href="#!">Remove</a> -->
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="align-middle ps-3 name">Oscar</td>
-                                        <td class="align-middle email">oscar@example.com</td>
-                                        <td class="align-middle age">52</td>
-                                        <td class="align-middle white-space-nowrap text-end pe-0">
-                                            <div class="btn-reveal-trigger position-static"><button
-                                                    class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
-                                                    type="button" data-bs-toggle="dropdown" data-boundary="window"
-                                                    aria-haspopup="true" aria-expanded="false"
-                                                    data-bs-reference="parent"><svg
-                                                        class="svg-inline--fa fa-ellipsis fs-10" aria-hidden="true"
-                                                        focusable="false" data-prefix="fas" data-icon="ellipsis"
-                                                        role="img" xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 448 512" data-fa-i2svg="">
-                                                        <path fill="currentColor"
-                                                            d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z">
-                                                        </path>
-                                                    </svg><!-- <span class="fas fa-ellipsis-h fs-10"></span> Font Awesome fontawesome.com --></button>
-                                                <div class="dropdown-menu dropdown-menu-end py-2"><a
-                                                        class="dropdown-item" href="#!">View</a><a class="dropdown-item"
-                                                        href="#!">Export</a>
-                                                    <!-- <div class="dropdown-divider"></div><a
-                                                        class="dropdown-item text-danger" href="#!">Remove</a> -->
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="align-middle ps-3 name">Emily</td>
-                                        <td class="align-middle email">emily@example.com</td>
-                                        <td class="align-middle age">30</td>
-                                        <td class="align-middle white-space-nowrap text-end pe-0">
-                                            <div class="btn-reveal-trigger position-static"><button
-                                                    class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
-                                                    type="button" data-bs-toggle="dropdown" data-boundary="window"
-                                                    aria-haspopup="true" aria-expanded="false"
-                                                    data-bs-reference="parent"><svg
-                                                        class="svg-inline--fa fa-ellipsis fs-10" aria-hidden="true"
-                                                        focusable="false" data-prefix="fas" data-icon="ellipsis"
-                                                        role="img" xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 448 512" data-fa-i2svg="">
-                                                        <path fill="currentColor"
-                                                            d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z">
-                                                        </path>
-                                                    </svg><!-- <span class="fas fa-ellipsis-h fs-10"></span> Font Awesome fontawesome.com --></button>
-                                                <div class="dropdown-menu dropdown-menu-end py-2"><a
-                                                        class="dropdown-item" href="#!">View</a><a class="dropdown-item"
-                                                        href="#!">Export</a>
-                                                    <!-- <div class="dropdown-divider"></div><a
-                                                        class="dropdown-item text-danger" href="#!">Remove</a> -->
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="align-middle ps-3 name">Jara</td>
-                                        <td class="align-middle email">jara@example.com</td>
-                                        <td class="align-middle age">25</td>
-                                        <td class="align-middle white-space-nowrap text-end pe-0">
-                                            <div class="btn-reveal-trigger position-static"><button
-                                                    class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
-                                                    type="button" data-bs-toggle="dropdown" data-boundary="window"
-                                                    aria-haspopup="true" aria-expanded="false"
-                                                    data-bs-reference="parent"><svg
-                                                        class="svg-inline--fa fa-ellipsis fs-10" aria-hidden="true"
-                                                        focusable="false" data-prefix="fas" data-icon="ellipsis"
-                                                        role="img" xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 448 512" data-fa-i2svg="">
-                                                        <path fill="currentColor"
-                                                            d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z">
-                                                        </path>
-                                                    </svg><!-- <span class="fas fa-ellipsis-h fs-10"></span> Font Awesome fontawesome.com --></button>
-                                                <div class="dropdown-menu dropdown-menu-end py-2"><a
-                                                        class="dropdown-item" href="#!">View</a><a class="dropdown-item"
-                                                        href="#!">Export</a>
-                                                    <!-- <div class="dropdown-divider"></div><a
-                                                        class="dropdown-item text-danger" href="#!">Remove</a> -->
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    <?php
+                                    include '../PhpFiles/connection.php';
+
+                                    if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+                                        $office_id = $_GET['id'];
+
+                                        $sql = "SELECT * FROM tbl_fms WHERE room_name = ?";
+                                        $stmt = $conn->prepare($sql);
+
+                                        if (!$stmt) {
+                                            die("Prepare failed: (" . $conn->errno . ") " . $conn->error);
+                                        }
+
+                                        $stmt->bind_param("i", $office_id);
+                                        $stmt->execute();
+                                        $result = $stmt->get_result();
+
+                                        if ($result->num_rows > 0) {
+                                            while ($row = $result->fetch_assoc()) {
+                                                echo '<tr>';
+                                                echo '<td class="align-middle ps-3 name">' . htmlspecialchars($row['filename']) . '</td>';
+                                                echo '<td class="align-middle">' . htmlspecialchars($row['officename']) . '</td>';
+                                                echo '<td class="align-middle">' . htmlspecialchars($row['room_name']) . '</td>';
+                                                echo '<td class="align-middle">' . htmlspecialchars($row['cupboard_name']) . '</td>';
+                                                echo '<td class="align-middle">' . htmlspecialchars($row['current_status']) . '</td>';
+                                                echo '<td class="align-middle">' . htmlspecialchars($row['taken_by']) . '</td>';
+                                                echo '<td class="align-middle">' . htmlspecialchars($row['taken_time']) . '</td>';
+                                                echo '<td class="align-middle">' . htmlspecialchars($row['returned_by']) . '</td>';
+                                                echo '<td class="align-middle">' . htmlspecialchars($row['returned_time']) . '</td>';
+                                                echo '<td class="align-middle">' . htmlspecialchars($row['added_by']) . '</td>';
+                                                echo '<td class="align-middle">' . htmlspecialchars($row['added_time']) . '</td>';
+                                                echo '<td class="align-middle text-center">
+    <div class="btn-reveal-trigger position-static">
+        <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
+            type="button" data-bs-toggle="dropdown" data-boundary="window"
+            aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
+            <i class="fas fa-ellipsis-h"></i>
+        </button>
+        <div class="dropdown-menu dropdown-menu-end py-2">
+            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editFileModal' . $row['id'] . '">Edit</a>';
+
+                                                if ($row['current_status'] === 'IN') {
+                                                    echo '<a class="dropdown-item" href="./php/mark_out.php?id=' . $row['id'] . '">Mark as OUT</a>';
+                                                } else {
+                                                    echo '<a class="dropdown-item" href="./php/mark_in.php?id=' . $row['id'] . '">Mark as IN</a>';
+                                                }
+
+                                                echo '    </div>
+    </div>
+</td>';
+
+                                                echo '</tr>';
+                                            }
+                                        } else {
+                                            echo '<tr><td colspan="12" class="text-center">No files found for this office.</td></tr>';
+                                        }
+
+                                        $stmt->close();
+                                    } else {
+                                        echo '<tr><td colspan="12" class="text-center text-danger">Invalid or missing office ID in URL.</td></tr>';
+                                    }
+                                    ?>
+
                                 </tbody>
                             </table>
                         </div>
@@ -423,6 +408,108 @@ if (!isset($_SESSION['user_id'])) {
                         </div>
                     </div>
 
+
+                    <?php
+                    $stmt = $conn->prepare("SELECT * FROM tbl_fms WHERE room_name = ?");
+                    $stmt->bind_param("i", $office_id);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+
+                    while ($row = $result->fetch_assoc()) {
+                        $modalId = $row['id'];
+
+                        $officesResult = $conn->query("SELECT id, office_name FROM tbl_offices ORDER BY office_name ASC");
+
+                        $currentOfficeId = $row['officename'];
+                        $currentRoomId = $row['room_name'];
+                        $roomsResult = $conn->prepare("SELECT id, room_name FROM tbl_rooms WHERE office_id = ?");
+                        $roomsResult->bind_param("i", $currentOfficeId);
+                        $roomsResult->execute();
+                        $rooms = $roomsResult->get_result();
+
+                        $currentRoomName = $row['room_name'];
+                        $cupboardsResult = $conn->prepare("SELECT id, name FROM shelves_cupboards WHERE room_name = ?");
+                        $cupboardsResult->bind_param("s", $currentRoomName);
+                        $cupboardsResult->execute();
+                        $cupboards = $cupboardsResult->get_result();
+                        ?>
+                        <div class="modal fade" id="editFileModal<?= $modalId ?>" tabindex="-1"
+                            aria-labelledby="editFileLabel<?= $modalId ?>" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-md">
+                                <div class="modal-content">
+                                    <form action="../phpFiles/update_file_location.php" method="POST">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="editFileLabel<?= $modalId ?>">Edit File Location
+                                            </h5>
+                                            <button class="btn-close" type="button" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <input type="hidden" name="file_id" value="<?= $modalId ?>">
+
+                                            <div class="mb-3">
+                                                <label class="form-label">File Name</label>
+                                                <input type="text" class="form-control" name="filename"
+                                                    value="<?= htmlspecialchars($row['filename']) ?>" required>
+                                            </div>
+
+                                            <!-- Office -->
+                                            <div class="mb-3">
+                                                <label class="form-label">Office</label>
+                                                <select id="office<?= $modalId ?>" name="officename"
+                                                    class="form-select office-select" data-id="<?= $modalId ?>" required>
+                                                    <option value="">Select Office</option>
+                                                    <?php while ($office = $officesResult->fetch_assoc()): ?>
+                                                        <option value="<?= $office['id'] ?>" <?= ($office['id'] == $currentOfficeId ? 'selected' : '') ?>>
+                                                            <?= htmlspecialchars($office['office_name']) ?>
+                                                        </option>
+                                                    <?php endwhile; ?>
+                                                </select>
+                                            </div>
+
+                                            <!-- Room -->
+                                            <div class="mb-3">
+                                                <label class="form-label">Room</label>
+                                                <select id="room<?= $modalId ?>" name="room_name"
+                                                    class="form-select room-select" data-id="<?= $modalId ?>" required>
+                                                    <option value="">Select Room</option>
+                                                    <?php while ($room = $rooms->fetch_assoc()): ?>
+                                                        <option value="<?= $room['id'] ?>" <?= ($room['id'] == $currentRoomId ? 'selected' : '') ?>>
+                                                            <?= htmlspecialchars($room['room_name']) ?>
+                                                        </option>
+                                                    <?php endwhile; ?>
+                                                </select>
+                                            </div>
+
+                                            <!-- Cupboard -->
+                                            <div class="mb-3">
+                                                <label class="form-label">Cupboard</label>
+                                                <select id="cupboard<?= $modalId ?>" name="cupboard_name"
+                                                    class="form-select cupboard-select" required>
+                                                    <option value="">Select Cupboard</option>
+                                                    <?php while ($cup = $cupboards->fetch_assoc()): ?>
+                                                        <option value="<?= $cup['name'] ?>"
+                                                            <?= ($cup['name'] == $row['cupboard_name'] ? 'selected' : '') ?>>
+                                                            <?= htmlspecialchars($cup['name']) ?>
+                                                        </option>
+                                                    <?php endwhile; ?>
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-primary" type="submit">Save Changes</button>
+                                            <button class="btn btn-outline-secondary" type="button"
+                                                data-bs-dismiss="modal">Cancel</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
+
+
+
                 </div>
 
                 <?php include("../../Components/footer.php"); ?>
@@ -430,7 +517,6 @@ if (!isset($_SESSION['user_id'])) {
         </div>
 
 
-        <!-- modal Area -->
 
     </main>
 
@@ -461,6 +547,88 @@ if (!isset($_SESSION['user_id'])) {
     <script src="../../assets/js/phoenix.js"></script>
     <script src="../../vendors/echarts/echarts.min.js"></script>
     <script src="../../assets/js/ecommerce-dashboard.js"></script>
+    <script>
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('shown.bs.modal', () => {
+                gsap.from(modal.querySelector('.modal-content'), {
+                    duration: 0.5,
+                    y: -50,
+                    opacity: 0,
+                    ease: "power2.out"
+                });
+            });
+        });
+
+        // Office change → load rooms
+        document.querySelectorAll('.office-select').forEach(officeSelect => {
+            officeSelect.addEventListener('change', function () {
+                const modalId = this.getAttribute('data-id');
+                const officeId = this.value;
+
+                const roomSelect = document.getElementById(`room${modalId}`);
+                const cupboardSelect = document.getElementById(`cupboard${modalId}`);
+
+                roomSelect.innerHTML = '<option>Loading...</option>';
+                roomSelect.disabled = true;
+                cupboardSelect.innerHTML = '<option>Select Cupboard</option>';
+                cupboardSelect.disabled = true;
+
+                if (officeId) {
+                    fetch('../PhpFiles/get_rooms.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: `office_id=${officeId}`
+                    })
+                        .then(res => res.text())
+                        .then(data => {
+                            roomSelect.innerHTML = data;
+                            roomSelect.disabled = false;
+                        });
+                }
+            });
+        });
+
+        // Room change → load cupboards
+        document.querySelectorAll('.room-select').forEach(roomSelect => {
+            roomSelect.addEventListener('change', function () {
+                const modalId = this.getAttribute('data-id');
+                const roomId = this.value;  // now this is the numeric ID
+
+                const cupboardSelect = document.getElementById(`cupboard${modalId}`);
+                cupboardSelect.innerHTML = '<option>Loading...</option>';
+                cupboardSelect.disabled = true;
+
+                if (roomId) {
+                    fetch('../PhpFiles/get_cupboards.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: `room_name=${encodeURIComponent(roomId)}`
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.success) {
+                                cupboardSelect.innerHTML = data.options;
+                                cupboardSelect.disabled = false;
+                            } else {
+                                alert(data.message || 'Failed to load cupboards.');
+                                cupboardSelect.innerHTML = '<option value="">Select Cupboard</option>';
+                                cupboardSelect.disabled = true;
+                            }
+                        })
+                        .catch(err => {
+                            console.error('Error loading cupboards:', err);
+                            cupboardSelect.innerHTML = '<option value="">Select Cupboard</option>';
+                            cupboardSelect.disabled = true;
+                        });
+                }
+            });
+        });
+
+
+    </script>
+
+
+
 </body>
 
 </html>
