@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 27, 2025 at 08:12 AM
+-- Generation Time: May 27, 2025 at 08:25 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -1792,6 +1792,13 @@ ALTER TABLE `tbl_project`
 ALTER TABLE `tbl_project_emp`
   ADD CONSTRAINT `tbl_project_emp_fk_emp` FOREIGN KEY (`emp_id`) REFERENCES `tbl_emp` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `tbl_project_emp_fk_project` FOREIGN KEY (`project_id`) REFERENCES `tbl_project` (`id`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tbl_project_task_status`
+--
+ALTER TABLE `tbl_project_task_status`
+  ADD CONSTRAINT `fk_project_id` FOREIGN KEY (`project_id`) REFERENCES `tbl_project` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_task_status_id` FOREIGN KEY (`task_status_id`) REFERENCES `tbl_task_status` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_tasks`
