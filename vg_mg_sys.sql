@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 23, 2025 at 09:49 AM
+-- Generation Time: May 24, 2025 at 01:18 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -60,8 +60,8 @@ CREATE TABLE `tbl_category` (
 --
 
 INSERT INTO `tbl_category` (`id`, `category_name`, `created_at`) VALUES
-(1, 'Massachusetts Institute of Technology', '2025-04-29'),
-(2, 'University of Chicago', '2025-04-29'),
+(1, 'Bugs', '2025-04-29'),
+(2, 'Changes', '2025-04-29'),
 (3, 'GSAS Open Labs At Harvard', '2025-04-29'),
 (4, 'California Institute of Technology', '2025-04-29');
 
@@ -234,6 +234,77 @@ INSERT INTO `tbl_folders` (`id`, `name`, `parent_id`, `is_archived`, `created_at
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_landlord`
+--
+
+CREATE TABLE `tbl_landlord` (
+  `id` int(11) NOT NULL,
+  `landlord_name` varchar(255) NOT NULL,
+  `landlord_email` varchar(255) NOT NULL,
+  `landlord_phone` varchar(20) NOT NULL,
+  `district` varchar(255) NOT NULL,
+  `taluka` varchar(255) NOT NULL,
+  `village` varchar(255) NOT NULL,
+  `property_type` varchar(100) NOT NULL,
+  `structure_type` varchar(100) NOT NULL,
+  `private_floors` int(11) NOT NULL,
+  `private_units` int(11) NOT NULL,
+  `public_wings` int(11) NOT NULL,
+  `public_floors` int(11) NOT NULL,
+  `society_units` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_landlord`
+--
+
+INSERT INTO `tbl_landlord` (`id`, `landlord_name`, `landlord_email`, `landlord_phone`, `district`, `taluka`, `village`, `property_type`, `structure_type`, `private_floors`, `private_units`, `public_wings`, `public_floors`, `society_units`) VALUES
+(1, 'Aryan', 'aryanshirodkar03@gmail.com', '07304680494', 'Aurangabad', 'Kannad', 'Hadiwara', 'structure', 'private', 5, 25, 0, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_leads`
+--
+
+CREATE TABLE `tbl_leads` (
+  `id` int(11) NOT NULL,
+  `lead_id` varchar(20) NOT NULL,
+  `salutation` varchar(10) DEFAULT NULL,
+  `first_name` varchar(100) DEFAULT NULL,
+  `last_name` varchar(100) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `phone` varchar(15) DEFAULT NULL,
+  `current_lead_profile` varchar(50) DEFAULT NULL,
+  `pmc_name` varchar(100) DEFAULT NULL,
+  `agent_name` varchar(100) DEFAULT NULL,
+  `agency_name` varchar(100) DEFAULT NULL,
+  `developer_name` varchar(100) DEFAULT NULL,
+  `developer_company` varchar(100) DEFAULT NULL,
+  `society_name` varchar(100) DEFAULT NULL,
+  `is_contacted` enum('yes','no') DEFAULT 'no',
+  `reference_source_id` int(11) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_leads`
+--
+
+INSERT INTO `tbl_leads` (`id`, `lead_id`, `salutation`, `first_name`, `last_name`, `email`, `phone`, `current_lead_profile`, `pmc_name`, `agent_name`, `agency_name`, `developer_name`, `developer_company`, `society_name`, `is_contacted`, `reference_source_id`, `created_at`) VALUES
+(1, 'PMSL_1', 'Miss.', 'Aryannnnnn', 'Shirodkar', 'aryanshirodkar03@gmail.com', '07304680494', 'pmc', 'ans4', NULL, NULL, NULL, NULL, '', 'yes', 1, '2025-01-09 14:47:50'),
+(2, 'PMSL_2', 'Mr.', 'Aryan', 'Shirodkar', 'aryanshirodkar03@gmail.com', '07304680494', '', '', 'Dex', 'dexshot', '', '', '', 'yes', 1, '2025-01-09 14:48:47'),
+(3, 'PMSL_3', '', 'des', 'kjandndck', 'lksmdc@lksdf', '07304680494', '', '', '', '', '', '', 'sclkcsldkmc dw', 'no', 0, '2025-01-09 14:50:52'),
+(4, 'PMSL_4', 'Miss', 'kdjfbjkwed', 'm,d ', 'aryanshirodkar03@gmail.com', '07304680494', 'developer', '', '', '', 'dfwecacdae', 'dcqwdweq', '', 'no', 0, '2025-01-09 14:52:15'),
+(5, 'PMSL_5', 'Mr.', 'ksjd cnkd c', 'sm,c ksnd c', 'aryanshirodkar03@gmail.com', '07304680494', 'pmc', 'scmlsdlkc kdc', '', '', '', '', '', 'no', 0, '2025-01-09 14:54:57'),
+(6, 'PMSL_6', 'Mr.', 'rnrn', 'anan', 'aryanshirodkar03@gmail.com', '07304680494', 'pmc', '', '', '', '', '', '', 'yes', 2, '2025-01-10 13:57:20'),
+(7, 'PMSL_7', 'Mr.', 'ans2', 'asn2', 'aryanshirodkar03@gmail.com', '7304680494', 'society', NULL, NULL, NULL, NULL, NULL, 'ans bldg', 'no', 0, '2025-01-22 07:51:44'),
+(8, 'PMSL_8', 'Mr.', 'Aryan', 'Shirodkar', 'aryanshirodkar03@gmail.com', '07304680494', 'society', '', '', '', '', '', 'ans soc', 'no', 0, '2025-01-22 08:08:37'),
+(9, 'PMSL_9', 'Mr.', 'Aryan', 'Shirodkar', 'ans@gmail.com', '7304680494', 'society', '', '', '', '', '', 'Ans Blddg', 'no', 0, '2025-05-05 07:15:33');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_leaves`
 --
 
@@ -392,7 +463,7 @@ CREATE TABLE `tbl_manage_builders` (
 --
 
 INSERT INTO `tbl_manage_builders` (`id`, `uid`, `created_at`, `builder_name`, `builder_contact`, `builder_email`, `company_name`, `is_active`) VALUES
-(1, 0, '2025-05-16 14:03:56', '    avc25', 1234567890, 'abc@gmail.com', '    vvcs3455    ', 'Yes'),
+(1, 0, '2025-05-24 11:09:41', '    avc25', 1234567890, 'abc@gmail.com', '    vvcs3455    ', 'Yes'),
 (19, 14, '2025-05-16 15:10:05', 'abc23', 1234567098, 'abc@gmail.com', 'vvcs3455', 'Yes'),
 (43, 15, '2025-05-16 13:59:42', 'jbjfkbjf', 1234567096, 'abc@gmail.com', 'vvcs3455', 'Yes'),
 (44, 16, '2025-05-16 12:29:56', 'jfjfwdf', 1234567096, 'abc@gmail.com', 'vvcs3455', 'Yes'),
@@ -773,6 +844,44 @@ INSERT INTO `tbl_rooms` (`id`, `room_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_society`
+--
+
+CREATE TABLE `tbl_society` (
+  `soc_id` int(11) NOT NULL,
+  `soc_name` varchar(255) DEFAULT NULL,
+  `cts_no` varchar(255) NOT NULL,
+  `district` varchar(255) DEFAULT NULL,
+  `taluka` varchar(255) DEFAULT NULL,
+  `village` varchar(255) DEFAULT NULL,
+  `ward` int(11) DEFAULT NULL,
+  `address` varchar(255) NOT NULL,
+  `holding_type` varchar(255) NOT NULL,
+  `total_units` int(11) NOT NULL,
+  `total_tenants` int(11) NOT NULL,
+  `as_per_physical` int(11) NOT NULL,
+  `as_per_card` int(11) NOT NULL,
+  `unit` varchar(255) NOT NULL,
+  `scheme` varchar(255) NOT NULL,
+  `plot_holding_type` varchar(255) DEFAULT NULL,
+  `reservation` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_society`
+--
+
+INSERT INTO `tbl_society` (`soc_id`, `soc_name`, `cts_no`, `district`, `taluka`, `village`, `ward`, `address`, `holding_type`, `total_units`, `total_tenants`, `as_per_physical`, `as_per_card`, `unit`, `scheme`, `plot_holding_type`, `reservation`) VALUES
+(1, 'Ram Baugh', '23/55e', 'Chandrapur', 'Saoli', 'Village 20', 2, 'waefrtghuyjyjyewqsaswdrtg', 'Mhada', 254, 23, 23, 267, 'sq-feet', '33(7)B', NULL, NULL),
+(18, 'arjun vilas', '2323232', 'Gadchiroli', 'Dhanora', 'Village 3', 2, 'dkkfnclkwdsclkamcp]oqwskdqwd', 'MCGM', 123, 12312321, 12312321, 2123, 'sq-meter', '33(7)B', NULL, NULL),
+(19, 'Aakash Ganga', '4545445', 'Chandrapur', 'Chandrapur', 'Village 1', 2, 'kjwdnkjnewwkn', 'Mhada', 2342, 234234324, 234234324, 32423432, 'sq-feet', '33(7)B', NULL, NULL),
+(23, 'Roshan Heights', '', '', '', '', 0, '', '', 0, 0, 0, 0, 'sq-feet', '33(7)B', 'Collector', 'mahada'),
+(25, 'abc', '12345', '', '', '', 0, '', '', 0, 0, 0, 0, 'sq-feet', '33(7)B', '', ''),
+(26, 'raj bldg', '12kj', 'Mumbai', 'MumbaiCity', 'Vile Parle', 2, '', '', 0, 0, 0, 0, 'sq-feet', '33(7)B', '', '');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_society_details`
 --
 
@@ -797,6 +906,57 @@ INSERT INTO `tbl_society_details` (`id`, `uid`, `created_at`, `society_name`, `w
 (4, 23, '2025-05-14 09:05:48', 'abc3', '1', 123, '123'),
 (5, 23, '2025-05-14 09:05:48', 'abc4', '1', 123, '123'),
 (6, 23, '2025-05-14 09:05:48', 'abc5', '1', 123, '123');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_soc_committee_details`
+--
+
+CREATE TABLE `tbl_soc_committee_details` (
+  `committee_member_id` int(11) NOT NULL,
+  `soc_id` int(11) NOT NULL,
+  `committee_member_name` varchar(255) NOT NULL,
+  `committee_memeber_role` varchar(255) NOT NULL,
+  `committee_member_phone` varchar(255) NOT NULL,
+  `committee_member_email` varchar(255) NOT NULL,
+  `term_start_date` date NOT NULL,
+  `term_end_date` date NOT NULL,
+  `reminder` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_soc_committee_details`
+--
+
+INSERT INTO `tbl_soc_committee_details` (`committee_member_id`, `soc_id`, `committee_member_name`, `committee_memeber_role`, `committee_member_phone`, `committee_member_email`, `term_start_date`, `term_end_date`, `reminder`) VALUES
+(1, 18, 'aryan shirodkar 231000', 'chairperson', '123456789', 'ans@gmail.com', '2025-01-23', '2025-01-04', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_soc_members`
+--
+
+CREATE TABLE `tbl_soc_members` (
+  `id` int(11) NOT NULL,
+  `soc_id` int(11) NOT NULL,
+  `owner_name` varchar(255) NOT NULL,
+  `flat_no` varchar(255) NOT NULL,
+  `contact_no` varchar(11) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `tag` varchar(255) NOT NULL,
+  `freehold` varchar(255) NOT NULL,
+  `leasehold` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_soc_members`
+--
+
+INSERT INTO `tbl_soc_members` (`id`, `soc_id`, `owner_name`, `flat_no`, `contact_no`, `email`, `tag`, `freehold`, `leasehold`) VALUES
+(1, 18, 'Aryan Shirodkar', '23', '7304680494', 'aryanshirodkar03@gmail.com', 'tenant', '', ''),
+(2, 18, 'Aakash Verma', '450', '7304680494', 'aryanshirodkar03@gmail.com', 'committee_member', 'yes', 'no');
 
 -- --------------------------------------------------------
 
@@ -857,6 +1017,13 @@ CREATE TABLE `tbl_tasks` (
   `image_path` varchar(256) DEFAULT NULL,
   `file_path` varchar(256) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_tasks`
+--
+
+INSERT INTO `tbl_tasks` (`id`, `uid`, `title`, `description`, `project_id`, `project_name`, `start_date`, `end_date`, `assigned_employee`, `task_category`, `status_id`, `priority`, `tags`, `image_path`, `file_path`) VALUES
+(1, NULL, 'Checking for task 1', 'this is a test task', 21, NULL, '2025-05-01', '2025-05-23', '1', 1, 1, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -953,6 +1120,35 @@ INSERT INTO `tbl_visitor` (`id`, `uid`, `f_name`, `m_name`, `l_name`, `phone_no`
 (2, 'visitor_6815f2052cdfb', 'om', 'Pandey', 'Pandey', '9321871957', 'om@gmail.com', '', 'visitor_2.jpg', '2025-05-03', '2025-05-14 13:02:35'),
 (3, 'visitor_68270285e0a88', 'Aryan', 'Nitin', 'Shirodkar', '7304680494', 'aryanshirodkar03@gmail.com', '', 'visitor_3.jpg', '2025-05-16', '2025-05-16 09:16:53');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_ward_details`
+--
+
+CREATE TABLE `tbl_ward_details` (
+  `id` int(11) NOT NULL,
+  `uid` varchar(255) CHARACTER SET utf16 COLLATE utf16_general_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `ward_name` varchar(255) NOT NULL,
+  `is_active` enum('Yes','No') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_ward_details`
+--
+
+INSERT INTO `tbl_ward_details` (`id`, `uid`, `created_at`, `ward_name`, `is_active`) VALUES
+(11, 'ward682dccb8c20e04.98813824', '2025-05-21 12:56:37', 'abc456', 'Yes'),
+(12, 'ward682dcd2fce5817.20579138', '2025-05-21 12:55:11', 'dbfbf', 'Yes'),
+(13, 'ward682dcf03c023e5.03904259', '2025-05-21 13:07:00', 'jdjd', 'Yes'),
+(14, 'ward682dd002cfd443.90485536', '2025-05-21 13:07:58', 'dddd', 'No'),
+(15, 'ward682dd01c13b368.54016824', '2025-05-21 13:08:02', 'dfdfd', 'No'),
+(16, 'ward682dd08d3d68d9.28000368', '2025-05-21 13:09:46', 'seses', 'Yes'),
+(17, 'ward682dd0c72e5f35.09899529', '2025-05-21 13:12:31', 'dafa', 'Yes'),
+(18, 'ward682dd135842da6.33886565', '2025-05-21 13:12:21', 'swsws', 'Yes'),
+(19, 'ward682dd175a43059.06693459', '2025-05-21 13:13:42', 'hjhjjhj2356', 'No');
+
 --
 -- Indexes for dumped tables
 --
@@ -1002,6 +1198,19 @@ ALTER TABLE `tbl_fms`
 ALTER TABLE `tbl_folders`
   ADD PRIMARY KEY (`id`),
   ADD KEY `tbl_folders_ibfk_1` (`parent_id`);
+
+--
+-- Indexes for table `tbl_landlord`
+--
+ALTER TABLE `tbl_landlord`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_leads`
+--
+ALTER TABLE `tbl_leads`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `lead_id` (`lead_id`);
 
 --
 -- Indexes for table `tbl_leaves`
@@ -1156,9 +1365,30 @@ ALTER TABLE `tbl_rooms`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tbl_society`
+--
+ALTER TABLE `tbl_society`
+  ADD PRIMARY KEY (`soc_id`,`cts_no`),
+  ADD UNIQUE KEY `cts_no` (`cts_no`),
+  ADD KEY `tbl_society_ibfk_1` (`ward`);
+
+--
 -- Indexes for table `tbl_society_details`
 --
 ALTER TABLE `tbl_society_details`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_soc_committee_details`
+--
+ALTER TABLE `tbl_soc_committee_details`
+  ADD PRIMARY KEY (`committee_member_id`),
+  ADD KEY `soc_id` (`soc_id`);
+
+--
+-- Indexes for table `tbl_soc_members`
+--
+ALTER TABLE `tbl_soc_members`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1221,6 +1451,13 @@ ALTER TABLE `tbl_visitor`
   ADD UNIQUE KEY `uid` (`uid`);
 
 --
+-- Indexes for table `tbl_ward_details`
+--
+ALTER TABLE `tbl_ward_details`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `uid` (`uid`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -1265,6 +1502,18 @@ ALTER TABLE `tbl_fms`
 --
 ALTER TABLE `tbl_folders`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `tbl_landlord`
+--
+ALTER TABLE `tbl_landlord`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tbl_leads`
+--
+ALTER TABLE `tbl_leads`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tbl_leaves`
@@ -1387,10 +1636,28 @@ ALTER TABLE `tbl_rooms`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `tbl_society`
+--
+ALTER TABLE `tbl_society`
+  MODIFY `soc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
 -- AUTO_INCREMENT for table `tbl_society_details`
 --
 ALTER TABLE `tbl_society_details`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `tbl_soc_committee_details`
+--
+ALTER TABLE `tbl_soc_committee_details`
+  MODIFY `committee_member_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tbl_soc_members`
+--
+ALTER TABLE `tbl_soc_members`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_source_details`
@@ -1408,7 +1675,7 @@ ALTER TABLE `tbl_tags`
 -- AUTO_INCREMENT for table `tbl_tasks`
 --
 ALTER TABLE `tbl_tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_task_emp`
@@ -1439,6 +1706,12 @@ ALTER TABLE `tbl_todo`
 --
 ALTER TABLE `tbl_visitor`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tbl_ward_details`
+--
+ALTER TABLE `tbl_ward_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Constraints for dumped tables
@@ -1522,6 +1795,12 @@ ALTER TABLE `tbl_project_emp`
 ALTER TABLE `tbl_project_task_status`
   ADD CONSTRAINT `fk_project_id` FOREIGN KEY (`project_id`) REFERENCES `tbl_project` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_task_status_id` FOREIGN KEY (`task_status_id`) REFERENCES `tbl_task_status` (`id`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tbl_soc_committee_details`
+--
+ALTER TABLE `tbl_soc_committee_details`
+  ADD CONSTRAINT `tbl_soc_committee_details_ibfk_1` FOREIGN KEY (`soc_id`) REFERENCES `tbl_society` (`soc_id`);
 
 --
 -- Constraints for table `tbl_task_emp`

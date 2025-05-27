@@ -13,7 +13,7 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>Task Assignment</title>
+    <title>Starter code</title>
 
     <!-- ===============================================-->
     <!--    Favicons-->
@@ -56,9 +56,6 @@
     <link href="../../vendors/leaflet/leaflet.css" rel="stylesheet">
     <link href="../../vendors/leaflet.markercluster/MarkerCluster.css" rel="stylesheet">
     <link href="../../vendors/leaflet.markercluster/MarkerCluster.Default.css" rel="stylesheet">
-    <link href="../../vendors/choices/choices.min.css" rel="stylesheet" />
-    <link href="../../vendors/flatpickr/flatpickr.min.css" rel="stylesheet" />
-    <link href="../../vendors/dropzone/dropzone.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -167,91 +164,113 @@
             }
         </script>
         <div class="content">
-            <!-- 🔹 Page Title & Breadcrumb -->
-            <div class="mb-4">
-                <h5 class="mb-2">Assign Tasks to Team</h5>
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">Proposals</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Assign Task</li>
-                    </ol>
-                </nav>
+
+            <div class="row g-0 justify-content-center align-items-center h-100">
+                <div class="col-auto">
+                    <h3 class="mb-4 text-center" style="margin: 0;">View Details</h3>
+                </div>
             </div>
             <hr>
 
-            <!-- 🔹 Card Container -->
-            <!-- <div class="card shadow-sm" id="taskCard" style="opacity: 0; transform: translateY(30px);">
-                    <div class="card-body"> -->
-            <!-- Your Form (wrapped in a div for animation targeting) -->
-            <div id="taskFormWrapper" style="opacity: 0; transform: translateY(20px);">
-                <form id="taskAssignForm" class="dropzone dropzone-multiple p-0" id="dropzone-multiple" data-dropzone="data-dropzone" action="#!">
-                    <div class="row g-3">
-                        <!-- Proposal Dropdown -->
-                        <div class="col-md-6">
-                            <label for="proposal" class="form-label">Proposal</label>
-                            <select class="form-select form-select-sm" id="proposal" name="proposal">
-                                <option selected disabled>Choose Proposal</option>
-                                <option value="1">Website Redesign</option>
-                                <option value="2">App Revamp</option>
-                            </select>
-                        </div>
 
-                        <!-- Task Title -->
-                        <div class="col-md-6">
-                            <label for="taskTitle" class="form-label">Task Title</label>
-                            <input type="text" class="form-control form-control-sm" id="taskTitle" name="taskTitle" placeholder="Enter task title">
-                        </div>
+            <div id="tableExample3" data-list='{"valueNames":["serial","propertyname","propertytime"],"page":5,"pagination":true}'>
+                <div class="search-box mb-3 mx-auto">
+                    <form class="position-relative"><input class="form-control search-input search form-control-sm" type="search" placeholder="Search" aria-label="Search" />
+                        <span class="fas fa-search search-box-icon"></span>
+                    </form>
+                </div>
 
-                        <hr>
-                        <div class="row">
-                            <!-- Assigned To Dropdown -->
-                            <div class="col-md-6">
-                                <label for="assignedTo" class="form-label">Assigned To</label>
-                                <select class="form-select" id="organizerMultiple" data-choices="data-choices" multiple="multiple" data-options='{"removeItemButton":true,"placeholder":true}'>
-                                    <option value="">Select organizer...</option>
-                                    <option>Massachusetts Institute of Technology</option>
-                                    <option>University of Chicago</option>
-                                    <option>GSAS Open Labs At Harvard</option>
-                                    <option>California Institute of Technology</option>
-                                </select>
-                            </div>
+                <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#followUpModal">
+                    Property
+                </button>
+                <br>
+                <br>
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm fs-9 mb-0">
+                        <thead>
+                            <tr>
 
-                            <!-- Deadline -->
-                            <div class="col-md-6">
-                                <label for="deadline" class="form-label">Deadline</label>
-                                <input class="form-control datetimepicker flatpickr-input" id="datetimepicker" type="text" placeholder="dd/mm/yyyy hour : minute" data-options="{&quot;enableTime&quot;:true,&quot;dateFormat&quot;:&quot;d/m/y H:i&quot;,&quot;disableMobile&quot;:true}" readonly="readonly">
+                                <th class="sort border-top" data-sort="serial">Serial</th>
+                                <th class="sort border-top" data-sort="propertyname">Property name</th>
+                                <th class="sort border-top" data-sort="propertytime">Property Type</th>
 
-                            </div>
-                        </div>
+                                <th class="sort text-end align-middle pe-0 border-top" scope="col">ACTION</th>
+                            </tr>
+                        </thead>
+                        <tbody class="list">
+                            <tr>
+                                <td class="align-middle serial">001</td>
+                                <td class="align-middle propertyname">Green Villa</td>
+                                <td class="align-middle propertytype">Residential</td>
+                                <td class="align-middle white-space-nowrap text-end pe-0">
+                                    <div class="btn-reveal-trigger position-static">
+                                        <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
+                                            <span class="fas fa-ellipsis-h fs-10"></span>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-end py-2">
+                                            <a class="dropdown-item" href="#!">Edit</a>
+                                            <a class="dropdown-item" href="#!">View Details</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
 
-                        <hr>
+                            <tr>
+                                <td class="align-middle serial">002</td>
+                                <td class="align-middle propertyname">Sunset Residency</td>
+                                <td class="align-middle propertytype">Commercial</td>
+                                <td class="align-middle white-space-nowrap text-end pe-0">
+                                    <div class="btn-reveal-trigger position-static">
+                                        <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
+                                            <span class="fas fa-ellipsis-h fs-10"></span>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-end py-2">
+                                            <a class="dropdown-item" href="#!">Edit</a>
+                                            <a class="dropdown-item" href="#!">View Details</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
 
-                        <div class="desc" style="margin-top: -0.2%;">
-                            <!-- Description -->
-                            <div class="col-12">
-                                <label for="description" class="form-label">Description</label>
-                                <textarea class="form-control form-control-sm" id="description" name="description" rows="4" placeholder="Describe the task..."></textarea>
-                            </div>
-                        </div>
+                            <tr>
+                                <td class="align-middle serial">003</td>
+                                <td class="align-middle propertyname">Ocean Breeze</td>
+                                <td class="align-middle propertytype">Plot</td>
+                                <td class="align-middle white-space-nowrap text-end pe-0">
+                                    <div class="btn-reveal-trigger position-static">
+                                        <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
+                                            <span class="fas fa-ellipsis-h fs-10"></span>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-end py-2">
+                                            <a class="dropdown-item" href="#!">Edit</a>
+                                            <a class="dropdown-item" href="#!">View Details</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
 
-                        <hr>
+                        </tbody>
+                    </table>
+                </div>
 
-                    </div>
+                <!-- Button and Pagination -->
 
 
-                    <!-- Submit Button -->
-                    <div class="mt-4 text-end">
-                        <button type="submit" class="btn btn-primary btn-sm">Assign Task</button>
-                    </div>
-                </form>
+                <div class="d-flex">
+                    <button class="page-link" data-list-pagination="prev">
+                        <span class="fas fa-chevron-left"></span>
+                    </button>
+                    <ul class="mb-0 pagination"></ul>
+                    <button class="page-link pe-0" data-list-pagination="next">
+                        <span class="fas fa-chevron-right"></span>
+                    </button>
+                </div>
             </div>
-            <!-- </div>
-                </div> -->
-            <div class="c" style="margin-top: 1%;">
-                <!-- Footer -->
-                <?php include("../../Components/footer.php"); ?>
-            </div>
+
+
+
+            <!-- Footer -->
+            <?php include("../../Components/footer.php"); ?>
         </div>
 
 
@@ -288,21 +307,9 @@
     <script src="../../assets/js/phoenix.js"></script>
     <script src="../../vendors/echarts/echarts.min.js"></script>
     <script src="../../assets/js/ecommerce-dashboard.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            gsap.to("#taskFormWrapper", {
-                duration: 0.8,
-                opacity: 1,
-                y: 0,
-                ease: "power3.out"
-            });
-        });
-    </script>
-    <script src="../../vendors/choices/choices.min.js"></script>
-    <script src="../../vendors/flatpickr/flatpickr.min.js"></script>
-    <script src="../../vendors/dropzone/dropzone-min.js"></script>
+
+
 
 
     </script>
