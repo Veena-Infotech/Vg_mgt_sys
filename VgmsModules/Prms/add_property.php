@@ -104,10 +104,6 @@
                 margin-bottom: 15px !important;
             }
         }
-
-        
-
-        
     </style>
 </head>
 
@@ -308,7 +304,7 @@
                                                         <div class="col-12 col-md-4">
                                                             <label class="form-label" for="district">District</label>
                                                             <input list="districts" id="district" name="district"
-                                                                class="form-control" placeholder="district"/>
+                                                                class="form-control" placeholder="district" />
                                                             <datalist id="districts">
                                                                 <!-- <select class="form-select" id="district" name="district" required> -->
 
@@ -1581,7 +1577,7 @@
                                                         const talukaSelect = document.getElementById('taluka');
                                                         const villageSelect = document.getElementById('village');
 
-                                                        districtSelect.addEventListener('change', function () {
+                                                        districtSelect.addEventListener('change', function() {
                                                             const selectedDistrict = districtSelect.value;
                                                             if (selectedDistrict) {
                                                                 populateTalukas(selectedDistrict);
@@ -1590,7 +1586,7 @@
                                                             }
                                                         });
 
-                                                        talukaSelect.addEventListener('change', function () {
+                                                        talukaSelect.addEventListener('change', function() {
                                                             const selectedDistrict = districtSelect.value;
                                                             const selectedTaluka = talukaSelect.value;
                                                             if (selectedTaluka) {
@@ -1635,30 +1631,30 @@
 
                                                     <!-- Ward Dropdown -->
                                                     <div class="row mb-3">
-                                                    <div class="col-12 col-md-6">
+                                                        <div class="col-12 col-md-6">
                                                             <label class="form-label" for="ward">Ward</label>
                                                             <select class="form-select" id="ward" name="ward" required>
-            <option value="" disabled selected>Select Ward</option>
-            <?php
-            include '../PhpFiles/connection.php';
-            $query = "SELECT * FROM tbl_ward_details";
-            $result = mysqli_query($conn, $query) or die("Query Unsuccessful: " . mysqli_error($conn));
-            if ($result) {
-                while ($row = mysqli_fetch_assoc($result)) {
-// echo '<option value="'.$row['id'].'">'.$row['ward_name'].'</option>';
-echo '
-  <option value="'.$row['id'].'">'.$row['ward_name'].'</option>';
+                                                                <option value="" disabled selected>Select Ward</option>
+                                                                <?php
+                                                                include '../PhpFiles/connection.php';
+                                                                $query = "SELECT * FROM tbl_ward_details";
+                                                                $result = mysqli_query($conn, $query) or die("Query Unsuccessful: " . mysqli_error($conn));
+                                                                if ($result) {
+                                                                    while ($row = mysqli_fetch_assoc($result)) {
+                                                                        // echo '<option value="'.$row['id'].'">'.$row['ward_name'].'</option>';
+                                                                        echo '
+  <option value="' . $row['id'] . '">' . $row['ward_name'] . '</option>';
 
-  $ward = $_POST['ward'];
-echo "Submitted ward: " . $ward; // Debug
+                                                                        $ward = $_POST['ward'];
+                                                                        echo "Submitted ward: " . $ward; // Debug
 
 
-                }
-            }
-            ?>
-        </select>
+                                                                    }
+                                                                }
+                                                                ?>
+                                                            </select>
                                                         </div>
-                                                        
+
                                                         <div class="col-12 col-md-6">
                                                             <label class="form-label" for="society-address">Society
                                                                 Address</label>
@@ -1696,18 +1692,18 @@ echo "Submitted ward: " . $ward; // Debug
                                                             <select class="form-select" id="select-lead"
                                                                 name="lead" required>
                                                                 <!-- name = "plot-holding-type" -->
-                                                                 <option value="" disabled selected>Select Lead</option>
-                                                                 <?php
-                                                                 include '../PhpFiles/connection.php';
+                                                                <option value="" disabled selected>Select Lead</option>
+                                                                <?php
+                                                                include '../PhpFiles/connection.php';
 
-                                                                 $query = "SELECT * FROM tbl_leads";
-                                                                 $result = mysqli_query($conn, $query) or die("Query unsuccessful".mysqli_error($conn));
-                                                                 if($result > 0){
-                                                                    while($row = mysqli_fetch_assoc($result)){
-                                                                        echo '<option value="'.$row['id'].'">'.$row['first_name'].' '.$row['last_name'].'</option>';
+                                                                $query = "SELECT * FROM tbl_leads";
+                                                                $result = mysqli_query($conn, $query) or die("Query unsuccessful" . mysqli_error($conn));
+                                                                if ($result > 0) {
+                                                                    while ($row = mysqli_fetch_assoc($result)) {
+                                                                        echo '<option value="' . $row['id'] . '">' . $row['first_name'] . ' ' . $row['last_name'] . '</option>';
                                                                     }
-                                                                 }
-                                                                 ?>
+                                                                }
+                                                                ?>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -1793,10 +1789,9 @@ echo "Submitted ward: " . $ward; // Debug
                                                     <div class="row gy-3">
                                                         <div class="col-12 col-md-4">
                                                             <button type="submit" name="add-society-button"
-                                                                class="btn btn-primary w-100">Submit</button>
+                                                                class="btn btn-primary ">Submit</button>
                                                         </div>
                                                     </div>
-
                                                 </div>
                                             </form>
                                         </div>
@@ -1805,71 +1800,39 @@ echo "Submitted ward: " . $ward; // Debug
                                 <!-- add society -->
                                 <?php
                                 include '../PhpFiles/connection.php';
-                                // if(isset($_POST['add-society-button'])){
-                                //     $society_name = $_POST['society-name'];
-                                //     $cts_number = $_POST['cts-number'];
-                                //     $district = $_POST['district'];
-                                //     $taluka = $_POST['taluka'];
-                                //     $village = $_POST['village'];
-                                //     $ward = $_POST['ward'];
-                                //     $society_address = $_POST['society-address'];
-                                //     $plot_holding_type = $_POST['plot-holding-type'];
-                                //     $lead = $_POST['lead'];
-                                //     $unit_number = $_POST['number-of-units'];
-                                //     $tenant_number = $_POST['number-of-tenants'];
-                                //     $as_per_physical = $_POST['physical-area'];
-                                //     $as_per_card = $_POST['pr-card-area'];
-                                //     $units = $_POST['unit-selection'];
-                                //     $scheme = $_POST['plot-holding-scheme'];
-                                //     $reservation = $_POST['plot-holding-reservation'];
 
-                                //     // generate unique id
-                                //     $uid = uniqid('society', true);
+                                if (isset($_POST['add-society-button'])) {
+                                    $society_name = $_POST['society-name'];
+                                    $cts_number = $_POST['cts-number'];
+                                    $district = $_POST['district'];
+                                    $taluka = $_POST['taluka'];
+                                    $village = $_POST['village'];
+                                    $ward = $_POST['ward'];  // Ensure this exists and is posted correctly
+                                    $society_address = $_POST['society-address'];
+                                    $plot_holding_type = $_POST['plot-holding-type'];
+                                    $lead = $_POST['lead'];
+                                    $unit_number = $_POST['number-of-units'];
+                                    $tenant_number = $_POST['number-of-tenants'];
+                                    $as_per_physical = $_POST['physical-area'];
+                                    $as_per_card = $_POST['pr-card-area'];
+                                    $units = $_POST['unit-selection'];
+                                    $scheme = $_POST['plot-holding-scheme'];
+                                    $reservation = $_POST['plot-holding-reservation'];
 
-                                //     $query = "INSERT INTO `tbl_add_society` (`uid`,`society_name`, `cts_number`, `district`, `society_address`, `units_number`, `tenants_number`, `physical`, `card`, `taluka`, `village`, `plot_holding_type`, `units`, `scheme`, `reservation`, `ward_id`, `lead_id`) VALUES ('$uid', '$society_name', '$cts_number', '$district', '$society_address', '$unit_number', '$tenant_number', '$as_per_physical', '$as_per_card', '$taluka', '$village', '$plot_holding_type', '$units', '$scheme', '$reservation', '$ward', '$lead') ";
+                                    // manually generate unique id
+                                    $uid = uniqid('society', true);
 
-                                //     $result = mysqli_query($conn, $query) or die("Query Unsuccessful".mysqli_error($conn));
+                                    $query = "INSERT INTO `tbl_society` (`soc_name`, `cts_no`, `district`, `taluka`, `village`, `ward`, `address`, `total_units`, `total_tenants`, `as_per_physical`, `as_per_card`, `unit`, `scheme`, `plot_holding_type`, `reservation`, `uid`, `lead_id`) VALUES ('$society_name', '$cts_number', '$district', '$taluka', '$village', '$ward', '$society_address', '$unit_number', '$tenant_number', '$as_per_physical', '$as_per_card', '$units', '$scheme', 'plot_holding_ype', '$reservation', '$uid', '$lead');";
 
-                                //     if($result){
-                                //         echo '<script> alert("Data added successfully"); window.location.href = "add_property.php" </script>';
-                                //     }else{
-                                //         echo '<script> alert("Failed : " '.mysqli_error($conn).'); window.location.href = "add_property.php" </script>';
-                                //     }
-                                // }
-include '../PhpFiles/connection.php';
+                                    $result = mysqli_query($conn, $query);
 
-if(isset($_POST['add-society-button'])) {
-    $society_name = $_POST['society-name'];
-    $cts_number = $_POST['cts-number'];
-    $district = $_POST['district'];
-    $taluka = $_POST['taluka'];
-    $village = $_POST['village'];
-    $ward = $_POST['ward'];  // Ensure this exists and is posted correctly
-    $society_address = $_POST['society-address'];
-    $plot_holding_type = $_POST['plot-holding-type'];
-    $lead = $_POST['lead'];
-    $unit_number = $_POST['number-of-units'];
-    $tenant_number = $_POST['number-of-tenants'];
-    $as_per_physical = $_POST['physical-area'];
-    $as_per_card = $_POST['pr-card-area'];
-    $units = $_POST['unit-selection'];
-    $scheme = $_POST['plot-holding-scheme'];
-    $reservation = $_POST['plot-holding-reservation'];
-
-    // manually generate unique id
-    $uid = uniqid('society', true);
-
-    $query = "INSERT INTO `tbl_society` (`soc_name`, `cts_no`, `district`, `taluka`, `village`, `ward`, `address`, `total_units`, `total_tenants`, `as_per_physical`, `as_per_card`, `unit`, `scheme`, `plot_holding_type`, `reservation`, `uid`, `lead_id`) VALUES ('$society_name', '$cts_number', '$district', '$taluka', '$village', '$ward', '$society_address', '$unit_number', '$tenant_number', '$as_per_physical', '$as_per_card', '$units', '$scheme', 'plot_holding_ype', '$reservation', '$uid', '$lead');";
-
-    $result = mysqli_query($conn, $query);
-
-    if($result) {
-        echo '<script>alert("Data added successfully"); window.location.href = "add_property.php"</script>';
-    } else {
-        echo '<script>alert("Failed: '.mysqli_error($conn).'"); window.location.href = "add_property.php"</script>';
-    }
-}
-?>
+                                    if ($result) {
+                                        echo '<script>alert("Data added successfully"); window.location.href = "add_property.php"</script>';
+                                    } else {
+                                        echo '<script>alert("Failed: ' . mysqli_error($conn) . '"); window.location.href = "add_property.php"</script>';
+                                    }
+                                }
+                                ?>
 
                                 <!-- Members Directory -->
                                 <div class="tab-pane fade" id="tab-reviews" role="tabpanel"
@@ -1886,9 +1849,27 @@ if(isset($_POST['add-society-button'])) {
                                                 <form method="post">
                                                     <!-- Member Details Section -->
                                                     <div class="row mb-3">
-                                                        <!-- Flat/Unit Owner Name -->
                                                         <div class="col-12">
-                                                            <label class="form-label" for="owner-name">Flat/Unit Owner
+                                                            <label class="form-label" for="society-name">Society Name</label>
+                                                            <select class="form-select" id="society_name"
+                                                                name="society_name" required>
+                                                                <option value="" disabled selected>Select Society Name</option>
+
+                                                            <?php
+                                                                include '../PhpFiles/connection.php';
+                                                                $query = "SELECT * FROM tbl_society";
+                                                                $result = mysqli_query($conn, $query) or die("Query Unsuccessful: " . mysqli_error($conn));
+                                                                if ($result) {
+                                                                    while ($row = mysqli_fetch_assoc($result)) {
+                                                                        echo '<option value="' . $row['soc_id'] . '">' . $row['soc_name'] . '</option>';
+                                                                    }
+                                                                }
+                                                                ?>
+                                                            </select>
+                                                        </div>
+                                                        <!-- Flat/Unit Owner Name -->
+                                                        <div class="col-12 mt-3">
+                                                            <label class="form-label" for="owner-name">Flat / Unit Owner
                                                                 Name</label>
                                                             <input class="form-control" id="owner-name"
                                                                 name="owner-name" type="text"
@@ -1912,11 +1893,10 @@ if(isset($_POST['add-society-button'])) {
                                                         </div>
                                                     </div>
 
-
                                                     <!-- Unit/Flat Number -->
                                                     <div class="row mb-3">
                                                         <div class="col-12">
-                                                            <label class="form-label" for="unit-number">Unit/Flat
+                                                            <label class="form-label" for="unit-number">Unit / Flat
                                                                 Number</label>
                                                             <input class="form-control" id="unit-number"
                                                                 name="unit-number" type="number"
@@ -1963,7 +1943,7 @@ if(isset($_POST['add-society-button'])) {
                                                         const additionalInputs = document.getElementById("additional-inputs");
 
                                                         // Listen for changes in the dropdown
-                                                        customTagsDropdown.addEventListener("change", function () {
+                                                        customTagsDropdown.addEventListener("change", function() {
                                                             if (customTagsDropdown.value === "Committee Member") {
                                                                 // Show additional inputs if "Committee Member" is selected
                                                                 additionalInputs.style.display = "flex";
@@ -1974,128 +1954,45 @@ if(isset($_POST['add-society-button'])) {
                                                         });
                                                     </script>
 
-                                                    <!-- Bulk Upload -->
-                                                    <div class="row mb-3">
-                                                        <div class="col-12">
-                                                            <label class="form-label" for="bulk-upload">Bulk Upload
-                                                                (CSV/Excel)</label>
-                                                            <br>
-                                                            <button type="button" class="btn btn-info w-100"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#bulkUploadModal">
-                                                                Upload File
-                                                            </button>
-                                                        </div>
-                                                    </div>
-
-                                                    <!-- Bulk Upload Modal -->
-                                                    <div class="modal fade" id="bulkUploadModal" tabindex="-1"
-                                                        aria-labelledby="bulkUploadModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="bulkUploadModalLabel">
-                                                                        Bulk
-                                                                        Upload Instructions</h5>
-                                                                    <button type="button" class="btn-close"
-                                                                        data-bs-dismiss="modal"
-                                                                        aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <p>
-                                                                        Upload the CSV file in the following format. Do
-                                                                        not
-                                                                        include the header/column header.
-                                                                        For example: <a href="../../example.csv"
-                                                                            download="../../example.csv">example.csv</a>
-                                                                    </p>
-                                                                    <p>The CSV file should follow this format:</p>
-                                                                    <ul>
-                                                                        <b>Serial No.</b>|<b>Flat No.</b>|<b>Primary
-                                                                            Owner</b>|<b>Associate Owner</b>|<b>Joint
-                                                                            Owner</b>|<b>Contact No.</b>|<b>Email ID</b>
-
-                                                                    </ul>
-                                                                    <input class="form-control" id="bulk-upload"
-                                                                        name="bulk-upload" type="file" accept=".csv" />
-                                                                </div>
-
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-primary"
-                                                                        data-bs-dismiss="modal">Upload</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <!-- Data Table -->
-                                                    <div class="row mb-3">
-                                                        <div class="col-12">
-                                                            <h5>Uploaded Data</h5>
-                                                            <table class="table table-striped table-bordered">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>Serial No.</th>
-                                                                        <th>Society Name</th>
-                                                                        <th>Flat No.</th>
-                                                                        <th>Primary Owner</th>
-                                                                        <th>Associate Owner</th>
-                                                                        <th>Joint Owner</th>
-                                                                        <th>Contact No.</th>
-                                                                        <th>Email ID</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody class="text-center">
-                                                                    <!-- Static Row 1 -->
-                                                                    <tr>
-                                                                        <td>1</td>
-                                                                        <td>Green Valley Residency</td>
-                                                                        <td>A-101</td>
-                                                                        <td>Rajesh Mehta</td>
-                                                                        <td>Sunita Mehta</td>
-                                                                        <td>Aryan Mehta</td>
-                                                                        <td>9876543210</td>
-                                                                        <td>rajesh.mehta@example.com</td>
-                                                                    </tr>
-                                                                    <!-- Static Row 2 -->
-                                                                    <tr>
-                                                                        <td>2</td>
-                                                                        <td>Blue Orchid Apartments</td>
-                                                                        <td>B-204</td>
-                                                                        <td>Anjali Sharma</td>
-                                                                        <td>—</td>
-                                                                        <td>—</td>
-                                                                        <td>9123456789</td>
-                                                                        <td>anjali.sharma@example.com</td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-
-                                                        </div>
-                                                    </div>
-
                                                     <!-- Submit and Reset Buttons -->
                                                     <div class="row gy-3">
                                                         <div class="col-12 col-md-4">
-                                                            <button type="submit" name="add-society-button"
+                                                            <button type="submit" name="member-button"
                                                                 class="btn btn-primary w-100">Submit</button>
                                                         </div>
                                                         <div class="col-12 col-md-4">
                                                             <button type="reset"
                                                                 class="btn btn-secondary w-100">Reset</button>
                                                         </div>
-                                                        <div class="col-12 col-md-4">
-                                                            <button type="button" class="btn btn-primary w-100"
-                                                                id="next-tab-btn">Next</button>
-                                                        </div>
+
                                                     </div>
-
-
                                                 </form>
+                                                <?php
+                                                include '../PhpFiles/connection.php';
 
+                                                if(isset($_POST['member-button'])){
+                                                $society_name = $_POST['society-name'];
+                                                $owner_name = $_POST['owner-name'];
+                                                $unit_number = $_POST['unit-number'];
+                                                $contact = $_POST['phone'];
+                                                $email = $_POST['email'];
+                                                $custom_tag = $_POST['custom-tags'];
+                                                $freehold = $_POST['freehold'];
+                                                $leasehold = $_POST['leasehold'];
+
+                                                // manually generate unique id
+                                                $uid = uniqid('soc_member', true);
+                                                $query = "INSERT INTO `tbl_soc_members` (`soc_id`, `owner_name`, `flat_no`, `contact_no`, `email`, `tag`, `freehold`, `leasehold`,`uid`) VALUES ('12', '$owner_name', '$unit_number', '$contact', '$email', '$custom_tag', '$freehold', '$leasehold','$uid') ";
+                                                $result = mysqli_query($conn, $query) or die("Query Unsuccessful" . mysqli_error($conn));
+                                                if ($result) {
+                                                    echo '<script>alert("Data added successfully"); window.location.href = "add_property.php" </script>';
+                                                } else {
+                                                    echo '<script>alert("Failed: ' . mysqli_error($conn) . '"); window.location.href = "add_property.php" </script>';
+                                                }
+                                            }
+                                                ?>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="tab-wishlist" role="tabpanel"
@@ -2111,7 +2008,7 @@ if(isset($_POST['add-society-button'])) {
                                                 <hr>
 
                                                 <!-- Form for adding committee details -->
-                                                <form method="post">
+                                                <form method="post" id="dateForm" onsubmit="return validateNotification();">
                                                     <!-- Office Bearers Section -->
                                                     <div class="row mb-3">
                                                         <div class="col-12 col-md-6 col-lg-4">
@@ -2122,13 +2019,17 @@ if(isset($_POST['add-society-button'])) {
                                                                 <option value="defaultsociety" disabled selected>Select
                                                                     Society
                                                                 </option>
-                                                                <option value="neelamnagar-society">Neelam Nagar
-                                                                </option>
-                                                                <option value="sunrise-society">Sunrise residency
-                                                                </option>
-                                                                <option value="blueshine-society">BlueShine residency
-                                                                </option>
-
+                                                                <?php
+                                                                include '../PhpFiles/connection.php';
+                                                                $query = "SELECT * FROM tbl_society";
+                                                                $result = mysqli_query($conn, $query) or die("Query Unsuccessful".mysqli_error($conn));
+                                                                if($result){
+                                                                    while($row = mysqli_fetch_assoc($result) ){
+                                                                        echo '<option value="'.$row['soc_id'].'"> '.$row['soc_name'].'
+                                                                </option>';
+                                                                    }
+                                                                }
+                                                                ?>
                                                             </select>
                                                         </div>
 
@@ -2179,40 +2080,50 @@ if(isset($_POST['add-society-button'])) {
                                                     <!-- Term Duration -->
                                                     <div class="row mb-3">
                                                         <div class="col-12 col-md-6 col-lg-6">
-                                                            <label class="form-label" for="term-start">Term Start Date
+                                                            <label class="form-label" for="fromDate">Term Start Date
                                                             </label>
-                                                            <input class="form-control" id="term-start"
-                                                                name="term-start" type="date" required />
+                                                            <input class="form-control" id="fromDate"
+                                                                name="fromDate" type="date" required />
                                                         </div>
                                                         <div class="col-12 col-md-6 col-lg-6">
-                                                            <label class="form-label" for="term-end">Term End Date
+                                                            <label class="form-label" for="toDate">Term End Date
                                                             </label>
-                                                            <input class="form-control" id="term-end" name="term-end"
+                                                            <input class="form-control" id="toDate" name="toDate"
                                                                 type="date" required />
                                                         </div>
 
 
                                                     </div>
 
-
-
                                                     <!-- Notifications Section -->
                                                     <div class="row mb-3">
-                                                        <div class="col-12 d-flex align-items-center">
+                                                        <!-- <div class="col-12 d-flex align-items-center">
                                                             <input class="form-check-input  mx-1" type="checkbox"
                                                                 id="notifications" name="notifications"
                                                                 style="width: 1.2em; height: 1.2em;" />
                                                             <label class="form-label mb-0" for="notifications">
                                                                 Enable Notifications for Term Expiration & Role Changes
                                                             </label>
-                                                        </div>
-                                                    </div>
+                                                        </div> -->
 
+                                                        <div class="col-12 d-flex align-items-center mb-1">
+        <input class="form-check-input mx-1" type="checkbox"
+               id="notifications" name="notifications"
+               style="width: 1.2em; height: 1.2em;" onchange="hideNotificationWarning();" />
+        <label class="form-label mb-0" for="notifications">
+            Enable Notifications for Term Expiration & Role Changes
+        </label>
+    </div>
+    <div id="notification-warning" class="text-danger ms-4" style="font-size: 0.875rem; display: none;">
+        ⚠️ Please enable notifications to proceed.
+    </div>
+
+                                                    </div>
 
                                                     <!-- Submit Button -->
                                                     <div class="row mb-3">
                                                         <div class="col-12 col-md-6 mb-2">
-                                                            <button type="submit"
+                                                            <button type="submit" name="committee-btn"
                                                                 class="btn btn-primary w-100">Submit</button>
                                                         </div>
                                                         <div class="col-12 col-md-6">
@@ -2221,18 +2132,78 @@ if(isset($_POST['add-society-button'])) {
                                                         </div>
                                                     </div>
                                                 </form>
+                                                <script>
+function validateNotification() {
+    const checkbox = document.getElementById('notifications');
+    const warning = document.getElementById('notification-warning');
 
+    if (!checkbox.checked) {
+        warning.style.display = 'block';
+        return false; // prevent form submission
+    }
+
+    warning.style.display = 'none';
+    return true; // allow submission
+}
+
+function hideNotificationWarning() {
+    const checkbox = document.getElementById('notifications');
+    const warning = document.getElementById('notification-warning');
+
+    if (checkbox.checked) {
+        warning.style.display = 'none';
+    }
+}
+</script>
+
+                                                <?php
+                                                include '../PhpFiles/connection.php';
+                                                
+                                                if(isset($_POST['committee-btn'])){
+                                                    if(!isset($_POST['$notifications']))
+    $notifications = '1';
+                                                      $from = $_POST['fromDate'];
+    $to = $_POST['toDate'];
+
+    $today = date('Y-m-d');
+
+    if (strtotime($from) < strtotime($today)) {
+        echo "<script>alert('From Date cannot be earlier than today.'); window.location.href = 'add_property.php'</script>";
+        exit;
+    }
+
+    if (strtotime($to) < strtotime($from)) {
+        echo "<script>alert('To Date cannot be earlier than From Date.');  window.location.href = 'add_property.php'</script>";
+        exit;
+    }else{
+    
+                                                $society_id = $_POST['soc-name'];
+                                                $committee_member_name = $_POST['office-bearer-name'];
+                                                $role = $_POST['role'];
+                                                $contact = $_POST['phone'];
+                                                $email = $_POST['contact-email'];
+                                                // $term_start_date = $_POST['term-start'];
+                                                // $term_end_date = $_POST['term-end'];
+                                                // $notifications = $_POST['notifications'];
+
+                                                // manually generate unique id
+                                                $uid = uniqid('committee', true);
+
+                                                $query = "INSERT INTO `tbl_soc_committee_details` (`soc_id`, `committee_member_name`, `committee_memeber_role`, `committee_member_phone`, `committee_member_email`, `term_start_date`, `term_end_date`, `reminder`,`uid`) VALUES ('$society_id', '$committee_member_name', '$role', '$contact', '$email', '$from', '$to', '$notifications','$uid');";
+                                                $result = mysqli_query($conn, $query) or die("Query Unsuccesful".mysqli_error($conn));
+                                                if($result){
+                                                    echo '<script> alert("Data added Successfully"); window.location.href = "add_property.php" </script>';
+                                                }else{
+                                                    echo '<script>alert("Failed : "'.mysqli_error($conn).' ); window.location.href = "add_property.php" </script>';
+                                                }
+                                            }
+                                        }
+                                                ?>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-
-
-
                             </div>
-
-
                         </div>
                     </div>
                 </div>
@@ -2262,12 +2233,12 @@ if(isset($_POST['add-society-button'])) {
                                 class="form-control" placeholder="Enter Mobile Number" />
                         </div>
                     </div>
-
+                    <!-- " -->
                     <div class="row mb-3">
                         <!-- District -->
                         <div class="col-12 col-md-4">
                             <label class="form-label" for="district">District</label>
-                            <input list="districts" id="dist" name="district" class="form-control" value="district" />
+                            <input list="districts" id="dist" name="district" class="form-control" placeholder="district" />
                             <datalist id="districts">
                                 <!-- <select class="form-select" id="district" name="district" required> -->
 
@@ -3542,25 +3513,11 @@ if(isset($_POST['add-society-button'])) {
 
                         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                         const selectDistrict = document.getElementById('dist');
                         const selectTaluka = document.getElementById('talukass');
                         const selectVillage = document.getElementById('villagess');
 
-                        selectDistrict.addEventListener('change', function () {
+                        selectDistrict.addEventListener('change', function() {
                             const selectedDistrict = selectDistrict.value;
                             if (selectedDistrict) {
                                 TalukaPopulate(selectedDistrict);
@@ -3569,7 +3526,7 @@ if(isset($_POST['add-society-button'])) {
                             }
                         });
 
-                        selectTaluka.addEventListener('change', function () {
+                        selectTaluka.addEventListener('change', function() {
                             const selectedDistrict = selectDistrict.value;
                             const selectedTaluka = selectTaluka.value;
                             if (selectedTaluka) {
@@ -3681,8 +3638,40 @@ if(isset($_POST['add-society-button'])) {
                     </div>
 
                     <!-- Submit Button -->
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" name="landlord-btn" class="btn btn-primary">Submit</button>
                 </form>
+                <?php
+                include '../PhpFiles/connection.php';
+
+                if (isset($_POST['landlord-btn'])) {
+                    $landlord_name = $_POST['landlord_name'];
+                    $email = $_POST['landlord_email'];
+                    $contact = $_POST['phone'];
+                    $district = $_POST['district'];
+                    $taluka = $_POST['taluka'];
+                    $village = $_POST['village'];
+                    $society_address = $_POST['society-address'];
+                    $property_type = $_POST['property_type'];
+                    $structure_type = $_POST['structure_type'];
+                    $private_units = $_POST['private_units'];
+                    $private_floor = $_POST['private_floors'];
+                    $public_wings = $_POST['public_wings'];
+                    $public_floors = $_POST['public_floors'];
+                    $society_units = $_POST['society_units'];
+
+                    // manually generate unique id
+                    $uid = uniqid('landlord', true);
+
+                    $query = "INSERT INTO `tbl_landlord` (`landlord_name`, `landlord_email`, `landlord_phone`, `district`, `taluka`, `village`, `property_type`, `structure_type`, `private_floors`, `private_units`, `public_wings`, `public_floors`, `society_units`,`society_address`,`uid`) VALUES ('$landlord_name', '$email', '$contact', '$district', '$taluka', '$village', '$property_type', '$structure_type', '$private_floor', '$private_units', '$public_wings', '$public_floors', '$society_units','$society_address','$uid') ";
+
+                    $result = mysqli_query($conn, $query) or die("Query Unsuccessful" . mysqli_error($conn));
+                    if ($result) {
+                        echo "<script> alert('Data Added Successfully'); window.location.href = 'add_property.php' </script>";
+                    } else {
+                        echo "<script> alert('Failed : ' " . mysqli_error($conn) . ") </script>";
+                    }
+                }
+                ?>
 
                 <script>
                     // DOM Elements
@@ -3694,12 +3683,12 @@ if(isset($_POST['add-society-button'])) {
                     const societyOptions = document.getElementById('society-options');
 
                     // Event Listeners
-                    propertyType.addEventListener('change', function () {
+                    propertyType.addEventListener('change', function() {
                         structureOptions.style.display = this.value === 'structure' ? 'block' : 'none';
                         resetStructureOptions();
                     });
 
-                    structureType.addEventListener('change', function () {
+                    structureType.addEventListener('change', function() {
                         resetStructureOptions();
                         if (this.value === 'private') {
                             privateOptions.style.display = 'flex';
@@ -3723,21 +3712,9 @@ if(isset($_POST['add-society-button'])) {
             <?php include("../../Components/footer.php"); ?>
         </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
         <script>
             // Show the popup on page load if there is an error
-            window.onload = function () {
+            window.onload = function() {
                 const errorPopup = document.getElementById('errorPopup');
                 if (errorPopup) {
                     errorPopup.classList.add('show');
@@ -3869,6 +3846,38 @@ if(isset($_POST['add-society-button'])) {
             delay: 0.5
         });
     </script>
+
+<!-- start and end date validation -->
+                                                <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const fromDateInput = document.getElementById('fromDate');
+    const toDateInput = document.getElementById('toDate');
+    const form = document.getElementById('dateForm');
+
+    const today = new Date().toISOString().split('T')[0];
+    fromDateInput.setAttribute('min', today); // disallow selecting past dates
+
+    fromDateInput.addEventListener('change', function () {
+      toDateInput.min = fromDateInput.value;
+    });
+
+    form.addEventListener('submit', function (e) {
+      const fromDate = new Date(fromDateInput.value);
+      const toDate = new Date(toDateInput.value);
+      const now = new Date();
+      now.setHours(0, 0, 0, 0); // set time to 00:00 for accurate comparison
+
+      if (fromDate < now) {
+        e.preventDefault();
+        alert("From Date cannot be earlier than today.");
+      } else if (toDate < fromDate) {
+        e.preventDefault();
+        alert("To Date cannot be earlier than From Date.");
+      }
+    });
+  });
+</script>
+
 
 
 
