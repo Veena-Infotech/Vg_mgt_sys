@@ -299,8 +299,6 @@ $stmt->close();
                                     <tr>
                                         <th class="sort border-top border-translucent ps-3" data-sort="filename">File
                                             Name</th>
-                                        <th class="sort border-top" data-sort="officename">Office</th>
-                                        <th class="sort border-top" data-sort="room">Room</th>
                                         <th class="sort border-top" data-sort="cupboard">Cupboard</th>
                                         <th class="sort border-top" data-sort="status">Status</th>
                                         <th class="sort border-top" data-sort="taken_by">Taken By</th>
@@ -332,52 +330,76 @@ $stmt->close();
 
                                         if ($result->num_rows > 0) {
                                             while ($row = $result->fetch_assoc()) {
+                                                $status = strtoupper($row['current_status']);
                                                 echo '<tr>';
-                                                echo '<td class="align-middle ps-3 name">' . htmlspecialchars($row['filename']) . '</td>';
-                                                echo '<td class="align-middle">' . htmlspecialchars($row['officename']) . '</td>';
-                                                echo '<td class="align-middle">' . htmlspecialchars($row['room_name']) . '</td>';
-                                                echo '<td class="align-middle">' . htmlspecialchars($row['cupboard_name']) . '</td>';
-                                                echo '<td class="align-middle">' . htmlspecialchars($row['current_status']) . '</td>';
-                                                echo '<td class="align-middle">' . htmlspecialchars($row['taken_by']) . '</td>';
-                                                echo '<td class="align-middle">' . htmlspecialchars($row['taken_time']) . '</td>';
-                                                echo '<td class="align-middle">' . htmlspecialchars($row['returned_by']) . '</td>';
-                                                echo '<td class="align-middle">' . htmlspecialchars($row['returned_time']) . '</td>';
-                                                echo '<td class="align-middle">' . htmlspecialchars($row['added_by']) . '</td>';
-                                                echo '<td class="align-middle">' . htmlspecialchars($row['added_time']) . '</td>';
-                                                echo '<td class="align-middle text-center">
-    <div class="btn-reveal-trigger position-static">
-        <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
-            type="button" data-bs-toggle="dropdown" data-boundary="window"
-            aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
-            <i class="fas fa-ellipsis-h"></i>
-        </button>
-        <div class="dropdown-menu dropdown-menu-end py-2">
-            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editFileModal' . $row['id'] . '">Edit</a>';
 
-                                                if ($row['current_status'] === 'IN') {
-                                                    echo '<a class="dropdown-item" href="./php/mark_out.php?id=' . $row['id'] . '">Mark as OUT</a>';
+                                                // File Name
+                                                echo '<td class="align-middle ps-3 name">' . htmlspecialchars($row['filename']) . '</td>';
+
+                                                // Cupboard (hide if OUT)
+                                                if ($status === 'IN') {
+                                                    echo '<td class="align-middle">' . htmlspecialchars($row['cupboard_name']) . '</td>';
                                                 } else {
-                                                    echo '<a class="dropdown-item" href="./php/mark_in.php?id=' . $row['id'] . '">Mark as IN</a>';
+                                                    echo '<td class="align-middle text-muted">OUT</td>';
                                                 }
 
-                                                echo '    </div>
-    </div>
-</td>';
+                                                // Status
+                                                echo '<td class="align-middle">' . $status . '</td>';
+
+                                                // Taken By & Taken Time (show only if OUT)
+                                                if ($status === 'OUT') {
+                                                    echo '<td class="align-middle">' . htmlspecialchars($row['taken_by']) . '</td>';
+                                                    echo '<td class="align-middle">' . htmlspecialchars($row['taken_time']) . '</td>';
+                                                } else {
+                                                    echo '<td class="align-middle text-muted">IN</td>';
+                                                    echo '<td class="align-middle text-muted">IN</td>';
+                                                }
+
+                                                // Returned By & Returned Time (show only if IN)
+                                                if ($status === 'IN') {
+                                                    echo '<td class="align-middle">' . htmlspecialchars($row['returned_by']) . '</td>';
+                                                    echo '<td class="align-middle">' . htmlspecialchars($row['returned_time']) . '</td>';
+                                                } else {
+                                                    echo '<td class="align-middle text-muted">OUT</td>';
+                                                    echo '<td class="align-middle text-muted">OUT</td>';
+                                                }
+
+                                                // Added By & Added Time
+                                                echo '<td class="align-middle">' . htmlspecialchars($row['added_by']) . '</td>';
+                                                echo '<td class="align-middle">' . htmlspecialchars($row['added_time']) . '</td>';
+
+                                                // Actions
+                                                echo '<td class="align-middle text-center">
+                        <div class="btn-reveal-trigger position-static">
+                            <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
+                                type="button" data-bs-toggle="dropdown" data-boundary="window"
+                                aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-end py-2">
+                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editFileModal' . $row['id'] . '">Edit</a>';
+
+                                                if ($status === 'IN') {
+                                                    echo '<a class="dropdown-item" href="#"
+                            data-bs-toggle="modal"
+                            data-bs-target="#markOutModal"
+                            data-file-id="' . $row['id'] . '">Mark as OUT</a>';
+                                                } else {
+                                                    echo '<a class="dropdown-item" href="#" onclick="markFileIn(' . $row['id'] . '); return false;">Mark as IN</a>';
+                                                }
+
+                                                echo '</div>
+                        </div>
+                    </td>';
 
                                                 echo '</tr>';
                                             }
-                                        } else {
-                                            echo '<tr><td colspan="12" class="text-center">No files found for this office.</td></tr>';
                                         }
-
-                                        $stmt->close();
-                                    } else {
-                                        echo '<tr><td colspan="12" class="text-center text-danger">Invalid or missing office ID in URL.</td></tr>';
                                     }
                                     ?>
-
                                 </tbody>
                             </table>
+
                         </div>
                         <div class="d-flex justify-content-between mt-3"><span class="d-none d-sm-inline-block"
                                 data-list-info="data-list-info">1 to 5 <span class="text-body-tertiary"> Items of
@@ -509,6 +531,36 @@ $stmt->close();
                     <?php } ?>
 
 
+                    <!-- Mark OUT Modal -->
+                    <div class="modal fade" id="markOutModal" tabindex="-1" aria-labelledby="markOutLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <form id="markOutForm" method="POST" action="../PhpFiles/update_file_status.php"
+                                class="modal-content">
+                                <input type="hidden" name="action" value="OUT">
+                                <input type="hidden" name="file_id" id="out_file_id">
+
+                                <div class="modal-header bg-warning-subtle">
+                                    <h5 class="modal-title fw-bold" id="markOutLabel">Mark File as OUT</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+
+                                <div class="modal-body">
+                                    <div class="form-floating mb-3">
+                                        <textarea class="form-control" name="reason" id="out_reason"
+                                            placeholder="Reason for taking file" required
+                                            style="height: 100px"></textarea>
+                                        <label for="out_reason">Reason</label>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-danger w-100">Mark as OUT</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
 
                 </div>
 
@@ -588,6 +640,15 @@ $stmt->close();
             });
         });
 
+        const markOutModal = document.getElementById('markOutModal');
+
+        markOutModal.addEventListener('show.bs.modal', event => {
+            const button = event.relatedTarget;  // the clicked link
+            const fileId = button.getAttribute('data-file-id');
+            markOutModal.querySelector('#out_file_id').value = fileId;
+        });
+
+
         // Room change → load cupboards
         document.querySelectorAll('.room-select').forEach(roomSelect => {
             roomSelect.addEventListener('change', function () {
@@ -626,8 +687,86 @@ $stmt->close();
 
 
     </script>
+    <script>
+        async function submitMarkOut(event) {
+            event.preventDefault();  // Prevent form default submission if used as event handler
 
+            const fileId = document.getElementById('out_file_id').value;
+            const reason = document.getElementById('out_reason').value.trim();
 
+            if (!fileId) {
+                alert('File ID is missing.');
+                return;
+            }
+
+            if (!reason) {
+                alert('Please provide a reason for taking the file.');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file_id', fileId);
+            formData.append('action', 'OUT');
+            formData.append('reason', reason);
+
+            try {
+                const response = await fetch('../PhpFiles/update_file_status.php', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Server error: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                alert(data.message || 'No message received.');
+
+                if (data.status === 'success') {
+                    // Close modal programmatically (Bootstrap 5)
+                    const markOutModal = document.getElementById('markOutModal');
+                    const modalInstance = bootstrap.Modal.getInstance(markOutModal);
+                    if (modalInstance) modalInstance.hide();
+
+                    // Optional: Refresh page or update UI
+                    // window.location.reload();
+                }
+            } catch (error) {
+                alert('Error submitting OUT status: ' + error.message);
+            }
+        }
+
+    </script>
+    <script>
+        async function markFileIn(fileId) {
+
+            const formData = new FormData();
+            formData.append('file_id', fileId);
+            formData.append('action', 'IN');
+            // No location change fields - keep current location as is
+
+            try {
+                const response = await fetch('../PhpFiles/update_file_status.php', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                const data = await response.json();
+
+                if (data.status === 'success') {
+                    alert('File marked IN successfully.\nTo change the location, please use the Edit action.');
+                    // Optional: refresh page or update UI here
+                    window.location.reload();
+                } else {
+                    alert('Failed to mark IN: ' + data.message);
+                }
+            } catch (error) {
+                window.location.reload();
+            }
+        }
+
+    </script>
 
 </body>
 
