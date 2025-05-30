@@ -213,7 +213,7 @@
                      $source_name = $_POST['name'];
 
                     //  Generate unique id
-                    $uid = uniqid('ward',true);
+                    $uid = uniqid('ward_',true);
 
                      $query = "INSERT INTO `tbl_source_details` (`uid`, `source_name`, `is_active`) VALUES ('$uid', '$source_name', 'Yes')";
                      $result = mysqli_query($conn, $query) or die("Query Unsuccesssful".mysqli_error($conn));

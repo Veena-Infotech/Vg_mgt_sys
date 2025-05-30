@@ -337,11 +337,11 @@ if (isset($_POST['add-landlord'])) {
     // Get next UID
     $res = mysqli_query($conn, "SELECT MAX(uid) AS max_uid FROM tbl_manage_landlord");
     $row = mysqli_fetch_assoc($res);
-    $next_uid = isset($row['max_uid']) ? $row['max_uid'] + 1 : 1;
+    $uid = uniqid('landllord_',true);
 
     // Insert query
     $query = "INSERT INTO `tbl_manage_landlord` (`id`, `landlord_name`, `contact_number`, `email`) 
-              VALUES ('$next_uid', '$name', '$contact', '$email')";
+              VALUES ('$uid', '$name', '$contact', '$email')";
 
     if (mysqli_query($conn, $query)) {
         echo "<script>alert('Added successfully'); window.location.href = 'view_manage_landlord.php';</script>";

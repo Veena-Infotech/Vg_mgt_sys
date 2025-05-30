@@ -544,7 +544,7 @@ function getStatusBadgeClass($status) {
         COUNT(*) AS total_tasks,
         SUM(CASE WHEN s.name = 'completed' THEN 1 ELSE 0 END) AS completed_tasks
     FROM tbl_tasks t
-    INNER JOIN tbl_task_status s ON t.status = s.id
+    INNER JOIN tbl_task_status s ON t.status_id = s.id
     WHERE t.project_id = $project_id
 ";
 $result1 = $conn->query($progressQuery);

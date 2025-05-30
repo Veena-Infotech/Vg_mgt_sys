@@ -351,7 +351,7 @@ if (isset($_POST['add_competitors'])) {
     $company_name = mysqli_real_escape_string($conn, $_POST['company_name']);
 
     // Generate a unique ID
-    $uid = uniqid('competitor_', true);
+    $uid = uniqid('competitors_', true);
 
     // SQL query (assuming your table has a column `is_active`)
     $query = "INSERT INTO `tbl_manage_competitors` 
