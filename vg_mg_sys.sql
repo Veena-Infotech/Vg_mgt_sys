@@ -3,11 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
-<<<<<<< HEAD
--- Generation Time: May 29, 2025 at 11:56 AM
-=======
--- Generation Time: May 30, 2025 at 11:20 AM
->>>>>>> 7694af9eef26ea83b30dc868d3138fbfc6dd6575
+-- Generation Time: May 30, 2025 at 01:29 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -552,6 +548,13 @@ CREATE TABLE `tbl_manage_reservation` (
   `is_active` enum('Yes','No') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `tbl_manage_reservation`
+--
+
+INSERT INTO `tbl_manage_reservation` (`id`, `uid`, `created_at`, `reservation_name`, `status`, `is_active`) VALUES
+(18, 'reservation683979ab65a470.53695837', '2025-05-30 09:26:03', 'ABC', NULL, 'Yes');
+
 -- --------------------------------------------------------
 
 --
@@ -707,7 +710,9 @@ INSERT INTO `tbl_project` (`id`, `uid`, `project_title`, `project_type`, `projec
 (25, 'prj_68113ed38894b', 'test 3', 2, 0, 1, 2, 'asdcasdc', '2025-04-30', '2025-05-11', 'admin', '2025-04-30'),
 (26, 'prj_6816093886f8f', 'Maitri Park', 3, 3, 2, 3, 'hdivdocaspovmsd', '2025-05-03', '2025-06-08', 'admin', '2025-05-03'),
 (27, 'prj_68170d04d7144', 'New Project Dims', 1, 0, 1, 2, 'testing for new location in dims', '2025-05-04', '2025-05-11', 'admin', '2025-05-04'),
-(28, 'prj_68170ec7c809e', 'dims x pms', 2, 3, 2, 1, 'lknscjksdno', '2025-05-04', '2025-05-11', 'admin', '2025-05-04');
+(28, 'prj_68170ec7c809e', 'dims x pms', 2, 3, 2, 1, 'lknscjksdno', '2025-05-04', '2025-05-11', 'admin', '2025-05-04'),
+(29, 'prj_68397c96662a9', 'infotech5', 1, 0, 1, 1, 'xyz', '2025-05-15', '2025-05-17', 'admin', '2025-05-30'),
+(30, 'prj_68397cea3bc09', 'abc', 1, 0, 1, 1, 'xyz', '2025-05-15', '2025-05-17', 'admin', '2025-05-30');
 
 -- --------------------------------------------------------
 
@@ -737,7 +742,11 @@ INSERT INTO `tbl_project_emp` (`id`, `emp_id`, `project_id`, `timestamp`) VALUES
 (18, 3, 27, '2025-05-04'),
 (19, 3, 28, '2025-05-04'),
 (20, 1, 28, '2025-05-04'),
-(21, 0, 28, '2025-05-04');
+(21, 0, 28, '2025-05-04'),
+(22, 3, 29, '2025-05-30'),
+(23, 1, 29, '2025-05-30'),
+(24, 3, 30, '2025-05-30'),
+(25, 1, 30, '2025-05-30');
 
 -- --------------------------------------------------------
 
@@ -971,11 +980,7 @@ CREATE TABLE `tbl_tasks` (
 --
 
 INSERT INTO `tbl_tasks` (`id`, `uid`, `title`, `description`, `project_id`, `project_name`, `start_date`, `end_date`, `assigned_employee`, `task_category`, `status_id`, `priority`, `tags`, `image_path`, `file_path`) VALUES
-<<<<<<< HEAD
-(1, NULL, 'Sample Task 1', 'This is a test task', 28, 'dims x pms', NULL, NULL, 0, 1, 2, 1, NULL, NULL, NULL),
-=======
-(1, '123', 'Sample Task 1', 'This is a test task', 28, 'dims x pms', NULL, NULL, 0, 1, 2, 1, NULL, NULL, NULL),
->>>>>>> 7694af9eef26ea83b30dc868d3138fbfc6dd6575
+(1, '123', 'Sample Task 1', 'This is a test task', 28, 'dims x pms', NULL, NULL, 0, 1, 3, 1, NULL, NULL, NULL),
 (2, NULL, 'Sample Task 2', 'This is another task', 28, 'dims x pms', NULL, NULL, 3, 2, 1, 2, NULL, NULL, NULL),
 (3, NULL, 'Sample Task 3', 'This is also another task', 21, 'infotech', NULL, NULL, 0, 2, 1, 3, NULL, NULL, NULL);
 
@@ -1290,10 +1295,7 @@ ALTER TABLE `tbl_priority`
 --
 ALTER TABLE `tbl_project`
   ADD PRIMARY KEY (`id`),
-<<<<<<< HEAD
-=======
   ADD UNIQUE KEY `uid` (`uid`),
->>>>>>> 7694af9eef26ea83b30dc868d3138fbfc6dd6575
   ADD KEY `tbl_project_fk_tbl_client_id` (`project_client`),
   ADD KEY `tbl_project_fk_tbl_project_status` (`project_status`),
   ADD KEY `tbl_escape_pm` (`project_manager`) USING BTREE,
@@ -1548,7 +1550,7 @@ ALTER TABLE `tbl_manage_property_type`
 -- AUTO_INCREMENT for table `tbl_manage_reservation`
 --
 ALTER TABLE `tbl_manage_reservation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `tbl_meeting_history`
@@ -1590,13 +1592,13 @@ ALTER TABLE `tbl_priority`
 -- AUTO_INCREMENT for table `tbl_project`
 --
 ALTER TABLE `tbl_project`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `tbl_project_emp`
 --
 ALTER TABLE `tbl_project_emp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `tbl_project_status`
@@ -1791,8 +1793,6 @@ ALTER TABLE `tbl_tasks`
   ADD CONSTRAINT `fk_priority` FOREIGN KEY (`priority`) REFERENCES `tbl_priority` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_task_emp_name` FOREIGN KEY (`assigned_employee`) REFERENCES `tbl_emp` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tasks_project` FOREIGN KEY (`project_id`) REFERENCES `tbl_project` (`id`) ON UPDATE CASCADE;
-<<<<<<< HEAD
-=======
 
 --
 -- Constraints for table `tbl_task_emp`
@@ -1807,7 +1807,6 @@ ALTER TABLE `tbl_task_emp`
 ALTER TABLE `tbl_task_tag`
   ADD CONSTRAINT `fk_tag_id` FOREIGN KEY (`tag_id`) REFERENCES `tbl_tags` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tbl_task_id` FOREIGN KEY (`task_id`) REFERENCES `tbl_tasks` (`id`) ON UPDATE CASCADE;
->>>>>>> 7694af9eef26ea83b30dc868d3138fbfc6dd6575
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
