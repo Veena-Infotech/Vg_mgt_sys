@@ -29,6 +29,15 @@
   <!-- ===============================================-->
   <!--    Stylesheets-->
   <!-- ===============================================-->
+  <!-- !-- Required CSS (Bootstrap + Dropzone + FontAwesome) --> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Required JS (Bootstrap + Dropzone) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js"></script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com/">
   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap"
@@ -169,6 +178,7 @@
         navbarVertical.setAttribute('data-navbar-appearance', 'darker');
       }
     </script>
+
     <div class="content">
       <div class="card shadow-none border my-4" data-component-card="data-component-card">
         <div class="card-header p-4 border-bottom bg-body">
@@ -176,112 +186,68 @@
             <div class="col-12 col-md">
               <h4 class="text-body mb-0" data-anchor="data-anchor">Candidate Details</h4>
             </div>
-
           </div>
         </div>
         <div class="card-body p-0">
           <div class="collapse code-collapse" id="form-grid-layout-code">
-            <pre class="scrollbar" style="max-height:420px"><code class="language-html">&lt;form class=&quot;row g-3&quot;&gt;
-  &lt;div class=&quot;col-md-6&quot;&gt;
-    &lt;label class=&quot;form-label&quot; for=&quot;inputEmail4&quot;&gt;Email&lt;/label&gt;
-    &lt;input class=&quot;form-control&quot; id=&quot;inputEmail4&quot; type=&quot;email&quot; /&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;col-md-6&quot;&gt;
-    &lt;label class=&quot;form-label&quot; for=&quot;inputPassword4&quot;&gt;Password&lt;/label&gt;
-    &lt;input class=&quot;form-control&quot; id=&quot;inputPassword4&quot; type=&quot;password&quot; /&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;col-12&quot;&gt;
-    &lt;label class=&quot;form-label&quot; for=&quot;inputAddress&quot;&gt;Address&lt;/label&gt;
-    &lt;input class=&quot;form-control&quot; id=&quot;inputAddress&quot; type=&quot;text&quot; placeholder=&quot;1234 Main St&quot; /&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;col-12&quot;&gt;
-    &lt;label class=&quot;form-label&quot; for=&quot;inputAddress2&quot;&gt;Address 2&lt;/label&gt;
-    &lt;input class=&quot;form-control&quot; id=&quot;inputAddress2&quot; type=&quot;text&quot; placeholder=&quot;Apartment, studio, or floor&quot; /&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;col-md-6&quot;&gt;
-    &lt;label class=&quot;form-label&quot; for=&quot;inputCity&quot;&gt;City&lt;/label&gt;
-    &lt;input class=&quot;form-control&quot; id=&quot;inputCity&quot; type=&quot;text&quot; /&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;col-md-4&quot;&gt;
-    &lt;label class=&quot;form-label&quot; for=&quot;inputState&quot;&gt;State&lt;/label&gt;
-    &lt;select class=&quot;form-select&quot; id=&quot;inputState&quot;&gt;
-      &lt;option selected=&quot;selected&quot;&gt;Choose...&lt;/option&gt;
-      &lt;option&gt;...&lt;/option&gt;
-    &lt;/select&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;col-md-2&quot;&gt;
-    &lt;label class=&quot;form-label&quot; for=&quot;inputZip&quot;&gt;Zip&lt;/label&gt;
-    &lt;input class=&quot;form-control&quot; id=&quot;inputZip&quot; type=&quot;text&quot; /&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;col-12&quot;&gt;
-    &lt;div class=&quot;form-check&quot;&gt;
-      &lt;input class=&quot;form-check-input&quot; id=&quot;gridCheck&quot; type=&quot;checkbox&quot; /&gt;
-      &lt;label class=&quot;form-check-label&quot; for=&quot;gridCheck&quot;&gt;Check me out&lt;/label&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;col-12&quot;&gt;
-    &lt;button class=&quot;btn btn-primary&quot; type=&quot;submit&quot;&gt;Sign in&lt;/button&gt;
-  &lt;/div&gt;
-&lt;/form&gt;</code></pre>
           </div>
           <div class="p-4 code-to-copy">
             <form class="row g-3">
 
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 mt-2">
                   <label class="form-label" for="inputCity">Certificate ID</label>
                   <input class="form-control" id="inputCity" type="text" />
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 mt-2">
                   <label class="form-label" for="inputCity">Full Name</label>
                   <input class="form-control" id="inputCity" type="text" />
                 </div>
-              </div>
 
-              <div class="col-md-6">
-                <label class="form-label" for="inputEmail4">Email</label>
-                <input class="form-control" id="inputEmail4" type="email" />
-              </div>
-              <div class="col-md-6">
-                <label class="form-label" for="inputCity">Phoen Number</label>
-                <input class="form-control" id="inputCity" type="text" />
-              </div>
-              <div class="col-md-3">
-                <label class="form-label" for="validationCustom04">Position Applied For</label>
-                <select class="form-select" id="validationCustom04" required>
-                  <option selected disabled value="">Choose...</option>
-                  <option>Maharashtra</option>
-                  <option>Gujarat</option>
-                  <option>Karnataka</option>
-                  <option>Tamil Nadu</option>
-                  <option>Uttar Pradesh</option>
-                  <!-- Add more states as needed -->
-                </select>
-                <div class="invalid-feedback">Please select a valid state.</div>
-              </div>
+                <div class="col-md-6 mt-2">
+                  <label class="form-label" for="inputEmail4">Email</label>
+                  <input class="form-control" id="inputEmail4" type="email" />
+                </div>
+                <div class="col-md-6 mt-2">
+                  <label class="form-label" for="inputCity">Phoen Number</label>
+                  <input class="form-control" id="inputCity" type="text" />
+                </div>
+                <div class="col-md-6 mt-2">
+                  <label class="form-label" for="validationCustom04">Position Applied For</label>
+                  <select class="form-select" id="validationCustom04" required>
+                    <option selected disabled value="">Choose...</option>
+                    <option>Maharashtra</option>
+                    <option>Gujarat</option>
+                    <option>Karnataka</option>
+                    <option>Tamil Nadu</option>
+                    <option>Uttar Pradesh</option>
+                    <!-- Add more states as needed -->
+                  </select>
+                  <div class="invalid-feedback">Please select a valid state.</div>
+                </div>
 
-              <div class="col-md-4">
-                <label class="form-label" for="datetimepicker">Application Date</label>
-                <input class="form-control datetimepicker" id="datetimepicker" type="text"
-                  placeholder="dd/mm/yyyy hour : minute"
-                  data-options='{"enableTime":true,"dateFormat":"d/m/y H:i","disableMobile":true}' />
-              </div>
+                <div class="col-md-6 mt-2">
+                  <label class="form-label" for="datetimepicker">Application Date</label>
+                  <input class="form-control datetimepicker" id="datetimepicker" type="text"
+                    placeholder="dd/mm/yyyy hour : minute"
+                    data-options='{"enableTime":true,"dateFormat":"d/m/y H:i","disableMobile":true}' />
+                </div>
 
-               <div class="col-md-3">
-                <label class="form-label" for="validationCustom04"> Current Status</label>
-                <select class="form-select" id="validationCustom04" required>
-                  <option selected disabled value="">Choose...</option>
-                  <option>Applied</option>
-                  <option>Shortlisted</option>
-                  <option>Interview</option>
-                  <option>Scheduled</option>
-                  <option>Offered</option>
-                  <option>Rejected</option>
-                  <!-- Add more states as needed -->
-                </select>
-                <div class="invalid-feedback">Please select a valid state.</div>
-              </div>
-              <!-- <div class="col-12">
+                <div class="col-md-6 mt-2">
+                  <label class="form-label" for="validationCustom04"> Current Status</label>
+                  <select class="form-select" id="validationCustom04" required>
+                    <option selected disabled value="">Choose...</option>
+                    <option>Applied</option>
+                    <option>Shortlisted</option>
+                    <option>Interview</option>
+                    <option>Scheduled</option>
+                    <option>Offered</option>
+                    <option>Rejected</option>
+                    <!-- Add more states as needed -->
+                  </select>
+                  <div class="invalid-feedback">Please select a valid state.</div>
+                </div>
+                <!-- <div class="col-12">
                                 <div class="form-check">
                                     <input class="form-check-input" id="gridCheck" type="checkbox" />
                                     <label class="form-check-label" for="gridCheck">Check me out</label>
@@ -294,83 +260,74 @@
           </div>
         </div>
       </div>
+    </div>
 
-
-      <div class="mb-9">
-        <div class="card shadow-none border mb-3 mt-6" data-component-card="data-component-card">
-          <div class="card-header p-4 border-bottom bg-body">
-            <div class="row g-3 justify-content-between align-items-end">
-              <div class="col-12 col-md">
-                <h4 class="text-body mb-0" data-anchor="dat a-anchor">Resume Upload</h4>
-
-
-              </div>
-
-
-
+    <div class="mb-9">
+      <div class="card shadow-none border mb-3 mt-6" data-component-card="data-component-card">
+        <div class="card-header p-4 border-bottom bg-body">
+          <div class="row g-3 justify-content-between align-items-end">
+            <div class="col-12 col-md">
+              <h4 class="text-body mb-0" data-anchor="dat a-anchor">Resume Upload</h4>
             </div>
           </div>
-          <div class="card-body p-0">
-            <div class="collapse code-collapse" id="single-file-upload-code">
-              <pre class="scrollbar" style="max-height:420px"><code class="language-html">&lt;div class=&quot;dropzone dropzone-multiple p-0&quot; id=&quot;dropzone&quot; data-dropzone=&quot;data-dropzone&quot; data-options='{&quot;url&quot;:&quot;valid/url&quot;,&quot;maxFiles&quot;:1,&quot;dictDefaultMessage&quot;:&quot;Choose or Drop a file here&quot;}'&gt;
-  &lt;div class=&quot;fallback&quot;&gt;&lt;input type=&quot;file&quot; name=&quot;file&quot; /&gt;&lt;/div&gt;
-  &lt;div class=&quot;dz-message&quot; data-dz-message=&quot;data-dz-message&quot;&gt;
-    &lt;div class=&quot;dz-message-text&quot;&gt;&lt;img class=&quot;me-2&quot; src=&quot;../../../assets/img/icons/cloud-upload.svg&quot; width=&quot;25&quot; alt=&quot;&quot; /&gt;Drop your file here&lt;/div&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;dz-preview dz-preview-multiple m-0 d-flex flex-column&quot;&gt;
-    &lt;div class=&quot;d-flex pb-3 border-bottom border-translucent media px-2&quot;&gt;
-      &lt;div class=&quot;border p-2 rounded-2 me-2&quot;&gt;&lt;img class=&quot;rounded-2 dz-image&quot; src=&quot;../../../assets/img/icons/file.png&quot; alt=&quot;...&quot; data-dz-thumbnail=&quot;data-dz-thumbnail&quot; /&gt;&lt;/div&gt;
-      &lt;div class=&quot;flex-1 d-flex flex-between-center&quot;&gt;
-        &lt;div&gt;
-          &lt;h6 data-dz-name=&quot;data-dz-name&quot;&gt;&lt;/h6&gt;
-          &lt;div class=&quot;d-flex align-items-center&quot;&gt;
-            &lt;p class=&quot;mb-0 fs-9 text-body-quaternary lh-1&quot; data-dz-size=&quot;data-dz-size&quot;&gt;&lt;/p&gt;
-            &lt;div class=&quot;dz-progress&quot;&gt;&lt;span class=&quot;dz-upload&quot; data-dz-uploadprogress=&quot;&quot;&gt;&lt;/span&gt;&lt;/div&gt;
-          &lt;/div&gt;&lt;span class=&quot;fs-10 text-danger&quot; data-dz-errormessage=&quot;data-dz-errormessage&quot;&gt;&lt;/span&gt;
-        &lt;/div&gt;
-        &lt;div class=&quot;dropdown&quot;&gt;&lt;button class=&quot;btn btn-link text-body-quaternary btn-sm dropdown-toggle btn-reveal dropdown-caret-none&quot; type=&quot;button&quot; data-bs-toggle=&quot;dropdown&quot; aria-haspopup=&quot;true&quot; aria-expanded=&quot;false&quot;&gt;&lt;span class=&quot;fas fa-ellipsis-h&quot;&gt;&lt;/span&gt;&lt;/button&gt;
-          &lt;div class=&quot;dropdown-menu dropdown-menu-end border border-translucent py-2&quot;&gt;&lt;a class=&quot;dropdown-item&quot; href=&quot;#!&quot; data-dz-remove=&quot;data-dz-remove&quot;&gt;Remove File&lt;/a&gt;&lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-            </div>
-            <div class="p-4 code-to-copy">
-              <div class="dropzone dropzone-multiple p-0" id="dropzone" data-dropzone="data-dropzone"
-                data-options='{"url":"valid/url","maxFiles":1,"dictDefaultMessage":"Choose or Drop a file here"}'>
-                <div class="fallback"><input type="file" name="file" /></div>
-                <div class="dz-message" data-dz-message="data-dz-message">
-                  <div class="dz-message-text"><img class="me-2" src="../../../assets/img/icons/cloud-upload.svg"
-                      width="25" alt="" />Drop your file here</div>
+        </div>
+        <div class="card-body p-0">
+          <div class="collapse code-collapse" id="single-file-upload-code">
+          </div>
+          <div class="p-4 code-to-copy">
+            <div class="dropzone dropzone-multiple p-0" id="dropzone" data-dropzone="data-dropzone"
+              data-options='{"url":"valid/url","maxFiles":1,"dictDefaultMessage":"Choose or Drop a file here"}'>
+
+              <div class="fallback"><input type="file" name="file" /></div>
+
+              <div class="dz-message" data-dz-message="data-dz-message">
+                <div class="dz-message-text">
+                  <img class="me-2" src="../../../assets/img/icons/cloud-upload.svg" width="25" alt="" />
+                  Drop your file here
                 </div>
-                <div class="dz-preview dz-preview-multiple m-0 d-flex flex-column">
-                  <div class="d-flex pb-3 border-bottom border-translucent media px-2">
-                    <div class="border p-2 rounded-2 me-2"><img class="rounded-2 dz-image"
-                        src="../../../assets/img/icons/file.png" alt="..." data-dz-thumbnail="data-dz-thumbnail" />
+              </div>
+
+              <div class="dz-preview dz-preview-multiple m-0 d-flex flex-column" style="color: blue;">
+                <div class="d-flex pb-3 border-bottom border-translucent media px-2" style="color: blue;">
+
+                  <!-- Image Preview Box with Custom Styling -->
+                  <div class="d-flex align-items-start p-2 me-2"
+                    style="background-color:rgb(255, 255, 255); width: 100px; height: 40px; border-radius: 8px; position: relative;">
+
+                    <!-- Delete Button -->
+                    <button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0 m-1" data-dz-remove
+                      title="Remove File">
+                      &times;
+                    </button>
+
+                    <!-- Image -->
+                    <img class="rounded-2 dz-image mx-auto my-auto"
+                      style="max-width: 100%; max-height: 100%; border-radius: 50%;"
+                      src="../../../assets/img/icons/file.png" alt="" data-dz-thumbnail="data-dz-thumbnail" />
+                  </div>
+
+                  <!-- File Info and State Dropdown -->
+                  <div class="flex-1 d-flex flex-between-center">
+                    <div>
+                      <h6 data-dz-name="data-dz-name" class="text-dark dark__text-white"></h6>
+                      <div class="d-flex align-items-center">
+                        <p class="mb-0 fs-9 text-body-quaternary lh-1" data-dz-size="data-dz-size"></p>
+                        <div class="dz-progress">
+                          <span class="dz-upload" data-dz-uploadprogress=""></span>
+                        </div>
+                      </div>
+                      <span class="fs-10 text-danger" data-dz-errormessage="data-dz-errormessage"></span>
                     </div>
-                    <div class="flex-1 d-flex flex-between-center">
-                      <div>
-                        <h6 data-dz-name="data-dz-name"></h6>
-                        <div class="d-flex align-items-center">
-                          <p class="mb-0 fs-9 te  xt-body-quaternary lh-1" data-dz-size="data-dz-size"></p>
-                          <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress=""></span></div>
-                        </div><span class="fs-10 text-danger" data-dz-errormessage="data-dz-errormessage"></span>
-                      </div>
-                      <div class="dropdown"><button
-                          class="btn btn-link text-body-quaternary btn-sm dropdown-toggle btn-reveal dropdown-caret-none"
-                          type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span
-                            class="fas fa-ellipsis-h"></span></button>
-                        <div class="dropdown-menu dropdown-menu-end border border-translucent py-2"><a
-                            class="dropdown-item" href="#!" data-dz-remove="data-dz-remove">Remove File</a></div>
-                      </div>
-                      <div class="col-md-3">
-                        <label class="form-label" for="validationCustom04">State</label>
-                        <select class="form-select" id="validationCustom04" required="">
-                          <option selected="" disabled="" value="">Choose...</option>
-                          <option>...</option>
-                        </select>
-                        <div class="invalid-feedback">Please select a valid state.</div>
+
+                    <!-- Dropdown for File Options -->
+                    <div class="dropdown">
+                      <button
+                        class="btn btn-link text-body-quaternary btn-sm dropdown-toggle btn-reveal dropdown-caret-none"
+                        type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="fas fa-ellipsis-h"></span>
+                      </button>
+                      <div class="dropdown-menu dropdown-menu-end border border-translucent py-2">
+                        <a class="dropdown-item" href="#!" data-dz-remove="data-dz-remove">Remove File</a>
                       </div>
                     </div>
                   </div>
@@ -379,12 +336,17 @@
             </div>
           </div>
         </div>
-
-
-        <!-- Footer -->
-        <?php include("../../Components/footer.php"); ?>
-
       </div>
+      <div class="col-12">
+        <button class="btn btn-primary" type="submit">Submit</button>
+      </div>
+    </div>
+
+
+    <!-- Footer -->
+    <?php include("../../Components/footer.php"); ?>
+
+    </div>
   </main>
 
   <!-- ===============================================-->

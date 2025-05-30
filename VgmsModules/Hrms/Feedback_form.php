@@ -176,53 +176,10 @@
                         <div class="col-12 col-md">
                             <h4 class="text-body mb-0" data-anchor="data-anchor">Feedback Form</h4>
                         </div>
-                       
                     </div>
                 </div>
                 <div class="card-body p-0">
-                    <div class="collapse code-collapse" id="form-grid-layout-code">
-                        <pre class="scrollbar" style="max-height:420px"><code class="language-html">&lt;form class=&quot;row g-3&quot;&gt;
-  &lt;div class=&quot;col-md-6&quot;&gt;
-    &lt;label class=&quot;form-label&quot; for=&quot;inputEmail4&quot;&gt;Email&lt;/label&gt;
-    &lt;input class=&quot;form-control&quot; id=&quot;inputEmail4&quot; type=&quot;email&quot; /&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;col-md-6&quot;&gt;
-    &lt;label class=&quot;form-label&quot; for=&quot;inputPassword4&quot;&gt;Password&lt;/label&gt;
-    &lt;input class=&quot;form-control&quot; id=&quot;inputPassword4&quot; type=&quot;password&quot; /&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;col-12&quot;&gt;
-    &lt;label class=&quot;form-label&quot; for=&quot;inputAddress&quot;&gt;Address&lt;/label&gt;
-    &lt;input class=&quot;form-control&quot; id=&quot;inputAddress&quot; type=&quot;text&quot; placeholder=&quot;1234 Main St&quot; /&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;col-12&quot;&gt;
-    &lt;label class=&quot;form-label&quot; for=&quot;inputAddress2&quot;&gt;Address 2&lt;/label&gt;
-    &lt;input class=&quot;form-control&quot; id=&quot;inputAddress2&quot; type=&quot;text&quot; placeholder=&quot;Apartment, studio, or floor&quot; /&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;col-md-6&quot;&gt;
-    &lt;label class=&quot;form-label&quot; for=&quot;inputCity&quot;&gt;City&lt;/label&gt;
-    &lt;input class=&quot;form-control&quot; id=&quot;inputCity&quot; type=&quot;text&quot; /&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;col-md-4&quot;&gt;
-    &lt;label class=&quot;form-label&quot; for=&quot;inputState&quot;&gt;State&lt;/label&gt;
-    &lt;select class=&quot;form-select&quot; id=&quot;inputState&quot;&gt;
-      &lt;option selected=&quot;selected&quot;&gt;Choose...&lt;/option&gt;
-      &lt;option&gt;...&lt;/option&gt;
-    &lt;/select&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;col-md-2&quot;&gt;
-    &lt;label class=&quot;form-label&quot; for=&quot;inputZip&quot;&gt;Zip&lt;/label&gt;
-    &lt;input class=&quot;form-control&quot; id=&quot;inputZip&quot; type=&quot;text&quot; /&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;col-12&quot;&gt;
-    &lt;div class=&quot;form-check&quot;&gt;
-      &lt;input class=&quot;form-check-input&quot; id=&quot;gridCheck&quot; type=&quot;checkbox&quot; /&gt;
-      &lt;label class=&quot;form-check-label&quot; for=&quot;gridCheck&quot;&gt;Check me out&lt;/label&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;col-12&quot;&gt;
-    &lt;button class=&quot;btn btn-primary&quot; type=&quot;submit&quot;&gt;Sign in&lt;/button&gt;
-  &lt;/div&gt;
-&lt;/form&gt;</code></pre>
+                    <div class="collapse code-collapse" id ="form-grid-layout-code">
                     </div>
                     <div class="p-4 code-to-copy">
                         <form class="row g-3">
@@ -284,18 +241,16 @@
                                     <option selected="selected">Hire</option>
                                     <option selected="selected">Neutral</option>
                                     <option selected="selected">No Hire</option>
-                                  
                                 </select>
                             </div>
                             <div class="col-12">
-                                <button class="btn btn-primary" type="submit">Sign in</button>
+                                <button class="btn btn-primary" type="submit">Submit</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-
     </main>
 
 
@@ -303,14 +258,9 @@
     <!--    End of Main Content-->
     <!-- ===============================================-->
 
-
-
     <!-- ===============================================-->
     <!--    JavaScripts-->
     <!-- ===============================================-->
-
-
-
 
     <!--Dropdown for contacted-to--->
     <!-- the belwo is the code for the dropdown for selecting the department  -->
@@ -318,6 +268,7 @@
         <!-- your form inputs including the above dropdown -->
     </form>
 
+    <!-- This is the scirpt for the date picker in the above form  -->
     <script>
         flatpickr("#datepicker2", {
             dateFormat: "d/m/Y",
