@@ -211,7 +211,7 @@
                      $ward_name = $_POST['name'];
 
                     //  Generate unique id
-                    $uid = uniqid('ward',true);
+                    $uid = uniqid('ward_',true);
 
                      $query = "INSERT INTO `tbl_ward_details` (`uid`, `ward_name`, `is_active`) VALUES ('$uid', '$ward_name', 'Yes')";
                      $result = mysqli_query($conn, $query) or die("Query Unsuccesssful".mysqli_error($conn));

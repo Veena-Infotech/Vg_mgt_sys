@@ -176,7 +176,7 @@
         COUNT(*) AS total_tasks,
         SUM(CASE WHEN s.name = 'completed' THEN 1 ELSE 0 END) AS completed_tasks
     FROM tbl_tasks t
-    INNER JOIN tbl_task_status s ON t.status = s.id
+    INNER JOIN tbl_task_status s ON t.status_id = s.id
     WHERE t.project_id = 21
 ";
 
@@ -433,7 +433,7 @@
                                     COUNT(*) AS total_tasks,
                                     SUM(CASE WHEN s.name = 'completed' THEN 1 ELSE 0 END) AS completed_tasks
                                 FROM tbl_tasks t
-                                INNER JOIN tbl_task_status s ON t.status = s.id
+                                INNER JOIN tbl_task_status s ON t.status_id = s.id
                                 WHERE t.project_id = $project_id
                             ";
                             $result1 = mysqli_query($conn, $query1);
@@ -487,8 +487,9 @@
                         <p class="fw-bold mb-0 text-truncate lh-1">Client : <span class="fw-semibold text-primary ms-1">' . htmlspecialchars($row['f_name']) . ' ' . htmlspecialchars($row['l_name']) . '</span></p>
                     </div>
                     <div class="d-flex align-items-center mb-4">
-                        <span class="fa-solid fa-credit-card me-2 text-body-tertiary fs-9 fw-extra-bold"></span>
-                        <p class="fw-bold mb-0 lh-1">Budget : <span class="ms-1 text-body-emphasis">$ ' . htmlspecialchars($row['budget']) . '</span></p>
+                        <span class="fa-solid fa-credit-card me-2 text-body-tertiary fs-9 fw-extra-bold"></span> 
+                        <p class="fw-bold mb-0 lh-1">Budget : <span class="ms-1  
+                        text-body-emphasis">$ Budget' . htmlspecialchars($row['l_name']) . '</span></p>
                     </div>
                     
 <div class="d-flex justify-content-between text-body-tertiary fw-semibold">

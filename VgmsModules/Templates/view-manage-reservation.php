@@ -210,7 +210,7 @@
                         $reservation_name = $_POST['name'];
                         
                         // generate unique id
-                        $uid = uniqid('reservation',true);
+                        $uid = uniqid('reservation_',true);
                         $query = "INSERT INTO `tbl_manage_reservation` (`uid`, `reservation_name`, `is_active`) VALUES ('$uid', '$reservation_name', 'Yes')";
 
                         $result = mysqli_query($conn, $query) or die('Query Unsuccessful'.mysqli_error($conn));

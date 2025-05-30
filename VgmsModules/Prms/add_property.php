@@ -1820,7 +1820,7 @@
                                     $reservation = $_POST['plot-holding-reservation'];
 
                                     // manually generate unique id
-                                    $uid = uniqid('society', true);
+                                    $uid = uniqid('society_', true);
 
                                     $query = "INSERT INTO `tbl_society` (`soc_name`, `cts_no`, `district`, `taluka`, `village`, `ward`, `address`, `total_units`, `total_tenants`, `as_per_physical`, `as_per_card`, `unit`, `scheme`, `plot_holding_type`, `reservation`, `uid`, `lead_id`) VALUES ('$society_name', '$cts_number', '$district', '$taluka', '$village', '$ward', '$society_address', '$unit_number', '$tenant_number', '$as_per_physical', '$as_per_card', '$units', '$scheme', 'plot_holding_ype', '$reservation', '$uid', '$lead');";
 
@@ -1981,7 +1981,7 @@
                                                 $leasehold = $_POST['leasehold'];
 
                                                 // manually generate unique id
-                                                $uid = uniqid('soc_member', true);
+                                                $uid = uniqid('soc_member_', true);
                                                 $query = "INSERT INTO `tbl_soc_members` (`soc_id`, `owner_name`, `flat_no`, `contact_no`, `email`, `tag`, `freehold`, `leasehold`,`uid`) VALUES ('12', '$owner_name', '$unit_number', '$contact', '$email', '$custom_tag', '$freehold', '$leasehold','$uid') ";
                                                 $result = mysqli_query($conn, $query) or die("Query Unsuccessful" . mysqli_error($conn));
                                                 if ($result) {
@@ -2187,7 +2187,7 @@ function hideNotificationWarning() {
                                                 // $notifications = $_POST['notifications'];
 
                                                 // manually generate unique id
-                                                $uid = uniqid('committee', true);
+                                                $uid = uniqid('committee_', true);
 
                                                 $query = "INSERT INTO `tbl_soc_committee_details` (`soc_id`, `committee_member_name`, `committee_memeber_role`, `committee_member_phone`, `committee_member_email`, `term_start_date`, `term_end_date`, `reminder`,`uid`) VALUES ('$society_id', '$committee_member_name', '$role', '$contact', '$email', '$from', '$to', '$notifications','$uid');";
                                                 $result = mysqli_query($conn, $query) or die("Query Unsuccesful".mysqli_error($conn));
@@ -3660,7 +3660,7 @@ function hideNotificationWarning() {
                     $society_units = $_POST['society_units'];
 
                     // manually generate unique id
-                    $uid = uniqid('landlord', true);
+                    $uid = uniqid('landlord_', true);
 
                     $query = "INSERT INTO `tbl_landlord` (`landlord_name`, `landlord_email`, `landlord_phone`, `district`, `taluka`, `village`, `property_type`, `structure_type`, `private_floors`, `private_units`, `public_wings`, `public_floors`, `society_units`,`society_address`,`uid`) VALUES ('$landlord_name', '$email', '$contact', '$district', '$taluka', '$village', '$property_type', '$structure_type', '$private_floor', '$private_units', '$public_wings', '$public_floors', '$society_units','$society_address','$uid') ";
 
