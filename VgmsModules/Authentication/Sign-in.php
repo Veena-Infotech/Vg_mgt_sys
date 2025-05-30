@@ -135,7 +135,7 @@
                           </div>
                         </div><button class="btn btn-primary w-100 mb-3">Sign In</button>
                       </form>
-                      <div class="col-auto"><a class="fs-9 fw-semibold" href="/VGMS/Vg_mgt_sys/VgmsModules/Authentication/forgot_password.php">Forgot
+                      <div class="col-auto"><a class="fs-9 fw-semibold" href="forgot_password.php">Forgot
                           Password?</a></div>
                     </div>
                   </div>
@@ -151,7 +151,7 @@
 
   <!-- <div class="offcanvas offcanvas-end settings-panel border-0" id="settings-offcanvas" tabindex="-1" aria-labelledby="settings-offcanvas">
         <div class="offcanvas-header align-items-start border-bottom flex-column border-translucent">
-          <div class="pt-1 w-100 mb-6 d-flex justify-content-between align-items-start">
+          <div class="pt-1 w-100 mb-6 d-flex justify-content-betwe  en align-items-start">
             <div>
               <h5 class="mb-2 me-2 lh-sm"><span class="fas fa-palette me-2 fs-8"></span>Theme Customizer</h5>
               <p class="mb-0 fs-9">Explore different styles according to your preferences</p>

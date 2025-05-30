@@ -137,15 +137,15 @@
                           <?php
                           include '../PhpFiles/connection.php'; // your DB connection
 
-                          $sql = "SELECT * FROM tbl_emp";
+                          $sql = "SELECT * FROM tbl_client";
                           $result = $conn->query($sql);
 
                           if ($result && $result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
-                              echo '<option value="' . htmlspecialchars($row['official_email']) . '">' . htmlspecialchars($row['f_name']) . '</option>';
+                              echo '<option value="' . htmlspecialchars($row['email']) . '">' . htmlspecialchars($row['f_name']) . '</option>';
                             }
                           } else {
-                            echo '<option disabled>No employees found</option>';
+                            echo '<option disabled>No Clients found</option>';
                           }
 
 
@@ -336,7 +336,7 @@
     document.getElementById('nameDropdown').addEventListener('change', function() {
       const name = this.value;
 
-      fetch('get_email.php', {
+      fetch('client-get_email.php', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -359,7 +359,7 @@
     function verifyOTP() {
       const otp = document.getElementById("otpInput").value;
 
-      fetch('verify_otp.php', {
+      fetch('client-verify_otp.php', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -388,7 +388,7 @@
         return;
       }
 
-      fetch('send_otp.php', {
+      fetch('client-send_otp.php', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -420,7 +420,7 @@
         return;
       }
 
-      fetch('reset_password.php', {
+      fetch('client-reset_password.php', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -431,6 +431,7 @@
         .then(result => {
           if (result.trim() === 'success') {
             alert("Password successfully reset!");
+            window.location.href = 'client-sign-in.php';
             // Optionally redirect to login
           } else {
             alert("Error resetting password: " + result);
