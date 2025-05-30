@@ -307,68 +307,6 @@ INNER JOIN tbl_ward_details AS w ON s.ward = w.id";
                                         }
                                     }
                                     ?>
-                                    
-
-                                    <tr>
-                                        <td class="align-middle ps-3 name society_name">Greenwood Residency</td>
-                                        <td class="align-middle cts ward">Ward 7</td>
-                                        <td class="align-middle address unit">8A</td>
-                                        <td class="align-middle address">45 Green Lane, Pune</td>
-                                        <td class="align-middle white-space-nowrap text-end pe-0">
-                                            <div class="btn-reveal-trigger position-static">
-                                                <button class="btn btn-sm btn-reveal fs-10 open-action-modal"
-                                                    data-id="2" data-bs-toggle="modal" data-bs-target="#actionModal">
-                                                    <span class="fas fa-ellipsis-h fs-10"></span>
-                                                </button>
-
-                                                <div class="dropdown-menu dropdown-menu-end py-2">
-                                                    <a class="dropdown-item"
-                                                        href="society-details.php?soc_id=2">View</a>
-                                                    <a class="dropdown-item" href="edit-society.php?soc_id=2">Edit
-                                                        Society Details</a>
-                                                    <a class="dropdown-item"
-                                                        href="edit-members-directory.php?soc_id=2">Edit Members
-                                                        Directory</a>
-                                                    <a class="dropdown-item"
-                                                        href="edit-committe-details.php?soc_id=2">Edit Committee
-                                                        Details</a>
-                                                    <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item text-danger" href="#!">Inactive</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="align-middle ps-3 name society_name">Ocean View Towers</td>
-                                        <td class="align-middle cts ward">Ward 2</td>
-                                        <td class="align-middle address unit">5C</td>
-                                        <td class="align-middle address">89 Beach Road, Goa</td>
-                                        <td class="align-middle white-space-nowrap text-end pe-0">
-                                            <div class="btn-reveal-trigger position-static">
-                                                <button class="btn btn-sm btn-reveal fs-10 open-action-modal"
-                                                    data-id="3" data-bs-toggle="modal" data-bs-target="#actionModal">
-                                                    <span class="fas fa-ellipsis-h fs-10"></span>
-                                                </button>
-
-                                                <div class="dropdown-menu dropdown-menu-end py-2">
-                                                    <a class="dropdown-item"
-                                                        href="society-details.php?soc_id=3">View</a>
-                                                    <a class="dropdown-item" href="edit-society.php?soc_id=3">Edit
-                                                        Society Details</a>
-                                                    <a class="dropdown-item"
-                                                        href="edit-members-directory.php?soc_id=3">Edit Members
-                                                        Directory</a>
-                                                    <a class="dropdown-item"
-                                                        href="edit-committe-details.php?soc_id=3">Edit Committee
-                                                        Details</a>
-                                                    <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item text-danger" href="#!">Inactive</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-
                                 </tbody>
                             </table>
                             <!-- Common Action Modal -->

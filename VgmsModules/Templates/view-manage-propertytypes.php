@@ -217,7 +217,7 @@
                         $client_type = mysqli_real_escape_string($conn, $_POST['edit_type']);
 
                         //  generate unique id
-                        $uid = uniqid('propertytype', true);
+                        $uid = uniqid('propertytype_', true);
                         $query = "INSERT INTO tbl_manage_property_type (uid,property_type_name, client_type) VALUES ('$uid','$property_type', '$client_type')";
                         $result = mysqli_query($conn, $query);
 
