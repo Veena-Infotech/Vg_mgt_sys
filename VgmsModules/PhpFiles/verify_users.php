@@ -35,41 +35,45 @@ if ($result->num_rows === 1) {
     $hashed_password = $user['password'];
 
     if (password_verify($password, $hashed_password)) {
-        $_SESSION['user_id'] = $emp_id;
-        $status = "completed";
-
-        // Log successful login
-        $log_stmt = $conn->prepare("INSERT INTO tbl_logs (emp_id, action, status, ip_address, user_agent) VALUES (?, ?, ?, ?, ?)");
-        $log_stmt->bind_param("issss", $emp_id, $action, $status, $ip_address, $user_agent);
-        $log_stmt->execute();
-
         if (strtolower($user['position']) === 'receptionist') {
+            $_SESSION['user_id'] = $emp_id;
+            $status = "completed";
+
+            // Log successful login
+            $log_stmt = $conn->prepare("INSERT INTO tbl_logs (emp_id, action, status, ip_address, user_agent) VALUES (?, ?, ?, ?, ?)");
+            $log_stmt->bind_param("issss", $emp_id, $action, $status, $ip_address, $user_agent);
+            $log_stmt->execute();
+
             header("Location: ../Vms/Receptionist-dashboard.php");
             exit();
         } else {
-            // Not authorized role
+            // Not an authorized role
             $_SESSION['login_error'] = "Access denied: Only receptionists can log in here.";
+            $log_stmt = $conn->prepare("INSERT INTO tbl_logs (emp_id, action, status, ip_address, user_agent) VALUES (?, ?, ?, ?, ?)");
+            $log_stmt->bind_param("issss", $emp_id, $action, $status, $ip_address, $user_agent);
+            $log_stmt->execute();
+
             header("Location: ../Authentication/Sign-in.php?status=unauthorized");
             exit();
         }
     } else {
-        // Log failed attempt
+        // Incorrect password
+        $_SESSION['login_error'] = "Incorrect email or password. Please enter correct details.";
         $log_stmt = $conn->prepare("INSERT INTO tbl_logs (emp_id, action, status, ip_address, user_agent) VALUES (?, ?, ?, ?, ?)");
         $log_stmt->bind_param("issss", $emp_id, $action, $status, $ip_address, $user_agent);
         $log_stmt->execute();
 
-        $_SESSION['login_error'] = "Invalid email or password.";
         header("Location: ../Authentication/Sign-in.php?status=failed");
         exit();
     }
 } else {
     // Email not found
     $emp_id = 0;
+    $_SESSION['login_error'] = "Incorrect email or password. Please enter correct details.";
     $log_stmt = $conn->prepare("INSERT INTO tbl_logs (emp_id, action, status, ip_address, user_agent) VALUES (?, ?, ?, ?, ?)");
     $log_stmt->bind_param("issss", $emp_id, $action, $status, $ip_address, $user_agent);
     $log_stmt->execute();
 
-    $_SESSION['login_error'] = "Invalid email or password.";
     header("Location: ../Authentication/Sign-in.php?status=failed");
     exit();
 }
