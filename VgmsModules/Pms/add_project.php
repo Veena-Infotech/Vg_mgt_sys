@@ -265,7 +265,7 @@ include '../PhpFiles/connection.php';
                                 <?php
                                 include 'connection.php'; // Ensure this path is correct
 
-                                $typeQuery = "SELECT id, type FROM tbl_project_type";
+                                $typeQuery = "SELECT id, type FROM tbl_project_type"; // Adjust this query to match your database structure
                                 $result = $conn->query($typeQuery);
 
                                 if ($result && $result->num_rows > 0) {
@@ -695,6 +695,6 @@ include '../PhpFiles/connection.php';
 </body>
 
 
-<!-- Mirrored from prium.github.io/phoenix/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Sep 2024 13:37:21 GMT -->
+
 
 </html>

@@ -313,7 +313,7 @@
                                                         <!-- Taluka -->
                                                         <div class="col-12 col-md-4">
                                                             <label class="form-label" for="taluka">Taluka</label>
-                                                            <input type="text" class="form-select" id="taluka"
+                                                            <input type="text" class="form-control" id="taluka"
                                                                 name="taluka" placeholder="Enter Taluka Name" readonly>
 
                                                             </input>
@@ -322,7 +322,7 @@
                                                         <!-- Village -->
                                                         <div class="col-12 col-md-4">
                                                             <label class="form-label" for="village">Village</label>
-                                                            <input class="form-select" id="village" name="village"
+                                                            <input class="form-control" id="village" name="village"
                                                                 placeholder="Enter Village Name" readonly>
 
                                                             </input>
@@ -333,7 +333,7 @@
                                                     <div class="row mb-3">
                                                         <div class="col-12 col-md-6">
                                                             <label class="form-label" for="ward">Ward</label>
-                                                            <input type="text" class="form-select" id="ward" name="ward"
+                                                            <input type="text" class="form-control" id="ward" name="ward"
                                                                 placeholder="Enter Ward Name" readonly>
 
 
@@ -361,7 +361,7 @@
                                                         <div class="col-12 col-md-6">
                                                             <label class="form-label" for="plot-holding-size">Plot
                                                                 Holding Type</label>
-                                                            <input type="text" class="form-select"
+                                                            <input type="text" class="form-control"
                                                                 id="plot-holding-size" name="plot-holding-type"
                                                                 placeholder="Enter Plot holding size" readonly>
 
@@ -370,7 +370,7 @@
                                                         <div class="col-12 col-md-6">
                                                             <label for="select-lead" class="form-label">Select Lead
                                                             </label>
-                                                            <input type="text" class="form-select" id="select-lead"
+                                                            <input type="text" class="form-control" id="select-lead"
                                                                 name="plot-holding-type" readonly placeholder="Select lead Name">
 
                                                             </input>
@@ -419,7 +419,7 @@
                                                         <div class="col-12 col-md-4">
                                                             <label class="form-label" for="unit-selection">Unit</label>
                                                             <input type="text" id="unit-selection" name="unit-selection"
-                                                                placeholder="Unit" class="form-select" readonly >
+                                                                placeholder="Unit" class="form-control" readonly >
 
                                                             </input>
                                                         </div>
@@ -428,7 +428,7 @@
                                                         <div class="col-12 col-md-6">
                                                             <label class="form-label"
                                                                 for="plot-holding-scheme">Scheme</label>
-                                                            <input type="text" class="form-select"
+                                                            <input type="text" class="form-control"
                                                                 id="plot-holding-scheme" name="plot-holding-scheme"
                                                                 placeholder="Scheme" readonly>
 
@@ -439,7 +439,7 @@
                                                         <div class="col-12 col-md-6">
                                                             <label class="form-label"
                                                                 for="plot-holding-reservation">Reservation</label>
-                                                            <input class="form-select" id="plot-holding-reservation"
+                                                            <input class="form-control" id="plot-holding-reservation"
                                                                 name="plot-holding-reservation" readonly placeholder="Reservation">
 
                                                             </input>
@@ -486,9 +486,7 @@
                                                             <tr>
                                                                 <th class="sort border-top border-translucent px-3 py-3"
                                                                     style="width: 7%;" data-sort="serial">Serial No</th>
-                                                                <th class="sort border-top px-3 py-3 text-start"
-                                                                    style="width: 25%;" data-sort="society">Society Name
-                                                                </th>
+                                                                
                                                                 <th class="sort border-top px-3 py-3" style="width: 8%;"
                                                                     data-sort="flat">Flat No</th>
                                                                 <th class="sort border-top px-3 py-3 text-start"
@@ -512,9 +510,7 @@
                                                             <tr>
                                                                 <td class="serial py-3 px-2 text-center"
                                                                     data-serial="1">1</td>
-                                                                <td class="society py-3 px-2 text-start"
-                                                                    data-society="Green Valley Residency">Green Valley
-                                                                    Residency</td>
+                                                                
                                                                 <td class="flat py-3 px-2 text-center"
                                                                     data-flat="A-101">A-101</td>
                                                                 <td class="primary py-3 px-2 text-start"
@@ -532,9 +528,7 @@
                                                             <tr>
                                                                 <td class="serial py-3 px-2 text-center"
                                                                     data-serial="2">2</td>
-                                                                <td class="society py-3 px-2 text-start"
-                                                                    data-society="Blue Orchid Apartments">Blue Orchid
-                                                                    Apartments</td>
+                                                                
                                                                 <td class="flat py-3 px-2 text-center"
                                                                     data-flat="B-204">B-204</td>
                                                                 <td class="primary py-3 px-2 text-start"
@@ -703,13 +697,13 @@
                         <!-- Taluka -->
                         <div class="col-12 col-md-4">
                             <label class="form-label" for="taluka">Taluka</label>
-                            <input type="text" class="form-select" id="talukass" name="taluka" placeholder="Enter Taluka" readonly>
+                            <input type="text" class="form-control" id="talukass" name="taluka" placeholder="Enter Taluka" readonly>
                         </div>
 
                         <!-- Village -->
                         <div class="col-12 col-md-4">
                             <label class="form-label" for="village">Village</label>
-                            <input type="text" class="form-select" id="villagess" name="village" placeholder="Enter Village"
+                            <input type="text" class="form-control" id="villagess" name="village" placeholder="Enter Village"
                                 readonly>
                         </div>
 
@@ -730,14 +724,14 @@
                     <!-- Dropdown -->
                     <div class="mb-3">
                         <label for="property-type" class="form-label">Property Type </label>
-                        <input type="text" id="property-type" name="property_type" class="form-select" required readonly
+                        <input type="text" id="property-type" name="property_type" class="form-control" required readonly
                             placeholder="Enter Property type">
                     </div>
 
                     <!-- Structure Options -->
                     <div id="structure-options" class="mb-3" style="display: none;">
                         <label for="structure-type" class="form-label">Structure Type</label>
-                        <select id="structure-type" name="structure_type" class="form-select">
+                        <select id="structure-type" name="structure_type" class="form-control">
                             <option value="" disabled selected>Select Structure Type</option>
                             <option value="private">Private</option>
                             <option value="public">Multiple Buildings</option>
@@ -955,8 +949,9 @@
 
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>8765456789
 
+   / .,mnb
     <script>
         gsap.from("#heading-gsap", {
             opacity: 0,
@@ -976,7 +971,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
     <script>
         const options = {
-            valueNames: ['serial', 'society', 'flat', 'primary', 'associate', 'joint', 'contact', 'email'],
+            valueNames: ['serial', 'flat', 'primary', 'associate', 'joint', 'contact', 'email'],
             page: 5, // Change as needed
             pagination: true
         };
@@ -999,6 +994,6 @@
 </body>
 
 
-<!-- Mirrored from prium.github.io/phoenix/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Sep 2024 13:37:21 GMT -->
+
 
 </html>

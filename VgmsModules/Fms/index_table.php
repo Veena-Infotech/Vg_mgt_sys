@@ -6,23 +6,20 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: ../../index.php");
     exit();
 }
+?>
+<?php
 
-$roomId = $_GET['id'];
-
-// Step 1: Get room name from tbl_rooms
-$roomQuery = "SELECT room_name FROM tbl_rooms WHERE id = ?";
-$stmt = $conn->prepare($roomQuery);
-$stmt->bind_param("i", $roomId);
+$room_id = $_GET['id'];
+// Get cupboard list for this room
+$cupboards = [];
+$stmt = $conn->prepare("SELECT id, name FROM shelves_cupboards WHERE room_name = ?");
+$stmt->bind_param("i", $room_id);
 $stmt->execute();
-$stmt->bind_result($room);
-$stmt->fetch(); // Fetch the result from bind_result
-$stmt->close(); // Always close the prepared statement
-
-// Step 2: Get cupboards for this room
-$cubboards = mysqli_query($conn, "SELECT * FROM shelves_cupboards WHERE room_name = '$room'");
-if (!$cubboards) {
-    die("Query failed: " . mysqli_error($conn));
+$result = $stmt->get_result();
+while ($row = $result->fetch_assoc()) {
+    $cupboards[] = $row;
 }
+$stmt->close();
 ?>
 
 <!DOCTYPE html>
@@ -192,245 +189,384 @@ if (!$cubboards) {
             }
         </script>
         <div class="content">
-            <div class="d-flex justify-content-between align-items-start p-3 border-bottom mb-3">
-                <div>
-                    <h4 class="mb-0">File Manager</h4>
-                    <small>Organize and access your files easily</small>
-                </div>
-                <div>
-                    <button class="btn btn-outline-primary me-2" data-bs-toggle="modal"
-                        data-bs-target="#locationModal">+
-                        File</button>
-                    <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addCupboardModal">+
-                        Shelf/Cupboard</button>
-                </div>
-            </div>
+            <div class="flex-grow-1 d-flex flex-column">
+                <!-- Header -->
+                <div class="d-flex justify-content-between align-items-start p-3 border-bottom">
+                    <div>
+                        <h4 class="mb-0">File Manager</h4>
+                        <small>Organize and access your files easily</small>
+                    </div>
+                    <div class="d-flex justify-content-end mb-3 px-3">
+                        <button class="btn btn-primary me-2" type="button" data-bs-toggle="modal" data-bs-target="#ASC">
+                            + Add Shelves/Cupboards
+                        </button>
 
-            <!-- Add Location Modal -->
-            <div class="modal fade mt-2" id="locationModal" tabindex="-1" aria-labelledby="locationModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content border-0">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="locationModalLabel">Add Location</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        <div class="modal fade" id="ASC" tabindex="-1" aria-labelledby="ASCModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <form method="POST" action="../PhpFiles/add_shelves_cupboards.php">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="ASCModalLabel">Add Shelves/Cupboards</h5>
+                                            <button class="btn btn-close p-1" type="button" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <input type="hidden" name="room_id" value="<?php echo $_GET['id']; ?>">
+
+                                            <div class="mb-3">
+                                                <label for="name" class="form-label">Shelf/Cupboard Name</label>
+                                                <input type="text" class="form-control" name="name" id="name" required>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-primary" type="submit">Add</button>
+                                            <button class="btn btn-outline-primary" type="button"
+                                                data-bs-dismiss="modal">Cancel</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
-                        <form id="addLocationForm">
-                            <div class="modal-body">
-                                <input type="text" id="fileInput" class="form-control mb-3"
-                                    placeholder="Enter file name" required>
-                                <select name="cupboard" class="form-select" required>
-                                    <option value="">-- Select --</option>
-                                    <?php
-                                    mysqli_data_seek($cubboards, 0); // reset result pointer
-                                    while ($row = mysqli_fetch_assoc($cubboards)): ?>
-                                        <option value="<?= $row['name'] ?>"><?= $row['name'] ?></option>
-                                    <?php endwhile; ?>
-                                </select>
+
+                        <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#AF">+ Add
+                            File</button>
+
+                        <div class="modal fade" id="AF" tabindex="-1" aria-labelledby="AFModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <form method="POST" action="../PhpFiles/add_files.php">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="AFModalLabel">Add File</h5>
+                                            <button class="btn btn-close p-1" type="button" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <input type="hidden" name="room_id" value="<?php echo $room_id; ?>">
+
+                                            <div class="mb-3">
+                                                <label for="cupboard_id" class="form-label">Cupboard</label>
+                                                <select class="form-select" name="cupboard_id" id="cupboard_id"
+                                                    required>
+                                                    <option value="">Select</option>
+                                                    <?php foreach ($cupboards as $cupboard): ?>
+                                                        <option value="<?= $cupboard['id'] ?>">
+                                                            <?= htmlspecialchars($cupboard['name']) ?>
+                                                        </option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="filename" class="form-label">File Name</label>
+                                                <input type="text" class="form-control" name="filename" id="filename"
+                                                    required>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-primary" type="submit">Add</button>
+                                            <button class="btn btn-outline-primary" type="button"
+                                                data-bs-dismiss="modal">Cancel</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-outline-success">Submit</button>
-                            </div>
-                        </form>
+                        </div>
+
                     </div>
                 </div>
-            </div>
 
+                <div class="container mt-4">
 
-            <!-- Modal -->
-            <div class="modal fade" id="addCupboardModal" tabindex="-1" aria-labelledby="addCupboardModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <form method="POST" action="add_cupboard.php" class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Add New Shelf/Cupboard</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <div id="tableExample3"
+                        data-list="{&quot;valueNames&quot;:[&quot;name&quot;,&quot;email&quot;,&quot;age&quot;],&quot;page&quot;:5,&quot;pagination&quot;:true}">
+                        <div class="search-box mb-3 mx-auto">
+                            <form class="position-relative"><input
+                                    class="form-control search-input search form-control-sm" type="search"
+                                    placeholder="Search" aria-label="Search">
+                                <svg class="svg-inline--fa fa-magnifying-glass search-box-icon" aria-hidden="true"
+                                    focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+                                    <path fill="currentColor"
+                                        d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z">
+                                    </path>
+                                </svg><!-- <span class="fas fa-search search-box-icon"></span> Font Awesome fontawesome.com -->
+                            </form>
                         </div>
-                        <div class="modal-body">
-                            <input type="hidden" name="roomname" value="<?= $room ?>">
-                            <div class="mb-3">
-                                <label class="form-label">Shelf/Cupboard Name</label>
-                                <input type="text" name="cupboard_name" class="form-control" required>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" name="add_cupboard" class="btn btn-primary">Add</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-
-
-            <div id="tableExample3"
-                data-list='{"valueNames":["room_name","cubboard_name","file_name",Added_By],"page":5,"pagination":true}'>
-                <div class="search-box mb-3 mx-auto">
-                    <form class="position-relative"><input class="form-control search-input search form-control-sm"
-                            type="search" placeholder="Search" aria-label="Search" />
-                        <span class="fas fa-search search-box-icon"></span>
-                    </form>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-striped table-sm fs-9 mb-0">
-                        <thead>
-                            <tr>
-                                <th class="sort border-top border-translucent ps-3">srno</th>
-                                <th class="sort border-top" data-sort="room_name">room_name</th>
-                                <th class="sort border-top" data-sort="cubboard_name">cubboard_name</th>
-                                <th class="sort border-top" data-sort="file_name">file_name</th>
-                                <th class="sort border-top" data-sort="Added_On">Added_On</th>
-                                <th class="sort border-top" data-sort="Added_By">Added_By</th>
-                                <th class="sort text-end align-middle pe-0 border-top" scope="col">ACTION</th>
-                            </tr>
-                        </thead>
-                        <tbody class="list">
-                            <?php
-                            include '../PhpFiles/connection.php';
-
-                            if (isset($_GET['id'])) {
-                                $roomId = $_GET['id'];
-
-                                // Step 1: Get room name from tbl_rooms
-                                $roomQuery = "SELECT room_name FROM tbl_rooms WHERE id = ?";
-                                $stmt = $conn->prepare($roomQuery);
-                                $stmt->bind_param("i", $roomId);
-                                $stmt->execute();
-                                $stmt->bind_result($roomName);
-
-                                if ($stmt->fetch()) {
-                                    $stmt->close();
-
-                                    // Step 2: Search for room name in tbl_fms
-                                    $fmsQuery = "SELECT * FROM tbl_fms WHERE room_name = ?";
-                                    $stmt = $conn->prepare($fmsQuery);
-                                    $stmt->bind_param("s", $roomName);
-                                    $stmt->execute();
-                                    $result = $stmt->get_result();
-                                    $srno = 1; // Initialize serial number
-
-                                    // Example of processing results
-                                    while ($row = $result->fetch_assoc()) {
-                                        // Do something with each $row
-                                        echo '
-                                             <tr>
-                                <td class="align-middle ps-3">'.$srno.'</td>
-                                <td class="align-middle ps-3 room_name">' . $row['room_name'] . '</td>
-                                <td class="align-middle cupboard_name">' . $row['cupboard_name'] . '</td>
-                                <td class="align-middle filename">' . $row['filename'] . '</td>
-                                <td class="align-middle Added_On">' . $row['time'] . '</td>
-                                <td class="align-middle Added_By">' . $row['added_by'] . '</td>
-                                <td class="align-middle white-space-nowrap text-end pe-0">
-                                    <div class="btn-reveal-trigger position-static"><button
-                                            class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
-                                            type="button" data-bs-toggle="dropdown" data-boundary="window"
-                                            aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span
-                                                class="fas fa-ellipsis-h fs-10"></span></button>
-                                        <div class="dropdown-menu dropdown-menu-end py-2"> <a class="dropdown-item" href="#" onclick=\'openEditModal(' . json_encode($row) . ')\'>Edit</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                                        ';
-                                        $srno++; // Increment serial number for each row
-                                    }
-
-                                    $stmt->close();
-                                } else {
-                                    echo "Room ID not found.";
-                                }
-                            } else {
-                                echo "No ID passed in URL.";
-                            }
-                            ?>
-                            <!-- <tr>
-                                <td class="align-middle ps-3">1</td>
-                                <td class="align-middle ps-3 room_name">Anna</td>
-                                <td class="align-middle cubboard_name">anna@example.com</td>
-                                <td class="align-middle file_name">18</td>
-                                <td class="align-middle Added_On">18</td>
-                                <td class="align-middle Added_By">18</td>
-                                <td class="align-middle white-space-nowrap text-end pe-0">
-                                    <div class="btn-reveal-trigger position-static"><button
-                                            class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
-                                            type="button" data-bs-toggle="dropdown" data-boundary="window"
-                                            aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span
-                                                class="fas fa-ellipsis-h fs-10"></span></button>
-                                        <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item"
-                                                href="#!">Edit</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr> -->
-                        </tbody>
-                    </table>
-                </div>
-                <div class="d-flex justify-content-between mt-3"><span class="d-none d-sm-inline-block"
-                        data-list-info="data-list-info"></span>
-                    <div class="d-flex"><button class="page-link" data-list-pagination="prev"><span
-                                class="fas fa-chevron-left"></span></button>
-                        <ul class="mb-0 pagination"></ul><button class="page-link pe-0"
-                            data-list-pagination="next"><span class="fas fa-chevron-right"></span></button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Footer -->
-            <?php include("../../Components/footer.php"); ?>
-        </div>
-
-
-        <!-- Edit Modal -->
-        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <form id="editForm" method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="editModalLabel">Edit File Details</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <input type="hidden" name="fms_id" id="fms_id">
-                            <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
-
-                            <div class="mb-3">
-                                <label for="edit_location" class="form-label">Room</label>
-                                <select class="form-select" name="room_name" id="edit_location" required>
-                                    <option value="" disabled selected>Select Room</option>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-sm fs-9 mb-0">
+                                <thead>
+                                    <tr>
+                                        <th class="sort border-top border-translucent ps-3" data-sort="filename">File
+                                            Name</th>
+                                        <th class="sort border-top" data-sort="cupboard">Cupboard</th>
+                                        <th class="sort border-top" data-sort="status">Status</th>
+                                        <th class="sort border-top" data-sort="taken_by">Taken By</th>
+                                        <th class="sort border-top" data-sort="taken_time">Taken Time</th>
+                                        <th class="sort border-top" data-sort="returned_by">Returned By</th>
+                                        <th class="sort border-top" data-sort="returned_time">Returned Time</th>
+                                        <th class="sort border-top" data-sort="added_by">Added By</th>
+                                        <th class="sort border-top" data-sort="added_time">Added Time</th>
+                                        <th class="border-top text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="list">
                                     <?php
-                                    $rooms = $conn->query("SELECT room_name FROM tbl_rooms");
-                                    while ($r = $rooms->fetch_assoc()) {
-                                        echo '<option value="' . htmlspecialchars($r['room_name']) . '">' . htmlspecialchars($r['room_name']) . '</option>';
+                                    include '../PhpFiles/connection.php';
+
+                                    if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+                                        $office_id = $_GET['id'];
+
+                                        $sql = "SELECT * FROM tbl_fms WHERE room_name = ?";
+                                        $stmt = $conn->prepare($sql);
+
+                                        if (!$stmt) {
+                                            die("Prepare failed: (" . $conn->errno . ") " . $conn->error);
+                                        }
+
+                                        $stmt->bind_param("i", $office_id);
+                                        $stmt->execute();
+                                        $result = $stmt->get_result();
+
+                                        if ($result->num_rows > 0) {
+                                            while ($row = $result->fetch_assoc()) {
+                                                $status = strtoupper($row['current_status']);
+                                                echo '<tr>';
+
+                                                // File Name
+                                                echo '<td class="align-middle ps-3 name">' . htmlspecialchars($row['filename']) . '</td>';
+
+                                                // Cupboard (hide if OUT)
+                                                if ($status === 'IN') {
+                                                    echo '<td class="align-middle">' . htmlspecialchars($row['cupboard_name']) . '</td>';
+                                                } else {
+                                                    echo '<td class="align-middle text-muted">OUT</td>';
+                                                }
+
+                                                // Status
+                                                echo '<td class="align-middle">' . $status . '</td>';
+
+                                                // Taken By & Taken Time (show only if OUT)
+                                                if ($status === 'OUT') {
+                                                    echo '<td class="align-middle">' . htmlspecialchars($row['taken_by']) . '</td>';
+                                                    echo '<td class="align-middle">' . htmlspecialchars($row['taken_time']) . '</td>';
+                                                } else {
+                                                    echo '<td class="align-middle text-muted">IN</td>';
+                                                    echo '<td class="align-middle text-muted">IN</td>';
+                                                }
+
+                                                // Returned By & Returned Time (show only if IN)
+                                                if ($status === 'IN') {
+                                                    echo '<td class="align-middle">' . htmlspecialchars($row['returned_by']) . '</td>';
+                                                    echo '<td class="align-middle">' . htmlspecialchars($row['returned_time']) . '</td>';
+                                                } else {
+                                                    echo '<td class="align-middle text-muted">OUT</td>';
+                                                    echo '<td class="align-middle text-muted">OUT</td>';
+                                                }
+
+                                                // Added By & Added Time
+                                                echo '<td class="align-middle">' . htmlspecialchars($row['added_by']) . '</td>';
+                                                echo '<td class="align-middle">' . htmlspecialchars($row['added_time']) . '</td>';
+
+                                                // Actions
+                                                echo '<td class="align-middle text-center">
+                        <div class="btn-reveal-trigger position-static">
+                            <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
+                                type="button" data-bs-toggle="dropdown" data-boundary="window"
+                                aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-end py-2">
+                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editFileModal' . $row['id'] . '">Edit</a>';
+
+                                                if ($status === 'IN') {
+                                                    echo '<a class="dropdown-item" href="#"
+                            data-bs-toggle="modal"
+                            data-bs-target="#markOutModal"
+                            data-file-id="' . $row['id'] . '">Mark as OUT</a>';
+                                                } else {
+                                                    echo '<a class="dropdown-item" href="#" onclick="markFileIn(' . $row['id'] . '); return false;">Mark as IN</a>';
+                                                }
+
+                                                echo '</div>
+                        </div>
+                    </td>';
+
+                                                echo '</tr>';
+                                            }
+                                        }
                                     }
                                     ?>
-                                </select>
-                            </div>
+                                </tbody>
+                            </table>
 
-                            <div class="mb-3">
-                                <label for="edit_cubboard" class="form-label">Cubboard</label>
-                                <select class="form-select" name="cubboard_name" id="edit_cubboard" required>
-                                    <option value="" disabled selected>Select Cubboard</option>
-                                    <?php
-                                    $cubs = $conn->query("SELECT DISTINCT cubboard_name FROM tbl_fms");
-                                    while ($c = $cubs->fetch_assoc()) {
-                                        echo '<option value="' . htmlspecialchars($c['cubboard_name']) . '">' . htmlspecialchars($c['cubboard_name']) . '</option>';
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="edit_file" class="form-label">File Name</label>
-                                <input type="text" class="form-control" name="file_name" id="edit_file" required>
-                            </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="submit" name="submit" class="btn btn-primary">Update</button>
+                        <div class="d-flex justify-content-between mt-3"><span class="d-none d-sm-inline-block"
+                                data-list-info="data-list-info">1 to 5 <span class="text-body-tertiary"> Items of
+                                </span>43</span>
+                            <div class="d-flex"><button class="page-link disabled" data-list-pagination="prev"
+                                    disabled=""><svg class="svg-inline--fa fa-chevron-left" aria-hidden="true"
+                                        focusable="false" data-prefix="fas" data-icon="chevron-left" role="img"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
+                                        <path fill="currentColor"
+                                            d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z">
+                                        </path>
+                                    </svg><!-- <span class="fas fa-chevron-left"></span> Font Awesome fontawesome.com --></button>
+                                <ul class="mb-0 pagination">
+                                    <li class="active"><button class="page" type="button" data-i="1"
+                                            data-page="5">1</button></li>
+                                    <li><button class="page" type="button" data-i="2" data-page="5">2</button></li>
+                                    <li><button class="page" type="button" data-i="3" data-page="5">3</button></li>
+                                    <li class="disabled"><button class="page" type="button">...</button></li>
+                                </ul><button class="page-link pe-0" data-list-pagination="next"><svg
+                                        class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false"
+                                        data-prefix="fas" data-icon="chevron-right" role="img"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
+                                        <path fill="currentColor"
+                                            d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z">
+                                        </path>
+                                    </svg><!-- <span class="fas fa-chevron-right"></span> Font Awesome fontawesome.com --></button>
+                            </div>
                         </div>
                     </div>
-                </form>
+
+
+                    <?php
+                    $stmt = $conn->prepare("SELECT * FROM tbl_fms WHERE room_name = ?");
+                    $stmt->bind_param("i", $office_id);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+
+                    while ($row = $result->fetch_assoc()) {
+                        $modalId = $row['id'];
+
+                        $officesResult = $conn->query("SELECT id, office_name FROM tbl_offices ORDER BY office_name ASC");
+
+                        $currentOfficeId = $row['officename'];
+                        $currentRoomId = $row['room_name'];
+                        $roomsResult = $conn->prepare("SELECT id, room_name FROM tbl_rooms WHERE office_id = ?");
+                        $roomsResult->bind_param("i", $currentOfficeId);
+                        $roomsResult->execute();
+                        $rooms = $roomsResult->get_result();
+
+                        $currentRoomName = $row['room_name'];
+                        $cupboardsResult = $conn->prepare("SELECT id, name FROM shelves_cupboards WHERE room_name = ?");
+                        $cupboardsResult->bind_param("s", $currentRoomName);
+                        $cupboardsResult->execute();
+                        $cupboards = $cupboardsResult->get_result();
+                        ?>
+                        <div class="modal fade" id="editFileModal<?= $modalId ?>" tabindex="-1"
+                            aria-labelledby="editFileLabel<?= $modalId ?>" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-md">
+                                <div class="modal-content">
+                                    <form action="../phpFiles/update_file_location.php" method="POST">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="editFileLabel<?= $modalId ?>">Edit File Location
+                                            </h5>
+                                            <button class="btn-close" type="button" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <input type="hidden" name="file_id" value="<?= $modalId ?>">
+
+                                            <div class="mb-3">
+                                                <label class="form-label">File Name</label>
+                                                <input type="text" class="form-control" name="filename"
+                                                    value="<?= htmlspecialchars($row['filename']) ?>" required>
+                                            </div>
+
+                                            <!-- Office -->
+                                            <div class="mb-3">
+                                                <label class="form-label">Office</label>
+                                                <select id="office<?= $modalId ?>" name="officename"
+                                                    class="form-select office-select" data-id="<?= $modalId ?>" required>
+                                                    <option value="">Select Office</option>
+                                                    <?php while ($office = $officesResult->fetch_assoc()): ?>
+                                                        <option value="<?= $office['id'] ?>" <?= ($office['id'] == $currentOfficeId ? 'selected' : '') ?>>
+                                                            <?= htmlspecialchars($office['office_name']) ?>
+                                                        </option>
+                                                    <?php endwhile; ?>
+                                                </select>
+                                            </div>
+
+                                            <!-- Room -->
+                                            <div class="mb-3">
+                                                <label class="form-label">Room</label>
+                                                <select id="room<?= $modalId ?>" name="room_name"
+                                                    class="form-select room-select" data-id="<?= $modalId ?>" required>
+                                                    <option value="">Select Room</option>
+                                                    <?php while ($room = $rooms->fetch_assoc()): ?>
+                                                        <option value="<?= $room['id'] ?>" <?= ($room['id'] == $currentRoomId ? 'selected' : '') ?>>
+                                                            <?= htmlspecialchars($room['room_name']) ?>
+                                                        </option>
+                                                    <?php endwhile; ?>
+                                                </select>
+                                            </div>
+
+                                            <!-- Cupboard -->
+                                            <div class="mb-3">
+                                                <label class="form-label">Cupboard</label>
+                                                <select id="cupboard<?= $modalId ?>" name="cupboard_name"
+                                                    class="form-select cupboard-select" required>
+                                                    <option value="">Select Cupboard</option>
+                                                    <?php while ($cup = $cupboards->fetch_assoc()): ?>
+                                                        <option value="<?= $cup['name'] ?>"
+                                                            <?= ($cup['name'] == $row['cupboard_name'] ? 'selected' : '') ?>>
+                                                            <?= htmlspecialchars($cup['name']) ?>
+                                                        </option>
+                                                    <?php endwhile; ?>
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-primary" type="submit">Save Changes</button>
+                                            <button class="btn btn-outline-secondary" type="button"
+                                                data-bs-dismiss="modal">Cancel</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
+
+
+                    <!-- Mark OUT Modal -->
+                    <div class="modal fade" id="markOutModal" tabindex="-1" aria-labelledby="markOutLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <form id="markOutForm" method="POST" action="../PhpFiles/update_file_status.php"
+                                class="modal-content">
+                                <input type="hidden" name="action" value="OUT">
+                                <input type="hidden" name="file_id" id="out_file_id">
+
+                                <div class="modal-header bg-warning-subtle">
+                                    <h5 class="modal-title fw-bold" id="markOutLabel">Mark File as OUT</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+
+                                <div class="modal-body">
+                                    <div class="form-floating mb-3">
+                                        <textarea class="form-control" name="reason" id="out_reason"
+                                            placeholder="Reason for taking file" required
+                                            style="height: 100px"></textarea>
+                                        <label for="out_reason">Reason</label>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-danger w-100">Mark as OUT</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+                <?php include("../../Components/footer.php"); ?>
             </div>
         </div>
-
 
 
 
@@ -463,113 +599,173 @@ if (!$cubboards) {
     <script src="../../assets/js/phoenix.js"></script>
     <script src="../../vendors/echarts/echarts.min.js"></script>
     <script src="../../assets/js/ecommerce-dashboard.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        function openEditModal(data) {
-            document.getElementById('fms_id').value = data.id;
-            document.getElementById('edit_location').value = data.room_name;
-            document.getElementById('edit_cubboard').value = data.cubboard_name;
-            document.getElementById('edit_file').value = data.file_name;
-
-            let modal = new bootstrap.Modal(document.getElementById('editModal'));
-            modal.show();
-        }
-    </script>
-    <script>
-        $(document).ready(function () {
-            $('#editForm').on('submit', function (e) {
-                e.preventDefault(); // Prevent default form submission
-
-                $.ajax({
-                    url: '../PhpFiles/update_fms.php', // your PHP file
-                    type: 'POST',
-                    data: $(this).serialize(),
-                    dataType: 'json',
-                    success: function (response) {
-                        if (response.status === 'success') {
-                            alert(response.message); // or show it in the UI
-                            window.location.reload(); // reload the page to see changes
-                        } else {
-                            alert(response.message);
-                        }
-                    },
-                    error: function () {
-                        alert('An error occurred while updating.');
-                    }
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('shown.bs.modal', () => {
+                gsap.from(modal.querySelector('.modal-content'), {
+                    duration: 0.5,
+                    y: -50,
+                    opacity: 0,
+                    ease: "power2.out"
                 });
             });
         });
+
+        // Office change → load rooms
+        document.querySelectorAll('.office-select').forEach(officeSelect => {
+            officeSelect.addEventListener('change', function () {
+                const modalId = this.getAttribute('data-id');
+                const officeId = this.value;
+
+                const roomSelect = document.getElementById(`room${modalId}`);
+                const cupboardSelect = document.getElementById(`cupboard${modalId}`);
+
+                roomSelect.innerHTML = '<option>Loading...</option>';
+                roomSelect.disabled = true;
+                cupboardSelect.innerHTML = '<option>Select Cupboard</option>';
+                cupboardSelect.disabled = true;
+
+                if (officeId) {
+                    fetch('../PhpFiles/get_rooms.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: `office_id=${officeId}`
+                    })
+                        .then(res => res.text())
+                        .then(data => {
+                            roomSelect.innerHTML = data;
+                            roomSelect.disabled = false;
+                        });
+                }
+            });
+        });
+
+        const markOutModal = document.getElementById('markOutModal');
+
+        markOutModal.addEventListener('show.bs.modal', event => {
+            const button = event.relatedTarget;  // the clicked link
+            const fileId = button.getAttribute('data-file-id');
+            markOutModal.querySelector('#out_file_id').value = fileId;
+        });
+
+
+        // Room change → load cupboards
+        document.querySelectorAll('.room-select').forEach(roomSelect => {
+            roomSelect.addEventListener('change', function () {
+                const modalId = this.getAttribute('data-id');
+                const roomId = this.value;  // now this is the numeric ID
+
+                const cupboardSelect = document.getElementById(`cupboard${modalId}`);
+                cupboardSelect.innerHTML = '<option>Loading...</option>';
+                cupboardSelect.disabled = true;
+
+                if (roomId) {
+                    fetch('../PhpFiles/get_cupboards.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: `room_name=${encodeURIComponent(roomId)}`
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.success) {
+                                cupboardSelect.innerHTML = data.options;
+                                cupboardSelect.disabled = false;
+                            } else {
+                                alert(data.message || 'Failed to load cupboards.');
+                                cupboardSelect.innerHTML = '<option value="">Select Cupboard</option>';
+                                cupboardSelect.disabled = true;
+                            }
+                        })
+                        .catch(err => {
+                            console.error('Error loading cupboards:', err);
+                            cupboardSelect.innerHTML = '<option value="">Select Cupboard</option>';
+                            cupboardSelect.disabled = true;
+                        });
+                }
+            });
+        });
+
+
     </script>
     <script>
-        document.getElementById("addLocationForm").addEventListener("submit", function (e) {
-            e.preventDefault();
+        async function submitMarkOut(event) {
+            event.preventDefault();  // Prevent form default submission if used as event handler
 
-            const fileInput = document.getElementById("fileInput").value.trim();
-            const cupboard = this.cupboard.value;
-            const urlParams = new URLSearchParams(window.location.search);
-            const roomId = urlParams.get("id"); // assuming the URL is like ?id=3
+            const fileId = document.getElementById('out_file_id').value;
+            const reason = document.getElementById('out_reason').value.trim();
 
-            if (!roomId) {
-                alert("Room ID not found in URL!");
+            if (!fileId) {
+                alert('File ID is missing.');
                 return;
             }
 
+            if (!reason) {
+                alert('Please provide a reason for taking the file.');
+                return;
+            }
 
-            fetch("../PhpFiles/add_location.php", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    file_name: fileInput,
-                    cupboard: cupboard,
-                    room_id: roomId
-                })
+            const formData = new FormData();
+            formData.append('file_id', fileId);
+            formData.append('action', 'OUT');
+            formData.append('reason', reason);
 
-            })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.status === "success") {
-                        alert("Location added successfully!");
-                        this.reset();
-                        bootstrap.Modal.getInstance(document.getElementById("locationModal")).hide();
-                        window.location.reload(); // Reload the page to see changes
-                    } else {
-                        alert("Error: " + data.message);
-                    }
-                })
-                .catch(err => {
-                    console.error("AJAX Error:", err);
-                    alert("Something went wrong.");
+            try {
+                const response = await fetch('../PhpFiles/update_file_status.php', {
+                    method: 'POST',
+                    body: formData,
                 });
-        });
+
+                if (!response.ok) {
+                    throw new Error(`Server error: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                alert(data.message || 'No message received.');
+
+                if (data.status === 'success') {
+                    // Close modal programmatically (Bootstrap 5)
+                    const markOutModal = document.getElementById('markOutModal');
+                    const modalInstance = bootstrap.Modal.getInstance(markOutModal);
+                    if (modalInstance) modalInstance.hide();
+
+                    // Optional: Refresh page or update UI
+                    // window.location.reload();
+                }
+            } catch (error) {
+                alert('Error submitting OUT status: ' + error.message);
+            }
+        }
+
     </script>
     <script>
-        document.querySelector("#addCupboardModal form").addEventListener("submit", function (e) {
-            e.preventDefault();
+        async function markFileIn(fileId) {
 
-            const formData = new FormData(this);
+            const formData = new FormData();
+            formData.append('file_id', fileId);
+            formData.append('action', 'IN');
+            // No location change fields - keep current location as is
 
-            fetch("../PhpFiles/add_cupboard.php", {
-                method: "POST",
-                body: formData
-            })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.status === "success") {
-                        alert("Cupboard added successfully!");
-                        this.reset();
-                        bootstrap.Modal.getInstance(document.getElementById("addCupboardModal")).hide();
-                        window.location.reload(); // Reload the page to see changes
-
-                        // Optionally refresh cupboard dropdown here
-                    } else {
-                        alert("Error: " + data.message);
-                    }
-                })
-                .catch(err => {
-                    console.error("AJAX Error:", err);
-                    alert("Something went wrong.");
+            try {
+                const response = await fetch('../PhpFiles/update_file_status.php', {
+                    method: 'POST',
+                    body: formData,
                 });
-        });
+
+                const data = await response.json();
+
+                if (data.status === 'success') {
+                    alert('File marked IN successfully.\nTo change the location, please use the Edit action.');
+                    // Optional: refresh page or update UI here
+                    window.location.reload();
+                } else {
+                    alert('Failed to mark IN: ' + data.message);
+                }
+            } catch (error) {
+                window.location.reload();
+            }
+        }
+
     </script>
 
 </body>

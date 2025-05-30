@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 24, 2025 at 01:18 PM
+-- Generation Time: May 29, 2025 at 11:56 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -741,13 +741,13 @@ CREATE TABLE `tbl_project` (
 --
 
 INSERT INTO `tbl_project` (`id`, `uid`, `project_title`, `project_type`, `project_manager`, `project_client`, `project_status`, `project_description`, `project_start_date`, `project_end_date`, `project_created_by`, `timestamp`) VALUES
-(21, 'prj_680f77ed89734', 'infotech', 2, 0, 2, 1, 'test', '2020-04-20', '2020-05-20', 'admin', '2025-04-28'),
-(22, 'prj_680f780d1cc70', 'infotech2', 1, 1, 1, 1, 'm, ff msd fk', '2025-04-28', '2025-05-11', 'admin', '2025-04-28'),
-(24, 'prj_68113dc2705e7', 'test 2', 2, 1, 2, 1, 'sdfgsfdgsdg', '2025-04-30', '2025-05-11', 'admin', '2025-04-30'),
-(25, 'prj_68113ed38894b', 'test 3', 1, 0, 1, 1, 'asdcasdc', '2025-04-30', '2025-05-11', 'admin', '2025-04-30'),
-(26, 'prj_6816093886f8f', 'Maitri Park', 1, 3, 2, 1, 'hdivdocaspovmsd', '2025-05-03', '2025-06-08', 'admin', '2025-05-03'),
+(21, 'prj_680f77ed89734', 'infotech', 1, 0, 2, 1, 'test', '2020-04-20', '2020-05-20', 'admin', '2025-04-28'),
+(22, 'prj_680f780d1cc70', 'infotech2', 2, 1, 1, 1, 'm, ff msd fk', '2025-04-28', '2025-05-11', 'admin', '2025-04-28'),
+(24, 'prj_68113dc2705e7', 'test 2', 3, 1, 2, 2, 'sdfgsfdgsdg', '2025-04-30', '2025-05-11', 'admin', '2025-04-30'),
+(25, 'prj_68113ed38894b', 'test 3', 2, 0, 1, 2, 'asdcasdc', '2025-04-30', '2025-05-11', 'admin', '2025-04-30'),
+(26, 'prj_6816093886f8f', 'Maitri Park', 3, 3, 2, 3, 'hdivdocaspovmsd', '2025-05-03', '2025-06-08', 'admin', '2025-05-03'),
 (27, 'prj_68170d04d7144', 'New Project Dims', 1, 0, 1, 2, 'testing for new location in dims', '2025-05-04', '2025-05-11', 'admin', '2025-05-04'),
-(28, 'prj_68170ec7c809e', 'dims x pms', 1, 3, 2, 1, 'lknscjksdno', '2025-05-04', '2025-05-11', 'admin', '2025-05-04');
+(28, 'prj_68170ec7c809e', 'dims x pms', 2, 3, 2, 1, 'lknscjksdno', '2025-05-04', '2025-05-11', 'admin', '2025-05-04');
 
 -- --------------------------------------------------------
 
@@ -788,6 +788,7 @@ INSERT INTO `tbl_project_emp` (`id`, `emp_id`, `project_id`, `timestamp`) VALUES
 CREATE TABLE `tbl_project_status` (
   `id` int(11) NOT NULL,
   `status_name` varchar(255) NOT NULL,
+  `bagde_color` enum('blue','black','yellow','green','red') DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -795,10 +796,10 @@ CREATE TABLE `tbl_project_status` (
 -- Dumping data for table `tbl_project_status`
 --
 
-INSERT INTO `tbl_project_status` (`id`, `status_name`, `created_at`) VALUES
-(1, 'On-Going', '2025-04-28 21:15:30'),
-(2, 'Waiting', '2025-04-28 21:15:41'),
-(3, 'Completed', '2025-04-28 21:15:51');
+INSERT INTO `tbl_project_status` (`id`, `status_name`, `bagde_color`, `created_at`) VALUES
+(1, 'On-Going', 'yellow', '2025-04-28 21:15:30'),
+(2, 'Waiting', 'red', '2025-04-28 21:15:41'),
+(3, 'Completed', 'green', '2025-04-28 21:15:51');
 
 -- --------------------------------------------------------
 
@@ -821,6 +822,28 @@ INSERT INTO `tbl_project_task_status` (`id`, `project_id`, `task_status_id`, `cr
 (1, 21, 1, '2025-05-14'),
 (2, 21, 2, '2025-05-14'),
 (3, 24, 3, '2025-05-14');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_project_type`
+--
+
+CREATE TABLE `tbl_project_type` (
+  `id` int(100) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `type` varchar(256) DEFAULT NULL,
+  `created_at` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_project_type`
+--
+
+INSERT INTO `tbl_project_type` (`id`, `uid`, `type`, `created_at`) VALUES
+(1, 1, 'Society website ', '2025-05-29'),
+(2, 2, '79A\r\n', '2025-05-29'),
+(3, 3, 'Internal Software', '2025-05-29');
 
 -- --------------------------------------------------------
 
@@ -1009,7 +1032,7 @@ CREATE TABLE `tbl_tasks` (
   `project_name` varchar(256) DEFAULT NULL,
   `start_date` date DEFAULT NULL,
   `end_date` date DEFAULT NULL,
-  `assigned_employee` varchar(256) DEFAULT NULL,
+  `assigned_employee` int(100) DEFAULT NULL,
   `task_category` int(11) DEFAULT NULL,
   `status_id` int(100) DEFAULT NULL,
   `priority` int(11) DEFAULT NULL,
@@ -1023,7 +1046,9 @@ CREATE TABLE `tbl_tasks` (
 --
 
 INSERT INTO `tbl_tasks` (`id`, `uid`, `title`, `description`, `project_id`, `project_name`, `start_date`, `end_date`, `assigned_employee`, `task_category`, `status_id`, `priority`, `tags`, `image_path`, `file_path`) VALUES
-(1, NULL, 'Checking for task 1', 'this is a test task', 21, NULL, '2025-05-01', '2025-05-23', '1', 1, 1, NULL, NULL, NULL, NULL);
+(1, NULL, 'Sample Task 1', 'This is a test task', 28, 'dims x pms', NULL, NULL, 0, 1, 2, 1, NULL, NULL, NULL),
+(2, NULL, 'Sample Task 2', 'This is another task', 28, 'dims x pms', NULL, NULL, 3, 2, 1, 2, NULL, NULL, NULL),
+(3, NULL, 'Sample Task 3', 'This is also another task', 21, 'infotech', NULL, NULL, 0, 2, 1, 3, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1331,10 +1356,10 @@ ALTER TABLE `tbl_priority`
 --
 ALTER TABLE `tbl_project`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `tbl_escape_pm` (`project_manager`),
-  ADD KEY `tbl_project_fk_project_type_id` (`project_type`),
   ADD KEY `tbl_project_fk_tbl_client_id` (`project_client`),
-  ADD KEY `tbl_project_fk_tbl_project_status` (`project_status`);
+  ADD KEY `tbl_project_fk_tbl_project_status` (`project_status`),
+  ADD KEY `tbl_escape_pm` (`project_manager`) USING BTREE,
+  ADD KEY `tbl_project_fk_tbl_project_type` (`project_type`);
 
 --
 -- Indexes for table `tbl_project_emp`
@@ -1357,6 +1382,13 @@ ALTER TABLE `tbl_project_task_status`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_project_id` (`project_id`),
   ADD KEY `fk_task_status_id` (`task_status_id`);
+
+--
+-- Indexes for table `tbl_project_type`
+--
+ALTER TABLE `tbl_project_type`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `uid` (`uid`);
 
 --
 -- Indexes for table `tbl_rooms`
@@ -1411,7 +1443,8 @@ ALTER TABLE `tbl_tasks`
   ADD PRIMARY KEY (`id`),
   ADD KEY `project_id` (`project_id`),
   ADD KEY `task_category` (`task_category`),
-  ADD KEY `priority` (`priority`);
+  ADD KEY `priority` (`priority`),
+  ADD KEY `fk_task_emp_name` (`assigned_employee`);
 
 --
 -- Indexes for table `tbl_task_emp`
@@ -1630,6 +1663,12 @@ ALTER TABLE `tbl_project_task_status`
   MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `tbl_project_type`
+--
+ALTER TABLE `tbl_project_type`
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `tbl_rooms`
 --
 ALTER TABLE `tbl_rooms`
@@ -1675,7 +1714,7 @@ ALTER TABLE `tbl_tags`
 -- AUTO_INCREMENT for table `tbl_tasks`
 --
 ALTER TABLE `tbl_tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_task_emp`
@@ -1778,9 +1817,9 @@ ALTER TABLE `tbl_pin_board`
 --
 ALTER TABLE `tbl_project`
   ADD CONSTRAINT `tbl_escape_pm` FOREIGN KEY (`project_manager`) REFERENCES `tbl_emp` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `tbl_project_fk_project_type_id` FOREIGN KEY (`project_type`) REFERENCES `tbl_project_type` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `tbl_project_fk_tbl_client_id` FOREIGN KEY (`project_client`) REFERENCES `tbl_client` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `tbl_project_fk_tbl_project_status` FOREIGN KEY (`project_status`) REFERENCES `tbl_project_status` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `tbl_project_fk_tbl_project_status` FOREIGN KEY (`project_status`) REFERENCES `tbl_project_status` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `tbl_project_fk_tbl_project_type` FOREIGN KEY (`project_type`) REFERENCES `tbl_project_type` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_project_emp`
@@ -1797,30 +1836,13 @@ ALTER TABLE `tbl_project_task_status`
   ADD CONSTRAINT `fk_task_status_id` FOREIGN KEY (`task_status_id`) REFERENCES `tbl_task_status` (`id`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `tbl_soc_committee_details`
+-- Constraints for table `tbl_tasks`
 --
-ALTER TABLE `tbl_soc_committee_details`
-  ADD CONSTRAINT `tbl_soc_committee_details_ibfk_1` FOREIGN KEY (`soc_id`) REFERENCES `tbl_society` (`soc_id`);
-
---
--- Constraints for table `tbl_task_emp`
---
-ALTER TABLE `tbl_task_emp`
-  ADD CONSTRAINT `tbl_task_emp_fk_emp` FOREIGN KEY (`emp_id`) REFERENCES `tbl_emp` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `tbl_task_emp_fk_task` FOREIGN KEY (`task_id`) REFERENCES `tbl_tasks` (`id`) ON UPDATE CASCADE;
-
---
--- Constraints for table `tbl_task_tag`
---
-ALTER TABLE `tbl_task_tag`
-  ADD CONSTRAINT `tbl_tash_tag_fk_tags` FOREIGN KEY (`tag_id`) REFERENCES `tbl_tags` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `tbl_tash_tag_fk_task` FOREIGN KEY (`task_id`) REFERENCES `tbl_tasks` (`id`) ON UPDATE CASCADE;
-
---
--- Constraints for table `tbl_todo`
---
-ALTER TABLE `tbl_todo`
-  ADD CONSTRAINT `tbl_todo_ibfk_1` FOREIGN KEY (`created_by`) REFERENCES `tbl_emp` (`id`) ON UPDATE CASCADE;
+ALTER TABLE `tbl_tasks`
+  ADD CONSTRAINT `fk_category` FOREIGN KEY (`task_category`) REFERENCES `tbl_category` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_priority` FOREIGN KEY (`priority`) REFERENCES `tbl_priority` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_task_emp_name` FOREIGN KEY (`assigned_employee`) REFERENCES `tbl_emp` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_tasks_project` FOREIGN KEY (`project_id`) REFERENCES `tbl_project` (`id`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
