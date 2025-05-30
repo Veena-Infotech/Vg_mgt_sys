@@ -1,50 +1,67 @@
 <?php
 session_start();
-include('../PhpFiles/connection.php'); // Replace with your DB connection file
+include 'connection.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = trim($_POST['email']);
-    $password = trim($_POST['password']);
+$email = trim($_POST['email']);
+$password = $_POST['password'];
 
-    // Validate input
-    if (empty($email) || empty($password)) {
-        $_SESSION['error'] = "Please enter both email and password.";
-        header("Location: ../login.php"); // Change to your login page path
-        exit();
-    }
+$action = "client_login_request";
+$status = "failed";
 
-    // Prepare and execute the query
-    $stmt = $conn->prepare("SELECT * FROM tbl_client WHERE email = ?");
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-
-    $result = $stmt->get_result();
-
-    // Check if user exists
-    if ($result->num_rows === 1) {
-        $row = $result->fetch_assoc();
-
-        // If you're using plain text passwords (not recommended), compare directly
-        if ($password === $row['password']) {
-            // Successful login
-            $_SESSION['client_id'] = $row['id']; // You can store more info if needed
-            $_SESSION['client_email'] = $row['email'];
-
-            header("Location: ../client_dashboard.php"); // ⬅️ Replace with your actual page
-            exit();
-        } else {
-            $_SESSION['error'] = "Incorrect password.";
-            header("Location: client-sign-in.php");
-            exit();
-        }
+// Function to get client IP
+function getClientIP()
+{
+    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+        return $_SERVER['HTTP_CLIENT_IP'];
+    } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        return explode(',', $_SERVER['HTTP_X_FORWARDED_FOR'])[0];
     } else {
-        $_SESSION['error'] = "Email not found.";
-        header("Location: client-sign-in.php");
+        return $_SERVER['REMOTE_ADDR'];
+    }
+}
+
+// Get client IP and user agent
+$ip_address = getClientIP();
+$user_agent = $_SERVER['HTTP_USER_AGENT'] ?? 'Unknown';
+
+// Fetch client by email
+$stmt = $conn->prepare("SELECT id, password FROM tbl_client WHERE official_email = ?");
+$stmt->bind_param("s", $email);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows === 1) {
+    $client = $result->fetch_assoc();
+    $client_id = $client['id'];
+    $hashed_password = $client['password'];
+
+    if (password_verify($password, $hashed_password)) {
+        $_SESSION['client_id'] = $client_id;
+        $status = "completed";
+
+        // Log successful login
+        $log_stmt = $conn->prepare("INSERT INTO tbl_logs (emp_id, action, status, ip_address, user_agent) VALUES (?, ?, ?, ?, ?)");
+        $log_stmt->bind_param("issss", $client_id, $action, $status, $ip_address, $user_agent);
+        $log_stmt->execute();
+
+        header("Location: ../Crm/index.php");
+        exit();
+    } else {
+        $_SESSION['login_error'] = "Incorrect email or password.";
+        $log_stmt = $conn->prepare("INSERT INTO tbl_logs (emp_id, action, status, ip_address, user_agent) VALUES (?, ?, ?, ?, ?)");
+        $log_stmt->bind_param("issss", $client_id, $action, $status, $ip_address, $user_agent);
+        $log_stmt->execute();
+
+        header("Location: ../client-Authentication/client-sign-in.php?status=failed");
         exit();
     }
 } else {
-    header("Location: client-sign-in.php");
+    $client_id = 0;
+    $_SESSION['login_error'] = "Incorrect email or password.";
+    $log_stmt = $conn->prepare("INSERT INTO tbl_logs (emp_id, action, status, ip_address, user_agent) VALUES (?, ?, ?, ?, ?)");
+    $log_stmt->bind_param("issss", $client_id, $action, $status, $ip_address, $user_agent);
+    $log_stmt->execute();
+
+    header("Location: ../client-Authentication/client-sign-in.php?status=failed");
     exit();
 }
-?>
- 

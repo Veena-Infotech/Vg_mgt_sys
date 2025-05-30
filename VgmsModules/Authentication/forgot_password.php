@@ -345,10 +345,6 @@
         })
         .then(response => response.text())
         .then(email => {
-          // document.getElementById('nameDropdown').value = email;
-
-          // Automatically trigger sending the OTP (optional)
-          sendOTP();
           console.log(email);
         })
         .catch(error => {

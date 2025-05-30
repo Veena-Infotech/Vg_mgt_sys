@@ -333,28 +333,48 @@
       });
     });
 
+    // document.getElementById('nameDropdown').addEventListener('change', function() {
+    //   const name = this.value;
+
+    //   fetch('client-get_email.php', {
+    //       method: 'POST',
+    //       headers: {
+    //         'Content-Type': 'application/x-www-form-urlencoded'
+    //       },
+    //       body: 'name=' + encodeURIComponent(name)
+    //     })
+    //     .then(response => response.text())
+    //     .then(email => {
+    //       // document.getElementById('nameDropdown').value = email;
+
+    //       // Automatically trigger sending the OTP (optional)
+    //       //sendOTP();
+    //       console.log(email);
+    //     })
+    //     .catch(error => {
+    //       console.error('Error fetching email:', error);
+    //     });
+    // });
+
     document.getElementById('nameDropdown').addEventListener('change', function() {
-      const name = this.value;
+  const name = this.value;
 
-      fetch('client-get_email.php', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          body: 'name=' + encodeURIComponent(name)
-        })
-        .then(response => response.text())
-        .then(email => {
-          // document.getElementById('nameDropdown').value = email;
-
-          // Automatically trigger sending the OTP (optional)
-          sendOTP();
-          console.log(email);
-        })
-        .catch(error => {
-          console.error('Error fetching email:', error);
-        });
+  fetch('client-get_email.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: 'name=' + encodeURIComponent(name)
+    })
+    .then(response => response.text())
+    .then(email => {
+      console.log(email);
+    })
+    .catch(error => {
+      console.error('Error fetching email:', error);
     });
+});
+
 
     function verifyOTP() {
       const otp = document.getElementById("otpInput").value;

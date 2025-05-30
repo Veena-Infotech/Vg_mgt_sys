@@ -328,7 +328,21 @@
 
 
     });
+
+    <?php
+    if (isset($_SESSION['login_error'])) {
+      $errorMsg = $_SESSION['login_error'];
+      echo "<script>
+        window.addEventListener('DOMContentLoaded', function() {
+            alert('$errorMsg');
+        });
+    </script>";
+      unset($_SESSION['login_error']);
+    }
+    ?>
   </script>
+
+
 
 </body>
 
