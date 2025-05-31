@@ -167,8 +167,9 @@
         </script>
         <div class="content">
             <h2 class="mb-1 lh-sm">Training Program Management</h2>
-      <p class="text-muted mb-4">Enter comprehensive details to create, update, and manage employee training programs efficiently, ensuring effective learning and development</p>
-      <hr class="hr" /><br>
+            <p class="text-muted mb-4">Enter comprehensive details to create, update, and manage employee training
+                programs efficiently, ensuring effective learning and development</p>
+            <hr class="hr" /><br>
             <h3 class="text-center mb-4 text-primary fw-bold">
                 Training Program Details</h3>
             <form class="row g-3 needs-validation" novalidate="">
@@ -177,7 +178,7 @@
                     <div class="mb-1">
                         <label class="form-label" for="validationCustom03">PROGRAM NAME</label>
                         <input class="form-control" id="validationCustom03" type="text" required>
-                        <div class="invalid-feedback">Please provide a valid city.</div>
+                        <div class="invalid-feedback">Please provide a program name.</div>
                     </div>
 
                     <!-- Salutation Field with padding adjustment -->
@@ -216,7 +217,7 @@
                 <div class="col-md-6">
                     <label class="form-label" for="validationCustom03">TRAINER NAME</label>
                     <input class="form-control" id="validationCustom03" type="text" required>
-                    <div class="invalid-feedback">Please provide a valid city.</div>
+                    <div class="invalid-feedback">Please provide a Trainer name</div>
                 </div>
 
                 <div class="col-md-6">
@@ -263,11 +264,15 @@
                                 value="presentation" onchange="toggleTextBox()">
                             <label class="form-check-label" for="materialPres">Presentation</label>
                         </div>
+                        
                     </div>
                     <div id="materialLinkBox" class="mt-3" style="display: none;">
                         <label class="form-label">Provide Link</label>
                         <input type="text" class="form-control" placeholder="Enter link or drive URL">
                     </div>
+                </div>
+                <div class="col-12 ">
+                    <button class="btn btn-primary w-100 mb-3">Submit</button>
                 </div>
             </form>
 
