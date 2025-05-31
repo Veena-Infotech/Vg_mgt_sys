@@ -360,19 +360,15 @@
                     include '../PhpFiles/connection.php';
 
                     if (isset($_POST['add_builder'])) {
-                        // $builder_name = $_POST[''];
                         $builder_name = mysqli_real_escape_string($conn, $_POST['builder_name']);
                         $builder_contact = mysqli_real_escape_string($conn, $_POST['builder_contact']);
                         $builder_email = mysqli_real_escape_string($conn, $_POST['builder_email']);
                         $company_name = mysqli_real_escape_string($conn, $_POST['company_name']);
 
                         // Manually calculate next uid
-                        $res = mysqli_query($conn, "SELECT MAX(uid) AS max_uid FROM tbl_manage_builders");
-                        $row = mysqli_fetch_assoc($res);
                         $uid = uniqid('builder_',true);
 
-                        $query = "INSERT INTO tbl_manage_builders (uid, builder_name, builder_contact, builder_email, company_name)
-              VALUES ($uid, '$builder_name', '$builder_contact', '$builder_email', '$company_name') ";
+                        $query = "INSERT INTO `tbl_manage_builders` (`uid`, `builder_name`, `builder_contact`, `builder_email`, `company_name`,`is_active`) VALUES ('$uid', '$builder_name', '$builder_contact', '$builder_email', '$company_name','1') ";
 
                         if (mysqli_query($conn, $query)) {
                             echo "<script>alert('Builder added successfully'); window.location.href='view-builders.php';</script>";

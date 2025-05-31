@@ -449,6 +449,19 @@ if (isset($_POST['edit_competitors'])) {
 
 
     </main>
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.edit_competitors').forEach(button => {
+        button.addEventListener('click', () => {
+            document.getElementById('edit_id').value = button.getAttribute('data-id');
+            document.getElementById('edit_name').value = button.getAttribute('data-competitor_name');
+            document.getElementById('edit_contact').value = button.getAttribute('data-contact');
+            document.getElementById('edit_email').value = button.getAttribute('data-email');
+            document.getElementById('edit_company').value = button.getAttribute('data-company_name');
+        });
+    });
+});
+</script>
 
     <!-- ===============================================-->
     <!--    End of Main Content-->
@@ -515,21 +528,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
-    </script>
 
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.edit_competitors').forEach(button => {
-        button.addEventListener('click', () => {
-            document.getElementById('edit_id').value = button.getAttribute('data-id');
-            document.getElementById('edit_name').value = button.getAttribute('data-competitor_name');
-            document.getElementById('edit_contact').value = button.getAttribute('data-contact');
-            document.getElementById('edit_email').value = button.getAttribute('data-email');
-            document.getElementById('edit_company').value = button.getAttribute('data-company_name');
-        });
-    });
-});
-</script>
+
+
+    </script>
 
 
 </body>

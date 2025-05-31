@@ -190,10 +190,11 @@
                                             <label for="name" class="form-label">Name Of the Property Type</label>
                                             <input class="form-control" type="text" id="name" name="name"
                                                 placeholder="Enter Property Type" required>
-                                            <label for="edit_type" class="form-label">Type of client</label>
-                                            <select name="edit_type" id="edit_type" class="form-select">
-                                                <option value="buyer">Buyer</option>
-                                                <option value="seller">Seller</option>
+
+                                            <label for="add_type" class="form-label">Type of client</label>
+                                            <select name="add_client_type" id="add_type" class="form-select">
+                                                <option value="Buyer">Buyer</option>
+                                                <option value="Seller">Seller</option>
                                             </select>
                                         </div>
                                         <input type="hidden" name="action" value="add_property_type">
@@ -214,11 +215,11 @@
                     include '../PhpFiles/connection.php';
                     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']) && $_POST['action'] === 'add_property_type') {
                         $property_type = mysqli_real_escape_string($conn, $_POST['name']);
-                        $client_type = mysqli_real_escape_string($conn, $_POST['edit_type']);
+                        $client_type = mysqli_real_escape_string($conn, $_POST['add_client_type']);
 
                         //  generate unique id
-                        $uid = uniqid('propertytype_', true);
-                        $query = "INSERT INTO tbl_manage_property_type (uid,property_type_name, client_type) VALUES ('$uid','$property_type', '$client_type')";
+                        $uid = uniqid('propertytype_ ', true);
+                        $query = "INSERT INTO `tbl_manage_property_type` (`uid`, `property_type_name`, `client_type`, `is_active`) VALUES ('$uid', '$property_type', '$client_type', '1');";
                         $result = mysqli_query($conn, $query);
 
                         if ($result) {
@@ -270,24 +271,32 @@
 
                                 $query = "SELECT * FROM tbl_manage_property_type";
                                 $result = mysqli_query($conn, $query) or die("Query Unsuccessful" . mysqli_error($conn));
+                                $count = 1;
                                 if ($result) {
                                     while ($row = mysqli_fetch_assoc($result)) {
                                         echo '<tr>
-                                    <td class="align-middle ps-3 id">' . $row['id'] . '</td>
+                                    <td class="align-middle ps-3 id">'.$count++.'</td>
                                     <td class="align-middle type">' . $row['property_type_name'] . '</td>
                                     <td class="align-middle client">' . $row['client_type'] . '</td>
                                     <td class="align-middle">
-                                        <button class="btn btn-sm btn-outline-primary edit-btn" 
-    data-bs-toggle="modal" 
-    data-bs-target="#editPropertyModal"
-                                        data-id = ' . $row['id'] . '
-                                        data-property_type = ' . $row['property_type_name'] . '
-                                        data-client_type = ' . $row['client_type'] . '
-                                         style="border: none;">🖉</button>
+                                        <button 
+  class="btn btn-sm btn-outline-primary edit-btn"
+  data-bs-toggle="modal"
+  data-bs-target="#editPropertyModal"
+  data-id="'. $row["id"].'"
+  data-property_type="'. htmlspecialchars($row["property_type_name"], ENT_QUOTES).'"
+  data-client_type="'. $row["client_type"].'"  
+  style="border: none;">
+  🖉
+</button>
+
+
+
                                     </td>
                                     <td class="align-middle">
                                      <input type="checkbox" class="form-check-input active-checkbox"
-         data-id="' . $row['id'] . '" ' . ($row['is_active'] === 'Yes' ? 'checked' : '') . '>
+         `                              data-id="' . $row['id'] . '" 
+                                        ' . ($row['is_active'] === 'Yes' ? 'checked' : '') . '>
                                     </td>
                                 </tr>';
                                     }
@@ -413,9 +422,10 @@
 
                                         <label for="edit_type" class="form-label">Type of client</label>
                                         <select name="edit_client_type" id="edit_type" class="form-select">
-                                            <option value="buyer">Buyer</option>
-                                            <option value="seller">Seller</option>
-                                        </select>
+    <option value="Buyer">Buyer</option>
+    <option value="Seller">Seller</option>
+</select>
+
                                     </div>
                                     <input type="hidden" id="edit_id" name="edit_id">
                                 </form>
@@ -429,6 +439,7 @@
                         </div>
                     </div>
                 </div>
+                
                 <?php
                 include '../PhpFiles/connection.php';
 
@@ -451,21 +462,61 @@
                 }
                 ?>
 
-
             </div>
+
             <footer>
                 <!-- Footer -->
                 <?php include("../../Components/footer.php"); ?>
             </footer>
         </div>
 
-
-
-
-
-
     </main>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".edit-btn").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+            const id = this.getAttribute("data-id");
+            const propertyType = this.getAttribute("data-property_type");
+            const clientType = this.getAttribute("data-client_type");
 
+            console.log("clientType:", clientType); // 👈 This will show in the browser console
+
+            document.getElementById("edit_id").value = id;
+            document.getElementById("edit_name").value = propertyType;
+            document.getElementById("edit_type").value = clientType;
+        });
+    });
+});
+</script>
+
+
+   <!-- <script>
+    document.addEventListener("DOMContentLoaded", function () {
+  document.body.addEventListener("click", function (e) {
+    const btn = e.target.closest(".edit-btn");
+    if (!btn) return;
+
+    const id = btn.getAttribute("data-id");
+    const propertyType = btn.getAttribute("data-property_type");
+    const clientType = btn.getAttribute("data-client_type");
+
+    console.log("clientType received:", clientType);
+
+    document.getElementById("edit_id").value = id;
+    document.getElementById("edit_name").value = propertyType;
+
+    const select = document.getElementById("edit_type");
+    const found = Array.from(select.options).some(option => option.value === clientType);
+
+    if (found) {
+      select.value = clientType;
+    } else {
+      console.warn("clientType value not found in options:", clientType);
+      select.selectedIndex = 0; // fallback
+    }
+  });
+}); -->
+   <!-- </script> -->
     <!-- ===============================================-->
     <!--    End of Main Content-->
     <!-- ===============================================-->
@@ -494,40 +545,8 @@
     <script src="../../vendors/echarts/echarts.min.js"></script>
     <script src="../../assets/js/ecommerce-dashboard.js"></script>
     <!-- JS for modal data transfer -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            document.querySelectorAll(".edit-btn").forEach(function(btn) {
-                btn.addEventListener("click", function() {
-                    const row = btn.closest("tr");
-                    const id = row.querySelector(".id").textContent.trim();
-                    const type = row.querySelector(".type").textContent.trim();
-                    const client = row.querySelector(".client").textContent.trim();
-
-                    document.getElementById("edit_property_id").value = id;
-                    document.getElementById("edit_property_type").value = type;
-                    document.getElementById("edit_client_type").value = client;
-                });
-            });
-        });
+   
     </script>
-    </script>
-
-    <script>
-        document.querySelectorAll('.edit-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const id = this.getAttribute('data-id');
-                const propertyType = this.getAttribute('data-property_type');
-                const clientType = this.getAttribute('data-client_type');
-
-                document.getElementById('edit_id').value = id;
-                document.getElementById('edit_name').value = propertyType;
-                document.getElementById('edit_type').value = clientType;
-            });
-        });
-    </script>
-
-
-
 </body>
 
 
