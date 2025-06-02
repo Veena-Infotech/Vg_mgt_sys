@@ -88,10 +88,7 @@
         object-fit: cover;
     }
 
-    .nav-tabs .nav-link {
-        color: white;
-        /* Default color for inactive tabs */
-    }
+ 
 
     .nav-tabs .nav-link.active {
         color: blue;
@@ -338,17 +335,17 @@
                                                                                 </div>
                                                                             </div>
 
-                                                                        <!-- Reference Name Dropdown -->
-<div class="col-md-6" id="referenceNameField">
-  <label class="form-label" for="referenceName">Reference Name</label>
-  <select class="form-select" id="referenceName" name="referenceName">
-    <option value="">Select Reference</option>
-    <option value="add_new_reference">+ Add Reference</option> <!-- placed right after default -->
-    <option value="Ref1">Ref1</option>
-    <option value="Ref2">Ref2</option>
-    <!-- Add more reference options as needed -->
-  </select>
-</div>
+                                                                            <!-- Reference Name Dropdown -->
+                                                                            <div class="col-md-6  animate-field" id="referenceNameField">
+                                                                                <label class="form-label" for="referenceName">Reference Name</label>
+                                                                                <select class="form-select" id="referenceName" name="referenceName" required style="border: 1px solid  #dcdcdc">
+                                                                                    <option value="">Select Reference</option>
+                                                                                    <option value="add_new_reference">+ Add Reference</option> <!-- placed right after default -->
+                                                                                    <option value="Ref1">Ref1</option>
+                                                                                    <option value="Ref2">Ref2</option>
+                                                                                    <!-- Add more reference options as needed -->
+                                                                                </select>
+                                                                            </div>
 
 
                                                                             <!-- Whom to Meet -->
@@ -780,15 +777,13 @@
                 otpInput.classList.add("is-invalid");
             }
         }
-        
-  document.getElementById("referenceName").addEventListener("change", function () {
-    if (this.value === "add_new_reference") {
-      // Temporary redirect to another page, change later
-      window.location.href = "/temporary-add-reference-page";
-    }
-  });
 
-
+        document.getElementById("referenceName").addEventListener("change", function() {
+            if (this.value === "add_new_reference") {
+                // Temporary redirect to another page, change later
+                window.location.href = "/temporary-add-reference-page";
+            }
+        });
     </script>
 
 
