@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 30, 2025 at 01:29 PM
+-- Generation Time: Jun 02, 2025 at 09:13 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -579,6 +579,13 @@ CREATE TABLE `tbl_meeting_history` (
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `tbl_meeting_history`
+--
+
+INSERT INTO `tbl_meeting_history` (`id`, `uid`, `date`, `time`, `visitor_id`, `emp_id`, `reason`, `location`, `in_time`, `out_time`, `payment_status`, `payment_mode`, `amount`, `meeting_status`, `timestamp`) VALUES
+(8, 'meet_683d47258c20c', '2025-06-02', '08:39:33', 4, 3, 'wdccc', NULL, NULL, NULL, NULL, NULL, NULL, 'Scheduled', '2025-06-02 06:39:33');
+
 -- --------------------------------------------------------
 
 --
@@ -800,7 +807,7 @@ INSERT INTO `tbl_project_task_status` (`id`, `project_id`, `task_status_id`, `cr
 
 CREATE TABLE `tbl_project_type` (
   `id` int(100) NOT NULL,
-  `uid` int(11) NOT NULL,
+  `uid` varchar(255) DEFAULT NULL,
   `type` varchar(256) DEFAULT NULL,
   `created_at` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -810,9 +817,9 @@ CREATE TABLE `tbl_project_type` (
 --
 
 INSERT INTO `tbl_project_type` (`id`, `uid`, `type`, `created_at`) VALUES
-(1, 1, 'Society website ', '2025-05-29'),
-(2, 2, '79A\r\n', '2025-05-29'),
-(3, 3, 'Internal Software', '2025-05-29');
+(1, '1', 'Society website ', '2025-05-29'),
+(2, '2', '79A\r\n', '2025-05-29'),
+(3, '3', 'Internal Software', '2025-05-29');
 
 -- --------------------------------------------------------
 
@@ -869,10 +876,10 @@ CREATE TABLE `tbl_society` (
 
 CREATE TABLE `tbl_society_details` (
   `id` int(11) NOT NULL,
-  `uid` int(11) NOT NULL,
+  `uid` varchar(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `society_name` varchar(255) NOT NULL,
-  `ward` varchar(255) NOT NULL,
+  `ward` int(11) DEFAULT NULL,
   `unit` int(11) NOT NULL,
   `address` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -1067,6 +1074,11 @@ CREATE TABLE `tbl_visitor` (
   `address` text DEFAULT NULL,
   `img` varchar(255) NOT NULL,
   `registered_date` date DEFAULT NULL,
+  `soc_company_name` varchar(255) DEFAULT NULL,
+  `visitor_type` enum('Guest','Client','Vendor','Society Member') DEFAULT NULL,
+  `designation` enum('Chairman','Secretary','Treasurer','Member') DEFAULT NULL,
+  `number_accompanying_guests` int(11) DEFAULT NULL,
+  `visit_purpose` text DEFAULT NULL,
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -1074,10 +1086,11 @@ CREATE TABLE `tbl_visitor` (
 -- Dumping data for table `tbl_visitor`
 --
 
-INSERT INTO `tbl_visitor` (`id`, `uid`, `f_name`, `m_name`, `l_name`, `phone_no`, `email`, `address`, `img`, `registered_date`, `timestamp`) VALUES
-(1, 'visitor_6814e4b888426', 'Aryan', 'Nitin', 'Shirodkar', 2147483647, 'ans@gmail.com', '', 'visitor_1.jpg', '2025-05-02', '2025-05-02 15:28:56'),
-(2, 'visitor_6815f2052cdfb', 'om', 'Pandey', 'Pandey', 2147483647, 'om@gmail.com', '', 'visitor_2.jpg', '2025-05-03', '2025-05-14 13:02:35'),
-(3, 'visitor_68270285e0a88', 'Aryan', 'Nitin', 'Shirodkar', 2147483647, 'aryanshirodkar03@gmail.com', '', 'visitor_3.jpg', '2025-05-16', '2025-05-16 09:16:53');
+INSERT INTO `tbl_visitor` (`id`, `uid`, `f_name`, `m_name`, `l_name`, `phone_no`, `email`, `address`, `img`, `registered_date`, `soc_company_name`, `visitor_type`, `designation`, `number_accompanying_guests`, `visit_purpose`, `timestamp`) VALUES
+(1, 'visitor_6814e4b888426', 'Aryan', 'Nitin', 'Shirodkar', 2147483647, 'ans@gmail.com', '', 'visitor_1.jpg', '2025-05-02', NULL, NULL, NULL, NULL, NULL, '2025-05-02 15:28:56'),
+(2, 'visitor_6815f2052cdfb', 'om', 'Pandey', 'Pandey', 2147483647, 'om@gmail.com', '', 'visitor_2.jpg', '2025-05-03', NULL, NULL, NULL, NULL, NULL, '2025-05-14 13:02:35'),
+(3, 'visitor_68270285e0a88', 'Aryan', 'Nitin', 'Shirodkar', 2147483647, 'aryanshirodkar03@gmail.com', '', 'visitor_3.jpg', '2025-05-16', NULL, NULL, NULL, NULL, NULL, '2025-05-16 09:16:53'),
+(4, 'visitor_683d47258a6d0', '', '', '', 1234567891, 'manya.veenagroup@gmail.com', '', 'visitor_4.jpg', '2025-06-02', NULL, NULL, NULL, NULL, NULL, '2025-06-02 06:39:33');
 
 -- --------------------------------------------------------
 
@@ -1556,7 +1569,7 @@ ALTER TABLE `tbl_manage_reservation`
 -- AUTO_INCREMENT for table `tbl_meeting_history`
 --
 ALTER TABLE `tbl_meeting_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_meeting_notes`
@@ -1694,7 +1707,7 @@ ALTER TABLE `tbl_todo`
 -- AUTO_INCREMENT for table `tbl_visitor`
 --
 ALTER TABLE `tbl_visitor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_ward_details`
