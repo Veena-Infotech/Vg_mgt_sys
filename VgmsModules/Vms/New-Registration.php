@@ -89,7 +89,7 @@
     }
 
     .nav-tabs .nav-link {
-        color: black;
+        color: white;
         /* Default color for inactive tabs */
     }
 
@@ -260,46 +260,96 @@
                                                                         <input type="hidden" name="capturedImage" id="captured_image_input">
                                                                         <div class="row">
                                                                             <!-- Full Name -->
-                                                                            <div class="col-md-6 mb-4">
-                                                                                <div class="form-floating">
-                                                                                    <input type="text"
-                                                                                        class="form-control rounded-3"
-                                                                                        id="name" placeholder="John Doe"
-                                                                                        name="name"
-                                                                                        required
-                                                                                        style="border: 1px solid #dcdcdc;">
-                                                                                    <label for="name">Full Name</label>
+                                                                            <!-- Name Fields -->
+                                                                            <div class="col-md-4  animate-field">
+                                                                                <label class="form-label" for="firstName">First Name</label>
+                                                                                <input class="form-control" id="firstName" name="firstName" type="text" placeholder="First Name" required style="border: 1px solid #dcdcdc;" />
+
+                                                                            </div>
+                                                                            <div class="col-md-4  animate-field">
+                                                                                <label class="form-label" for="middleName">Middle Name</label>
+                                                                                <input class="form-control" id="middleName" name="middleName" type="text" placeholder="Middle Name" required style="border: 1px solid #dcdcdc;" />
+                                                                            </div>
+                                                                            <div class="col-md-4  animate-field">
+                                                                                <label class="form-label" for="lastName">Last Name</label>
+                                                                                <input class="form-control" id="lastName" name="lastName" type="text" placeholder="Last Name" required style="border: 1px solid #dcdcdc;" />
+                                                                            </div>
+
+                                                                            <!-- Email and Phone -->
+                                                                            <div class="col-md-6  animate-field">
+                                                                                <label class="form-label" for="email">Email</label>
+                                                                                <input class="form-control" id="email" name="email" type="email" placeholder="johndoe@example.com" required style="border: 1px solid #dcdcdc;" />
+                                                                            </div>
+                                                                            <div class="col-md-6  animate-field">
+                                                                                <label class="form-label" for="phone">Phone Number</label>
+                                                                                <input class="form-control" id="phone" name="phone" type="tel" placeholder="123-456-7890" required style="border: 1px solid #dcdcdc;" />
+                                                                            </div>
+
+                                                                            <!-- Radio Buttons -->
+                                                                            <div class="col-md-12  animate-field">
+                                                                                <label class="form-label">You are from:</label>
+                                                                                <div>
+                                                                                    <div class="form-check form-check-inline">
+                                                                                        <input class="form-check-input" id="societyRadio" type="radio" name="source" value="society" required style="border: 1px solid #dcdcdc;" />
+                                                                                        <label class="form-check-label" for="societyRadio">Society</label>
+                                                                                    </div>
+                                                                                    <div class="form-check form-check-inline">
+                                                                                        <input class="form-check-input" id="companyRadio" type="radio" name="source" value="company" required style="border: 1px solid #dcdcdc;" />
+                                                                                        <label class="form-check-label" for="companyRadio">Company</label>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
 
-                                                                            <!-- Email -->
-                                                                            <div class="col-md-6 mb-4">
-                                                                                <div class="form-floating">
-                                                                                    <input type="email"
-                                                                                        class="form-control rounded-3"
-                                                                                        id="email"
-                                                                                        name="email"
-                                                                                        placeholder="johndoe@example.com"
-                                                                                        required
-                                                                                        style="border: 1px solid #dcdcdc;">
-                                                                                    <label for="email">Email</label>
+                                                                            <!-- Conditional Dropdowns -->
+                                                                            <div class="col-md-6" id="designationDropdown" style="display: none;">
+                                                                                <label class="form-label" for="designation">Designation</label>
+                                                                                <select class="form-select" id="designation" name="designation">
+                                                                                    <option selected disabled value="">Choose...</option>
+                                                                                    <option>Manager</option>
+                                                                                    <option>Secretary</option>
+                                                                                    <option>President</option>
+                                                                                </select>
+                                                                            </div>
+
+                                                                            <div class="col-md-6" id="visitorTypeDropdown" style="display: none;">
+                                                                                <label class="form-label" for="visitorType">Visitor Type</label>
+                                                                                <select class="form-select" id="visitorType" name="visitorType">
+                                                                                    <option selected disabled value="">Choose...</option>
+                                                                                    <option>Vendor</option>
+                                                                                    <option>Client</option>
+                                                                                    <option>Delivery</option>
+                                                                                </select>
+                                                                            </div>
+
+
+
+                                                                            <!-- Reference Radio -->
+                                                                            <div class="col-md-12  animate-field">
+                                                                                <label class="form-label">Is through Reference?</label>
+                                                                                <div>
+                                                                                    <div class="form-check form-check-inline">
+                                                                                        <input class="form-check-input" id="referenceYes" type="radio" name="reference" value="yes" required style="border: 1px solid #dcdcdc;" />
+                                                                                        <label class="form-check-label" for="referenceYes">Yes</label>
+                                                                                    </div>
+                                                                                    <div class="form-check form-check-inline">
+                                                                                        <input class="form-check-input" id="referenceNo" type="radio" name="reference" value="no" required style="border: 1px solid #dcdcdc;" />
+                                                                                        <label class="form-check-label" for="referenceNo">No</label>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
 
-                                                                            <!-- Phone -->
-                                                                            <div class="col-md-6 mb-4">
-                                                                                <div class="form-floating">
-                                                                                    <input type="tel"
-                                                                                        class="form-control rounded-3"
-                                                                                        id="phone"
-                                                                                        name="phone"
-                                                                                        placeholder="123-456-7890"
-                                                                                        required
-                                                                                        style="border: 1px solid #dcdcdc;">
-                                                                                    <label for="phone">Phone
-                                                                                        Number</label>
-                                                                                </div>
-                                                                            </div>
+                                                                        <!-- Reference Name Dropdown -->
+<div class="col-md-6" id="referenceNameField">
+  <label class="form-label" for="referenceName">Reference Name</label>
+  <select class="form-select" id="referenceName" name="referenceName">
+    <option value="">Select Reference</option>
+    <option value="add_new_reference">+ Add Reference</option> <!-- placed right after default -->
+    <option value="Ref1">Ref1</option>
+    <option value="Ref2">Ref2</option>
+    <!-- Add more reference options as needed -->
+  </select>
+</div>
+
 
                                                                             <!-- Whom to Meet -->
                                                                             <?php
@@ -309,7 +359,7 @@
                                                                             $result = mysqli_query($conn, $sql);
                                                                             ?>
 
-                                                                            <div class="col-md-6 mb-4">
+                                                                            <div class="col-md-6 mb-4 animate-field">
                                                                                 <div class="form-floating">
                                                                                     <select class="form-select rounded-3" id="whomToMeet" name="whomToMeet" required style="border: 1px solid #dcdcdc;">
                                                                                         <option selected disabled>Choose...</option>
@@ -329,7 +379,7 @@
 
                                                                             <!-- Reason to Meet -->
                                                                             <div class="col-md-8 mb-4">
-                                                                                <div class="form-floating h-100">
+                                                                                <div class="form-floating h-100 animate-field">
                                                                                     <textarea
                                                                                         class="form-control rounded-3 h-100"
                                                                                         placeholder="Reason for meeting"
@@ -343,7 +393,7 @@
                                                                             </div>
 
                                                                             <!-- Capture Image -->
-                                                                            <div class="col-md-4 mb-4"
+                                                                            <div class="col-md-4 mb-4 animate-field"
                                                                                 id="captureImageBox">
                                                                                 <div class=" rounded-3 p-3 d-flex flex-column align-items-center justify-content-between h-100"
                                                                                     style="min-height: 200px; ">
@@ -366,7 +416,7 @@
                                                                             </div>
 
                                                                             <!-- Register Button (full width) -->
-                                                                            <div class="col-12 d-grid">
+                                                                            <div class="col-12 d-grid animate-field">
                                                                                 <!-- <button type="submit"
                                                                                     class="btn btn-primary btn-lg rounded-pill shadow-sm">Register</button> -->
                                                                                 <button class="btn btn-primary w-100 mb-3">Registration</button>
@@ -410,37 +460,56 @@
                                                                             <label for="visitorName">Visitors</label>
                                                                         </div>
 
-                                                                        <!-- Whom to Meet Dropdown -->
-                                                                        <div class="form-floating mb-4">
-                                                                            <select class="form-select rounded-3" id="whomToMeet" name="whomToMeet" required style="border: 1px solid #dcdcdc;">
-                                                                                <option selected disabled>Choose...</option>
-                                                                                <?php
-                                                                                $empQuery = "SELECT id, f_name, l_name, position FROM tbl_emp ORDER BY f_name ASC";
-                                                                                $empResult = mysqli_query($conn, $empQuery);
+                                                                        <!-- OTP Section (Always Visible) -->
+                                                                        <div class="row align-items-end mb-4" id="otpSection">
+                                                                            <!-- OTP Input -->
+                                                                            <div class="col-md-8">
+                                                                                <label class="form-label" for="otp">Enter OTP</label>
+                                                                                <input type="text" class="form-control rounded-3" id="otp" name="otp" maxlength="6" required pattern="\d{6}" style="border: 1px solid #dcdcdc;" placeholder="Enter 6-digit OTP" />
+                                                                                <div class="invalid-feedback">Please enter a valid 6-digit OTP.</div>
+                                                                            </div>
 
-                                                                                while ($emp = mysqli_fetch_assoc($empResult)) {
-                                                                                    $emp_id = $emp['id'];
-                                                                                    $emp_name = $emp['f_name'] . ' ' . $emp['l_name'] . ' (' . $emp['position'] . ')';
-                                                                                    echo "<option value=\"$emp_id\">$emp_name</option>";
-                                                                                }
-                                                                                ?>
-                                                                            </select>
-                                                                            <label for="whomToMeet">Whom to Meet?</label>
+                                                                            <!-- Verify Button -->
+                                                                            <div class="col-md-4">
+                                                                                <button class="btn btn-primary mt-4 w-100" type="button" onclick="verifyOTP()">Verify</button>
+                                                                            </div>
                                                                         </div>
 
-                                                                        <div class="form-floating mb-4">
-                                                                            <textarea class="form-control rounded-3"
-                                                                                placeholder="Reason for meeting"
-                                                                                id="reason"
-                                                                                name="reason"
-                                                                                style="height: 200px; border: 1px solid #dcdcdc;"
-                                                                                required></textarea>
-                                                                            <label for="reason">Reason to Meet</label>
-                                                                        </div>
-                                                                        <div class="d-grid">
-                                                                            <!-- <button type="submit"
-                                                                                class="btn btn-primary btn-lg rounded-pill shadow-sm">Update</button> -->
-                                                                            <button class="btn btn-primary w-100 mb-3">Update</button>
+
+                                                                        <!-- Rest of Form (Hidden initially) -->
+                                                                        <div id="mainFormFields" style="display: none;">
+                                                                            <!-- Whom to Meet Dropdown -->
+                                                                            <div class="form-floating mb-4">
+                                                                                <select class="form-select rounded-3" id="whomToMeet" name="whomToMeet" required style="border: 1px solid #dcdcdc;">
+                                                                                    <option selected disabled>Choose...</option>
+                                                                                    <?php
+                                                                                    $empQuery = "SELECT id, f_name, l_name, position FROM tbl_emp ORDER BY f_name ASC";
+                                                                                    $empResult = mysqli_query($conn, $empQuery);
+                                                                                    while ($emp = mysqli_fetch_assoc($empResult)) {
+                                                                                        $emp_id = $emp['id'];
+                                                                                        $emp_name = $emp['f_name'] . ' ' . $emp['l_name'] . ' (' . $emp['position'] . ')';
+                                                                                        echo "<option value=\"$emp_id\">$emp_name</option>";
+                                                                                    }
+                                                                                    ?>
+                                                                                </select>
+                                                                                <label for="whomToMeet">Whom to Meet?</label>
+                                                                            </div>
+
+                                                                            <!-- Reason -->
+                                                                            <div class="form-floating mb-4">
+                                                                                <textarea class="form-control rounded-3"
+                                                                                    placeholder="Reason for meeting"
+                                                                                    id="reason"
+                                                                                    name="reason"
+                                                                                    style="height: 200px; border: 1px solid #dcdcdc;"
+                                                                                    required></textarea>
+                                                                                <label for="reason">Reason to Meet</label>
+                                                                            </div>
+
+                                                                            <!-- Submit -->
+                                                                            <div class="d-grid">
+                                                                                <button class="btn btn-primary w-100 mb-3">Update</button>
+                                                                            </div>
                                                                         </div>
                                                                     </form>
                                                                 </div>
@@ -594,7 +663,7 @@
     <script>
         window.onload = function() {
             // Select the elements to animate
-            const formFields = document.querySelectorAll('.card-body form .form-floating, .card-body form .btn, #captureImageBox');
+            const formFields = document.querySelectorAll('.card-body  .animate-field');
             const cardBody = document.querySelector('.card-body');
             const tabs = document.querySelectorAll('.nav-tabs .nav-item');
             const newVisitorTitle = document.querySelector('.card-body h3');
@@ -677,6 +746,49 @@
             document.getElementById('capturedImage').classList.remove('d-none');
             document.getElementById('captured_image_input').value = dataURL;
         });
+
+
+
+        document.getElementById("societyRadio").addEventListener("change", function() {
+            document.getElementById("designationDropdown").style.display = "block";
+            document.getElementById("visitorTypeDropdown").style.display = "none";
+        });
+
+        document.getElementById("companyRadio").addEventListener("change", function() {
+            document.getElementById("designationDropdown").style.display = "none";
+            document.getElementById("visitorTypeDropdown").style.display = "block";
+        });
+
+        document.getElementById("referenceYes").addEventListener("change", function() {
+            document.getElementById("referenceNameField").style.display = "block";
+            document.getElementById("addReferenceBtn").style.display = "block";
+        });
+
+        document.getElementById("referenceNo").addEventListener("change", function() {
+            document.getElementById("referenceNameField").style.display = "none";
+            document.getElementById("addReferenceBtn").style.display = "none";
+        });
+
+        function verifyOTP() {
+            const otpInput = document.getElementById("otp");
+            const otpValue = otpInput.value.trim();
+
+            if (/^\d{6}$/.test(otpValue)) {
+                otpInput.classList.remove("is-invalid");
+                document.getElementById("mainFormFields").style.display = "block";
+            } else {
+                otpInput.classList.add("is-invalid");
+            }
+        }
+        
+  document.getElementById("referenceName").addEventListener("change", function () {
+    if (this.value === "add_new_reference") {
+      // Temporary redirect to another page, change later
+      window.location.href = "/temporary-add-reference-page";
+    }
+  });
+
+
     </script>
 
 
