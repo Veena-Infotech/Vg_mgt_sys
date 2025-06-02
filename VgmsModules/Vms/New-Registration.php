@@ -88,7 +88,7 @@
         object-fit: cover;
     }
 
- 
+
 
     .nav-tabs .nav-link.active {
         color: blue;
@@ -298,6 +298,11 @@
                                                                             </div>
 
                                                                             <!-- Conditional Dropdowns -->
+                                                                            <div class="col-md-6 animate-field" id="name" style="display: none;">
+                                                                                <label class="form-label" for="firstName">Society Name</label>
+                                                                                <input class="form-control" id="firstName" name="first_name" type="text" placeholder="Society Name" required style="border: 1px solid #dcdcdc;" />
+                                                                            </div>
+
                                                                             <div class="col-md-6" id="designationDropdown" style="display: none;">
                                                                                 <label class="form-label" for="designation">Designation</label>
                                                                                 <select class="form-select" id="designation" name="designation">
@@ -306,6 +311,11 @@
                                                                                     <option>Secretary</option>
                                                                                     <option>President</option>
                                                                                 </select>
+                                                                            </div>
+
+                                                                            <div class="col-md-6 animate-field" id="Companyname" style="display: none;">
+                                                                                <label class="form-label" for="firstName">Company Name</label>
+                                                                                <input class="form-control" id="firstName" name="first_name" type="text" placeholder="Company Name" required style="border: 1px solid #dcdcdc;" />
                                                                             </div>
 
                                                                             <div class="col-md-6" id="visitorTypeDropdown" style="display: none;">
@@ -321,7 +331,7 @@
 
 
                                                                             <!-- Reference Radio -->
-                                                                            <div class="col-md-12  animate-field">
+                                                                            <!-- <div class="col-md-12 animate-field">
                                                                                 <label class="form-label">Is through Reference?</label>
                                                                                 <div>
                                                                                     <div class="form-check form-check-inline">
@@ -333,7 +343,7 @@
                                                                                         <label class="form-check-label" for="referenceNo">No</label>
                                                                                     </div>
                                                                                 </div>
-                                                                            </div>
+                                                                            </div> -->
 
                                                                             <!-- Reference Name Dropdown -->
                                                                             <div class="col-md-6  animate-field" id="referenceNameField">
@@ -349,6 +359,27 @@
 
 
                                                                             <!-- Whom to Meet -->
+                                                                            
+                                                                            <!-- past php is not deleted -->
+                                                                            <!--?php
+                                                                                    include('../PhpFiles/connection.php');
+
+                                                                                    $sql = "SELECT id, f_name, l_name, position FROM tbl_emp ORDER BY f_name ASC";
+                                                                                    $result = mysqli_query($conn, $sql);
+                                                                                    ?-->
+
+                                                                           
+                                                                                        <!--?php
+                                                                                        while ($row = mysqli_fetch_assoc($result)) {
+                                                                                            $emp_id = $row['id'];
+                                                                                            $full_name = $row['f_name'] . ' ' . $row['l_name'];
+                                                                                            $position = $row['position'];
+                                                                                            echo "<option value='$emp_id'>$full_name ($position)</option>";
+                                                                                        }
+                                                                                        ?-->
+                                                                                   
+
+                                                                            <!-- Whom to Meet -->
                                                                             <?php
                                                                             include('../PhpFiles/connection.php'); // Adjust path if needed
 
@@ -357,21 +388,20 @@
                                                                             ?>
 
                                                                             <div class="col-md-6 mb-4 animate-field">
-                                                                                <div class="form-floating">
-                                                                                    <select class="form-select rounded-3" id="whomToMeet" name="whomToMeet" required style="border: 1px solid #dcdcdc;">
-                                                                                        <option selected disabled>Choose...</option>
-                                                                                        <?php
-                                                                                        while ($row = mysqli_fetch_assoc($result)) {
-                                                                                            $emp_id = $row['id'];
-                                                                                            $full_name = $row['f_name'] . ' ' . $row['l_name'];
-                                                                                            $position = $row['position'];
-                                                                                            echo "<option value='$emp_id'>$full_name ($position)</option>";
-                                                                                        }
-                                                                                        ?>
-                                                                                    </select>
-                                                                                    <label for="whomToMeet">Whom to Meet?</label>
-                                                                                </div>
+                                                                                <label class="form-label" for="whomToMeet">Whom to Meet?</label>
+                                                                                <select class="form-select" id="whomToMeet" name="whomToMeet" required style="border: 1px solid #dcdcdc;">
+                                                                                    <option selected disabled>Choose...</option>
+                                                                                    <?php
+                                                                                    while ($row = mysqli_fetch_assoc($result)) {
+                                                                                        $emp_id = $row['id'];
+                                                                                        $full_name = $row['f_name'] . ' ' . $row['l_name'];
+                                                                                        $position = $row['position'];
+                                                                                        echo "<option value='$emp_id'>$full_name ($position)</option>";
+                                                                                    }
+                                                                                    ?>
+                                                                                </select>
                                                                             </div>
+
 
 
                                                                             <!-- Reason to Meet -->
@@ -747,11 +777,15 @@
 
 
         document.getElementById("societyRadio").addEventListener("change", function() {
+            document.getElementById("Companyname").style.display = "none";
+            document.getElementById("name").style.display = "block";
             document.getElementById("designationDropdown").style.display = "block";
             document.getElementById("visitorTypeDropdown").style.display = "none";
         });
 
         document.getElementById("companyRadio").addEventListener("change", function() {
+            document.getElementById("Companyname").style.display = "block";
+            document.getElementById("name").style.display = "none";
             document.getElementById("designationDropdown").style.display = "none";
             document.getElementById("visitorTypeDropdown").style.display = "block";
         });
