@@ -213,56 +213,87 @@
                                 </tr>
                             </thead>
                             <tbody class="list">
-                                <tr>
-                                    <td class="align-middle ps-3 id">1</td>
-                                    <td class="align-middle name">Residential Complex</td>
-                                    <td class="align-middle">
-                                        <button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editSourceModal" style="border: none;">🖉</button>
+                               <?php
+include '../PhpFiles/connection.php';
+
+$count = 0;
+$query = "SELECT * FROM tbl_project_type";
+$result = mysqli_query($conn, $query) or die("Query Unsuccessful: " . mysqli_error($conn));
+
+if ($result) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        $count++;
+        echo '<tr>
+            <td class="align-middle ps-3 id">' . $count . '</td>
+            <td class="align-middle name">' . htmlspecialchars($row['type']) . '</td>
+            <td class="align-middle">
+                <button class="btn btn-sm btn-outline-primary edit-btn"
+    data-bs-toggle="modal"
+    data-bs-target="#editSourceModal"
+    data-id="' . $row['id'] . '"
+    data-name="' . htmlspecialchars($row['type'], ENT_QUOTES) . '"
+    style="border: none;">🖉</button>
+
+            </td>
+            <td class="align-middle">
+                                        <input type="checkbox" class="form-check-input active-checkbox"
+         data-id="' . $row['id'] . '" ' . ($row['is_active'] === 'Yes' ? 'checked' : '') . '>
                                     </td>
-                                    <td class="align-middle">
-                                        <input class="form-check-input" type="checkbox" checked>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="align-middle ps-3 id">2</td>
-                                    <td class="align-middle name">Commercial Office</td>
-                                    <td class="align-middle">
-                                        <button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editSourceModal" style="border: none;">🖉</button>
-                                    </td>
-                                    <td class="align-middle">
-                                        <input class="form-check-input" type="checkbox">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="align-middle ps-3 id">3</td>
-                                    <td class="align-middle name">Hospitality Tower</td>
-                                    <td class="align-middle">
-                                        <button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editSourceModal" style="border: none;">🖉</button>
-                                    </td>
-                                    <td class="align-middle">
-                                        <input class="form-check-input" type="checkbox" checked>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="align-middle ps-3 id">4</td>
-                                    <td class="align-middle name">Retail Plaza</td>
-                                    <td class="align-middle">
-                                        <button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editSourceModal" style="border: none;">🖉</button>
-                                    </td>
-                                    <td class="align-middle">
-                                        <input class="form-check-input" type="checkbox">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="align-middle ps-3 id">5</td>
-                                    <td class="align-middle name">Mixed-Use Development</td>
-                                    <td class="align-middle">
-                                        <button class="btn btn-sm btn-outline-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editSourceModal" style="border: none;">🖉</button>
-                                    </td>
-                                    <td class="align-middle">
-                                        <input class="form-check-input" type="checkbox" checked>
-                                    </td>
-                                </tr>
+        </tr>';
+    }
+}
+
+
+                                ?>
+                                <!-- checkbox -->
+                                <script>
+                                    document.addEventListener('DOMContentLoaded', function() {
+                                        document.querySelectorAll('.active-checkbox').forEach(checkbox => {
+                                            checkbox.addEventListener('change', function() {
+                                                const builderId = this.getAttribute('data-id');
+                                                const isActive = this.checked ? 'Yes' : 'No';
+
+                                                fetch('view-projecttype.php', {
+                                                        method: 'POST',
+                                                        headers: {
+                                                            'Content-Type': 'application/x-www-form-urlencoded'
+                                                        },
+                                                        body: `id=${builderId}&is_active=${isActive}`
+                                                    })
+                                                    .then(response => response.text())
+                                                    .then(data => {
+                                                        console.log('Update response:', data);
+                                                    })
+                                                    .catch(error => {
+                                                        console.error('Error updating status:', error);
+                                                    });
+                                            });
+                                        });
+                                    });
+                                </script>
+
+                         <!-- checkbox -->
+                        <?php
+                        include '../PhpFiles/connection.php';
+
+                        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'], $_POST['is_active'])) {
+                            $id = $_POST['id'];
+                            $is_active = ($_POST['is_active'] === 'Yes') ? 'Yes' : 'No';
+
+                            $stmt = $conn->prepare("UPDATE tbl_project_type SET is_active = ? WHERE id = ?");
+                            $stmt->bind_param("si", $is_active, $id);
+
+                            if ($stmt->execute()) {
+                                echo "success";
+                            } else {
+                                echo "error: " . $stmt->error;
+                            }
+
+                            $stmt->close();
+                            $conn->close();
+                            exit(); // prevent rest of page from being echoed
+                        }
+                        ?>
                             </tbody>
                         </table>
                     </div>
@@ -304,7 +335,7 @@
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <button class="btn btn-primary" type="submit"
+                                <button class="btn btn-primary" type="submit" name="projecttype-btn"
                                     form="addsourceForm">ADD</button>
                                 <button class="btn btn-outline-primary" type="button"
                                     data-bs-dismiss="modal">Cancel</button>
@@ -312,6 +343,25 @@
                         </div>
                     </div>
                 </div>
+                <!-- add operation -->
+                 <?php
+                 include '../PhpFiles/connection.php';
+
+                 if(isset($_POST['projecttype-btn'])){
+                 $project_type = $_POST['name'];
+                 
+                //  generate unique if manually
+                $uid = uniqid('project_type_', true);
+
+                $query = "INSERT INTO `tbl_project_type` (`uid`, `type`,`is_active`) VALUES ('$uid', '$project_type','1')";
+                $result = mysqli_query($conn, $query) or die("Query Unsuccessful".mysqli_error($conn));
+                if($result){
+                    echo '<script>alert("Data Added Successfully"); window.location.href = "view-projecttype.php" </script>';
+                }else{
+                    echo '<script> alert("Failed : "'.mysqli_error($conn).'); window.location.href = "view-projecttype.php" </script>';
+                }
+            }
+                 ?>
 
                 <!-- Edit Source Modal -->
                 <div class="modal fade" id="editSourceModal" tabindex="-1" aria-labelledby="editSourceLabel" aria-hidden="true">
@@ -324,23 +374,48 @@
                             </div>
 
                             <div class="modal-body">
-                                <form id="editSourceForm" method="post">
+                                <!-- <form id="editSourceForm" method="post">
                                     <div class="mb-3">
                                         <label for="edit_source_name" class="form-label">Project Type</label>
                                         <input class="form-control" type="text" id="edit_source_name" name="edit_source_name" placeholder="Enter Project Type" required>
                                     </div>
                                     <input type="hidden" id="edit_source_id" name="edit_source_id">
-                                </form>
+                                </form> -->
+                                <form id="editSourceForm" method="post">
+          <div class="mb-3">
+            <label for="edit_source_name" class="form-label">Project Type</label>
+            <input class="form-control" type="text" id="edit_source_name" name="edit_source_name" placeholder="Enter Project Type" required>
+          </div>
+          <input type="hidden" id="edit_source_id" name="edit_source_id">
+        </form>
                             </div>
 
                             <div class="modal-footer">
-                                <button class="btn btn-primary" type="submit" form="editSourceForm">EDIT</button>
+                                <!-- <button class="btn btn-primary" name="projecttype_edit_btn" type="submit" form="editSourceForm">EDIT</button> -->
+                                 <button class="btn btn-primary" name="projecttype_edit_btn" type="submit" form="editSourceForm">EDIT</button>
                                 <button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">Cancel</button>
                             </div>
 
                         </div>
                     </div>
                 </div>
+                <!-- Update operation php code -->
+                 <?php
+                 include '../PhpFiles/connection.php';
+
+                 if(isset($_POST['projecttype_edit_btn'])){
+                    $id = $_POST['edit_source_id'];
+                    $project_type = $_POST['edit_source_name'];
+
+                    $query = "UPDATE `tbl_project_type` SET `type` = '$project_type' WHERE `id` = $id";
+                    $result = mysqli_query($conn, $query) or die("Query Unsuccessful".mysqli_error($conn));
+                    if($result){
+                    echo '<script>alert("Data Updated Successfully"); window.location.href = "view-projecttype.php" </script>';
+                }else{
+                    echo '<script> alert("Failed : "'.mysqli_error($conn).'); window.location.href = "view-projecttype.php" </script>';
+                }
+                 }
+                 ?>
 
                 <!-- <div class="modal fade" id="editservices" tabindex="-1" aria-labelledby="editregionLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
@@ -379,6 +454,21 @@
 
 
     </main>
+     <!-- ajax code for edit -->
+ <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".edit-btn").forEach(function(btn) {
+                btn.addEventListener("click", function() {
+                    const row = btn.closest("tr");
+                    const id = row.querySelector(".id").textContent.trim();
+                    const name = row.querySelector(".name").textContent.trim();
+
+                    document.getElementById("edit_source_id").value = id;
+                    document.getElementById("edit_source_name").value = name;
+                });
+            });
+        });
+    </script>
 
     <!-- ===============================================-->
     <!--    End of Main Content-->
@@ -408,7 +498,7 @@
     <script src="../../vendors/echarts/echarts.min.js"></script>
     <script src="../../assets/js/ecommerce-dashboard.js"></script>
     <!-- JS to populate modal -->
-    <script>
+    <!-- <script>
         document.addEventListener("DOMContentLoaded", function() {
             document.querySelectorAll(".edit-btn").forEach(function(btn) {
                 btn.addEventListener("click", function() {
@@ -421,10 +511,7 @@
                 });
             });
         });
-    </script>
-
-
-
+    </script> -->
 
     </script>
 

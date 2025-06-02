@@ -394,6 +394,7 @@ if (isset($_POST['edit_btn'])) {
 }
 ?>
 
+
                 <!-- <div class="modal fade" id="editservices" tabindex="-1" aria-labelledby="editregionLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
@@ -431,6 +432,21 @@ if (isset($_POST['edit_btn'])) {
 
 
     </main>
+    <!-- ajax code for edit -->
+ <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".edit-btn").forEach(function(btn) {
+                btn.addEventListener("click", function() {
+                    const row = btn.closest("tr");
+                    const id = row.querySelector(".id").textContent.trim();
+                    const name = row.querySelector(".name").textContent.trim();
+
+                    document.getElementById("edit_source_id").value = id;
+                    document.getElementById("edit_source_name").value = name;
+                });
+            });
+        });
+    </script>
 
     <!-- ===============================================-->
     <!--    End of Main Content-->
@@ -460,24 +476,7 @@ if (isset($_POST['edit_btn'])) {
     <script src="../../vendors/echarts/echarts.min.js"></script>
     <script src="../../assets/js/ecommerce-dashboard.js"></script>
     <!-- JS to populate modal -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            document.querySelectorAll(".edit-btn").forEach(function(btn) {
-                btn.addEventListener("click", function() {
-                    const row = btn.closest("tr");
-                    const id = row.querySelector(".id").textContent.trim();
-                    const name = row.querySelector(".name").textContent.trim();
-
-                    document.getElementById("edit_source_id").value = id;
-                    document.getElementById("edit_source_name").value = name;
-                });
-            });
-        });
-    </script>
-
-
-
-
+   
     </script>
 
 
