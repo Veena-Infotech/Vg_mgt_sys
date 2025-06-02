@@ -253,7 +253,7 @@
                                                                 <div class="card-body p-5">
                                                                     <h3 class="text-center mb-4 text-primary fw-bold">
                                                                         New Visitor Registration</h3>
-                                                                    <form action="../PhpFiles/register_visitor.php" method="POST" enctype="multipart/form-data">
+                                                                    <form action="../PhpFiles/handle_visitors_registration.php" method="POST" enctype="multipart/form-data">
                                                                         <input type="hidden" name="capturedImage" id="captured_image_input">
                                                                         <div class="row">
                                                                             <!-- Full Name -->
