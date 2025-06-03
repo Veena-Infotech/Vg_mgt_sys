@@ -179,548 +179,64 @@ include '../PhpFiles/connection.php';
                 <h4 class="mb-0">Document Search</h4>
                 <small>Filter through organizational storage to find required documents</small>
                 <hr class="hr">
-<div id="tableExample3" data-list='{"valueNames":["name","email","age"],"page":5,"pagination":true}'>
-  <div class="search-box mb-3 mx-auto">
-    <form class="position-relative"><input class="form-control search-input search form-control-sm" type="search" placeholder="Search" aria-label="Search" />
-      <span class="fas fa-search search-box-icon"></span>
-    </form>
-  </div>
-  <div class="table-responsive">
-    <table class="table table-striped table-sm fs-9 mb-0">
-      <thead>
-        <tr>
-          <th class="sort border-top border-translucent ps-3" data-sort="name">Name</th>
-          <th class="sort border-top" data-sort="email">Email</th>
-          <th class="sort border-top" data-sort="age">Age</th>
-          <th class="sort text-end align-middle pe-0 border-top" scope="col">ACTION</th>
-        </tr>
-      </thead>
-      <tbody class="list">
-        <tr>
-          <td class="align-middle ps-3 name">Anna</td>
-          <td class="align-middle email">anna@example.com</td>
-          <td class="align-middle age">18</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Homer</td>
-          <td class="align-middle email">homer@example.com</td>
-          <td class="align-middle age">35</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Oscar</td>
-          <td class="align-middle email">oscar@example.com</td>
-          <td class="align-middle age">52</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Emily</td>
-          <td class="align-middle email">emily@example.com</td>
-          <td class="align-middle age">30</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Jara</td>
-          <td class="align-middle email">jara@example.com</td>
-          <td class="align-middle age">25</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Clark</td>
-          <td class="align-middle email">clark@example.com</td>
-          <td class="align-middle age">39</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Jennifer</td>
-          <td class="align-middle email">jennifer@example.com</td>
-          <td class="align-middle age">52</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Tony</td>
-          <td class="align-middle email">tony@example.com</td>
-          <td class="align-middle age">30</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Tom</td>
-          <td class="align-middle email">tom@example.com</td>
-          <td class="align-middle age">25</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Michael</td>
-          <td class="align-middle email">michael@example.com</td>
-          <td class="align-middle age">39</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Antony</td>
-          <td class="align-middle email">antony@example.com</td>
-          <td class="align-middle age">39</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Raymond</td>
-          <td class="align-middle email">raymond@example.com</td>
-          <td class="align-middle age">52</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Marie</td>
-          <td class="align-middle email">marie@example.com</td>
-          <td class="align-middle age">30</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Cohen</td>
-          <td class="align-middle email">cohen@example.com</td>
-          <td class="align-middle age">25</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Rowen</td>
-          <td class="align-middle email">rowen@example.com</td>
-          <td class="align-middle age">39</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">John</td>
-          <td class="align-middle email">john@example.com</td>
-          <td class="align-middle age">25</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Emily</td>
-          <td class="align-middle email">emily@example.com</td>
-          <td class="align-middle age">31</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Alice</td>
-          <td class="align-middle email">alice@example.com</td>
-          <td class="align-middle age">42</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">David</td>
-          <td class="align-middle email">david@example.com</td>
-          <td class="align-middle age">29</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Sullivan Benton</td>
-          <td class="align-middle email">sullivan@example.com</td>
-          <td class="align-middle age">23</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Uriah Nunez</td>
-          <td class="align-middle email">uriah@example.com</td>
-          <td class="align-middle age">32</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Terry Lynch</td>
-          <td class="align-middle email">terry@example.com</td>
-          <td class="align-middle age">45</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Lailah Green</td>
-          <td class="align-middle email">lailah@example.com</td>
-          <td class="align-middle age">25</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Phillip Mack</td>
-          <td class="align-middle email">phillip@example.com</td>
-          <td class="align-middle age">21</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Whitney Sawyer</td>
-          <td class="align-middle email">whitney@example.com</td>
-          <td class="align-middle age">12</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Jaliyah Ritter</td>
-          <td class="align-middle email">jaliyah@example.com</td>
-          <td class="align-middle age">12</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Clayton Arnold</td>
-          <td class="align-middle email">clayton@example.com</td>
-          <td class="align-middle age">52</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Jett Donovan</td>
-          <td class="align-middle email">jett@example.com</td>
-          <td class="align-middle age">31</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Javion Christensen</td>
-          <td class="align-middle email">javion@example.com</td>
-          <td class="align-middle age">25</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Brittany Griffin</td>
-          <td class="align-middle email">brittany@example.com</td>
-          <td class="align-middle age">41</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Dustin Middleton</td>
-          <td class="align-middle email">dustin@example.com</td>
-          <td class="align-middle age">45</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Janessa Mann</td>
-          <td class="align-middle email">janessa@example.com</td>
-          <td class="align-middle age">65</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Evangeline Santos</td>
-          <td class="align-middle email">evangeline@example.com</td>
-          <td class="align-middle age">32</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Parker Todd</td>
-          <td class="align-middle email">parker@example.com</td>
-          <td class="align-middle age">41</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Jaxson Gill</td>
-          <td class="align-middle email">jaxson@example.com</td>
-          <td class="align-middle age">33</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Lucille</td>
-          <td class="align-middle email">lucille@example.com</td>
-          <td class="align-middle age">34</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Terrell</td>
-          <td class="align-middle email">terrell@example.com</td>
-          <td class="align-middle age">35</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Shayna</td>
-          <td class="align-middle email">shayna@example.com</td>
-          <td class="align-middle age">36</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Alvaro</td>
-          <td class="align-middle email">alvaro@example.com</td>
-          <td class="align-middle age">37</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Clay</td>
-          <td class="align-middle email">clay@example.com</td>
-          <td class="align-middle age">37</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Oscar</td>
-          <td class="align-middle email">oscar@example.com</td>
-          <td class="align-middle age">37</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Tabitha</td>
-          <td class="align-middle email">tabitha@example.com</td>
-          <td class="align-middle age">37</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-middle ps-3 name">Jordon</td>
-          <td class="align-middle email">jordon@example.com</td>
-          <td class="align-middle age">37</td>
-          <td class="align-middle white-space-nowrap text-end pe-0">
-            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="d-flex justify-content-between mt-3"><span class="d-none d-sm-inline-block" data-list-info="data-list-info"></span>
-    <div class="d-flex"><button class="page-link" data-list-pagination="prev"><span class="fas fa-chevron-left"></span></button>
-      <ul class="mb-0 pagination"></ul><button class="page-link pe-0" data-list-pagination="next"><span class="fas fa-chevron-right"></span></button>
-    </div>
-  </div>
-</div>
+                <div id="tableExample3" data-list='{
+  "valueNames": [
+    "file_name",
+    "office_name",
+    "room_name",
+    "cupboard",
+    "status",
+    "taken_by",
+    "taken_time",
+    "reason"
+  ],
+  "page": 5,
+  "pagination": true
+}'>
+                    <div class="search-box mb-3 mx-auto">
+                        <form class="position-relative"><input class="form-control search-input search form-control-sm"
+                                type="search" placeholder="Search" aria-label="Search" />
+                            <span class="fas fa-search search-box-icon"></span>
+                        </form>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-sm fs-9 mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="sort border-top border-translucent ps-3" data-sort="file_name">File Name
+                                    </th>
+                                    <th class="sort border-top" data-sort="office_name">Office Name</th>
+                                    <th class="sort border-top" data-sort="room_name">Room Name</th>
+                                    <th class="sort border-top" data-sort="cupboard">Cupboard</th>
+                                    <th class="sort border-top" data-sort="status">Status</th>
+                                    <th class="sort border-top" data-sort="taken_by">Taken By</th>
+                                    <th class="sort border-top" data-sort="taken_time">Taken Time</th>
+                                    <th class="sort border-top" data-sort="reason">Reason</th>
+                                </tr>
+                            </thead>
+                            <tbody class="list">
+                                <tr>
+                                    <td class="align-middle ps-3 file_name">Lease Agreement</td>
+                                    <td class="align-middle office_name">Head Office</td>
+                                    <td class="align-middle room_name">Room 101</td>
+                                    <td class="align-middle cupboard">Cupboard A</td>
+                                    <td class="align-middle status text-success">IN</td>
+                                    <td class="align-middle taken_by">—</td>
+                                    <td class="align-middle taken_time">—</td>
+                                    <td class="align-middle reason">—</td>
+                                </tr>
+                               </tbody>
+                        </table>
+                    </div>
+                    <div class="d-flex justify-content-between mt-3"><span class="d-none d-sm-inline-block"
+                            data-list-info="data-list-info"></span>
+                        <div class="d-flex"><button class="page-link" data-list-pagination="prev"><span
+                                    class="fas fa-chevron-left"></span></button>
+                            <ul class="mb-0 pagination"></ul><button class="page-link pe-0"
+                                data-list-pagination="next"><span class="fas fa-chevron-right"></span></button>
+                        </div>
+                    </div>
+                </div>
                 <div class="container mt-4">
                 </div>
                 <?php include("../../Components/footer.php"); ?>
@@ -756,7 +272,55 @@ include '../PhpFiles/connection.php';
     <script src="../../vendors/echarts/echarts.min.js"></script>
     <script src="../../assets/js/ecommerce-dashboard.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch('../PhpFiles/get_fms_records.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        const tbody = document.querySelector("#file-table-body");
+                        data.records.forEach(row => {
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `
+                        <td class="align-middle ps-3 file_name">${row.file_name}</td>
+                        <td class="align-middle office_name">${row.office_name}</td>
+                        <td class="align-middle room_name">${row.room_name}</td>
+                        <td class="align-middle cupboard">${row.cupboard}</td>
+                        <td class="align-middle status ${row.status === 'IN' ? 'text-success' : 'text-danger'}">${row.status}</td>
+                        <td class="align-middle taken_by">${row.taken_by}</td>
+                        <td class="align-middle taken_time">${row.taken_time}</td>
+                        <td class="align-middle reason">${row.reason}</td>
+                    `;
+                            tbody.appendChild(tr);
+                        });
 
+                        // Re-initialize List.js if needed
+                        if (typeof List !== 'undefined') {
+                            new List('fileTable', {
+                                valueNames: [
+                                    'file_name',
+                                    'office_name',
+                                    'room_name',
+                                    'cupboard',
+                                    'status',
+                                    'taken_by',
+                                    'taken_time',
+                                    'reason'
+                                ],
+                                page: 5,
+                                pagination: true
+                            });
+                        }
+                    } else {
+                        alert("No records found.");
+                    }
+                })
+                .catch(err => {
+                    console.error("Error fetching data:", err);
+                    alert("Failed to fetch data.");
+                });
+        });
+    </script>
 
 </body>
 
