@@ -1,12 +1,3 @@
-<?php
-include '../PhpFiles/connection.php';
-// session_start();
-
-// if (!isset($_SESSION['user_id'])) {
-//     header("Location: ../../index.php");
-//     exit();
-// }
-?>
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr" data-navigation-type="default" data-navbar-horizontal-shape="default">
 
@@ -40,8 +31,7 @@ include '../PhpFiles/connection.php';
     <!-- ===============================================-->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet">
     <link href="../../vendors/simplebar/simplebar.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../unicons.iconscout.com/release/v4.0.8/css/line.css">
     <link href="../../assets/css/theme-rtl.css" type="text/css" rel="stylesheet" id="style-rtl">
@@ -93,6 +83,8 @@ include '../PhpFiles/connection.php';
                 topNavSlim?.remove();
                 navbarTop?.remove();
                 navbarTopSlim?.remove();
+
+
                 navbarCombo?.remove();
                 navbarComboSlim?.remove();
                 navbarDefault?.remove();
@@ -174,74 +166,63 @@ include '../PhpFiles/connection.php';
             }
         </script>
         <div class="content">
-            <div class="flex-grow-1 d-flex flex-column">
-                <!-- Header -->
-                <h4 class="mb-0">Document Search</h4>
-                <small>Filter through organizational storage to find required documents</small>
-                <hr class="hr">
-                <div id="tableExample3" data-list='{
-  "valueNames": [
-    "file_name",
-    "office_name",
-    "room_name",
-    "cupboard",
-    "status",
-    "taken_by",
-    "taken_time",
-    "reason"
-  ],
-  "page": 5,
-  "pagination": true
-}'>
-                    <div class="search-box mb-3 mx-auto">
-                        <form class="position-relative"><input class="form-control search-input search form-control-sm"
-                                type="search" placeholder="Search" aria-label="Search" />
-                            <span class="fas fa-search search-box-icon"></span>
-                        </form>
+             <h1 class="mb-4 fw-bold">Follow Up</h1>
+            <div class="card shadow-sm p-4">
+                <h4 class="mb-4">Visitor Meeting Form</h4>
+
+                <form>
+                    <!-- Visitor Name Dropdown -->
+                    <div class="mb-3">
+                        <label for="visitorName" class="form-label">Visitor Name</label>
+                        <select id="visitorName" class="form-select">
+                            <option selected disabled>Select Visitor</option>
+                            <option>John Doe</option>
+                            <option>Jane Smith</option>
+                            <option>Amit Patel</option>
+                            <option>Ananya Sharma</option>
+                        </select>
                     </div>
-                    <div class="table-responsive">
-                        <table class="table table-striped table-sm fs-9 mb-0">
-                            <thead>
-                                <tr>
-                                    <th class="sort border-top border-translucent ps-3" data-sort="file_name">File Name
-                                    </th>
-                                    <th class="sort border-top" data-sort="office_name">Office Name</th>
-                                    <th class="sort border-top" data-sort="room_name">Room Name</th>
-                                    <th class="sort border-top" data-sort="cupboard">Cupboard</th>
-                                    <th class="sort border-top" data-sort="status">Status</th>
-                                    <th class="sort border-top" data-sort="taken_by">Taken By</th>
-                                    <th class="sort border-top" data-sort="taken_time">Taken Time</th>
-                                    <th class="sort border-top" data-sort="reason">Reason</th>
-                                </tr>
-                            </thead>
-                            <tbody class="list">
-                                <tr>
-                                    <td class="align-middle ps-3 file_name">Lease Agreement</td>
-                                    <td class="align-middle office_name">Head Office</td>
-                                    <td class="align-middle room_name">Room 101</td>
-                                    <td class="align-middle cupboard">Cupboard A</td>
-                                    <td class="align-middle status text-success">IN</td>
-                                    <td class="align-middle taken_by">—</td>
-                                    <td class="align-middle taken_time">—</td>
-                                    <td class="align-middle reason">—</td>
-                                </tr>
-                               </tbody>
-                        </table>
+
+                    <!-- Meeting With (Auto-fill) -->
+                    <div class="mb-3">
+                        <label for="meetingWith" class="form-label">Meeting With</label>
+                        <input type="text" class="form-control" id="meetingWith" placeholder="Auto-filled based on visitor">
                     </div>
-                    <div class="d-flex justify-content-between mt-3"><span class="d-none d-sm-inline-block"
-                            data-list-info="data-list-info"></span>
-                        <div class="d-flex"><button class="page-link" data-list-pagination="prev"><span
-                                    class="fas fa-chevron-left"></span></button>
-                            <ul class="mb-0 pagination"></ul><button class="page-link pe-0"
-                                data-list-pagination="next"><span class="fas fa-chevron-right"></span></button>
-                        </div>
+
+                    <!-- Follow-up Date/Time Picker -->
+                    <div class="mb-3">
+                        <label for="followUpDateTime" class="form-label">Follow-up Date & Time</label>
+                        <input type="datetime-local" class="form-control" id="followUpDateTime">
                     </div>
-                </div>
-                <div class="container mt-4">
-                </div>
-                <?php include("../../Components/footer.php"); ?>
+
+                    <!-- Notes/Purpose -->
+                    <div class="mb-3">
+                        <label for="notes" class="form-label">Notes / Purpose</label>
+                        <textarea class="form-control" id="notes" rows="3" placeholder="Meeting purpose, details..."></textarea>
+                    </div>
+
+                    <!-- Notify Receptionist -->
+                    <div class="form-check mb-4">
+                        <input class="form-check-input" type="checkbox" value="" id="notifyReceptionist">
+                        <label class="form-check-label" for="notifyReceptionist">
+                            Notify Receptionist
+                        </label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-primary w-100">Submit</button>
+                </form>
             </div>
+
+            <!-- Footer -->
+            <?php include("../../Components/footer.php"); ?>
         </div>
+
+
+
+
+
+
     </main>
 
     <!-- ===============================================-->
@@ -271,57 +252,18 @@ include '../PhpFiles/connection.php';
     <script src="../../assets/js/phoenix.js"></script>
     <script src="../../vendors/echarts/echarts.min.js"></script>
     <script src="../../assets/js/ecommerce-dashboard.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            fetch('../PhpFiles/get_fms_records.php')
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === 'success') {
-                        const tbody = document.querySelector("#file-table-body");
-                        data.records.forEach(row => {
-                            const tr = document.createElement('tr');
-                            tr.innerHTML = `
-                        <td class="align-middle ps-3 file_name">${row.file_name}</td>
-                        <td class="align-middle office_name">${row.office_name}</td>
-                        <td class="align-middle room_name">${row.room_name}</td>
-                        <td class="align-middle cupboard">${row.cupboard}</td>
-                        <td class="align-middle status ${row.status === 'IN' ? 'text-success' : 'text-danger'}">${row.status}</td>
-                        <td class="align-middle taken_by">${row.taken_by}</td>
-                        <td class="align-middle taken_time">${row.taken_time}</td>
-                        <td class="align-middle reason">${row.reason}</td>
-                    `;
-                            tbody.appendChild(tr);
-                        });
 
-                        // Re-initialize List.js if needed
-                        if (typeof List !== 'undefined') {
-                            new List('fileTable', {
-                                valueNames: [
-                                    'file_name',
-                                    'office_name',
-                                    'room_name',
-                                    'cupboard',
-                                    'status',
-                                    'taken_by',
-                                    'taken_time',
-                                    'reason'
-                                ],
-                                page: 5,
-                                pagination: true
-                            });
-                        }
-                    } else {
-                        alert("No records found.");
-                    }
-                })
-                .catch(err => {
-                    console.error("Error fetching data:", err);
-                    alert("Failed to fetch data.");
-                });
-        });
+
+
+
+
     </script>
 
+
+
 </body>
+
+
+
 
 </html>

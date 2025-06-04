@@ -335,12 +335,10 @@ if (isset($_POST['add-landlord'])) {
     $email = mysqli_real_escape_string($conn, $_POST['Landlord_email']);
 
     // Get next UID
-    $res = mysqli_query($conn, "SELECT MAX(uid) AS max_uid FROM tbl_manage_landlord");
-    $row = mysqli_fetch_assoc($res);
-    $uid = uniqid('landllord_',true);
+    $uid = uniqid('landlord_',true);
 
     // Insert query
-    $query = "INSERT INTO `tbl_manage_landlord` (`id`, `landlord_name`, `contact_number`, `email`) 
+    $query = "INSERT INTO `tbl_manage_landlord` (`uid`, `landlord_name`, `contact_number`, `email`) 
               VALUES ('$uid', '$name', '$contact', '$email')";
 
     if (mysqli_query($conn, $query)) {
@@ -412,7 +410,19 @@ if (isset($_POST['edit_Landlord'])) {
     }
 }
 ?>
-
+    <!-- update -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.edit-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            document.getElementById('edit_id').value = button.getAttribute('data-id');
+            document.getElementById('edit_name').value = button.getAttribute('data-name');
+            document.getElementById('edit_contact').value = button.getAttribute('data-contact');
+            document.getElementById('edit_email').value = button.getAttribute('data-email');
+        });
+    });
+});
+</script>
                             </div>
                         </div>
                     </div>
@@ -528,18 +538,7 @@ if (isset($_POST['edit_Landlord'])) {
         }
     </script>
 
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.edit-btn').forEach(button => {
-        button.addEventListener('click', () => {
-            document.getElementById('edit_id').value = button.getAttribute('data-id');
-            document.getElementById('edit_name').value = button.getAttribute('data-name');
-            document.getElementById('edit_contact').value = button.getAttribute('data-contact');
-            document.getElementById('edit_email').value = button.getAttribute('data-email');
-        });
-    });
-});
-</script>
+
 
 
 

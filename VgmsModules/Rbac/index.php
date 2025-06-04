@@ -1,12 +1,3 @@
-<?php
-include '../PhpFiles/connection.php';
-// session_start();
-
-// if (!isset($_SESSION['user_id'])) {
-//     header("Location: ../../index.php");
-//     exit();
-// }
-?>
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr" data-navigation-type="default" data-navbar-horizontal-shape="default">
 
@@ -40,8 +31,7 @@ include '../PhpFiles/connection.php';
     <!-- ===============================================-->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet">
     <link href="../../vendors/simplebar/simplebar.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../unicons.iconscout.com/release/v4.0.8/css/line.css">
     <link href="../../assets/css/theme-rtl.css" type="text/css" rel="stylesheet" id="style-rtl">
@@ -174,73 +164,123 @@ include '../PhpFiles/connection.php';
             }
         </script>
         <div class="content">
-            <div class="flex-grow-1 d-flex flex-column">
-                <!-- Header -->
-                <h4 class="mb-0">Document Search</h4>
-                <small>Filter through organizational storage to find required documents</small>
-                <hr class="hr">
-                <div id="tableExample3" data-list='{
-  "valueNames": [
-    "file_name",
-    "office_name",
-    "room_name",
-    "cupboard",
-    "status",
-    "taken_by",
-    "taken_time",
-    "reason"
-  ],
-  "page": 5,
-  "pagination": true
-}'>
+
+            <div class="row g-0 justify-content-between align-items-center h-100">
+                <!-- Container for the Title -->
+                <div style="width: 100%; text-align: center; margin: 20px 0;">
+                    <h3 style="margin: 0;">RBAC</h3>
+                </div>
+                <hr>
+
+
+                <div class="d-flex align-items-end justify-content-between mb-3">
+                    <!-- Left: Select + Next Button -->
+                    <div class="d-flex align-items-end gap-2">
+                        <div>
+                            <select class="form-select" id="organizerSingle" data-choices="data-choices" data-options='{"removeItemButton":true,"placeholder":true}'>
+                                <option value="">Select Employee...</option>
+                                <option>Massachusetts Institute of Technology</option>
+                                <option>University of Chicago</option>
+                                <option>GSAS Open Labs At Harvard</option>
+                                <option>California Institute of Technology</option>
+                            </select>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-outline-primary" value="fetch">Fetch</button>
+                        </div>
+                    </div>
+
+                    <!-- Right: Add Module -->
+                    <div class="dropdown">
+                        <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            Add Module
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Add New Module</a></li>
+                            <li><a class="dropdown-item" href="#">Import Modules</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                <!-- List.js Container -->
+                <div id="moduleTable" data-list='{"valueNames":["module"],"page":3,"pagination":true}' style="width: 100%; padding-top: 20px;">
+
+                    <!-- Search Bar -->
                     <div class="search-box mb-3 mx-auto">
-                        <form class="position-relative"><input class="form-control search-input search form-control-sm"
-                                type="search" placeholder="Search" aria-label="Search" />
-                            <span class="fas fa-search search-box-icon"></span>
+                        <form class="position-relative">
+                            <input class="form-control search-input search form-control-sm" type="search"
+                                placeholder="Search" aria-label="Search">
+                            <svg class="svg-inline--fa fa-magnifying-glass search-box-icon" aria-hidden="true"
+                                focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img"
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+                            </svg>
                         </form>
                     </div>
+
+                    <!-- Table -->
                     <div class="table-responsive">
                         <table class="table table-striped table-sm fs-9 mb-0">
                             <thead>
                                 <tr>
-                                    <th class="sort border-top border-translucent ps-3" data-sort="file_name">File Name
-                                    </th>
-                                    <th class="sort border-top" data-sort="office_name">Office Name</th>
-                                    <th class="sort border-top" data-sort="room_name">Room Name</th>
-                                    <th class="sort border-top" data-sort="cupboard">Cupboard</th>
-                                    <th class="sort border-top" data-sort="status">Status</th>
-                                    <th class="sort border-top" data-sort="taken_by">Taken By</th>
-                                    <th class="sort border-top" data-sort="taken_time">Taken Time</th>
-                                    <th class="sort border-top" data-sort="reason">Reason</th>
+                                    <th class="sort border-top border-translucent ps-3" data-sort="module">Modules</th>
+                                    <th class="border-top">Add</th>
+                                    <th class="border-top">Update</th>
+                                    <th class="border-top">View</th>
                                 </tr>
                             </thead>
                             <tbody class="list">
                                 <tr>
-                                    <td class="align-middle ps-3 file_name">Lease Agreement</td>
-                                    <td class="align-middle office_name">Head Office</td>
-                                    <td class="align-middle room_name">Room 101</td>
-                                    <td class="align-middle cupboard">Cupboard A</td>
-                                    <td class="align-middle status text-success">IN</td>
-                                    <td class="align-middle taken_by">—</td>
-                                    <td class="align-middle taken_time">—</td>
-                                    <td class="align-middle reason">—</td>
+                                    <td class="align-middle ps-3 module">Residential Complex</td>
+                                    <td class="align-middle"><input type="checkbox" class="form-check-input" checked></td>
+                                    <td class="align-middle"><input type="checkbox" class="form-check-input"></td>
+                                    <td class="align-middle"><input type="checkbox" class="form-check-input" checked></td>
                                 </tr>
-                               </tbody>
+                                <tr>
+                                    <td class="align-middle ps-3 module">Commercial Office</td>
+                                    <td class="align-middle"><input type="checkbox" class="form-check-input"></td>
+                                    <td class="align-middle"><input type="checkbox" class="form-check-input" checked></td>
+                                    <td class="align-middle"><input type="checkbox" class="form-check-input"></td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 module">Hospitality Tower</td>
+                                    <td class="align-middle"><input type="checkbox" class="form-check-input" checked></td>
+                                    <td class="align-middle"><input type="checkbox" class="form-check-input" checked></td>
+                                    <td class="align-middle"><input type="checkbox" class="form-check-input"></td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 module">Retail Plaza</td>
+                                    <td class="align-middle"><input type="checkbox" class="form-check-input"></td>
+                                    <td class="align-middle"><input type="checkbox" class="form-check-input"></td>
+                                    <td class="align-middle"><input type="checkbox" class="form-check-input" checked></td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle ps-3 module">Mixed-Use Development</td>
+                                    <td class="align-middle"><input type="checkbox" class="form-check-input" checked></td>
+                                    <td class="align-middle"><input type="checkbox" class="form-check-input"></td>
+                                    <td class="align-middle"><input type="checkbox" class="form-check-input" checked></td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
-                    <div class="d-flex justify-content-between mt-3"><span class="d-none d-sm-inline-block"
-                            data-list-info="data-list-info"></span>
-                        <div class="d-flex"><button class="page-link" data-list-pagination="prev"><span
-                                    class="fas fa-chevron-left"></span></button>
-                            <ul class="mb-0 pagination"></ul><button class="page-link pe-0"
-                                data-list-pagination="next"><span class="fas fa-chevron-right"></span></button>
+
+                    <!-- Pagination -->
+                    <div class="d-flex justify-content-end mt-3">
+                        <div class="d-flex">
+                            <button class="page-link" data-list-pagination="prev">
+                                <span class="fas fa-chevron-left"></span>
+                            </button>
+                            <ul class="mb-0 pagination"></ul>
+                            <button class="page-link pe-0" data-list-pagination="next">
+                                <span class="fas fa-chevron-right"></span>
+                            </button>
                         </div>
                     </div>
                 </div>
-                <div class="container mt-4">
-                </div>
-                <?php include("../../Components/footer.php"); ?>
             </div>
+
+            <!-- Footer -->
+            <?php include("../../Components/footer.php"); ?>
         </div>
     </main>
 
@@ -254,7 +294,6 @@ include '../PhpFiles/connection.php';
     <!--    JavaScripts-->
 
     <!-- ===============================================-->
-    <!--Dropdown for contacted-to--->
 
     <script src="../../vendors/popper/popper.min.js"></script>
     <script src="../../vendors/bootstrap/bootstrap.min.js"></script>
@@ -271,56 +310,12 @@ include '../PhpFiles/connection.php';
     <script src="../../assets/js/phoenix.js"></script>
     <script src="../../vendors/echarts/echarts.min.js"></script>
     <script src="../../assets/js/ecommerce-dashboard.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            fetch('../PhpFiles/get_fms_records.php')
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === 'success') {
-                        const tbody = document.querySelector("#file-table-body");
-                        data.records.forEach(row => {
-                            const tr = document.createElement('tr');
-                            tr.innerHTML = `
-                        <td class="align-middle ps-3 file_name">${row.file_name}</td>
-                        <td class="align-middle office_name">${row.office_name}</td>
-                        <td class="align-middle room_name">${row.room_name}</td>
-                        <td class="align-middle cupboard">${row.cupboard}</td>
-                        <td class="align-middle status ${row.status === 'IN' ? 'text-success' : 'text-danger'}">${row.status}</td>
-                        <td class="align-middle taken_by">${row.taken_by}</td>
-                        <td class="align-middle taken_time">${row.taken_time}</td>
-                        <td class="align-middle reason">${row.reason}</td>
-                    `;
-                            tbody.appendChild(tr);
-                        });
+    <!-- Include List.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
 
-                        // Re-initialize List.js if needed
-                        if (typeof List !== 'undefined') {
-                            new List('fileTable', {
-                                valueNames: [
-                                    'file_name',
-                                    'office_name',
-                                    'room_name',
-                                    'cupboard',
-                                    'status',
-                                    'taken_by',
-                                    'taken_time',
-                                    'reason'
-                                ],
-                                page: 5,
-                                pagination: true
-                            });
-                        }
-                    } else {
-                        alert("No records found.");
-                    }
-                })
-                .catch(err => {
-                    console.error("Error fetching data:", err);
-                    alert("Failed to fetch data.");
-                });
-        });
     </script>
+
+
 
 </body>
 

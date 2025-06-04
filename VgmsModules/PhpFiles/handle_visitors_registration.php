@@ -8,3 +8,9 @@ function sanitize_folder_name($string)
 }
 
 //Get form data
+$f_name = $_POST['firstName'] ?? '';
+$m_name = $_POST['middleName'] ?? '';
+$l_name = $_POST['lastName'] ?? '';
+$email = $_POST['email'] ?? '';
+$phone = $_POST['phone'] ?? ''; 
+?>

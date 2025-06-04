@@ -208,6 +208,65 @@ session_start();
                             </tr>
                         </thead>
                         <tbody class="list">
+                            <tr>
+                                <td class="align-middle ps-3 number">1</td>
+                                <td class="align-middle name">Ravi Sharma</td>
+                                <td class="align-middle Empname">Anjali Verma</td>
+                                <td class="align-middle meeting">Project Discussion</td>
+                                <td class="align-middle date">2025-05-31</td>
+                                <td class="align-middle time">11:00 AM</td>
+                                <td class="align-middle status">
+                                   <span class="badge badge-phoenix badge-phoenix-primary">Primary</span>
+                                </td>
+                                <td class="align-middle white-space-nowrap text-end pe-0">
+                                    <div class="btn-reveal-trigger position-static">
+                                        <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
+                                            <svg class="svg-inline--fa fa-ellipsis fs-10" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                                <path fill="currentColor" d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z"></path>
+                                            </svg>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-end py-2">
+                                            <a class="dropdown-item" href="Meeting_notes_popup.php">Completed</a>
+                                            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#rescheduleModal">Reschedule</a>
+                                        </div>
+
+                                </td>
+                            </tr>
+                            <div class="modal fade" id="rescheduleModal" tabindex="-1" aria-labelledby="rescheduleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="rescheduleModalLabel">Reschedule Meeting</h5>
+                                            <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <form id="rescheduleForm">
+                                                <div class="mb-3">
+                                                    <label for="rescheduleDate" class="form-label">Date</label>
+                                                    <input type="date" class="form-control" id="rescheduleDate" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="rescheduleTime" class="form-label">Time</label>
+                                                    <input type="time" class="form-control" id="rescheduleTime" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="rescheduleReason" class="form-label">Reason</label>
+                                                    <textarea class="form-control" id="rescheduleReason" rows="3" placeholder="Enter reason..." required></textarea>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button class="btn btn-primary" type="submit" form="rescheduleForm">Submit</button>
+                                            <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
                             <?php
                             include '../PhpFiles/connection.php';
 
@@ -332,7 +391,7 @@ session_start();
 
             <hr>
 
-             <h2 class="mb-2 lh-sm">Meeting History </h2>
+            <h2 class="mb-2 lh-sm">Meeting History </h2>
             <p class="mb-3 text-muted">A list of visitors scheduled for employee-side meetings</p>
             <hr class="hr" /><br>
 
@@ -365,6 +424,7 @@ session_start();
                             </tr>
                         </thead>
                         <tbody class="list">
+
                             <?php
                             include '../PhpFiles/connection.php';
 
@@ -442,7 +502,7 @@ session_start();
 
                             ?>
 
-                          
+
                         </tbody>
                     </table>
                 </div>
