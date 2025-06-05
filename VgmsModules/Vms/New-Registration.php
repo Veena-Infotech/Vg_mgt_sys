@@ -251,17 +251,17 @@
                                                             <div class="card border-0 shadow-lg rounded-4"
                                                                 style="min-height: 500px;">
                                                                 <div class="card-body p-5">
-                                                                 <h3 class="text-center mb-4 text-primary fw-bold">
+                                                                    <h3 class="text-center mb-4 text-primary fw-bold">
                                                                         New Visitor Registration
-                                                                 </h3>
-                                                                 <?php if (isset($_GET['success'])): ?>
-    <div class="alert alert-<?php echo $_GET['success'] === 'true' ? 'success' : 'danger'; ?>">
-        <?php echo $_GET['success'] === 'true' ? 'Visitor registered successfully!' : 'Failed to register visitor.'; ?>
-    </div>
-<?php endif; ?>
+                                                                    </h3>
+                                                                    <?php if (isset($_GET['success'])): ?>
+                                                                        <div class="alert alert-<?php echo $_GET['success'] === 'true' ? 'success' : 'danger'; ?>">
+                                                                            <?php echo $_GET['success'] === 'true' ? 'Visitor registered successfully!' : 'Failed to register visitor.'; ?>
+                                                                        </div>
+                                                                    <?php endif; ?>
 
                                                                     <form action="../PhpFiles/handle_visitors_registration.php" method="POST" enctype="multipart/form-data">
-                                                                       
+
 
                                                                         <div class="row">
                                                                             <!-- Full Name -->
@@ -295,45 +295,46 @@
                                                                                 <label class="form-label">You are from:</label>
                                                                                 <div>
                                                                                     <div class="form-check form-check-inline">
-                                                                                        <input class="form-check-input" id="societyRadio" type="radio" name="source" value="society"  style="border: 1px solid #dcdcdc;" />
+                                                                                        <input class="form-check-input" id="societyRadio" type="radio" name="source" value="society" style="border: 1px solid #dcdcdc;" />
                                                                                         <label class="form-check-label" for="societyRadio">Society</label>
                                                                                     </div>
                                                                                     <div class="form-check form-check-inline">
-                                                                                        <input class="form-check-input" id="companyRadio" type="radio" name="source" value="company"  style="border: 1px solid #dcdcdc;" />
+                                                                                        <input class="form-check-input" id="companyRadio" type="radio" name="source" value="company" style="border: 1px solid #dcdcdc;" />
                                                                                         <label class="form-check-label" for="companyRadio">Company</label>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                             <?php
-                                                                                include('../PhpFiles/connection.php');
+                                                                            include('../PhpFiles/connection.php');
 
-                                                                                // Function to extract ENUM values
-                                                                                function getEnumValues($conn, $table, $column) {
-                                                                                    $sql = "SHOW COLUMNS FROM `$table` LIKE '$column'";
-                                                                                    $result = mysqli_query($conn, $sql);
-                                                                                    $enumValues = [];
+                                                                            // Function to extract ENUM values
+                                                                            function getEnumValues($conn, $table, $column)
+                                                                            {
+                                                                                $sql = "SHOW COLUMNS FROM `$table` LIKE '$column'";
+                                                                                $result = mysqli_query($conn, $sql);
+                                                                                $enumValues = [];
 
-                                                                                    if ($row = mysqli_fetch_assoc($result)) {
+                                                                                if ($row = mysqli_fetch_assoc($result)) {
                                                                                     preg_match('/^enum\((.*)\)$/', $row['Type'], $matches);
                                                                                     $vals = explode(',', $matches[1]);
 
                                                                                     foreach ($vals as $val) {
-                                                                                    $enumValues[] = trim($val, "'");
-                                                                                     }
-                                                                                  }
-
-                                                                                   return $enumValues;
+                                                                                        $enumValues[] = trim($val, "'");
+                                                                                    }
                                                                                 }
 
-                                                                                // Get enum values
-                                                                                $designations = getEnumValues($conn, 'tbl_visitor', 'designation');
-                                                                                $visitorTypes = getEnumValues($conn, 'tbl_visitor', 'visitor_type');
+                                                                                return $enumValues;
+                                                                            }
+
+                                                                            // Get enum values
+                                                                            $designations = getEnumValues($conn, 'tbl_visitor', 'designation');
+                                                                            $visitorTypes = getEnumValues($conn, 'tbl_visitor', 'visitor_type');
                                                                             ?>
 
                                                                             <!-- Conditional Dropdowns -->
                                                                             <div class="col-md-6 animate-field" id="name" style="display: none;">
                                                                                 <label class="form-label" for="firstName">Society Name</label>
-                                                                                <input class="form-control" id="society_name" name="society_name" type="text" placeholder="Society Name"  style="border: 1px solid #dcdcdc;" />
+                                                                                <input class="form-control" id="society_name" name="society_name" type="text" placeholder="Society Name" style="border: 1px solid #dcdcdc;" />
                                                                             </div>
 
                                                                             <div class="col-md-6" id="designationDropdown" style="display: none;">
@@ -350,7 +351,7 @@
 
                                                                             <div class="col-md-6 animate-field" id="Companyname" style="display: none;">
                                                                                 <label class="form-label" for="firstName">Company Name</label>
-                                                                                <input class="form-control" id="company_name" name="company_name" type="text" placeholder="Company Name"  style="border: 1px solid #dcdcdc;" />
+                                                                                <input class="form-control" id="company_name" name="company_name" type="text" placeholder="Company Name" style="border: 1px solid #dcdcdc;" />
                                                                             </div>
 
                                                                             <div class="col-md-6" id="visitorTypeDropdown" style="display: none;">
@@ -360,16 +361,16 @@
                                                                                     <?php foreach ($visitorTypes as $type) { ?>
                                                                                         <option value="<?php echo htmlspecialchars($type); ?>">
                                                                                             <?php echo htmlspecialchars($type); ?>
-                                                                                                </option>
-                                                                                            <?php } ?>
+                                                                                        </option>
+                                                                                    <?php } ?>
                                                                                 </select>
                                                                             </div>
                                                                             <?php
-                                                                                include('../PhpFiles/connection.php');
+                                                                            include('../PhpFiles/connection.php');
 
-                                                                                // Fetch reference clients
-                                                                                $refQuery = "SELECT id, f_name, l_name FROM tbl_client ORDER BY f_name";
-                                                                                $refResult = mysqli_query($conn, $refQuery);
+                                                                            // Fetch reference clients
+                                                                            $refQuery = "SELECT id, f_name, l_name FROM tbl_client ORDER BY f_name";
+                                                                            $refResult = mysqli_query($conn, $refQuery);
                                                                             ?>
 
                                                                             <!-- Reference Name Dropdown -->
@@ -378,7 +379,7 @@
                                                                                 <select class="form-select" id="referenceName" name="referenceName" required style="border: 1px solid  #dcdcdc">
                                                                                     <option value="">Select Reference</option>
                                                                                     <option value="add_new_reference">+ Add Reference</option> <!-- placed right after default -->
-                                                                                    <?php while($row = mysqli_fetch_assoc($refResult)) { ?>
+                                                                                    <?php while ($row = mysqli_fetch_assoc($refResult)) { ?>
                                                                                         <option value="<?php echo htmlspecialchars($row['id']); ?>">
                                                                                             <?php echo htmlspecialchars($row['f_name'] . ' ' . $row['l_name']); ?>
                                                                                         </option>
@@ -407,7 +408,7 @@
                                                                                 </select>
                                                                             </div>
 
-                                                                           <div class="col-md-6 mb-4 animate-field" id="neavField">
+                                                                            <div class="col-md-6 mb-4 animate-field" id="neavField">
                                                                                 <label class="form-label" for="noofguest">Number of guest</label>
                                                                                 <input class="form-control" id="noofguest" name="noofguest" type="text" placeholder="No of guest" required style="border: 1px solid #dcdcdc;" />
                                                                             </div>
@@ -431,22 +432,22 @@
                                                                                 </div>
                                                                             </div-->
                                                                             <!-- Reason to Meet -->
-<div class="col-md-8 mb-4">
-    <div class="form-floating h-100 animate-field">
-        <textarea
-            class="form-control rounded-3 h-100"
-            placeholder="Reason for meeting"
-            id="reason"
-            name="reason"
-            style="min-height: 200px; border: 1px solid #dcdcdc;"
-            required></textarea>
-        <label for="reason">Reason to Meet</label>
-    </div>
-</div>
+                                                                            <div class="col-md-8 mb-4">
+                                                                                <div class="form-floating h-100 animate-field">
+                                                                                    <textarea
+                                                                                        class="form-control rounded-3 h-100"
+                                                                                        placeholder="Reason for meeting"
+                                                                                        id="reason"
+                                                                                        name="reason"
+                                                                                        style="min-height: 200px; border: 1px solid #dcdcdc;"
+                                                                                        required></textarea>
+                                                                                    <label for="reason">Reason to Meet</label>
+                                                                                </div>
+                                                                            </div>
 
 
                                                                             <!-- Capture Image -->
-                                                                             <input type="hidden" name="capturedImageData" id="capturedImageData">
+                                                                            <input type="hidden" name="capturedImageData" id="capturedImageData">
 
                                                                             <div class="col-md-4 mb-4 animate-field"
                                                                                 id="captureImageBox">
@@ -498,21 +499,31 @@
                                                                         include('../PhpFiles/connection.php'); // Update path as needed
                                                                         ?>
                                                                         <!-- Visitors Dropdown -->
-                                                                        <div class="form-floating mb-4">
-                                                                            <select class="form-select rounded-3" id="visitorName" name="visitorName" required style="border: 1px solid #dcdcdc;">
-                                                                                <option selected disabled>Choose...</option>
-                                                                                <?php
-                                                                                $visitorQuery = "SELECT id, f_name, m_name, l_name FROM tbl_visitor ORDER BY f_name ASC";
-                                                                                $visitorResult = mysqli_query($conn, $visitorQuery);
+                                                                        <div class="row mb-4 align-items-end">
+                                                                            <!-- Dropdown Column -->
+                                                                            <div class="col-md-9">
+                                                                                <div class="form-floating">
+                                                                                    <select class="form-select rounded-3" id="visitorName" name="visitorName" required style="border: 1px solid #dcdcdc;">
+                                                                                        <option selected disabled>Choose...</option>
+                                                                                        <?php
+                                                                                        $visitorQuery = "SELECT id, f_name, m_name, l_name FROM tbl_visitor ORDER BY f_name ASC";
+                                                                                        $visitorResult = mysqli_query($conn, $visitorQuery);
 
-                                                                                while ($visitor = mysqli_fetch_assoc($visitorResult)) {
-                                                                                    $visitor_id = $visitor['id'];
-                                                                                    $full_name = trim($visitor['f_name'] . ' ' . $visitor['m_name'] . ' ' . $visitor['l_name']);
-                                                                                    echo "<option value=\"$visitor_id\">$full_name</option>";
-                                                                                }
-                                                                                ?>
-                                                                            </select>
-                                                                            <label for="visitorName">Visitors</label>
+                                                                                        while ($visitor = mysqli_fetch_assoc($visitorResult)) {
+                                                                                            $visitor_id = $visitor['id'];
+                                                                                            $full_name = trim($visitor['f_name'] . ' ' . $visitor['m_name'] . ' ' . $visitor['l_name']);
+                                                                                            echo "<option value=\"$visitor_id\">$full_name</option>";
+                                                                                        }
+                                                                                        ?>
+                                                                                    </select>
+                                                                                    <label for="visitorName">Visitors</label>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <!-- Button Column -->
+                                                                            <div class="col-md-3">
+                                                                                <button type="button" class="btn btn-primary w-100" id="sendOtpBtn">Send OTP</button>
+                                                                            </div>
                                                                         </div>
 
                                                                         <!-- OTP Section (Always Visible) -->
@@ -585,53 +596,54 @@
             </div>
 
 
-         <script>
-            document.addEventListener("DOMContentLoaded", function () 
-            {
-            const video = document.getElementById("video");
-            const canvas = document.getElementById("canvas");
-            const captureBtn = document.getElementById("captureBtn");
-            const capturedImage = document.getElementById("capturedImage");
-            const capturedImageData = document.getElementById("capturedImageData");
-            let stream = null;
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    const video = document.getElementById("video");
+                    const canvas = document.getElementById("canvas");
+                    const captureBtn = document.getElementById("captureBtn");
+                    const capturedImage = document.getElementById("capturedImage");
+                    const capturedImageData = document.getElementById("capturedImageData");
+                    let stream = null;
 
-            // Start camera
-            async function startCamera() {
-            try {
-                stream = await navigator.mediaDevices.getUserMedia({ video: true });
-                video.srcObject = stream;
-                video.play();
-            } catch (error) {
-                console.error("Camera Error: ", error);
-                alert("Camera access denied! Enable it in browser settings.");
-            }
-            }
+                    // Start camera
+                    async function startCamera() {
+                        try {
+                            stream = await navigator.mediaDevices.getUserMedia({
+                                video: true
+                            });
+                            video.srcObject = stream;
+                            video.play();
+                        } catch (error) {
+                            console.error("Camera Error: ", error);
+                            alert("Camera access denied! Enable it in browser settings.");
+                        }
+                    }
 
-            // Capture Image button click
-            captureBtn.addEventListener("click", function () {
-            if (!stream) {
-                alert("Camera not started. Please allow access.");
-                return;
-            }
+                    // Capture Image button click
+                    captureBtn.addEventListener("click", function() {
+                        if (!stream) {
+                            alert("Camera not started. Please allow access.");
+                            return;
+                        }
 
-            const context = canvas.getContext("2d");
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                        const context = canvas.getContext("2d");
+                        canvas.width = video.videoWidth;
+                        canvas.height = video.videoHeight;
+                        context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-            const imageDataUrl = canvas.toDataURL("image/png");
+                        const imageDataUrl = canvas.toDataURL("image/png");
 
-            capturedImage.src = imageDataUrl;
-            capturedImage.classList.remove("d-none");
+                        capturedImage.src = imageDataUrl;
+                        capturedImage.classList.remove("d-none");
 
-            // ✅ Store in hidden field
-            capturedImageData.value = imageDataUrl;
-            });
+                        // ✅ Store in hidden field
+                        capturedImageData.value = imageDataUrl;
+                    });
 
-            // Start camera on page load
-            startCamera();
-            });
-         </script>
+                    // Start camera on page load
+                    startCamera();
+                });
+            </script>
 
 
             <!-- Script to handle the popup -->
@@ -788,56 +800,56 @@
     <!-- script for image handling -->
 
     <script>
-document.addEventListener("DOMContentLoaded", function () {
-    const societyRadio = document.getElementById("societyRadio");
-    const companyRadio = document.getElementById("companyRadio");
+        document.addEventListener("DOMContentLoaded", function() {
+            const societyRadio = document.getElementById("societyRadio");
+            const companyRadio = document.getElementById("companyRadio");
 
-    const societyField = document.getElementById("name");
-    const designationField = document.getElementById("designationDropdown");
-    const companyField = document.getElementById("Companyname");
-    const visitorTypeField = document.getElementById("visitorTypeDropdown");
+            const societyField = document.getElementById("name");
+            const designationField = document.getElementById("designationDropdown");
+            const companyField = document.getElementById("Companyname");
+            const visitorTypeField = document.getElementById("visitorTypeDropdown");
 
-    const societyInput = document.getElementById("society_name");
-    const companyInput = document.getElementById("company_name");
-    const designationSelect = document.getElementById("designation");
-    const visitorTypeSelect = document.getElementById("visitorType");
+            const societyInput = document.getElementById("society_name");
+            const companyInput = document.getElementById("company_name");
+            const designationSelect = document.getElementById("designation");
+            const visitorTypeSelect = document.getElementById("visitorType");
 
-    function updateFields() {
-        if (societyRadio.checked) {
-            societyField.style.display = "block";
-            designationField.style.display = "block";
-            companyField.style.display = "none";
-            visitorTypeField.style.display = "none";
+            function updateFields() {
+                if (societyRadio.checked) {
+                    societyField.style.display = "block";
+                    designationField.style.display = "block";
+                    companyField.style.display = "none";
+                    visitorTypeField.style.display = "none";
 
-            societyInput.required = true;
-            designationSelect.required = true;
-            companyInput.required = false;
-            visitorTypeSelect.required = false;
-        } else if (companyRadio.checked) {
-            societyField.style.display = "none";
-            designationField.style.display = "none";
-            companyField.style.display = "block";
-            visitorTypeField.style.display = "block";
+                    societyInput.required = true;
+                    designationSelect.required = true;
+                    companyInput.required = false;
+                    visitorTypeSelect.required = false;
+                } else if (companyRadio.checked) {
+                    societyField.style.display = "none";
+                    designationField.style.display = "none";
+                    companyField.style.display = "block";
+                    visitorTypeField.style.display = "block";
 
-            societyInput.required = false;
-            designationSelect.required = false;
-            companyInput.required = true;
-            visitorTypeSelect.required = true;
-        }
-    }
+                    societyInput.required = false;
+                    designationSelect.required = false;
+                    companyInput.required = true;
+                    visitorTypeSelect.required = true;
+                }
+            }
 
-    // Run on load
-    updateFields();
+            // Run on load
+            updateFields();
 
-    // Attach listeners
-    societyRadio.addEventListener("change", updateFields);
-    companyRadio.addEventListener("change", updateFields);
-});
-</script>
+            // Attach listeners
+            societyRadio.addEventListener("change", updateFields);
+            companyRadio.addEventListener("change", updateFields);
+        });
+    </script>
 
 
 
-    
+
 
 
 </body>
