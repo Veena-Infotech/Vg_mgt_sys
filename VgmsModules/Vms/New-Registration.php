@@ -254,8 +254,14 @@
                                                                  <h3 class="text-center mb-4 text-primary fw-bold">
                                                                         New Visitor Registration
                                                                  </h3>
+                                                                 <?php if (isset($_GET['success'])): ?>
+    <div class="alert alert-<?php echo $_GET['success'] === 'true' ? 'success' : 'danger'; ?>">
+        <?php echo $_GET['success'] === 'true' ? 'Visitor registered successfully!' : 'Failed to register visitor.'; ?>
+    </div>
+<?php endif; ?>
+
                                                                     <form action="../PhpFiles/handle_visitors_registration.php" method="POST" enctype="multipart/form-data">
-                                                                        <input type="hidden" name="capturedImage" id="capturedImageData">
+                                                                       
 
                                                                         <div class="row">
                                                                             <!-- Full Name -->
@@ -289,11 +295,11 @@
                                                                                 <label class="form-label">You are from:</label>
                                                                                 <div>
                                                                                     <div class="form-check form-check-inline">
-                                                                                        <input class="form-check-input" id="societyRadio" type="radio" name="source" value="society" required style="border: 1px solid #dcdcdc;" />
+                                                                                        <input class="form-check-input" id="societyRadio" type="radio" name="source" value="society"  style="border: 1px solid #dcdcdc;" />
                                                                                         <label class="form-check-label" for="societyRadio">Society</label>
                                                                                     </div>
                                                                                     <div class="form-check form-check-inline">
-                                                                                        <input class="form-check-input" id="companyRadio" type="radio" name="source" value="company" required style="border: 1px solid #dcdcdc;" />
+                                                                                        <input class="form-check-input" id="companyRadio" type="radio" name="source" value="company"  style="border: 1px solid #dcdcdc;" />
                                                                                         <label class="form-check-label" for="companyRadio">Company</label>
                                                                                     </div>
                                                                                 </div>
@@ -327,7 +333,7 @@
                                                                             <!-- Conditional Dropdowns -->
                                                                             <div class="col-md-6 animate-field" id="name" style="display: none;">
                                                                                 <label class="form-label" for="firstName">Society Name</label>
-                                                                                <input class="form-control" id="firstName" name="first_name" type="text" placeholder="Society Name" required style="border: 1px solid #dcdcdc;" />
+                                                                                <input class="form-control" id="society_name" name="society_name" type="text" placeholder="Society Name"  style="border: 1px solid #dcdcdc;" />
                                                                             </div>
 
                                                                             <div class="col-md-6" id="designationDropdown" style="display: none;">
@@ -344,7 +350,7 @@
 
                                                                             <div class="col-md-6 animate-field" id="Companyname" style="display: none;">
                                                                                 <label class="form-label" for="firstName">Company Name</label>
-                                                                                <input class="form-control" id="firstName" name="first_name" type="text" placeholder="Company Name" required style="border: 1px solid #dcdcdc;" />
+                                                                                <input class="form-control" id="company_name" name="company_name" type="text" placeholder="Company Name"  style="border: 1px solid #dcdcdc;" />
                                                                             </div>
 
                                                                             <div class="col-md-6" id="visitorTypeDropdown" style="display: none;">
@@ -579,17 +585,18 @@
             </div>
 
 
-           <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const video = document.getElementById("video");
-        const canvas = document.getElementById("canvas");
-        const captureBtn = document.getElementById("captureBtn");
-        const capturedImage = document.getElementById("capturedImage");
-        const capturedImageData = document.getElementById("capturedImageData");
-        let stream = null;
+         <script>
+            document.addEventListener("DOMContentLoaded", function () 
+            {
+            const video = document.getElementById("video");
+            const canvas = document.getElementById("canvas");
+            const captureBtn = document.getElementById("captureBtn");
+            const capturedImage = document.getElementById("capturedImage");
+            const capturedImageData = document.getElementById("capturedImageData");
+            let stream = null;
 
-        // Start camera
-        async function startCamera() {
+            // Start camera
+            async function startCamera() {
             try {
                 stream = await navigator.mediaDevices.getUserMedia({ video: true });
                 video.srcObject = stream;
@@ -598,10 +605,10 @@
                 console.error("Camera Error: ", error);
                 alert("Camera access denied! Enable it in browser settings.");
             }
-        }
+            }
 
-        // Capture Image button click
-        captureBtn.addEventListener("click", function () {
+            // Capture Image button click
+            captureBtn.addEventListener("click", function () {
             if (!stream) {
                 alert("Camera not started. Please allow access.");
                 return;
@@ -619,12 +626,12 @@
 
             // ✅ Store in hidden field
             capturedImageData.value = imageDataUrl;
-        });
+            });
 
-        // Start camera on page load
-        startCamera();
-    });
-</script>
+            // Start camera on page load
+            startCamera();
+            });
+         </script>
 
 
             <!-- Script to handle the popup -->
@@ -781,70 +788,56 @@
     <!-- script for image handling -->
 
     <script>
-        document.getElementById('captureBtn').addEventListener('click', function() {
-            const canvas = document.getElementById('canvas');
-            const video = document.getElementById('video');
-            const context = canvas.getContext('2d');
+document.addEventListener("DOMContentLoaded", function () {
+    const societyRadio = document.getElementById("societyRadio");
+    const companyRadio = document.getElementById("companyRadio");
 
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
+    const societyField = document.getElementById("name");
+    const designationField = document.getElementById("designationDropdown");
+    const companyField = document.getElementById("Companyname");
+    const visitorTypeField = document.getElementById("visitorTypeDropdown");
 
-            context.drawImage(video, 0, 0, canvas.width, canvas.height);
-            const dataURL = canvas.toDataURL('image/jpeg');
+    const societyInput = document.getElementById("society_name");
+    const companyInput = document.getElementById("company_name");
+    const designationSelect = document.getElementById("designation");
+    const visitorTypeSelect = document.getElementById("visitorType");
 
-            document.getElementById('capturedImage').src = dataURL;
-            document.getElementById('capturedImage').classList.remove('d-none');
-            document.getElementById('captured_image_input').value = dataURL;
-        });
+    function updateFields() {
+        if (societyRadio.checked) {
+            societyField.style.display = "block";
+            designationField.style.display = "block";
+            companyField.style.display = "none";
+            visitorTypeField.style.display = "none";
 
+            societyInput.required = true;
+            designationSelect.required = true;
+            companyInput.required = false;
+            visitorTypeSelect.required = false;
+        } else if (companyRadio.checked) {
+            societyField.style.display = "none";
+            designationField.style.display = "none";
+            companyField.style.display = "block";
+            visitorTypeField.style.display = "block";
 
-
-        document.getElementById("societyRadio").addEventListener("change", function() {
-            document.getElementById("Companyname").style.display = "none";
-            document.getElementById("name").style.display = "block";
-            document.getElementById("designationDropdown").style.display = "block";
-            document.getElementById("visitorTypeDropdown").style.display = "none";
-        });
-
-        document.getElementById("companyRadio").addEventListener("change", function() {
-            document.getElementById("Companyname").style.display = "block";
-            document.getElementById("name").style.display = "none";
-            document.getElementById("designationDropdown").style.display = "none";
-            document.getElementById("visitorTypeDropdown").style.display = "block";
-        });
-
-        document.getElementById("referenceYes").addEventListener("change", function() {
-            document.getElementById("referenceNameField").style.display = "block";
-            document.getElementById("addReferenceBtn").style.display = "block";
-        });
-
-        document.getElementById("referenceNo").addEventListener("change", function() {
-            document.getElementById("referenceNameField").style.display = "none";
-            document.getElementById("addReferenceBtn").style.display = "none";
-        });
-
-        function verifyOTP() {
-            const otpInput = document.getElementById("otp");
-            const otpValue = otpInput.value.trim();
-
-            if (/^\d{6}$/.test(otpValue)) {
-                otpInput.classList.remove("is-invalid");
-                document.getElementById("mainFormFields").style.display = "block";
-            } else {
-                otpInput.classList.add("is-invalid");
-            }
+            societyInput.required = false;
+            designationSelect.required = false;
+            companyInput.required = true;
+            visitorTypeSelect.required = true;
         }
+    }
 
-        document.getElementById("referenceName").addEventListener("change", function() {
-            if (this.value === "add_new_reference") {
-                // Temporary redirect to another page, change later
-                window.location.href = "/temporary-add-reference-page";
-            }
-        });
-    </script>
+    // Run on load
+    updateFields();
+
+    // Attach listeners
+    societyRadio.addEventListener("change", updateFields);
+    companyRadio.addEventListener("change", updateFields);
+});
+</script>
 
 
-    </script>
+
+    
 
 
 </body>

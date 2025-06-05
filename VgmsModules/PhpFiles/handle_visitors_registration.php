@@ -17,9 +17,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $imagePath = null;
 
     $source = $_POST['source'];
-    $society_name = ($source === 'society') ? $_POST['first_name'] : NULL;
+    $society_name = ($source === 'society') ? $_POST['society_name'] : NULL;
+    $company_name = ($source === 'company') ? $_POST['company_name'] : NULL;
+
     $designation = ($source === 'society') ? $_POST['designation'] : NULL;
-    $company_name = ($source === 'company') ? $_POST['first_name'] : NULL;
+    
     $visitor_type = ($source === 'company') ? $_POST['visitorType'] : NULL;
 
     $reference_id = (int) $_POST['referenceName'];
@@ -62,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $imageData = base64_decode($imageData);
 
         // Save image
-        $uploadDir = "uploads/captured/";
+        $uploadDir = "../uploads/visitor_img/";
         if (!is_dir($uploadDir)) {
             mkdir($uploadDir, 0777, true);
         }
@@ -95,7 +97,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         );
 
         if (mysqli_stmt_execute($stmt)) {
-            echo "✅ Visitor registered successfully with UID: $uid";
+            header("Location: ../Vms/New-Registration.php?success=true");
+exit;
+
         } else {
             echo "❌ Error: " . mysqli_stmt_error($stmt);
         }
