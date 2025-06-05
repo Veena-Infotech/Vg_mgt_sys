@@ -43,6 +43,7 @@
   <link href="../../assets/css/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
   <link href="../../assets/css/user.min.css" type="text/css" rel="stylesheet" id="user-style-default">
 
+
   <script>
     var phoenixIsRTL = window.config.config.phoenixIsRTL;
     if (phoenixIsRTL) {
@@ -61,6 +62,14 @@
   <link href="../../vendors/flatpickr/flatpickr.min.css" rel="stylesheet" />
   <link href="../../vendors/choices/choices.min.css" rel="stylesheet" />
 </head>
+<style>
+  .custom-modal-width {
+    max-width: 1400px;
+    /* increase width */
+    width: 90vw;
+    /* responsive */
+  }
+</style>
 
 <body>
   <!-- ===============================================-->
@@ -385,11 +394,11 @@
               class="form-control search-input rounded-3 px-3" placeholder="Add new task" /></div>
         </div> -->
         <?php
-include '../PhpFiles/connection.php';
+        include '../PhpFiles/connection.php';
 
-$project_id = isset($_GET['project_id']) ? intval($_GET['project_id']) : 0;
+        $project_id = isset($_GET['project_id']) ? intval($_GET['project_id']) : 0;
 
-$sql = "
+        $sql = "
   SELECT 
     t.id,
     t.title,
@@ -410,151 +419,145 @@ $sql = "
 
 
 
-$result = $conn->query($sql);
-$tasks = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
+        $result = $conn->query($sql);
+        $tasks = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
 
-foreach ($tasks as $task) {
-    if (empty($task['status_name'])) {
-        echo "Missing status for task ID: {$task['id']}<br>";
-    }
-}
-// 🧩 Group by status name
-$groupedTasks = [];
-foreach ($tasks as $task) {
-  $status = $task['status_name'] ?: 'Unassigned';
-  if (!isset($groupedTasks[$status])) {
-    $groupedTasks[$status] = [];
-  }
-  $groupedTasks[$status][] = $task;
-}
+        foreach ($tasks as $task) {
+          if (empty($task['status_name'])) {
+            echo "Missing status for task ID: {$task['id']}<br>";
+          }
+        }
+        // 🧩 Group by status name
+        $groupedTasks = [];
+        foreach ($tasks as $task) {
+          $status = $task['status_name'] ?: 'Unassigned';
+          if (!isset($groupedTasks[$status])) {
+            $groupedTasks[$status] = [];
+          }
+          $groupedTasks[$status][] = $task;
+        }
 
 
-?>
+        ?>
 
-        
+
         <?php foreach ($groupedTasks as $status => $tasksInStatus): ?>
-        <div class="kanban-column scrollbar">
-          <div class="kanban-column-header px-4 hover-actions-trigger">
-            <div class="d-flex align-items-center border-bottom border-3 py-3 border-300">
-              <h5 class="mb-0 kanban-column-title">
-                <?= htmlspecialchars($status) ?>
-                <span class="kanban-title-badge">
-                  <?= count($tasksInStatus) ?>
-                </span>
-              </h5>
-              <div class="hover-actions-trigger"><button
-                  class="btn btn-sm btn-phoenix-default kanban-header-dropdown-btn hover-actions" type="button"
-                  data-boundary="viewport" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span
-                    class="fas fa-ellipsis-h"></span></button>
-                <div class="dropdown-menu dropdown-menu-end py-2" style="width: 15rem;"><a
-                    class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
-                    href="#!"><span>Sort tasks</span><span class="fas fa-angle-right fs-10"></span></a><a
-                    class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
-                    href="#!"><span>Sort all tasks</span></a><a
-                    class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
-                    href="#!"><span>Move all tasks</span><span class="fas fa-angle-right fs-10"></span></a><a
-                    class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
-                    href="#!"><span>Remove all tasks</span></a>
-                  <hr class="my-2" /><a
-                    class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
-                    href="#!"><span>Import</span></a><a
-                    class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
-                    href="#!"><span>Export</span><span class="fas fa-angle-right fs-10"></span></a>
-                  <hr class="my-2" /><a
-                    class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
-                    href="#!"><span>Move column</span><span class="fas fa-angle-right fs-10"></span></a><a
-                    class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
-                    href="#!"><span>Duplicate column</span></a><a
-                    class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
-                    href="#!"><span>Delete column</span></a><a
-                    class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
-                    href="#!"><span>Archive column</span></a>
-                  <hr class="my-2" /><a
-                    class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
-                    href="#!"><span>Edit title &amp; description</span></a><a
-                    class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
-                    href="#!"><span>Edit colour</span><span class="fas fa-angle-right fs-10"></span></a>
-                </div>
+          <div class="kanban-column scrollbar">
+            <div class="kanban-column-header px-4 hover-actions-trigger">
+              <div class="d-flex align-items-center border-bottom border-3 py-3 border-300">
+                <h5 class="mb-0 kanban-column-title">
+                  <?= htmlspecialchars($status) ?>
+                  <span class="kanban-title-badge">
+                    <?= count($tasksInStatus) ?>
+                  </span>
+                </h5>
+                <div class="hover-actions-trigger"><button
+                    class="btn btn-sm btn-phoenix-default kanban-header-dropdown-btn hover-actions" type="button"
+                    data-boundary="viewport" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span
+                      class="fas fa-ellipsis-h"></span></button>
+                  <div class="dropdown-menu dropdown-menu-end py-2" style="width: 15rem;"><a
+                      class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
+                      href="#!"><span>Sort tasks</span><span class="fas fa-angle-right fs-10"></span></a><a
+                      class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
+                      href="#!"><span>Sort all tasks</span></a><a
+                      class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
+                      href="#!"><span>Move all tasks</span><span class="fas fa-angle-right fs-10"></span></a><a
+                      class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
+                      href="#!"><span>Remove all tasks</span></a>
+                    <hr class="my-2" /><a
+                      class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
+                      href="#!"><span>Import</span></a><a
+                      class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
+                      href="#!"><span>Export</span><span class="fas fa-angle-right fs-10"></span></a>
+                    <hr class="my-2" /><a
+                      class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
+                      href="#!"><span>Move column</span><span class="fas fa-angle-right fs-10"></span></a><a
+                      class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
+                      href="#!"><span>Duplicate column</span></a><a
+                      class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
+                      href="#!"><span>Delete column</span></a><a
+                      class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
+                      href="#!"><span>Archive column</span></a>
+                    <hr class="my-2" /><a
+                      class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
+                      href="#!"><span>Edit title &amp; description</span></a><a
+                      class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
+                      href="#!"><span>Edit colour</span><span class="fas fa-angle-right fs-10"></span></a>
+                  </div>
                 </div><span class="uil uil-left-arrow-to-left fs-8 ms-auto kanban-collapse-icon"
-                data-kanban-collapse="data-kanban-collapse"></span><span
-                class="uil uil-arrow-from-right fs-8 ms-auto kanban-collapse-icon"
-                data-kanban-collapse="data-kanban-collapse"></span>
-            </div>
-          </div>
-          <div class="kanban-items-container" data-sortable="data-sortable">
-            <?php foreach ($tasksInStatus as $task): ?>
-            <div class="sortable-item-wrapper border-bottom border-translucent px-2 py-2">
-              <div class="card sortable-item hover-actions-trigger">
-                <div class="card-body py-3 px-3">
-                  <div class="position-relative mb-2 overflow-hidden rounded" style="height:200px; width:100%">
-                    <div class="bg-holder" style="background-image:url(../../assets/img/kanban/1.jpg);"></div>
-                    <!--/.bg-holder-->
-                  </div>
-                  <div class="kanban-status mb-1 position-relative lh-1"><span
-                      class="fa fa-circle me-2 d-inline-block text-danger" style="min-width:1rem"
-                      data-fa-transform="shrink-1 down-3"></span><span
-                      class="badge badge-phoenix fs-10 badge-phoenix-danger">
-                      <span>
-                        <?= htmlspecialchars($task['category_name']) ?>
-                      </span><span
-                        class="ms-1 d-inline-block fas fa-bug" data-fa-transform="up-2"
-                        style="height:7.8px;width:7.8px;"></span></span><button
-                      class="btn btn-sm btn-phoenix-default kanban-item-dropdown-btn hover-actions" type="button"
-                      data-boundary="viewport" data-bs-toggle="dropdown" aria-haspopup="true"
-                      aria-expanded="false"><span class="fas fa-ellipsis-h fa-rotate-90"
-                        data-fa-transform="shrink-2"></span></button>
-                    <div class="dropdown-menu dropdown-menu-end py-2" style="width: 15rem;"><a
-                        class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
-                        href="#!"><span>Move</span><span class="fas fa-angle-right fs-10"></span></a><a
-                        class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
-                        href="#!"><span>Duplicate</span></a><a
-                        class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
-                        href="#!"><span>Jump to top</span></a><a
-                        class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
-                        href="#!"><span>Jump to bottom</span></a>
-                      <hr class="my-2" /><a
-                        class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
-                        href="#!"><span>Print/Download</span></a><a
-                        class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
-                        href="#!"><span>Share</span><span class="fas fa-angle-right fs-10"></span></a>
-                      <hr class="my-2" /><a
-                        class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
-                        href="#!"><span>Move to archive</span><span class="fas fa-angle-right fs-10"></span></a><a
-                        class="dropdown-item d-flex flex-between-center border-1 border-translucent text-danger"
-                        href="#!"><span>Delete</span></a>
-                    </div>
-                  </div>
-                  <p
-                    class="mb-0 stretched-link"
-                    data-bs-toggle="modal"
-                    data-bs-target="#KanbanItemDetailsModal"
-                    data-id="<?= $task['id'] ?>"
-                    data-title="<?= htmlspecialchars($task['title']) ?>"
-                    data-description="<?= htmlspecialchars($task['description']) ?>"
-                    data-project="<?= htmlspecialchars($task['project_name']) ?>"
-                    data-status="<?= htmlspecialchars($task['status_name']) ?>"
-                    data-priority="<?= htmlspecialchars($task['priority_name']) ?>"
-                    data-category="<?= htmlspecialchars($task['category_name']) ?>"
-                    data-employee="<?= htmlspecialchars($task['employee_name']) ?>"
-                    >
-                    <?= htmlspecialchars($task['title']) ?>
-                  </p>
-                  <div class="d-flex mt-2 align-items-center">
-                    <P class="fs-9 mb-0">
-                      <?= htmlspecialchars($task['description']) ?>
-                    </P>
-                  </div>
-                </div>
-                <?php endforeach; ?>
+                  data-kanban-collapse="data-kanban-collapse"></span><span
+                  class="uil uil-arrow-from-right fs-8 ms-auto kanban-collapse-icon"
+                  data-kanban-collapse="data-kanban-collapse"></span>
               </div>
             </div>
+            <div class="kanban-items-container" data-sortable="data-sortable">
+              <?php foreach ($tasksInStatus as $task): ?>
+                <div class="sortable-item-wrapper border-bottom border-translucent px-2 py-2">
+                  <div class="card sortable-item hover-actions-trigger">
+                    <div class="card-body py-3 px-3">
+                      <div class="position-relative mb-2 overflow-hidden rounded" style="height:200px; width:100%">
+                        <div class="bg-holder" style="background-image:url(../../assets/img/kanban/1.jpg);"></div>
+                        <!--/.bg-holder-->
+                      </div>
+                      <div class="kanban-status mb-1 position-relative lh-1"><span
+                          class="fa fa-circle me-2 d-inline-block text-danger" style="min-width:1rem"
+                          data-fa-transform="shrink-1 down-3"></span><span
+                          class="badge badge-phoenix fs-10 badge-phoenix-danger">
+                          <span>
+                            <?= htmlspecialchars($task['category_name']) ?>
+                          </span><span class="ms-1 d-inline-block fas fa-bug" data-fa-transform="up-2"
+                            style="height:7.8px;width:7.8px;"></span></span><button
+                          class="btn btn-sm btn-phoenix-default kanban-item-dropdown-btn hover-actions" type="button"
+                          data-boundary="viewport" data-bs-toggle="dropdown" aria-haspopup="true"
+                          aria-expanded="false"><span class="fas fa-ellipsis-h fa-rotate-90"
+                            data-fa-transform="shrink-2"></span></button>
+                        <div class="dropdown-menu dropdown-menu-end py-2" style="width: 15rem;"><a
+                            class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
+                            href="#!"><span>Move</span><span class="fas fa-angle-right fs-10"></span></a><a
+                            class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
+                            href="#!"><span>Duplicate</span></a><a
+                            class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
+                            href="#!"><span>Jump to top</span></a><a
+                            class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
+                            href="#!"><span>Jump to bottom</span></a>
+                          <hr class="my-2" /><a
+                            class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
+                            href="#!"><span>Print/Download</span></a><a
+                            class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
+                            href="#!"><span>Share</span><span class="fas fa-angle-right fs-10"></span></a>
+                          <hr class="my-2" /><a
+                            class="dropdown-item d-flex flex-between-center border-1 border-translucent undefined"
+                            href="#!"><span>Move to archive</span><span class="fas fa-angle-right fs-10"></span></a><a
+                            class="dropdown-item d-flex flex-between-center border-1 border-translucent text-danger"
+                            href="#!"><span>Delete</span></a>
+                        </div>
+                      </div>
+                      <p class="mb-0 stretched-link" data-bs-toggle="modal" data-bs-target="#KanbanItemDetailsModal"
+                        data-id="<?= $task['id'] ?>" data-title="<?= htmlspecialchars($task['title']) ?>"
+                        data-description="<?= htmlspecialchars($task['description']) ?>"
+                        data-project="<?= htmlspecialchars($task['project_name']) ?>"
+                        data-status="<?= htmlspecialchars($task['status_name']) ?>"
+                        data-priority="<?= htmlspecialchars($task['priority_name']) ?>"
+                        data-category="<?= htmlspecialchars($task['category_name']) ?>"
+                        data-employee="<?= htmlspecialchars($task['employee_name']) ?>">
+                        <?= htmlspecialchars($task['title']) ?>
+                      </p>
+                      <div class="d-flex mt-2 align-items-center">
+                        <P class="fs-9 mb-0">
+                          <?= htmlspecialchars($task['description']) ?>
+                        </P>
+                      </div>
+                    </div>
+                  <?php endforeach; ?>
+                </div>
+              </div>
+            </div>
+            <div class="py-3 px-4 kanban-add-task"><button class="btn bg-sm bg-body-tertiary me-2 px-0"
+                data-bs-toggle="modal" data-bs-target="#kanbanAddTask"><span
+                  class="fas fa-plus text-white dark__text-gray-400"
+                  data-fa-transform="grow-4 down-1"></span></button><input
+                class="form-control search-input rounded-3 px-3" placeholder="Add new task" /></div>
           </div>
-          <div class="py-3 px-4 kanban-add-task"><button class="btn bg-sm bg-body-tertiary me-2 px-0"
-              data-bs-toggle="modal" data-bs-target="#kanbanAddTask"><span
-                class="fas fa-plus text-white dark__text-gray-400"
-                data-fa-transform="grow-4 down-1"></span></button><input
-              class="form-control search-input rounded-3 px-3" placeholder="Add new task" /></div>
-        </div>
         <?php endforeach; ?>
         <!--div class="kanban-column scrollbar">
           <div class="kanban-column-header px-4 hover-actions-trigger">
@@ -1269,7 +1272,7 @@ foreach ($tasks as $task) {
             </a></div>
         </div>
       </div>
-      
+
       <div class="phoenix-offcanvas phoenix-offcanvas-end bg-body-highlight position-fixed outline-none" tabindex="-1"
         id="offcanvasKanban" style="max-width: 445px">
         <div class="offcanvas-header justify-content-between">
@@ -2156,7 +2159,7 @@ foreach ($tasks as $task) {
   <!-- ===============================================-->
   <!--    End of Main Content-->
   <!-- ===============================================-->
-  
+
   <div class="offcanvas offcanvas-end settings-panel border-0" id="settings-offcanvas" tabindex="-1"
     aria-labelledby="settings-offcanvas">
     <div class="offcanvas-header align-items-start border-bottom flex-column border-translucent">
@@ -2316,21 +2319,23 @@ foreach ($tasks as $task) {
     </div> -->
   </a>
   <?php
-      if (isset($_GET['project_id']) && is_numeric($_GET['project_id'])) {
-        $project_id = (int) $_GET['project_id'];
-      } else {
-          echo "Invalid project ID.";
-          exit;
-        }
+  if (isset($_GET['project_id']) && is_numeric($_GET['project_id'])) {
+    $project_id = (int) $_GET['project_id'];
+  } else {
+    echo "Invalid project ID.";
+    exit;
+  }
   ?>
 
   <div class="modal fade" id="kanbanAddTask" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen-sm-down modal-xl modal-dialog-centered">
       <div class="modal-content">
         <!-- added the from tag and name attribute -->
-        <form action="../../VgmsModules/PhpFiles/handle_add_task.php" method="post" enctype="multipart/form-data" class="needs-validation" novalidate="novalidate" class="dropzone dropzone-multiple p-0" id="dropzone-multiple" data-dropzone="data-dropzone">
+        <form action="../../VgmsModules/PhpFiles/handle_add_task.php" method="post" enctype="multipart/form-data"
+          class="needs-validation" novalidate="novalidate" class="dropzone dropzone-multiple p-0" id="dropzone-multiple"
+          data-dropzone="data-dropzone">
           <div class="modal-body">
-            <h3>Edit Task</h3>
+            <h3>Add Task</h3>
             <div class="row gx-3 gy-4">
               <hr>
               <div class="col-sm-6 col-md-12" style="margin-top: -1%;">
@@ -2352,8 +2357,7 @@ foreach ($tasks as $task) {
                     <option value="3">Erebus</option>
                   </select><label for="TaskType">BORAD TYPE</label></div> -->
                 <label class="form-label">Project Name<span style="color: red;">*</span></label>
-                <input type="text" class="form-control" placeholder="Enter project title"
-                  name="project_name">
+                <input type="text" class="form-control" placeholder="Enter project title" name="project_name">
 
               </div>
               <div class="col-sm-4" style="width: 50%;">
@@ -2365,7 +2369,10 @@ foreach ($tasks as $task) {
                     <option value="3">Release</option>
                   </select><label for="KanbanColumnType">COLUMN</label></div> -->
                 <label class="form-label" for="timepicker2">Select Time Range</label>
-                <input class="form-control datetimepicker flatpickr-input" id="timepicker2" type="text" name="time_range" placeholder="d/m/y to d/m/y" data-options="{&quot;mode&quot;:&quot;range&quot;,&quot;dateFormat&quot;:&quot;d/m/y&quot;,&quot;disableMobile&quot;:true}" readonly="readonly">
+                <input class="form-control datetimepicker flatpickr-input" id="timepicker2" type="text"
+                  name="time_range" placeholder="d/m/y to d/m/y"
+                  data-options="{&quot;mode&quot;:&quot;range&quot;,&quot;dateFormat&quot;:&quot;d/m/y&quot;,&quot;disableMobile&quot;:true}"
+                  readonly="readonly">
 
               </div>
               <!-- to add some field  -->
@@ -2377,7 +2384,10 @@ foreach ($tasks as $task) {
                   </select><label for="KanbanPlaceNumber">PLACE</label></div>
               </div> -->
               <div class="col-sm-12">
-                <div class="mb-3"><label for="organizerMultiple2">Assigned Employee</label><select class="form-select" id="organizerMultiple2" data-choices="data-choices" multiple="multiple" size="1" name="organizerMultiple" required="required" data-options='{"removeItemButton":true,"placeholder":true}'>
+                <div class="mb-3"><label for="organizerMultiple2">Assigned Employee</label><select class="form-select"
+                    id="organizerMultiple2" data-choices="data-choices" multiple="multiple" size="1"
+                    name="organizerMultiple" required="required"
+                    data-options='{"removeItemButton":true,"placeholder":true}'>
                     <option value="">Select employee...</option>
                     <option>Massachusetts Institute of Technology</option>
                     <option>University of Chicago</option>
@@ -2390,14 +2400,16 @@ foreach ($tasks as $task) {
               <div class="col-sm-4" style="width: 50%; margin-top:-0.5% ; ">
                 <label for="organizerSingle" style="font-size : 12px;">Task Category</label>
                 <div class="s">
-                  <select class="form-select" id="organizerSingle" name="task_category" data-choices="data-choices" data-options='{"removeItemButton":true,"placeholder":true}'>
+                  <select class="form-select" id="organizerSingle" name="task_category" data-choices="data-choices"
+                    data-options='{"removeItemButton":true,"placeholder":true}'>
                     <option value="">Select organizer...</option>
                   </select>
                 </div>
               </div>
               <div class="col-sm-4" style="width: 50%; margin-top:-0.5% ;">
                 <div class="mb-3"><label for="organizerSingle2" style="font-size : 12px">PRIORITY</label>
-                  <select class="form-select" id="organizerSingle2" data-choices="data-choices" name="organizerSingle" size="1" required="required" data-options='{"removeItemButton":true,"placeholder":true}'>
+                  <select class="form-select" id="organizerSingle2" data-choices="data-choices" name="organizerSingle"
+                    size="1" required="required" data-options='{"removeItemButton":true,"placeholder":true}'>
                     <option value="">Low (Default)</option>
                     <option>High</option>
                     <option>Medium</option>
@@ -2425,7 +2437,9 @@ foreach ($tasks as $task) {
                 </div> -->
               <div class="col-sm-12" style="margin-top: -1%;">
                 <div class="mb-3"><label for="organizerMultiple2" style="font-size : 12px">Tags</label>
-                  <select class="form-select" id="organizerMultiple2" data-choices="data-choices" multiple="multiple" size="1" name="tagsMultiple" required="required" data-options='{"removeItemButton":true,"placeholder":true}'>
+                  <select class="form-select" id="organizerMultiple2" data-choices="data-choices" multiple="multiple"
+                    size="1" name="tagsMultiple" required="required"
+                    data-options='{"removeItemButton":true,"placeholder":true}'>
                     <option value="">Select organizer...</option>
                     <option>1</option>
                     <option>2</option>
@@ -2440,8 +2454,7 @@ foreach ($tasks as $task) {
           </div>
           <!-- image -->
           <div class="col-12 gy-4" style="margin-top: -1%;">
-            <div class="dropzone dropzone-multiple bg-transparent p-0" id="Kanbandropzone"
-              data-dropzone="data-dropzone"
+            <div class="dropzone dropzone-multiple bg-transparent p-0" id="Kanbandropzone" data-dropzone="data-dropzone"
               data-options='{"url":"valid/url","maxFiles":1,"dictDefaultMessage":"Choose or Drop a file here"}'>
               <div class="fallback"><input type="file" name="file" /></div>
               <div class="dz-message py-3" data-dz-message="data-dz-message">
@@ -2473,13 +2486,17 @@ foreach ($tasks as $task) {
             </div>
           </div>
           <!-- file upload -->
-          <div class="dropzone dropzone-multiple p-0" id="dropzone-multiple" data-dropzone="data-dropzone" style="margin-top: 1%;">
+          <div class="dropzone dropzone-multiple p-0" id="dropzone-multiple" data-dropzone="data-dropzone"
+            style="margin-top: 1%;">
             <label class="form-label">Upload File <span style="color: red;">*</span></label>
             <div class="fallback"><input name="file" type="file" multiple="multiple" /></div>
-            <div class="dz-message" data-dz-message="data-dz-message"><img class="me-2" src="../../assets/img/icons/cloud-upload.svg" width="25" alt="" style="margin-left:38%" />Drop your files here</div>
+            <div class="dz-message" data-dz-message="data-dz-message"><img class="me-2"
+                src="../../assets/img/icons/cloud-upload.svg" width="25" alt="" style="margin-left:38%" />Drop your
+              files here</div>
             <div class="dz-preview dz-preview-multiple m-0 d-flex flex-column">
               <div class="d-flex mb-3 pb-3 border-bottom border-translucent media">
-                <div class="border p-2 rounded-2 me-2"><img class="rounded-2 dz-image" src="../../assets/img/icons/file.png" alt="..." data-dz-thumbnail="data-dz-thumbnail" /></div>
+                <div class="border p-2 rounded-2 me-2"><img class="rounded-2 dz-image"
+                    src="../../assets/img/icons/file.png" alt="..." data-dz-thumbnail="data-dz-thumbnail" /></div>
                 <div class="flex-1 d-flex flex-between-center">
                   <div>
                     <h6 data-dz-name="data-dz-name"></h6>
@@ -2488,8 +2505,13 @@ foreach ($tasks as $task) {
                       <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress=""></span></div>
                     </div><span class="fs-10 text-danger" data-dz-errormessage="data-dz-errormessage"></span>
                   </div>
-                  <div class="dropdown"><button class="btn btn-link text-body-tertiary btn-sm dropdown-toggle btn-reveal dropdown-caret-none" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><a class="dropdown-item" href="#!" data-dz-remove="data-dz-remove"><span style="color: red; font-size:30px;">...</a></button>
-                    <div class="dropdown-menu dropdown-menu-end border border-translucent py-2"><a class="dropdown-item" href="#!" data-dz-remove="data-dz-remove">Remove File</a></div>
+                  <div class="dropdown"><button
+                      class="btn btn-link text-body-tertiary btn-sm dropdown-toggle btn-reveal dropdown-caret-none"
+                      type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><a
+                        class="dropdown-item" href="#!" data-dz-remove="data-dz-remove"><span
+                          style="color: red; font-size:30px;">...</a></button>
+                    <div class="dropdown-menu dropdown-menu-end border border-translucent py-2"><a class="dropdown-item"
+                        href="#!" data-dz-remove="data-dz-remove">Remove File</a></div>
                   </div>
                 </div>
               </div>
@@ -2497,8 +2519,8 @@ foreach ($tasks as $task) {
           </div>
 
 
-          <div class="modal-footer justify-content-between"><button class="btn p-1" type="button" data-bs-dismiss="modal"
-              aria-label="Close" value="refresh"><span class="fas fa-times fs-10 me-1"
+          <div class="modal-footer justify-content-between"><button class="btn p-1" type="button"
+              data-bs-dismiss="modal" aria-label="Close" value="refresh"><span class="fas fa-times fs-10 me-1"
                 data-fa-transform="up-1"></span>Close</button><button class="btn btn-primary px-6" type="close"
               data-bs-dismiss="modal" value="submit">Done</button>
           </div>
@@ -2507,9 +2529,10 @@ foreach ($tasks as $task) {
       </div>
     </div>
   </div>
-  
+
   <div class="modal fade" id="KanbanItemDetailsModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen-md-down modal-md modal-dialog-centered">
+    <div class="modal-dialog modal-xl modal-dialog-centered custom-modal-width">
+
       <div class="modal-content overflow-hidden">
         <div class="modal-body p-0">
           <div class="position-relative" style="height:200px; width:100%">
@@ -2517,7 +2540,8 @@ foreach ($tasks as $task) {
             <!--/.bg-holder-->
           </div>
           <div class="row gy-4 py-0 gx-0">
-            <div class="col-lg-8 col-12">
+            <!-- First Column: was col-lg-8, now col-lg-4 -->
+            <div class="col-lg-4 col-12">
               <div class="row mt-0 gy-4 pb-3 gx-0 px-3">
                 <div class="col-4 col-sm-3">
                   <h6 class="text-body-tertiary fw-bolder lh-sm mt-1">TITLE </h6>
@@ -2529,59 +2553,64 @@ foreach ($tasks as $task) {
                   <h6 class="text-body-tertiary fw-bolder lh-sm mt-1">DESCRIPTION </h6>
                 </div>
                 <div class="col-8 col-sm-9">
-                  <P class="fs-9 mb-0" id="modal-description"></P>
+                  <p class="fs-9 mb-0" id="modal-description"></p>
                 </div>
                 <div class="col-4 col-sm-3">
                   <h6 class="text-body-tertiary fw-bolder lh-sm mt-1">PROJECT NAME </h6>
                 </div>
                 <div class="col-8 col-sm-9">
-                  <P class="mb-0 text-body-emphasis fw-semibold" id="modal-project"></P>
+                  <p class="mb-0 text-body-emphasis fw-semibold" id="modal-project"></p>
                 </div>
                 <div class="col-4 col-sm-3">
                   <h6 class="text-body-tertiary fw-bolder lh-sm mt-1">STATUS</h6>
                 </div>
                 <div class="col-8 col-sm-9">
-                  <P class="mb-0 text-body-emphasis fw-semibold d-inline-block kanban-column-underline-warning" id="modal-status">
-                  </P>
+                  <p class="mb-0 text-body-emphasis fw-semibold d-inline-block kanban-column-underline-warning"
+                    id="modal-status"></p>
                 </div>
                 <div class="col-4 col-sm-3">
-                  <h6 class="text-body-tertiary fw-bolder lh-sm mt-1">ASSAIGNED TO </h6>
+                  <h6 class="text-body-tertiary fw-bolder lh-sm mt-1">ASSIGNED TO </h6>
                 </div>
                 <div class="col-8 col-sm-9">
-                  <P class="mb-0 text-body-emphasis fw-semibold" id="modal-employee"></P>
+                  <p class="mb-0 text-body-emphasis fw-semibold" id="modal-employee"></p>
                 </div>
                 <div class="col-4 col-sm-3">
                   <h6 class="text-body-tertiary fw-bolder lh-sm mt-1">PRIORITY </h6>
                 </div>
                 <div class="col-8 col-sm-9">
-                  <P class="mb-0 text-body-emphasis fw-semibold" id="modal-priority"><span class="fa fa-circle m text-warning"
-                      data-fa-transform="shrink-6 down-1" ></span>
-                  </P>
+                  <p class="mb-0 text-body-emphasis fw-semibold" id="modal-priority">
+                    <span class="fa fa-circle m text-warning" data-fa-transform="shrink-6 down-1"></span>
+                  </p>
                 </div>
                 <div class="col-4 col-sm-3">
                   <h6 class="text-body-tertiary fw-bolder lh-sm mt-1">CATEGORY </h6>
                 </div>
-                <div class="col-8 col-sm-9"><span
-                    class="badge badge-phoenix fs-10 badge-phoenix-danger" id="modal-category"><span>
-                   </span><span
-                      class="ms-1 fas fa-bug item.icon" data-fa-transform="up-2"
-                      style="height:7.8px;width:7.8px;"></span></span></div>
+                <div class="col-8 col-sm-9">
+                  <span class="badge badge-phoenix fs-10 badge-phoenix-danger" id="modal-category">
+                    <span></span>
+                    <span class="ms-1 fas fa-bug item.icon" data-fa-transform="up-2"
+                      style="height:7.8px;width:7.8px;"></span>
+                  </span>
+                </div>
                 <div class="col-4 col-sm-3">
                   <h6 class="text-body-tertiary fw-bolder lh-sm mt-1">ATTACHMENTS </h6>
                 </div>
                 <div class="col-8 col-sm-9">
-                  <div class="border-bottom border-translucent d-flex flex-row pb-3"><a
-                      href="../../assets/img/kanban/a1.jpg" data-gallery="gallery-kanban-attachment"> <img
-                        class="rounded-3" src="../../assets/img/kanban/a1.jpg" width="64" height="64" alt="" /></a>
+                  <div class="border-bottom border-translucent d-flex flex-row pb-3">
+                    <a href="../../assets/img/kanban/a1.jpg" data-gallery="gallery-kanban-attachment">
+                      <img class="rounded-3" src="../../assets/img/kanban/a1.jpg" width="64" height="64" alt="" />
+                    </a>
                     <div class="flex-1 ms-3 d-flex flex-column">
                       <h5 class="lh-sm">Silly_sight_1.png</h5>
-                      <p class="lh-1 fs-9 text-body-tertiary fw-medium mb-0">21st Decemver, 12:56 PM</p>
-                      <div class="d-flex mt-auto"><button class="btn p-0 fs-8 text-body-tertiary me-3"><span
-                            class="fas fa-comment" data-fa-transform="shrink-4"></span></button><button
-                          class="btn p-0 fs-8 text-body-tertiary me-3"><span class="fas fa-trash"
-                            data-fa-transform="shrink-4"></span></button><button
-                          class="btn p-0 fs-8 text-body-tertiary"><span class="fas fa-pencil"
-                            data-fa-transform="shrink-4"></span></button></div>
+                      <p class="lh-1 fs-9 text-body-tertiary fw-medium mb-0">21st December, 12:56 PM</p>
+                      <div class="d-flex mt-auto">
+                        <button class="btn p-0 fs-8 text-body-tertiary me-3"><span class="fas fa-comment"
+                            data-fa-transform="shrink-4"></span></button>
+                        <button class="btn p-0 fs-8 text-body-tertiary me-3"><span class="fas fa-trash"
+                            data-fa-transform="shrink-4"></span></button>
+                        <button class="btn p-0 fs-8 text-body-tertiary"><span class="fas fa-pencil"
+                            data-fa-transform="shrink-4"></span></button>
+                      </div>
                     </div>
                   </div>
                   <div class="border-bottom border-translucent d-flex flex-row pb-3 mt-3">
@@ -2591,60 +2620,63 @@ foreach ($tasks as $task) {
                     </div>
                     <div class="flex-1 ms-3 d-flex flex-column">
                       <h5 class="lh-sm">All_images.zip</h5>
-                      <p class="lh-1 fs-9 text-body-tertiary fw-medium mb-0">21st Decemver, 12:56 PM</p>
-                      <div class="d-flex text-body-tertiary mt-auto"><button
-                          class="btn p-0 fs-8 text-body-tertiary me-3"><span class="fas fa-comment"
-                            data-fa-transform="shrink-4"></span></button><button
-                          class="btn p-0 fs-8 text-body-tertiary me-3"><span class="fas fa-trash"
-                            data-fa-transform="shrink-4"></span></button><button
-                          class="btn p-0 fs-8 text-body-tertiary"><span class="fas fa-pencil"
-                            data-fa-transform="shrink-4"></span></button></div>
+                      <p class="lh-1 fs-9 text-body-tertiary fw-medium mb-0">21st December, 12:56 PM</p>
+                      <div class="d-flex text-body-tertiary mt-auto">
+                        <button class="btn p-0 fs-8 text-body-tertiary me-3"><span class="fas fa-comment"
+                            data-fa-transform="shrink-4"></span></button>
+                        <button class="btn p-0 fs-8 text-body-tertiary me-3"><span class="fas fa-trash"
+                            data-fa-transform="shrink-4"></span></button>
+                        <button class="btn p-0 fs-8 text-body-tertiary"><span class="fas fa-pencil"
+                            data-fa-transform="shrink-4"></span></button>
+                      </div>
                     </div>
-                  </div><button class="btn btn-link ps-0"><span class="fas fa-plus me-2"
+                  </div>
+                  <button class="btn btn-link ps-0"><span class="fas fa-plus me-2"
                       data-fa-transform="shrink-3"></span>Add an Attachment</button>
                 </div>
               </div>
             </div>
-            
 
-            <div class="col-lg-4 border-start-lg">
+            <!-- Second Column: was col-lg-4, now col-lg-4 -->
+            <div class="col-lg-4 col-12 border-start-lg">
               <div class="scrollbar" style="max-height: 667px;">
                 <div class="px-3">
                   <h5 class="mb-3 mt-4">Actions</h5>
                   <ul class="nav flex-column flex-sm-row flex-lg-column list-unstyled">
                     <li class="kanban-action-item lh-sm nav-item me-2">
-                      <a
-                        class="nav-link text-body-emphasis fw-semibold fs-9 stretched-link"
-                        href="#"
-                        id="changeStatusTrigger"
-                        data-task-id=""
-                        data-current-status=""
-                        >
+                      <a class="nav-link text-body-emphasis fw-semibold fs-9 stretched-link" href="#"
+                        id="changeStatusTrigger" data-task-id="" data-current-status="">
                         <span class="me-2 fa-solid fa-file-export"></span>Change status
                       </a>
-                   </li>
-
-                    <li class="kanban-action-item lh-sm nav-item me-2"><a
-                        class="nav-link text-body-emphasis fw-semibold fs-9 stretched-link" href="#!"><span
-                          class="me-2 fa-solid fa-clone"></span>Duplicate</a></li>
-                    <li class="kanban-action-item lh-sm nav-item me-2"><a
-                        class="nav-link text-body-emphasis fw-semibold fs-9 stretched-link" href="#!"><span
-                          class="me-2 fa-solid fa-share-nodes"></span>Share</a></li>
-                    <li class="kanban-action-item lh-sm nav-item me-2"><a
-                        class="nav-link text-body-emphasis fw-semibold fs-9 stretched-link" href="#!"><span
-                          class="me-2 fa-solid fa-square-plus"></span>Create template</a></li>
-                    <li class="kanban-action-item lh-sm nav-item me-2"><a
-                        class="nav-link text-body-emphasis fw-semibold fs-9 stretched-link" href="#!"><span
-                          class="me-2 fa-solid fa-arrows-up-to-line"></span>Jump to top</a></li>
-                    <li class="kanban-action-item lh-sm nav-item me-2"><a
-                        class="nav-link text-body-emphasis fw-semibold fs-9 stretched-link" href="#!"><span
-                          class="me-2 fa-solid fa-box-archive"></span>Move to Archive</a></li>
-                    <li class="kanban-action-item lh-sm nav-item me-2"><a
-                        class="nav-link text-body-emphasis fw-semibold fs-9 stretched-link" href="#!"><span
-                          class="me-2 fa-solid fa-trash-can"></span>Move to Trash</a></li>
-                    <li class="kanban-action-item lh-sm nav-item me-2"><a
-                        class="nav-link text-body-emphasis fw-semibold fs-9 stretched-link" href="#!"><span
-                          class="me-2 fa-solid fa-download"></span>Print/Download</a></li>
+                    </li>
+                    <li class="kanban-action-item lh-sm nav-item me-2">
+                      <a class="nav-link text-body-emphasis fw-semibold fs-9 stretched-link" href="#!"><span
+                          class="me-2 fa-solid fa-clone"></span>Duplicate</a>
+                    </li>
+                    <li class="kanban-action-item lh-sm nav-item me-2">
+                      <a class="nav-link text-body-emphasis fw-semibold fs-9 stretched-link" href="#!"><span
+                          class="me-2 fa-solid fa-share-nodes"></span>Share</a>
+                    </li>
+                    <li class="kanban-action-item lh-sm nav-item me-2">
+                      <a class="nav-link text-body-emphasis fw-semibold fs-9 stretched-link" href="#!"><span
+                          class="me-2 fa-solid fa-square-plus"></span>Create template</a>
+                    </li>
+                    <li class="kanban-action-item lh-sm nav-item me-2">
+                      <a class="nav-link text-body-emphasis fw-semibold fs-9 stretched-link" href="#!"><span
+                          class="me-2 fa-solid fa-arrows-up-to-line"></span>Jump to top</a>
+                    </li>
+                    <li class="kanban-action-item lh-sm nav-item me-2">
+                      <a class="nav-link text-body-emphasis fw-semibold fs-9 stretched-link" href="#!"><span
+                          class="me-2 fa-solid fa-box-archive"></span>Move to Archive</a>
+                    </li>
+                    <li class="kanban-action-item lh-sm nav-item me-2">
+                      <a class="nav-link text-body-emphasis fw-semibold fs-9 stretched-link" href="#!"><span
+                          class="me-2 fa-solid fa-trash-can"></span>Move to Trash</a>
+                    </li>
+                    <li class="kanban-action-item lh-sm nav-item me-2">
+                      <a class="nav-link text-body-emphasis fw-semibold fs-9 stretched-link" href="#!"><span
+                          class="me-2 fa-solid fa-download"></span>Print/Download</a>
+                    </li>
                   </ul>
                   <h5 class="mt-6">Activities</h5>
                   <div class="d-flex border-bottom ">
@@ -2653,11 +2685,11 @@ foreach ($tasks as $task) {
                         data-fa-transform="shrink-4"></span></div>
                     <div class="activity-item ps-2 py-3">
                       <p class="mb-1 fs-9"><span class="fw-bold"> Alfen Loebe </span> Moved the task <a href="#!">"the
-                          standard chunk" </a>from <span class="fw-bold">Doing</span> to <span class="fw-bold">To
+                          standard chunk"</a> from <span class="fw-bold">Doing</span> to <span class="fw-bold">To
                           Do</span></p>
                       <div class="d-flex">
-                        <p class="mb-0 fs-9 me-3"> <span class="fa-regular fa-clock me-1"></span>10:41 AM</p>
-                        <p class="mb-0 fs-9">Aughst 7,2022</p>
+                        <p class="mb-0 fs-9 me-3"><span class="fa-regular fa-clock me-1"></span>10:41 AM</p>
+                        <p class="mb-0 fs-9">August 7, 2022</p>
                       </div>
                     </div>
                   </div>
@@ -2667,11 +2699,11 @@ foreach ($tasks as $task) {
                         data-fa-transform="shrink-4"></span></div>
                     <div class="activity-item ps-2 py-3">
                       <p class="mb-1 fs-9"><span class="fw-bold"> Jessie Samson </span> Attached image3.png to the task
-                        <a href="#!">"the standard chunk" </a>
+                        <a href="#!">"the standard chunk"</a>
                       </p>
                       <div class="d-flex">
-                        <p class="mb-0 fs-9 me-3"> <span class="fa-regular fa-clock me-1"></span>10:41 AM</p>
-                        <p class="mb-0 fs-9">Aughst 7,2022</p>
+                        <p class="mb-0 fs-9 me-3"><span class="fa-regular fa-clock me-1"></span>10:41 AM</p>
+                        <p class="mb-0 fs-9">August 7, 2022</p>
                       </div>
                     </div>
                   </div>
@@ -2680,51 +2712,104 @@ foreach ($tasks as $task) {
                         data-fa-transform="shrink-4"></span></div>
                     <div class="activity-item ps-2 py-3">
                       <p class="mb-1 fs-9"><span class="fw-bold"> Alfen Loebe </span> Moved the task <a href="#!">"the
-                          standard chunk" </a>from <span class="fw-bold">Doing</span> to <span class="fw-bold">To
+                          standard chunk"</a> from <span class="fw-bold">Doing</span> to <span class="fw-bold">To
                           Do</span></p>
                       <div class="d-flex">
-                        <p class="mb-0 fs-9 me-3"> <span class="fa-regular fa-clock me-1"></span>10:41 AM</p>
-                        <p class="mb-0 fs-9">Aughst 7,2022</p>
+                        <p class="mb-0 fs-9 me-3"><span class="fa-regular fa-clock me-1"></span>10:41 AM</p>
+                        <p class="mb-0 fs-9">August 7, 2022</p>
                       </div>
                     </div>
                   </div>
-                  <div class="d-flex  ">
+                  <div class="d-flex">
                     <div class="pt-3 text-primary"><span
                         class="border border-translucent rounded-pill p-1 fas fa-random"
                         data-fa-transform="shrink-4"></span></div>
                     <div class="activity-item ps-2 py-3">
                       <p class="mb-1 fs-9"><span class="fw-bold"> Alfen Loebe </span> Moved the task <a href="#!">"the
-                          standard chunk" </a>from <span class="fw-bold">Doing</span> to <span class="fw-bold">To
+                          standard chunk"</a> from <span class="fw-bold">Doing</span> to <span class="fw-bold">To
                           Do</span></p>
                       <div class="d-flex">
-                        <p class="mb-0 fs-9 me-3"> <span class="fa-regular fa-clock me-1"></span>10:41 AM</p>
-                        <p class="mb-0 fs-9">Aughst 7,2022</p>
+                        <p class="mb-0 fs-9 me-3"><span class="fa-regular fa-clock me-1"></span>10:41 AM</p>
+                        <p class="mb-0 fs-9">August 7, 2022</p>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+
+            <!-- Third Column: New col-lg-4 -->
+            <div class="col-lg-4 col-12 border-start-lg d-flex flex-column" style="height: 70vh;">
+
+              <div class="border-top px-3 pt-3 d-flex flex-column flex-grow-1">
+
+                <h5 class="mb-2 text-white">Activity</h5>
+
+                <div id="chatMessages" class="flex-grow-1 overflow-auto bg-dark p-3 rounded mb-2" style="color: #ccc;">
+                  <!-- Message from another user -->
+                  <div class="mb-3 text-start">
+                    <div class="bg-secondary text-white rounded p-3 shadow-sm d-inline-block w-65">Let’s start on this
+                      today.</div>
+                    <div class="text-muted small">Aakash • 10:15 AM</div>
+                  </div>
+
+
+
+                  <!-- Another message from someone else -->
+                  <div class="mb-3 text-start">
+                    <div class="bg-secondary text-white rounded p-3 shadow-sm d-inline-block w-65">TASK ACTIVITY</div>
+                    <div class="text-muted small">Aryan • 10:18 AM</div>
+                  </div>
+                </div>
+
+
+                <div class="pt-2 d-flex">
+                  <input type="text" class="form-control me-2" placeholder="Type a message..." id="chatInput"
+                    style="height: 42px; font-size: 0.95rem;" />
+                  <button class="btn btn-primary d-flex align-items-center px-3" id="sendBtn">
+                    <i class="fas fa-paper-plane"></i>
+                  </button>
+                </div>
+
+              </div>
+
+            </div>
+
+
+
           </div>
-          <div class="modal-footer justify-content-between"><button class="btn p-1" type="button" data-bs-dismiss="modal"
-            aria-label="Close"><span class="fas fa-times fs-10 me-1"
-              data-fa-transform="up-1"></span>Close</button><button class="btn btn-phoenix-primary px-6" type="button"
-            data-bs-target="#kanbanAddTask" data-bs-toggle="modal">Edit<span class="fas fa-edit ms-2"
-              data-fa-transform="shrink-3"></span></button></div>
+          <div class="modal-footer justify-content-between"><button class="btn p-1" type="button"
+              data-bs-dismiss="modal" aria-label="Close"><span class="fas fa-times fs-10 me-1"
+                data-fa-transform="up-1"></span>Close</button><button class="btn btn-phoenix-primary px-6" type="button"
+              data-bs-target="#kanbanAddTask" data-bs-toggle="modal">Edit<span class="fas fa-edit ms-2"
+                data-fa-transform="shrink-3"></span></button></div>
+        </div>
       </div>
     </div>
   </div>
-  
-  
+  </div>
+
+
+  </div>
+
+  <!-- <div class="modal-footer justify-content-between"><button class="btn p-1" type="button" data-bs-dismiss="modal"
+      aria-label="Close"><span class="fas fa-times fs-10 me-1" data-fa-transform="up-1"></span>Close</button><button
+      class="btn btn-phoenix-primary px-6" type="button" data-bs-target="#kanbanAddTask"
+      data-bs-toggle="modal">Edit<span class="fas fa-edit ms-2" data-fa-transform="shrink-3"></span></button></div>
+  </div> -->
+  </div>
+  </div>
+
+
 
   <!--Fetching the task status from the database-->
   <?php
-    $statusQuery = "SELECT id, name FROM tbl_task_status";
-    $statusResult = $conn->query($statusQuery);
-    $statuses = $statusResult ? $statusResult->fetch_all(MYSQLI_ASSOC) : [];
+  $statusQuery = "SELECT id, name FROM tbl_task_status";
+  $statusResult = $conn->query($statusQuery);
+  $statuses = $statusResult ? $statusResult->fetch_all(MYSQLI_ASSOC) : [];
   ?>
 
-  
+
   <script>
     /**
     * Script to manage task status changes from the Kanban Task Detail Modal.
@@ -2741,84 +2826,84 @@ foreach ($tasks as $task) {
     * - PHP backend: update_task_status.php
     */
 
-   const allStatuses = <?= json_encode($statuses) ?>;
+    const allStatuses = <?= json_encode($statuses) ?>;
 
-   document.addEventListener('DOMContentLoaded', function () {
-    const detailsModal = document.getElementById('KanbanItemDetailsModal');
-    const statusSelect = document.getElementById('statusSelect');
-    const updateBtn = document.getElementById('confirmChangeStatusBtn');
-    let currentTaskId = null;
+    document.addEventListener('DOMContentLoaded', function () {
+      const detailsModal = document.getElementById('KanbanItemDetailsModal');
+      const statusSelect = document.getElementById('statusSelect');
+      const updateBtn = document.getElementById('confirmChangeStatusBtn');
+      let currentTaskId = null;
 
-   detailsModal.addEventListener('show.bs.modal', function (event) {
-    const trigger = event.relatedTarget;
+      detailsModal.addEventListener('show.bs.modal', function (event) {
+        const trigger = event.relatedTarget;
 
-    // Set modal content
-    document.getElementById('modal-title').textContent = trigger.getAttribute('data-title');
-    document.getElementById('modal-description').textContent = trigger.getAttribute('data-description');
-    document.getElementById('modal-project').textContent = trigger.getAttribute('data-project');
-    document.getElementById('modal-status').textContent = trigger.getAttribute('data-status');
-    document.getElementById('modal-priority').textContent = trigger.getAttribute('data-priority');
-    document.getElementById('modal-category').textContent = trigger.getAttribute('data-category');
-    document.getElementById('modal-employee').textContent = trigger.getAttribute('data-employee');
+        // Set modal content
+        document.getElementById('modal-title').textContent = trigger.getAttribute('data-title');
+        document.getElementById('modal-description').textContent = trigger.getAttribute('data-description');
+        document.getElementById('modal-project').textContent = trigger.getAttribute('data-project');
+        document.getElementById('modal-status').textContent = trigger.getAttribute('data-status');
+        document.getElementById('modal-priority').textContent = trigger.getAttribute('data-priority');
+        document.getElementById('modal-category').textContent = trigger.getAttribute('data-category');
+        document.getElementById('modal-employee').textContent = trigger.getAttribute('data-employee');
 
-    // Update global taskId
-    currentTaskId = trigger.getAttribute('data-id');
-    const currentStatus = trigger.getAttribute('data-status');
+        // Update global taskId
+        currentTaskId = trigger.getAttribute('data-id');
+        const currentStatus = trigger.getAttribute('data-status');
 
-    // Update Change Status button in sidebar
-    const changeBtn = document.getElementById('changeStatusTrigger');
-    if (changeBtn) {
-      changeBtn.setAttribute('data-task-id', currentTaskId);
-      changeBtn.setAttribute('data-current-status', currentStatus);
+        // Update Change Status button in sidebar
+        const changeBtn = document.getElementById('changeStatusTrigger');
+        if (changeBtn) {
+          changeBtn.setAttribute('data-task-id', currentTaskId);
+          changeBtn.setAttribute('data-current-status', currentStatus);
 
-      // Remove previous click listeners to avoid duplicates
-      const newBtn = changeBtn.cloneNode(true);
-      changeBtn.parentNode.replaceChild(newBtn, changeBtn);
+          // Remove previous click listeners to avoid duplicates
+          const newBtn = changeBtn.cloneNode(true);
+          changeBtn.parentNode.replaceChild(newBtn, changeBtn);
 
-      // Add click event to trigger status modal
-      newBtn.addEventListener('click', function (e) {
-        e.preventDefault();
+          // Add click event to trigger status modal
+          newBtn.addEventListener('click', function (e) {
+            e.preventDefault();
 
-        const selectedStatus = this.getAttribute('data-current-status');
-        statusSelect.innerHTML = '';
+            const selectedStatus = this.getAttribute('data-current-status');
+            statusSelect.innerHTML = '';
 
-        allStatuses.forEach(status => {
-          const opt = document.createElement('option');
-          opt.value = status.id;
-          opt.textContent = status.name;
-          if (status.name === selectedStatus) opt.selected = true;
-          statusSelect.appendChild(opt);
-        });
+            allStatuses.forEach(status => {
+              const opt = document.createElement('option');
+              opt.value = status.id;
+              opt.textContent = status.name;
+              if (status.name === selectedStatus) opt.selected = true;
+              statusSelect.appendChild(opt);
+            });
 
-        new bootstrap.Modal(document.getElementById('changeStatusModal')).show();
-      });
-    }
-   });
-   function switchTheme(mode) {
-    // mode should be "light" or "dark"
-    document.body.setAttribute("data-bs-theme", mode);
-    localStorage.setItem("theme", mode); // store preference
-  }
-   updateBtn.addEventListener('click', function () {
-    const selectedStatusId = statusSelect.value;
-    if (!currentTaskId || !selectedStatusId) return;
-
-    fetch('../PhpFiles/update_task_status.php', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `task_id=${currentTaskId}&status_id=${selectedStatusId}`
-    })
-      .then(res => res.text())
-      .then(response => {
-        if (response.trim() === 'success') {
-          //alert('Status updated!');
-          location.reload();
-        } else {
-          alert('Error updating: ' + response);
+            new bootstrap.Modal(document.getElementById('changeStatusModal')).show();
+          });
         }
       });
+      function switchTheme(mode) {
+        // mode should be "light" or "dark"
+        document.body.setAttribute("data-bs-theme", mode);
+        localStorage.setItem("theme", mode); // store preference
+      }
+      updateBtn.addEventListener('click', function () {
+        const selectedStatusId = statusSelect.value;
+        if (!currentTaskId || !selectedStatusId) return;
+
+        fetch('../PhpFiles/update_task_status.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: `task_id=${currentTaskId}&status_id=${selectedStatusId}`
+        })
+          .then(res => res.text())
+          .then(response => {
+            if (response.trim() === 'success') {
+              //alert('Status updated!');
+              location.reload();
+            } else {
+              alert('Error updating: ' + response);
+            }
+          });
+      });
     });
-   });
   </script>
 
 
@@ -2843,29 +2928,31 @@ foreach ($tasks as $task) {
   <!-- Bootstrap 5.3 JS Bundle (includes Popper for tooltips, modals, etc.) -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
- <!-- Modal to select and update task status -->
-<div class="modal fade" id="changeStatusModal" tabindex="-1" aria-labelledby="changeStatusModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content rounded-4 shadow-sm">
-      <div class="modal-header">
-        <h5 class="modal-title fw-semibold" id="changeStatusModalLabel">Update Task Status</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body px-4 pb-0">
-        <div class="mb-3">
-          <label for="statusSelect" class="form-label fw-bold small text-uppercase">Select New Status</label>
-          <select class="form-select rounded-3 py-2" id="statusSelect"></select>
+  <!-- Modal to select and update task status -->
+  <div class="modal fade" id="changeStatusModal" tabindex="-1" aria-labelledby="changeStatusModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content rounded-4 shadow-sm">
+        <div class="modal-header">
+          <h5 class="modal-title fw-semibold" id="changeStatusModalLabel">Update Task Status</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-      </div>
-      <div class="modal-footer border-0 px-4 pb-4 pt-0">
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary px-4" id="confirmChangeStatusBtn">Save Changes</button>
+        <div class="modal-body px-4 pb-0">
+          <div class="mb-3">
+            <label for="statusSelect" class="form-label fw-bold small text-uppercase">Select New Status</label>
+            <select class="form-select rounded-3 py-2" id="statusSelect"></select>
+          </div>
+        </div>
+        <div class="modal-footer border-0 px-4 pb-4 pt-0">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary px-4" id="confirmChangeStatusBtn">Save Changes</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 
 
 </body>
+
 </html>
