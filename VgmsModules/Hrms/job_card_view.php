@@ -167,8 +167,7 @@
         <div class="content my-4">
             <div class="d-flex align-items-center gap-6 mb-4">
                 <h2 class="mb-1">Jobs</h2>
-                <button class="btn btn-primary" type="button" data-bs-toggle="modal"
-                    data-bs-target="#jobOpeningModal">
+                <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#jobOpeningModal">
                     Add a Job Opening
                 </button>
             </div>
@@ -331,9 +330,18 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="departmentInput" class="form-label">Department</label>
-                                <input type="text" class="form-control" id="departmentInput" name="department" required>
+                                <label for="departmentSelect" class="form-label">Department</label>
+                                <select class="form-select" id="departmentSelect" name="department" required>
+                                    <option value="" disabled selected>Select Department</option>
+                                    <option value="HR">HR</option>
+                                    <option value="Engineering">Engineering</option>
+                                    <option value="Marketing">Marketing</option>
+                                    <option value="Sales">Sales</option>
+                                    <option value="Finance">Finance</option>
+                                    <!-- Add more options as needed -->
+                                </select>
                             </div>
+
 
                             <div class="mb-3">
                                 <label for="jobdescInput" class="form-label">Job Description</label>
