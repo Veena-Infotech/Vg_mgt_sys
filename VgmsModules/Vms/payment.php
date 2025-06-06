@@ -165,7 +165,7 @@
             }
         </script>
         <div class="content d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-            <div class="container" style="max-width: 480px;">
+            <div class="container mb-4" style="max-width: 480px;">
                 <div class="card shadow-sm border-0 rounded-4 w-100">
                     <div class="card-header bg-primary text-white rounded-top-4 text-center py-3">
                         <h3 class="mb-0 fw-bold" style="font-size: 1.8rem;">Payment Details</h3>
@@ -197,6 +197,20 @@
                                 Paid By Cash
                             </button>
                         </div>
+
+                        <div class="row mt-2" >
+                            <div class="col-6" >
+                                <button type="button" class="btn btn-danger btn-lg rounded-pill fw-bold">
+                                    Payment Denied
+                                </button>
+                            </div>
+                            <div class="col-6" >
+                                <button type="button" class="btn btn-success btn-lg rounded-pill fw-bold">
+                                    Payment Success
+                                </button>
+                            </div>
+                        </div>
+
 
                     </div>
                 </div>
