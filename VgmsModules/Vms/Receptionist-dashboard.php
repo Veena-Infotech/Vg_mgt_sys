@@ -1,3 +1,30 @@
+
+<?php if (isset($_GET['status']) && $_GET['status'] === 'success'): ?>
+    <div id="successPopup" style="
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #d4edda;
+        color: #155724;
+        padding: 15px 25px;
+        border: 1px solid #c3e6cb;
+        border-radius: 5px;
+        font-size: 16px;
+        z-index: 9999;
+        display: none;
+    ">
+        Payment <?php echo htmlspecialchars($_GET['type']); ?>: Processed successfully!
+    </div>
+    <script>
+        const popup = document.getElementById('successPopup');
+        popup.style.display = 'block';
+        setTimeout(() => {
+            popup.style.display = 'none';
+        }, 3000);
+    </script>
+<?php endif; ?>
+
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr" data-navigation-type="default" data-navbar-horizontal-shape="default">
 
@@ -199,7 +226,9 @@
                 <th class="sort border-top" data-sort="meeting">Meeting Purpose</th>
                 <th class="sort border-top" data-sort="time">Time</th>
                 <th class="sort border-top" data-sort="status">Status</th>
-                <th class="sort text-end align-middle pe-0 border-top" scope="col">ACTION</th>
+                <th class="sort border-top" data-sort="payment">Payment</th>
+                <th class="sort border-top" data-sort="payment_status"> Payment Status</th>
+                <th class="sort text-end align-middle pe-3 border-top" scope="col">ACTION</th>
               </tr>
             </thead>
             <tbody class="list">
@@ -210,14 +239,15 @@
 
               // Check if "view=all" is set in the URL, show all meetings, else show today's meetings
               if (isset($_GET['view']) && $_GET['view'] === 'all') {
-                $sql = "SELECT m.id, v.f_name AS visitor_name, e.f_name AS emp_name, m.reason, m.time, m.meeting_status 
+                $sql = "SELECT m.id, CONCAT(v.f_name,' ', v.l_name) AS visitor_name, e.f_name AS emp_name, m.reason, m.time, m.meeting_status, m.amount, m.payment_status
                         FROM tbl_meeting_history m 
                         JOIN tbl_visitor v ON m.visitor_id = v.id 
                         JOIN tbl_emp e ON m.emp_id = e.id 
                         ORDER BY m.date DESC, m.time DESC";
                         
               } else {
-                $sql = "SELECT m.id, v.f_name AS visitor_name, e.f_name AS emp_name, m.reason, m.time, m.meeting_status 
+                $sql = "SELECT m.id, 
+                CONCAT(v.f_name,' ', v.l_name) AS visitor_name, e.f_name AS emp_name, m.reason, m.time, m.meeting_status, m.amount, m.payment_status
                         FROM tbl_meeting_history m 
                         JOIN tbl_visitor v ON m.visitor_id = v.id 
                         JOIN tbl_emp e ON m.emp_id = e.id 
@@ -251,42 +281,63 @@
 
                   <td class="align-middle status">
                     <?php
-                    $status = $row['meeting_status'];
-                    $badge_class = match ($status) {
-                      'Completed' => 'badge-phoenix-success',
-                      'Rescheduled' => 'badge-phoenix-info',
-                      'InProgress' => 'badge-phoenix-primary',
-                      default => 'badge-phoenix-warning'
-                    };
+                      $status = $row['meeting_status'];
+                      $badge_class = match ($status) {
+                        'Completed' => 'badge-phoenix-success',
+                        'Rescheduled' => 'badge-phoenix-info',
+                        'InProgress' => 'badge-phoenix-primary',
+                        default => 'badge-phoenix-warning'
+                      };
                     ?>
                     <div class="badge badge-phoenix fs-10 <?php echo $badge_class; ?>">
                       <span class="fw-bold"><?php echo htmlspecialchars($status); ?></span>
                     </div>
                   </td>
 
-                  <td class="align-middle white-space-nowrap text-end pe-0 action-cell">
-                    <div class="btn-reveal-trigger position-static">
+                  <td class="align-middle payment"><?php echo htmlspecialchars($row['amount']) ?? '—'; ?></td>
+                  <td class="align-middle payment_status">
+  <?php
+    $payment_status = !empty($row['payment_status']) ? $row['payment_status'] : 'Unpaid';
+
+    $payment_badge_class = match ($payment_status) {
+      'Paid' => 'badge-phoenix-success',
+      'Pending' => 'badge-phoenix-warning',
+      'Unpaid' => 'badge-phoenix-danger', 
+      default => 'badge-phoenix-secondary'
+    };
+  ?>
+  <div class="badge badge-phoenix fs-10 <?php echo $payment_badge_class; ?>">
+    <span class="fw-bold"><?php echo htmlspecialchars($payment_status); ?></span>
+  </div>
+</td>
+
+
+                  <td class="align-middle text-end pe-3">
+                    <div class="btn-reveal-trigger d-inline-block">
                       <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10"
-                        type="button" data-bs-toggle="dropdown" data-boundary="window"
-                        aria-haspopup="true" aria-expanded="false">
+                        type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-ellipsis"></i>
                       </button>
                       <div class="dropdown-menu dropdown-menu-end py-2">
-                        <form method="POST" action="../PhpFiles/update_status.php">
-                          <input type="hidden" name="meeting_id" value="<?php echo $row['id']; ?>">
+                      <form method="POST" action="../PhpFiles/update_status.php">
+                        <input type="hidden" name="meeting_id" value="<?php echo $row['id']; ?>">
                           <?php
-                          $allStatuses = ['Scheduled', 'InProgress', 'Completed', 'Rescheduled'];
-                          foreach ($allStatuses as $option) {
-                            if ($option !== $status) {
-                              echo "<button class='dropdown-item' type='submit' name='status' value='$option'>Move to $option</button>";
+                            $allStatuses = ['Scheduled', 'InProgress', 'Completed', 'Rescheduled'];
+                            foreach ($allStatuses as $option) {
+                              if ($option !== $status) {
+                                echo "<button class='dropdown-item' type='submit' name='status' value='$option'>Move to $option</button>";
+                              }
                             }
-                          }
                           ?>
-                        </form>
+                      </form>
+                      <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="payment.php?meeting_id=<?php echo $row['id']; ?>">Receive Payment</a>
                       </div>
                     </div>
                   </td>
-                  
+
+                </tr>
+
                 <?php
               }
                 ?>

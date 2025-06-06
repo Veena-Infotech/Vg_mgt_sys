@@ -19,6 +19,7 @@
     <!--    Favicons-->
     <!-- ===============================================-->
     <link rel="shortcut icon" type="image/x-icon" href="../../assets/img/favicons/favicon.ico">
+    
     <link rel="manifest" href="../../assets/img/favicons/manifest.json">
     <meta name="msapplication-TileImage" content="../../assets/img/favicons/mstile-150x150.png">
     <meta name="theme-color" content="#ffffff">
@@ -58,6 +59,8 @@
     <link href="../../vendors/leaflet.markercluster/MarkerCluster.css" rel="stylesheet">
     <link href="../../vendors/leaflet.markercluster/MarkerCluster.Default.css" rel="stylesheet">
 </head>
+
+
 
 <body>
     <!-- ===============================================-->
@@ -164,6 +167,22 @@
                 navbarVertical.setAttribute('data-navbar-appearance', 'darker');
             }
         </script>
+
+        <?php
+include '../PhpFiles/connection.php';
+
+$meeting_id = $_GET['meeting_id'] ?? 0;
+
+$query = "SELECT mh.amount, v.id AS visitor_id, c.f_name, c.l_name
+          FROM tbl_meeting_history mh
+          JOIN tbl_visitor v ON mh.visitor_id = v.id
+          JOIN tbl_client c ON v.reference_id = c.id
+          WHERE mh.id = $meeting_id";
+
+$result = mysqli_query($conn, $query);
+$data = mysqli_fetch_assoc($result);
+?>
+
         <div class="content d-flex justify-content-center align-items-center" style="min-height: 100vh;">
             <div class="container mb-4" style="max-width: 480px;">
                 <div class="card shadow-sm border-0 rounded-4 w-100">
@@ -191,25 +210,39 @@
                             <p class="fw-bold text-primary" id="paymentAmount" style="font-size: 2.5rem;">₹ 1500</p>
                         </div>
 
-                        <!-- Pay Button -->
-                        <div class="d-grid">
-                            <button type="button" class="btn btn-primary btn-lg rounded-pill fw-bold">
-                                Paid By Cash
-                            </button>
-                        </div>
+                        
+            <!-- Paid By Cash -->
+<form action="../PhpFiles/make_payment.php" method="POST" class="mb-2">
+    <input type="hidden" name="meeting_id" value="<?php echo htmlspecialchars($meeting_id); ?>">
+    <input type="hidden" name="amount" value="<?php echo htmlspecialchars($data['amount']); ?>">
+    <input type="hidden" name="type" value="Cash">
+    <button type="submit" class="btn btn-primary btn-lg rounded-pill w-100 fw-bold">Paid By Cash</button>
+</form>
 
-                        <div class="row mt-2" >
-                            <div class="col-6" >
-                                <button type="button" class="btn btn-danger btn-lg rounded-pill fw-bold">
-                                    Payment Denied
-                                </button>
-                            </div>
-                            <div class="col-6" >
-                                <button type="button" class="btn btn-success btn-lg rounded-pill fw-bold">
-                                    Payment Success
-                                </button>
-                            </div>
-                        </div>
+<!-- Row for Payment Denied and Success -->
+<div class="row g-2">
+    <!-- Payment Denied -->
+    <div class="col-6">
+        <form action="../PhpFiles/make_payment.php" method="POST">
+            <input type="hidden" name="meeting_id" value="<?php echo htmlspecialchars($meeting_id); ?>">
+            <input type="hidden" name="amount" value="<?php echo htmlspecialchars($data['amount']); ?>">
+            <input type="hidden" name="type" value="Denied">
+            <button type="submit" class="btn btn-danger btn-lg rounded-pill w-100 fw-bold">Payment Denied</button>
+        </form>
+    </div>
+
+    <!-- Payment Success -->
+    <div class="col-6">
+        <form action="../PhpFiles/make_payment.php" method="POST">
+            <input type="hidden" name="meeting_id" value="<?php echo htmlspecialchars($meeting_id); ?>">
+            <input type="hidden" name="amount" value="<?php echo htmlspecialchars($data['amount']); ?>">
+            <input type="hidden" name="type" value="Online">
+            <button type="submit" class="btn btn-success btn-lg rounded-pill w-100 fw-bold">Payment Success</button>
+        </form>
+    </div>
+</div>
+
+
 
 
                     </div>
@@ -261,9 +294,9 @@
 
     <script>
         window.addEventListener('DOMContentLoaded', () => {
-            const upiId = 'ghanshanimanish152@okaxis'; // replace with your real UPI ID
+            const upiId = '7666491809@fam'; // replace with your real UPI ID
             const payeeName = 'The Veena Group';
-            const amount = '1500';
+            
             const currency = 'INR';
 
             const upiUri = `upi://pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(payeeName)}&am=${encodeURIComponent(amount)}&cu=${encodeURIComponent(currency)}`;
@@ -278,11 +311,55 @@
         });
     </script>
 
+    <script>
+    const meetingId = <?php echo json_encode($meeting_id); ?>;
+    const amount = <?php echo json_encode($data['amount']); ?>;
+    const userName = <?php echo json_encode($data['f_name'] . ' ' . $data['l_name']); ?>;
+</script>
+
+    
+        <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("userName").innerText = userName;
+    document.getElementById("paymentAmount").innerText = "₹ " + amount;
+
+    const now = new Date();
+    document.getElementById("paymentDate").innerText = "Date: " + now.toLocaleDateString();
+    document.getElementById("paymentTime").innerText = "Time: " + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    function handlePayment(paymentType) {
+        fetch("../PhpFiles/make_payment.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/JSON"
+            },
+            body: new URLSearchParams({
+                meeting_id: meetingId,
+                payment_type: paymentType,
+                amount: amount
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                alert("Payment recorded as " + paymentType);
+            } else {
+                alert("Error: " + data.error);
+            }
+        });
+    }
+
+    document.querySelector(".btn-primary").addEventListener("click", () => handlePayment("Cash"));
+    document.querySelector(".btn-success").addEventListener("click", () => handlePayment("Online"));
+    document.querySelector(".btn-danger").addEventListener("click", () => alert("Payment Denied"));
+});
+
+</script>
+
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
-
-
-    </script>
 
 
 

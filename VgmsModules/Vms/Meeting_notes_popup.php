@@ -252,32 +252,64 @@
                 </div>
             </div> -->
 
-            <form id="onboardingForm" enctype="multipart/form-data" class="dropzone dropzone-multiple p-0" id="dropzone-multiple" data-dropzone="data-dropzone" action="#!">
+            <form action="../PhpFiles/handle_vms_meeting_notes.php" method="POST" id="onboardingForm" enctype="multipart/form-data" class="dropzone dropzone-multiple p-0" id="dropzone-multiple" data-dropzone="data-dropzone" >
 
                 <!-- STEP TEMPLATE START -->
                 <!-- Repeat this template per section with unique content -->
                 <div class="step">
                     <div class="row g-3">
+                        <?php
+                        include '../PhpFiles/connection.php';
+
+$meeting_id = isset($_GET['meeting_id']) ? mysqli_real_escape_string($conn, $_GET['meeting_id']) : '';
+$uid = '';
+$visitor_name = '';
+$employee_name = '';
+
+if (!empty($meeting_id)) {
+    $query = mysqli_query($conn, "
+        SELECT 
+            h.uid,
+            CONCAT(v.f_name, ' ', v.m_name, ' ', v.l_name) AS visitor_name,
+            CONCAT(e.f_name, ' ', e.m_name, ' ', e.l_name) AS employee_name
+        FROM tbl_meeting_history h
+        LEFT JOIN tbl_visitor v ON h.visitor_id = v.id
+        LEFT JOIN tbl_emp e ON h.emp_id = e.id
+        WHERE h.id = '$meeting_id'
+        LIMIT 1
+    ");
+
+    if ($row = mysqli_fetch_assoc($query)) {
+        $uid = $row['uid'];
+        $visitor_name = trim($row['visitor_name']);
+        $employee_name = trim($row['employee_name']);
+    } 
+}
+                        ?>
+
 
                         <div class="col-md-6">
                             <label class="form-label">Meeting ID</label>
-                            <input class="form-control" type="text" name="name" placeholder="101203" id="bootstrap-vertical-wizard-wizard-name" />
+                            <input type="text" class="form-control" value="<?php echo htmlspecialchars($uid); ?>" readonly>
+                            <input type="hidden" name="meeting_id" value="<?php echo $meeting_id; ?>">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Visitor Name</label>
-                            <input class="form-control" type="text" name="name" placeholder="John Smith" id="bootstrap-vertical-wizard-wizard-name" />
+                            <input class="form-control" type="text" name="visitor_name" placeholder="John Smith" readonly value="<?php echo htmlspecialchars($visitor_name); ?>" />
+
                         </div>
 
                         <div class="col-md-6">
                             <div class="mb-2">
-                                <label class="form-label">Employe's Name</label>
-                                <input class="form-control" type="text" name="name" placeholder="John Smith" id="bootstrap-vertical-wizard-wizard-name" />
+                                <label class="form-label">Employee's Name</label>
+                                <input class="form-control" type="text" name="employee_name" placeholder="John Smith" readonly value="<?php echo htmlspecialchars($employee_name); ?>" />
+
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <label class="form-label" for="datetimepicker">Meeting Date & Time</label>
-                            <input class="form-control datetimepicker flatpickr-input" id="datetimepicker" type="text" placeholder="dd/mm/yyyy hour : minute" data-options="{&quot;enableTime&quot;:true,&quot;dateFormat&quot;:&quot;d/m/y H:i&quot;,&quot;disableMobile&quot;:true}" readonly="readonly">
+                            <input class="form-control datetimepicker flatpickr-input" name="date_time" id="datetimepicker" type="text" placeholder="dd/mm/yyyy hour : minute" data-options="{&quot;enableTime&quot;:true,&quot;dateFormat&quot;:&quot;d/m/y H:i&quot;,&quot;disableMobile&quot;:true}" readonly="readonly">
                         </div>
 
                         <div class="col-md-6">
@@ -292,25 +324,27 @@
                                     </div>
                                     <div id="filePreview" class="mt-3"></div>
                                 </div> -->
-                                <input class="form-control" id="formFileMultiple" type="file" multiple="multiple" />
+                                <input class="form-control" id="formFile" name="uploaded_file" type="file" />
+
+
                         </div>
 
                         <div class="col-md-6">
                             <label class="form-label">Payment Amount (If applicable)</label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text">₹</span>
-                                <input class="form-control" type="text" aria-label="Amount (to the nearest dollar)" />
+                                <input class="form-control" type="text" name="payment_amt" aria-label="Amount (to the nearest dollar)" />
                                 <span class="input-group-text">.00</span>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Additional Comments</label>
-                             <textarea class="form-control" id="exampleTextarea" rows="3"> </textarea>
+                             <textarea class="form-control" name="additional_comments" id="exampleTextarea" rows="3"> </textarea>
                         </div>
 
                         <div class="col-md-6">
                             <label class="form-label">Discussion Summary</label>
-                             <textarea class="form-control" id="exampleTextarea" rows="3"> </textarea>
+                             <textarea class="form-control"  name="discussion_summary" id="exampleTextarea" rows="3"> </textarea>
                         </div>
 
 
@@ -318,7 +352,8 @@
                     </div>
                     <div class="d-flex justify-content-end mt-4 gap-2">
                         <button type="reset" class="btn btn-outline-secondary">Reset</button>
-                        <button type="button" class="btn btn-outline-primary next">Submit</button>
+                        <button type="submit" name="submit_btn" class="btn btn-outline-primary">Submit</button>
+
                     </div>
 
                 </div>

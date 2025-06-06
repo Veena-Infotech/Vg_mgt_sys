@@ -1,5 +1,5 @@
 <?php
-include 'connection.php'; // Make sure connection.php is correct
+include 'connection.php'; // Ensure this connects correctly
 
 // Helper function to sanitize folder name
 function sanitize_folder_name($string)
@@ -21,16 +21,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $company_name = ($source === 'company') ? $_POST['company_name'] : NULL;
 
     $designation = ($source === 'society') ? $_POST['designation'] : NULL;
-    
     $visitor_type = ($source === 'company') ? $_POST['visitorType'] : NULL;
 
-    $reference_id = (int) $_POST['referenceName'];
+    $reference_id = (int) $_POST['referenceName']; // This is emp_id
     $whom_to_meet = $_POST['whomToMeet'];
     $number_guests = $_POST['noofguest'];
     $visit_purpose = trim($_POST['reason']);
     $registered_date = date('Y-m-d');
 
-    // Check if reference_id exists in tbl_client
+    // Validate reference_id
     $checkRef = "SELECT id FROM tbl_client WHERE id = ?";
     $checkStmt = mysqli_prepare($conn, $checkRef);
     mysqli_stmt_bind_param($checkStmt, "i", $reference_id);
@@ -43,18 +42,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     mysqli_stmt_close($checkStmt);
 
-    // Function to generate a unique ID
+    // Generate UID
     function generateUID()
     {
         $prefix = "VST";
         $random = substr(str_shuffle("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 4);
-        $time = substr(time(), -4); // last 4 digits of current Unix timestamp
+        $time = substr(time(), -4);
         return $prefix . '-' . strtoupper($random) . '-' . $time;
     }
 
     $uid = generateUID();
 
-    // ✅ Handle captured image before binding
+    // Handle image
     if (isset($_POST['capturedImageData']) && !empty($_POST['capturedImageData'])) {
         $imageData = $_POST['capturedImageData'];
 
@@ -72,11 +71,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $imageName = 'visitor_' . time() . '.png';
         $imagePath = $uploadDir . $imageName;
         file_put_contents($imagePath, $imageData);
-
-        echo "✅ Captured image saved: $imagePath<br>";
     }
 
-    // Insert query
+    // Insert visitor
     $sql = "INSERT INTO tbl_visitor (
         f_name, m_name, l_name, phone_no, email, 
         registered_date, society_name, company_name, 
@@ -97,11 +94,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         );
 
         if (mysqli_stmt_execute($stmt)) {
-            header("Location: ../Vms/New-Registration.php?success=true");
-exit;
+            $visitor_id = mysqli_insert_id($conn); // Get inserted visitor ID
+
+            // Insert into meeting history
+            $meeting_uid = uniqid("meet_");
+            $meeting_date = date('Y-m-d');
+            $meeting_time = date('H:i:s');
+
+            $insertMeeting = "INSERT INTO tbl_meeting_history (uid, date, time, visitor_id, emp_id, reason)
+                              VALUES (?, ?, ?, ?, ?, ?)";
+            $stmt2 = mysqli_prepare($conn, $insertMeeting);
+            mysqli_stmt_bind_param($stmt2, "sssiss", $meeting_uid, $meeting_date, $meeting_time, $visitor_id, $whom_to_meet, $visit_purpose);
+
+            if (mysqli_stmt_execute($stmt2)) {
+                // ✅ All good — redirect
+                header("Location: ../Vms/New-Registration.php?success=true");
+                exit;
+            } else {
+                echo "❌ Meeting insert failed: " . mysqli_stmt_error($stmt2);
+            }
 
         } else {
-            echo "❌ Error: " . mysqli_stmt_error($stmt);
+            echo "❌ Visitor insert failed: " . mysqli_stmt_error($stmt);
         }
 
         mysqli_stmt_close($stmt);

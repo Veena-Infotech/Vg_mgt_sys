@@ -546,7 +546,7 @@
                                                                         <div id="mainFormFields" style="display: none;">
                                                                             <!-- Whom to Meet Dropdown -->
                                                                             <div class="form-floating mb-4">
-                                                                                <select class="form-select rounded-3" id="whomToMeet" name="whomToMeet" required style="border: 1px solid #dcdcdc;">
+                                                                                <select class="form-select rounded-3" id="whomToMeet" name="referenceName" required style="border: 1px solid #dcdcdc;">
                                                                                     <option selected disabled>Choose...</option>
                                                                                     <?php
                                                                                     $empQuery = "SELECT id, f_name, l_name, position FROM tbl_emp ORDER BY f_name ASC";

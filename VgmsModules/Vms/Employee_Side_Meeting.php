@@ -199,7 +199,6 @@ session_start();
                             <tr>
                                 <th class="sort border-top border-translucent ps-3" data-sort="number">#</th>
                                 <th class="sort border-top border-translucent ps-3" data-sort="name">Visitor</th>
-                                <th class="sort border-top" data-sort="Empname">Employee</th>
                                 <th class="sort border-top" data-sort="meeting">Meeting Purpose</th>
                                 <th class="sort border-top" data-sort="date">Date</th>
                                 <th class="sort border-top" data-sort="time">Time</th>
@@ -208,7 +207,7 @@ session_start();
                             </tr>
                         </thead>
                         <tbody class="list">
-                            <tr>
+                            <!--tr>
                                 <td class="align-middle ps-3 number">1</td>
                                 <td class="align-middle name">Ravi Sharma</td>
                                 <td class="align-middle Empname">Anjali Verma</td>
@@ -231,7 +230,7 @@ session_start();
                                         </div>
 
                                 </td>
-                            </tr>
+                            </tr-->
                             <div class="modal fade" id="rescheduleModal" tabindex="-1" aria-labelledby="rescheduleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -268,74 +267,71 @@ session_start();
                             </div>
 
                             <?php
-                            include '../PhpFiles/connection.php';
+                                include '../PhpFiles/connection.php';
 
-                            $emp_id = $_SESSION['user_id']; // Assuming employee ID is stored in 'user_id'
+                                $emp_id = $_SESSION['user_id']; // Assuming employee ID is stored in 'user_id'
 
-                            // Filter by emp_id
-                            $sql = "SELECT m.id, v.f_name AS visitor_name, e.f_name AS emp_name, m.reason, m.time, m.date, m.meeting_status 
-                                FROM tbl_meeting_history m 
-                                JOIN tbl_visitor v ON m.visitor_id = v.id 
-                                JOIN tbl_emp e ON m.emp_id = e.id 
-                                WHERE m.emp_id = '$emp_id' AND m.date = CURDATE()
-                                ORDER BY m.date DESC, m.time DESC";
+                                // Filter by emp_id
+                                $sql = "SELECT m.id, 
+                                    CONCAT(v.f_name, ' ', v.m_name, ' ', v.l_name) AS visitor_name, 
+                                    m.reason, m.time, m.date, m.meeting_status 
+                                    FROM tbl_meeting_history m 
+                                    JOIN tbl_visitor v ON m.visitor_id = v.id 
+                                    WHERE m.emp_id = '$emp_id' AND m.date = CURDATE()
+                                    ORDER BY m.date DESC, m.time DESC"
+                                ;
 
-                            $count_query = "SELECT COUNT(*) AS total FROM tbl_meeting_history 
-                                WHERE emp_id = '$emp_id' AND date = CURDATE()";
+                                $count_query = "SELECT COUNT(*) AS total FROM tbl_meeting_history 
+                                    WHERE emp_id = '$emp_id' AND date = CURDATE()"
+                                ;
 
+                                $count_result = mysqli_query($conn, $count_query);
+                                $count_row = mysqli_fetch_assoc($count_result);
+                                $total_items = $count_row['total'];
 
+                                $result = mysqli_query($conn, $sql);
+                                $counter = 1;
 
-
-                            $count_result = mysqli_query($conn, $count_query);
-                            $count_row = mysqli_fetch_assoc($count_result);
-                            $total_items = $count_row['total'];
-
-
-                            $result = mysqli_query($conn, $sql);
-                            $counter = 1;
-
-                            $result = mysqli_query($conn, $sql);
-                            $counter = 1;
-
-                            if (mysqli_num_rows($result) > 0) {
-                                while ($row = mysqli_fetch_assoc($result)) {
-                            ?>
-                                    <tr>
-                                        <td class="align-middle ps-3 number"><?php echo $counter++; ?></td>
-                                        <td class="align-middle name"><?php echo htmlspecialchars($row['visitor_name']); ?></td>
-                                        <td class="align-middle Empname"><?php echo htmlspecialchars($row['emp_name']); ?></td>
-                                        <td class="align-middle meeting"><?php echo htmlspecialchars($row['reason']); ?></td>
-                                        <td class="align-middle date"><?php echo date("d M Y", strtotime($row['date'])); ?></td>
-                                        <td class="align-middle time"><?php echo date("h:i A", strtotime($row['time'])); ?></td>
-                                        <td class="align-middle status">
-                                            <?php
-                                            $status = $row['meeting_status'];
-                                            $badge_class = match ($status) {
-                                                'Completed' => 'badge-phoenix-success',
-                                                'Rescheduled' => 'badge-phoenix-info',
-                                                'InProgress' => 'badge-phoenix-primary',
-                                                default => 'badge-phoenix-warning'
-                                            };
-                                            ?>
-                                            <div class="badge badge-phoenix fs-10 <?php echo $badge_class; ?>">
-                                                <span class="fw-bold"><?php echo htmlspecialchars($status); ?></span>
-                                            </div>
-                                        </td>
-                                        <td class="align-middle text-end pe-0">
-                                            <div class="btn-reveal-trigger position-static">
-                                                <button class="btn btn-sm dropdown-toggle dropdown-caret-none btn-reveal fs-10"
-                                                    type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                if (mysqli_num_rows($result) > 0) {
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                             ?>
+        
+                                <?php
+                                    $status = $row['meeting_status'];
+                                    $badge_class = match ($status) {
+                                        'Completed' => 'badge-phoenix-success',
+                                        'Rescheduled' => 'badge-phoenix-info',
+                                        'InProgress' => 'badge-phoenix-primary',
+                                         default => 'badge-phoenix-warning'
+                                    };
+                                ?>
+                                <tr>
+                                    <td class="align-middle ps-3 number"><?php echo $counter++; ?></td>
+                                    <td class="align-middle name"><?php echo htmlspecialchars($row['visitor_name']); ?></td>
+                                    <td class="align-middle meeting"><?php echo htmlspecialchars($row['reason']); ?></td>
+                                    <td class="align-middle date"><?php echo date("d M Y", strtotime($row['date'])); ?></td>
+                                    <td class="align-middle time"><?php echo date("h:i A", strtotime($row['time'])); ?></td>
+                                    <td class="align-middle status">
+                                        <div class="badge badge-phoenix fs-10 <?php echo $badge_class; ?>">
+                                            <span class="fw-bold"><?php echo htmlspecialchars($status); ?></span>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle text-end pe-0">
+                                        <div class="btn-reveal-trigger position-static">
+                                            <button class="btn btn-sm dropdown-toggle dropdown-caret-none btn-reveal fs-10"
+                                                type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                     <i class="fas fa-ellipsis fs-10"></i>
-                                                </button>
+                                            </button>
                                                 <div class="dropdown-menu dropdown-menu-end py-2">
                                                     <a class="dropdown-item" href="Meeting_notes_popup.php?meeting_id=<?php echo $row['id']; ?>">Add-edit notes</a>
                                                     <a class="dropdown-item" href="../PhpFiles/CompleteMeeting.php?id=<?php echo $row['id']; ?>">Complete</a>
                                                     <div class="dropdown-divider"></div>
                                                     <a class="dropdown-item text-danger" href="../PhpFiles/RescheduleMeeting.php?id=<?php echo $row['id']; ?>">Reschedule</a>
                                                 </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                        </div>
+                                    </td>
+                                </tr>
+
                             <?php
                                 }
                             } else {
@@ -415,7 +411,7 @@ session_start();
                             <tr>
                                 <th class="sort border-top border-translucent ps-3" data-sort="number">#</th>
                                 <th class="sort border-top border-translucent ps-3" data-sort="name">Visitor</th>
-                                <th class="sort border-top" data-sort="Empname">Employee</th>
+                                
                                 <th class="sort border-top" data-sort="meeting">Meeting Purpose</th>
                                 <th class="sort border-top" data-sort="date">Date</th>
                                 <th class="sort border-top" data-sort="time">Time</th>
@@ -425,47 +421,34 @@ session_start();
                         </thead>
                         <tbody class="list">
 
-                            <?php
-                            include '../PhpFiles/connection.php';
+                                 <?php
+include '../PhpFiles/connection.php';
 
-                            $emp_id = $_SESSION['user_id']; // Assuming employee ID is stored in 'user_id'
+$emp_id = $_SESSION['user_id']; // Assuming employee ID is stored in 'user_id'
 
-                            // Filter by emp_id
-                            $sql = "SELECT m.id, v.f_name AS visitor_name, e.f_name AS emp_name, m.reason, m.time, m.date, m.meeting_status 
-                                FROM tbl_meeting_history m 
-                                JOIN tbl_visitor v ON m.visitor_id = v.id 
-                                JOIN tbl_emp e ON m.emp_id = e.id 
-                                WHERE m.emp_id = '$emp_id'
-                                ORDER BY m.date DESC, m.time DESC";
+// Filter by emp_id
+$sql = "SELECT m.id, 
+        CONCAT(v.f_name, ' ', v.m_name, ' ', v.l_name) AS visitor_name, 
+        m.reason, m.time, m.date, m.meeting_status 
+        FROM tbl_meeting_history m 
+        JOIN tbl_visitor v ON m.visitor_id = v.id 
+        WHERE m.emp_id = '$emp_id' AND m.date = CURDATE()
+        ORDER BY m.date DESC, m.time DESC";
 
-                            $count_query = "SELECT COUNT(*) AS total FROM tbl_meeting_history 
-                                WHERE emp_id = '$emp_id'";
+$count_query = "SELECT COUNT(*) AS total FROM tbl_meeting_history 
+                WHERE emp_id = '$emp_id' AND date = CURDATE()";
 
+$count_result = mysqli_query($conn, $count_query);
+$count_row = mysqli_fetch_assoc($count_result);
+$total_items = $count_row['total'];
 
+$result = mysqli_query($conn, $sql);
+$counter = 1;
 
-
-                            $count_result = mysqli_query($conn, $count_query);
-                            $count_row = mysqli_fetch_assoc($count_result);
-                            $total_items = $count_row['total'];
-
-
-                            $result = mysqli_query($conn, $sql);
-                            $counter = 1;
-
-                            $result = mysqli_query($conn, $sql);
-                            $counter = 1;
-
-                            if (mysqli_num_rows($result) > 0) {
-                                while ($row = mysqli_fetch_assoc($result)) {
-                            ?>
-                                    <tr>
-                                        <td class="align-middle ps-3 number"><?php echo $counter++; ?></td>
-                                        <td class="align-middle name"><?php echo htmlspecialchars($row['visitor_name']); ?></td>
-                                        <td class="align-middle Empname"><?php echo htmlspecialchars($row['emp_name']); ?></td>
-                                        <td class="align-middle meeting"><?php echo htmlspecialchars($row['reason']); ?></td>
-                                        <td class="align-middle date"><?php echo date("d M Y", strtotime($row['date'])); ?></td>
-                                        <td class="align-middle time"><?php echo date("h:i A", strtotime($row['time'])); ?></td>
-                                        <td class="align-middle status">
+if (mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
+?>
+        
                                             <?php
                                             $status = $row['meeting_status'];
                                             $badge_class = match ($status) {
@@ -475,25 +458,33 @@ session_start();
                                                 default => 'badge-phoenix-warning'
                                             };
                                             ?>
-                                            <div class="badge badge-phoenix fs-10 <?php echo $badge_class; ?>">
-                                                <span class="fw-bold"><?php echo htmlspecialchars($status); ?></span>
-                                            </div>
-                                        </td>
-                                        <td class="align-middle text-end pe-0">
-                                            <div class="btn-reveal-trigger position-static">
-                                                <button class="btn btn-sm dropdown-toggle dropdown-caret-none btn-reveal fs-10"
-                                                    type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="fas fa-ellipsis fs-10"></i>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-end py-2">
-                                                    <a class="dropdown-item" href="Meeting_notes_popup.php?meeting_id=<?php echo $row['id']; ?>">Add-edit notes</a>
-                                                    <a class="dropdown-item" href="../PhpFiles/CompleteMeeting.php?id=<?php echo $row['id']; ?>">Complete</a>
-                                                    <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item text-danger" href="RescheduleMeeting.php?id=<?php echo $row['id']; ?>">Reschedule</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                            <tr>
+    <td class="align-middle ps-3 number"><?php echo $counter++; ?></td>
+    <td class="align-middle name"><?php echo htmlspecialchars($row['visitor_name']); ?></td>
+    <td class="align-middle meeting"><?php echo htmlspecialchars($row['reason']); ?></td>
+    <td class="align-middle date"><?php echo date("d M Y", strtotime($row['date'])); ?></td>
+    <td class="align-middle time"><?php echo date("h:i A", strtotime($row['time'])); ?></td>
+    <td class="align-middle status">
+        <div class="badge badge-phoenix fs-10 <?php echo $badge_class; ?>">
+            <span class="fw-bold"><?php echo htmlspecialchars($status); ?></span>
+        </div>
+    </td>
+    <td class="align-middle text-end pe-0">
+        <div class="btn-reveal-trigger position-static">
+            <button class="btn btn-sm dropdown-toggle dropdown-caret-none btn-reveal fs-10"
+                type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-ellipsis fs-10"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-end py-2">
+                <a class="dropdown-item" href="Meeting_notes_popup.php?meeting_id=<?php echo $row['id']; ?>">Add-edit notes</a>
+                <a class="dropdown-item" href="../PhpFiles/CompleteMeeting.php?id=<?php echo $row['id']; ?>">Complete</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item text-danger" href="../PhpFiles/RescheduleMeeting.php?id=<?php echo $row['id']; ?>">Reschedule</a>
+            </div>
+        </div>
+    </td>
+</tr>
+
                             <?php
                                 }
                             } else {
