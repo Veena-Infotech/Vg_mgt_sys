@@ -164,17 +164,18 @@
       }
     </script>
     <div class="content">
-      <h3 style="margin: 0;" class="mb-4">Payment Verification</h3>
-      
-      <div id="tableExample3" data-list="{&quot;valueNames&quot;:[&quot;serial_no&quot;,&quot;payment_type&quot;,&quot;amount&quot;,&quot;purpose&quot;,&quot;proof&quot;,&quot;payment_received&quot;],&quot;page&quot;:5,&quot;pagination&quot;:true}">
-        <div class="search-box mb-3 mx-auto">
-          <form class="position-relative"><input class="form-control search-input search form-control-sm" type="search" placeholder="Search" aria-label="Search">
-            <svg class="svg-inline--fa fa-magnifying-glass search-box-icon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
-              <path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path>
-            </svg><!-- <span class="fas fa-search search-box-icon"></span> Font Awesome fontawesome.com -->
+      <h3 style="text-align: center; margin:0%;" class="mb-4">Payment Verification</h3>
+<hr>
+      <div id="tableExample3" data-list='{"valueNames":["serial_no","payment_type","amount","purpose","proof","payment_received"],"page":3,"pagination":true}'>
+
+        <!-- Search -->
+        <div class="search-box mb-3 mx-auto mt-5">
+          <form class="position-relative">
+            <input class="form-control search-input search form-control-sm" type="search" placeholder="Search" aria-label="Search">
           </form>
         </div>
-        <div class="table-responsive">
+
+        <div class="table-responsive mt-5">
           <table class="table table-striped table-sm fs-9 mb-0">
             <thead>
               <tr>
@@ -187,64 +188,65 @@
               </tr>
             </thead>
             <tbody class="list">
-             <tr>
-              <td class="align-middle ps-3 serial_no">001</td>
-              <td class="align-middle payment_type">Online</td>
-              <td class="align-middle amount">₹1500</td>
-              <td class="align-middle purpose">Membership Fee</td>
-              <td class="align-middle proof">receipt_001.jpg</td>
-              <td class="align-middle payment_received">
-                  <input class="form-check-input" id="flexCheckDefault" type="checkbox" value="" />
-              </td>
-            </tr>
-            <tr>
-              <td class="align-middle ps-3 serial_no">002</td>
-              <td class="align-middle payment_type">Online</td>
-              <td class="align-middle amount">₹1500</td>
-              <td class="align-middle purpose">Membership Fee</td>
-              <td class="align-middle proof">receipt_001.jpg</td>
-              <td class="align-middle payment_received">
-                <input class="form-check-input" id="flexCheckDefault" type="checkbox" value="" />
-              </td>
-            </tr>
-            <tr>
-              <td class="align-middle ps-3 serial_no">001</td>
-              <td class="align-middle payment_type">Offline</td>
-              <td class="align-middle amount">₹1500</td>
-              <td class="align-middle purpose">Membership Fee</td>
-              <td class="align-middle proof">receipt_001.jpg</td>
-              <td class="align-middle payment_received">
-                <input class="form-check-input" id="flexCheckDefault" type="checkbox" value="" />
-              </td>
-            </tr>
-            <tr>
-              <td class="align-middle ps-3 serial_no">001</td>
-              <td class="align-middle payment_type">Online</td>
-              <td class="align-middle amount">₹1500</td>
-              <td class="align-middle purpose">Membership Fee</td>
-              <td class="align-middle proof">receipt_001.jpg</td>
-              <td class="align-middle payment_received">
-                  <input class="form-check-input" id="flexCheckDefault" type="checkbox" value="" />
-              </td>
-            </tr>
+              <tr>
+                <td class="align-middle ps-3 serial_no">001</td>
+                <td class="align-middle payment_type">Online</td>
+                <td class="align-middle amount">₹1500</td>
+                <td class="align-middle purpose">Membership Fees</td>
+                <td class="align-middle proof">receipt_001.jpg</td>
+                <td class="align-middle payment_received">
+                  <input class="form-check-input" type="checkbox" />
+                </td>
+              </tr>
+              <tr>
+                <td class="align-middle ps-3 serial_no">002</td>
+                <td class="align-middle payment_type">Online</td>
+                <td class="align-middle amount">₹1500</td>
+                <td class="align-middle purpose">Membership Fee</td>
+                <td class="align-middle proof">receipt_002.jpg</td>
+                <td class="align-middle payment_received">
+                  <input class="form-check-input" type="checkbox" />
+                </td>
+              </tr>
+              <tr>
+                <td class="align-middle ps-3 serial_no">003</td>
+                <td class="align-middle payment_type">Offline</td>
+                <td class="align-middle amount">₹1500</td>
+                <td class="align-middle purpose">Membership Fee</td>
+                <td class="align-middle proof">receipt_003.jpg</td>
+                <td class="align-middle payment_received">
+                  <input class="form-check-input" type="checkbox" />
+                </td>
+              </tr>
+              <tr>
+                <td class="align-middle ps-3 serial_no">004</td>
+                <td class="align-middle payment_type">Online</td>
+                <td class="align-middle amount">₹1500</td>
+                <td class="align-middle purpose">Membership Fee</td>
+                <td class="align-middle proof">receipt_004.jpg</td>
+                <td class="align-middle payment_received">
+                  <input class="form-check-input" type="checkbox" />
+                </td>
+              </tr>
             </tbody>
           </table>
-        </div>
-        <div class="d-flex justify-content-between mt-3"><span class="d-none d-sm-inline-block" data-list-info="data-list-info">1 to 5 <span class="text-body-tertiary"> Items of </span>43</span>
-          <div class="d-flex"><button class="page-link disabled" data-list-pagination="prev" disabled=""><svg class="svg-inline--fa fa-chevron-left" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
-                <path fill="currentColor" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"></path>
-              </svg><!-- <span class="fas fa-chevron-left"></span> Font Awesome fontawesome.com --></button>
-            <ul class="mb-0 pagination">
-              <li class="active"><button class="page" type="button" data-i="1" data-page="5">1</button></li>
-              <li><button class="page" type="button" data-i="2" data-page="5">2</button></li>
-              <li><button class="page" type="button" data-i="3" data-page="5">3</button></li>
-              <li class="disabled"><button class="page" type="button">...</button></li>
-            </ul><button class="page-link pe-0" data-list-pagination="next"><svg class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
-                <path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path>
-              </svg><!-- <span class="fas fa-chevron-right"></span> Font Awesome fontawesome.com --></button>
+
+          <!-- Pagination -->
+          <div class="d-flex justify-content-end mt-3">
+            <div class="d-flex align-items-center gap-2">
+              <button class="page-link" data-list-pagination="prev">
+                <span class="fas fa-chevron-left"></span>
+              </button>
+              <ul class="mb-0 pagination"></ul>
+              <button class="page-link" data-list-pagination="next">
+                <span class="fas fa-chevron-right"></span>
+              </button>
+            </div>
           </div>
         </div>
+
       </div>
+
 
       <!-- Footer -->
       <?php include("../../Components/footer.php"); ?>
