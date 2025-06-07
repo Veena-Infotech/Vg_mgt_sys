@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 07, 2025 at 06:06 AM
+-- Generation Time: Jun 07, 2025 at 03:53 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -419,7 +419,9 @@ INSERT INTO `tbl_logs` (`id`, `emp_id`, `action`, `status`, `timestamp`, `ip_add
 (32, 1, 'login_request', 'completed', '2025-06-05 09:08:17', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36'),
 (33, 1, 'login_request', 'completed', '2025-06-06 05:43:57', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36'),
 (34, 1, 'login_request', 'completed', '2025-06-06 05:49:24', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36'),
-(35, 1, 'login_request', 'completed', '2025-06-06 12:29:33', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36');
+(35, 1, 'login_request', 'completed', '2025-06-06 12:29:33', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36'),
+(36, 1, 'login_request', 'completed', '2025-06-07 12:20:17', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36'),
+(37, 1, 'login_request', 'completed', '2025-06-07 13:34:09', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36');
 
 -- --------------------------------------------------------
 
@@ -601,7 +603,8 @@ INSERT INTO `tbl_meeting_history` (`id`, `uid`, `date`, `time`, `visitor_id`, `e
 (18, 'meet_684287d3306d6', '2025-06-06', '08:16:51', 30, 3, 'meeting with sir', NULL, NULL, NULL, '', NULL, NULL, 'Scheduled', '2025-06-06 06:16:51'),
 (19, 'meet_6842b1da7a4a5', '2025-06-06', '11:16:10', 31, 1, 'meeting with sir', NULL, NULL, NULL, 'Paid', 'Cash', 1.00, 'Scheduled', '2025-06-06 10:43:59'),
 (20, 'meet_6842ce5350fdf', '2025-06-06', '13:17:39', 32, 1, 'meeting', NULL, NULL, NULL, 'Paid', 'Cash', 1.00, 'Scheduled', '2025-06-06 12:25:59'),
-(21, 'meet_6842def3c27d0', '2025-06-06', '14:28:35', 33, 1, 'meeting', NULL, NULL, NULL, 'Paid', 'Cash', 2.00, 'Scheduled', '2025-06-06 12:30:53');
+(21, 'meet_6842def3c27d0', '2025-06-06', '14:28:35', 33, 1, 'meeting', NULL, NULL, NULL, 'Paid', 'Cash', 2.00, 'Scheduled', '2025-06-06 12:30:53'),
+(22, 'meet_684442542686d', '2025-06-07', '15:44:52', 34, 1, 'meeting', NULL, NULL, NULL, 'Paid', 'Cash', 200.00, 'Scheduled', '2025-06-07 13:50:38');
 
 -- --------------------------------------------------------
 
@@ -637,7 +640,8 @@ INSERT INTO `tbl_meeting_notes` (`id`, `uid`, `meeting_id`, `emp_id`, `visitor_i
 (8, 'meet_684281bc86ef6', 17, 1, 21, '2007-06-25 13:00:00', 8000, ' wfdc', ' acrf', NULL, '../uploads/meeting_files/file_49858.jpg', NULL, '2025-06-06 06:34:15'),
 (9, 'meet_6842b1da7a4a5', 19, 1, 31, '2007-06-25 10:00:00', 1, ' asxdx', ' dcffv', NULL, '../uploads/meeting_files/file_40221.pdf', NULL, '2025-06-06 09:17:49'),
 (10, 'meet_6842ce5350fdf', 20, 1, 32, '2007-06-25 11:05:00', 1, ' gfdy', ' hjgut', NULL, '../uploads/meeting_files/file_63687.jpg', NULL, '2025-06-06 11:19:07'),
-(11, 'meet_6842def3c27d0', 21, 1, 33, '2007-06-25 13:00:00', 2, ' dfbty', ' gfbtyn', NULL, '../uploads/meeting_files/file_91555.jpg', NULL, '2025-06-06 12:30:39');
+(11, 'meet_6842def3c27d0', 21, 1, 33, '2007-06-25 13:00:00', 2, ' dfbty', ' gfbtyn', NULL, '../uploads/meeting_files/file_91555.jpg', NULL, '2025-06-06 12:30:39'),
+(12, 'meet_684442542686d', 22, 1, 34, '2008-06-25 11:00:00', 200, ' kjchk', ' ,fhlirf', NULL, '../uploads/meeting_files/file_95189.pdf', NULL, '2025-06-07 13:46:06');
 
 -- --------------------------------------------------------
 
@@ -669,7 +673,7 @@ CREATE TABLE `tbl_payment` (
   `uid` varchar(50) NOT NULL,
   `amount` decimal(10,2) NOT NULL,
   `type` enum('Cash','Card','Online','Cheque') DEFAULT NULL,
-  `client_id` int(11) DEFAULT NULL,
+  `visitor_id` int(11) DEFAULT NULL,
   `reason` text DEFAULT NULL,
   `note` text DEFAULT NULL,
   `proof` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`proof`)),
@@ -681,27 +685,28 @@ CREATE TABLE `tbl_payment` (
 -- Dumping data for table `tbl_payment`
 --
 
-INSERT INTO `tbl_payment` (`id`, `uid`, `amount`, `type`, `client_id`, `reason`, `note`, `proof`, `payment_date`, `timestamp`) VALUES
-(1, 'PAY_6842c66f668b9', 1.00, 'Cash', 2, NULL, NULL, NULL, '2025-06-06', '2025-06-06 10:43:59'),
-(2, 'PAY_6842ca550c4ea', 8000.00, 'Cash', 1, NULL, NULL, NULL, '2025-06-06', '2025-06-06 11:00:37'),
-(3, 'PAY_6842ca5f9a84c', 8000.00, 'Cash', 1, NULL, NULL, NULL, '2025-06-06', '2025-06-06 11:00:47'),
-(4, 'PAY_6842d2f6d5036', 1.00, 'Cash', 3, NULL, NULL, NULL, '2025-06-06', '2025-06-06 11:37:26'),
-(5, 'PAY_6842d4f9362db', 1.00, 'Cash', 3, NULL, NULL, NULL, '2025-06-06', '2025-06-06 11:46:01'),
-(6, 'PAY_6842d6820f905', 1.00, 'Cash', 3, NULL, NULL, NULL, '2025-06-06', '2025-06-06 11:52:34'),
-(7, 'PAY_6842d686ce2d5', 1.00, 'Online', 3, NULL, NULL, NULL, '2025-06-06', '2025-06-06 11:52:38'),
-(8, 'PAY_6842d68991249', 1.00, 'Cash', 3, NULL, NULL, NULL, '2025-06-06', '2025-06-06 11:52:41'),
-(9, 'PAY_6842d6f3952e2', 1.00, 'Cash', 3, NULL, NULL, NULL, '2025-06-06', '2025-06-06 11:54:27'),
-(10, 'PAY_6842d801e34b4', 1.00, 'Cash', 3, NULL, NULL, NULL, '2025-06-06', '2025-06-06 11:58:57'),
-(11, 'PAY_6842d940ac162', 1.00, 'Cash', 3, NULL, NULL, NULL, '2025-06-06', '2025-06-06 12:04:16'),
-(12, 'PAY_6842dbc47d968', 1.00, 'Cash', 3, NULL, NULL, NULL, '2025-06-06', '2025-06-06 12:15:00'),
-(13, 'PAY_6842dc6614980', 1.00, 'Cash', 3, NULL, NULL, NULL, '2025-06-06', '2025-06-06 12:17:42'),
-(14, 'PAY_6842dc6a0a43d', 1.00, 'Online', 3, NULL, NULL, NULL, '2025-06-06', '2025-06-06 12:17:46'),
-(15, 'PAY_6842dcaa21388', 1.00, 'Cash', 3, NULL, NULL, NULL, '2025-06-06', '2025-06-06 12:18:50'),
-(16, 'PAY_6842dd3fd22fc', 1.00, 'Cash', 3, NULL, NULL, NULL, '2025-06-06', '2025-06-06 12:21:19'),
-(17, 'PAY_6842dd4fe1241', 1.00, 'Online', 3, NULL, NULL, NULL, '2025-06-06', '2025-06-06 12:21:35'),
-(18, 'PAY_6842de578b6b3', 1.00, 'Cash', 3, NULL, NULL, NULL, '2025-06-06', '2025-06-06 12:25:59'),
-(19, 'PAY_6842dea550db8', 1.00, 'Cash', 3, NULL, NULL, NULL, '2025-06-06', '2025-06-06 12:27:17'),
-(20, 'PAY_6842df7d43142', 2.00, 'Cash', 2, NULL, NULL, NULL, '2025-06-06', '2025-06-06 12:30:53');
+INSERT INTO `tbl_payment` (`id`, `uid`, `amount`, `type`, `visitor_id`, `reason`, `note`, `proof`, `payment_date`, `timestamp`) VALUES
+(1, 'PAY_6842c66f668b9', 1.00, 'Cash', NULL, NULL, NULL, NULL, '2025-06-06', '2025-06-06 10:43:59'),
+(2, 'PAY_6842ca550c4ea', 8000.00, 'Cash', NULL, NULL, NULL, NULL, '2025-06-06', '2025-06-06 11:00:37'),
+(3, 'PAY_6842ca5f9a84c', 8000.00, 'Cash', NULL, NULL, NULL, NULL, '2025-06-06', '2025-06-06 11:00:47'),
+(4, 'PAY_6842d2f6d5036', 1.00, 'Cash', NULL, NULL, NULL, NULL, '2025-06-06', '2025-06-06 11:37:26'),
+(5, 'PAY_6842d4f9362db', 1.00, 'Cash', NULL, NULL, NULL, NULL, '2025-06-06', '2025-06-06 11:46:01'),
+(6, 'PAY_6842d6820f905', 1.00, 'Cash', NULL, NULL, NULL, NULL, '2025-06-06', '2025-06-06 11:52:34'),
+(7, 'PAY_6842d686ce2d5', 1.00, 'Online', NULL, NULL, NULL, NULL, '2025-06-06', '2025-06-06 11:52:38'),
+(8, 'PAY_6842d68991249', 1.00, 'Cash', NULL, NULL, NULL, NULL, '2025-06-06', '2025-06-06 11:52:41'),
+(9, 'PAY_6842d6f3952e2', 1.00, 'Cash', NULL, NULL, NULL, NULL, '2025-06-06', '2025-06-06 11:54:27'),
+(10, 'PAY_6842d801e34b4', 1.00, 'Cash', NULL, NULL, NULL, NULL, '2025-06-06', '2025-06-06 11:58:57'),
+(11, 'PAY_6842d940ac162', 1.00, 'Cash', NULL, NULL, NULL, NULL, '2025-06-06', '2025-06-06 12:04:16'),
+(12, 'PAY_6842dbc47d968', 1.00, 'Cash', NULL, NULL, NULL, NULL, '2025-06-06', '2025-06-06 12:15:00'),
+(13, 'PAY_6842dc6614980', 1.00, 'Cash', NULL, NULL, NULL, NULL, '2025-06-06', '2025-06-06 12:17:42'),
+(14, 'PAY_6842dc6a0a43d', 1.00, 'Online', NULL, NULL, NULL, NULL, '2025-06-06', '2025-06-06 12:17:46'),
+(15, 'PAY_6842dcaa21388', 1.00, 'Cash', NULL, NULL, NULL, NULL, '2025-06-06', '2025-06-06 12:18:50'),
+(16, 'PAY_6842dd3fd22fc', 1.00, 'Cash', NULL, NULL, NULL, NULL, '2025-06-06', '2025-06-06 12:21:19'),
+(17, 'PAY_6842dd4fe1241', 1.00, 'Online', NULL, NULL, NULL, NULL, '2025-06-06', '2025-06-06 12:21:35'),
+(18, 'PAY_6842de578b6b3', 1.00, 'Cash', NULL, NULL, NULL, NULL, '2025-06-06', '2025-06-06 12:25:59'),
+(19, 'PAY_6842dea550db8', 1.00, 'Cash', NULL, NULL, NULL, NULL, '2025-06-06', '2025-06-06 12:27:17'),
+(20, 'PAY_6842df7d43142', 2.00, 'Cash', NULL, NULL, NULL, NULL, '2025-06-06', '2025-06-06 12:30:53'),
+(21, 'PAY_684443ae516b2', 200.00, 'Cash', 34, NULL, NULL, NULL, '2025-06-07', '2025-06-07 13:50:38');
 
 -- --------------------------------------------------------
 
@@ -1166,7 +1171,8 @@ INSERT INTO `tbl_visitor` (`id`, `uid`, `f_name`, `m_name`, `l_name`, `phone_no`
 (30, 'VST-1H5Z-0611', 'manya', 'ashok', 'nirvan', 2147483647, 'manya@gmail.com', NULL, '../uploads/visitor_img/visitor_1749190611.png', '2025-06-06', 'sai ram', NULL, 2, NULL, '', 2, 'meeting with sir', '2025-06-06 06:16:51'),
 (31, 'VST-SRG2-1370', 'asha', 'dinanath', 'chauhan', 1234567891, 'asha@gmail.com', NULL, '../uploads/visitor_img/visitor_1749201370.png', '2025-06-06', 'abc', NULL, 2, NULL, '', 4, 'meeting with sir', '2025-06-06 09:16:10'),
 (32, 'VST-2M85-8659', 'mohan', 'dinanath', 'rathod', 1234567890, 'mohan@gmail.com', NULL, '../uploads/visitor_img/visitor_1749208659.png', '2025-06-06', 'abc', NULL, 3, NULL, '', 3, 'meeting', '2025-06-06 11:17:39'),
-(33, 'VST-V709-2915', 'abc', 'vgf', 'panjwani', 1234567891, 'tthjg@gmail.com', NULL, '../uploads/visitor_img/visitor_1749212915.png', '2025-06-06', 'drfrt', NULL, 2, NULL, '', 1, 'meeting', '2025-06-06 12:28:35');
+(33, 'VST-V709-2915', 'abc', 'vgf', 'panjwani', 1234567891, 'tthjg@gmail.com', NULL, '../uploads/visitor_img/visitor_1749212915.png', '2025-06-06', 'drfrt', NULL, 2, NULL, '', 1, 'meeting', '2025-06-06 12:28:35'),
+(34, 'VST-XQ0G-3892', 'ashok', 'liladhar', 'nirvan', 1234567890, 'ashok@gmail.com', NULL, '../uploads/visitor_img/visitor_1749303892.png', '2025-06-07', NULL, 'Deepmay footwear', 2, 'Client', NULL, 2, 'meeting', '2025-06-07 13:44:52');
 
 -- --------------------------------------------------------
 
@@ -1367,7 +1373,7 @@ ALTER TABLE `tbl_misc`
 ALTER TABLE `tbl_payment`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `uid` (`uid`),
-  ADD KEY `fk_client_id_tbl_client` (`client_id`);
+  ADD KEY `fk_visitor_id_tbl_visitor` (`visitor_id`);
 
 --
 -- Indexes for table `tbl_pin_board`
@@ -1607,7 +1613,7 @@ ALTER TABLE `tbl_loan_status`
 -- AUTO_INCREMENT for table `tbl_logs`
 --
 ALTER TABLE `tbl_logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `tbl_manage_agencies`
@@ -1649,13 +1655,13 @@ ALTER TABLE `tbl_manage_reservation`
 -- AUTO_INCREMENT for table `tbl_meeting_history`
 --
 ALTER TABLE `tbl_meeting_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `tbl_meeting_notes`
 --
 ALTER TABLE `tbl_meeting_notes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tbl_misc`
@@ -1667,7 +1673,7 @@ ALTER TABLE `tbl_misc`
 -- AUTO_INCREMENT for table `tbl_payment`
 --
 ALTER TABLE `tbl_payment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `tbl_pin_board`
@@ -1787,7 +1793,7 @@ ALTER TABLE `tbl_todo`
 -- AUTO_INCREMENT for table `tbl_visitor`
 --
 ALTER TABLE `tbl_visitor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `tbl_ward_details`
@@ -1855,7 +1861,7 @@ ALTER TABLE `tbl_misc`
 -- Constraints for table `tbl_payment`
 --
 ALTER TABLE `tbl_payment`
-  ADD CONSTRAINT `fk_client_id_tbl_client` FOREIGN KEY (`client_id`) REFERENCES `tbl_client` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_visitor_id_tbl_visitor` FOREIGN KEY (`visitor_id`) REFERENCES `tbl_visitor` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_pin_board`
