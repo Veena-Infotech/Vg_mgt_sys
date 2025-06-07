@@ -546,7 +546,7 @@
                                                                         <div id="mainFormFields" style="display: none;">
                                                                             <!-- Whom to Meet Dropdown -->
                                                                             <div class="form-floating mb-4">
-                                                                                <select class="form-select rounded-3" id="whomToMeet" name="referenceName" required style="border: 1px solid #dcdcdc;">
+                                                                                <select class="form-select rounded-3" id="whomToMeet" name="whomToMeet" required style="border: 1px solid #dcdcdc;">
                                                                                     <option selected disabled>Choose...</option>
                                                                                     <?php
                                                                                     $empQuery = "SELECT id, f_name, l_name, position FROM tbl_emp ORDER BY f_name ASC";
@@ -678,56 +678,55 @@
                 });
             </script>
 
-<script>
-function sendOTP() {
-  const empId = document.getElementById("visitorName").value;
-  if (!empId) return alert("Please select an employee");
+            <script>
+                function sendOTP() {
+                    const empId = document.getElementById("visitorName").value;
+                    if (!empId) return alert("Please select an employee");
 
-  fetch('../PhpFiles/send_otp.php', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: `visitorName=${encodeURIComponent(empId)}`
-  })
-  .then(res => res.text())
-  .then(data => {
-    document.getElementById("result").innerText = data;
-  });
-}
+                    fetch('../PhpFiles/send_otp.php', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded'
+                            },
+                            body: `visitorName=${encodeURIComponent(empId)}`
+                        })
+                        .then(res => res.text())
+                        .then(data => {
+                            document.getElementById("result").innerText = data;
+                        });
+                }
 
-function verifyOTP() {
-  const otp = document.getElementById("otp").value;
+                function getCookie(name) {
+                    const cookies = document.cookie.split(';');
+                    for (let cookie of cookies) {
+                        const [key, value] = cookie.trim().split('=');
+                        if (key === name) return decodeURIComponent(value);
+                    }
+                    return null;
+                }
 
-  fetch('../PhpFiles/verify_otp.php', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: `otp=${encodeURIComponent(otp)}`
-  })
-  .then(res => res.text())
-  .then(data => {
-    // Display server response in the result div
-    document.getElementById("result").innerText = data;
-    
+                function verifyOTP() {
+                    const otpInput = document.getElementById("otp").value;
+                    const storedOtp = getCookie("otp");
 
-    // Handle different server responses
-    if (data.trim() === "success") {
-      alert("✅ OTP verified successfully!");
-      // Optionally redirect or show next UI step
-    } else if (data.trim() === "expired") {
-      alert("⏰ OTP has expired. Please request a new one.");
-    } else if (data.trim() === "invalid") {
-        alert(data);
-    //   alert("❌ Invalid OTP. Please try again.");
-    } else if (data.trim() === "too_many_attempts") {
-      alert("⚠️ Too many failed attempts. Please request a new OTP.");
-    }
-  })
-  .catch(error => {
-    console.error("Verification error:", error);
-    alert("⚠️ Error verifying OTP. Please try again later.");
-  });
-}
+                    if (!storedOtp) {
+                        alert("⏰ OTP has expired or is not set. Please request a new one.");
+                        return;
+                    }
 
-</script>
+                    if (otpInput === storedOtp) {
+                        alert("✅ OTP verified successfully!");
+
+                        const hiddenFields = document.getElementById("mainFormFields");
+
+                        hiddenFields.style.display = "block";
+                        // Optionally: delete cookie
+                        document.cookie = "otp=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                    } else {
+                        alert("❌ Invalid OTP.");
+                    }
+                }
+            </script>
 
             <!-- Modal -->
             <div class="modal fade" id="statusModal" tabindex="-1" aria-labelledby="statusModalLabel" aria-hidden="true">

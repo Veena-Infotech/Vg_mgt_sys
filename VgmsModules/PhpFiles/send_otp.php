@@ -46,9 +46,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $mail->send();
 
+        // ✅ Store in session
         $_SESSION['otp'] = $otp;
         $_SESSION['otp_email'] = $email;
         $_SESSION['otp_expires'] = time() + (5 * 60); // 5 minutes
+
+        // ✅ Store in cookies (expires in 5 minutes)
+        setcookie("otp", $otp, time() + (5 * 60), "/");
+        setcookie("otp_email", $email, time() + (5 * 60), "/");
 
         echo "OTP has been sent to the visitor's registered email.";
     } catch (Exception $e) {
