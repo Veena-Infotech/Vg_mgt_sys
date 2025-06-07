@@ -13,7 +13,7 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>Starter code</title>
+    <title>Feedback Form</title>
 
     <!-- ===============================================-->
     <!--    Favicons-->
@@ -179,7 +179,7 @@
                     </div>
                 </div>
                 <div class="card-body p-0">
-                    <div class="collapse code-collapse" id ="form-grid-layout-code">
+                    <div class="collapse code-collapse" id="form-grid-layout-code">
                     </div>
                     <div class="p-4 code-to-copy">
                         <form class="row g-3">
@@ -187,47 +187,47 @@
                                 <label class="form-label" for="inputCity">Interview ID</label>
                                 <input class="form-control" id="inputCity" type="text" />
                             </div>
-                                <div class="col-md-6">
+                            <div class="col-md-6">
                                 <label class="form-label" for="inputCity">Candidate ID</label>
                                 <input class="form-control" id="inputCity" type="text" />
                             </div>
-                             <div class="col-md-6">
+                            <div class="col-md-6">
                                 <label class="form-label" for="inputCity"> Interviewer Name</label>
                                 <input class="form-control" id="inputCity" type="text" />
                             </div>
-                             <div class="col-md-6">
+                            <div class="col-md-6">
                                 <label class="form-label" for="inputCity">Candidate ID</label>
                                 <input class="form-control" id="inputCity" type="text" />
                             </div>
-                             <div class="col-md-4">
+                            <div class="col-md-4">
                                 <label class="form-label" for="inputState">Interview Round</label>
                                 <select class="form-select" id="inputState">
                                     <option selected="selected">Choose...</option>
                                     <option>...</option>
                                 </select>
                             </div>
-                             <div class="col-md-4">
+                            <div class="col-md-4">
                                 <label class="form-label" for="inputState">Technical Skills Rating</label>
                                 <select class="form-select" id="inputState">
                                     <option selected="selected">Choose...</option>
                                     <option>...</option>
                                 </select>
                             </div>
-                             <div class="col-md-4">
+                            <div class="col-md-4">
                                 <label class="form-label" for="inputState">Communication Skills Rating</label>
                                 <select class="form-select" id="inputState">
                                     <option selected="selected">Choose...</option>
                                     <option>...</option>
                                 </select>
                             </div>
-                              <div class="col-md-4">
+                            <div class="col-md-4">
                                 <label class="form-label" for="inputState">Problem-Solving Skills Rating</label>
                                 <select class="form-select" id="inputState">
                                     <option selected="selected">Choose...</option>
                                     <option>...</option>
                                 </select>
                             </div>
-                             <div class="col-md-4">
+                            <div class="col-md-4">
                                 <label class="form-label" for="inputState">Cultural Fit Rating</label>
                                 <select class="form-select" id="inputState">
                                     <option selected="selected">Choose...</option>
@@ -250,10 +250,12 @@
                     </div>
                 </div>
             </div>
+            <!-- Footer -->
+            <?php include("../../Components/footer.php"); ?>
+
         </div>
+
     </main>
-
-
     <!-- ===============================================-->
     <!--    End of Main Content-->
     <!-- ===============================================-->
