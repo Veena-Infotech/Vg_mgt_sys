@@ -182,7 +182,8 @@
                             <div class="d-flex align-items-center">
                                 <h4 class="mb-2 line-clamp-1 lh-sm flex-1 me-5">Project Title Example</h4>
                                 <div class="hover-actions top-0 end-0 mt-4 me-4">
-                                    <button class="btn btn-primary btn-icon flex-shrink-0 toggle-button" type="button">
+                                    <button class="btn btn-primary btn-icon flex-shrink-0 toggle-button" type="button"
+                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Check responses">
                                         <span class="fa-solid fa-chevron-right"></span>
                                     </button>
                                 </div>
@@ -229,14 +230,29 @@
                                 </p>
                             </div>
 
-                            <div class="d-flex justify-content-end align-items-center mt-3">
-                                <div class="d-flex align-items-center mt-lg-3 mt-xl-0">
+
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <!-- <button class="btn btn-outline-secondary btn-sm" type="button" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" title="Edit Job Opening">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button> -->
+                                <button class="btn btn-outline-secondary btn-sm" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#EditjobOpeningModal" title="Edit Job Opening">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+
+
+                                <div class="d-flex align-items-center">
                                     <i class="fa-solid fa-comment-dots me-1"></i>
                                     <p class="d-inline-block fw-bold mb-0">
                                         10 <span class="fw-normal">Responses</span>
                                     </p>
                                 </div>
                             </div>
+
+
+
+
                         </div>
                     </div>
                 </div>
@@ -246,11 +262,13 @@
                     <div class="card h-100 hover-actions-trigger shadow-sm">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
-                                <h4 class="mb-2 line-clamp-1 lh-sm flex-1 me-5">Project Title Example</h4>
+                                <h4 class="mb-2 line-clamp-1 lh-sm flex-1 me-5">Project Title Example 2</h4>
                                 <div class="hover-actions top-0 end-0 mt-4 me-4">
-                                    <button class="btn btn-primary btn-icon flex-shrink-0 toggle-button" type="button">
+                                    <button class="btn btn-primary btn-icon flex-shrink-0 toggle-button" type="button"
+                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Check responses">
                                         <span class="fa-solid fa-chevron-right"></span>
                                     </button>
+
                                 </div>
                             </div>
 
@@ -295,8 +313,15 @@
                                 </p>
                             </div>
 
-                            <div class="d-flex justify-content-end align-items-center mt-3">
-                                <div class="d-flex align-items-center mt-lg-3 mt-xl-0">
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                
+                                <button class="btn btn-outline-secondary btn-sm" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#EditjobOpeningModal" title="Edit Job Opening">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+
+
+                                <div class="d-flex align-items-center">
                                     <i class="fa-solid fa-comment-dots me-1"></i>
                                     <p class="d-inline-block fw-bold mb-0">
                                         10 <span class="fw-normal">Responses</span>
@@ -305,7 +330,12 @@
                             </div>
                         </div>
                     </div>
+
+
                 </div>
+
+
+
 
                 <!-- Add more cards here with the same structure -->
             </div>
@@ -326,8 +356,16 @@
 
                             <div class="mb-3">
                                 <label for="roleInput" class="form-label">Role</label>
-                                <input type="text" class="form-control" id="roleInput" name="role" required>
+                                <select class="form-select" id="roleInput" name="role" required>
+                                    <option value="" selected disabled>Select Role</option>
+                                    <option value="Frontend Developer">Frontend Developer</option>
+                                    <option value="Backend Developer">Backend Developer</option>
+                                    <option value="Full Stack Developer">Full Stack Developer</option>
+
+
+                                </select>
                             </div>
+
 
                             <div class="mb-3">
                                 <label for="departmentSelect" class="form-label">Department</label>
@@ -384,6 +422,86 @@
             </div>
         </div>
 
+        <div class="modal fade" id="EditjobOpeningModal" tabindex="-1" aria-labelledby="jobOpeningModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="jobOpeningModalLabel">Edit Job Opening</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <form id="jobOpeningForm">
+                        <div class="modal-body">
+
+                            <div class="mb-3">
+                                <label for="roleInput" class="form-label">Role</label>
+                                <select class="form-select" id="roleInput" name="role" required>
+                                    <option value="" disabled>Select Role</option>
+                                    <option value="Frontend Developer" selected>Frontend Developer</option>
+                                    <option value="Backend Developer">Backend Developer</option>
+                                    <option value="Full Stack Developer">Full Stack Developer</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="departmentSelect" class="form-label">Department</label>
+                                <select class="form-select" id="departmentSelect" name="department" required>
+                                    <option value="" disabled>Select Department</option>
+                                    <option value="HR">HR</option>
+                                    <option value="Engineering" selected>Engineering</option>
+                                    <option value="Marketing">Marketing</option>
+                                    <option value="Sales">Sales</option>
+                                    <option value="Finance">Finance</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="jobdescInput" class="form-label">Job Description</label>
+                                <textarea class="form-control" id="jobdescInput" name="jobdesc" rows="3"
+                                    required>Looking for a skilled Frontend Developer proficient in React.js and responsive design.</textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="locationInput" class="form-label">Location</label>
+                                <input type="text" class="form-control" id="locationInput" name="location"
+                                    value="New York" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="formlinkInput" class="form-label">Form Link</label>
+                                <input type="url" class="form-control" id="formlinkInput" name="formlink"
+                                    value="https://forms.gle/example" required>
+                            </div>
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="startdateInput" class="form-label">Start Date</label>
+                                    <input type="date" class="form-control" id="startdateInput" name="startdate"
+                                        value="2025-01-15" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="enddateInput" class="form-label">End Date</label>
+                                    <input type="date" class="form-control" id="enddateInput" name="enddate"
+                                        value="2025-06-30" required>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="reset" class="btn btn-secondary">Clear</button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+
 
 
 
@@ -428,6 +546,15 @@
 
 
 
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+                new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+        });
     </script>
 
 
