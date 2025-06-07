@@ -170,44 +170,46 @@
             <div class="card shadow-sm p-4">
                 <h4 class="mb-4">Visitor Meeting Form</h4>
 
-                <form>
-                    <!-- Visitor Name Dropdown -->
-                    <div class="mb-3">
-                        <label for="visitorName" class="form-label">Visitor Name</label>
-                        <select id="visitorName" class="form-select">
-                            <option selected disabled>Select Visitor</option>
-                            <option>John Doe</option>
-                            <option>Jane Smith</option>
-                            <option>Amit Patel</option>
-                            <option>Ananya Sharma</option>
-                        </select>
-                    </div>
+               <form id="followUpForm" method="post">
+    <!-- Visitor Name Dropdown -->
+    <div class="mb-3">
+        <label for="visitorName" class="form-label">Visitor Name</label>
+        <select id="visitorName" name="visitorName" class="form-select">
+            <option selected disabled value="">Select Visitor</option>
+            <option value="john_doe">John Doe</option>
+            <option value="jane_smith">Jane Smith</option>
+            <option value="amit_patel">Amit Patel</option>
+            <option value="ananya_sharma">Ananya Sharma</option>
+        </select>
+    </div>
 
-                    <!-- Meeting With (Auto-fill) -->
-                    <div class="mb-3">
-                        <label for="meetingWith" class="form-label">Meeting With</label>
-                        <input type="text" class="form-control" id="meetingWith" placeholder="Auto-filled based on visitor">
-                    </div>
+    <!-- Meeting With (Auto-fill) -->
+    <div class="mb-3">
+        <label for="meetingWith" class="form-label">Meeting With</label>
+        <input type="text" class="form-control" id="meetingWith" name="meetingWith" placeholder="Auto-filled based on visitor">
+    </div>
 
-                    <!-- Follow-up Date/Time Picker -->
-                    <div class="mb-3">
-                        <label for="followUpDateTime" class="form-label">Follow-up Date & Time</label>
-                        <input type="datetime-local" class="form-control" id="followUpDateTime">
-                    </div>
+    <!-- Follow-up Date/Time Picker -->
+    <div class="mb-3">
+        <label for="followUpDateTime" class="form-label">Follow-up Date & Time</label>
+        <input type="datetime-local" class="form-control" id="followUpDateTime" name="followUpDateTime">
+    </div>
 
-                    <!-- Notes/Purpose -->
-                    <div class="mb-3">
-                        <label for="notes" class="form-label">Notes / Purpose</label>
-                        <textarea class="form-control" id="notes" rows="3" placeholder="Meeting purpose, details..."></textarea>
-                    </div>
+    <!-- Notes/Purpose -->
+    <div class="mb-3">
+        <label for="notes" class="form-label">Notes / Purpose</label>
+        <textarea class="form-control" id="notes" name="notes" rows="3" placeholder="Meeting purpose, details..."></textarea>
+    </div>
 
-                    <!-- Notify Receptionist -->
-                    <div class="form-check mb-4">
-                        <input class="form-check-input" type="checkbox" value="" id="notifyReceptionist">
-                        <label class="form-check-label" for="notifyReceptionist">
-                            Notify Receptionist
-                        </label>
-                    </div>
+    <!-- Notify Receptionist -->
+    <div class="form-check mb-4">
+        <input class="form-check-input" type="checkbox" id="notifyReceptionist" name="notifyReceptionist" value="yes">
+        <label class="form-check-label" for="notifyReceptionist">
+            Notify Receptionist
+        </label>
+    </div>
+
+
 
                     <!-- Submit Button -->
                     <button type="submit" class="btn btn-primary w-100">Submit</button>
