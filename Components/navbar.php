@@ -92,7 +92,7 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/vms/EmployeeSideMeeting.php?tag=emp-meet" id="emp-meet">
+                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/vms/Employee_Side_Meeting.php?tag=emp-meet" id="emp-meet">
                       <div class="d-flex align-items-center">
                         <span class="me-2"><i class="fa-solid fa-handshake"></i></span>
                         <span class="nav-link-text">Employee Side Meeting</span>
