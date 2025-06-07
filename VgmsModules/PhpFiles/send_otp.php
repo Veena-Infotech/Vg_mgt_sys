@@ -1,47 +1,42 @@
 <?php
-
-session_start(); 
+session_start();
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require '../../vendor/autoload.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = $_POST['name'];
+    include 'connection.php';
 
-    include '../PhpFiles/connection.php';
+    $name = $_POST['visitorName'] ?? '';
 
     $stmt = $conn->prepare("SELECT email FROM tbl_visitor WHERE id = ?");
     $stmt->bind_param("s", $name);
     $stmt->execute();
+    $stmt->bind_result($email);
 
-    if ($stmt->fetch()) {
-        echo $email;
-    } else {
-        echo '';
+    if (!$stmt->fetch()) {
+        echo "Email not found for this visitor.";
+        $stmt->close();
+        $conn->close();
+        exit;
     }
 
     $stmt->close();
     $conn->close();
-}
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-require '../../vendor/autoload.php'; // or include PHPMailer manually
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = $_POST['email'];
-    $otp = rand(100000, 999999); // Generate 6-digit OTP
-
+    $otp = rand(100000, 999999);
     $mail = new PHPMailer(true);
 
     try {
         $mail->isSMTP();
         $mail->Host       = 'smtp.gmail.com';
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'aryanshirodkar03@gmail.com';       // your Gmail
-        $mail->Password   = 'xwsi nvsp xgqr eusi';          // app password
+        $mail->Username   = 'aryanshirodkar03@gmail.com';
+        $mail->Password   = 'xwsi nvsp xgqr eusi';
         $mail->SMTPSecure = 'tls';
         $mail->Port       = 587;
 
-        $mail->setFrom('aryanshirodkar03@gmil.com', 'Veena Infotech');   
+        $mail->setFrom('aryanshirodkar03@gmail.com', 'Veena Infotech');
         $mail->addAddress($email);
 
         $mail->isHTML(true);
@@ -53,13 +48,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $_SESSION['otp'] = $otp;
         $_SESSION['otp_email'] = $email;
-        $_SESSION['otp_expires'] = time() + (5 * 60);
+        $_SESSION['otp_expires'] = time() + (5 * 60); // 5 minutes
 
-        $_GET['email'];
-
-        echo "OTP sent to $email";
+        echo "OTP has been sent to the visitor's registered email.";
     } catch (Exception $e) {
         echo "Mailer Error: " . $mail->ErrorInfo;
     }
 }
-?>

@@ -704,9 +704,29 @@ function verifyOTP() {
   })
   .then(res => res.text())
   .then(data => {
+    // Display server response in the result div
     document.getElementById("result").innerText = data;
+    
+
+    // Handle different server responses
+    if (data.trim() === "success") {
+      alert("✅ OTP verified successfully!");
+      // Optionally redirect or show next UI step
+    } else if (data.trim() === "expired") {
+      alert("⏰ OTP has expired. Please request a new one.");
+    } else if (data.trim() === "invalid") {
+        alert(data);
+    //   alert("❌ Invalid OTP. Please try again.");
+    } else if (data.trim() === "too_many_attempts") {
+      alert("⚠️ Too many failed attempts. Please request a new OTP.");
+    }
+  })
+  .catch(error => {
+    console.error("Verification error:", error);
+    alert("⚠️ Error verifying OTP. Please try again later.");
   });
 }
+
 </script>
 
             <!-- Modal -->
