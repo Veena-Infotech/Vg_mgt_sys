@@ -13,7 +13,7 @@
   <!-- ===============================================-->
   <!--    Document Title-->
   <!-- ===============================================-->
-  <title>Starter code</title>
+  <title>Candidate Profile</title>
 
   <!-- ===============================================-->
   <!--    Favicons-->
@@ -359,9 +359,6 @@
   <!--    JavaScripts-->
   <!-- ===============================================-->
 
-
-
-
   <!--Dropdown for contacted-to--->
   <!-- the belwo is the code for the dropdown for selecting the department  -->
   <form class="row g-3 needs-validation" novalidate>
@@ -384,9 +381,6 @@
       });
     })();
   </script>
-
-
-
   <script src="../../vendors/popper/popper.min.js"></script>
   <script src="../../vendors/bootstrap/bootstrap.min.js"></script>
   <script src="../../vendors/anchorjs/anchor.min.js"></script>
@@ -402,18 +396,6 @@
   <script src="../../assets/js/phoenix.js"></script>
   <script src="../../vendors/echarts/echarts.min.js"></script>
   <script src="../../assets/js/ecommerce-dashboard.js"></script>
-
-
-
-
-
   </script>
-
-
-
 </body>
-
-
-<!-- Mirrored from prium.github.io/phoenix/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Sep 2024 13:37:21 GMT -->
-
 </html>

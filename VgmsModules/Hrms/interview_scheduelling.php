@@ -13,7 +13,8 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>Starter code</title>
+
+    <title>Interview Scheduling</title>
 
     <!-- ===============================================-->
     <!--    Favicons-->
@@ -22,7 +23,6 @@
     <link rel="manifest" href="../../assets/img/favicons/manifest.json">
     <meta name="msapplication-TileImage" content="../../assets/img/favicons/mstile-150x150.png">
     <meta name="theme-color" content="#ffffff">
-
     <script src="../../vendors/simplebar/simplebar.min.js"></script>
     <script src="../../assets/js/config.js"></script>
 
@@ -81,10 +81,8 @@
             var navbarCombo = document.querySelector('#navbarCombo');
             var navbarComboSlim = document.querySelector('#navbarComboSlim');
             var dualNav = document.querySelector('#dualNav');
-
             var documentElement = document.documentElement;
             var navbarVertical = document.querySelector('.navbar-vertical');
-
             if (navbarPosition === 'dual-nav') {
                 topNavSlim?.remove();
                 navbarTop?.remove();
@@ -95,7 +93,6 @@
                 navbarVertical?.remove();
                 dualNav.removeAttribute('style');
                 document.documentElement.setAttribute('data-navigation-type', 'dual');
-
             } else if (navbarTopShape === 'slim' && navbarPosition === 'vertical') {
                 navbarDefault?.remove();
                 navbarTop?.remove();
@@ -105,7 +102,6 @@
                 topNavSlim.style.display = 'block';
                 navbarVertical.style.display = 'inline-block';
                 document.documentElement.setAttribute('data-navbar-horizontal-shape', 'slim');
-
             } else if (navbarTopShape === 'slim' && navbarPosition === 'horizontal') {
                 navbarDefault?.remove();
                 navbarVertical?.remove();
@@ -156,13 +152,11 @@
                 navbarDefault.removeAttribute('style');
                 navbarVertical.removeAttribute('style');
             }
-
             var navbarTopStyle = window.config.config.phoenixNavbarTopStyle;
             var navbarTop = document.querySelector('.navbar-top');
             if (navbarTopStyle === 'darker') {
                 navbarTop.setAttribute('data-navbar-appearance', 'darker');
             }
-
             var navbarVerticalStyle = window.config.config.phoenixNavbarVerticalStyle;
             var navbarVertical = document.querySelector('.navbar-vertical');
             if (navbarVerticalStyle === 'darker') {
@@ -180,48 +174,7 @@
                 </div>
                 <div class="card-body p-0">
                     <div class="collapse code-collapse" id="form-grid-layout-code">
-                        <pre class="scrollbar" style="max-height:420px"><code class="language-html">&lt;form class=&quot;row g-3&quot;&gt;
-  &lt;div class=&quot;col-md-6&quot;&gt;
-    &lt;label class=&quot;form-label&quot; for=&quot;inputEmail4&quot;&gt;Email&lt;/label&gt;
-    &lt;input class=&quot;form-control&quot; id=&quot;inputEmail4&quot; type=&quot;email&quot; /&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;col-md-6&quot;&gt;
-    &lt;label class=&quot;form-label&quot; for=&quot;inputPassword4&quot;&gt;Password&lt;/label&gt;
-    &lt;input class=&quot;form-control&quot; id=&quot;inputPassword4&quot; type=&quot;password&quot; /&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;col-12&quot;&gt;
-    &lt;label class=&quot;form-label&quot; for=&quot;inputAddress&quot;&gt;Address&lt;/label&gt;
-    &lt;input class=&quot;form-control&quot; id=&quot;inputAddress&quot; type=&quot;text&quot; placeholder=&quot;1234 Main St&quot; /&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;col-12&quot;&gt;
-    &lt;label class=&quot;form-label&quot; for=&quot;inputAddress2&quot;&gt;Address 2&lt;/label&gt;
-    &lt;input class=&quot;form-control&quot; id=&quot;inputAddress2&quot; type=&quot;text&quot; placeholder=&quot;Apartment, studio, or floor&quot; /&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;col-md-6&quot;&gt;
-    &lt;label class=&quot;form-label&quot; for=&quot;inputCity&quot;&gt;City&lt;/label&gt;
-    &lt;input class=&quot;form-control&quot; id=&quot;inputCity&quot; type=&quot;text&quot; /&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;col-md-4&quot;&gt;
-    &lt;label class=&quot;form-label&quot; for=&quot;inputState&quot;&gt;State&lt;/label&gt;
-    &lt;select class=&quot;form-select&quot; id=&quot;inputState&quot;&gt;
-      &lt;option selected=&quot;selected&quot;&gt;Choose...&lt;/option&gt;
-      &lt;option&gt;...&lt;/option&gt;
-    &lt;/select&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;col-md-2&quot;&gt;
-    &lt;label class=&quot;form-label&quot; for=&quot;inputZip&quot;&gt;Zip&lt;/label&gt;
-    &lt;input class=&quot;form-control&quot; id=&quot;inputZip&quot; type=&quot;text&quot; /&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;col-12&quot;&gt;
-    &lt;div class=&quot;form-check&quot;&gt;
-      &lt;input class=&quot;form-check-input&quot; id=&quot;gridCheck&quot; type=&quot;checkbox&quot; /&gt;
-      &lt;label class=&quot;form-check-label&quot; for=&quot;gridCheck&quot;&gt;Check me out&lt;/label&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;col-12&quot;&gt;
-    &lt;button class=&quot;btn btn-primary&quot; type=&quot;submit&quot;&gt;Sign in&lt;/button&gt;
-  &lt;/div&gt;
-&lt;/form&gt;</code></pre>
+                   
                     </div>
                     <div class="p-4 code-to-copy">
                         <form class="row g-3">
@@ -280,22 +233,16 @@
                     </div>
                 </div>
             </div>
+            <!-- Footer -->
+            <?php include("../../Components/footer.php"); ?>
         </div>
-
     </main>
-
-
     <!-- ===============================================-->
     <!--    End of Main Content-->
     <!-- ===============================================-->
-
-
-
     <!-- ===============================================-->
     <!--    JavaScripts-->
     <!-- ===============================================-->
-
-
 
 
     <!--Dropdown for contacted-to--->
@@ -337,7 +284,6 @@
             }
         });
     </script>
-
     <script src="../../vendors/popper/popper.min.js"></script>
     <script src="../../vendors/bootstrap/bootstrap.min.js"></script>
     <script src="../../vendors/anchorjs/anchor.min.js"></script>
@@ -353,18 +299,6 @@
     <script src="../../assets/js/phoenix.js"></script>
     <script src="../../vendors/echarts/echarts.min.js"></script>
     <script src="../../assets/js/ecommerce-dashboard.js"></script>
-
-
-
-
-
     </script>
-
-
-
 </body>
-
-
-<!-- Mirrored from prium.github.io/phoenix/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Sep 2024 13:37:21 GMT -->
-
 </html>
