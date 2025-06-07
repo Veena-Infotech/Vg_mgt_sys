@@ -24,8 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
 
     if (!$visitor_id) die("Visitor not found.");
-
-    // Get client_id from visitor
+    
+    //Get client_id from visitor
     $stmt = $conn->prepare("SELECT reference_id FROM tbl_visitor WHERE id = ?");
     $stmt->bind_param("i", $visitor_id);
     $stmt->execute();
@@ -39,8 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $uid = uniqid('PAY_');
     $payment_date = date("Y-m-d");
 
-    $stmt = $conn->prepare("INSERT INTO tbl_payment (uid, amount, type, client_id, payment_date) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("sdsis", $uid, $amount, $type, $client_id, $payment_date);
+    $stmt = $conn->prepare("INSERT INTO tbl_payment (uid, amount, type, visitor_id, payment_date) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("sdsis", $uid, $amount, $type, $visitor_id, $payment_date);
 
     if ($stmt->execute()) {
     // Update meeting status

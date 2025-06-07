@@ -173,10 +173,9 @@ include '../PhpFiles/connection.php';
 
 $meeting_id = $_GET['meeting_id'] ?? 0;
 
-$query = "SELECT mh.amount, v.id AS visitor_id, c.f_name, c.l_name
+$query = "SELECT mh.amount, v.id AS visitor_id, v.f_name, v.l_name
           FROM tbl_meeting_history mh
           JOIN tbl_visitor v ON mh.visitor_id = v.id
-          JOIN tbl_client c ON v.reference_id = c.id
           WHERE mh.id = $meeting_id";
 
 $result = mysqli_query($conn, $query);

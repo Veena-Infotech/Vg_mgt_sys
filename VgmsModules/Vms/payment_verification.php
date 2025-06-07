@@ -163,9 +163,16 @@
         navbarVertical.setAttribute('data-navbar-appearance', 'darker');
       }
     </script>
+
+    <?php
+      include '../PhpFiles/connection.php'; // DB connection file
+
+      $query = "SELECT * FROM tbl_payment ORDER BY id DESC";
+      $result = mysqli_query($conn, $query);
+    ?>
     <div class="content">
       <h3 style="text-align: center; margin:0%;" class="mb-4">Payment Verification</h3>
-<hr>
+        <hr>
       <div id="tableExample3" data-list='{"valueNames":["serial_no","payment_type","amount","purpose","proof","payment_received"],"page":3,"pagination":true}'>
 
         <!-- Search -->
@@ -188,46 +195,25 @@
               </tr>
             </thead>
             <tbody class="list">
-              <tr>
-                <td class="align-middle ps-3 serial_no">001</td>
-                <td class="align-middle payment_type">Online</td>
-                <td class="align-middle amount">₹1500</td>
-                <td class="align-middle purpose">Membership Fees</td>
-                <td class="align-middle proof">receipt_001.jpg</td>
-                <td class="align-middle payment_received">
-                  <input class="form-check-input" type="checkbox" />
-                </td>
-              </tr>
-              <tr>
-                <td class="align-middle ps-3 serial_no">002</td>
-                <td class="align-middle payment_type">Online</td>
-                <td class="align-middle amount">₹1500</td>
-                <td class="align-middle purpose">Membership Fee</td>
-                <td class="align-middle proof">receipt_002.jpg</td>
-                <td class="align-middle payment_received">
-                  <input class="form-check-input" type="checkbox" />
-                </td>
-              </tr>
-              <tr>
-                <td class="align-middle ps-3 serial_no">003</td>
-                <td class="align-middle payment_type">Offline</td>
-                <td class="align-middle amount">₹1500</td>
-                <td class="align-middle purpose">Membership Fee</td>
-                <td class="align-middle proof">receipt_003.jpg</td>
-                <td class="align-middle payment_received">
-                  <input class="form-check-input" type="checkbox" />
-                </td>
-              </tr>
-              <tr>
-                <td class="align-middle ps-3 serial_no">004</td>
-                <td class="align-middle payment_type">Online</td>
-                <td class="align-middle amount">₹1500</td>
-                <td class="align-middle purpose">Membership Fee</td>
-                <td class="align-middle proof">receipt_004.jpg</td>
-                <td class="align-middle payment_received">
-                  <input class="form-check-input" type="checkbox" />
-                </td>
-              </tr>
+              <?php
+                $serial = 1;
+                while ($row = mysqli_fetch_assoc($result)) {
+                  $isReceived = !empty($row["amount"]); // Payment received if amount is present
+
+                echo '
+                  <tr>
+                    <td class="align-middle ps-3 serial_no">'. $serial .'</td>
+                    <td class="align-middle payment_type">' . htmlspecialchars($row["type"]) . '</td>
+                    <td class="align-middle amount">₹' . htmlspecialchars($row["amount"]) . '</td>
+                    <td class="align-middle purpose"> </td>
+                    <td class="align-middle proof"> </td>
+                    <td class="align-middle payment_received">
+                    <input class="form-check-input" type="checkbox" disabled ' . ($isReceived ? "checked" : "") . ' />
+                    </td>
+                  </tr>';
+                  $serial++;
+              }
+              ?>
             </tbody>
           </table>
 
