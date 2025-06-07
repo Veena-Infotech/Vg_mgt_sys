@@ -522,7 +522,7 @@
 
                                                                             <!-- Button Column -->
                                                                             <div class="col-md-3">
-                                                                                <button type="button" class="btn btn-primary w-100" id="sendOtpBtn">Send OTP</button>
+                                                                                <button type="button" class="btn btn-primary w-100" id="sendOtpBtn" name="sendotp" onclick="sendOTP()">Send OTP</button>
                                                                             </div>
                                                                         </div>
 
@@ -537,7 +537,7 @@
 
                                                                             <!-- Verify Button -->
                                                                             <div class="col-md-4">
-                                                                                <button class="btn btn-primary mt-4 w-100" type="button" onclick="verifyOTP()">Verify</button>
+                                                                                <button class="btn btn-primary mt-4 w-100" type="button" name="verifyotp" onclick="verifyOTP()">Verify</button>
                                                                             </div>
                                                                         </div>
 
@@ -678,8 +678,36 @@
                 });
             </script>
 
+<script>
+function sendOTP() {
+  const empId = document.getElementById("visitorName").value;
+  if (!empId) return alert("Please select an employee");
 
+  fetch('../PhpFiles/send_otp.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: `visitorName=${encodeURIComponent(empId)}`
+  })
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById("result").innerText = data;
+  });
+}
 
+function verifyOTP() {
+  const otp = document.getElementById("otp").value;
+
+  fetch('../PhpFiles/verify_otp.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: `otp=${encodeURIComponent(otp)}`
+  })
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById("result").innerText = data;
+  });
+}
+</script>
 
             <!-- Modal -->
             <div class="modal fade" id="statusModal" tabindex="-1" aria-labelledby="statusModalLabel" aria-hidden="true">
