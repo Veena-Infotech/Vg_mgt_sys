@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 02, 2025 at 09:13 AM
+-- Generation Time: Jun 07, 2025 at 06:06 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -414,7 +414,12 @@ INSERT INTO `tbl_logs` (`id`, `emp_id`, `action`, `status`, `timestamp`, `ip_add
 (27, 1, 'login_request', 'completed', '2025-05-03 07:55:51', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36'),
 (28, 1, 'login_request', 'completed', '2025-05-03 10:35:39', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36'),
 (29, 1, 'login_request', 'completed', '2025-05-04 09:10:46', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36'),
-(30, 1, 'login_request', 'completed', '2025-05-14 11:58:24', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36');
+(30, 1, 'login_request', 'completed', '2025-05-14 11:58:24', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36'),
+(31, 1, 'login_request', 'failed', '2025-06-05 09:07:55', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36'),
+(32, 1, 'login_request', 'completed', '2025-06-05 09:08:17', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36'),
+(33, 1, 'login_request', 'completed', '2025-06-06 05:43:57', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36'),
+(34, 1, 'login_request', 'completed', '2025-06-06 05:49:24', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36'),
+(35, 1, 'login_request', 'completed', '2025-06-06 12:29:33', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36');
 
 -- --------------------------------------------------------
 
@@ -572,7 +577,7 @@ CREATE TABLE `tbl_meeting_history` (
   `location` varchar(100) DEFAULT NULL,
   `in_time` time DEFAULT NULL,
   `out_time` time DEFAULT NULL,
-  `payment_status` enum('Paid','Unpaid') DEFAULT NULL,
+  `payment_status` enum('Unpaid','Paid') NOT NULL,
   `payment_mode` enum('Cash','Card','Online') DEFAULT NULL,
   `amount` decimal(10,2) DEFAULT NULL,
   `meeting_status` enum('Scheduled','Completed','InProgress','Rescheduled') DEFAULT 'Scheduled',
@@ -584,7 +589,19 @@ CREATE TABLE `tbl_meeting_history` (
 --
 
 INSERT INTO `tbl_meeting_history` (`id`, `uid`, `date`, `time`, `visitor_id`, `emp_id`, `reason`, `location`, `in_time`, `out_time`, `payment_status`, `payment_mode`, `amount`, `meeting_status`, `timestamp`) VALUES
-(8, 'meet_683d47258c20c', '2025-06-02', '08:39:33', 4, 3, 'wdccc', NULL, NULL, NULL, NULL, NULL, NULL, 'Scheduled', '2025-06-02 06:39:33');
+(8, 'meet_683d47258c20c', '2025-06-02', '08:39:33', 4, 3, 'wdccc', NULL, NULL, NULL, '', NULL, NULL, 'Scheduled', '2025-06-02 06:39:33'),
+(10, 'meet_68415a09c5ad8', '2025-06-05', '10:49:13', 22, 1, 'swcdc', NULL, NULL, NULL, '', NULL, NULL, 'Scheduled', '2025-06-05 09:08:41'),
+(11, 'meet_684171e8b1904', '2025-06-05', '12:31:04', 23, 1, 'meeting with sir', NULL, NULL, NULL, '', NULL, NULL, 'Scheduled', '2025-06-05 10:31:04'),
+(12, 'meet_68417b63ce556', '2025-06-05', '13:11:31', 24, 1, 'discuss about documents', NULL, NULL, NULL, '', NULL, NULL, 'Scheduled', '2025-06-05 11:11:31'),
+(13, 'meet_68417fa63b6a3', '2025-06-05', '13:29:42', 25, 1, 'grbbtn', NULL, NULL, NULL, '', NULL, NULL, 'Rescheduled', '2025-06-05 11:34:32'),
+(14, 'meet_68418af45488e', '2025-06-05', '14:17:56', 26, 1, 'hgfjyu', NULL, NULL, NULL, '', NULL, NULL, 'Scheduled', '2025-06-05 12:17:56'),
+(15, 'meet_68418c2621d35', '2025-06-05', '14:23:02', 27, 1, 'hrroui', NULL, NULL, NULL, '', NULL, NULL, 'Scheduled', '2025-06-05 12:23:02'),
+(16, 'meet_68418ec1b03a9', '2025-06-05', '14:34:09', 28, 1, 'meeting', NULL, NULL, NULL, '', NULL, NULL, 'Scheduled', '2025-06-05 12:34:09'),
+(17, 'meet_684281bc86ef6', '2025-06-06', '07:50:52', 29, 1, 'meeting with sir', NULL, NULL, NULL, 'Paid', 'Cash', 8000.00, 'Scheduled', '2025-06-06 11:00:37'),
+(18, 'meet_684287d3306d6', '2025-06-06', '08:16:51', 30, 3, 'meeting with sir', NULL, NULL, NULL, '', NULL, NULL, 'Scheduled', '2025-06-06 06:16:51'),
+(19, 'meet_6842b1da7a4a5', '2025-06-06', '11:16:10', 31, 1, 'meeting with sir', NULL, NULL, NULL, 'Paid', 'Cash', 1.00, 'Scheduled', '2025-06-06 10:43:59'),
+(20, 'meet_6842ce5350fdf', '2025-06-06', '13:17:39', 32, 1, 'meeting', NULL, NULL, NULL, 'Paid', 'Cash', 1.00, 'Scheduled', '2025-06-06 12:25:59'),
+(21, 'meet_6842def3c27d0', '2025-06-06', '14:28:35', 33, 1, 'meeting', NULL, NULL, NULL, 'Paid', 'Cash', 2.00, 'Scheduled', '2025-06-06 12:30:53');
 
 -- --------------------------------------------------------
 
@@ -596,11 +613,31 @@ CREATE TABLE `tbl_meeting_notes` (
   `id` int(11) NOT NULL,
   `uid` varchar(50) NOT NULL,
   `meeting_id` int(11) DEFAULT NULL,
+  `emp_id` int(11) DEFAULT NULL,
+  `visitor_id` int(11) DEFAULT NULL,
+  `date_time` datetime DEFAULT NULL,
+  `payment_amt` int(11) DEFAULT NULL,
+  `additional_comments` text DEFAULT NULL,
+  `discussion_summary` text DEFAULT NULL,
   `notes` text DEFAULT NULL,
-  `files` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`files`)),
+  `files` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `reminders` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`reminders`)),
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_meeting_notes`
+--
+
+INSERT INTO `tbl_meeting_notes` (`id`, `uid`, `meeting_id`, `emp_id`, `visitor_id`, `date_time`, `payment_amt`, `additional_comments`, `discussion_summary`, `notes`, `files`, `reminders`, `timestamp`) VALUES
+(1, '', 10, 1, 21, '2006-06-25 11:00:00', 4000, ' tgte', ' evrrv', NULL, NULL, NULL, '2025-06-05 10:23:12'),
+(2, 'meet_684171e8b1904', 11, 1, 23, '2006-06-25 11:00:00', 4000, ' rffv', ' ffvrgb', NULL, NULL, NULL, '2025-06-05 10:38:35'),
+(6, 'meet_68417b63ce556', 12, 1, 24, '2006-06-25 13:10:00', 8000, ' jhgu', ' hlhiy', NULL, '', NULL, '2025-06-05 11:13:24'),
+(7, 'meet_68417fa63b6a3', 13, 1, 25, '2006-06-25 11:00:00', 8000, ' hvmyj', ' jhgu', NULL, '../uploads/meeting_files/file_68418079b79e3_10TH CERTIFICATE.jpg', NULL, '2025-06-05 11:33:13'),
+(8, 'meet_684281bc86ef6', 17, 1, 21, '2007-06-25 13:00:00', 8000, ' wfdc', ' acrf', NULL, '../uploads/meeting_files/file_49858.jpg', NULL, '2025-06-06 06:34:15'),
+(9, 'meet_6842b1da7a4a5', 19, 1, 31, '2007-06-25 10:00:00', 1, ' asxdx', ' dcffv', NULL, '../uploads/meeting_files/file_40221.pdf', NULL, '2025-06-06 09:17:49'),
+(10, 'meet_6842ce5350fdf', 20, 1, 32, '2007-06-25 11:05:00', 1, ' gfdy', ' hjgut', NULL, '../uploads/meeting_files/file_63687.jpg', NULL, '2025-06-06 11:19:07'),
+(11, 'meet_6842def3c27d0', 21, 1, 33, '2007-06-25 13:00:00', 2, ' dfbty', ' gfbtyn', NULL, '../uploads/meeting_files/file_91555.jpg', NULL, '2025-06-06 12:30:39');
 
 -- --------------------------------------------------------
 
@@ -632,12 +669,39 @@ CREATE TABLE `tbl_payment` (
   `uid` varchar(50) NOT NULL,
   `amount` decimal(10,2) NOT NULL,
   `type` enum('Cash','Card','Online','Cheque') DEFAULT NULL,
+  `client_id` int(11) DEFAULT NULL,
   `reason` text DEFAULT NULL,
   `note` text DEFAULT NULL,
   `proof` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`proof`)),
   `payment_date` date DEFAULT NULL,
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_payment`
+--
+
+INSERT INTO `tbl_payment` (`id`, `uid`, `amount`, `type`, `client_id`, `reason`, `note`, `proof`, `payment_date`, `timestamp`) VALUES
+(1, 'PAY_6842c66f668b9', 1.00, 'Cash', 2, NULL, NULL, NULL, '2025-06-06', '2025-06-06 10:43:59'),
+(2, 'PAY_6842ca550c4ea', 8000.00, 'Cash', 1, NULL, NULL, NULL, '2025-06-06', '2025-06-06 11:00:37'),
+(3, 'PAY_6842ca5f9a84c', 8000.00, 'Cash', 1, NULL, NULL, NULL, '2025-06-06', '2025-06-06 11:00:47'),
+(4, 'PAY_6842d2f6d5036', 1.00, 'Cash', 3, NULL, NULL, NULL, '2025-06-06', '2025-06-06 11:37:26'),
+(5, 'PAY_6842d4f9362db', 1.00, 'Cash', 3, NULL, NULL, NULL, '2025-06-06', '2025-06-06 11:46:01'),
+(6, 'PAY_6842d6820f905', 1.00, 'Cash', 3, NULL, NULL, NULL, '2025-06-06', '2025-06-06 11:52:34'),
+(7, 'PAY_6842d686ce2d5', 1.00, 'Online', 3, NULL, NULL, NULL, '2025-06-06', '2025-06-06 11:52:38'),
+(8, 'PAY_6842d68991249', 1.00, 'Cash', 3, NULL, NULL, NULL, '2025-06-06', '2025-06-06 11:52:41'),
+(9, 'PAY_6842d6f3952e2', 1.00, 'Cash', 3, NULL, NULL, NULL, '2025-06-06', '2025-06-06 11:54:27'),
+(10, 'PAY_6842d801e34b4', 1.00, 'Cash', 3, NULL, NULL, NULL, '2025-06-06', '2025-06-06 11:58:57'),
+(11, 'PAY_6842d940ac162', 1.00, 'Cash', 3, NULL, NULL, NULL, '2025-06-06', '2025-06-06 12:04:16'),
+(12, 'PAY_6842dbc47d968', 1.00, 'Cash', 3, NULL, NULL, NULL, '2025-06-06', '2025-06-06 12:15:00'),
+(13, 'PAY_6842dc6614980', 1.00, 'Cash', 3, NULL, NULL, NULL, '2025-06-06', '2025-06-06 12:17:42'),
+(14, 'PAY_6842dc6a0a43d', 1.00, 'Online', 3, NULL, NULL, NULL, '2025-06-06', '2025-06-06 12:17:46'),
+(15, 'PAY_6842dcaa21388', 1.00, 'Cash', 3, NULL, NULL, NULL, '2025-06-06', '2025-06-06 12:18:50'),
+(16, 'PAY_6842dd3fd22fc', 1.00, 'Cash', 3, NULL, NULL, NULL, '2025-06-06', '2025-06-06 12:21:19'),
+(17, 'PAY_6842dd4fe1241', 1.00, 'Online', 3, NULL, NULL, NULL, '2025-06-06', '2025-06-06 12:21:35'),
+(18, 'PAY_6842de578b6b3', 1.00, 'Cash', 3, NULL, NULL, NULL, '2025-06-06', '2025-06-06 12:25:59'),
+(19, 'PAY_6842dea550db8', 1.00, 'Cash', 3, NULL, NULL, NULL, '2025-06-06', '2025-06-06 12:27:17'),
+(20, 'PAY_6842df7d43142', 2.00, 'Cash', 2, NULL, NULL, NULL, '2025-06-06', '2025-06-06 12:30:53');
 
 -- --------------------------------------------------------
 
@@ -1074,11 +1138,13 @@ CREATE TABLE `tbl_visitor` (
   `address` text DEFAULT NULL,
   `img` varchar(255) NOT NULL,
   `registered_date` date DEFAULT NULL,
-  `soc_company_name` varchar(255) DEFAULT NULL,
+  `society_name` varchar(255) DEFAULT NULL,
+  `company_name` varchar(255) DEFAULT NULL,
+  `reference_id` int(11) DEFAULT NULL,
   `visitor_type` enum('Guest','Client','Vendor','Society Member') DEFAULT NULL,
   `designation` enum('Chairman','Secretary','Treasurer','Member') DEFAULT NULL,
   `number_accompanying_guests` int(11) DEFAULT NULL,
-  `visit_purpose` text DEFAULT NULL,
+  `visit_purpose` varchar(255) DEFAULT NULL,
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -1086,11 +1152,21 @@ CREATE TABLE `tbl_visitor` (
 -- Dumping data for table `tbl_visitor`
 --
 
-INSERT INTO `tbl_visitor` (`id`, `uid`, `f_name`, `m_name`, `l_name`, `phone_no`, `email`, `address`, `img`, `registered_date`, `soc_company_name`, `visitor_type`, `designation`, `number_accompanying_guests`, `visit_purpose`, `timestamp`) VALUES
-(1, 'visitor_6814e4b888426', 'Aryan', 'Nitin', 'Shirodkar', 2147483647, 'ans@gmail.com', '', 'visitor_1.jpg', '2025-05-02', NULL, NULL, NULL, NULL, NULL, '2025-05-02 15:28:56'),
-(2, 'visitor_6815f2052cdfb', 'om', 'Pandey', 'Pandey', 2147483647, 'om@gmail.com', '', 'visitor_2.jpg', '2025-05-03', NULL, NULL, NULL, NULL, NULL, '2025-05-14 13:02:35'),
-(3, 'visitor_68270285e0a88', 'Aryan', 'Nitin', 'Shirodkar', 2147483647, 'aryanshirodkar03@gmail.com', '', 'visitor_3.jpg', '2025-05-16', NULL, NULL, NULL, NULL, NULL, '2025-05-16 09:16:53'),
-(4, 'visitor_683d47258a6d0', '', '', '', 1234567891, 'manya.veenagroup@gmail.com', '', 'visitor_4.jpg', '2025-06-02', NULL, NULL, NULL, NULL, NULL, '2025-06-02 06:39:33');
+INSERT INTO `tbl_visitor` (`id`, `uid`, `f_name`, `m_name`, `l_name`, `phone_no`, `email`, `address`, `img`, `registered_date`, `society_name`, `company_name`, `reference_id`, `visitor_type`, `designation`, `number_accompanying_guests`, `visit_purpose`, `timestamp`) VALUES
+(20, 'VST-VEOS-9777', 'neav', 'satram', 'panjwani', 2147483647, 'neav@gmail.com', NULL, '../uploads/visitor_img/visitor_1749109777.png', '2025-06-05', 'abc', NULL, 2, NULL, '', 2, 'meeting with group', '2025-06-05 07:49:37'),
+(21, 'VST-CJ5B-0955', 'Meena', 'ashok', 'nirvan', 1234567891, 'meena@gmail.com', NULL, '../uploads/visitor_img/visitor_1749110955.png', '2025-06-05', 'abc', NULL, 2, NULL, '', 2, 'meeting', '2025-06-05 08:09:15'),
+(22, 'VST-DAC6-3353', 'neav', 'satram', 'panjwani', 2147483647, 'neav@gmail.com', NULL, '../uploads/visitor_img/visitor_1749113353.png', '2025-06-05', 'abc', NULL, 1, NULL, '', 3, 'swcdc', '2025-06-05 08:49:13'),
+(23, 'VST-K80P-9464', 'Manya', 'ashok', 'nirvan', 2147483647, 'manya@gmail.com', NULL, '../uploads/visitor_img/visitor_1749119464.png', '2025-06-05', 'abc', NULL, 1, NULL, '', 2, 'meeting with sir', '2025-06-05 10:31:04'),
+(24, 'VST-T87W-1891', 'mohan', 'satram', 'rathod', 1234567891, 'mohan@gmail.com', NULL, '../uploads/visitor_img/visitor_1749121891.png', '2025-06-05', NULL, 'edrf', 1, 'Vendor', NULL, 4, 'discuss about documents', '2025-06-05 11:11:31'),
+(25, 'VST-8B26-2982', 'Aryan', 'satram', 'rathod', 2147483647, 'aryan@gmail.com', NULL, '../uploads/visitor_img/visitor_1749122982.png', '2025-06-05', 'drfrt', NULL, 1, NULL, '', 2, 'grbbtn', '2025-06-05 11:29:42'),
+(26, 'VST-WSUN-5876', 'asha', 'mohan', 'kamble', 2147483647, 'asha@gmail.com', NULL, '../uploads/visitor_img/visitor_1749125876.png', '2025-06-05', NULL, 'gfry', 1, 'Client', NULL, 3, 'hgfjyu', '2025-06-05 12:17:56'),
+(27, 'VST-GPMI-6182', 'manish', 'dinanath', 'chauhan', 2147483647, 'manish@gmail.com', NULL, '../uploads/visitor_img/visitor_1749126182.png', '2025-06-05', 'sai ram', NULL, 1, NULL, '', 4, 'hrroui', '2025-06-05 12:23:02'),
+(28, 'VST-BY3S-6849', 'Raj', 'mohan', 'chauhan', 1234567890, 'raj@gmail.com', NULL, '../uploads/visitor_img/visitor_1749126849.png', '2025-06-05', 'jbjch', NULL, 1, NULL, '', 2, 'meeting', '2025-06-05 12:34:09'),
+(29, 'VST-7UEM-9052', 'Meena', 'ashok', 'nirvan', 1234567891, 'meena@gmail.com', NULL, '../uploads/visitor_img/visitor_1749189052.png', '2025-06-06', 'abc', NULL, 1, NULL, '', 2, 'meeting with sir', '2025-06-06 05:50:52'),
+(30, 'VST-1H5Z-0611', 'manya', 'ashok', 'nirvan', 2147483647, 'manya@gmail.com', NULL, '../uploads/visitor_img/visitor_1749190611.png', '2025-06-06', 'sai ram', NULL, 2, NULL, '', 2, 'meeting with sir', '2025-06-06 06:16:51'),
+(31, 'VST-SRG2-1370', 'asha', 'dinanath', 'chauhan', 1234567891, 'asha@gmail.com', NULL, '../uploads/visitor_img/visitor_1749201370.png', '2025-06-06', 'abc', NULL, 2, NULL, '', 4, 'meeting with sir', '2025-06-06 09:16:10'),
+(32, 'VST-2M85-8659', 'mohan', 'dinanath', 'rathod', 1234567890, 'mohan@gmail.com', NULL, '../uploads/visitor_img/visitor_1749208659.png', '2025-06-06', 'abc', NULL, 3, NULL, '', 3, 'meeting', '2025-06-06 11:17:39'),
+(33, 'VST-V709-2915', 'abc', 'vgf', 'panjwani', 1234567891, 'tthjg@gmail.com', NULL, '../uploads/visitor_img/visitor_1749212915.png', '2025-06-06', 'drfrt', NULL, 2, NULL, '', 1, 'meeting', '2025-06-06 12:28:35');
 
 -- --------------------------------------------------------
 
@@ -1273,7 +1349,9 @@ ALTER TABLE `tbl_meeting_history`
 ALTER TABLE `tbl_meeting_notes`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `uid` (`uid`),
-  ADD KEY `meeting_id` (`meeting_id`);
+  ADD KEY `meeting_id` (`meeting_id`),
+  ADD KEY `fk_emp_id_tbl_emp` (`emp_id`),
+  ADD KEY `tbl_visitor_id_tbl_visitor` (`visitor_id`);
 
 --
 -- Indexes for table `tbl_misc`
@@ -1288,7 +1366,8 @@ ALTER TABLE `tbl_misc`
 --
 ALTER TABLE `tbl_payment`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `uid` (`uid`);
+  ADD UNIQUE KEY `uid` (`uid`),
+  ADD KEY `fk_client_id_tbl_client` (`client_id`);
 
 --
 -- Indexes for table `tbl_pin_board`
@@ -1438,7 +1517,8 @@ ALTER TABLE `tbl_todo`
 --
 ALTER TABLE `tbl_visitor`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `uid` (`uid`);
+  ADD UNIQUE KEY `uid` (`uid`),
+  ADD KEY `fk_refrence_id_tbl_client` (`reference_id`);
 
 --
 -- Indexes for table `tbl_ward_details`
@@ -1527,7 +1607,7 @@ ALTER TABLE `tbl_loan_status`
 -- AUTO_INCREMENT for table `tbl_logs`
 --
 ALTER TABLE `tbl_logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `tbl_manage_agencies`
@@ -1569,13 +1649,13 @@ ALTER TABLE `tbl_manage_reservation`
 -- AUTO_INCREMENT for table `tbl_meeting_history`
 --
 ALTER TABLE `tbl_meeting_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `tbl_meeting_notes`
 --
 ALTER TABLE `tbl_meeting_notes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tbl_misc`
@@ -1587,7 +1667,7 @@ ALTER TABLE `tbl_misc`
 -- AUTO_INCREMENT for table `tbl_payment`
 --
 ALTER TABLE `tbl_payment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `tbl_pin_board`
@@ -1707,7 +1787,7 @@ ALTER TABLE `tbl_todo`
 -- AUTO_INCREMENT for table `tbl_visitor`
 --
 ALTER TABLE `tbl_visitor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `tbl_ward_details`
@@ -1761,13 +1841,21 @@ ALTER TABLE `tbl_meeting_history`
 -- Constraints for table `tbl_meeting_notes`
 --
 ALTER TABLE `tbl_meeting_notes`
-  ADD CONSTRAINT `tbl_meeting_notes_ibfk_1` FOREIGN KEY (`meeting_id`) REFERENCES `tbl_meeting_history` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_emp_id_tbl_emp` FOREIGN KEY (`emp_id`) REFERENCES `tbl_emp` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `tbl_meeting_notes_ibfk_1` FOREIGN KEY (`meeting_id`) REFERENCES `tbl_meeting_history` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `tbl_visitor_id_tbl_visitor` FOREIGN KEY (`visitor_id`) REFERENCES `tbl_visitor` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_misc`
 --
 ALTER TABLE `tbl_misc`
   ADD CONSTRAINT `tbl_misc_ibfk_1` FOREIGN KEY (`applied_by`) REFERENCES `tbl_emp` (`id`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tbl_payment`
+--
+ALTER TABLE `tbl_payment`
+  ADD CONSTRAINT `fk_client_id_tbl_client` FOREIGN KEY (`client_id`) REFERENCES `tbl_client` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_pin_board`
@@ -1820,6 +1908,12 @@ ALTER TABLE `tbl_task_emp`
 ALTER TABLE `tbl_task_tag`
   ADD CONSTRAINT `fk_tag_id` FOREIGN KEY (`tag_id`) REFERENCES `tbl_tags` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tbl_task_id` FOREIGN KEY (`task_id`) REFERENCES `tbl_tasks` (`id`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tbl_visitor`
+--
+ALTER TABLE `tbl_visitor`
+  ADD CONSTRAINT `fk_refrence_id_tbl_client` FOREIGN KEY (`reference_id`) REFERENCES `tbl_client` (`id`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
