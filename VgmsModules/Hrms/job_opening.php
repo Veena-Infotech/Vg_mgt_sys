@@ -158,6 +158,21 @@
           navbarVertical.setAttribute('data-navbar-appearance', 'darker');
         }
       </script>
+      <?php
+        include '../PhpFiles/connection.php'; // DB connection
+
+        // Fetch skills for dropdown
+        $skills_query = "SELECT id, skills FROM tbl_skills";
+        $skills_result = mysqli_query($conn, $skills_query);
+
+        // Fetch next Job ID (AUTO_INCREMENT)
+        $next_job_id = 1;
+        $result = mysqli_query($conn, "SHOW TABLE STATUS LIKE 'tbl_jobs'");
+        if ($row = mysqli_fetch_assoc($result)) {
+            $next_job_id = $row['Auto_increment'];
+        }
+      ?>
+
     <div class="content">
       <!-- <--------------------------------------------------------
       From here the Forms section are starting
@@ -181,44 +196,50 @@
                     <div class="collapse code-collapse" id="custom-styles-example-code">
                     </div>
                     <div class="p-4 code-to-copy">
-                      <form class="row g-3 needs-validation" novalidate="">
+                      <form method="POST" class="row g-3 needs-validation" novalidate=""  action="../PhpFiles/handle_job_opening.php">
+
                         <div class="col-md-4">
                           <label class="form-label" for="validationCustom01">Job ID</label>
-                          <input class="form-control" id="validationCustom01" type="text" value="Mark" required="" />
+                          <!--input class="form-control" id="validationCustom01" type="text" value="Mark" required="" /-->
+                          <input type="text" class="form-control" value="<?php echo $next_job_id; ?>" disabled>
+
+
                           <div class="valid-feedback">Looks good!</div>
                         </div>
                         <div class="col-md-4">
                           <label class="form-label" for="validationCustom02">Job Text</label>
-                          <input class="form-control" id="validationCustom02" type="text" value="Otto" required="" />
+                          <!--input class="form-control" id="validationCustom02" type="text" value="Otto" required="" /-->
+                          <input class="form-control" id="validationCustom02" name="job_text" type="text" value="Job-<?php echo $next_job_id; ?>" required />
                           <div class="valid-feedback">Looks good!</div>
                         </div>
                         <div class="col-md-3">
                           <label class="form-label" for="departmentSelect">Department</label>
-                          <select class="form-select" id="departmentSelect" required>
-                            <option selected disabled value="">Choose...</option>
-                            <option value="value1">Department 1</option>
-                            <option value="value2">Department 2</option>
-                            <option value="value3">Department 3</option>
-                            <option value="value4">Department 4</option>
-                            <option value="value5">Department 5</option>
-                            <option value="value6">Department 6</option>
-                          </select>
+                          <select class="form-select" id="departmentSelect" name="department" required>
+  <option selected disabled value="">Choose...</option>
+  <option value="Department 1">Department 1</option>
+  <option value="Department 2">Department 2</option>
+  <option value="Department 3">Department 3</option>
+  <option value="Department 4">Department 4</option>
+  <option value="Department 5">Department 5</option>
+  <option value="Department 6">Department 6</option>
+</select>
+
                           <div class="invalid-feedback">Please select a valid department.</div>
                         </div>
                         <div class="col-md-6">
                           <label class="form-label" for="validationCustom03">City</label>
-                          <input class="form-control" id="validationCustom03" type="text" required="" />
+                          <input class="form-control" id="validationCustom03" type="text" name="city" required />
                           <div class="invalid-feedback">Please provide a valid city.</div>
                         </div>
                         <label class="form-label" for="validationCustomUsername">Job Description</label>
                         <div class="form-floating mt -1" style="margin-top: 6px;">
                           <textarea class="form-control" id="floatingTextarea2" placeholder="Leave a comment here"
-                            style="height: 100px"></textarea>
+                            style="height: 100px" name="job_description"></textarea>
                           <label for="floatingTextarea2">Comments</label>
                         </div>
                         <div class="col-12">
                         </div>
-                      </form>
+                      <!--/form-->
                     </div>
                   </div>
                 </div>
@@ -234,16 +255,17 @@
                     <div class="collapse code-collapse" id="tooltips-code">
                     </div>
                     <div class="p-4 code-to-copy">
-                      <form class="row g-3 needs-validation" novalidate="">
+                      <!--form action="../PhpFiles/handle_job_opening.php" method="POST" class="row g-3 needs-validation" novalidate=""-->
+                      <div class="row g-3 needs-validation" novalidate="">
                         <div class="col-md-4 position-relative">
                           <label class="form-label" for="validationTooltip01">Experience Required</label>
-                          <input class="form-control" id="validationTooltip01" type="text" value="Enter the number"
+                          <input class="form-control" id="validationTooltip01" type="text" name="experience_required" placeholder="Experience in years" value=""
                             required="" />
                           <div class="valid-tooltip">Looks good!</div>
                         </div>
                         <div class="col-md-3 position-relative">
                           <label for="skillsRequired" class="form-label">Skills Required</label>
-                          <select class="form-select" id="skillsRequired" required>
+                          <!--select class="form-select" id="skillsRequired" required>
                             <option value="" selected disabled>Choose...</option>
                             <option>HTML</option>
                             <option>CSS</option>
@@ -251,8 +273,14 @@
                             <option>PHP</option>
                             <option>Python</option>
                             <option>React</option>
-                            <!-- Add more options as needed -->
+                          </select-->
+                          <select class="form-select" id="skillsRequired" name="skills_required_id" required>
+                            <option value="" selected disabled>Choose...</option>
+                            <?php while($skill = mysqli_fetch_assoc($skills_result)): ?>
+                            <option value="<?= $skill['id']; ?>"><?= $skill['skills']; ?></option>
+                            <?php endwhile; ?>
                           </select>
+
                           <div class="invalid-tooltip">
                             Please select a valid skill.
                           </div>
@@ -264,7 +292,7 @@
                         <!-- Input Field -->
                         <div class="col-md-6 ml-3 mt-3">
                           <label class="form-label" for="datepicker2">Posting Date</label>
-                          <input class="form-control" id="datepicker2" type="text" placeholder="dd/mm/yyyy" required>
+                          <input class="form-control" id="datepicker2" type="text" placeholder="dd/mm/yyyy" name="posting_date" required>
                           <div class="invalid-feedback">Please select a valid date (today or later).</div>
                         </div>
                         <!-- Script -->
@@ -307,7 +335,7 @@
                         <!-- Input Field -->
                         <div class="col-md-6 ml-3 mt-3">
                           <label class="form-label" for="datepicker2">Closing Date</label>
-                          <input class="form-control" id="datepicker2" type="text" placeholder="dd/mm/yyyy" required>
+                          <input class="form-control" id="datepicker2" type="text" placeholder="dd/mm/yyyy" name="closing_date" required>
                           <div class="invalid-feedback">Please select a valid date (today or later).</div>
                         </div>
                         <!-- Script -->
@@ -347,7 +375,7 @@
                         <div class="col-12">
                           <button class="btn btn-primary" type="submit">Submit form</button>
                         </div>
-                      </form>
+                      </div><!--/form-->
                     </div>
                   </div>
                 </div>
@@ -404,14 +432,15 @@
       // }).then(...);
     });
     // Here is teh code for the table 2 which is Information//
-    <select class="form-select" id="skillsRequired" required multiple>
+    
+  </script>
+  <!--select class="form-select" id="skillsRequired" required multiple>
   <option>HTML</option>
   <option>CSS</option>
   <option>JavaScript</option>
   <option>Python</option>
 </select>
-<small class="text-muted">Hold Ctrl (or ⌘ on Mac) to select multiple</small>
-  </script>
+<small class="text-muted">Hold Ctrl (or ⌘ on Mac) to select multiple</small-->
   <script src="../../vendors/popper/popper.min.js"></script>
   <script src="../../vendors/bootstrap/bootstrap.min.js"></script>
   <script src="../../vendors/anchorjs/anchor.min.js"></script>
