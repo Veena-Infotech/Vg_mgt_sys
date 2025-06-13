@@ -13,7 +13,7 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>Starter code</title>
+    <title>New Registration</title>
 
     <!-- ===============================================-->
     <!--    Favicons-->
@@ -40,6 +40,9 @@
     <link href="../../assets/css/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
     <link href="../../assets/css/user.min.css" type="text/css" rel="stylesheet" id="user-style-default">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Choices.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+
     <script>
         var phoenixIsRTL = window.config.config.phoenixIsRTL;
         if (phoenixIsRTL) {
@@ -106,6 +109,27 @@
         border-color: #007bff #007bff transparent;
         color: #007bff;
     }
+
+
+
+    /* Reduce font size of select input and placeholder */
+    #visitorName {
+        font-size: 0.85rem !important;
+        height: 2.2rem !important;
+        padding: 0.3rem 0.6rem !important;
+    }
+
+    /* Choices.js placeholder text and dropdown styling */
+    .choices__inner {
+        font-size: 0.80rem !important;
+        min-height: 2.2rem !important;
+        padding: 0.3rem 0.6rem !important;
+    }
+
+    .choices__placeholder {
+        font-size: 0.85rem !important;
+    }
+
 
     /* .profile-tab {
   opacity: 0;
@@ -255,58 +279,104 @@
                                                                         New Visitor Registration
                                                                     </h3>
                                                                     <?php if (isset($_GET['success'])): ?>
-                                                                        <div class="alert alert-<?php echo $_GET['success'] === 'true' ? 'success' : 'danger'; ?>">
+                                                                        <div
+                                                                            class="alert alert-<?php echo $_GET['success'] === 'true' ? 'success' : 'danger'; ?>">
                                                                             <?php echo $_GET['success'] === 'true' ? 'Visitor registered successfully!' : 'Failed to register visitor.'; ?>
                                                                         </div>
                                                                     <?php endif; ?>
 
-                                                                    <form action="../PhpFiles/handle_visitors_registration.php" method="POST" enctype="multipart/form-data">
-
-
+                                                                    <form
+                                                                        action="../PhpFiles/handle_visitors_registration.php"
+                                                                        method="POST" enctype="multipart/form-data">
                                                                         <div class="row">
                                                                             <!-- Full Name -->
                                                                             <!-- Name Fields -->
                                                                             <div class="col-md-4  animate-field">
-                                                                                <label class="form-label" for="firstName">First Name</label>
-                                                                                <input class="form-control" id="firstName" name="firstName" type="text" placeholder="First Name" required style="border: 1px solid #dcdcdc;" />
+                                                                                <label class="form-label"
+                                                                                    for="firstName">First Name</label>
+                                                                                <input class="form-control"
+                                                                                    id="firstName" name="firstName"
+                                                                                    type="text" placeholder="First Name"
+                                                                                    required
+                                                                                    style="border: 1px solid #dcdcdc;" />
 
                                                                             </div>
                                                                             <div class="col-md-4  animate-field">
-                                                                                <label class="form-label" for="middleName">Middle Name</label>
-                                                                                <input class="form-control" id="middleName" name="middleName" type="text" placeholder="Middle Name" required style="border: 1px solid #dcdcdc;" />
+                                                                                <label class="form-label"
+                                                                                    for="middleName">Middle Name</label>
+                                                                                <input class="form-control"
+                                                                                    id="middleName" name="middleName"
+                                                                                    type="text"
+                                                                                    placeholder="Middle Name"
+                                                                                    style="border: 1px solid #dcdcdc;" />
                                                                             </div>
                                                                             <div class="col-md-4  animate-field">
-                                                                                <label class="form-label" for="lastName">Last Name</label>
-                                                                                <input class="form-control" id="lastName" name="lastName" type="text" placeholder="Last Name" required style="border: 1px solid #dcdcdc;" />
+                                                                                <label class="form-label"
+                                                                                    for="lastName">Last Name</label>
+                                                                                <input class="form-control"
+                                                                                    id="lastName" name="lastName"
+                                                                                    type="text" placeholder="Last Name"
+                                                                                    required
+                                                                                    style="border: 1px solid #dcdcdc;" />
                                                                             </div>
-
                                                                             <!-- Email and Phone -->
                                                                             <div class="col-md-6  animate-field">
-                                                                                <label class="form-label" for="email">Email</label>
-                                                                                <input class="form-control" id="email" name="email" type="email" placeholder="johndoe@example.com" required style="border: 1px solid #dcdcdc;" />
+                                                                                <label class="form-label"
+                                                                                    for="email">Email</label>
+                                                                                <input class="form-control" id="email"
+                                                                                    name="email" type="email"
+                                                                                    placeholder="johndoe@example.com"
+                                                                                    required
+                                                                                    style="border: 1px solid #dcdcdc;" />
                                                                             </div>
                                                                             <div class="col-md-6  animate-field">
-                                                                                <label class="form-label" for="phone">Phone Number</label>
-                                                                                <input class="form-control" id="phone" name="phone" type="tel" placeholder="123-456-7890" required style="border: 1px solid #dcdcdc;" />
+                                                                                <label class="form-label"
+                                                                                    for="phone">Phone Number</label>
+                                                                                <input class="form-control" id="phone"
+                                                                                    name="phone" type="tel"
+                                                                                    placeholder="123-456-7890" required
+                                                                                    style="border: 1px solid #dcdcdc;" />
                                                                             </div>
-
                                                                             <!-- Radio Buttons -->
-                                                                            <div class="col-md-12  animate-field">
-                                                                                <label class="form-label">You are from:</label>
+                                                                            <div class="col-md-12 animate-field">
+                                                                                <label class="form-label">You are
+                                                                                    from:</label>
                                                                                 <div>
-                                                                                    <div class="form-check form-check-inline">
-                                                                                        <input class="form-check-input" id="societyRadio" type="radio" name="source" value="society" style="border: 1px solid #dcdcdc;" />
-                                                                                        <label class="form-check-label" for="societyRadio">Society</label>
+                                                                                    <div
+                                                                                        class="form-check form-check-inline">
+                                                                                        <input class="form-check-input"
+                                                                                            id="societyRadio"
+                                                                                            type="radio" name="source"
+                                                                                            value="society"
+                                                                                            style="border: 1px solid #dcdcdc;" />
+                                                                                        <label class="form-check-label"
+                                                                                            for="societyRadio">Society</label>
                                                                                     </div>
-                                                                                    <div class="form-check form-check-inline">
-                                                                                        <input class="form-check-input" id="companyRadio" type="radio" name="source" value="company" style="border: 1px solid #dcdcdc;" />
-                                                                                        <label class="form-check-label" for="companyRadio">Company</label>
+                                                                                    <div
+                                                                                        class="form-check form-check-inline">
+                                                                                        <input class="form-check-input"
+                                                                                            id="companyRadio"
+                                                                                            type="radio" name="source"
+                                                                                            value="company"
+                                                                                            style="border: 1px solid #dcdcdc;" />
+                                                                                        <label class="form-check-label"
+                                                                                            for="companyRadio">Company</label>
+                                                                                    </div>
+                                                                                    <div
+                                                                                        class="form-check form-check-inline">
+                                                                                        <input class="form-check-input"
+                                                                                            id="othersRadio"
+                                                                                            type="radio" name="source"
+                                                                                            value="others"
+                                                                                            style="border: 1px solid #dcdcdc;" />
+                                                                                        <label class="form-check-label"
+                                                                                            for="othersRadio">Others</label>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
+
                                                                             <?php
                                                                             include('../PhpFiles/connection.php');
-
                                                                             // Function to extract ENUM values
                                                                             function getEnumValues($conn, $table, $column)
                                                                             {
@@ -330,73 +400,122 @@
                                                                             $designations = getEnumValues($conn, 'tbl_visitor', 'designation');
                                                                             $visitorTypes = getEnumValues($conn, 'tbl_visitor', 'visitor_type');
                                                                             ?>
-
                                                                             <!-- Conditional Dropdowns -->
-                                                                            <div class="col-md-6 animate-field" id="name" style="display: none;">
-                                                                                <label class="form-label" for="firstName">Society Name</label>
-                                                                                <input class="form-control" id="society_name" name="society_name" type="text" placeholder="Society Name" style="border: 1px solid #dcdcdc;" />
+                                                                            <div class="col-md-6 animate-field"
+                                                                                id="name" style="display: none;">
+                                                                                <label class="form-label"
+                                                                                    for="firstName">Society Name</label>
+                                                                                <input class="form-control"
+                                                                                    id="society_name"
+                                                                                    name="society_name" type="text"
+                                                                                    placeholder="Society Name"
+                                                                                    style="border: 1px solid #dcdcdc;" />
                                                                             </div>
-
-                                                                            <div class="col-md-6" id="designationDropdown" style="display: none;">
-                                                                                <label class="form-label" for="designation">Designation</label>
-                                                                                <select class="form-select" id="designation" name="designation">
-                                                                                    <option selected disabled value="">Choose...</option>
+                                                                            <div class="col-md-6"
+                                                                                id="designationDropdown"
+                                                                                style="display: none;">
+                                                                                <label class="form-label"
+                                                                                    for="designation">Designation</label>
+                                                                                <select class="form-select"
+                                                                                    id="designation" name="designation">
+                                                                                    <option selected disabled value="">
+                                                                                        Choose...</option>
                                                                                     <?php foreach ($designations as $designation) { ?>
-                                                                                        <option value="<?php echo htmlspecialchars($designation); ?>">
+                                                                                        <option
+                                                                                            value="<?php echo htmlspecialchars($designation); ?>">
                                                                                             <?php echo htmlspecialchars($designation); ?>
                                                                                         </option>
                                                                                     <?php } ?>
                                                                                 </select>
                                                                             </div>
-
-                                                                            <div class="col-md-6 animate-field" id="Companyname" style="display: none;">
-                                                                                <label class="form-label" for="firstName">Company Name</label>
-                                                                                <input class="form-control" id="company_name" name="company_name" type="text" placeholder="Company Name" style="border: 1px solid #dcdcdc;" />
+                                                                            <div class="col-md-6 animate-field"
+                                                                                id="Companyname" style="display: none;">
+                                                                                <label class="form-label"
+                                                                                    for="firstName">Company Name</label>
+                                                                                <input class="form-control"
+                                                                                    id="company_name"
+                                                                                    name="company_name" type="text"
+                                                                                    placeholder="Company Name"
+                                                                                    style="border: 1px solid #dcdcdc;" />
                                                                             </div>
-
-                                                                            <div class="col-md-6" id="visitorTypeDropdown" style="display: none;">
-                                                                                <label class="form-label" for="visitorType">Visitor Type</label>
-                                                                                <select class="form-select" id="visitorType" name="visitorType">
-                                                                                    <option selected disabled value="">Choose...</option>
+                                                                            <div class="col-md-6"
+                                                                                id="visitorTypeDropdown"
+                                                                                style="display: none;">
+                                                                                <label class="form-label"
+                                                                                    for="visitorType">Visitor
+                                                                                    Type</label>
+                                                                                <select class="form-select"
+                                                                                    id="visitorType" name="visitorType">
+                                                                                    <option selected disabled value="">
+                                                                                        Choose...</option>
                                                                                     <?php foreach ($visitorTypes as $type) { ?>
-                                                                                        <option value="<?php echo htmlspecialchars($type); ?>">
+                                                                                        <option
+                                                                                            value="<?php echo htmlspecialchars($type); ?>">
                                                                                             <?php echo htmlspecialchars($type); ?>
                                                                                         </option>
                                                                                     <?php } ?>
                                                                                 </select>
                                                                             </div>
+
+                                                                            <!-- Others Conditional Input -->
+                                                                            <div class="col-md-6 animate-field"
+                                                                                id="othersInput" style="display: none;">
+                                                                                <label class="form-label"
+                                                                                    for="description">Description</label>
+                                                                                <input class="form-control"
+                                                                                    id="description" name="description"
+                                                                                    type="text"
+                                                                                    placeholder="Enter a short description"
+                                                                                    style="border: 1px solid #dcdcdc;" />
+                                                                            </div>
+
+
                                                                             <?php
                                                                             include('../PhpFiles/connection.php');
-
                                                                             // Fetch reference clients
                                                                             $refQuery = "SELECT id, f_name, l_name FROM tbl_client ORDER BY f_name";
                                                                             $refResult = mysqli_query($conn, $refQuery);
                                                                             ?>
-
                                                                             <!-- Reference Name Dropdown -->
-                                                                            <div class="col-md-6  animate-field" id="referenceNameField">
-                                                                                <label class="form-label" for="referenceName">Reference Name</label>
-                                                                                <select class="form-select" id="referenceName" name="referenceName" required style="border: 1px solid  #dcdcdc">
-                                                                                    <option value="">Select Reference</option>
-                                                                                    <option value="add_new_reference">+ Add Reference</option> <!-- placed right after default -->
+                                                                            <div class="col-md-6  animate-field"
+                                                                                id="referenceNameField">
+                                                                                <label class="form-label"
+                                                                                    for="referenceName">Reference
+                                                                                    Name</label>
+                                                                                <select class="form-select"
+                                                                                    id="referenceName"
+                                                                                    name="referenceName" required
+                                                                                    style="border: 1px solid  #dcdcdc">
+                                                                                    <option value="">Select Reference
+                                                                                    </option>
+                                                                                    <option value="add_new_reference">+
+                                                                                        Add Reference</option>
+                                                                                    <!-- placed right after default -->
                                                                                     <?php while ($row = mysqli_fetch_assoc($refResult)) { ?>
-                                                                                        <option value="<?php echo htmlspecialchars($row['id']); ?>">
+                                                                                        <option
+                                                                                            value="<?php echo htmlspecialchars($row['id']); ?>">
                                                                                             <?php echo htmlspecialchars($row['f_name'] . ' ' . $row['l_name']); ?>
                                                                                         </option>
                                                                                     <?php } ?>
                                                                                 </select>
+
                                                                             </div>
                                                                             <?php
                                                                             include('../PhpFiles/connection.php'); // Adjust path if needed
-
                                                                             $sql = "SELECT id, f_name, l_name, position FROM tbl_emp ORDER BY f_name ASC";
                                                                             $result = mysqli_query($conn, $sql);
                                                                             ?>
 
                                                                             <div class="col-md-6 mb-4 animate-field">
-                                                                                <label class="form-label" for="whomToMeet">Whom to Meet?</label>
-                                                                                <select class="form-select" id="whomToMeet" name="whomToMeet" required style="border: 1px solid #dcdcdc;">
-                                                                                    <option selected disabled>Choose...</option>
+                                                                                <label class="form-label"
+                                                                                    for="whomToMeet">Whom to
+                                                                                    Meet?</label>
+                                                                                <select class="form-select"
+                                                                                    id="whomToMeet" name="whomToMeet"
+                                                                                    required
+                                                                                    style="border: 1px solid #dcdcdc;">
+                                                                                    <option selected disabled>Choose...
+                                                                                    </option>
                                                                                     <?php
                                                                                     while ($row = mysqli_fetch_assoc($result)) {
                                                                                         $emp_id = $row['id'];
@@ -407,47 +526,36 @@
                                                                                     ?>
                                                                                 </select>
                                                                             </div>
-
-                                                                            <div class="col-md-6 mb-4 animate-field" id="neavField">
-                                                                                <label class="form-label" for="noofguest">Number of guest</label>
-                                                                                <input class="form-control" id="noofguest" name="noofguest" type="text" placeholder="No of guest" required style="border: 1px solid #dcdcdc;" />
+                                                                            <div class="col-md-6 mb-4 animate-field"
+                                                                                id="neavField">
+                                                                                <label class="form-label"
+                                                                                    for="noofguest">Number of
+                                                                                    guest</label>
+                                                                                <input class="form-control"
+                                                                                    id="noofguest" name="noofguest"
+                                                                                    type="text"
+                                                                                    placeholder="No of guest" required
+                                                                                    style="border: 1px solid #dcdcdc;" />
                                                                             </div>
 
-
-                                                                            <!-- Reason to Meet -->
-                                                                            <!--div class="col-md-8 mb-4">
-                                                                                <div class="form-floating h-100 animate-field">
-                                                                                    <label for="reason">Reason to
-                                                                                        Meet
-                                                                                    </label>
-                                                                                    <textarea
-                                                                                        class="form-control rounded-3 h-100"
-                                                                                        placeholder="Reason for meeting"
-                                                                                        id="reason"
-                                                                                        name="reason"
-                                                                                        style="min-height: 200px; border: 1px solid #dcdcdc;"
-                                                                                        required>
-                                                                                    </textarea>
-                                                                                    
-                                                                                </div>
-                                                                            </div-->
                                                                             <!-- Reason to Meet -->
                                                                             <div class="col-md-8 mb-4">
-                                                                                <div class="form-floating h-100 animate-field">
+                                                                                <div
+                                                                                    class="form-floating h-100 animate-field">
                                                                                     <textarea
                                                                                         class="form-control rounded-3 h-100"
                                                                                         placeholder="Reason for meeting"
-                                                                                        id="reason"
-                                                                                        name="reason"
+                                                                                        id="reason" name="reason"
                                                                                         style="min-height: 200px; border: 1px solid #dcdcdc;"
                                                                                         required></textarea>
-                                                                                    <label for="reason">Reason to Meet</label>
+                                                                                    <label for="reason">Reason to
+                                                                                        Meet</label>
                                                                                 </div>
                                                                             </div>
-
-
                                                                             <!-- Capture Image -->
-                                                                            <input type="hidden" name="capturedImageData" id="capturedImageData">
+                                                                            <input type="hidden"
+                                                                                name="capturedImageData"
+                                                                                id="capturedImageData">
 
                                                                             <div class="col-md-4 mb-4 animate-field"
                                                                                 id="captureImageBox">
@@ -475,7 +583,9 @@
                                                                             <div class="col-12 d-grid animate-field">
                                                                                 <!-- <button type="submit"
                                                                                     class="btn btn-primary btn-lg rounded-pill shadow-sm">Register</button> -->
-                                                                                <button class="btn btn-primary w-100 mb-3" type="submit">Registration</button>
+                                                                                <button
+                                                                                    class="btn btn-primary w-100 mb-3"
+                                                                                    type="submit">Registration</button>
                                                                             </div>
                                                                         </div> <!-- row end -->
                                                                     </form>
@@ -493,61 +603,133 @@
                                                                 style="min-height: 500px;">
                                                                 <div class="card-body p-5">
                                                                     <h3 class="text-center mb-4 text-primary fw-bold">
-                                                                        Existing Visitor Registration</h3>
-                                                                    <form action="../PhpFiles/schedule_meeting.php" method="post">
-                                                                        <?php
-                                                                        include('../PhpFiles/connection.php'); // Update path as needed
-                                                                        ?>
-                                                                        <!-- Visitors Dropdown -->
-                                                                        <div class="row mb-4 align-items-end">
-                                                                            <!-- Dropdown Column -->
-                                                                            <div class="col-md-9">
-                                                                                <div class="form-floating">
-                                                                                    <select class="form-select rounded-3" id="visitorName" name="visitorName" required style="border: 1px solid #dcdcdc;">
-                                                                                        <option selected disabled>Choose...</option>
-                                                                                        <?php
-                                                                                        $visitorQuery = "SELECT id, f_name, m_name, l_name FROM tbl_visitor ORDER BY f_name ASC";
-                                                                                        $visitorResult = mysqli_query($conn, $visitorQuery);
+                                                                        Existing Visitor Verification
+                                                                    </h3>
+                                                                    <form>
+                                                                        <!-- Step 1: Source Dropdown -->
+                                                                        <div class="form-floating mb-4">
+                                                                            <select class="form-select rounded-3"
+                                                                                id="sourceType" name="sourceType"
+                                                                                required
+                                                                                style="border: 1px solid #dcdcdc;">
+                                                                                <option selected disabled>Choose...
+                                                                                </option>
+                                                                                <option value="society">Society</option>
+                                                                                <option value="company">Company</option>
+                                                                                <option value="others">Others</option>
+                                                                            </select>
+                                                                            <label for="sourceType">Select You Are
+                                                                                From</label>
+                                                                        </div>
 
-                                                                                        while ($visitor = mysqli_fetch_assoc($visitorResult)) {
-                                                                                            $visitor_id = $visitor['id'];
-                                                                                            $full_name = trim($visitor['f_name'] . ' ' . $visitor['m_name'] . ' ' . $visitor['l_name']);
-                                                                                            echo "<option value=\"$visitor_id\">$full_name</option>";
-                                                                                        }
-                                                                                        ?>
-                                                                                    </select>
-                                                                                    <label for="visitorName">Visitors</label>
+                                                                        <!-- Compact Visitor Dropdown (Matching Your Reference) -->
+                                                                        <div class="form-floating form-floating-advance-select mb-4"
+                                                                            id="visitorDropdownContainer"
+                                                                            style="display: none;">
+
+                                                                            <select class="form-select" id="visitorName"
+                                                                                name="visitorName" data-choices
+                                                                                data-options='{"removeItemButton": false, "placeholder": true}'
+                                                                                required
+                                                                                style="font-size: 0.7rem; height: 2.2rem; padding: 0.3rem 0.6rem; border: 1px solid #dcdcdc;">
+                                                                                <option value="" disabled selected>
+                                                                                    Choose Visitor...</option>
+                                                                                <?php
+                                                                                $visitorQuery = "SELECT id, f_name, m_name, l_name FROM tbl_visitor ORDER BY f_name ASC";
+                                                                                $visitorResult = mysqli_query($conn, $visitorQuery);
+
+                                                                                while ($visitor = mysqli_fetch_assoc($visitorResult)) {
+                                                                                    $visitor_id = $visitor['id'];
+                                                                                    $full_name = trim($visitor['f_name'] . ' ' . $visitor['m_name'] . ' ' . $visitor['l_name']);
+                                                                                    echo "<option value=\"$visitor_id\">$full_name</option>";
+                                                                                }
+                                                                                ?>
+
+                                                                            </select>
+                                                                        </div>
+
+                                                                        <!-- Step 3: Verification Method -->
+                                                                        <div class="mb-4" id="verificationMethod"
+                                                                            style="display: none;">
+                                                                            <label class="form-label">Select
+                                                                                Verification Method:</label>
+
+                                                                            <div class="d-flex gap-4">
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input"
+                                                                                        type="radio" name="verifyOption"
+                                                                                        id="emailRadio" value="email">
+                                                                                    <label class="form-check-label"
+                                                                                        for="emailRadio">Email</label>
+                                                                                </div>
+
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input"
+                                                                                        type="radio" name="verifyOption"
+                                                                                        id="manualRadio" value="manual">
+                                                                                    <label class="form-check-label"
+                                                                                        for="manualRadio">Manual</label>
                                                                                 </div>
                                                                             </div>
-
-                                                                            <!-- Button Column -->
-                                                                            <div class="col-md-3">
-                                                                                <button type="button" class="btn btn-primary w-100" id="sendOtpBtn" name="sendotp" onclick="sendOTP()">Send OTP</button>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <!-- OTP Section (Always Visible) -->
-                                                                        <div class="row align-items-end mb-4" id="otpSection">
-                                                                            <!-- OTP Input -->
-                                                                            <div class="col-md-8">
-                                                                                <label class="form-label" for="otp">Enter OTP</label>
-                                                                                <input type="text" class="form-control rounded-3" id="otp" name="otp" maxlength="6" required pattern="\d{6}" style="border: 1px solid #dcdcdc;" placeholder="Enter 6-digit OTP" />
-                                                                                <div class="invalid-feedback">Please enter a valid 6-digit OTP.</div>
-                                                                            </div>
-
-                                                                            <!-- Verify Button -->
-                                                                            <div class="col-md-4">
-                                                                                <button class="btn btn-primary mt-4 w-100" type="button" name="verifyotp" onclick="verifyOTP()">Verify</button>
-                                                                            </div>
                                                                         </div>
 
 
-                                                                        <!-- Rest of Form (Hidden initially) -->
+                                                                        <!-- Step 4A: Email Verification -->
+                                                                        <div id="emailVerificationSection"
+                                                                            style="display: none;">
+                                                                            <div class="row mb-4 align-items-end">
+                                                                                <div class="col-md-8">
+                                                                                    <label class="form-label"
+                                                                                        for="otp">Enter OTP</label>
+                                                                                    <input type="text"
+                                                                                        class="form-control rounded-3"
+                                                                                        id="otp" name="otp"
+                                                                                        maxlength="6" pattern="\d{6}"
+                                                                                        placeholder="Enter 6-digit OTP"
+                                                                                        style="border: 1px solid #dcdcdc;">
+                                                                                    <div class="invalid-feedback">Please
+                                                                                        enter a valid 6-digit OTP.</div>
+                                                                                </div>
+                                                                                <div class="col-md-4">
+                                                                                    <button
+                                                                                        class="btn btn-primary mt-4 w-100"
+                                                                                        type="button"
+                                                                                        onclick="sendOTP()">Send
+                                                                                        OTP</button>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="d-grid mb-4">
+                                                                                <button class="btn btn-primary w-100"
+                                                                                    type="button"
+                                                                                    onclick="verifyOTP()">Verify</button>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <!-- Step 4B: Manual Verification -->
+                                                                        <div id="manualVerificationSection"
+                                                                            style="display: none;">
+                                                                            <div class="text-center mb-4">
+                                                                                <img src="../path/to/visitor/image.jpg"
+                                                                                    alt="Visitor Image"
+                                                                                    class="img-thumbnail"
+                                                                                    style="width: 150px; height: auto;">
+                                                                            </div>
+                                                                            <div class="d-grid mb-4">
+                                                                                <button class="btn btn-primary w-100"
+                                                                                    type="button">Verify</button>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <!-- Step 5: Hidden Section (after successful verification) -->
                                                                         <div id="mainFormFields" style="display: none;">
-                                                                            <!-- Whom to Meet Dropdown -->
+                                                                            <!-- Whom to Meet -->
                                                                             <div class="form-floating mb-4">
-                                                                                <select class="form-select rounded-3" id="whomToMeet" name="whomToMeet" required style="border: 1px solid #dcdcdc;">
-                                                                                    <option selected disabled>Choose...</option>
+                                                                                <select class="form-select rounded-3"
+                                                                                    id="whomToMeet" name="whomToMeet"
+                                                                                    required
+                                                                                    style="border: 1px solid #dcdcdc;">
+                                                                                    <option selected disabled>Choose...
+                                                                                    </option>
                                                                                     <?php
                                                                                     $empQuery = "SELECT id, f_name, l_name, position FROM tbl_emp ORDER BY f_name ASC";
                                                                                     $empResult = mysqli_query($conn, $empQuery);
@@ -558,27 +740,31 @@
                                                                                     }
                                                                                     ?>
                                                                                 </select>
-                                                                                <label for="whomToMeet">Whom to Meet?</label>
+                                                                                <label for="whomToMeet">Whom to
+                                                                                    Meet?</label>
                                                                             </div>
 
-                                                                            <!-- Reason -->
+                                                                            <!-- Reason to Meet -->
                                                                             <div class="form-floating mb-4">
                                                                                 <textarea class="form-control rounded-3"
                                                                                     placeholder="Reason for meeting"
-                                                                                    id="reason"
-                                                                                    name="reason"
+                                                                                    id="reason" name="reason"
                                                                                     style="height: 200px; border: 1px solid #dcdcdc;"
                                                                                     required></textarea>
-                                                                                <label for="reason">Reason to Meet</label>
+                                                                                <label for="reason">Reason to
+                                                                                    Meet</label>
                                                                             </div>
 
                                                                             <!-- Submit -->
                                                                             <div class="d-grid">
-                                                                                <button class="btn btn-primary w-100 mb-3">Update</button>
+                                                                                <button
+                                                                                    class="btn btn-primary w-100 mb-3">Submit</button>
                                                                             </div>
                                                                         </div>
                                                                     </form>
                                                                 </div>
+
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -590,6 +776,47 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Add Reference Modal -->
+                    <div class="modal fade" id="addReferenceModal" tabindex="-1"
+                        aria-labelledby="addReferenceModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="addReferenceModalLabel">Add New Reference</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="addReferenceForm">
+                                        <div class="mb-3">
+                                            <label for="refFirstName" class="form-label">First Name</label>
+                                            <input type="text" class="form-control" id="refFirstName"
+                                                name="refFirstName" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="refMiddleName" class="form-label">Middle Name</label>
+                                            <input type="text" class="form-control" id="refMiddleName"
+                                                name="refMiddleName">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="refLastName" class="form-label">Last Name</label>
+                                            <input type="text" class="form-control" id="refLastName" name="refLastName">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="refPhone" class="form-label">Phone Number</label>
+                                            <input type="tel" class="form-control" id="refPhone" name="refPhone">
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
                 <!-- Footer -->
                 <?php include("../../Components/footer.php"); ?>
@@ -597,7 +824,7 @@
 
 
             <script>
-                document.addEventListener("DOMContentLoaded", function() {
+                document.addEventListener("DOMContentLoaded", function () {
                     const video = document.getElementById("video");
                     const canvas = document.getElementById("canvas");
                     const captureBtn = document.getElementById("captureBtn");
@@ -620,7 +847,7 @@
                     }
 
                     // Capture Image button click
-                    captureBtn.addEventListener("click", function() {
+                    captureBtn.addEventListener("click", function () {
                         if (!stream) {
                             alert("Camera not started. Please allow access.");
                             return;
@@ -648,7 +875,7 @@
 
             <!-- Script to handle the popup -->
             <script>
-                document.addEventListener("DOMContentLoaded", function() {
+                document.addEventListener("DOMContentLoaded", function () {
                     const urlParams = new URLSearchParams(window.location.search);
                     const success = urlParams.get('success');
 
@@ -684,12 +911,12 @@
                     if (!empId) return alert("Please select an employee");
 
                     fetch('../PhpFiles/send_otp.php', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/x-www-form-urlencoded'
-                            },
-                            body: `visitorName=${encodeURIComponent(empId)}`
-                        })
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: `visitorName=${encodeURIComponent(empId)}`
+                    })
                         .then(res => res.text())
                         .then(data => {
                             document.getElementById("result").innerText = data;
@@ -719,17 +946,25 @@
 
                         const hiddenFields = document.getElementById("mainFormFields");
 
-                        hiddenFields.style.display = "block";
+                        // ✅ Toggle logic added here
+                        if (hiddenFields.style.display === "none" || hiddenFields.style.display === "") {
+                            hiddenFields.style.display = "block";
+                        }
+
+
+
                         // Optionally: delete cookie
                         document.cookie = "otp=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
                     } else {
                         alert("❌ Invalid OTP.");
                     }
                 }
+
             </script>
 
             <!-- Modal -->
-            <div class="modal fade" id="statusModal" tabindex="-1" aria-labelledby="statusModalLabel" aria-hidden="true">
+            <div class="modal fade" id="statusModal" tabindex="-1" aria-labelledby="statusModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header bg-success text-white" id="statusModalHeader">
@@ -777,7 +1012,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
 
     <script>
-        window.onload = function() {
+        window.onload = function () {
             // Select the elements to animate
             const formFields = document.querySelectorAll('.card-body  .animate-field');
             const cardBody = document.querySelector('.card-body');
@@ -823,14 +1058,14 @@
         };
         const tabs = document.querySelectorAll('.nav-link');
         tabs.forEach(tab => {
-            tab.addEventListener('click', function(e) {
+            tab.addEventListener('click', function (e) {
                 const targetTabContent = document.querySelector(this.getAttribute('href'));
 
                 // Hide all tabs with a fade out animation
                 gsap.to('.tab-pane', {
                     opacity: 0,
                     duration: 0.5,
-                    onComplete: function() {
+                    onComplete: function () {
                         // After fade out completes, show the target tab content with a fade-in animation
                         gsap.fromTo(targetTabContent, {
                             opacity: 0
@@ -847,7 +1082,7 @@
     <!-- script for image handling -->
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const societyRadio = document.getElementById("societyRadio");
             const companyRadio = document.getElementById("companyRadio");
 
@@ -893,6 +1128,133 @@
             companyRadio.addEventListener("change", updateFields);
         });
     </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const societyRadio = document.getElementById("societyRadio");
+            const companyRadio = document.getElementById("companyRadio");
+            const othersRadio = document.getElementById("othersRadio");
+
+            const societyFields = ["name", "designationDropdown"];
+            const companyFields = ["Companyname", "visitorTypeDropdown"];
+            const othersFields = ["othersInput"];
+
+            function hideAllConditionalFields() {
+                [...societyFields, ...companyFields, ...othersFields].forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.style.display = "none";
+                });
+            }
+
+            function showFields(fields) {
+                fields.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.style.display = "block";
+                });
+            }
+
+            societyRadio.addEventListener("change", () => {
+                hideAllConditionalFields();
+                if (societyRadio.checked) {
+                    showFields(societyFields);
+                }
+            });
+
+            companyRadio.addEventListener("change", () => {
+                hideAllConditionalFields();
+                if (companyRadio.checked) {
+                    showFields(companyFields);
+                }
+            });
+
+            othersRadio.addEventListener("change", () => {
+                hideAllConditionalFields();
+                if (othersRadio.checked) {
+                    showFields(othersFields);
+                }
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const referenceSelect = document.getElementById("referenceName");
+
+            referenceSelect.addEventListener("change", function () {
+                if (this.value === "add_new_reference") {
+                    const modal = new bootstrap.Modal(document.getElementById('addReferenceModal'));
+                    modal.show();
+                    this.value = ""; // Reset the dropdown to prevent double-popup
+                }
+            });
+
+            // Optional: handle the form submission via AJAX or log it
+            document.getElementById("addReferenceForm").addEventListener("submit", function (e) {
+                e.preventDefault();
+                // You can perform AJAX call here to send data to backend if needed
+                alert("Reference added!");
+                bootstrap.Modal.getInstance(document.getElementById('addReferenceModal')).hide();
+                this.reset();
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const sourceDropdown = document.getElementById("sourceType");
+            const visitorDropdownContainer = document.getElementById("visitorDropdownContainer");
+            const verificationMethod = document.getElementById("verificationMethod");
+            const emailRadio = document.getElementById("emailRadio");
+            const manualRadio = document.getElementById("manualRadio");
+            const emailVerificationSection = document.getElementById("emailVerificationSection");
+            const manualVerificationSection = document.getElementById("manualVerificationSection");
+
+            // Show visitor dropdown and verification methods on valid source selection
+            sourceDropdown.addEventListener("change", function () {
+                const selected = sourceDropdown.value;
+
+                if (selected === "society" || selected === "company" || selected === "others") {
+                    visitorDropdownContainer.style.display = "block";
+                    verificationMethod.style.display = "block";
+                } else {
+                    visitorDropdownContainer.style.display = "none";
+                    verificationMethod.style.display = "none";
+                    emailVerificationSection.style.display = "none";
+                    manualVerificationSection.style.display = "none";
+                }
+            });
+
+            // Toggle between email/manual verification sections
+            emailRadio.addEventListener("change", function () {
+                if (emailRadio.checked) {
+                    emailVerificationSection.style.display = "block";
+                    manualVerificationSection.style.display = "none";
+                }
+            });
+
+            manualRadio.addEventListener("change", function () {
+                if (manualRadio.checked) {
+                    manualVerificationSection.style.display = "block";
+                    emailVerificationSection.style.display = "none";
+                }
+            });
+        });
+    </script>
+    <!-- Choices.js JS -->
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const visitorSelect = document.getElementById('visitorName');
+            if (visitorSelect) {
+                new Choices(visitorSelect, {
+                    placeholder: true,
+                    removeItemButton: false,
+                    allowHTML: false,
+                    searchEnabled: true
+                });
+            }
+        });
+    </script>
+
 
 
 
