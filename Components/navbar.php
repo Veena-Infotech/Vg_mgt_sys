@@ -115,6 +115,54 @@
                       </div>
                     </a>
                   </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/vms/emp_attendence.php?tag=emp-att" id="emp-att">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fa-solid fa-money-bill"></i></span>
+                        <span class="nav-link-text">Employee Attendance</span>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/vms/employee_dashboard.php?tag=emp-dash" id="emp-dash">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fa-solid fa-money-bill"></i></span>
+                        <span class="nav-link-text">Employee Dashboard</span>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/vms/get_email.php?tag=get-email" id="get-email">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fa-solid fa-money-bill"></i></span>
+                        <span class="nav-link-text">Get Email</span>
+                      </div>
+                    </a>
+                  </li>
+                   <li class="nav-item">
+                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/vms/Receptionist-dashboard.php?tag=rec-dash" id="rec-dash">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fa-solid fa-money-bill"></i></span>
+                        <span class="nav-link-text">Receptionist Dashboard</span>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/vms/view_tasks.php?tag=view-task" id="view-task">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fa-solid fa-money-bill"></i></span>
+                        <span class="nav-link-text">View Task</span>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/Vg_mgt_sys/VgmsModules/vms/payment_verification.php?tag=payment_ver" id="payment_ver">
+                      <div class="d-flex align-items-center">
+                        <span class="me-2"><i class="fa-solid fa-money-bill"></i></span>
+                        <span class="nav-link-text">Payment Verification</span>
+                      </div>
+                    </a>
+                  </li>
                 </ul>
               </div>
             </div>
