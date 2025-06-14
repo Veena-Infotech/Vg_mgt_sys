@@ -255,20 +255,21 @@
                                             <li class="nav-item">
                                                 <a href="#my-posts" data-bs-toggle="tab" class="nav-link active show"
                                                     style="font-weight: 600; font-size: 1.1rem; padding: 12px 24px; border-radius: 8px 8px 0 0;">
-                                                    <i class="bi bi-person-plus-fill" style="margin-right: 8px;"></i>
-                                                    New Registration
+                                                    <i class="bi bi-person-check-fill" style="margin-right: 8px;"></i>
+                                                    Existing Registration
                                                 </a>
                                             </li>
                                             <li class="nav-item">
                                                 <a href="#about-me" data-bs-toggle="tab" class="nav-link"
                                                     style="font-weight: 600; font-size: 1.1rem; padding: 12px 24px; border-radius: 8px 8px 0 0;">
-                                                    <i class="bi bi-person-check-fill" style="margin-right: 8px;"></i>
-                                                    Existing Registration
+
+                                                    <i class="bi bi-person-plus-fill" style="margin-right: 8px;"></i>
+                                                    New Registration
                                                 </a>
                                             </li>
                                         </ul>
                                         <div class="tab-content">
-                                            <div id="my-posts" class="tab-pane fade active show">
+                                            <div id="about-me" class="tab-pane fade ">
                                                 <div class="container mt-5">
                                                     <div class="row justify-content-center">
                                                         <div class="col-md-10">
@@ -595,7 +596,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div id="about-me" class="tab-pane fade">
+                                            <div id="my-posts" class="tab-pane fade active show">
                                                 <div class="container mt-5">
                                                     <div class="row justify-content-center">
                                                         <div class="col-md-7">
@@ -672,8 +673,6 @@
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-
-
                                                                         <!-- Step 4A: Email Verification -->
                                                                         <div id="emailVerificationSection"
                                                                             style="display: none;">
@@ -740,6 +739,7 @@
                                                                                     }
                                                                                     ?>
                                                                                 </select>
+
                                                                                 <label for="whomToMeet">Whom to
                                                                                     Meet?</label>
                                                                             </div>
@@ -763,8 +763,6 @@
                                                                         </div>
                                                                     </form>
                                                                 </div>
-
-
                                                             </div>
                                                         </div>
                                                     </div>

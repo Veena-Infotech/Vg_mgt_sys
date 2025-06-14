@@ -31,7 +31,8 @@
   <!-- ===============================================-->
   <link rel="preconnect" href="https://fonts.googleapis.com/">
   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
-  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap"
+    rel="stylesheet">
   <link href="../../vendors/simplebar/simplebar.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../../unicons.iconscout.com/release/v4.0.8/css/line.css">
   <link href="../../assets/css/theme-rtl.css" type="text/css" rel="stylesheet" id="style-rtl">
@@ -165,20 +166,22 @@
     </script>
 
     <?php
-      include '../PhpFiles/connection.php'; // DB connection file
-
-      $query = "SELECT * FROM tbl_payment ORDER BY id DESC";
-      $result = mysqli_query($conn, $query);
+    include '../PhpFiles/connection.php'; // DB connection file
+    
+    $query = "SELECT * FROM tbl_payment ORDER BY id DESC";
+    $result = mysqli_query($conn, $query);
     ?>
     <div class="content">
       <h3 style="text-align: center; margin:0%;" class="mb-4">Payment Verification</h3>
-        <hr>
-      <div id="tableExample3" data-list='{"valueNames":["serial_no","payment_type","amount","purpose","proof","payment_received"],"page":3,"pagination":true}'>
+      <hr>
+      <div id="tableExample3"
+        data-list='{"valueNames":["serial_no","payment_type","amount","purpose","proof","paid_by","datetime","payment_received"],"page":3,"pagination":true}'>
 
         <!-- Search -->
         <div class="search-box mb-3 mx-auto mt-5">
           <form class="position-relative">
-            <input class="form-control search-input search form-control-sm" type="search" placeholder="Search" aria-label="Search">
+            <input class="form-control search-input search form-control-sm" type="search" placeholder="Search"
+              aria-label="Search">
           </form>
         </div>
 
@@ -191,27 +194,31 @@
                 <th class="sort border-top" data-sort="amount">Amount</th>
                 <th class="sort border-top" data-sort="purpose">Purpose</th>
                 <th class="sort border-top" data-sort="proof">Proof</th>
+                <th class="sort border-top" data-sort="paid_by">Paid By</th>
+                <th class="sort border-top" data-sort="datetime">Date and Time</th>
                 <th class="sort border-top" data-sort="payment_received">Payment Received</th>
               </tr>
             </thead>
             <tbody class="list">
               <?php
-                $serial = 1;
-                while ($row = mysqli_fetch_assoc($result)) {
-                  $isReceived = !empty($row["amount"]); // Payment received if amount is present
-
+              $serial = 1;
+              while ($row = mysqli_fetch_assoc($result)) {
+                $isReceived = !empty($row["amount"]); // Payment received if amount is present
+              
                 echo '
-                  <tr>
-                    <td class="align-middle ps-3 serial_no">'. $serial .'</td>
-                    <td class="align-middle payment_type">' . htmlspecialchars($row["type"]) . '</td>
-                    <td class="align-middle amount">₹' . htmlspecialchars($row["amount"]) . '</td>
-                    <td class="align-middle purpose"> </td>
-                    <td class="align-middle proof"> </td>
-                    <td class="align-middle payment_received">
+                <tr>
+                  <td class="align-middle ps-3 serial_no">' . $serial . '</td>
+                  <td class="align-middle payment_type">' . htmlspecialchars($row["type"]) . '</td>
+                  <td class="align-middle amount">₹' . htmlspecialchars($row["amount"]) . '</td>
+                  <td class="align-middle purpose"> </td>
+                  <td class="align-middle proof"> </td>
+                  <td class="align-middle paid_by"> </td>
+                  <td class="align-middle datetime"> </td>
+                  <td class="align-middle payment_received">
                     <input class="form-check-input" type="checkbox" disabled ' . ($isReceived ? "checked" : "") . ' />
-                    </td>
-                  </tr>';
-                  $serial++;
+                  </td>
+                </tr>';
+                $serial++;
               }
               ?>
             </tbody>
@@ -233,10 +240,10 @@
 
       </div>
 
-
       <!-- Footer -->
       <?php include("../../Components/footer.php"); ?>
     </div>
+
 
 
 
